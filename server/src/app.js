@@ -7,6 +7,7 @@ import compression from 'compression';
 // Routes
 import indexRoutes from './routes/index.routes.js';
 import userRoutes from './routes/user.routes.js';
+import serpRoutes from './routes/serp.routes.js';
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use(compression());
 
 app.use('/', indexRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/serp', serpRoutes)
 
 export default app;

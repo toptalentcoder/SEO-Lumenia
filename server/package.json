@@ -23,9 +23,16 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.10.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "qs": "^6.14.0"
+    "qs": "^6.14.0",
+    "serpapi": "^2.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.22.0",
+    "eslint-plugin-import": "^2.31.0",
+    "prettier": "^3.5.3"
   }
 }

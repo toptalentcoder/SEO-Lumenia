@@ -8,5 +8,6 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/profile', protect, getUserProfile);
 router.get('/google/callback', googleAuth);
+// router.get('/verify/:token', verifyUser);
 
 export default router;
