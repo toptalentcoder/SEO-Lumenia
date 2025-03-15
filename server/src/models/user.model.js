@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
     googleId : { type: String },
     avatar: { type: String },
+    isVerified: { type: Boolean, default: false },
 });
 
 // Hash password before saving
