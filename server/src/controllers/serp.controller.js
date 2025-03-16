@@ -3,9 +3,23 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import natural from 'natural';
 import sw from 'stopword';
+import { OpenAI } from 'openai';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+// Initialize tokenizer and stemmer globally
+const tokenizer = new natural.WordTokenizer();
+const stemmer = natural.PorterStemmer;
+
+// Initialize the OpenAI API client
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY, // Use your OpenAI API key
+});
+
+// Main Google Search API
 export const googleSearchAPI = async (req, res) => {
-
     const { query } = req.body;
 
     const SERP_API_KEY = process.env.SERP_API_KEY;
@@ -21,7 +35,7 @@ export const googleSearchAPI = async (req, res) => {
 
             const titleMap = new Map();
 
-            //extract title and link
+            // Extract title and link
             response.forEach(item => {
                 const formattedTitle = `${item.title} | ${item.source}`;
 
@@ -35,26 +49,29 @@ export const googleSearchAPI = async (req, res) => {
             // Flatten the map and include both title and link
             const extractedData = Array.from(titleMap.values()).flat();
 
-            //extract only links for TF-IDF score
+            // Extract only links for TF-IDF score
             const links = response.map(item => item.link);
 
-            //Scrape and process the content from each URL
+            // Scrape and process the content from each URL
             const pageTexts = await Promise.all(links.map(link => fetchPageContent(link)));
 
-            //Step 1: Process the text (Lowercase, punctuation removal, tokenization, stopword removal)
+            // Step 1: Process the text (Lowercase, punctuation removal, tokenization, stopword removal)
             const processedText = pageTexts.map(text => processText(text));
 
-            // Step 2 : Extract top 50 words based on TF-IDF from all scraped pages
-            const top50Words = extractTop50Words(processedText);
+            // Step 2: Extract top 50 words based on TF-IDF from all scraped pages
+            const keywords = extractWords(processedText);
 
-            res.json(top50Words);
+            // Step 4: Use OpenAI for deeper semantic analysis
+            const semanticKeywords = await getSemanticKeywords(keywords, query);
+
+            res.json({ semanticKeywords });
         }
     );
-}
+};
 
 // Fetch page content from the URL
 const fetchPageContent = async(url) => {
-    try{
+    try {
         const response = await axios.get(url);
 
         const html = response.data;
@@ -67,10 +84,10 @@ const fetchPageContent = async(url) => {
         });
 
         return textContent;
-    }catch(error){
-        console.error('Error Scraping the page : ', error);
+    } catch (error) {
+        console.error('Error Scraping the page:', error);
     }
-}
+};
 
 // Preprocess text (lowercase, remove punctuation, tokenize, and remove stopwords)
 const processText = (text) => {
@@ -82,35 +99,72 @@ const processText = (text) => {
 
     let processedText = text.toLowerCase();
     processedText = processedText.replace(/[^\w\s]/g, ""); // Remove punctuation
-    const tokenizer = new natural.WordTokenizer();
-    let tokens = tokenizer.tokenize(processedText);
-    tokens = sw.removeStopwords(tokens); // Remove stopwords
-    return tokens;
-}
+    const tokens = tokenizer.tokenize(processedText);
+    return sw.removeStopwords(tokens); // Remove stopwords
+};
 
 // Extract top 50 words based on TF-IDF
-const extractTop50Words = (documents) => {
-    const tfidf = new natural.TfIdf();
+const extractWords = (documents) => {
+    let tfidf = new natural.TfIdf();
 
-    // Add documents to the TF-IDF model
-    documents.forEach(doc => tfidf.addDocument(doc));
+    // Add each document to the TF-IDF model
+    documents.forEach(doc => tfidf.addDocument(doc.join(" ")));
 
-    // Get TF-IDF scores for terms in the first document
-    const terms = [];
+    let wordScores = {};
 
-    // with term and tfidf score
-    // tfidf.listTerms(0).forEach(term => {
-    //     terms.push({ term: term.term, tfidf: term.tfidf });
-    // });
-
-    tfidf.listTerms(0).forEach(term => {
-        terms.push(term.term);
+    // Compute TF-IDF scores for all words
+    documents.forEach((doc, index) => {
+        doc.forEach(word => {
+            let score = tfidf.tfidf(word, index);
+            if (!wordScores[word]) wordScores[word] = 0;
+            wordScores[word] += score;
+        });
     });
 
-
-    // Sort terms by TF-IDF score in descending order
-    // terms.sort((a, b) => b.tfidf - a.tfidf);
-
-    // Return the top 50 words
-    return terms.slice(0, 50);
+    // Return all words (ignoring scores), sorted by highest TF-IDF score
+    return Object.keys(wordScores).sort((a, b) => wordScores[b] - wordScores[a]).slice(0, 100);
 };
+
+// Get semantic related keywords using OpenAI embeddings
+async function getSemanticKeywords(keywords, baseQuery) {
+    const baseEmbedding = await getEmbedding(baseQuery);
+    let keywordSimilarityScores = [];
+
+    for (let keyword of keywords) {
+        let keywordEmbedding = await getEmbedding(keyword);
+        let similarity = cosineSimilarity(baseEmbedding, keywordEmbedding);
+
+        // Only consider semantic keywords with a high enough similarity
+        if (similarity > 0.7) { // You can adjust this threshold if needed
+            keywordSimilarityScores.push({ keyword, similarity });
+        }
+    }
+
+    // Sort the keywords by similarity score in descending order and return top 50
+    keywordSimilarityScores.sort((a, b) => b.similarity - a.similarity);
+
+    // Return only the top 50 semantic keywords
+    return keywordSimilarityScores.slice(0, 50).map(item => item.keyword);
+}
+
+// Get OpenAI embeddings for a word
+async function getEmbedding(word) {
+    const response = await openai.embeddings.create({
+        model: "text-embedding-ada-002",
+        input: word,
+    });
+        // Ensure the response has the expected structure
+        if (response && response.data && response.data.length > 0) {
+            return response.data[0].embedding;  // Get the embedding vector
+        } else {
+            throw new Error('Invalid response from OpenAI API');
+        }
+}
+
+// Cosine similarity function
+function cosineSimilarity(vecA, vecB) {
+    let dotProduct = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
+    let magnitudeA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
+    let magnitudeB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
+    return dotProduct / (magnitudeA * magnitudeB);
+}
