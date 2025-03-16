@@ -53,7 +53,7 @@ export default function SigninPage() {
         setError(null);
         setIsLoading(true);
         try {
-        const response = await fetch("/api/auth/login", {
+        const response = await fetch("/api/users/login", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -120,10 +120,8 @@ export default function SigninPage() {
                     </>
                 ) : (
                     <>
-                    <span>Sign In</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-5 w-5">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l-6-6m0 0l6-6m-6 6h18" />
-                    </svg>
+                        <BiSearch />
+                        <span>Sign In</span>
                     </>
                 )}
                 </button>
