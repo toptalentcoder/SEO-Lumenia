@@ -4,10 +4,6 @@ import * as cheerio from 'cheerio';
 import natural from 'natural';
 import sw from 'stopword';
 import { OpenAI } from 'openai';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 // Initialize tokenizer and stemmer globally
 const tokenizer = new natural.WordTokenizer();
@@ -64,7 +60,16 @@ export const googleSearchAPI = async (req, res) => {
             // Step 4: Use OpenAI for deeper semantic analysis
             const semanticKeywords = await getSemanticKeywords(keywords, query);
 
-            res.json({ semanticKeywords });
+            // Fetch keyword frequency per URL
+            const keywordDistributions = await Promise.all(
+                links.map(link => fetchPageContentForKeywordFrequency(link, semanticKeywords))
+            );
+
+            // Compute optimization levels
+            const optimizationLevels = calculateOptimizationLevels(keywordDistributions);
+
+
+            res.json({ optimizationLevels });
         }
     );
 };
@@ -167,4 +172,74 @@ function cosineSimilarity(vecA, vecB) {
     let magnitudeA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
     let magnitudeB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
     return dotProduct / (magnitudeA * magnitudeB);
+}
+
+// Fetch page content and count keyword frequencies
+const fetchPageContentForKeywordFrequency = async (url, keywords) => {
+    try {
+        const response = await axios.get(url);
+        const html = response.data;
+        const $ = cheerio.load(html);
+
+        let textContent = '';
+        $('p').each((i, element) => {
+            textContent += $(element).text() + ' ';
+        });
+
+        // Process text
+        const tokens = processText(textContent);
+
+        // Count keyword frequencies
+        let keywordCounts = {};
+        keywords.forEach(keyword => {
+            keywordCounts[keyword] = tokens.filter(word => word === keyword).length;
+        });
+
+        return keywordCounts;
+    } catch (error) {
+        console.error('Error Scraping the page:', error);
+        return {};
+    }
+};
+
+function calculateOptimizationLevels(keywordDistributions) {
+    let keywordStats = {};
+
+    // Organize keyword frequencies across all URLs
+    for (let i = 0; i < keywordDistributions.length; i++) {
+        let keywordCounts = keywordDistributions[i];
+
+        for (let keyword in keywordCounts) {
+            if (!keywordStats[keyword]) keywordStats[keyword] = [];
+            keywordStats[keyword].push(keywordCounts[keyword]);
+        }
+    }
+
+    let optimizationLevels = {};
+
+    for (let keyword in keywordStats) {
+        let frequencies = keywordStats[keyword];
+
+        // Compute Mean and Standard Deviation
+        let mean = frequencies.reduce((sum, f) => sum + f, 0) / frequencies.length;
+        let stdDev = Math.sqrt(frequencies.reduce((sum, f) => sum + Math.pow(f - mean, 2), 0) / frequencies.length);
+
+        // Define Optimization Ranges
+        let subOptimizedMax = mean - 0.5 * stdDev;
+        let standardOptimizedMin = mean - 0.5 * stdDev;
+        let standardOptimizedMax = mean + 0.5 * stdDev;
+        let strongOptimizedMin = mean + 0.5 * stdDev;
+        let strongOptimizedMax = mean + 1.5 * stdDev;
+        let overOptimizedMin = mean + 1.5 * stdDev;
+
+        // Store Optimization Ranges
+        optimizationLevels[keyword] = {
+            "subOptimized": `≤ ${Math.round(subOptimizedMax)}`,
+            "standardOptimized": `${Math.round(standardOptimizedMin)} ~ ${Math.round(standardOptimizedMax)}`,
+            "strongOptimized": `${Math.round(strongOptimizedMin)} ~ ${Math.round(strongOptimizedMax)}`,
+            "overOptimized": `≥ ${Math.round(overOptimizedMin)}`
+        };
+    }
+
+    return optimizationLevels;
 }
