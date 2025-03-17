@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import natural from 'natural';
 import sw from 'stopword';
-import { OpenAI } from 'openai';
+import { OpenAI } from 'openai/index.mjs';
 
 // Initialize tokenizer and stemmer globally
 const tokenizer = new natural.WordTokenizer();
