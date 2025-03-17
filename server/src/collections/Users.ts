@@ -6,6 +6,10 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
     hideAPIURL : true
   },
+  access : {
+    create : () => true,
+    read : () => true
+  },
   auth: true,
   endpoints : [],
   fields: [

@@ -67,13 +67,13 @@ export default function SignupPage() {
         }
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name: formData.fullName,
+                    username: formData.fullName,
                     email: formData.email,
                     password: formData.password,
                 }),

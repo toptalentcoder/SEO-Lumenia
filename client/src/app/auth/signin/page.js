@@ -23,14 +23,14 @@ export default function SigninPage() {
         const userDataString = localStorage.getItem("googleAuthUser");
         if (userDataString) {
             try {
-            const userData = JSON.parse(userDataString);
-            localStorage.setItem("authToken", userData.token);
-            localStorage.setItem("user", JSON.stringify(userData.user));
-            setUser(userData.user);
-            localStorage.removeItem("googleAuthUser");
-            router.push("/dashboard");
+                const userData = JSON.parse(userDataString);
+                localStorage.setItem("authToken", userData.token);
+                localStorage.setItem("user", JSON.stringify(userData.user));
+                setUser(userData.user);
+                localStorage.removeItem("googleAuthUser");
+                router.push("/dashboard");
             } catch (error) {
-            console.error("Error parsing user data:", error);
+                console.error("Error parsing user data:", error);
             }
         }
         };
@@ -53,10 +53,10 @@ export default function SigninPage() {
         setError(null);
         setIsLoading(true);
         try {
-        const response = await fetch("/api/users/login", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, {
             method: "POST",
             headers: {
-            "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
         });
