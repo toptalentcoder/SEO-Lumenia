@@ -498,6 +498,35 @@ export default function Navbar() {
                             <BellIcon aria-hidden="true" className="size-6" />
                         </button>
 
+                        <Menu>
+                            <MenuButton className="text-white cursor-pointer">
+                                <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
+                                    <GoOrganization />
+                                    <a
+                                        key={'write_for_seo'}
+                                        href='#'
+                                        className=''
+                                    >
+                                        {user?.username}
+                                    </a>
+                                    <IoIosArrowDown/>
+                                </div>
+                            </MenuButton>
+                            <MenuItems
+                                anchor="bottom start"
+                                className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl mt-4"
+                            >
+                                <MenuItem>
+                                    <a
+                                        href="#"
+                                        className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                    >
+                                        {user.username} Org
+                                    </a>
+                                </MenuItem>
+                            </MenuItems>
+                        </Menu>
+
                         {/* Profile dropdown */}
                         <Menu as="div" className="relative ml-3">
                             <div>
