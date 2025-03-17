@@ -10,10 +10,9 @@ import { CgProfile } from "react-icons/cg";
 import { FaFolder } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
 import { FaUsers } from "react-icons/fa";
-import { FaListCheck } from "react-icons/fa6";
-import { FaDatabase } from "react-icons/fa6";
+import { FaListCheck, FaRobot, FaDatabase } from "react-icons/fa6";
 import { BiWallet } from "react-icons/bi";
-import { CiViewList, CiLogout } from "react-icons/ci";
+import { CiViewList, CiLogout, CiSearch  } from "react-icons/ci";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 
 const navigation = [
@@ -434,7 +433,34 @@ export default function Example() {
                             </div>
                         </div>
                     </div>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
+
+                        <button
+                            type="button"
+                            className="relative rounded-full p-1 text-white hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                            >
+                            <span className="absolute -inset-1.5" />
+                            <span className="sr-only">View notifications</span>
+                            <CiSearch aria-hidden="true" className="size-6" />
+                        </button>
+
+                        <div className='flex items-center space-x-2'>
+
+                            <button
+                                type='button'
+                                className='bg-[#EBB71A] text-white px-6 py-2 rounded-xl flex items-center space-x-2'>
+                                <FaRobot className='text-xl'/>
+                                <span>20000</span>
+                            </button>
+
+                            <button
+                                type='button'
+                                className='bg-[#279AAC] text-white px-8 py-2 rounded-xl flex items-center space-x-2'>
+                                <FaDatabase className='text-xl'/>
+                                <span>220</span>
+                            </button>
+                        </div>
+
                         <button
                             type="button"
                             className="relative rounded-full p-1 text-white hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
