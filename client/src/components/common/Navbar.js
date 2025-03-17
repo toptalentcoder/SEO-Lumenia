@@ -55,6 +55,15 @@ export default function Navbar() {
         }
     }, [user]);  // ✅ Runs whenever `user` changes
 
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+
+        setUser(null);
+
+        // Redirect to sign-in IMMEDIATELY
+        window.location.href = "/auth/signin";
+    };
+
     return (
         <Disclosure as="nav" className="bg-[#413793]">
             <div className=" max-w-full px-2 sm:px-6 lg:px-8">
@@ -521,7 +530,7 @@ export default function Navbar() {
                                         href="#"
                                         className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                     >
-                                        {user.username} Org
+                                        {user?.username} Org
                                     </a>
                                 </MenuItem>
                             </MenuItems>
@@ -670,14 +679,15 @@ export default function Navbar() {
                                 </div>
 
                                 <MenuItem>
-                                    <div className='flex items-center space-x-2 px-7 py-5 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
-                                        <CiLogout   />
-                                        <a
-                                            href="#"
+                                    <button
+                                        onClick={handleLogout}
+                                        className='flex w-full items-center space-x-2 px-7 py-5 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'
                                         >
+                                        <CiLogout />
+                                        <span>
                                             Log out
-                                        </a>
-                                    </div>
+                                        </span>
+                                    </button>
                                 </MenuItem>
                             </MenuItems>
                         </Menu>
