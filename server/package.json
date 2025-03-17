@@ -1,44 +1,49 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "src/server.js",
-  "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "test": "echo \"No tests specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "A blank template to get started with Payload 3.0",
+  "license": "MIT",
   "type": "module",
-  "description": "",
+  "scripts": {
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "dev": "cross-env PORT=7777 NODE_OPTIONS=--no-deprecation next dev",
+    "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "start": "cross-env PORT=7777 NODE_OPTIONS=--no-deprecation next start"
+  },
   "dependencies": {
-    "axios": "^1.8.3",
-    "bcryptjs": "^3.0.2",
-    "body-parser": "^1.20.3",
-    "cheerio": "^1.0.0",
-    "compression": "^1.8.0",
-    "cors": "^2.8.5",
-    "cosine-similarity": "^1.0.1",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "helmet": "^8.0.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.12.1",
-    "morgan": "^1.10.0",
-    "natural": "^8.0.1",
-    "nodemailer": "^6.10.0",
-    "openai": "^4.87.3",
-    "passport": "^0.7.0",
-    "passport-jwt": "^4.0.1",
-    "passport-local": "^1.0.0",
-    "qs": "^6.14.0",
-    "serpapi": "^2.1.0",
-    "stopword": "^3.1.4"
+    "@payloadcms/db-mongodb": "latest",
+    "@payloadcms/next": "latest",
+    "@payloadcms/payload-cloud": "latest",
+    "@payloadcms/richtext-lexical": "latest",
+    "cross-env": "^7.0.3",
+    "graphql": "^16.8.1",
+    "next": "15.2.2",
+    "payload": "latest",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "sharp": "0.32.6"
   },
   "devDependencies": {
-    "eslint": "^9.22.0",
-    "eslint-plugin-import": "^2.31.0",
-    "prettier": "^3.5.3"
+    "@eslint/eslintrc": "^3.2.0",
+    "@types/node": "^22.5.4",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "15.2.2",
+    "prettier": "^3.4.2",
+    "typescript": "5.7.3"
+  },
+  "engines": {
+    "node": "^18.20.2 || >=20.9.0",
+    "pnpm": "^9"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   }
 }
