@@ -311,39 +311,113 @@ export default function Example() {
                                     </MenuButton>
                                     <MenuItems
                                         anchor="bottom start"
-                                        className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white border border-gray-500"
+                                        className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl mt-4"
                                     >
                                         <MenuItem>
-                                            <a
-                                                href="#"
-                                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                            <span
+                                                className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
                                             >
-                                                Your Profile
-                                            </a>
+                                                MONITOR
+                                            </span>
                                         </MenuItem>
                                         <MenuItem>
                                             <a
                                                 href="#"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
-                                                Your Profile
+                                                Projects Monitoring
                                             </a>
                                         </MenuItem>
-                                        <hr />
+                                        <MenuItem>
+                                            <a
+                                                href="#"
+                                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                            >
+                                                SERP Monitoring
+                                            </a>
+                                        </MenuItem>
+
+                                        <div className='px-4 text-gray-300'>
+                                            <hr />
+                                        </div>
+
+                                        <MenuItem>
+                                            <span
+                                                className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
+                                            >
+                                                TECH ANALYSIS
+                                            </span>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <a
+                                                href="#"
+                                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                            >
+                                                Page Duplication
+                                            </a>
+                                        </MenuItem>
                                         <MenuItem>
                                         <a
                                                 href="#"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
-                                                Your Profile
+                                                404 Link Recovery
                                             </a>
                                         </MenuItem>
+
+                                        <div className='px-4 text-gray-300'>
+                                            <hr />
+                                        </div>
+
                                         <MenuItem>
-                                        <a
+                                            <span
+                                                className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
+                                            >
+                                                DOES GOOGLE MOVE?
+                                            </span>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <a
                                                 href="#"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
-                                                Your Profile
+                                                Serp Weather
+                                            </a>
+                                        </MenuItem>
+
+                                        <div className='px-4 text-gray-300'>
+                                            <hr />
+                                        </div>
+
+                                        <MenuItem>
+                                            <span
+                                                className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
+                                            >
+                                                HISTORY
+                                            </span>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <a
+                                                href="#"
+                                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                            >
+                                                Unlocked Websites
+                                            </a>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <a
+                                                href="#"
+                                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                            >
+                                                My Rankings Exports
+                                            </a>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <a
+                                                href="#"
+                                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                            >
+                                                My Images
                                             </a>
                                         </MenuItem>
                                     </MenuItems>
