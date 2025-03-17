@@ -1,6 +1,10 @@
+"use client"
+
+import { useState, useEffect } from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image";
+import { useUser } from '../../context/UserContext.js'
 import { RxPencil1 } from "react-icons/rx";
 import { PiCrownSimpleBold } from "react-icons/pi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -26,7 +30,31 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+const getUserInitials = (name) => {
+    if (!name || typeof name !== "string") return "U";  // Prevents errors
+    const words = name.trim().split(" ");
+    if (words.length > 1) {
+        return (words[0][0] + words[1][0]).toUpperCase(); // First letters of first & last name
+    }
+    return words[0].substring(0, 2).toUpperCase(); // First 2 letters if only one name
+};
+
+
+export default function Navbar() {
+
+    const { user, setUser } = useUser();
+
+    // ✅ State to store profile data
+    const [profileImage, setProfileImage] = useState(null);
+    const [initials, setInitials] = useState("");
+
+    useEffect(() => {
+        if (user) {
+            setProfileImage(user?.profilePicture?.url || user?.profileImageURL);
+            setInitials(getUserInitials(user?.username));
+        }
+    }, [user]);  // ✅ Runs whenever `user` changes
+
     return (
         <Disclosure as="nav" className="bg-[#413793]">
             <div className=" max-w-full px-2 sm:px-6 lg:px-8">
@@ -476,11 +504,17 @@ export default function Example() {
                                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                                 <span className="absolute -inset-1.5" />
                                 <span className="sr-only">Open user menu</span>
-                                <img
-                                    alt=""
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    className="size-8 rounded-full"
-                                />
+                                {profileImage ? (
+                                    <Image
+                                        src={profileImage}
+                                        alt={user?.username || "User Profile"}
+                                        width={40}
+                                        height={40}
+                                        className="rounded-full object-cover"
+                                    />
+                                ) : (
+                                    <span className="text-white p-3 bg-[#279AAC] rounded-full">{initials}</span>
+                                )}
                                 </MenuButton>
                             </div>
                             <MenuItems
