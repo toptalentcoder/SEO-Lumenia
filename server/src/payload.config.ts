@@ -11,6 +11,9 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { FRONTEND_URL } from './config/apiConfig'
 import { customEndpoints } from './endpoints'
+import { paypalProductID } from './globals/paypalProductID'
+import { BillingPlan } from './collections/paypalPlan'
+import { createPlansAndGetID } from './services/paypal/plan/CreatePlan'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,7 +25,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, BillingPlan],
+  globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -40,4 +44,8 @@ export default buildConfig({
   endpoints: [
     ...(customEndpoints || []), // Ensure customEndpoints is defined
   ],
+  onInit : async(payload) => {
+    console.log('Paypal plan check');
+    createPlansAndGetID(payload)
+  }
 })

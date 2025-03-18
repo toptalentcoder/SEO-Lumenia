@@ -68,6 +68,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    billing_plan: BillingPlan;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -76,6 +77,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    billing_plan: BillingPlanSelect<false> | BillingPlanSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -83,8 +85,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    paypal_product_id: PaypalProductId;
+  };
+  globalsSelect: {
+    paypal_product_id: PaypalProductIdSelect<false> | PaypalProductIdSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -155,6 +161,37 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "billing_plan".
+ */
+export interface BillingPlan {
+  id: string;
+  plan_name?: string | null;
+  month_plan_id?: string | null;
+  year_plan_id?: string | null;
+  description?: string | null;
+  monthly_price?: number | null;
+  yearly_price?: number | null;
+  interval_unit?: ('MONTH' | 'YEAR') | null;
+  category: 'subscription' | 'api';
+  currency?: ('USD' | 'EUR') | null;
+  features?: {
+    subscription_features?: {
+      tokens?: number | null;
+      ai_tokens?: number | null;
+      seats?: number | null;
+      guests?: number | null;
+      monitoring?: number | null;
+    };
+    api_features?: {
+      parallel_generation?: number | null;
+      api_rate_limit?: number | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -167,6 +204,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'billing_plan';
+        value: string | BillingPlan;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -250,6 +291,42 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "billing_plan_select".
+ */
+export interface BillingPlanSelect<T extends boolean = true> {
+  plan_name?: T;
+  month_plan_id?: T;
+  year_plan_id?: T;
+  description?: T;
+  monthly_price?: T;
+  yearly_price?: T;
+  interval_unit?: T;
+  category?: T;
+  currency?: T;
+  features?:
+    | T
+    | {
+        subscription_features?:
+          | T
+          | {
+              tokens?: T;
+              ai_tokens?: T;
+              seats?: T;
+              guests?: T;
+              monitoring?: T;
+            };
+        api_features?:
+          | T
+          | {
+              parallel_generation?: T;
+              api_rate_limit?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -279,6 +356,26 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "paypal_product_id".
+ */
+export interface PaypalProductId {
+  id: string;
+  product_id?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "paypal_product_id_select".
+ */
+export interface PaypalProductIdSelect<T extends boolean = true> {
+  product_id?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
