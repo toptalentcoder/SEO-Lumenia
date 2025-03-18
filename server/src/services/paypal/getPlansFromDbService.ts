@@ -29,9 +29,8 @@ interface Plan {
 
 export const getPlansForSubscription = async (
     payload: Payload,
-    category: "subscription" | "api",
     order: "asc" | "desc" = "asc"
-): Promise<Plan[]> => {
+): Promise<{ subscriptionPlans: Plan[], apiPlans: Plan[] }> => {
     if (!API_KEY || !BASE_URL) {
         throw new Error("API_KEY or BASE_URL is missing in environment variables.");
     }
@@ -39,23 +38,18 @@ export const getPlansForSubscription = async (
     try {
         const sortOrder = order === "asc" ? "monthly_price" : "-monthly_price"; // Sorting order
 
-        // Fetch plans with filtering by category
+        // Fetch all plans without filtering by category
         const response = await payload.find({
             collection: "billing_plan",
-            where: {
-                category: {
-                    equals: category
-                }
-            },
             sort: sortOrder, // ✅ Sorting by `monthly_price`
             limit: 50 // Limit results if needed
         });
 
         const fetchedPlans = response.docs || []; // ✅ Ensures an array is always returned
 
-        // Process and return the structured plan data
-        return fetchedPlans.map((plan) => {
-            const structuredPlan: Plan = {
+        // Filter plans by category
+        const subscriptionPlans = fetchedPlans.filter((plan) => plan.category === "subscription").map((plan) => {
+            return {
                 plan_name: plan.plan_name ?? "",
                 month_plan_id: plan.month_plan_id ?? "",
                 year_plan_id: plan.year_plan_id ?? "",
@@ -63,27 +57,37 @@ export const getPlansForSubscription = async (
                 monthly_price: plan.monthly_price ?? 0,
                 yearly_price: plan.yearly_price ?? 0,
                 currency: plan.currency ?? "",
-                category: plan.category ?? "", // Ensure category is included in the returned plan
-            };
-
-            // Assign features based on the category
-            if (plan.category === "subscription") {
-                structuredPlan.features = {
+                category: plan.category ?? "",
+                features: {
                     tokens: plan.features?.subscription_features?.tokens ?? 0,
                     ai_tokens: plan.features?.subscription_features?.ai_tokens ?? 0,
                     seats: plan.features?.subscription_features?.seats ?? 0,
                     guests: plan.features?.subscription_features?.guests ?? 0,
                     monitoring: plan.features?.subscription_features?.monitoring ?? 0,
-                };
-            } else if (plan.category === "api") {
-                structuredPlan.features = {
+                }
+            };
+        });
+
+        const apiPlans = fetchedPlans.filter((plan) => plan.category === "api").map((plan) => {
+            return {
+                plan_name: plan.plan_name ?? "",
+                month_plan_id: plan.month_plan_id ?? "",
+                year_plan_id: plan.year_plan_id ?? "",
+                description: plan.description ?? "",
+                monthly_price: plan.monthly_price ?? 0,
+                yearly_price: plan.yearly_price ?? 0,
+                currency: plan.currency ?? "",
+                category: plan.category ?? "",
+                features: {
                     parallel_generation: plan.features?.api_features?.parallel_generation ?? 0,
                     api_rate_limit: plan.features?.api_features?.api_rate_limit ?? 0,
-                };
-            }
-
-            return structuredPlan;
+                }
+            };
         });
+
+        // Return both subscription and API plans
+        return { subscriptionPlans, apiPlans };
+
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error("Axios Error:", error.response?.status, error.response?.data || error.message);
