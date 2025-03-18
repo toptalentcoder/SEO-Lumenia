@@ -160,7 +160,7 @@ export const BillingPlan: CollectionConfig = {
                 if (
                     data.currency !== existingDoc.currency ||
                     data.plan_name !== existingDoc.plan_name ||
-                    data.description !== existingDoc.description
+                    data.category !== existingDoc.category
                 ) {
                     shouldDeactivateMonth = true;
                     shouldDeactivateYear = true;
