@@ -1,51 +1,71 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
-import { usePlan } from "../../context/UserPlanContext.js";
+import { usePlan } from "../../context/UserPlanContext";
 
 export default function PricingTable({ isUpdatingSubscription }) {
-    const { user, refreshUser } = useUser(); // ✅ Use `useUser()` instead of `useUserPlan()`
+    const { user, refreshUser } = useUser();
     const [plans, setPlans] = useState([]);
     const [fetchLoading, setFetchLoading] = useState(true);
     const { selectedPlanId, selectedPlanName, setPlan } = usePlan();
     const [billingCycle, setBillingCycle] = useState("monthly");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
-    const [isProcessing, setIsProcessing] = useState(false); // ✅ Loading state
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [activeTab, setActiveTab] = useState("subscription"); // State for active tab
 
-    // ✅ Fetch available plans
-    useEffect(() => {
-        const fetchPlans = async () => {
-            try {
-                const response = await fetch("/api/plans");
-                const data = await response.json();
-
-                console.log(data)
+    // Function to fetch plans for subscription
+    const fetchSubscriptionPlans = async () => {
+        try {
+            const response = await fetch("/api/plans");
+            const data = await response.json();
+            if (Array.isArray(data.fetchedPlans.subscriptionPlans)) {
                 setPlans(data.fetchedPlans.subscriptionPlans);
-
-                // Set billing cycle based on database interval_unit
-                if (data.fetchedPlans.length > 0) {
-                    const firstPlan = data.fetchedPlans[0]; // Get first plan
+                if (data.fetchedPlans.subscriptionPlans.length > 0) {
+                    const firstPlan = data.fetchedPlans.subscriptionPlans[0];
                     setBillingCycle(firstPlan.interval_unit === "MONTH" ? "monthly" : "annually");
                 }
-
-            } catch (error) {
-                console.error("Error fetching plans:", error);
-            } finally {
-                setFetchLoading(false);
+            } else {
+                setPlans([]);
             }
-        };
-        fetchPlans();
-    }, []);
+        } catch (error) {
+            console.error("Error fetching plans:", error);
+        } finally {
+            setFetchLoading(false);
+        }
+    };
 
-    // ✅ Handle subscription process
-    const handleSubscription = async (planId, planName) => {
-
+    // Function to fetch plans for API-based plans
+    const fetchApiPlans = async () => {
         try {
+            const response = await fetch("/api/api-plans"); // Modify this endpoint as needed
+            const data = await response.json();
+            if (Array.isArray(data.apiPlans)) {
+                setPlans(data.apiPlans); // Set API-based plans
+            } else {
+                setPlans([]);
+            }
+        } catch (error) {
+            console.error("Error fetching API plans:", error);
+        } finally {
+            setFetchLoading(false);
+        }
+    };
 
-            setIsProcessing(true); // ✅ Show loading state
+    // useEffect to fetch plans based on active tab
+    useEffect(() => {
+        setFetchLoading(true); // Show loading
+        if (activeTab === "subscription") {
+            fetchSubscriptionPlans();
+        } else if (activeTab === "api") {
+            fetchApiPlans();
+        }
+    }, [activeTab]);
 
+    const handleSubscription = async (planId, planName) => {
+        try {
+            setIsProcessing(true);
             const response = await fetch("/api/create-subscription", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -53,60 +73,50 @@ export default function PricingTable({ isUpdatingSubscription }) {
             });
 
             const result = await response.json();
-
-            console.log(planId)
-            console.log(result)
             if (response.ok && result.approvalUrl) {
-
-                setPlan(planId, planName);              // ✅ Store selected plan in state + localStorage
-
-                // ✅ Wait a short time before redirection for better UX
+                setPlan(planId, planName);
                 setTimeout(() => {
                     window.location.href = result.approvalUrl;
                 }, 1000);
-
             } else {
                 alert("Subscription creation failed.");
                 setIsProcessing(false);
             }
         } catch (error) {
-            console.error("Error creating subscription:", error);
             alert("An error occurred while creating the subscription.");
             setIsProcessing(false);
         }
     };
 
-    // if (fetchLoading || isUpdatingSubscription)
-    //     return (
-    //         <div className="flex flex-col items-center mx-auto my-auto">
-    //             <PreloadSubscription onLoad={() => setFetchLoading(false)} />
-    //         </div>
-    //     );
-
-    console.log(user);
-    console.log(user?.billing_plan?.year_plan_id);
-
     return (
         <div className="flex flex-col items-center mx-auto py-10">
-            {/* Billing Toggle */}
-            <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-2 mb-10 bg-white border-2 border-gray-300 dark:border-gray-500 dark:bg-slate-800 p-1 rounded-3xl">
-                {["monthly", "annually"].map((cycle) => (
-                    <button
-                        key={cycle}
-                        onClick={() => setBillingCycle(cycle)}
-                        className={`px-4 py-1 rounded-full w-full md:w-auto ${
-                            billingCycle === cycle
-                                ? "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
-                                : "text-gray-600 dark:text-gray-200"
-                        }`}
-                    >
-                        {cycle.charAt(0).toUpperCase() + cycle.slice(1)}
-                    </button>
-                ))}
+            {/* Tab Buttons */}
+            <div className="flex mb-6">
+                <button
+                    onClick={() => setActiveTab("subscription")}
+                    className={`px-6 py-2 rounded-tl-xl rounded-bl-xl ${
+                        activeTab === "subscription"
+                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                            : "bg-white text-gray-600 dark:text-gray-200"
+                    }`}
+                >
+                    Subscription
+                </button>
+                <button
+                    onClick={() => setActiveTab("api")}
+                    className={`px-6 py-2 rounded-tr-xl rounded-br-xl ${
+                        activeTab === "api"
+                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                            : "bg-white text-gray-600 dark:text-gray-200"
+                    }`}
+                >
+                    API
+                </button>
             </div>
 
+            {/* Pricing Plans */}
             <div className="w-full overflow-x-auto scrollbar-hide">
-                <div className="flex space-x-6 p-4">
+                <div className="flex space-x-4 flex-wrap justify-center p-4">
                     {plans
                         .filter((plan) => {
                             return billingCycle === "monthly"
@@ -129,9 +139,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
                                     }`}
                                 >
                                     <h3 className="text-gray-600 dark:text-gray-200 text-xl font-bold mb-2">{plan.plan_name ?? "No Name"}</h3>
-                                    <div className="h-20">
-                                        <p className="text-gray-600 dark:text-gray-200 mb-4">{plan.description ?? "No Description Available"}</p>
-                                    </div>
+                                    <p className="text-gray-600 dark:text-gray-200 mb-4">{plan.description ?? "No Description Available"}</p>
 
                                     <p className="text-3xl font-bold mb-4 text-gray-600 dark:text-gray-200">
                                         {plan.currency === "USD" ? "$" : "€"}
@@ -159,14 +167,14 @@ export default function PricingTable({ isUpdatingSubscription }) {
 
                                     {/* Dynamic Feature List */}
                                     <ul className="mt-6 space-y-4 text-gray-600 dark:text-gray-200">
-                                        {/* <li>✓ {plan.results_per_search ?? "N/A"} results per search</li>
+                                        <li>✓ {plan.results_per_search ?? "N/A"} results per search</li>
                                         <li>✓ {plan.backlinks_monitored ?? "N/A"} backlinks monitored</li>
                                         <li>✓ {plan.plugin_clicks ?? "N/A"} Plugin clicks</li>
                                         <li>✓ {plan.keyword_searches ?? "N/A"} keyword searches</li>
                                         <li>✓ {plan.competitive_analyses ?? "N/A"} competitive analyses</li>
                                         <li>✓ {plan.simultaneous_bulk_competitive ?? "N/A"} simultaneous bulk competitive</li>
                                         <li>✓ {plan.bulk_keywords ?? "N/A"} bulk keywords</li>
-                                        <li>✓ {plan.serp_scanner ?? "N/A"} SERP Scanner</li> */}
+                                        <li>✓ {plan.serp_scanner ?? "N/A"} SERP Scanner</li>
                                     </ul>
                                 </div>
                             );
