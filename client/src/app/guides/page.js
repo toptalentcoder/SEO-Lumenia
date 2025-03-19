@@ -5,6 +5,7 @@ import { Globe, MoreVertical } from "lucide-react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
+import { VscNewFile } from "react-icons/vsc";
 
 const queries = [
     { query: "What is the best vpn", id: "12702148", platform: "google", project: "adf", group: "group1", date: "Mar 19, 2025" },
@@ -319,7 +320,14 @@ export default function SEOQueryDashboard() {
                         </button>
                     </div>
                 )}
-                </div>
+            </div>
+
+            <div className="flex justify-end mr-24 mt-6">
+                <button className="ml-2 flex items-center space-x-2 bg-[#4A4291] hover:bg-[#454168] cursor-pointer text-white py-2 px-4 rounded-xl">
+                    <VscNewFile />
+                    <span className="text-sm">New Project</span>
+                </button>
+            </div>
 
             {/* Query Table */}
             <div className="container mx-auto p-4">
