@@ -3,16 +3,20 @@ import axios from "axios";
 import { Payload } from "payload";
 
 interface SubscriptionFeatures {
-    tokens?: number;
-    ai_tokens?: number;
-    seats?: number;
-    guests?: number;
-    monitoring?: number;
+    subscription_features : {
+        tokens?: number;
+        ai_tokens?: number;
+        seats?: number;
+        guests?: number;
+        monitoring?: number;
+    }
 }
 
 interface ApiFeatures {
-    parallel_generation?: number;
-    api_rate_limit?: number;
+    api_features : {
+        parallel_generation?: number;
+        api_rate_limit?: number;
+    }
 }
 
 interface Plan {
@@ -59,11 +63,13 @@ export const getPlansForSubscription = async (
                 currency: plan.currency ?? "",
                 category: plan.category ?? "",
                 features: {
-                    tokens: plan.features?.subscription_features?.tokens ?? 0,
-                    ai_tokens: plan.features?.subscription_features?.ai_tokens ?? 0,
-                    seats: plan.features?.subscription_features?.seats ?? 0,
-                    guests: plan.features?.subscription_features?.guests ?? 0,
-                    monitoring: plan.features?.subscription_features?.monitoring ?? 0,
+                    subscription_features : {
+                        tokens: plan.features?.subscription_features?.tokens ?? 0,
+                        ai_tokens: plan.features?.subscription_features?.ai_tokens ?? 0,
+                        seats: plan.features?.subscription_features?.seats ?? 0,
+                        guests: plan.features?.subscription_features?.guests ?? 0,
+                        monitoring: plan.features?.subscription_features?.monitoring ?? 0,
+                    }
                 }
             };
         });
@@ -79,8 +85,10 @@ export const getPlansForSubscription = async (
                 currency: plan.currency ?? "",
                 category: plan.category ?? "",
                 features: {
-                    parallel_generation: plan.features?.api_features?.parallel_generation ?? 0,
-                    api_rate_limit: plan.features?.api_features?.api_rate_limit ?? 0,
+                    api_features : {
+                        parallel_generation: plan.features?.api_features?.parallel_generation ?? 0,
+                        api_rate_limit: plan.features?.api_features?.api_rate_limit ?? 0,
+                    }
                 }
             };
         });

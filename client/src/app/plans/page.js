@@ -3,6 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext";
 import { usePlan } from "../../context/UserPlanContext";
+import { PiNotePencilBold } from "react-icons/pi";
+import { FaRobot } from "react-icons/fa6";
+import { FcBusinessman } from "react-icons/fc";
+import { BsFillPersonFill } from "react-icons/bs";
 
 export default function PricingTable({ isUpdatingSubscription }) {
     const { user, refreshUser } = useUser();
@@ -138,7 +142,15 @@ export default function PricingTable({ isUpdatingSubscription }) {
                                         isCurrentPlan ? "border-primary dark:bg-slate-600" : "border-gray-300 dark:border-gray-700"
                                     }`}
                                 >
-                                    <h3 className="text-gray-600 dark:text-gray-200 text-xl font-bold mb-2">{plan.plan_name ?? "No Name"}</h3>
+                                    <div className="flex items-center space-x-7">
+                                        {/* {activeTab === 'subscription' ?
+                                                <div>
+aa
+                                                </div>
+                                            } */}
+                                        <h3 className="text-gray-600 dark:text-gray-200 text-xl font-bold mb-2">{plan.plan_name ?? "No Name"}</h3>
+                                    </div>
+
                                     <p className="text-gray-600 dark:text-gray-200 mb-4">{plan.description ?? "No Description Available"}</p>
 
                                     <p className="text-3xl font-bold mb-4 text-gray-600 dark:text-gray-200">
@@ -165,17 +177,47 @@ export default function PricingTable({ isUpdatingSubscription }) {
                                         {isCurrentPlan ? "Current Plan" : "Upgrade Plan"}
                                     </button>
 
-                                    {/* Dynamic Feature List */}
-                                    <ul className="mt-6 space-y-4 text-gray-600 dark:text-gray-200">
-                                        <li>✓ {plan.results_per_search ?? "N/A"} results per search</li>
-                                        <li>✓ {plan.backlinks_monitored ?? "N/A"} backlinks monitored</li>
-                                        <li>✓ {plan.plugin_clicks ?? "N/A"} Plugin clicks</li>
-                                        <li>✓ {plan.keyword_searches ?? "N/A"} keyword searches</li>
-                                        <li>✓ {plan.competitive_analyses ?? "N/A"} competitive analyses</li>
-                                        <li>✓ {plan.simultaneous_bulk_competitive ?? "N/A"} simultaneous bulk competitive</li>
-                                        <li>✓ {plan.bulk_keywords ?? "N/A"} bulk keywords</li>
-                                        <li>✓ {plan.serp_scanner ?? "N/A"} SERP Scanner</li>
-                                    </ul>
+                                    <div className="flex items-center space-x-7">
+                                        {activeTab === 'subscription' ? (
+                                            <div>
+                                                <div className="mt-3">
+                                                    Each month, you receive:
+                                                    <ul className="mt-3 space-y-4 text-gray-600 dark:text-gray-200">
+                                                        <div className="flex items-center space-x-2">
+                                                            <PiNotePencilBold className="text-[#413793] text-2xl"/>
+                                                            <li>{plan.features?.subscription_features?.tokens / 5 ?? "N/A"} guides ({plan.features?.subscription_features?.tokens ?? "N/A"} tokens, valid for 1 month)</li>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <FaRobot className="text-[#413793] text-2xl"/>
+                                                            <li>{plan.features?.subscription_features?.ai_tokens ?? "N/A"} AI tokens (valid for 1 month)</li>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                                <div className="mt-3">
+                                                    Other Perks:
+                                                    <ul className="mt-3 space-y-4 text-gray-600 dark:text-gray-200">
+                                                        <div className="flex items-center space-x-2">
+                                                            <FcBusinessman className="text-[#413793] text-2xl"/>
+                                                            <li>up to {plan.features?.subscription_features?.seats ?? "N/A"} seats</li>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <BsFillPersonFill className="text-[#413793] text-2xl"/>
+                                                            <li>up to {plan.features?.subscription_features?.guests ?? "N/A"} guests</li>
+                                                        </div>
+                                                        <div className="flex items-center space-x-2">
+                                                            <BsFillPersonFill className="text-[#413793] text-2xl"/>
+                                                            <li>up to {plan.features?.subscription_features?.monitoring ?? "N/A"} monitoring</li>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        ) : activeTab === 'api' ? (
+                                            <div className="flex items-center space-x-2 mt-6">
+                                                <PiNotePencilBold className="text-[#413793] text-2xl"/>
+                                                <div>{plan.features?.api_features?.parallel_generation ?? "N/A"} Parallel generation</div>
+                                        </div>
+                                        ) : null} {/* If no tab matches, nothing will be rendered */}
+                                    </div>
                                 </div>
                             );
                         })}
