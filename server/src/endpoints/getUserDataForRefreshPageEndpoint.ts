@@ -60,13 +60,7 @@ export const getUserDataForRefreshPageEndpoint : Endpoint = {
         const userData = user.docs[0];
 
         return new Response(JSON.stringify({
-            user: {
-                id: userData.id,
-                email: userData.email,
-                subscriptionPlan : userData.subscriptionPlan,
-                apiPlan : userData.apiPlan,
-                paypalSubscriptionExpiresAt : userData.paypalSubscriptionExpiresAt,
-            },
+            user: userData
         }),
         {
             status: 200,
