@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import Navbar from '../components/common/Navbar.js'
 import { ThemeProvider } from '../context/ThemeContext.js'
 import { UserProvider } from '../context/UserContext.js'
+import { PlanProvider } from '../context/UserPlanContext.js'
 import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
@@ -36,9 +37,11 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider>
           <UserProvider>
-            {/* Show Navbar only if the current path is NOT in the hiddenNavPaths list */}
-            {!hiddenNavPaths.includes(pathname) && <Navbar />}
-            {children}
+            <PlanProvider>
+              {/* Show Navbar only if the current path is NOT in the hiddenNavPaths list */}
+              {!hiddenNavPaths.includes(pathname) && <Navbar />}
+              {children}
+            </PlanProvider>
           </UserProvider>
         </ThemeProvider>
       </body>

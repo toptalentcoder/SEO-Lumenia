@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image";
+import Link from "next/link";
 import { useUser } from '../../context/UserContext.js'
 import { RxPencil1 } from "react-icons/rx";
 import { PiCrownSimpleBold } from "react-icons/pi";
@@ -629,14 +630,12 @@ export default function Navbar() {
                                     </div>
                                 </MenuItem>
                                 <MenuItem>
-                                    <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
-                                        <FaDatabase />
-                                        <a
-                                            href="#"
-                                        >
-                                            Plans
-                                        </a>
-                                    </div>
+                                    <Link href="/plans">
+                                        <button className="flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full cursor-pointer">
+                                            <FaDatabase />
+                                            <span>Plans</span>
+                                        </button>
+                                    </Link>
                                 </MenuItem>
                                 <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
