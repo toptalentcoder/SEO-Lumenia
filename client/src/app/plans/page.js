@@ -7,6 +7,7 @@ import { PiNotePencilBold } from "react-icons/pi";
 import { FaRobot } from "react-icons/fa6";
 import { FcBusinessman } from "react-icons/fc";
 import { BsFillPersonFill } from "react-icons/bs";
+import { FaCoins } from "react-icons/fa6";
 
 export default function PricingTable({ isUpdatingSubscription }) {
     const { user, refreshUser } = useUser();
@@ -161,10 +162,10 @@ aa
 
                                     {/* Button to Subscribe or Indicate Current Plan */}
                                     <button
-                                        className={`w-full py-2 rounded-lg ${
+                                        className={`w-full py-2 rounded-lg items-center text-center ${
                                             isCurrentPlan
                                                 ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                                                : "bg-white border-2 border-gray-300 hover:border-gray-400 dark:border-0 dark:bg-slate-700 dark:hover:bg-slate-600 text-primary dark:text-gray-200"
+                                                : "bg-[#413793] border-2 border-gray-300 hover:border-gray-400 dark:border-0 dark:bg-slate-700 dark:hover:bg-slate-600 text-primary dark:text-gray-200"
                                         }`}
                                         disabled={!!isCurrentPlan}
                                         onClick={() => {
@@ -174,7 +175,15 @@ aa
                                             }
                                         }}
                                     >
-                                        {isCurrentPlan ? "Current Plan" : "Upgrade Plan"}
+                                        <div className="flex items-center space-x-2 text-center justify-center text-white">
+                                            <FaCoins className="text-2xl"/>
+                                            <span>
+                                                {isCurrentPlan ?
+                                                    "Current Plan" : "Subscribe"
+                                                }
+                                            </span>
+
+                                        </div>
                                     </button>
 
                                     <div className="flex items-center space-x-7">
