@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react";
+import { useUser } from '../../context/UserContext';
+import CreateProjectModal from '../../components/ui/CreateProjectModal'
 import { Globe, MoreVertical } from "lucide-react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
@@ -19,9 +21,12 @@ const queries = [
 ];
 
 export default function SEOQueryDashboard() {
+
+    const { user } = useUser();
     const [search, setSearch] = useState("");
     const [isFocused, setIsFocused] = useState(false);
     const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -29,6 +34,18 @@ export default function SEOQueryDashboard() {
 
     const handleBlur = () => {
         setIsFocused(false);
+    };
+
+    const handleProjectCreated = (newProject) => {
+        const newRow = {
+            id: rows.length + 1,
+            name: newProject.name,
+            domain: newProject.domain,
+            favourites: 0,
+        };
+
+        setRows((prevRows) => [...prevRows, newRow]);
+        setIsCreateModalOpen(false);
     };
 
     return (
@@ -323,7 +340,9 @@ export default function SEOQueryDashboard() {
             </div>
 
             <div className="flex justify-end mr-24 mt-6">
-                <button className="ml-2 flex items-center space-x-2 bg-[#4A4291] hover:bg-[#454168] cursor-pointer text-white py-2 px-4 rounded-xl">
+                <button
+                    className="ml-2 flex items-center space-x-2 bg-[#4A4291] hover:bg-[#454168] cursor-pointer text-white py-2 px-4 rounded-xl"
+                    onClick={() => setIsCreateModalOpen(true)}>
                     <VscNewFile />
                     <span className="text-sm">New Project</span>
                 </button>
@@ -363,6 +382,14 @@ export default function SEOQueryDashboard() {
                     </table>
                 </div>
             </div>
+
+            {/* Create Project Modal */}
+            <CreateProjectModal
+                isOpen={isCreateModalOpen}
+                onClose={() => setIsCreateModalOpen(false)}
+                onProjectCreated={handleProjectCreated}
+                userEmail={user?.email || ""}
+            />
         </div>
     );
 }
