@@ -93,14 +93,20 @@ export default function Navbar() {
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-3">
                                 <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
-                                    <RxPencil1/>
+                                    {/* <RxPencil1/>
                                     <a
                                         key={'write_for_seo'}
                                         href='#'
                                         className=''
                                     >
                                         Write For SEO
-                                    </a>
+                                    </a> */}
+                                    <Link href="/guides">
+                                        <button className="flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium cursor-pointer">
+                                            <RxPencil1/>
+                                            <span>Write For SEO</span>
+                                        </button>
+                                    </Link>
                                 </div>
 
                                 <Menu>
