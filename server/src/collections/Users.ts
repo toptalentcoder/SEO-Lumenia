@@ -77,5 +77,17 @@ export const Users: CollectionConfig = {
       type: 'text',
       admin: { position: 'sidebar', hidden : true },
     },
+    {
+      name: 'availableFeatures',
+      type: 'group',
+      admin: { position: 'sidebar' },
+      fields : [
+        { name: "tokens", type: "number", label : "Tokens" },
+        { name: "ai_tokens", type: "number", label : "AI Tokens" },
+        { name: "seats", type: "number", label : "Seats" },
+        { name: "guests", type: "number", label : "Guests" },
+        { name: "monitoring", type: "number", label : "Monitoring" },
+      ]
+    },
   ],
 }

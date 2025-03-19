@@ -1,12 +1,6 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { showSubscription } from "@/services/paypal/subscription/ShowSubscription";
 import { Endpoint, PayloadRequest } from "payload";
-import crypto from "crypto";
-
-// Define a flexible structure for dynamic plan features
-interface DynamicFeatures {
-    [key: string]: number;
-}
 
 export const saveSubscriptionToUserCollection: Endpoint = {
     path: "/save-subscription",
@@ -89,11 +83,6 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                 );
             }
 
-            // 🔹 Ensure features exist dynamically
-            // const selectedFeatures: DynamicFeatures = Object.fromEntries(
-            //     Object.entries(matchedPlan.features || {}).filter(([_, value]) => value !== null).map(([key, value]) => [key, value as number])
-            // );
-
             if(matchedPlan.category === 'subscription'){
                 // 🔹 Update user subscription in Payload CMS
                 await payload.update({
@@ -102,10 +91,13 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                     data: {
                         subscriptionPlan: matchedPlan.id, // 🔹 Save relation (MongoDB ObjectID)
                         paypalSubscriptionExpiresAt: nextBillingTime,
-                        // usedFeatures: Object.keys(selectedFeatures).reduce((acc, key) => {
-                        //     acc[key] = 0;
-                        //     return acc;
-                        // }, {} as DynamicFeatures),
+                        availableFeatures : {
+                            tokens : matchedPlan.features?.subscription_features?.tokens,
+                            ai_tokens : matchedPlan.features?.subscription_features?.ai_tokens,
+                            seats : matchedPlan.features?.subscription_features?.seats,
+                            guests : matchedPlan.features?.subscription_features?.guests,
+                            monitoring : matchedPlan.features?.subscription_features?.monitoring,
+                        },
                     },
                 });
             }else if(matchedPlan.category === 'api'){
@@ -116,10 +108,6 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                     data: {
                         apiPlan: matchedPlan.id, // 🔹 Save relation (MongoDB ObjectID)
                         paypalSubscriptionExpiresAt: nextBillingTime,
-                        // usedFeatures: Object.keys(selectedFeatures).reduce((acc, key) => {
-                        //     acc[key] = 0;
-                        //     return acc;
-                        // }, {} as DynamicFeatures),
                     },
                 });
             }

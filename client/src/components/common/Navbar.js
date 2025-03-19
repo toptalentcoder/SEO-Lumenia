@@ -487,16 +487,16 @@ export default function Navbar() {
 
                             <button
                                 type='button'
-                                className='bg-[#EBB71A] text-white px-6 py-2 rounded-xl flex items-center space-x-2'>
+                                className='bg-[#EBB71A] text-white py-2 rounded-xl flex items-center space-x-2 w-32 justify-center'>
                                 <FaRobot className='text-xl'/>
-                                <span>20000</span>
+                                <span>{user?.availableFeatures?.ai_tokens || 0}</span>
                             </button>
 
                             <button
                                 type='button'
-                                className='bg-[#279AAC] text-white px-8 py-2 rounded-xl flex items-center space-x-2'>
+                                className='bg-[#279AAC] text-white py-2 rounded-xl flex items-center space-x-2 w-32 justify-center'>
                                 <FaCoins className='text-xl'/>
-                                <span>220</span>
+                                <span>{user?.availableFeatures?.tokens || 0}</span>
                             </button>
                         </div>
 
