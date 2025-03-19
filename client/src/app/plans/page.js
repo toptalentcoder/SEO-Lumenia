@@ -160,32 +160,6 @@ aa
                                         <span className="text-sm text-gray-500 dark:text-gray-200"> / {billingCycle}</span>
                                     </p>
 
-                                    {/* Button to Subscribe or Indicate Current Plan */}
-                                    <button
-                                        className={`w-full py-2 rounded-lg items-center text-center ${
-                                            isCurrentPlan
-                                                ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
-                                                : "bg-[#413793] border-2 border-gray-300 hover:border-gray-400 dark:border-0 dark:bg-slate-700 dark:hover:bg-slate-600 text-primary dark:text-gray-200"
-                                        }`}
-                                        disabled={!!isCurrentPlan}
-                                        onClick={() => {
-                                            if (!isCurrentPlan) {
-                                                setSelectedPlan({ id: planId, name: plan.plan_name });
-                                                setIsModalOpen(true);
-                                            }
-                                        }}
-                                    >
-                                        <div className="flex items-center space-x-2 text-center justify-center text-white">
-                                            <FaCoins className="text-2xl"/>
-                                            <span>
-                                                {isCurrentPlan ?
-                                                    "Current Plan" : "Subscribe"
-                                                }
-                                            </span>
-
-                                        </div>
-                                    </button>
-
                                     <div className="flex items-center space-x-7">
                                         {activeTab === 'subscription' ? (
                                             <div>
@@ -227,6 +201,32 @@ aa
                                         </div>
                                         ) : null} {/* If no tab matches, nothing will be rendered */}
                                     </div>
+
+                                    {/* Button to Subscribe or Indicate Current Plan */}
+                                    <button
+                                        className={`flex px-4 py-2 rounded-lg items-center mt-7 mx-auto ${
+                                            isCurrentPlan
+                                                ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                                                : "bg-[#413793] border-2 border-gray-300 hover:border-gray-400 dark:border-0 dark:bg-slate-700 dark:hover:bg-slate-600 text-primary dark:text-gray-200"
+                                        }`}
+                                        disabled={!!isCurrentPlan}
+                                        onClick={() => {
+                                            if (!isCurrentPlan) {
+                                                setSelectedPlan({ id: planId, name: plan.plan_name });
+                                                setIsModalOpen(true);
+                                            }
+                                        }}
+                                    >
+                                        <div className="flex items-center space-x-2 text-center justify-center text-white">
+                                            <FaCoins className="text-2xl"/>
+                                            <span>
+                                                {isCurrentPlan ?
+                                                    "Current Plan" : "Subscribe"
+                                                }
+                                            </span>
+
+                                        </div>
+                                    </button>
                                 </div>
                             );
                         })}
