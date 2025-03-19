@@ -53,10 +53,12 @@ export default function SEOQueryDashboard() {
                             </MenuButton>
                             <MenuItems
                                 anchor="bottom start"
-                                className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl p-4 space-y-3"
+                                className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl p-4 px-6 space-y-4"
                             >
                                 <MenuItem>
-                                    <span className="text-sm text-gray-400">Popular Language Choices</span>
+                                    <div>
+                                        <span className="text-sm text-gray-400">Popular Language Choices</span>
+                                    </div>
                                 </MenuItem>
                                 <MenuItem>
                                     <div className="flex items-center">
@@ -78,7 +80,9 @@ export default function SEOQueryDashboard() {
                                     </div>
                                 </MenuItem>
                                 <MenuItem>
-                                    <span className="text-sm text-gray-400">All available languages</span>
+                                    <div>
+                                        <span className="text-sm text-gray-400">All available languages</span>
+                                    </div>
                                 </MenuItem>
                                 <MenuItem>
                                     <div className="flex items-center">
