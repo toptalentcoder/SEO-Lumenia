@@ -72,5 +72,10 @@ export const Users: CollectionConfig = {
         },
       },
     },
+    {
+      name: 'paypalSubscriptionExpiresAt',
+      type: 'text',
+      admin: { position: 'sidebar', hidden : false },
+    },
   ],
 }

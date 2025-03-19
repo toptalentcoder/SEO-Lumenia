@@ -131,6 +131,7 @@ export interface User {
   googleId?: string | null;
   subscriptionPlan?: (string | null) | BillingPlan;
   apiPlan?: (string | null) | BillingPlan;
+  paypalSubscriptionExpiresAt?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -265,6 +266,7 @@ export interface UsersSelect<T extends boolean = true> {
   googleId?: T;
   subscriptionPlan?: T;
   apiPlan?: T;
+  paypalSubscriptionExpiresAt?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

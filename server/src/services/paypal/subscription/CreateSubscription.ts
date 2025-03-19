@@ -30,8 +30,8 @@ export const createSubscription = async(planID : string) => {
                 "brand_name": "Surferlink", // Optional but good for display purposes
                 "locale": "en-US", // Optional: Locale for user interface
                 "user_action": "SUBSCRIBE_NOW", // Optional: Sets user action
-                "return_url": "http://localhost:1212/dashboard", // Required: Where the user is redirected after approval
-                "cancel_url": "http://localhost:1212/dashboard", // Required: Where the user is redirected after cancelation
+                "return_url": "http://localhost:3000/plans", // Required: Where the user is redirected after approval
+                "cancel_url": "http://localhost:3000/plans", // Required: Where the user is redirected after cancelation
             },
         };
 

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useUser } from "../../context/UserContext";
 import { usePlan } from "../../context/UserPlanContext";
 import { PiNotePencilBold } from "react-icons/pi";
@@ -14,16 +15,19 @@ import { IoBusinessSharp } from "react-icons/io5";
 import { FaWallet } from "react-icons/fa";
 import { IoCodeSlashSharp } from "react-icons/io5";
 
-export default function PricingTable({ isUpdatingSubscription }) {
+export default function PricingTable() {
     const { user, refreshUser } = useUser();
     const [plans, setPlans] = useState([]);
     const [fetchLoading, setFetchLoading] = useState(true);
-    const { selectedPlanId, selectedPlanName, setPlan } = usePlan();
+    const { selectedPlanId, selectedPlanName, setPlan, clearPlan } = usePlan();
     const [billingCycle, setBillingCycle] = useState("monthly");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const [activeTab, setActiveTab] = useState("subscription"); // State for active tab
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const router = useRouter();
 
     // Function to fetch plans for subscription
     const fetchSubscriptionPlans = async () => {
@@ -87,7 +91,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
                 setPlan(planId, planName);
                 setTimeout(() => {
                     window.location.href = result.approvalUrl;
-                }, 1000);
+                }, 500);
             } else {
                 alert("Subscription creation failed.");
                 setIsProcessing(false);
@@ -97,6 +101,94 @@ export default function PricingTable({ isUpdatingSubscription }) {
             setIsProcessing(false);
         }
     };
+
+    // ✅ API call to save subscription
+    const saveSubscription = useCallback(
+        async (subscriptionId, planId, planName, email) => {
+            try {
+                console.log("🔵 Saving subscription:", { subscriptionId, planId, planName, email });
+
+                const response = await fetch("/api/save-subscription", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ subscriptionId, planId, planName, userEmail: email }),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Failed to save subscription");
+                }
+
+                console.log("✅ Subscription saved successfully!");
+                return data.features || null;
+            } catch (error) {
+                console.error("❌ Failed to save subscription:", error);
+                return null;
+            }
+        }, []
+    );
+
+    // ✅ Handle subscription updates
+    useEffect(() => {
+        const subscriptionId = searchParams?.get("subscription_id");
+
+        if (!user || !subscriptionId) return;
+
+        let { email } = user;
+        let planId = selectedPlanId;
+        let planName = selectedPlanName;
+
+        // ✅ Retrieve session data if missing
+        if (!email || !planId || !planName) {
+            const userSession = localStorage.getItem("user");
+            if (userSession) {
+                const parsedSession = JSON.parse(userSession);
+                email = parsedSession.email || null;
+                planId = localStorage.getItem("selectedPlanId") || null;
+                planName = localStorage.getItem("selectedPlanName") || null;
+            }
+        }
+
+        if (!email || !planId || !planName) return;
+
+        // ✅ Function to check subscription status
+        const updateSubscription = async () => {
+            try {
+                if (!subscriptionId || typeof subscriptionId !== "string" || subscriptionId.includes(":")) {
+                    console.warn("⚠️ Skipping API request due to invalid subscriptionId:", subscriptionId);
+                    return;
+                }
+
+                console.log("🔵 Checking subscription status for:", subscriptionId);
+                const response = await fetch(`/api/show-subscription?subscriptionId=${encodeURIComponent(subscriptionId)}`);
+
+                if (!response.ok) {
+                    throw new Error("Failed to check subscription status");
+                }
+
+                const data = await response.json();
+                const subscriptionStatus = data.subscriptionStatus;
+
+                console.log("🔵 Subscription Status:", subscriptionStatus);
+
+                if (subscriptionStatus === "ACTIVE") {
+                    await saveSubscription(subscriptionId, planId, planName, email);
+                    await refreshUser();
+                }
+            } catch (error) {
+                console.error("❌ Error updating subscription:", error);
+            }
+        };
+
+        updateSubscription();
+
+        localStorage.removeItem("selectedPlanId");
+        localStorage.removeItem("selectedPlanName");
+        if (pathname) {
+            router.replace(pathname);
+        }
+    }, [searchParams, pathname, router, user, refreshUser, saveSubscription, selectedPlanId, selectedPlanName, clearPlan]);
 
     return (
         <div className="flex flex-col items-center mx-auto py-10">
@@ -190,8 +282,10 @@ export default function PricingTable({ isUpdatingSubscription }) {
                             const planPrice = billingCycle === "monthly" ? plan.monthly_price ?? 0 : plan.yearly_price ?? 0;
 
                             const isCurrentPlan =
-                                (billingCycle === "monthly" && user?.billing_plan?.month_plan_id === plan.month_plan_id) ||
-                                (billingCycle === "annually" && user?.billing_plan?.year_plan_id === plan.year_plan_id);
+                                (billingCycle === "monthly" && user?.subscriptionPlan?.month_plan_id === plan.month_plan_id) ||
+                                (billingCycle === "annually" && user?.subscriptionPlan?.year_plan_id === plan.year_plan_id) ||
+                                (billingCycle === "annually" && user?.apiPlan?.year_plan_id === plan.year_plan_id) ||
+                                (billingCycle === "annually" && user?.apiPlan?.year_plan_id === plan.year_plan_id)
 
                             return (
                                 <div
@@ -271,7 +365,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
                                             <button
                                                 className={`flex px-4 py-2 rounded-lg items-center mt-7 mx-auto ${
                                                     isCurrentPlan
-                                                        ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                                                        ? "bg-[#9770C8] text-white"
                                                         : "bg-[#413793] border-gray-300 hover:border-gray-400 dark:border-0 dark:bg-slate-700 dark:hover:bg-slate-600 text-primary dark:text-gray-200 cursor-pointer"
                                                 }`}
                                                 disabled={!!isCurrentPlan}
