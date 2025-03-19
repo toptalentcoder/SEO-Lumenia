@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react";
-import { Search, Globe, MoreVertical } from "lucide-react";
+import { Globe, MoreVertical } from "lucide-react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
-import { US } from 'country-flag-icons/react/3x2'
+import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 
 const queries = [
     { query: "What is the best vpn", id: "12702148", platform: "google", project: "adf", group: "group1", date: "Mar 19, 2025" },
@@ -46,23 +46,249 @@ export default function SEOQueryDashboard() {
                                 <div className="flex items-center space-x-2 text-[#4A4291] hover:bg-[#4A4291] hover:text-white rounded-l-lg px-3 py-3 text-md font-medium border border-[#4A4291]">
                                     <span>Language</span>
                                     <span>:</span>
-                                    <US title="United States"/>
+                                    <US />
                                     <span>EN</span>
                                     <IoIosArrowDown />
                                 </div>
                             </MenuButton>
                             <MenuItems
                                 anchor="bottom start"
-                                className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl mt-4"
+                                className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl p-4 space-y-3"
                             >
-                            <MenuItem>
-                                <a
-                                href="#"
-                                className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                                >
-                                Org
-                                </a>
-                            </MenuItem>
+                                <MenuItem>
+                                    <span className="text-sm text-gray-400">Popular Language Choices</span>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <US className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(USA)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <US className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(USA)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <FR className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(France)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <span className="text-sm text-gray-400">All available languages</span>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <AT className="w-4 h-3"/>
+                                            <span>German</span>
+                                            <span>(Austria)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <ZA className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(South Africa)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CH className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(Switzerland)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <BE className="w-4 h-3"/>
+                                            <span>German</span>
+                                            <span>(Belgium)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <AR className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(Argentina)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <FR className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(France)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CH className="w-4 h-3"/>
+                                            <span>German</span>
+                                            <span>(Switzerland)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CL className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(Chile)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <LU className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(Luxemburg)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <DE className="w-4 h-3"/>
+                                            <span>German</span>
+                                            <span>(Germany)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CO className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(Colombia)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <MA className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(Morocco)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <AE className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(United Arab Emirates)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <US className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(USA)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CH className="w-4 h-3"/>
+                                            <span>Italian</span>
+                                            <span>(Switzerland)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <AU className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(Australia)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <ES className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(Spain)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <IT className="w-4 h-3"/>
+                                            <span>Italian</span>
+                                            <span>(Italy)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CA className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(Canada)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <MX className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(Mexico)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <NL className="w-4 h-3"/>
+                                            <span>Dutch</span>
+                                            <span>(Netherlands)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <EG className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(Egypt)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <PE className="w-4 h-3"/>
+                                            <span>Spanish</span>
+                                            <span>(Peru)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <PL className="w-4 h-3"/>
+                                            <span>Polish</span>
+                                            <span>(Poland)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <GB className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(United Kingdom)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <AD className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(Andorra)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <BR className="w-4 h-3"/>
+                                            <span>Portuguese</span>
+                                            <span>(Brazil)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <IN className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(India)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <BE className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(Belgium)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <PT className="w-4 h-3"/>
+                                            <span>Portuguese</span>
+                                            <span>(Portugal)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
+                                <MenuItem>
+                                    <div className="flex items-center">
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <US className="w-4 h-3"/>
+                                            <span>English</span>
+                                            <span>(USA)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <CA className="w-4 h-3"/>
+                                            <span>French</span>
+                                            <span>(Canada)</span>
+                                        </div>
+                                        <div className="flex items-center space-x-0.5 text-sm text-gray-500 font-semibold w-64">
+                                            <RO className="w-4 h-3"/>
+                                            <span>Romanian</span>
+                                            <span>(Romania)</span>
+                                        </div>
+                                    </div>
+                                </MenuItem>
                             </MenuItems>
                         </Menu>
                     </div>
