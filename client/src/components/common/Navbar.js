@@ -19,6 +19,7 @@ import { FaListCheck, FaRobot, FaDatabase } from "react-icons/fa6";
 import { BiWallet } from "react-icons/bi";
 import { CiViewList, CiLogout, CiSearch  } from "react-icons/ci";
 import { IoMdHelpCircleOutline } from "react-icons/io";
+import { FaCoins } from "react-icons/fa6";
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -494,7 +495,7 @@ export default function Navbar() {
                             <button
                                 type='button'
                                 className='bg-[#279AAC] text-white px-8 py-2 rounded-xl flex items-center space-x-2'>
-                                <FaDatabase className='text-xl'/>
+                                <FaCoins className='text-xl'/>
                                 <span>220</span>
                             </button>
                         </div>
@@ -632,7 +633,7 @@ export default function Navbar() {
                                 <MenuItem>
                                     <Link href="/plans">
                                         <button className="flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full cursor-pointer">
-                                            <FaDatabase />
+                                            <FaCoins />
                                             <span>Plans</span>
                                         </button>
                                     </Link>
