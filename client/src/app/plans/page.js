@@ -39,10 +39,10 @@ export default function PricingTable({ isUpdatingSubscription }) {
     // Function to fetch plans for API-based plans
     const fetchApiPlans = async () => {
         try {
-            const response = await fetch("/api/api-plans"); // Modify this endpoint as needed
+            const response = await fetch("/api/plans"); // Modify this endpoint as needed
             const data = await response.json();
-            if (Array.isArray(data.apiPlans)) {
-                setPlans(data.apiPlans); // Set API-based plans
+            if (Array.isArray(data.fetchedPlans.apiPlans)) {
+                setPlans(data.fetchedPlans.apiPlans); // Set API-based plans
             } else {
                 setPlans([]);
             }
@@ -116,7 +116,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
 
             {/* Pricing Plans */}
             <div className="w-full overflow-x-auto scrollbar-hide">
-                <div className="flex space-x-4 flex-wrap justify-center p-4">
+                <div className="flex space-x-4 space-y-6 flex-wrap justify-center p-4">
                     {plans
                         .filter((plan) => {
                             return billingCycle === "monthly"
