@@ -5,8 +5,8 @@ import { CollectionConfig, CollectionSlug } from "payload";
 export const BillingPlan: CollectionConfig = {
     slug: "billing_plan",
     admin: {
-        useAsTitle: "category",
-        hideAPIURL: true
+        useAsTitle: "plan_name",
+        hideAPIURL: true,
     },
     labels: {
         singular: "Billing Plan",

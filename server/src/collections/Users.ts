@@ -49,5 +49,28 @@ export const Users: CollectionConfig = {
       type: 'text',
       required: false,
     },
+    // Adding the relationships to BillingPlan
+    {
+      name: 'subscriptionPlan',
+      type: 'relationship',
+      relationTo: 'billing_plan', // The name of the Billing Plan collection
+      admin: { position: 'sidebar' },
+      filterOptions: {
+        category: {
+          equals: 'subscription', // Only include plans with the 'subscription' category
+        },
+      },
+    },
+    {
+      name: 'apiPlan',
+      type: 'relationship',
+      relationTo: 'billing_plan', // The name of the Billing Plan collection
+      admin: { position: 'sidebar' },
+      filterOptions: {
+        category: {
+          equals: 'api', // Only include plans with the 'subscription' category
+        },
+      },
+    },
   ],
 }

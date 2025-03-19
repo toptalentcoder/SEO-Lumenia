@@ -129,6 +129,8 @@ export interface User {
   profilePicture?: (string | null) | Media;
   profileImageURL?: string | null;
   googleId?: string | null;
+  subscriptionPlan?: (string | null) | BillingPlan;
+  apiPlan?: (string | null) | BillingPlan;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -261,6 +263,8 @@ export interface UsersSelect<T extends boolean = true> {
   profilePicture?: T;
   profileImageURL?: T;
   googleId?: T;
+  subscriptionPlan?: T;
+  apiPlan?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
