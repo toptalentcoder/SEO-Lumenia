@@ -122,20 +122,24 @@ export default function PricingTable({ isUpdatingSubscription }) {
                 </button>
             </div>
 
-            <div className="flex items-center space-x-2 mb-10">
-            {/* Monthly Label */}
-            <span
-                className={`cursor-pointer text-gray-600 dark:text-gray-200`}
-                onClick={() => setBillingCycle("monthly")}
-            >
-                Monthly
-            </span>
+            <div className="text-sm text-center text-amber-400 mb-7">
+                <span>Prices Exclude VAT</span>
+            </div>
 
-            {/* Toggle Switch */}
-            <div
-                className={`relative inline-block w-12 h-6 rounded-full cursor-pointer ${billingCycle === "annually" ? "bg-[#413793]" : "bg-gray-300 dark:bg-gray-600"}`}
-                onClick={() => setBillingCycle(billingCycle === "monthly" ? "annually" : "monthly")}
-            >
+            <div className="flex items-center space-x-2">
+                {/* Monthly Label */}
+                <span
+                    className={`cursor-pointer text-gray-600 dark:text-gray-200`}
+                    onClick={() => setBillingCycle("monthly")}
+                >
+                    Monthly
+                </span>
+
+                {/* Toggle Switch */}
+                <div
+                    className={`relative inline-block w-12 h-6 rounded-full cursor-pointer ${billingCycle === "annually" ? "bg-[#413793]" : "bg-gray-300 dark:bg-gray-600"}`}
+                    onClick={() => setBillingCycle(billingCycle === "monthly" ? "annually" : "monthly")}
+                >
                 {/* Knob */}
                 <div
                     className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 ease-in-out ${
@@ -151,6 +155,20 @@ export default function PricingTable({ isUpdatingSubscription }) {
                 >
                     Annual
                 </span>
+            </div>
+
+            <div className="flex items-center text-center w-3/4">
+                {activeTab === 'subscription' ? (
+                    <div>
+                        <div className="mt-6 text-s">
+                            Every month, our subscriptions unlock a world of optimization with a set of tokens to create guides valid for 50 days, helping you fine-tune your semantic work. These tokens come with a one-month lifespan, alongside AI tokens you can use to generate content or unlock data, also valid for a month. And because we love rewarding loyalty, 70% of your unused guide creation tokens automatically roll over for an extra month. So, you never have to worry about missing out on optimization opportunities!
+                        </div>
+                    </div>
+                ) : activeTab === 'api' ? (
+                    <div className="flex items-center space-x-2 text-sm">
+                        Our API subscriptions run independently, without tying into our other offerings. With this subscription, you can churn out as many guides as you want, as long as you stay within our rate limit. But remember, this unlimited feature is just for requests made through the API. To make the most of our API, you'll need to develop some software on your end. Keep this in mind as you plan your integration.
+                    </div>
+                ) : null} {/* If no tab matches, nothing will be rendered */}
             </div>
 
             {/* Pricing Plans */}
