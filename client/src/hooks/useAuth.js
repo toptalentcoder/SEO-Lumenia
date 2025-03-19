@@ -44,7 +44,7 @@ export function useAuth() {
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/api/usrInfo", {
+            const response = await fetch("http://localhost:7777/api/usrInfo", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
