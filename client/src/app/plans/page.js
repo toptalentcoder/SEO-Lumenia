@@ -122,9 +122,40 @@ export default function PricingTable({ isUpdatingSubscription }) {
                 </button>
             </div>
 
+            <div className="flex items-center space-x-2 mb-10">
+            {/* Monthly Label */}
+            <span
+                className={`cursor-pointer text-gray-600 dark:text-gray-200`}
+                onClick={() => setBillingCycle("monthly")}
+            >
+                Monthly
+            </span>
+
+            {/* Toggle Switch */}
+            <div
+                className={`relative inline-block w-12 h-6 rounded-full cursor-pointer ${billingCycle === "annually" ? "bg-[#413793]" : "bg-gray-300 dark:bg-gray-600"}`}
+                onClick={() => setBillingCycle(billingCycle === "monthly" ? "annually" : "monthly")}
+            >
+                {/* Knob */}
+                <div
+                    className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 ease-in-out ${
+                        billingCycle === "annually" ? "transform translate-x-6" : ""
+                    }`}
+                />
+                </div>
+
+                {/* Annual Label */}
+                <span
+                    className={`cursor-pointer text-gray-600 dark:text-gray-200`}
+                    onClick={() => setBillingCycle("annually")}
+                >
+                    Annual
+                </span>
+            </div>
+
             {/* Pricing Plans */}
-            <div className="w-full overflow-x-auto scrollbar-hide">
-                <div className="flex space-x-4 space-y-6 flex-wrap justify-center p-4">
+            <div className="w-full ">
+                <div className="flex flex-wrap justify-center p-4 space-x-4 space-y-6 ">
                     {plans
                         .filter((plan) => {
                             return billingCycle === "monthly"
@@ -142,7 +173,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
                             return (
                                 <div
                                     key={index}
-                                    className={`p-6 rounded-3xl shadow-xl bg-white dark:bg-slate-800 w-lg ${
+                                    className={`p-6 rounded-3xl shadow-xl bg-white dark:bg-slate-800 w-lg items-stretch ${
                                         isCurrentPlan ? "border-primary dark:bg-slate-600" : "border-gray-300 dark:border-gray-700"
                                     }`}
                                 >
@@ -248,7 +279,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
 
             {/* Subscription Confirmation Modal */}
             {isModalOpen && selectedPlan && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-11/12 sm:w-96">
                         <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                             Confirm Subscription
