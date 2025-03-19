@@ -27,7 +27,7 @@ export const createSubscription = async(planID : string) => {
             "start_time": new Date(new Date().getTime() + 60000).toISOString(), // Required: ISO 8601 format start time
             "quantity": 1, // Required: Quantity of the subscription
             "application_context": {
-                "brand_name": "Surferlink", // Optional but good for display purposes
+                "brand_name": "YourTextSEO", // Optional but good for display purposes
                 "locale": "en-US", // Optional: Locale for user interface
                 "user_action": "SUBSCRIBE_NOW", // Optional: Sets user action
                 "return_url": "http://localhost:3000/plans", // Required: Where the user is redirected after approval

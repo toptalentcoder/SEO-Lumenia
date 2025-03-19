@@ -132,6 +132,13 @@ export interface User {
   subscriptionPlan?: (string | null) | BillingPlan;
   apiPlan?: (string | null) | BillingPlan;
   paypalSubscriptionExpiresAt?: string | null;
+  availableFeatures?: {
+    tokens?: number | null;
+    ai_tokens?: number | null;
+    seats?: number | null;
+    guests?: number | null;
+    monitoring?: number | null;
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -267,6 +274,15 @@ export interface UsersSelect<T extends boolean = true> {
   subscriptionPlan?: T;
   apiPlan?: T;
   paypalSubscriptionExpiresAt?: T;
+  availableFeatures?:
+    | T
+    | {
+        tokens?: T;
+        ai_tokens?: T;
+        seats?: T;
+        guests?: T;
+        monitoring?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;
