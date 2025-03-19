@@ -11,6 +11,8 @@ import { FaCoins } from "react-icons/fa6";
 import { LuTheater } from "react-icons/lu";
 import { IoIosBusiness } from "react-icons/io";
 import { IoBusinessSharp } from "react-icons/io5";
+import { FaWallet } from "react-icons/fa";
+import { IoCodeSlashSharp } from "react-icons/io5";
 
 export default function PricingTable({ isUpdatingSubscription }) {
     const { user, refreshUser } = useUser();
@@ -98,26 +100,29 @@ export default function PricingTable({ isUpdatingSubscription }) {
 
     return (
         <div className="flex flex-col items-center mx-auto py-10">
+
             {/* Tab Buttons */}
-            <div className="flex mb-6">
+            <div className="flex mb-10 justify-start w-full ml-36">
                 <button
                     onClick={() => setActiveTab("subscription")}
-                    className={`px-6 py-2 rounded-tl-xl rounded-bl-xl ${
+                    className={`px-6 py-2 cursor-pointer flex items-center gap-4 text-2xl ${
                         activeTab === "subscription"
-                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                            ? " text-[#413793] border-t-4 border-[#413793] shadow"
                             : "bg-white text-gray-600 dark:text-gray-200"
                     }`}
                 >
+                    <FaWallet className="text-[#413793]"/>
                     Subscription
                 </button>
                 <button
                     onClick={() => setActiveTab("api")}
-                    className={`px-6 py-2 rounded-tr-xl rounded-br-xl ${
+                    className={`px-6 py-2 cursor-pointer flex items-center gap-4 text-2xl ${
                         activeTab === "api"
-                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                            ? " text-[#413793] border-t-4 border-[#413793] shadow"
                             : "bg-white text-gray-600 dark:text-gray-200"
                     }`}
                 >
+                    <IoCodeSlashSharp className="text-[#413793]"/>
                     API
                 </button>
             </div>
@@ -165,7 +170,7 @@ export default function PricingTable({ isUpdatingSubscription }) {
                         </div>
                     </div>
                 ) : activeTab === 'api' ? (
-                    <div className="flex items-center space-x-2 text-sm">
+                    <div className="flex items-center space-x-2 text-sm mt-6">
                         Our API subscriptions run independently, without tying into our other offerings. With this subscription, you can churn out as many guides as you want, as long as you stay within our rate limit. But remember, this unlimited feature is just for requests made through the API. To make the most of our API, you'll need to develop some software on your end. Keep this in mind as you plan your integration.
                     </div>
                 ) : null} {/* If no tab matches, nothing will be rendered */}
