@@ -1,5 +1,4 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { error } from "console";
 import { Endpoint, PayloadRequest } from "payload";
 
 // Define the Project interface
