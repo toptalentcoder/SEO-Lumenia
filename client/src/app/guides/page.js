@@ -80,7 +80,11 @@ export default function SEOQueryDashboard() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ query: search }),
+                body: JSON.stringify({
+                    query: search,
+                    projectID : projectID ? projectID : 'default',
+                    email : user.email
+                }),
             });
 
             const result = await response.json();

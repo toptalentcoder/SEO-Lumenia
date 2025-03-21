@@ -5,6 +5,7 @@ import { fetchPageContent } from "@/service/createSeoGuide/fetchPageContent";
 import { fetchPageContentForKeywordFrequency } from "@/service/createSeoGuide/fetchPageContentForKeywordFrequency";
 import { getSemanticKeywords } from "@/service/createSeoGuide/getSemanticKeywords";
 import { processText } from "@/service/createSeoGuide/processText";
+import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 import { getJson } from "serpapi";
 
@@ -27,8 +28,9 @@ export const createSeoGuide: Endpoint = {
             );
         }
 
+        const {payload} = req;
         const body = await req.json();
-        const {query} = body;
+        const {query, projectID, email} = body;
 
         const SERP_API_KEY = process.env.SERP_API_KEY;
 
@@ -72,14 +74,68 @@ export const createSeoGuide: Endpoint = {
 
             const optimizationLevels = calculateOptimizationLevels(keywordDistributions);
 
-            return new Response(JSON.stringify({
+            const seoGuides = {
                 "query" : query,
                 "grapthData" : optimizationLevels,
                 "searchResults": organicResults.map(({ title, link }) => ({ title, link }))
-            }), {
-                status: 200,
-                headers: { "Content-Type": "application/json" },
+            }
+
+            const users = await payload.find({
+                collection: "users",
+                where: { email: { equals: email } },
+                limit: 1,
             });
+
+            if (!users.docs.length) {
+                return new Response(
+                    JSON.stringify({ error: `User not found for email: ${email}` }),
+                    {
+                        status: 400,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*",
+                        },
+                    }
+                );
+            }
+
+            const user = users.docs[0];
+
+            // ✅ Ensure projects array is correctly typed
+            const existingProjects: Project[] = Array.isArray(user.projects) ? (user.projects as Project[]) : [];
+
+            let projectUpdated = false;
+            const updatedProjects = existingProjects.map((project) => {
+                if (project.projectID === projectID) {
+                    projectUpdated = true;
+                    return {
+                        ...project,
+                        seoGuides: [...(project.seoGuides || []), seoGuides], // Append new SEO guide
+                    };
+                }
+                return project;
+            });
+
+            if (!projectUpdated) {
+                return new Response(
+                    JSON.stringify({ error: "Project not found" }),
+                    { status: 404, headers: { "Content-Type": "application/json" } }
+                );
+            }
+
+            await payload.update({
+                collection: "users",
+                where: { email: { equals: email } },
+                data: { projects: updatedProjects },
+            });
+
+            return new Response(
+                JSON.stringify({ success: true, seoGuides }),
+                {
+                    status: 200,
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
         } catch (err) {
             console.error("❌ createSeoGuide error:", err);
             return new Response(JSON.stringify({ error: "Failed to create SEO guide" }), {
