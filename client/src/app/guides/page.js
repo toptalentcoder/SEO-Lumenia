@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { IoIosArrowDown } from "react-icons/io";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 import { VscNewFile } from "react-icons/vsc";
+import { FaCoins } from "react-icons/fa6";
 
 const queries = [
     { query: "What is the best vpn", id: "12702148", platform: "google", project: "adf", group: "group1", date: "Mar 19, 2025" },
@@ -64,6 +65,12 @@ export default function SEOQueryDashboard() {
             setIsCreateModalOpen(false);
         }, 500);
     };
+
+    const handleCreateSEOGuide = async() => {
+        if(!search.trim()){
+            return;
+        }
+    }
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -340,6 +347,8 @@ export default function SEOQueryDashboard() {
                             ${isFocused ? 'rounded-r-xl' : 'rounded-r-lg'}`}
                         placeholder={isFocused ? 'Enter your query' : 'Enter your query'}
                         onFocus={handleFocus}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                     />
                 </div>
 
@@ -352,9 +361,32 @@ export default function SEOQueryDashboard() {
                         <select id="group" className="border p-1 rounded">
                             <option value="No group">No group</option>
                         </select>
-                        <button className="ml-2 bg-green-600 hover:bg-green-700 cursor-pointer text-white py-2 px-4 rounded-xl">
-                            Create a SEO Guide
-                        </button>
+                        <div className="relative inline-block">
+                            <button
+                                className="ml-2 bg-green-600 hover:bg-green-700 cursor-pointer text-white py-2 px-4 rounded-xl"
+                                onClick={handleCreateSEOGuide}
+                            >
+                                Create a SEO Guide
+                            </button>
+
+                            {/* Tooltip - Only visible when search is typed */}
+                            {search.trim().length > 0 && (
+                                <div className="absolute top-1/2 left-full ml-3 transform -translate-y-1/2 bg-[#4A4291] text-white text-xs px-3 py-1 rounded-lg shadow-lg flex items-center space-x-1">
+                                    {/* Triangle Pointer */}
+                                    <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-6 border-t-transparent border-b-6 border-b-transparent border-r-6 border-r-[#4A4291]"></div>
+
+                                    {/* Tooltip Text */}
+                                    <span className="font-semibold">Total</span>
+                                    <span className="font-semibold">cost</span>
+                                    <span className="font-semibold">:</span>
+                                    <span className="font-semibold">5</span>
+
+                                    {/* Coin Icon */}
+                                    <span className="text-lg"><FaCoins/></span>
+                                </div>
+                            )}
+
+                        </div>
                     </div>
                 )}
             </div>
