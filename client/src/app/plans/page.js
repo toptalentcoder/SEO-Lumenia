@@ -263,7 +263,7 @@ export default function PricingTable() {
                     </div>
                 ) : activeTab === 'api' ? (
                     <div className="flex items-center space-x-2 text-sm mt-6">
-                        Our API subscriptions run independently, without tying into our other offerings. With this subscription, you can churn out as many guides as you want, as long as you stay within our rate limit. But remember, this unlimited feature is just for requests made through the API. To make the most of our API, you'll need to develop some software on your end. Keep this in mind as you plan your integration.
+                        Our API subscriptions run independently, without tying into our other offerings. With this subscription, you can churn out as many guides as you want, as long as you stay within our rate limit. But remember, this unlimited feature is just for requests made through the API. To make the most of our API, you will need to develop some software on your end. Keep this in mind as you plan your integration.
                     </div>
                 ) : null} {/* If no tab matches, nothing will be rendered */}
             </div>

@@ -89,5 +89,43 @@ export const Users: CollectionConfig = {
         { name: "monitoring", type: "number", label : "Monitoring" },
       ]
     },
+    {
+      name: 'projects',
+      type: 'json',
+      admin: { position: 'sidebar' },
+    },
   ],
+  hooks: {
+    beforeChange: [
+      async ({ data, operation }) => {
+        if (operation === 'create') {
+          const defaultProjectName = "Default";
+
+          const defaultProject = {
+            projectID: String(Math.floor(100000 + Math.random() * 900000)),
+            projectName: defaultProjectName,
+          };
+
+          // Always work with an array
+          const existingProjects = Array.isArray(data.projects) ? data.projects : [];
+
+          // Check if default project already exists
+          const alreadyHasDefault = existingProjects.some(
+            (p: { projectID: string; projectName: string }) => p.projectName === defaultProjectName
+          );
+
+          // Only add if it doesn't exist
+          if (!alreadyHasDefault) {
+            existingProjects.push(defaultProject);
+          }
+
+          // Assign back to data
+          data.projects = existingProjects;
+        }
+
+        return data;
+      },
+    ],
+  },
+
 }

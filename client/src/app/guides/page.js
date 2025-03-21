@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useUser } from '../../context/UserContext';
 import CreateProjectModal from '../../components/ui/CreateProjectModal'
 import { Globe, MoreVertical } from "lucide-react";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { useRouter, useSearchParams } from 'next/navigation';
 import { IoIosArrowDown } from "react-icons/io";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 import { VscNewFile } from "react-icons/vsc";
@@ -27,6 +28,11 @@ export default function SEOQueryDashboard() {
     const [isFocused, setIsFocused] = useState(false);
     const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [rows, setRows] = useState([]);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const projectID = searchParams?.get("projectID")
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -36,16 +42,27 @@ export default function SEOQueryDashboard() {
         setIsFocused(false);
     };
 
-    const handleProjectCreated = (newProject) => {
+    const handleProjectCreated = async(newProject) => {
         const newRow = {
-            id: rows.length + 1,
+            id: newProject.id,
             name: newProject.name,
             domain: newProject.domain,
             favourites: 0,
         };
 
+        console.log(newRow)
         setRows((prevRows) => [...prevRows, newRow]);
-        setIsCreateModalOpen(false);
+
+        const fetchedProject = await fetch(`/api/getProjectItemInfo?email=${user?.email}&projectID=${newProject.id}`)
+            .then(res => res.json())
+            .then(data => data.matchingProject);
+
+        if(fetchedProject){
+            router.push(`/guides?projectID=${fetchedProject.projectID}`)
+        }
+        setTimeout(() => {
+            setIsCreateModalOpen(false);
+        }, 500);
     };
 
     return (
@@ -317,7 +334,10 @@ export default function SEOQueryDashboard() {
 
                     {/* Textarea */}
                     <textarea
-                        className={`flex-1 bg-white p-3 border border-gray-300 rounded-r-lg transition-all duration-300 ease-in-out ml-44 ${isFocused ? 'h-24' : 'h-12'} ${isFocused ? '' : 'overflow-hidden'}`}
+                        className={`flex-1 bg-white p-3 border transition-all duration-300 ease-in-out ml-44 focus:outline-none
+                            ${isFocused ? 'h-24' : 'h-12'} ${isFocused ? '' : 'overflow-hidden'}
+                            ${isFocused ? 'border-[1.5px] border-[#9770C8]' : 'border-gray-300'}
+                            ${isFocused ? 'rounded-r-xl' : 'rounded-r-lg'}`}
                         placeholder={isFocused ? 'Enter your query' : 'Enter your query'}
                         onFocus={handleFocus}
                     />
@@ -348,9 +368,16 @@ export default function SEOQueryDashboard() {
                 </button>
             </div>
 
+
             {/* Query Table */}
             <div className="container mx-auto p-4">
-                <div className="bg-white shadow rounded-lg overflow-hidden">
+
+                {projectID ? (
+                    <div>
+                        {projectID}
+                    </div>
+                ) : (
+                    <div className="bg-white shadow rounded-lg overflow-hidden">
                     <table className="w-full text-left" onClick={handleBlur}>
                         <thead>
                         <tr className="bg-gray-200 text-gray-700">
@@ -380,7 +407,8 @@ export default function SEOQueryDashboard() {
                         ))}
                         </tbody>
                     </table>
-                </div>
+                    </div>
+                )}
             </div>
 
             {/* Create Project Modal */}
