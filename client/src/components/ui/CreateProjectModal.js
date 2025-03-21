@@ -1,6 +1,11 @@
 import { useState } from "react";
 import Modal from "./Modal";
 
+const generateProjectId = () => {
+    const randomID = Math.floor(100000 + Math.random() * 900000);
+    return new String(randomID);
+};
+
 export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, userEmail }) {
     const [projectName, setProjectName] = useState("");
     const [domainName, setDomainName] = useState("");
@@ -16,6 +21,8 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
 
         setIsLoading(true);
 
+        const projectID = generateProjectId();
+
         try {
             const response = await fetch("/api/post-project", {
                 method: "POST",
@@ -24,17 +31,18 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
                     email: userEmail,
                     projectName,
                     domainName,
+                    projectID
                 }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                onProjectCreated({ id: Date.now(), name: projectName, domain: domainName, favourites: 0 });
+                setSuccessMessage("Project successfully created!"); // Show success message
+                onProjectCreated({ id: projectID, name: projectName, domain: domainName, favourites: 0 });
                 setProjectName("");
                 setDomainName("");
                 onClose();
-                setSuccessMessage("Project successfully created!"); // Show success message
             } else {
                 setErrorMessage(data.message || "Error creating project.");
             }

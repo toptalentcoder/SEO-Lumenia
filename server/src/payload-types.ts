@@ -139,6 +139,15 @@ export interface User {
     guests?: number | null;
     monitoring?: number | null;
   };
+  projects?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -283,6 +292,7 @@ export interface UsersSelect<T extends boolean = true> {
         guests?: T;
         monitoring?: T;
       };
+  projects?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
