@@ -6,6 +6,7 @@ import { saveSubscriptionToUserCollection } from "./paypal/saveSubscriptionTpDbE
 import { showSubscriptionEndpoint } from "./paypal/showSubscriptionEndpoint";
 import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
 import { addProjectToUser } from "./projectManagement/postProject";
+import { createSeoGuide } from "./seoGuide/createSeoGuide";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -15,5 +16,6 @@ export const customEndpoints = [
     saveSubscriptionToUserCollection,
     getUserDataForRefreshPageEndpoint,
     addProjectToUser,
-    getUserProjectInfo
+    getUserProjectInfo,
+    createSeoGuide
 ]
