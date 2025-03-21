@@ -101,12 +101,29 @@ export const createSeoGuide: Endpoint = {
 
             const user = users.docs[0];
 
+            let projectId : string ;
+
+            if (projectID === "Default") {
+                const defaultProject = Array.isArray(user.projects)
+                    ? (user.projects as Project[]).find((project) => project.projectName === "Default")
+                    : undefined;
+
+                if (defaultProject) {
+                    projectId = defaultProject.projectID;
+                } else {
+                    return new Response(
+                        JSON.stringify({ error: "Default project not found" }),
+                        { status: 404, headers: { "Content-Type": "application/json" } }
+                    );
+                }
+            }
+
             // ✅ Ensure projects array is correctly typed
             const existingProjects: Project[] = Array.isArray(user.projects) ? (user.projects as Project[]) : [];
 
             let projectUpdated = false;
             const updatedProjects = existingProjects.map((project) => {
-                if (project.projectID === projectID) {
+                if (project.projectID === projectId) {
                     projectUpdated = true;
                     return {
                         ...project,
@@ -130,7 +147,7 @@ export const createSeoGuide: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true, seoGuides }),
+                JSON.stringify({ success: true }),
                 {
                     status: 200,
                     headers: { "Content-Type": "application/json" },

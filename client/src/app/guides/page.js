@@ -82,7 +82,7 @@ export default function SEOQueryDashboard() {
                 },
                 body: JSON.stringify({
                     query: search,
-                    projectID : projectID ? projectID : 'default',
+                    projectID : projectID ? projectID : 'Default',
                     email : user.email
                 }),
             });
