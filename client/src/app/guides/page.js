@@ -32,6 +32,7 @@ export default function SEOQueryDashboard() {
     const [rows, setRows] = useState([]);
     const router = useRouter();
     const searchParams = useSearchParams();
+    const [loading, setLoading] = useState(false);
 
     const projectID = searchParams?.get("projectID")
 
@@ -70,6 +71,30 @@ export default function SEOQueryDashboard() {
         if(!search.trim()){
             return;
         }
+
+        setLoading(true); // 🔄 Disable the button
+
+        try {
+            const response = await fetch('/api/createSeoGuide', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: search }),
+            });
+
+            const result = await response.json();
+            console.log(result); // 🔍 Handle response if needed
+
+            if(result){
+                router.push('/aaa');
+            }
+        } catch (error) {
+            console.error("Failed to create SEO guide:", error);
+        } finally {
+            setLoading(false); // ✅ Re-enable the button
+        }
+
     }
 
     return (
@@ -363,7 +388,10 @@ export default function SEOQueryDashboard() {
                         </select>
                         <div className="relative inline-block">
                             <button
-                                className="ml-2 bg-green-600 hover:bg-green-700 cursor-pointer text-white py-2 px-4 rounded-xl"
+                                disabled={loading}
+                                className={`ml-2 py-2 px-4 rounded-xl text-white ${
+                                    loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 cursor-pointer'
+                                }`}
                                 onClick={handleCreateSEOGuide}
                             >
                                 Create a SEO Guide
