@@ -1,12 +1,13 @@
 type KeywordCounts = Record<string, number>;
 type KeywordDistributions = KeywordCounts[];
 type OptimizationRanges = {
+    name : string;
     subOptimized: string;
     standardOptimized: string;
     strongOptimized: string;
     overOptimized: string;
 };
-type OptimizationLevels = Record<string, OptimizationRanges>;
+type OptimizationLevels = OptimizationRanges[];
 
 /**
  * Calculates optimization levels for each keyword across multiple documents
@@ -26,7 +27,7 @@ export function calculateOptimizationLevels(
         }
     }
 
-    const optimizationLevels: OptimizationLevels = Object.create(null);
+    const optimizationLevels: OptimizationLevels = [];
 
     for (const keyword in keywordStats) {
         const frequencies = keywordStats[keyword];
@@ -50,13 +51,15 @@ export function calculateOptimizationLevels(
         const strongMin = stdMax;
         const strongMax = mean + 1.5 * stdDev;
         const overMin = strongMax;
+        const overMax = mean + 2.5 * stdDev;
 
-        optimizationLevels[keyword] = {
-            subOptimized: `≤ ${Math.round(subMax)}`,
-            standardOptimized: `${Math.round(stdMin)} ~ ${Math.round(stdMax)}`,
-            strongOptimized: `${Math.round(strongMin)} ~ ${Math.round(strongMax)}`,
-            overOptimized: `≥ ${Math.round(overMin)}`
-        };
+        optimizationLevels.push({
+            name : keyword,
+            subOptimized: `${Math.round(subMax)}`,
+            standardOptimized: `${Math.round(stdMax) - Math.round(stdMin)}`,
+            strongOptimized: `${Math.round(strongMax) - Math.round(strongMin)}`,
+            overOptimized: `${Math.round(overMax) - Math.round(overMin)}`
+        });
     }
 
     return optimizationLevels;

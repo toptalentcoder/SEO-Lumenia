@@ -8,12 +8,17 @@ import { processText } from "@/service/createSeoGuide/processText";
 import { Endpoint, PayloadRequest } from "payload";
 import { getJson } from "serpapi";
 
+interface OrganicResult {
+    title : string;
+    link: string;
+    // Add other properties if needed
+}
+
 export const createSeoGuide: Endpoint = {
     path: "/createSeoGuide",
     method: "post",
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-        const { payload } = req;
 
         if (!req.json) {
             return new Response(
@@ -50,23 +55,28 @@ export const createSeoGuide: Endpoint = {
                 );
             });
 
-            const response = json["organic_results"] ?? [];
-            const links = response.map((item: any) => item.link);
+            const organicResults: OrganicResult[] = json["organic_results"] ?? [];
+
+            const links = organicResults.map((item: OrganicResult) => item.link);
 
             // Fetch and process content
             const pageTexts = await Promise.all(links.map(fetchPageContent));
-            const processedText = pageTexts.map(processText);
+            const processedText = pageTexts.filter((text): text is string => text !== null).map(processText);
             const keywords = extractWords(processedText);
             const semanticKeywords = await getSemanticKeywords(keywords, query);
 
             // Frequency + Optimization Calculation
             const keywordDistributions = await Promise.all(
-                links.map((link : any) => fetchPageContentForKeywordFrequency(link, semanticKeywords))
+                links.map((link: string) => fetchPageContentForKeywordFrequency(link, semanticKeywords))
             );
 
             const optimizationLevels = calculateOptimizationLevels(keywordDistributions);
 
-            return new Response(JSON.stringify({ optimizationLevels }), {
+            return new Response(JSON.stringify({
+                "query" : query,
+                "grapthData" : optimizationLevels,
+                "searchResults": organicResults.map(({ title, link }) => ({ title, link }))
+            }), {
                 status: 200,
                 headers: { "Content-Type": "application/json" },
             });
