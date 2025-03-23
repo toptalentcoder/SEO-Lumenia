@@ -5,7 +5,8 @@ import { useParams } from "next/navigation";
 import { useUser } from '../../../context/UserContext';
 import { GoOrganization } from "react-icons/go";
 import { BsThreeDots } from "react-icons/bs"
-import LeftSection from './leftSection'
+import LeftSection from './left/leftSection'
+
 
 export default function GuidePage() {
 
