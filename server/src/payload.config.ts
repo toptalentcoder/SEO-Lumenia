@@ -1,5 +1,6 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import mongoose from 'mongoose';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -45,6 +46,9 @@ export default buildConfig({
     ...(customEndpoints || []), // Ensure customEndpoints is defined
   ],
   onInit : async(payload) => {
+    const conn = mongoose.connection
+
+    conn.set('socketTimeoutMS', 30000)
     console.log('Paypal plan check');
     createPlansAndGetID(payload)
   }

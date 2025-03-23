@@ -72,10 +72,16 @@ export default function SEOQueryDashboard() {
             return;
         }
 
+        if (!user?.availableFeatures || parseInt(user.availableFeatures.tokens?.trim?.() || "0", 10) < 5) {
+            alert("Not enough tokens. Please upgrade your plan!");
+            return;
+        }
+
         setLoading(true); // 🔄 Disable the button
 
         try {
-            const response = await fetch('/api/createSeoGuide', {
+
+            const response = await fetch('http://localhost:7777/api/createSeoGuide', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

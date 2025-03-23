@@ -76,7 +76,7 @@ export const createSeoGuide: Endpoint = {
 
             const seoGuides = {
                 "query" : query,
-                "grapthData" : optimizationLevels,
+                "graphData" : optimizationLevels,
                 "searchResults": organicResults.map(({ title, link }) => ({ title, link }))
             }
 
