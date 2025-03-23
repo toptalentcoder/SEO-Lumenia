@@ -96,22 +96,31 @@ export const getUserProjects: Endpoint = {
             );
         }
 
-        const flattenedProjects: FlattenedProjectInfo[] = (projectData as Project[]).map((project: Project) => {
-            const firstGuide = Array.isArray(project.seoGuides) && project.seoGuides.length > 0
-                ? project.seoGuides[0]
-                : {};
+        const typedProjectData = projectData as Project[];
 
-            return {
-                projectName: project.projectName || '',
-                projectID : project.projectID || '',
-                query: firstGuide.query || '',
-                queryID: firstGuide.queryID || '',
-                queryEngine: firstGuide.queryEngine || '',
-                language: firstGuide.language || 'unknown',
-                createdAt: typeof firstGuide.createdAt === 'number'
-                    ? new Date(firstGuide.createdAt).toISOString()
-                    : 'unknown'
-            };
+        const flattenedProjects: FlattenedProjectInfo[] = typedProjectData
+            .flatMap((project) => {
+                if (!Array.isArray(project.seoGuides)) return [];
+
+                return project.seoGuides.map((guide) => ({
+                    projectName: project.projectName || '',
+                    projectID: project.projectID || '',
+                    query: guide.query || '',
+                    queryID: guide.queryID || '',
+                    queryEngine: guide.queryEngine || '',
+                    language: guide.language || 'unknown',
+                    createdAt:
+                        typeof guide.createdAt === 'number'
+                        ? new Date(guide.createdAt).toISOString()
+                        : 'unknown',
+                }));
+            })
+            .sort((a, b) => {
+                // Push 'unknown' dates to the end
+                if (a.createdAt === 'unknown') return 1;
+                if (b.createdAt === 'unknown') return -1;
+
+                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         });
 
         return new Response(JSON.stringify(flattenedProjects), {

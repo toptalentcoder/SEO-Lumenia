@@ -449,9 +449,10 @@ export default function SEOQueryDashboard() {
                 </button>
             </div>
 
-
-            {/* Query Table */}
-            <QueryTable projectID={projectID} />
+            <div className="w-full h-full bg-white">
+                {/* Query Table */}
+                <QueryTable projectID={projectID} />
+            </div>
 
             {/* Create Project Modal */}
             <CreateProjectModal
