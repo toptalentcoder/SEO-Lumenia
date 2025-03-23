@@ -119,10 +119,14 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 
     return (
         <div className="flex flex-wrap items-center gap-0 border-b pb-2 border-gray-300">
-            <select className="border px-2 py-1 text-sm rounded">
+            <select className="px-3 py-2 text-md rounded cursor-pointer hover:bg-blue-100 focus:outline-none">
                 <option>Paragraph</option>
-                <option>Heading 1</option>
-                <option>Heading 2</option>
+                <option className="text-3xl font-semibold hover:bg-blue-100">h1</option>
+                <option className="text-2xl font-semibold hover:bg-blue-100">h2</option>
+                <option className="text-xl font-semibold hover:bg-blue-100">h3</option>
+                <option className="text-lg font-semibold hover:bg-blue-100">h4</option>
+                <option className="text-md font-semibold hover:bg-blue-100">h5</option>
+                <option className="text-sm font-semibold hover:bg-blue-100">h6</option>
             </select>
             <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100 ml-6">B</button>
             <button onClick={() => format('italic')} className="italic px-3 py-1 font-semibold hover:bg-blue-100">I</button>
@@ -187,15 +191,15 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 
             <button
                 onClick={() => {
-                const html = editor.getRootElement().innerHTML;
-                setHtmlContent(html);
-                setSourceMode(true);
+                    const html = editor.getRootElement().innerHTML;
+                    setHtmlContent(html);
+                    setSourceMode(true);
                 }}
-                className="text-lg px-2 py-1 hover:bg-blue-100"
+                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4"
             >
                 <IoCodeSlash />
             </button>
-            <button className="text-lg ml-auto bg-blue-600 text-white px-3 py-1 rounded">▶ Import URL</button>
+            <button className="text-md ml-auto text-gray-700 px-2 py-1 hover:bg-blue-100 rounded">▶ Import URL</button>
         </div>
     );
 }
@@ -232,7 +236,7 @@ function SeoTxlToolbar() {
 // Translate dropdown
 function SeoTranslateDropdown() {
     return (
-        <div className="border-b pb-2 border-gray-300">
+        <div className="border-b pb-2 border-gray-300  shadow-lg">
             <select className="text-sm px-3 py-1 rounded hover:bg-blue-100">
                 <option>
                     <div  className='flex items-center space-x-2'>
