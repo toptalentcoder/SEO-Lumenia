@@ -6,6 +6,7 @@ import { saveSubscriptionToUserCollection } from "./paypal/saveSubscriptionTpDbE
 import { showSubscriptionEndpoint } from "./paypal/showSubscriptionEndpoint";
 import { getUserProjects } from "./projectManagement/getProject";
 import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
+import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
 import { addProjectToUser } from "./projectManagement/postProject";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
 
@@ -19,5 +20,6 @@ export const customEndpoints = [
     addProjectToUser,
     getUserProjectInfo,
     getUserProjects,
+    getSeoGuideByQueryID,
     createSeoGuide
 ]
