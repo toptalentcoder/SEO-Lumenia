@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from '../../context/UserContext';
 import { BsThreeDots } from "react-icons/bs"
+import { useRouter } from "next/navigation";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 
 const formatDate = (isoDate) => {
@@ -21,6 +22,7 @@ export default function QueryTable({ projectID }) {
     const { user } = useUser();
     const [rows, setRows] = useState([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter(); // For navigation
 
     useEffect(() => {
         if(!user.email) return;
@@ -56,6 +58,12 @@ export default function QueryTable({ projectID }) {
 
         fetchProjects();
     }, [user]);
+
+    const handleQueryIDPage = (queryID) => {
+        if(queryID){
+            router.push(`/guide/${queryID}`);
+        }
+    }
 
     return (
         <div className="container mx-auto">
@@ -109,7 +117,10 @@ export default function QueryTable({ projectID }) {
                                             className="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded"
                                         />
                                     </td>
-                                    <td className="w-1/4 px-3 py-4 text-lg font-medium text-gray-800 font-sans">
+                                    <td
+                                        className="w-1/4 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer"
+                                        onClick={() => handleQueryIDPage(row.queryID)}
+                                    >
                                         <div>
                                             <div className="text-[#4A4291]">
                                                 {row.query}
