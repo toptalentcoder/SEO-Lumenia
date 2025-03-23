@@ -32,7 +32,7 @@ export const createSeoGuide: Endpoint = {
 
         const { payload } = req;
         const body = await req.json();
-        const { query, projectID, email } = body;
+        const { query, projectID, email, queryID, language, queryEngine } = body;
 
         const SERP_API_KEY = process.env.SERP_API_KEY;
 
@@ -96,8 +96,12 @@ export const createSeoGuide: Endpoint = {
 
             const seoGuides = {
                 query,
+                queryID,
+                queryEngine,
                 graphData: optimizationLevels,
                 searchResults: organicResults.map(({ title, link }) => ({ title, link })),
+                language,
+                createdAt : Date.now()
             };
 
             const users = await payload.find({

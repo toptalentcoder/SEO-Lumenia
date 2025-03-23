@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useUser } from '../../context/UserContext';
 import CreateProjectModal from '../../components/ui/CreateProjectModal'
-import { Globe, MoreVertical } from "lucide-react";
+import QueryTable from './queryTable'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { IoIosArrowDown } from "react-icons/io";
@@ -35,6 +35,11 @@ export default function SEOQueryDashboard() {
     const [loading, setLoading] = useState(false);
 
     const projectID = searchParams?.get("projectID")
+
+    const generateQueryId = () => {
+        const randomID = Math.floor(10000000 + Math.random() * 90000000);
+        return new String(randomID);
+    };
 
     const handleFocus = () => {
         setIsFocused(true);
@@ -71,13 +76,16 @@ export default function SEOQueryDashboard() {
         if(!search.trim()){
             return;
         }
-
-        if (!user?.availableFeatures || parseInt(user.availableFeatures.tokens?.trim?.() || "0", 10) < 5) {
+        console.log(user)
+        if (!user?.availableFeatures || parseInt(user.availableFeatures.tokens || "0", 10) < 5) {
             alert("Not enough tokens. Please upgrade your plan!");
             return;
         }
 
+
         setLoading(true); // 🔄 Disable the button
+
+        const queryID = generateQueryId();
 
         try {
 
@@ -88,8 +96,11 @@ export default function SEOQueryDashboard() {
                 },
                 body: JSON.stringify({
                     query: search,
+                    queryID : queryID,
+                    queryEngine : "google",
                     projectID : projectID ? projectID : 'Default',
-                    email : user.email
+                    email : user.email,
+                    language : "EN"
                 }),
             });
 
@@ -440,46 +451,7 @@ export default function SEOQueryDashboard() {
 
 
             {/* Query Table */}
-            <div className="container mx-auto p-4">
-
-                {projectID ? (
-                    <div>
-                        {projectID}
-                    </div>
-                ) : (
-                    <div className="bg-white shadow rounded-lg overflow-hidden">
-                    <table className="w-full text-left" onClick={handleBlur}>
-                        <thead>
-                        <tr className="bg-gray-200 text-gray-700">
-                            <th className="p-3">Query</th>
-                            <th className="p-3">Project</th>
-                            <th className="p-3">Group</th>
-                            <th className="p-3">Created On</th>
-                            <th className="p-3">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {queries.map((q, index) => (
-                            <tr key={index} className="border-b hover:bg-gray-100">
-                            <td className="p-3 flex items-center gap-2">
-                                <Globe className="w-4 h-4 text-gray-500" />
-                                {q.query} <span className="text-gray-400 text-sm">#{q.id} - {q.platform}</span>
-                            </td>
-                            <td className="p-3">{q.project}</td>
-                            <td className="p-3">{q.group || "-"}</td>
-                            <td className="p-3">{q.date}</td>
-                            <td className="p-3 text-right">
-                                <button variant="ghost" size="icon">
-                                <MoreVertical className="w-5 h-5" />
-                                </button>
-                            </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                    </div>
-                )}
-            </div>
+            <QueryTable projectID={projectID} />
 
             {/* Create Project Modal */}
             <CreateProjectModal
