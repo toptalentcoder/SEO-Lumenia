@@ -1,8 +1,10 @@
 import { ImCross } from "react-icons/im";
 import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 export default function Analysis({data}) {
+
     return(
         <div className="px-6">
             <div className="flex items-center gap-2 justify-end">
@@ -47,7 +49,40 @@ export default function Analysis({data}) {
                     1
                 </div>
             </div>
-            {data.query}
+
+            <div className="mt-8" style={{ width: '100%', height: 300 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                        width={500}
+                        height={500}
+                        data={data.graphData}
+                        margin={{
+                            top: 10,
+                            right: 30,
+                            left: 0,
+                            bottom: 50,
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} tick={{ fontSize : 13 }}/>
+                        <YAxis
+                            tick={false}
+                            label={{
+                                value: 'Optimization',
+                                angle: -90,
+                                position: 'insideLeft',
+                                offset: 10,
+                                style: { textAnchor: 'middle', fontSize: 12 }
+                            }}
+                        />
+
+                        <Area type="monotone" dataKey="subOptimized" stackId="1" stroke="#7CB5EC" fill="#7CB5EC"/>
+                        <Area type="monotone" dataKey="standardOptimized" stackId="1" stroke="#90EE7E" fill="#90EE7E" />
+                        <Area type="monotone" dataKey="strongOptimized" stackId="1" stroke="#FFA500" fill="#FFA500" />
+                        <Area type="monotone" dataKey="overOptimized" stackId="1" stroke="#FF0000" fill="#FF0000" />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     )
 }
