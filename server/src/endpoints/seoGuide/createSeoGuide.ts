@@ -2,17 +2,16 @@ import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { calculateOptimizationLevels } from "@/service/createSeoGuide/calculateOptimizationLevels";
 import { extractWords } from "@/service/createSeoGuide/extractWords";
 import { fetchPageContent } from "@/service/createSeoGuide/fetchPageContent";
-import { fetchPageContentForKeywordFrequency } from "@/service/createSeoGuide/fetchPageContentForKeywordFrequency";
 import { getSemanticKeywords } from "@/service/createSeoGuide/getSemanticKeywords";
 import { processText } from "@/service/createSeoGuide/processText";
 import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
+import pLimit from "p-limit";
 import { getJson } from "serpapi";
 
 interface OrganicResult {
-    title : string;
+    title: string;
     link: string;
-    // Add other properties if needed
 }
 
 export const createSeoGuide: Endpoint = {
@@ -20,17 +19,16 @@ export const createSeoGuide: Endpoint = {
     method: "post",
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-
         if (!req.json) {
             return new Response(
-                JSON.stringify({ error: 'Invalid request: Missing JSON parsing function' }),
-                { status: 400, headers: { 'Content-Type': 'application/json' } }
+                JSON.stringify({ error: "Invalid request: Missing JSON parsing function" }),
+                { status: 400, headers: { "Content-Type": "application/json" } }
             );
         }
 
-        const {payload} = req;
+        const { payload } = req;
         const body = await req.json();
-        const {query, projectID, email} = body;
+        const { query, projectID, email } = body;
 
         const SERP_API_KEY = process.env.SERP_API_KEY;
 
@@ -42,7 +40,6 @@ export const createSeoGuide: Endpoint = {
         }
 
         try {
-            // Fetch SERP results
             const json = await new Promise<any>((resolve, reject) => {
                 getJson(
                     {
@@ -58,27 +55,46 @@ export const createSeoGuide: Endpoint = {
             });
 
             const organicResults: OrganicResult[] = json["organic_results"] ?? [];
-
             const links = organicResults.map((item: OrganicResult) => item.link);
 
-            // Fetch and process content
-            const pageTexts = await Promise.all(links.map(fetchPageContent));
-            const processedText = pageTexts.filter((text): text is string => text !== null).map(processText);
-            const keywords = extractWords(processedText);
-            const semanticKeywords = await getSemanticKeywords(keywords, query);
+            const limit = pLimit(5);
 
-            // Frequency + Optimization Calculation
-            const keywordDistributions = await Promise.all(
-                links.map((link: string) => fetchPageContentForKeywordFrequency(link, semanticKeywords))
+            const pageContents = await Promise.all(
+                links.map((link) => limit(() => fetchPageContent(link)))
             );
 
-            const optimizationLevels = calculateOptimizationLevels(keywordDistributions);
+            const processedTokens = pageContents
+                .filter((text): text is string => !!text)
+                .map(processText);
+
+            const keywords = extractWords(processedTokens);
+            const semanticKeywords = await getSemanticKeywords(keywords, query);
+
+            const keywordFrequencies = processedTokens.map((tokens) => {
+                const frequencyMap = new Map<string, number>();
+                const keywordSet = new Set(semanticKeywords);
+
+                for (const token of tokens) {
+                    if (keywordSet.has(token)) {
+                        frequencyMap.set(token, (frequencyMap.get(token) || 0) + 1);
+                    }
+                }
+
+                const result: Record<string, number> = {};
+                for (const keyword of semanticKeywords) {
+                    result[keyword] = frequencyMap.get(keyword) || 0;
+                }
+
+                return result;
+            });
+
+            const optimizationLevels = calculateOptimizationLevels(keywordFrequencies);
 
             const seoGuides = {
-                "query" : query,
-                "graphData" : optimizationLevels,
-                "searchResults": organicResults.map(({ title, link }) => ({ title, link }))
-            }
+                query,
+                graphData: optimizationLevels,
+                searchResults: organicResults.map(({ title, link }) => ({ title, link })),
+            };
 
             const users = await payload.find({
                 collection: "users",
@@ -100,12 +116,13 @@ export const createSeoGuide: Endpoint = {
             }
 
             const user = users.docs[0];
-
-            let projectId : string ;
+            let projectId: string;
 
             if (projectID === "Default") {
                 const defaultProject = Array.isArray(user.projects)
-                    ? (user.projects as Project[]).find((project) => project.projectName === "Default")
+                    ? (user.projects as Project[]).find(
+                        (project) => project.projectName === "Default"
+                    )
                     : undefined;
 
                 if (defaultProject) {
@@ -116,10 +133,13 @@ export const createSeoGuide: Endpoint = {
                         { status: 404, headers: { "Content-Type": "application/json" } }
                     );
                 }
+            } else {
+                projectId = projectID;
             }
 
-            // ✅ Ensure projects array is correctly typed
-            const existingProjects: Project[] = Array.isArray(user.projects) ? (user.projects as Project[]) : [];
+            const existingProjects: Project[] = Array.isArray(user.projects)
+                ? (user.projects as Project[])
+                : [];
 
             let projectUpdated = false;
             const updatedProjects = existingProjects.map((project) => {
@@ -127,7 +147,7 @@ export const createSeoGuide: Endpoint = {
                     projectUpdated = true;
                     return {
                         ...project,
-                        seoGuides: [...(project.seoGuides || []), seoGuides], // Append new SEO guide
+                        seoGuides: [...(project.seoGuides || []), seoGuides],
                     };
                 }
                 return project;
@@ -147,11 +167,8 @@ export const createSeoGuide: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true }),
-                {
-                    status: 200,
-                    headers: { "Content-Type": "application/json" },
-                }
+                JSON.stringify({ success: true, seoGuides }),
+                { status: 200, headers: { "Content-Type": "application/json" } }
             );
         } catch (err) {
             console.error("❌ createSeoGuide error:", err);

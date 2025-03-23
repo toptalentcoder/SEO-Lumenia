@@ -27,6 +27,7 @@
     "natural": "^8.0.1",
     "next": "15.2.2",
     "openai": "^4.89.0",
+    "p-limit": "^6.2.0",
     "payload": "latest",
     "react": "19.0.0",
     "react-dom": "19.0.0",
