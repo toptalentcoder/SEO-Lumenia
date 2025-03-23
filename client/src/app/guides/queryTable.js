@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from '../../context/UserContext';
 import { BsThreeDots } from "react-icons/bs"
+import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 
 const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -56,10 +57,8 @@ export default function QueryTable({ projectID }) {
         fetchProjects();
     }, [user]);
 
-    console.log(rows)
-
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto">
             {projectID ? (
                 <div>{projectID}</div>
             ) : loading ? (
@@ -67,9 +66,9 @@ export default function QueryTable({ projectID }) {
             ) : rows.length === 0 ? (
                 <div>aaa</div>
             ) : (
-                <div className="mx-auto overflow-hidden rounded-lg shadow-lg bg-white">
+                <div className="mx-auto overflow-hidden rounded-lg bg-white">
                     <table className="min-w-full border-collapse table-fixed">
-                        <thead className="bg-white border-b border-gray-600">
+                        <thead className="bg-whit">
                             <tr>
                                 <th className="w-12 px-1 py-3 text-center">
                                     <input
@@ -103,7 +102,7 @@ export default function QueryTable({ projectID }) {
 
                         <tbody className="divide-y divide-gray-300">
                             {rows.map((row) => (
-                                <tr key={row.id} className="hover:bg-gray-50">
+                                <tr key={row.id} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                     <td className="w-12 px-1 py-4 text-center">
                                         <input
                                             type="checkbox"
@@ -124,7 +123,10 @@ export default function QueryTable({ projectID }) {
                                         </div>
                                     </td>
                                     <td className="w-1/8 px-3 py-4 text-md text-gray-400 text-center">
-                                        {row.language}
+                                        <div className="flex items-center gap-2 justify-center">
+                                            <US className="w-4 h-3"/>
+                                            {row.language}
+                                        </div>
                                     </td>
                                     <td className="w-1/6 px-3 py-4 text-lg text-[#4A4291] font-sans text-center">
                                         {row.projectName}
