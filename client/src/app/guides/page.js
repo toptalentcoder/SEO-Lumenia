@@ -10,17 +10,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 import { VscNewFile } from "react-icons/vsc";
 import { FaCoins } from "react-icons/fa6";
-
-const queries = [
-    { query: "What is the best vpn", id: "12702148", platform: "google", project: "adf", group: "group1", date: "Mar 19, 2025" },
-    { query: "What is the best vpn", id: "12674543", platform: "bing", project: "Default", group: "", date: "Mar 17, 2025" },
-    { query: "What is the best vpn", id: "12674517", platform: "searchopt", project: "Default", group: "", date: "Mar 17, 2025" },
-    { query: "What is 10 top people in the world?", id: "12651988", platform: "google", project: "Default", group: "", date: "Mar 15, 2025" },
-    { query: "Gambling", id: "12611793", platform: "google", project: "Default", group: "", date: "Mar 12, 2025" },
-    { query: "What is the best vpn", id: "12576652", platform: "google", project: "Default", group: "", date: "Mar 10, 2025" },
-    { query: "What is the top 10 fashion world?", id: "12535939", platform: "google", project: "Default", group: "", date: "Mar 5, 2025" },
-    { query: "What is the best gambling site?", id: "12529235", platform: "google", project: "Default", group: "", date: "Mar 4, 2025" },
-];
+import { GoOrganization } from "react-icons/go";
 
 export default function SEOQueryDashboard() {
 
@@ -47,7 +37,7 @@ export default function SEOQueryDashboard() {
 
     const handleBlur = () => {
         setIsFocused(false);
-    };
+    }
 
     const handleProjectCreated = async(newProject) => {
         const newRow = {
@@ -57,7 +47,6 @@ export default function SEOQueryDashboard() {
             favourites: 0,
         };
 
-        console.log(newRow)
         setRows((prevRows) => [...prevRows, newRow]);
 
         const fetchedProject = await fetch(`/api/getProjectItemInfo?email=${user?.email}&projectID=${newProject.id}`)
@@ -82,7 +71,6 @@ export default function SEOQueryDashboard() {
             return;
         }
 
-
         setLoading(true); // 🔄 Disable the button
 
         const queryID = generateQueryId();
@@ -105,7 +93,6 @@ export default function SEOQueryDashboard() {
             });
 
             const result = await response.json();
-            console.log(result); // 🔍 Handle response if needed
 
             if(result){
                 router.push('/aaa');
@@ -449,7 +436,16 @@ export default function SEOQueryDashboard() {
                 </button>
             </div>
 
-            <div className="w-full h-full bg-white">
+            <div
+                className="w-full h-full bg-white mt-10"
+                onClick={() => handleBlur()}
+            >
+
+                <div className="flex items-center px-12 py-4 mb-10 font-semibold gap-2 text-gray-400">
+                    <GoOrganization/>
+                    {user?.username}
+                    <span>Org.</span>
+                </div>
                 {/* Query Table */}
                 <QueryTable projectID={projectID} />
             </div>
