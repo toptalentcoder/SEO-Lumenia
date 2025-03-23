@@ -1,4 +1,6 @@
-// components/LexicalSeoEditor.jsx
+"use client"
+
+import { useEffect, useState } from "react";
 import React from 'react';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -22,7 +24,7 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import { RiPenNibLine, RiAlignLeft, RiAlignRight, RiAlignJustify, RiAlignCenter } from "react-icons/ri";
 import { FaRegEye } from "react-icons/fa";
 import { BsListCheck } from "react-icons/bs";
-import { IoDocumentOutline } from "react-icons/io5";
+import { IoDocumentOutline, IoCodeSlash } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { MdLanguage } from "react-icons/md";
 import { GoLink } from "react-icons/go";
@@ -64,20 +66,48 @@ const editorConfig = {
 };
 
 export default function LexicalSeoEditor() {
+
+    const [ sourceMode, setSourceMode ] = useState(false);
+    const [ htmlContent, setHtmlContent ] = useState('');
+
     return (
         <LexicalComposer initialConfig={editorConfig}>
             <div className="rounded-md border border-gray-300 bg-white p-3 space-y-1">
-                <FormatToolbar />
+                <FormatToolbar
+                    setSourceMode={setSourceMode}
+                    setHtmlContent={setHtmlContent}
+                />
                 <SeoTxlToolbar />
                 <SeoTranslateDropdown />
                 <EditorArea />
             </div>
+
+            {sourceMode && (
+                <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+                    <div className="bg-white p-4 rounded shadow-lg w-full max-w-3xl">
+                        <h2 className="text-lg font-semibold mb-2">🧾 Source Code</h2>
+                        <textarea
+                            value={htmlContent}
+                            onChange={(e) => setHtmlContent(e.target.value)}
+                            className="w-full h-[300px] border border-gray-300 rounded p-2 font-mono text-sm"
+                        />
+                        <div className="flex justify-end mt-3">
+                            <button
+                                onClick={() => setSourceMode(false)}
+                                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </LexicalComposer>
     );
 }
 
 // Formatting Toolbar
-function FormatToolbar() {
+function FormatToolbar( { setSourceMode, setHtmlContent } ) {
     const [editor] = useLexicalComposerContext();
 
     const format = (style) => {
@@ -155,7 +185,16 @@ function FormatToolbar() {
                 <RiAlignJustify />
             </button>
 
-            <button className="text-lg">{`</>`}</button>
+            <button
+                onClick={() => {
+                const html = editor.getRootElement().innerHTML;
+                setHtmlContent(html);
+                setSourceMode(true);
+                }}
+                className="text-lg px-2 py-1 hover:bg-blue-100"
+            >
+                <IoCodeSlash />
+            </button>
             <button className="text-lg ml-auto bg-blue-600 text-white px-3 py-1 rounded">▶ Import URL</button>
         </div>
     );
