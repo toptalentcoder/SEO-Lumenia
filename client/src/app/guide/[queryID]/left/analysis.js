@@ -2,6 +2,7 @@ import { ImCross } from "react-icons/im";
 import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import LexicalSeoEditor from './seoEditor';
 
 export default function Analysis({data}) {
 
@@ -82,6 +83,38 @@ export default function Analysis({data}) {
                         <Area type="monotone" dataKey="overOptimized" stackId="1" stroke="#FF0000" fill="#FF0000" />
                     </AreaChart>
                 </ResponsiveContainer>
+            </div>
+
+            <div className="flex items-center gap-4 justify-center mt-4">
+                <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#FF0000]"></div>
+                    <span className="text-sm font-semibold">Over-optimiztion</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#FFA500]"></div>
+                    <span className="text-sm font-semibold">Strong-optimiztion</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#90EE7E]"></div>
+                    <span className="text-sm font-semibold">Standard-optimiztion</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#7CB5EC]"></div>
+                    <span className="text-sm font-semibold">Sub-optimiztion</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                    {/* Horizontal bar + dot + horizontal bar */}
+                    <div className="flex items-center">
+                        <div className="w-2 h-0.5 bg-black" />
+                        <div className="w-2 h-2 bg-black rounded-full" />
+                        <div className="w-2 h-0.5 bg-black" />
+                    </div>
+                    <span className="font-semibold text-sm">Your content</span>
+                </div>
+            </div>
+
+            <div className="p-6">
+                <LexicalSeoEditor/>
             </div>
         </div>
     )
