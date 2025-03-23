@@ -8,7 +8,8 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { ListItemNode, ListNode } from '@lexical/list';
-import { $insertOrderedList, $insertUnorderedList } from '@lexical/list';
+import { $createListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
+import { FORMAT_ELEMENT_COMMAND } from 'lexical';
 import { LinkNode, AutoLinkNode } from '@lexical/link';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
@@ -18,13 +19,14 @@ import {
     FORMAT_TEXT_COMMAND,
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { RiPenNibLine } from "react-icons/ri";
+import { RiPenNibLine, RiAlignLeft, RiAlignRight, RiAlignJustify, RiAlignCenter } from "react-icons/ri";
 import { FaRegEye } from "react-icons/fa";
 import { BsListCheck } from "react-icons/bs";
 import { IoDocumentOutline } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { MdLanguage } from "react-icons/md";
 import { GoLink } from "react-icons/go";
+import { FaListUl, FaListOl } from "react-icons/fa";
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -41,12 +43,23 @@ const editorConfig = {
             subscript: 'align-sub text-xs',
             superscript: 'align-super text-xs',
         },
+        list: {
+            ul: 'list-disc list-inside',
+            ol: 'list-decimal list-inside',
+            listitem: 'mb-1',
+        },
+        align: {
+            left: 'text-left',
+            center: 'text-center',
+            right: 'text-right',
+            justify: 'text-justify',
+        },
     },
     nodes: [
         ListNode,
         ListItemNode,
-        LinkNode,       // ✅ Add this
-        AutoLinkNode,   // ✅ Optional: auto-detect URLs
+        LinkNode,
+        AutoLinkNode,
     ],
 };
 
@@ -81,11 +94,11 @@ function FormatToolbar() {
                 <option>Heading 1</option>
                 <option>Heading 2</option>
             </select>
-            <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100">B</button>
+            <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100 ml-6">B</button>
             <button onClick={() => format('italic')} className="italic px-3 py-1 font-semibold hover:bg-blue-100">I</button>
             <button onClick={() => format('underline')} className="underline px-3 py-1 font-semibold hover:bg-blue-100">U</button>
             <button onClick={() => format('strikethrough')} className="line-through px-3 py-1 font-semibold hover:bg-blue-100">S</button>
-            <button onClick={() => format('subscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100">X₂</button>
+            <button onClick={() => format('subscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 ml-4">X₂</button>
             <button onClick={() => format('superscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100">X²</button>
             <button
                 onClick={() => {
@@ -93,17 +106,55 @@ function FormatToolbar() {
                     if (!url) return;
                     editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
                 }}
-                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100"
+                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4"
             >
                 <GoLink />
             </button>
-            <button onClick={() => insertList('unordered')} className="text-lg">• List</button>
-            <button onClick={() => insertList('ordered')} className="text-lg">1. List</button>
-            <button className="text-lg">↔</button>
-            <button className="text-lg">⤡</button>
-            <button className="text-lg">⤢</button>
-            <button className="text-lg">=</button>
-            <button className="text-lg">📋</button>
+            <button
+                onClick={() => {
+                    editor.update(() => {
+                        editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
+                    });
+                }}
+                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4"
+            >
+                <FaListUl />
+            </button>
+            <button
+                onClick={() => {
+                    editor.update(() => {
+                        editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND);
+                    });
+                }}
+                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100"
+            >
+                <FaListOl />
+            </button>
+            <button
+                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
+                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4"
+            >
+                <RiAlignLeft />
+            </button>
+            <button
+                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
+                className="text-lg px-2 py-1 hover:bg-blue-100"
+            >
+                <RiAlignCenter />
+            </button>
+            <button
+                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
+                className="text-lg px-2 py-1 hover:bg-blue-100"
+            >
+                <RiAlignRight />
+            </button>
+            <button
+                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
+                className="text-lg px-2 py-1 hover:bg-blue-100"
+            >
+                <RiAlignJustify />
+            </button>
+
             <button className="text-lg">{`</>`}</button>
             <button className="text-lg ml-auto bg-blue-600 text-white px-3 py-1 rounded">▶ Import URL</button>
         </div>
@@ -171,7 +222,8 @@ function EditorArea() {
                 ErrorBoundary={LexicalErrorBoundary}
             />
             <HistoryPlugin />
-            <LinkPlugin /> 
+            <LinkPlugin />
+            <ListPlugin />
             <OnChangePlugin onChange={(editorState) => {
                 editorState.read(() => {
                     // read state here if needed
