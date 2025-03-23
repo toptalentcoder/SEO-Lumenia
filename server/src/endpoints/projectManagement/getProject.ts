@@ -3,6 +3,7 @@ import { Endpoint, PayloadRequest } from "payload";
 
 interface FlattenedProjectInfo {
     projectName: string;
+    projectID : string;
     query: string;
     queryID: string;
     queryEngine: string;
@@ -12,6 +13,7 @@ interface FlattenedProjectInfo {
 
 interface Project {
     projectName?: string;
+    projectID ? : string;
     seoGuides?: {
         query?: string;
         queryID?: string;
@@ -94,8 +96,6 @@ export const getUserProjects: Endpoint = {
             );
         }
 
-
-
         const flattenedProjects: FlattenedProjectInfo[] = (projectData as Project[]).map((project: Project) => {
             const firstGuide = Array.isArray(project.seoGuides) && project.seoGuides.length > 0
                 ? project.seoGuides[0]
@@ -103,6 +103,7 @@ export const getUserProjects: Endpoint = {
 
             return {
                 projectName: project.projectName || '',
+                projectID : project.projectID || '',
                 query: firstGuide.query || '',
                 queryID: firstGuide.queryID || '',
                 queryEngine: firstGuide.queryEngine || '',
