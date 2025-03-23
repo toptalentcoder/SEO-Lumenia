@@ -6,6 +6,7 @@ import { useUser } from '../../context/UserContext';
 import { BsThreeDots } from "react-icons/bs"
 import { useRouter } from "next/navigation";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
+import { FaGoogle } from "react-icons/fa";
 
 const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -122,7 +123,8 @@ export default function QueryTable({ projectID }) {
                                         onClick={() => handleQueryIDPage(row.queryID)}
                                     >
                                         <div>
-                                            <div className="text-[#4A4291]">
+                                            <div className="text-[#4A4291] flex items-center gap-1 text-md">
+                                                <FaGoogle/>
                                                 {row.query}
                                             </div>
                                             <div className="flex items-center space-x-2 text-sm">

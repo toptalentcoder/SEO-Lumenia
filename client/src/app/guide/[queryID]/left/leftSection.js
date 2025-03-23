@@ -6,6 +6,7 @@ import { IoReturnUpForwardOutline } from "react-icons/io5";
 import { MdAutoGraph } from "react-icons/md";
 import { FaImage } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
+import Analysis from './analysis';
 
 export default function LeftSection ({data}) {
 
@@ -82,7 +83,31 @@ export default function LeftSection ({data}) {
                     Explore
                 </button>
             </div>
-            {data.query}
+            {activeTab === 'Analysis' ? (
+                <div>
+                    <Analysis data={data}/>
+                </div>
+            ) : activeTab === 'Compare' ? (
+                <div>
+                    Compare
+                </div>
+            ) : activeTab === 'SocialPost' ? (
+                <div>
+                    SocialPost
+                </div>
+            ) : activeTab === 'Monitoring' ? (
+                <div>
+                    Monitoring
+                </div>
+            ) : activeTab === 'Images' ? (
+                <div>
+                    Images
+                </div>
+            ) : activeTab === 'Explore' ? (
+                <div>
+                    Explore
+                </div>
+            ) : null}
         </div>
     )
 }
