@@ -6,12 +6,16 @@ import { getSemanticKeywords } from "@/service/createSeoGuide/getSemanticKeyword
 import { processText } from "@/service/createSeoGuide/processText";
 import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
-import pLimit from "p-limit";
 import { getJson } from "serpapi";
 
 interface OrganicResult {
     title: string;
     link: string;
+}
+
+interface SerpApiResponse {
+    organic_results: OrganicResult[];
+    // Add more fields if you use them elsewhere
 }
 
 export const createSeoGuide: Endpoint = {
@@ -40,16 +44,20 @@ export const createSeoGuide: Endpoint = {
         }
 
         try {
-            const json = await new Promise<any>((resolve, reject) => {
+            const json = await new Promise<SerpApiResponse>((resolve, reject) => {
                 getJson(
                     {
                         engine: "google",
                         q: query,
                         api_key: SERP_API_KEY,
                     },
-                    (data) => {
-                        if (!data) return reject("SERP API returned null");
-                        resolve(data);
+                    (data: unknown) => {
+                        if (!data || typeof data !== 'object' || !('organic_results' in data)) {
+                            return reject("SERP API returned unexpected structure");
+                        }
+
+                        // Type assertion here
+                        resolve(data as SerpApiResponse);
                     }
                 );
             });
@@ -57,11 +65,7 @@ export const createSeoGuide: Endpoint = {
             const organicResults: OrganicResult[] = json["organic_results"] ?? [];
             const links = organicResults.map((item: OrganicResult) => item.link);
 
-            const limit = pLimit(5);
-
-            const pageContents = await Promise.all(
-                links.map((link) => limit(() => fetchPageContent(link)))
-            );
+            const pageContents = await Promise.all(links.map(fetchPageContent));
 
             const processedTokens = pageContents
                 .filter((text): text is string => !!text)
@@ -167,7 +171,7 @@ export const createSeoGuide: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true, seoGuides }),
+                JSON.stringify({ success: true }),
                 { status: 200, headers: { "Content-Type": "application/json" } }
             );
         } catch (err) {
