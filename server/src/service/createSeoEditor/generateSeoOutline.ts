@@ -1,0 +1,45 @@
+import { OpenAI } from 'openai';
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+export async function generateSeoOutline({
+    query,
+    keywords,
+    language = "English"
+}: {
+    query: string;
+    keywords: string[];
+    language?: string;
+}): Promise<string[]> {
+    const prompt = `
+        You are an SEO strategist.
+
+        Generate a detailed, hierarchical outline for an SEO article based on the query: "${query}".
+
+        Use the following keywords where appropriate: ${keywords.join(', ')}
+
+        Format the outline as:
+        1. Title
+        1.1 Section Title
+        1.1.1 Subsection Title
+        ...
+
+        Include common SEO content blocks like:
+        - Introduction (definitions, importance)
+        - Technical explanations (how it works, features)
+        - Comparisons between products/services
+        - Buyer considerations (what to look for)
+        - Recommendations and examples
+
+        Make the outline comprehensive but not too long (max 5 main sections).
+    `;
+
+    const response = await openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
+        temperature: 0.6,
+    });
+
+    const text = response.choices[0].message.content;
+    return text?.split(/\n\d+\.\s+/).filter(q => q.trim() !== "") ?? [];
+}

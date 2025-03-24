@@ -1,10 +1,10 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoQuestions } from "@/service/createSeoEditor/generateSeoQuestionss";
+import { autoExpandSeoText } from "@/service/createSeoEditor/generateSeoAuto";
 import { Endpoint, PayloadRequest } from "payload";
 
-export const generateSeoQuestionsEndpoint : Endpoint = {
+export const generateSeoAutoEndpoint : Endpoint = {
 
-    path : '/generate_seo_questions',
+    path : '/generate_seo_auto',
 
     method : 'post',
 
@@ -17,25 +17,25 @@ export const generateSeoQuestionsEndpoint : Endpoint = {
         }
 
         const body = await req.json();
-        const { query, keywords, language } = body;
+        const { currentText } = body;
 
-        if (!query || typeof query !== "string" || !Array.isArray(keywords)) {
-            return new Response(JSON.stringify({ error: "Missing or invalid query/keywords" }), {
+        if (!currentText) {
+            return new Response(JSON.stringify({ error: "Missing or invalid currentText" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json" },
             });
         }
 
         try {
-            const questions = await generateSeoQuestions({ query, keywords, language });
+            const autoText = await autoExpandSeoText( currentText);
 
-            return new Response(JSON.stringify({ success: true, questions }), {
+            return new Response(JSON.stringify({ success: true, autoText }), {
                 status: 200,
                 headers: { "Content-Type": "application/json" },
             });
         } catch (error) {
-                console.error("❌ generateSeoQuestions error:", error);
-                return new Response(JSON.stringify({ error: "Failed to generate SEO questions" }), {
+                console.error("❌ autoText error:", error);
+                return new Response(JSON.stringify({ error: "Failed to generate currentText" }), {
                     status: 500,
                     headers: { "Content-Type": "application/json" },
                 });

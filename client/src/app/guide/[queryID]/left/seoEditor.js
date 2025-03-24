@@ -82,24 +82,36 @@ const editorConfig = {
 
 export default function LexicalSeoEditor({data}) {
 
-
     const [ sourceMode, setSourceMode ] = useState(false);
     const [ htmlContent, setHtmlContent ] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
             <div className="rounded-md border border-gray-300 bg-white p-3 space-y-1">
+
+                {/* Loading banner */}
+                {isLoading && (
+                    <div className="absolute justify-center mx-auto my-auto bg-blue-100 text-blue-700 text-sm py-2 px-4 rounded-t-md flex items-center space-x-2 z-10">
+                        <svg className="animate-spin h-4 w-4 text-blue-500" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                        </svg>
+                        <span>Generating SEO-TXL Questions...</span>
+                    </div>
+                )}
+
                 <FormatToolbar
                     setSourceMode={setSourceMode}
                     setHtmlContent={setHtmlContent}
                 />
-                <SeoTxlToolbar data = {data} />
+                <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} />
                 <SeoTranslateDropdown />
                 <EditorArea />
             </div>
 
             {sourceMode && (
-                <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-4 rounded shadow-lg w-full max-w-3xl">
                         <h2 className="text-lg font-semibold mb-2">🧾 Source Code</h2>
                         <textarea
@@ -255,7 +267,7 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 }
 
 // SEO-TXL Toolbar
-function SeoTxlToolbar({ data }) {
+function SeoTxlToolbar({ data, setIsLoading }) {
 
     const [editor] = useLexicalComposerContext();
 
@@ -264,6 +276,7 @@ function SeoTxlToolbar({ data }) {
         const keywords = data.graphData.map(item => item.name);
 
         try {
+            setIsLoading(true);
             const response = await fetch("/api/generate_seo_questions", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -288,8 +301,89 @@ function SeoTxlToolbar({ data }) {
             });
         } catch (err) {
             console.error("Error generating SEO-TXL Questions:", err);
+        }finally {
+            setIsLoading(false); // Done
         }
     }
+
+    const handleSeoTxlOutline = async () => {
+        const query = data.query;
+        const keywords = data.graphData.map(item => item.name);
+        setIsLoading(true); // Optional loading state
+
+        try {
+            const response = await fetch("/api/generate_seo_outline", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query, keywords }),
+            });
+
+            const result = await response.json();
+
+            if (!result.success || !Array.isArray(result.outlines)) {
+                console.error("Failed to generate outlines", result);
+                return;
+            }
+
+            const outlines = result.outlines;
+
+            editor.update(() => {
+                const nodes = outlines.map((q, i) =>
+                    $createParagraphNode().append($createTextNode(`${i + 1}. ${q}`))
+                );
+
+                $insertNodes(nodes); // ✅ Correct way to insert nodes
+            });
+        } catch (err) {
+            console.error("Failed to generate outline", err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleSeoTxlAuto = async () => {
+        const root = editor.getRootElement();
+        const currentText = root.innerText.trim();
+
+        if (!currentText) return;
+
+        setIsLoading(true); // Optional loading indicator
+
+        try {
+            const response = await fetch("/api/generate_seo_auto", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ currentText }),
+            });
+
+            const result = await response.json();
+
+            if (!result.success || !result.autoText) {
+                console.error("Failed to generate auto content", result);
+                return;
+            }
+
+            const autoText = result.autoText;
+
+            console.log(autoText)
+
+            editor.update(() => {
+                const textLines = Array.isArray(autoText)
+                    ? autoText
+                    : autoText.split(/\n+/).filter(line => line.trim() !== "");
+
+                const nodes = textLines.map((line, i) =>
+                    $createParagraphNode().append($createTextNode(line.trim()))
+                );
+
+                $insertNodes(nodes);
+            });
+        } catch (err) {
+            console.error("Failed to run SEO-TXL Auto:", err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="flex flex-wrap items-center gap-4 border-b border-gray-300 pb-2">
@@ -297,11 +391,17 @@ function SeoTxlToolbar({ data }) {
                 <RiPenNibLine/>
                 <span className='text-sm'>SEO-TXL Writer</span>
             </button>
-            <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'>
+            <button
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                onClick={handleSeoTxlAuto}
+            >
                 <FaRegEye/>
                 <span className='text-sm'>SEO-TXL Auto</span>
             </button>
-            <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'>
+            <button
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                onClick={handleSeoTxlOutline}
+            >
                 <BsListCheck/>
                 <span className='text-sm'>SEO-TXL Outline</span>
             </button>
@@ -340,7 +440,7 @@ function EditorArea() {
         <>
             <RichTextPlugin
                 contentEditable={
-                    <ContentEditable className="min-h-[200px] outline-none p-2 text-sm" />
+                    <ContentEditable className="h-[250px] overflow-y-auto outline-none p-2 text-sm" />
                 }
                 placeholder={<div className="text-gray-400 px-2">Start writing here...</div>}
                 ErrorBoundary={LexicalErrorBoundary}

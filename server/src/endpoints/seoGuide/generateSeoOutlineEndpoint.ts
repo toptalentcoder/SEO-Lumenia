@@ -1,10 +1,10 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoQuestions } from "@/service/createSeoEditor/generateSeoQuestionss";
+import { generateSeoOutline } from "@/service/createSeoEditor/generateSeoOutline";
 import { Endpoint, PayloadRequest } from "payload";
 
-export const generateSeoQuestionsEndpoint : Endpoint = {
+export const generateSeoOutlineEndpoint : Endpoint = {
 
-    path : '/generate_seo_questions',
+    path : '/generate_seo_outline',
 
     method : 'post',
 
@@ -27,15 +27,15 @@ export const generateSeoQuestionsEndpoint : Endpoint = {
         }
 
         try {
-            const questions = await generateSeoQuestions({ query, keywords, language });
+            const outlines = await generateSeoOutline({ query, keywords, language });
 
-            return new Response(JSON.stringify({ success: true, questions }), {
+            return new Response(JSON.stringify({ success: true, outlines }), {
                 status: 200,
                 headers: { "Content-Type": "application/json" },
             });
         } catch (error) {
-                console.error("❌ generateSeoQuestions error:", error);
-                return new Response(JSON.stringify({ error: "Failed to generate SEO questions" }), {
+                console.error("❌ generateSeooutlines error:", error);
+                return new Response(JSON.stringify({ error: "Failed to generate SEO outlines" }), {
                     status: 500,
                     headers: { "Content-Type": "application/json" },
                 });
