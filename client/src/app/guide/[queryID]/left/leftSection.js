@@ -83,31 +83,35 @@ export default function LeftSection ({data}) {
                     Explore
                 </button>
             </div>
-            {activeTab === 'Analysis' ? (
-                <div>
-                    <Analysis data={data}/>
-                </div>
-            ) : activeTab === 'Compare' ? (
-                <div>
-                    Compare
-                </div>
-            ) : activeTab === 'SocialPost' ? (
-                <div>
-                    SocialPost
-                </div>
-            ) : activeTab === 'Monitoring' ? (
-                <div>
-                    Monitoring
-                </div>
-            ) : activeTab === 'Images' ? (
-                <div>
-                    Images
-                </div>
-            ) : activeTab === 'Explore' ? (
-                <div>
-                    Explore
-                </div>
-            ) : null}
+
+            <div>
+                {activeTab === 'Analysis' ? (
+                    <div>
+                        <Analysis data={data}/>
+                    </div>
+                ) : activeTab === 'Compare' ? (
+                    <div>
+                        Compare
+                    </div>
+                ) : activeTab === 'SocialPost' ? (
+                    <div>
+                        SocialPost
+                    </div>
+                ) : activeTab === 'Monitoring' ? (
+                    <div>
+                        Monitoring
+                    </div>
+                ) : activeTab === 'Images' ? (
+                    <div>
+                        Images
+                    </div>
+                ) : activeTab === 'Explore' ? (
+                    <div>
+                        Explore
+                    </div>
+                ) : null}
+            </div>
+
         </div>
     )
 }

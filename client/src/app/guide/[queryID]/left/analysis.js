@@ -1,10 +1,17 @@
+"use client"
+
 import { ImCross } from "react-icons/im";
 import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import LexicalSeoEditor from './seoEditor';
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { IoIosArrowDown } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 export default function Analysis({data}) {
+
+    const [selectedLinks, setSelectedLinks] = useState([]);
 
     return(
         <div className="px-6">
@@ -17,7 +24,7 @@ export default function Analysis({data}) {
                 </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-6">
 
                 <div className="flex items-center space-x-3 justify-start ">
 
@@ -47,7 +54,52 @@ export default function Analysis({data}) {
                 </div>
 
                 <div className="flex justify-end">
-                    1
+                    <Menu>
+                        <MenuButton className="text-gray-200 cursor-pointer border border-gray-300 rounded-lg">
+                            <div className='flex items-center space-x-2 text-gray-300 hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-md font-medium'>
+                                <a
+                                    key={'write_for_seo'}
+                                    href='#'
+                                    className=''
+                                >
+                                    Display competitors
+                                </a>
+                                <IoIosArrowDown/>
+                            </div>
+                        </MenuButton>
+                        <MenuItems
+                            anchor="bottom start"
+                            className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50"
+                        >
+                            {data?.searchResults?.map((result, index) => {
+                                const isChecked = selectedLinks.includes(result.link);
+
+                                return (
+                                <MenuItem key={index} as="div">
+                                    <div
+                                        className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                        onClick={(e) => {
+                                            e.preventDefault(); // prevents menu from closing
+                                            setSelectedLinks((prev) =>
+                                            prev.includes(result.link)
+                                                ? prev.filter((link) => link !== result.link)
+                                                : [...prev, result.link]
+                                            );
+                                        }}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            checked={isChecked}
+                                            onChange={() => {}}
+                                            onClick={(e) => e.stopPropagation()} // prevents double toggle on checkbox click
+                                        />
+                                        <span className="truncate">{result.link}</span>
+                                    </div>
+                                </MenuItem>
+                                );
+                            })}
+                        </MenuItems>
+                    </Menu>
                 </div>
             </div>
 
@@ -113,7 +165,7 @@ export default function Analysis({data}) {
                 </div>
             </div>
 
-            <div className="p-6">
+            <div className="p-6 mt-10">
                 <LexicalSeoEditor/>
             </div>
         </div>
