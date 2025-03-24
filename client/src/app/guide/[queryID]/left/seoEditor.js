@@ -385,6 +385,44 @@ function SeoTxlToolbar({ data, setIsLoading }) {
         }
     };
 
+    const handleSeoTxlRephrase = async () => {
+        const root = editor.getRootElement();
+        const currentText = root.innerText.trim(); // Get the raw text from the editor
+
+        if (!currentText) return;
+
+        setIsLoading(true); // Show loading indicator
+
+        try {
+            const response = await fetch("/api/generate_seo_rephrase", {  // Use the correct endpoint
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ currentText }), // Send the current text to be rephrased
+            });
+
+            const result = await response.json();
+            if (!result.success || !result.rephrasedText) {
+                console.error("Failed to rephrase the content:", result);
+                return;
+            }
+
+            const rephrasedText = result.rephrasedText;
+
+            // Now, update the editor with the rephrased content
+            editor.update(() => {
+                const lines = rephrasedText.split(/\n+/).filter(line => line.trim() !== "");
+                const nodes = lines.map((line, i) =>
+                    $createParagraphNode().append($createTextNode(line.trim()))
+                );
+                $insertNodes(nodes); // Insert the rephrased nodes into the editor
+            });
+        } catch (err) {
+            console.error("Error during rephrase:", err);
+        } finally {
+            setIsLoading(false); // Hide the loading indicator
+        }
+    };
+
     return (
         <div className="flex flex-wrap items-center gap-4 border-b border-gray-300 pb-2">
             <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'>
@@ -412,7 +450,10 @@ function SeoTxlToolbar({ data, setIsLoading }) {
                 <IoDocumentOutline/>
                 <span className='text-sm'>SEO-TXL Questions</span>
             </button>
-            <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'>
+            <button
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                onClick={handleSeoTxlRephrase}
+            >
                 <MdOutlineWbSunny/>
                 <span className='text-sm'>SEO-TXL Rephrase</span>
             </button>
