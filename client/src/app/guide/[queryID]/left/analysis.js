@@ -166,7 +166,7 @@ export default function Analysis({data}) {
             </div>
 
             <div className="p-6 mt-10">
-                <LexicalSeoEditor/>
+                <LexicalSeoEditor data = {data}/>
             </div>
         </div>
     )

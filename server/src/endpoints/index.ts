@@ -9,6 +9,7 @@ import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
 import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
 import { addProjectToUser } from "./projectManagement/postProject";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
+import { generateSeoQuestionsEndpoint } from "./seoGuide/generateSeoQuestions";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -21,5 +22,6 @@ export const customEndpoints = [
     getUserProjectInfo,
     getUserProjects,
     getSeoGuideByQueryID,
+    generateSeoQuestionsEndpoint,
     createSeoGuide
 ]

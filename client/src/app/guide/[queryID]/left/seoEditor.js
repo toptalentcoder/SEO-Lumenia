@@ -18,7 +18,8 @@ import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
     $createParagraphNode,
-    $setSelection,
+    $createTextNode,
+    $insertNodes,
 } from 'lexical';
 import { $createHeadingNode } from '@lexical/rich-text';
 import {
@@ -32,7 +33,6 @@ import { FaRegEye } from "react-icons/fa";
 import { BsListCheck } from "react-icons/bs";
 import { IoDocumentOutline, IoCodeSlash } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
-import { MdLanguage } from "react-icons/md";
 import { GoLink } from "react-icons/go";
 import { FaListUl, FaListOl } from "react-icons/fa";
 
@@ -80,12 +80,11 @@ const editorConfig = {
     ],
 };
 
-export default function LexicalSeoEditor() {
+export default function LexicalSeoEditor({data}) {
+
 
     const [ sourceMode, setSourceMode ] = useState(false);
     const [ htmlContent, setHtmlContent ] = useState('');
-
-
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
@@ -94,7 +93,7 @@ export default function LexicalSeoEditor() {
                     setSourceMode={setSourceMode}
                     setHtmlContent={setHtmlContent}
                 />
-                <SeoTxlToolbar />
+                <SeoTxlToolbar data = {data} />
                 <SeoTranslateDropdown />
                 <EditorArea />
             </div>
@@ -256,7 +255,41 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 }
 
 // SEO-TXL Toolbar
-function SeoTxlToolbar() {
+function SeoTxlToolbar({ data }) {
+
+    const [editor] = useLexicalComposerContext();
+
+    const handleSEO_TXLQuestions = async () => {
+        const query = data.query;
+        const keywords = data.graphData.map(item => item.name);
+
+        try {
+            const response = await fetch("/api/generate_seo_questions", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query, keywords }),
+            });
+
+            const result = await response.json();
+
+            if (!result.success || !Array.isArray(result.questions)) {
+                console.error("Failed to generate questions", result);
+                return;
+            }
+
+            const questions = result.questions;
+
+            editor.update(() => {
+                const nodes = questions.map((q, i) =>
+                    $createParagraphNode().append($createTextNode(`${i + 1}. ${q}`))
+                );
+
+                $insertNodes(nodes); // ✅ Correct way to insert nodes
+            });
+        } catch (err) {
+            console.error("Error generating SEO-TXL Questions:", err);
+        }
+    }
 
     return (
         <div className="flex flex-wrap items-center gap-4 border-b border-gray-300 pb-2">
@@ -272,7 +305,10 @@ function SeoTxlToolbar() {
                 <BsListCheck/>
                 <span className='text-sm'>SEO-TXL Outline</span>
             </button>
-            <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'>
+            <button
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                onClick={() => handleSEO_TXLQuestions()}
+            >
                 <IoDocumentOutline/>
                 <span className='text-sm'>SEO-TXL Questions</span>
             </button>
