@@ -5,7 +5,8 @@ import { useParams } from "next/navigation";
 import { useUser } from '../../../context/UserContext';
 import { GoOrganization } from "react-icons/go";
 import { BsThreeDots } from "react-icons/bs"
-import LeftSection from './left/leftSection'
+import LeftSection from './left/leftSection';
+import RightSection from './right/rightSection';
 
 
 export default function GuidePage() {
@@ -51,8 +52,8 @@ export default function GuidePage() {
                 <div className="bg-white w-full lg:w-2/3 lg:order-0 order-0 lg:mr-3 mt-10">
                     <LeftSection data={data}/>
                 </div>
-                <div className="bg-amber-200 w-full lg:w-1/3 lg:order-1 order-1 lg:ml-3 mt-10">
-                bbb
+                <div className="w-full lg:w-1/3 lg:order-1 order-1 lg:ml-3 mt-10">
+                    <RightSection data={data}/>
                 </div>
             </div>
         </div>

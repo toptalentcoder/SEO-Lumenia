@@ -136,34 +136,35 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 
     const applyHeadingBlock = (tag) => {
         editor.update(() => {
-          const selection = $getSelection();
-          if (!$isRangeSelection(selection)) return;
-      
-          const nodes = selection.getNodes();
-      
-          for (const node of nodes) {
-            const block = node.getTopLevelElementOrThrow();
-            const type = block.getType();
-      
-            if (type !== 'paragraph' && type !== 'heading') continue;
-      
-            const newNode =
-              tag === 'paragraph'
-                ? $createParagraphNode()
-                : $createHeadingNode(tag);
-      
-            // Move children from old block to new block
-            const children = block.getChildren();
-            block.replace(newNode);
-            for (const child of children) {
-              newNode.append(child);
+            const selection = $getSelection();
+            if (!$isRangeSelection(selection)) return;
+
+            const nodes = selection.getNodes();
+
+            for (const node of nodes) {
+                const block = node.getTopLevelElementOrThrow();
+                const type = block.getType();
+
+                if (type !== 'paragraph' && type !== 'heading') continue;
+
+                const newNode =
+                    tag === 'paragraph'
+                        ? $createParagraphNode()
+                        : $createHeadingNode(tag);
+
+                // Move children from old block to new block
+                const children = block.getChildren();
+                block.replace(newNode);
+                for (const child of children) {
+                    newNode.append(child);
+                }
+
+                // Move selection into new node
+                newNode.selectEnd();
             }
-      
-            // Move selection into new node
-            newNode.selectEnd();
-          }
         });
-      };
+    };
+
     return (
         <div className="flex flex-wrap items-center gap-0 border-b pb-2 border-gray-300">
             <select
