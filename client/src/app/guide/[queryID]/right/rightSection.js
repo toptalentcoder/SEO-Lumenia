@@ -1,0 +1,69 @@
+"use client";
+
+import React, { useEffect, useState, useCallback } from "react";
+import { FaMagnifyingGlassChart, FaCodeCompare  } from "react-icons/fa6";
+import { BsSend } from "react-icons/bs";
+import { HiChatBubbleLeftRight } from "react-icons/hi2";
+import { IoDocument } from "react-icons/io5";
+import { RiPresentationFill } from "react-icons/ri";
+
+export default function RightSection ({data}) {
+
+    const [activeTab, setActiveTab] = useState("seoBrief");
+
+    return(
+        <div>
+            {/* Tab Buttons */}
+            <div className="flex justify-start w-full bg-[#F8FAFD]">
+                <button
+                    onClick={() => setActiveTab("seoBrief")}
+                    className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
+                        activeTab === "seoBrief"
+                            ? " text-[#413793] border-t-4 border-[#413793] bg-white"
+                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                    }`}
+                >
+                    <RiPresentationFill className="text-[#413793]"/>
+                    SEO Brief
+                </button>
+                <button
+                    onClick={() => setActiveTab("yourWebpage")}
+                    className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
+                        activeTab === "yourWebpage"
+                            ? " text-[#413793] border-t-4 border-[#413793] bg-white"
+                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                    }`}
+                >
+                    <IoDocument className="text-[#413793]"/>
+                    Your webpage
+                </button>
+            </div>
+
+            <div className="h-auto mb-6">
+                {activeTab === 'seoBrief' ? (
+                    <div className="bg-white p-4 rounded shadow">asd</div>
+                ) : activeTab === 'yourWebpage' ? (
+                    <div className="bg-white p-4 rounded shadow">adfadfasdfasdfasdf</div>
+                ) : null}
+            </div>
+
+            <div className="bg-white rounded-2xl p-4 shadow">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-5">
+                    <HiChatBubbleLeftRight className="text-blue-400 text-2xl"/>
+                    <span>Comments</span>
+                </div>
+                <div className="h-80"/>
+                <div className="flex border-t border-gray-200 items-center justify-between gap-3 pt-5">
+                    <input
+                        className="border border-gray-200 px-3 py-1.5 rounded-lg focus:outline-[#413793] w-full"
+                        placeholder="Write a message"
+                    />
+                    <div className="bg-[#413793] rounded-full p-2 cursor-pointer">
+                        <BsSend className="text-white"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
