@@ -12,9 +12,15 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { $createListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
 import { FORMAT_ELEMENT_COMMAND } from 'lexical';
+import { HeadingNode } from '@lexical/rich-text';
 import { LinkNode, AutoLinkNode } from '@lexical/link';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { TOGGLE_LINK_COMMAND } from '@lexical/link';
+import {
+    $createParagraphNode,
+    $setSelection,
+} from 'lexical';
+import { $createHeadingNode } from '@lexical/rich-text';
 import {
     $getSelection,
     $isRangeSelection,
@@ -45,6 +51,14 @@ const editorConfig = {
             subscript: 'align-sub text-xs',
             superscript: 'align-super text-xs',
         },
+        heading: {
+            h1: 'text-3xl font-bold mb-4',
+            h2: 'text-2xl font-semibold mb-3',
+            h3: 'text-xl font-semibold mb-2',
+            h4: 'text-lg font-semibold mb-1',
+            h5: 'text-md font-semibold',
+            h6: 'text-sm font-semibold',
+        },
         list: {
             ul: 'list-disc list-inside',
             ol: 'list-decimal list-inside',
@@ -58,6 +72,7 @@ const editorConfig = {
         },
     },
     nodes: [
+        HeadingNode,
         ListNode,
         ListItemNode,
         LinkNode,
@@ -69,6 +84,8 @@ export default function LexicalSeoEditor() {
 
     const [ sourceMode, setSourceMode ] = useState(false);
     const [ htmlContent, setHtmlContent ] = useState('');
+
+
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
@@ -117,16 +134,49 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
         });
     };
 
+    const applyHeadingBlock = (tag) => {
+        editor.update(() => {
+          const selection = $getSelection();
+          if (!$isRangeSelection(selection)) return;
+      
+          const nodes = selection.getNodes();
+      
+          for (const node of nodes) {
+            const block = node.getTopLevelElementOrThrow();
+            const type = block.getType();
+      
+            if (type !== 'paragraph' && type !== 'heading') continue;
+      
+            const newNode =
+              tag === 'paragraph'
+                ? $createParagraphNode()
+                : $createHeadingNode(tag);
+      
+            // Move children from old block to new block
+            const children = block.getChildren();
+            block.replace(newNode);
+            for (const child of children) {
+              newNode.append(child);
+            }
+      
+            // Move selection into new node
+            newNode.selectEnd();
+          }
+        });
+      };
     return (
         <div className="flex flex-wrap items-center gap-0 border-b pb-2 border-gray-300">
-            <select className="px-3 py-2 text-md rounded cursor-pointer hover:bg-blue-100 focus:outline-none">
-                <option>Paragraph</option>
-                <option className="text-3xl font-semibold hover:bg-blue-100">h1</option>
-                <option className="text-2xl font-semibold hover:bg-blue-100">h2</option>
-                <option className="text-xl font-semibold hover:bg-blue-100">h3</option>
-                <option className="text-lg font-semibold hover:bg-blue-100">h4</option>
-                <option className="text-md font-semibold hover:bg-blue-100">h5</option>
-                <option className="text-sm font-semibold hover:bg-blue-100">h6</option>
+            <select
+                className="px-3 py-2 text-md rounded cursor-pointer hover:bg-blue-100 focus:outline-none"
+                onChange={(e) => applyHeadingBlock(e.target.value)}
+            >
+                <option value="paragraph">Paragraph</option>
+                <option value="h1" className="text-3xl font-semibold hover:bg-blue-100">h1</option>
+                <option value="h2" className="text-2xl font-semibold hover:bg-blue-100">h2</option>
+                <option value="h3" className="text-xl font-semibold hover:bg-blue-100">h3</option>
+                <option value="h4" className="text-lg font-semibold hover:bg-blue-100">h4</option>
+                <option value="h5" className="text-md font-semibold hover:bg-blue-100">h5</option>
+                <option value="h6" className="text-sm font-semibold hover:bg-blue-100">h6</option>
             </select>
             <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100 ml-6">B</button>
             <button onClick={() => format('italic')} className="italic px-3 py-1 font-semibold hover:bg-blue-100">I</button>
