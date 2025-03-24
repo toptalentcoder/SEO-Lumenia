@@ -289,13 +289,7 @@ function SeoTranslateDropdown() {
     return (
         <div className="border-b pb-2 border-gray-300  shadow-lg">
             <select className="text-sm px-3 py-1 rounded hover:bg-blue-100">
-                <option>
-                    <div  className='flex items-center space-x-2'>
-                        <MdLanguage className='w-2 h-2'/>
-                        <span>SEO-TXL Translate to...</span>
-                    </div>
-
-                </option>
+                <option disabled selected>🌐 SEO-TXL Translate to...</option>
                 <option>English</option>
                 <option>French</option>
                 <option>German</option>
