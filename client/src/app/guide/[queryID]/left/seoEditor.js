@@ -37,6 +37,8 @@ import { GoLink } from "react-icons/go";
 import { FaListUl, FaListOl } from "react-icons/fa";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
+import { AiOutlineGlobal } from "react-icons/ai";
+import { LuPencil } from "react-icons/lu";
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -474,40 +476,77 @@ function SeoTranslateDropdown() {
 
     return (
         <div className="border-b pb-2 border-gray-300  shadow-lg">
-            {/* <select
-                className="text-sm px-3 py-1 rounded hover:bg-blue-100"
-                value={selectedLanguage}  // Set the value of the select element
-                onChange={handleLanguageChange}  // Handle changes to the selected value
-            >
-                <option value='aa' disabled selected>🌐 SEO-TXL Translate to...</option>
-                <option value='aaq'>English</option>
-                <option value='aar'>French</option>
-                <option value='aau'>German</option>
-            </select> */}
             <Menu>
                 <MenuButton className="text-black cursor-pointer">
-                    <div className='flex items-center space-x-2 text-black hover:bg-[#4A4291] hover:text-black rounded-md px-3 py-2 text-md font-medium'>
-                        <a
-                            key={'translate'}
-                            href='#'
-                            className=''
-                        >
-                            aaa
-                        </a>
+                    <div className='flex items-center space-x-2 text-black hover:bg-blue-100 hover:text-black rounded-md px-3 py-2 text-md font-medium'>
+                        <AiOutlineGlobal/>
+                        <span className="text-sm">SEO-TXL Translate to...</span>
                         <IoIosArrowDown/>
                     </div>
                 </MenuButton>
                 <MenuItems
                     anchor="bottom start"
-                    className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl mt-4"
+                    className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl"
                 >
                     <MenuItem>
-                        <a
-                            href="#"
-                            className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                        >
-                            sdfsdf
-                        </a>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">English</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">French</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Spanish</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">German</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Dutch</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Italian</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Portuguese(Portugal)</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Portuguese(Brazil)</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Polish</span>
+                        </div>
+                    </MenuItem>
+                    <MenuItem>
+                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
+                            <LuPencil/>
+                            <span className="text-sm">Romanian</span>
+                        </div>
                     </MenuItem>
                 </MenuItems>
             </Menu>
