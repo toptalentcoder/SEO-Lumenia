@@ -6,6 +6,7 @@ import { BsSend } from "react-icons/bs";
 import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { IoDocument } from "react-icons/io5";
 import { RiPresentationFill } from "react-icons/ri";
+import SeoBrief from './seoBrief';
 
 export default function RightSection ({data}) {
 
@@ -41,7 +42,7 @@ export default function RightSection ({data}) {
 
             <div className="h-auto mb-6">
                 {activeTab === 'seoBrief' ? (
-                    <div className="bg-white p-4 rounded shadow">asd</div>
+                    <div className="bg-white p-4 rounded shadow"><SeoBrief data={data}/></div>
                 ) : activeTab === 'yourWebpage' ? (
                     <div className="bg-white p-4 rounded shadow">adfadfasdfasdfasdf</div>
                 ) : null}

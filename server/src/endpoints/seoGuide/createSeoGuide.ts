@@ -184,7 +184,7 @@ export const createSeoGuide: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true }),
+                JSON.stringify({ success: true, seoBrief }),
                 { status: 200, headers: { "Content-Type": "application/json" } }
             );
         } catch (err) {

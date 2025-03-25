@@ -5,9 +5,9 @@ import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import LexicalSeoEditor from './seoEditor';
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Analysis({data}) {
 
