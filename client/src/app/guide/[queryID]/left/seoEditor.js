@@ -35,6 +35,8 @@ import { IoDocumentOutline, IoCodeSlash } from "react-icons/io5";
 import { MdOutlineWbSunny } from "react-icons/md";
 import { GoLink } from "react-icons/go";
 import { FaListUl, FaListOl } from "react-icons/fa";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { IoIosArrowDown } from "react-icons/io";
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -463,14 +465,52 @@ function SeoTxlToolbar({ data, setIsLoading }) {
 
 // Translate dropdown
 function SeoTranslateDropdown() {
+
+    const [selectedLanguage, setSelectedLanguage] = useState(''); // state to track the selected value
+
+    const handleLanguageChange = (event) => {
+        setSelectedLanguage(event.target.value);
+    };
+
     return (
         <div className="border-b pb-2 border-gray-300  shadow-lg">
-            <select className="text-sm px-3 py-1 rounded hover:bg-blue-100">
-                <option disabled selected>🌐 SEO-TXL Translate to...</option>
-                <option>English</option>
-                <option>French</option>
-                <option>German</option>
-            </select>
+            {/* <select
+                className="text-sm px-3 py-1 rounded hover:bg-blue-100"
+                value={selectedLanguage}  // Set the value of the select element
+                onChange={handleLanguageChange}  // Handle changes to the selected value
+            >
+                <option value='aa' disabled selected>🌐 SEO-TXL Translate to...</option>
+                <option value='aaq'>English</option>
+                <option value='aar'>French</option>
+                <option value='aau'>German</option>
+            </select> */}
+            <Menu>
+                <MenuButton className="text-black cursor-pointer">
+                    <div className='flex items-center space-x-2 text-black hover:bg-[#4A4291] hover:text-black rounded-md px-3 py-2 text-md font-medium'>
+                        <a
+                            key={'translate'}
+                            href='#'
+                            className=''
+                        >
+                            aaa
+                        </a>
+                        <IoIosArrowDown/>
+                    </div>
+                </MenuButton>
+                <MenuItems
+                    anchor="bottom start"
+                    className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl mt-4"
+                >
+                    <MenuItem>
+                        <a
+                            href="#"
+                            className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                        >
+                            sdfsdf
+                        </a>
+                    </MenuItem>
+                </MenuItems>
+            </Menu>
         </div>
     );
 }
