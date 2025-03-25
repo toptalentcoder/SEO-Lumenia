@@ -7,7 +7,7 @@ import { getSemanticKeywords } from "@/service/createSeoGuide/getSemanticKeyword
 import { processText } from "@/service/createSeoGuide/processText";
 import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
-import { getJson } from "serpapi";
+import axios from "axios";
 
 interface OrganicResult {
     title: string;
@@ -45,25 +45,17 @@ export const createSeoGuide: Endpoint = {
         }
 
         try {
-            const json = await new Promise<SerpApiResponse>((resolve, reject) => {
-                getJson(
-                    {
-                        engine: "google",
-                        q: query,
-                        api_key: SERP_API_KEY,
-                    },
-                    (data: unknown) => {
-                        if (!data || typeof data !== 'object' || !('organic_results' in data)) {
-                            return reject("SERP API returned unexpected structure");
-                        }
-
-                        // Type assertion here
-                        resolve(data as SerpApiResponse);
-                    }
-                );
+            // Fetch SERP API data using axios (including PAA questions)
+            const response = await axios.get('https://serpapi.com/search', {
+                params: {
+                    q: query,
+                    api_key: SERP_API_KEY,
+                },
             });
 
-            const organicResults: OrganicResult[] = json["organic_results"] ?? [];
+            const organicResults: OrganicResult[] = response.data['organic_results'] || [];
+            const paaQuestions = response.data['related_questions'] || [];
+            const PAAs = paaQuestions.map((item : {question : string}) => item.question);
             const links = organicResults.map((item: OrganicResult) => item.link);
 
             // Generate SEO brief concurrently
@@ -110,6 +102,7 @@ export const createSeoGuide: Endpoint = {
                 searchResults: organicResults.map(({ title, link }) => ({ title, link })),
                 language,
                 seoBrief,
+                PAAs,
                 createdAt : Date.now()
             };
 
@@ -184,7 +177,7 @@ export const createSeoGuide: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true, seoBrief }),
+                JSON.stringify({ success: true }),
                 { status: 200, headers: { "Content-Type": "application/json" } }
             );
         } catch (err) {
