@@ -45,62 +45,61 @@ export async function generateSeoBrief(query: string) {
         temperature: 0.7,
     });
 
-// Log the raw response for debugging
-const seoBriefRaw = response.choices?.[0]?.message?.content ?? "Error generating SEO brief";
+    // Log the raw response for debugging
+    const seoBriefRaw = response.choices?.[0]?.message?.content ?? "Error generating SEO brief";
 
-const seoBrief: {
-    primaryIntent: string;
-    objective: string[];
-    mainTopics: string[];
-    importantQuestions: string[];
-    writingStyleAndTone: string[];
-    recommendedStyle: string[];
-    valueProposition: string[];
-} = {
-    primaryIntent: "",
-    objective: [],
-    mainTopics: [],
-    importantQuestions: [],
-    writingStyleAndTone: [],
-    recommendedStyle: [],
-    valueProposition: [],
-};
+    const seoBrief: {
+        primaryIntent: string;
+        objective: string[];
+        mainTopics: string[];
+        importantQuestions: string[];
+        writingStyleAndTone: string[];
+        recommendedStyle: string[];
+        valueProposition: string[];
+    } = {
+        primaryIntent: "",
+        objective: [],
+        mainTopics: [],
+        importantQuestions: [],
+        writingStyleAndTone: [],
+        recommendedStyle: [],
+        valueProposition: [],
+    };
 
-// Updated regex to capture multi-line lists
-const sectionRegex = /(\d+)\.\s*\*\*(.*?)\*\*:\s*-\s*([\s\S]*?)(?=\d+\.\s|\n{2,}|$)/gs;
-let match;
-while ((match = sectionRegex.exec(seoBriefRaw)) !== null) {
-    const sectionKey = match[2].trim();  // Exact section key (no normalization)
-    const sectionValue = match[3].trim();  // Clean up the value
+    // Updated regex to capture multi-line lists
+    const sectionRegex = /(\d+)\.\s*\*\*(.*?)\*\*:\s*-\s*([\s\S]*?)(?=\d+\.\s|\n{2,}|$)/gs;
+    let match;
+    while ((match = sectionRegex.exec(seoBriefRaw)) !== null) {
+        const sectionKey = match[2].trim();  // Exact section key (no normalization)
+        const sectionValue = match[3].trim();  // Clean up the value
 
-    // Assign values to the appropriate sections
-    switch (sectionKey) {
-        case 'Primary Intent':
-            seoBrief.primaryIntent = sectionValue;
-            break;
-        case 'Objective':
-            seoBrief.objective = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);
-            break;
-        case 'Main Topics to Cover':
-            seoBrief.mainTopics = sectionValue.split('\n').map(topic => topic.trim().replace(/^-?\s*/, '')).filter(topic => topic);
-            break;
-        case 'Important Questions to Address':
-            seoBrief.importantQuestions = sectionValue.split('\n').map(question => question.trim().replace(/^-?\s*/, '')).filter(question => question);
-            break;
-        case 'Writing Style and Tone':
-            seoBrief.writingStyleAndTone = sectionValue.split(',').map(style => style.trim());
-            break;
-        case 'Recommended Style':
-            seoBrief.recommendedStyle = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);
-            break;
-        case 'Value Proposition':
-            seoBrief.valueProposition = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);
-            break;
-        default:
-            break;
+        // Assign values to the appropriate sections
+        switch (sectionKey) {
+            case 'Primary Intent':
+                seoBrief.primaryIntent = sectionValue;
+                break;
+            case 'Objective':
+                seoBrief.objective = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);
+                break;
+            case 'Main Topics to Cover':
+                seoBrief.mainTopics = sectionValue.split('\n').map(topic => topic.trim().replace(/^-?\s*/, '')).filter(topic => topic);
+                break;
+            case 'Important Questions to Address':
+                seoBrief.importantQuestions = sectionValue.split('\n').map(question => question.trim().replace(/^-?\s*/, '')).filter(question => question);
+                break;
+            case 'Writing Style and Tone':
+                seoBrief.writingStyleAndTone = sectionValue.split(',').map(style => style.trim());
+                break;
+            case 'Recommended Style':
+                seoBrief.recommendedStyle = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);
+                break;
+            case 'Value Proposition':
+                seoBrief.valueProposition = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);
+                break;
+            default:
+                break;
+        }
     }
-}
 
-
-return seoBrief;
+    return seoBrief;
 }
