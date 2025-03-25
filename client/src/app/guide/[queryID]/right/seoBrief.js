@@ -34,7 +34,7 @@ export default function SeoBrief({data}){
             <div className="ml-10 mt-3 text-gray-400 text-sm">Key Subjects:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {mainTopics.map((topic, index) => (
-                    <div key={index} className="inline-flex items-center gap-2">
+                    <div key={index} className="flex items-center gap-2">
                         <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600  flex-shrink-0" />
                         <div className="leading-tight">
                             {topic}
@@ -45,7 +45,7 @@ export default function SeoBrief({data}){
             <div className="ml-10 mt-3 text-gray-400 text-sm">Questions to Consider:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {importantQuestions.map((topic, index) => (
-                    <div key={index} className="inline-flex items-center gap-2">
+                    <div key={index} className="flex items-center gap-2">
                         <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600  flex-shrink-0" />
                         <div className="leading-tight">
                             {topic}
@@ -68,10 +68,10 @@ export default function SeoBrief({data}){
             <div className="ml-10 mt-3 text-gray-400 text-sm">Recommended Style:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {recommendedStyle.map((topic, index) => (
-                    <div key={index} className="inline-flex items-center gap-2">
+                    <div key={index} className="flex items-center gap-2">
                         <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600  flex-shrink-0" />
                         <div className="leading-tight">
-                            {topic}
+                            {topic}.
                         </div>
                     </div>
                 ))}
@@ -82,7 +82,7 @@ export default function SeoBrief({data}){
                     <div key={index} className="inline-flex items-center gap-2">
                         <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600  flex-shrink-0" />
                         <div className="leading-tight">
-                            {topic}
+                            {topic}.
                         </div>
                     </div>
                 ))}
