@@ -9,6 +9,7 @@ import { IoSearch } from "react-icons/io5";
 import Analysis from './analysis';
 import Compare from './compare';
 import SocialPost from './socialPost';
+import Explore from './explore';
 
 export default function LeftSection ({data}) {
 
@@ -109,7 +110,7 @@ export default function LeftSection ({data}) {
                     </div>
                 ) : activeTab === 'Explore' ? (
                     <div>
-                        Explore
+                        <Explore data = { data } />
                     </div>
                 ) : null}
             </div>
