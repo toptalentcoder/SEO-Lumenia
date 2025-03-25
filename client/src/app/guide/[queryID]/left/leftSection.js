@@ -8,6 +8,7 @@ import { FaImage } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import Analysis from './analysis';
 import Compare from './compare';
+import SocialPost from './socialPost';
 
 export default function LeftSection ({data}) {
 
@@ -96,7 +97,7 @@ export default function LeftSection ({data}) {
                     </div>
                 ) : activeTab === 'SocialPost' ? (
                     <div>
-                        SocialPost
+                        <SocialPost />
                     </div>
                 ) : activeTab === 'Monitoring' ? (
                     <div>
