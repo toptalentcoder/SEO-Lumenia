@@ -24,3 +24,8 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Correct example */
+.text-[amber-50] {
+  color: var(--color-amber-50);
+}

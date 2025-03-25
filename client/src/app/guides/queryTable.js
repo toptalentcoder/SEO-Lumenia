@@ -77,7 +77,7 @@ export default function QueryTable({ projectID }) {
             ) : (
                 <div className="mx-auto overflow-hidden rounded-lg bg-white">
                     <table className="min-w-full border-collapse table-fixed">
-                        <thead className="bg-whit">
+                        <thead className="bg-white">
                             <tr>
                                 <th className="w-12 px-1 py-3 text-center">
                                     <input
