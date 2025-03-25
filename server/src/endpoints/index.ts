@@ -8,6 +8,7 @@ import { getUserProjects } from "./projectManagement/getProject";
 import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
 import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
 import { addProjectToUser } from "./projectManagement/postProject";
+import { createSeoBriefEndpoint } from "./seoGuide/createSeoBriefEndpoint";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
 import { generateSeoAutoEndpoint } from "./seoGuide/generateSeoAutoEndpoint";
 import { generateSeoOutlineEndpoint } from "./seoGuide/generateSeoOutlineEndpoint";
@@ -29,5 +30,6 @@ export const customEndpoints = [
     generateSeoOutlineEndpoint,
     generateSeoAutoEndpoint,
     generateSeoRephraseEndpoint,
+    createSeoBriefEndpoint,
     createSeoGuide
 ]
