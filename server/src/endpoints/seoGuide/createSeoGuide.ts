@@ -1,4 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
+import { generateSeoBrief } from "@/service/createSeoEditor/createSeoBrief";
 import { calculateOptimizationLevels } from "@/service/createSeoGuide/calculateOptimizationLevels";
 import { extractWords } from "@/service/createSeoGuide/extractWords";
 import { fetchPageContent } from "@/service/createSeoGuide/fetchPageContent";
@@ -65,7 +66,14 @@ export const createSeoGuide: Endpoint = {
             const organicResults: OrganicResult[] = json["organic_results"] ?? [];
             const links = organicResults.map((item: OrganicResult) => item.link);
 
-            const pageContents = await Promise.all(links.map(fetchPageContent));
+            // Generate SEO brief concurrently
+            const seoBriefPromise = generateSeoBrief(query);
+
+            // Fetch page content concurrently
+            const pageContentsPromise = Promise.all(links.map(fetchPageContent));
+
+            // Process the results concurrently
+            const [pageContents, seoBrief] = await Promise.all([pageContentsPromise, seoBriefPromise]);
 
             const processedTokens = pageContents
                 .filter((text): text is string => !!text)
@@ -101,6 +109,7 @@ export const createSeoGuide: Endpoint = {
                 graphData: optimizationLevels,
                 searchResults: organicResults.map(({ title, link }) => ({ title, link })),
                 language,
+                seoBrief,
                 createdAt : Date.now()
             };
 
