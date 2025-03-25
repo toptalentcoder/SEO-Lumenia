@@ -15,7 +15,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaFolder } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
 import { FaUsers } from "react-icons/fa";
-import { FaListCheck, FaRobot, FaDatabase } from "react-icons/fa6";
+import { FaListCheck, FaRobot } from "react-icons/fa6";
 import { BiWallet } from "react-icons/bi";
 import { CiViewList, CiLogout, CiSearch  } from "react-icons/ci";
 import { IoMdHelpCircleOutline } from "react-icons/io";

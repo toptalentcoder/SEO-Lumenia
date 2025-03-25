@@ -1,3 +1,5 @@
+import { FaRobot } from "react-icons/fa6";
+
 export default function SeoBrief({data}){
 
     const { seoBrief } = data;
@@ -55,7 +57,7 @@ export default function SeoBrief({data}){
             <div className="ml-10 mt-3 text-gray-400 text-sm">Recommended Tone:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {writingStyleAndTone.map((topic, index) => (
-                    <div key={index} className="inline-flex items-center gap-2">
+                    <div key={index} className="flex items-center gap-2 mt-1">
                         <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600  flex-shrink-0" />
                         <div className="leading-tight">
                             {topic}
@@ -85,6 +87,14 @@ export default function SeoBrief({data}){
                     </div>
                 ))}
             </div>
+
+            <button
+                className="mt-10 flex justify-center items-center space-x-2 text-[#FFFFFF] bg-[#EBB71A] hover:bg-[#C29613] cursor-pointer mx-auto px-5 py-1 rounded-lg">
+                <FaRobot/>
+                <span>200</span>
+                <span>-</span>
+                <span>Verify Brief Items</span>
+            </button>
 
         </div>
     )
