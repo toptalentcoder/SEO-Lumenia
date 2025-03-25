@@ -7,6 +7,7 @@ import { MdAutoGraph } from "react-icons/md";
 import { FaImage } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import Analysis from './analysis';
+import Compare from './compare';
 
 export default function LeftSection ({data}) {
 
@@ -91,7 +92,7 @@ export default function LeftSection ({data}) {
                     </div>
                 ) : activeTab === 'Compare' ? (
                     <div>
-                        Compare
+                        <Compare data = {data} />
                     </div>
                 ) : activeTab === 'SocialPost' ? (
                     <div>
