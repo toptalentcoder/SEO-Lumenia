@@ -7,7 +7,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import LexicalSeoEditor from './seoEditor';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
 
 const CustomDot = ({ cx, cy, payload, value, index, color }) => {
@@ -21,22 +21,41 @@ const CustomDot = ({ cx, cy, payload, value, index, color }) => {
 export default function Analysis({data}) {
 
     const [selectedLinks, setSelectedLinks] = useState([]);
-    const [graphLineData, setGraphLineData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [graphData, setGraphData] = useState([]);
+    const [graphLineData, setGraphLineData] = useState([]);
 
     // // Use Lexical Composer Context to access editor
     // const [editor] = useLexicalComposerContext();
 
-    // Prepare graph data
-    const graphData = data?.optimizationLevels?.map((keywordData) => {
-        return {
-            name: keywordData.keyword,  // Keyword as the name for each point on the X-axis
-            subOptimized: parseInt(keywordData.optimizationRanges.subOptimized, 10),
-            standardOptimized: parseInt(keywordData.optimizationRanges.standardOptimized, 10),
-            strongOptimized: parseInt(keywordData.optimizationRanges.strongOptimized, 10),
-            overOptimized: parseInt(keywordData.optimizationRanges.overOptimized, 10),
-        };
-    }) || [];
+
+    useEffect(() => {
+        // Only set graph data when data is available
+        if (data?.optimizationLevels) {
+            const newGraphData = data.optimizationLevels.map((keywordData) => ({
+                name: keywordData.keyword,
+                subOptimized: parseInt(keywordData.optimizationRanges.subOptimized, 10),
+                standardOptimized: parseInt(keywordData.optimizationRanges.standardOptimized, 10),
+                strongOptimized: parseInt(keywordData.optimizationRanges.strongOptimized, 10),
+                overOptimized: parseInt(keywordData.optimizationRanges.overOptimized, 10),
+            }));
+
+            setGraphData(newGraphData);
+
+            const initialGraphLineData = [
+                {
+                    name: "Series 1",
+                    data: data.optimizationLevels.map((optimization) => ({
+                        name: optimization.keyword,
+                        value: 0,
+                    })),
+                },
+            ];
+
+            setGraphLineData(initialGraphLineData);
+        }
+    }, [data]); // Run this effect whenever the 'data' changes
+
 
     // Handle the analysis trigger
     const handleAnalyse = async () => {
