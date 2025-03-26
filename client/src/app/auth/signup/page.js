@@ -35,7 +35,7 @@ export default function SignupPage() {
                 sessionStorage.setItem("user", JSON.stringify(userData.user));
                 setUser(userData);
 
-                router.push("/dashboard");
+                router.push("/guides");
             }
         };
 

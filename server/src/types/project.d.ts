@@ -5,3 +5,6 @@ export interface Project {
     domainName: string;
     seoGuides: string[] | [];
 }
+
+type KeywordCounts = Record<string, number>;
+type KeywordDistributions = KeywordCounts[];

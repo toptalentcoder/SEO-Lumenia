@@ -5,7 +5,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 /**
  * Compute cosine similarity between two vectors
  */
-function cosineSimilarity(vecA: number[], vecB: number[]): number {
+export function cosineSimilarity(vecA: number[], vecB: number[]): number {
     let dot = 0, magA = 0, magB = 0;
     for (let i = 0; i < vecA.length; i++) {
         dot += vecA[i] * vecB[i];
@@ -15,21 +15,44 @@ function cosineSimilarity(vecA: number[], vecB: number[]): number {
     return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
-/**
- * Fetch OpenAI embeddings for a given input string
- */
-async function getEmbedding(text: string): Promise<number[]> {
-    const response = await openai.embeddings.create({
-        model: 'text-embedding-ada-002',
-        input: text,
-    });
+const MAX_TOKENS = 8192;  // Maximum tokens for the OpenAI embeddings model
 
-    const embedding = response?.data?.[0]?.embedding;
-    if (!embedding) {
-        throw new Error(`Failed to retrieve embedding for input: ${text}`);
+// Function to split the content into smaller chunks
+const splitTextIntoChunks = (text: string): string[] => {
+    const words = text.split(' ');
+    const chunks = [];
+    let chunk = '';
+
+    for (let i = 0; i < words.length; i++) {
+        if ((chunk + words[i]).length > MAX_TOKENS) {
+            chunks.push(chunk);
+            chunk = words[i];
+        } else {
+            chunk += ' ' + words[i];
+        }
+    }
+    if (chunk) chunks.push(chunk);  // Push the last chunk
+
+    return chunks;
+};
+
+// Usage in getEmbedding
+export async function getEmbedding(text: string): Promise<number[]> {
+    const chunks = splitTextIntoChunks(text);  // Split the content into chunks
+
+    let embeddings: number[] = [];
+
+    // Calculate embeddings for each chunk separately
+    for (const chunk of chunks) {
+        const response = await openai.embeddings.create({
+            model: 'text-embedding-ada-002',
+            input: chunk,
+        });
+
+        embeddings = embeddings.concat(response.data[0]?.embedding || []);
     }
 
-    return embedding;
+    return embeddings;  // Return combined embeddings
 }
 
 /**
