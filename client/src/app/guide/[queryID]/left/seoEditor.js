@@ -277,7 +277,7 @@ function SeoTxlToolbar({ data, setIsLoading }) {
 
     const handleSEO_TXLQuestions = async () => {
         const query = data.query;
-        const keywords = data.graphData.map(item => item.name);
+        const keywords = data?.optimizationLevels?.map(item => item.keyword);
 
         try {
             setIsLoading(true);
@@ -312,7 +312,7 @@ function SeoTxlToolbar({ data, setIsLoading }) {
 
     const handleSeoTxlOutline = async () => {
         const query = data.query;
-        const keywords = data.graphData.map(item => item.name);
+        const keywords = data?.optimizationLevels?.map(item => item.keyword);
         setIsLoading(true); // Optional loading state
 
         try {
