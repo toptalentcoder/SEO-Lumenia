@@ -1,6 +1,6 @@
 "use client"
 
-import { FaRobot } from "react-icons/fa6";
+import { FaRobot, FaSpinner } from "react-icons/fa6";
 import {useState} from 'react'
 import axios from 'axios';
 
@@ -21,11 +21,13 @@ export default function SeoBrief({data, content}){
     // State for verification results and improvement suggestions
     const [verificationResult, setVerificationResult] = useState(null);
     const [improvementSuggestions, setImprovementSuggestions] = useState("");
+    const [isLoading, setIsLoading] = useState(false);  // New state for loading
 
     const handleVerifyClick = async () => {
         try {
+            setIsLoading(true);
             // Send content and SEO brief to the backend for verification
-            const response = await axios.post("/api/verify-content", { content, seoBrief });
+            const response = await axios.post("http://localhost:7777/api/verify_seo_brief", { content, seoBrief });
             const { verificationResult, improvementText } = response.data;
 
             // Update the verification state
@@ -33,6 +35,8 @@ export default function SeoBrief({data, content}){
             setImprovementSuggestions(improvementText);
         } catch (error) {
             console.error("Error verifying brief:", error);
+        }finally {
+            setIsLoading(false); // Set loading to false once the request is complete
         }
     };
 
@@ -122,10 +126,16 @@ export default function SeoBrief({data, content}){
             <button
                 onClick={handleVerifyClick}
                 className="mt-10 flex justify-center items-center space-x-2 text-[#FFFFFF] bg-[#EBB71A] hover:bg-[#C29613] cursor-pointer mx-auto px-5 py-1 rounded-lg">
-                <FaRobot/>
-                <span>200</span>
-                <span>-</span>
-                <span>Verify Brief Items</span>
+                {isLoading ? (
+                    <FaSpinner className="animate-spin text-white" />
+                ) : (
+                    <>
+                        <FaRobot />
+                        <span>200</span>
+                        <span>-</span>
+                        <span>Verify Brief Items</span>
+                    </>
+                )}
             </button>
 
             {/* Display improvement suggestions at the bottom */}

@@ -29,6 +29,7 @@ export default function Analysis({data}) {
     // const [editor] = useLexicalComposerContext();
 
 
+
     useEffect(() => {
         // Only set graph data when data is available
         if (data?.optimizationLevels) {
