@@ -13,6 +13,7 @@ import { generateSeoAutoEndpoint } from "./seoGuide/generateSeoAutoEndpoint";
 import { generateSeoOutlineEndpoint } from "./seoGuide/generateSeoOutlineEndpoint";
 import { generateSeoQuestionsEndpoint } from "./seoGuide/generateSeoQuestions";
 import { generateSeoRephraseEndpoint } from "./seoGuide/generateSeoRephraseEndpoint";
+import { createSocialPostEndpoint } from "./seoGuide/createSocialPostEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -29,5 +30,6 @@ export const customEndpoints = [
     generateSeoOutlineEndpoint,
     generateSeoAutoEndpoint,
     generateSeoRephraseEndpoint,
-    createSeoGuide
+    createSeoGuide,
+    createSocialPostEndpoint
 ]

@@ -51,34 +51,37 @@ export const calculateDynamicOptimizationRanges = (
         };
     };
 
+    // Check for matching lengths
+    // if (urls.length !== processedDocs.length) {
+    //     console.error("Mismatch between the number of URLs and processed documents.");
+    //     return [];
+    // }
+
     // Calculate frequency for each keyword across all URLs
-    keywords.forEach((keyword) => {
+    for (const keyword of keywords) {
         const urlOptimizations: Record<string, number> = {};
-        const keywordFrequencies: number[] = [];  // Track frequencies for calculating dynamic ranges
+        const keywordFrequencies: number[] = [];
 
         // For each URL, count keyword occurrences
-        urls.forEach((url, index) => {
+        for (const [index, url] of urls.entries()) {
             const doc = processedDocs[index];
 
-            // Check if processedDocs[index] is valid and not undefined
-            if (doc) {
-                const keywordCount = doc.filter((word) => word === keyword).length;
-                const frequency = keywordCount / doc.length; // Frequency as percentage of the document
-
-                // Apply fallback for frequency of 0 (if keyword exists, assign a small value)
-                if (frequency === 0 && keywordCount > 0) {
-                    urlOptimizations[url] = 0.0001 * 10000; // Set a small fallback value (scaled by 10000)
-                } else {
-                    urlOptimizations[url] = Math.round(frequency * 10000);  // Store frequency per URL, multiplied by 10000
-                }
-
-                keywordFrequencies.push(frequency); // Add frequency for dynamic range calculation
-            } else {
-                console.warn(`Processed document for URL ${url} is undefined or empty.`);
+            if (!doc || doc.length === 0) {
+                console.warn(`Document for URL ${url} is either missing or empty!`);
                 urlOptimizations[url] = 0; // Set frequency to 0 if document is invalid
-                keywordFrequencies.push(0);  // Add 0 frequency for missing content
+                keywordFrequencies.push(0);
+                continue; // Skip to the next URL if the document is missing or empty
             }
-        });
+
+            // Normalize and match keyword (case insensitive and without punctuation)
+            const keywordNormalized = keyword.toLowerCase();
+            const docNormalized = doc.map(word => word.toLowerCase().replace(/[^\w\s]/g, '')); // Strip punctuation
+            const keywordCount = docNormalized.filter((word) => word === keywordNormalized).length;
+
+            const frequency = keywordCount / doc.length; // Frequency as percentage of the document
+            urlOptimizations[url] = Math.round((frequency + 1) * 10000); // Store frequency per URL, multiplied by 10000
+            keywordFrequencies.push(frequency); // Add frequency for dynamic range calculation
+        }
 
         // Calculate dynamic ranges for the keyword based on frequency distribution
         const optimizationRanges = calculateRanges(keywordFrequencies);
@@ -92,7 +95,7 @@ export const calculateDynamicOptimizationRanges = (
                 ...optimizationRanges,  // Spread the calculated ranges
             },
         });
-    });
+    }
 
     return keywordOptimizations;
 };
