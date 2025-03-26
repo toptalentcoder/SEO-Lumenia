@@ -75,7 +75,7 @@ export const calculateDynamicOptimizationRanges = (
 
             // Normalize and match keyword (case insensitive and without punctuation)
             const keywordNormalized = keyword.toLowerCase();
-            const docNormalized = doc.map(word => word.toLowerCase().replace(/[^\w\s]/g, '')); // Strip punctuation
+            const docNormalized = doc.flat().map(word => word.toLowerCase().replace(/[^\w\s]/g, '')); // Strip punctuation
             const keywordCount = docNormalized.filter((word) => word === keywordNormalized).length;
 
             const frequency = keywordCount / doc.length; // Frequency as percentage of the document
