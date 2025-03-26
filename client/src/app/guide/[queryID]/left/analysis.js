@@ -13,6 +13,19 @@ export default function Analysis({data}) {
 
     const [selectedLinks, setSelectedLinks] = useState([]);
 
+    console.log(data)
+
+    // Prepare graph data
+    const graphData = data?.optimizationLevels?.map((keywordData) => {
+        return {
+            name: keywordData.keyword,  // Keyword as the name for each point on the X-axis
+            subOptimized: parseInt(keywordData.optimizationRanges.subOptimized, 10),
+            standardOptimized: parseInt(keywordData.optimizationRanges.standardOptimized, 10),
+            strongOptimized: parseInt(keywordData.optimizationRanges.strongOptimized, 10),
+            overOptimized: parseInt(keywordData.optimizationRanges.overOptimized, 10),
+        };
+    }) || [];
+
     return(
         <div className="px-6">
             <div className="flex items-center gap-2 justify-end">
@@ -103,12 +116,12 @@ export default function Analysis({data}) {
                 </div>
             </div>
 
-            <div className="mt-8" style={{ width: '100%', height: 300 }}>
+            <div className="mt-8" style={{ width: '100%', height: 350 }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart
                         width={500}
                         height={500}
-                        data={data.graphData}
+                        data={graphData}
                         margin={{
                             top: 10,
                             right: 30,
@@ -129,7 +142,7 @@ export default function Analysis({data}) {
                             }}
                         />
 
-                        <Area type="monotone" dataKey="subOptimized" stackId="1" stroke="#7CB5EC" fill="#7CB5EC"/>
+                        <Area type="monotone" dataKey="subOptimized" stackId="1" stroke="#7CB5EC" fill="#7CB5EC" />
                         <Area type="monotone" dataKey="standardOptimized" stackId="1" stroke="#90EE7E" fill="#90EE7E" />
                         <Area type="monotone" dataKey="strongOptimized" stackId="1" stroke="#FFA500" fill="#FFA500" />
                         <Area type="monotone" dataKey="overOptimized" stackId="1" stroke="#FF0000" fill="#FF0000" />

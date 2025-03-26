@@ -28,7 +28,7 @@ export default function SigninPage() {
                 localStorage.setItem("user", JSON.stringify(userData.user));
                 setUser(userData.user);
                 localStorage.removeItem("googleAuthUser");
-                router.push("/dashboard");
+                router.push("/guides");
             } catch (error) {
                 console.error("Error parsing user data:", error);
             }
@@ -84,7 +84,7 @@ export default function SigninPage() {
         } catch (err) {
             console.error("Error setting user in context:", err);
         }
-        router.push("/dashboard");
+        router.push("/guides");
         } catch (err) {
         console.error(err);
         setError(err instanceof Error ? err.message : "An unexpected error occurred.");

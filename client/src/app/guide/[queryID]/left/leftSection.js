@@ -63,7 +63,7 @@ export default function LeftSection ({data}) {
                     <MdAutoGraph className="text-[#413793]"/>
                     Monitoring
                 </button>
-                <button
+                {/* <button
                     onClick={() => setActiveTab("Images")}
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
                         activeTab === "Images"
@@ -73,7 +73,7 @@ export default function LeftSection ({data}) {
                 >
                     <FaImage className="text-[#413793]"/>
                     Images
-                </button>
+                </button> */}
                 <button
                     onClick={() => setActiveTab("Explore")}
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
@@ -104,11 +104,7 @@ export default function LeftSection ({data}) {
                     <div>
                         Monitoring
                     </div>
-                ) : activeTab === 'Images' ? (
-                    <div>
-                        Images
-                    </div>
-                ) : activeTab === 'Explore' ? (
+                )  : activeTab === 'Explore' ? (
                     <div>
                         <Explore data = { data } />
                     </div>

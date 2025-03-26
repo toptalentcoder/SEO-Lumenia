@@ -17,7 +17,7 @@ export const fetchPageContent = async (url: string): Promise<string | null> => {
         clearTimeout(timeout);
 
         if (!response.ok || !response.body){
-            console.log(`false : ${url}`);
+            console.log(`failed to fetch : ${url}`);
             return null;
         }
 

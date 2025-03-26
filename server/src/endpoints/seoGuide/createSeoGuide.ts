@@ -1,6 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { generateSeoBrief } from "@/service/createSeoEditor/createSeoBrief";
-import { calculateOptimizationLevels } from "@/service/createSeoGuide/calculateOptimizationLevels";
 import { extractWords } from "@/service/createSeoGuide/extractWords";
 import { fetchPageContent } from "@/service/createSeoGuide/fetchPageContent";
 import { getSemanticKeywords } from "@/service/createSeoGuide/getSemanticKeywords";
@@ -8,15 +7,14 @@ import { processText } from "@/service/createSeoGuide/processText";
 import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 import axios from "axios";
+import { calculateSOSEOandDSEO } from "@/service/createSeoGuide/calculateSOSEO";
+import { calculateDynamicOptimizationRanges } from "@/service/createSeoGuide/assignOptimizationLevel";
 
 interface OrganicResult {
     title: string;
     link: string;
-}
-
-interface SerpApiResponse {
-    organic_results: OrganicResult[];
-    // Add more fields if you use them elsewhere
+    soseo?: number; // Optional property for SEO optimization level
+    dseo?: number;  // Optional property for SEO optimization level
 }
 
 export const createSeoGuide: Endpoint = {
@@ -92,14 +90,20 @@ export const createSeoGuide: Endpoint = {
                 return result;
             });
 
-            const optimizationLevels = calculateOptimizationLevels(keywordFrequencies);
+                  // Calculate dynamic optimization ranges for each keyword across all URLs
+            const optimizationLevels = calculateDynamicOptimizationRanges(
+                links,
+                processedTokens,
+                semanticKeywords
+            );
 
             const seoGuides = {
                 query,
                 queryID,
                 queryEngine,
-                graphData: optimizationLevels,
+                optimizationLevels,
                 searchResults: organicResults.map(({ title, link }) => ({ title, link })),
+                // seoScores,
                 language,
                 seoBrief,
                 PAAs,
@@ -177,7 +181,7 @@ export const createSeoGuide: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true }),
+                JSON.stringify({ success: true, seoGuides }),
                 { status: 200, headers: { "Content-Type": "application/json" } }
             );
         } catch (err) {

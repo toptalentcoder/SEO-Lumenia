@@ -7,6 +7,7 @@ import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { IoDocument } from "react-icons/io5";
 import { RiPresentationFill } from "react-icons/ri";
 import SeoBrief from './seoBrief';
+import YourWebPageSection from './yourWebPageSection';
 
 export default function RightSection ({data}) {
 
@@ -44,7 +45,7 @@ export default function RightSection ({data}) {
                 {activeTab === 'seoBrief' ? (
                     <div className="bg-white p-4 rounded shadow"><SeoBrief data={data}/></div>
                 ) : activeTab === 'yourWebpage' ? (
-                    <div className="bg-white p-4 rounded shadow">adfadfasdfasdfasdf</div>
+                    <div className="bg-white p-4 rounded shadow"><YourWebPageSection data={data}/></div>
                 ) : null}
             </div>
 
