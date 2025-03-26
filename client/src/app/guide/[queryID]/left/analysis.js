@@ -110,6 +110,45 @@ export default function Analysis({data}) {
         }
     };
 
+    const analyseUrlGraph = async (url) => {
+        // Check if data and seoGuides are available
+        if (!data?.optimizationLevels) {
+            console.error("Optimization data not available.");
+            return; // Exit if data is not available
+        }
+
+        const selectedUrl = data.optimizationLevels.find(
+            (level) => Object.keys(level.urlOptimizations).includes(url)
+        );
+
+        if (!selectedUrl) {
+            console.error("Keyword not found in optimization levels.");
+            return; // Exit if the keyword is not found
+        }
+
+        const urlOptimizationData = selectedUrl.urlOptimizations;
+
+        // Check if urlOptimizations is not empty
+        if (!urlOptimizationData || !urlOptimizationData[url]) {
+            console.error("No optimization data available for the URL.");
+            return; // Exit if no URL optimization data is available
+        }
+
+        // Map data to the format expected by graphLineData
+        const updatedGraphLineData = [
+            {
+                name: "URL Optimizations", // Customize the name here
+                data: data.optimizationLevels.map((optimization) => ({
+                    name: optimization.keyword,  // Use the keyword as name
+                    value: urlOptimizationData[Object.keys(urlOptimizationData).find((key) => key === url)] || 0, // Get the optimization value for that specific URL
+                })),
+            },
+        ];
+
+        // Update graphLineData with the new data
+        setGraphLineData(updatedGraphLineData);
+    };
+
     return(
         <div className="px-6">
             <div className="flex items-center gap-2 justify-end">
@@ -172,27 +211,28 @@ export default function Analysis({data}) {
                                 const isChecked = selectedLinks.includes(result.link);
 
                                 return (
-                                <MenuItem key={index} as="div">
-                                    <div
-                                        className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                        onClick={(e) => {
-                                            e.preventDefault(); // prevents menu from closing
-                                            setSelectedLinks((prev) =>
-                                            prev.includes(result.link)
-                                                ? prev.filter((link) => link !== result.link)
-                                                : [...prev, result.link]
-                                            );
-                                        }}
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            checked={isChecked}
-                                            onChange={() => {}}
-                                            onClick={(e) => e.stopPropagation()} // prevents double toggle on checkbox click
-                                        />
-                                        <span className="truncate">{result.link}</span>
-                                    </div>
-                                </MenuItem>
+                                    <MenuItem key={index} as="div">
+                                        <div
+                                            className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                            onClick={(e) => {
+                                                e.preventDefault(); // prevents menu from closing
+                                                setSelectedLinks((prev) =>
+                                                prev.includes(result.link)
+                                                    ? prev.filter((link) => link !== result.link)
+                                                    : [...prev, result.link]
+                                                );
+                                                analyseUrlGraph(result.link)
+                                            }}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={isChecked}
+                                                onChange={() => {}}
+                                                onClick={(e) => e.stopPropagation()} // prevents double toggle on checkbox click
+                                            />
+                                            <span className="truncate">{result.link}</span>
+                                        </div>
+                                    </MenuItem>
                                 );
                             })}
                         </MenuItems>
@@ -310,36 +350,36 @@ export default function Analysis({data}) {
                     <span>Analyse</span>
                 </button>
                 <Menu>
-                        <MenuButton className="text-gray-200 cursor-pointer rounded-r-xl bg-[#413793] pl-3 hover:bg-[#2f2c45]">
-                            <div className='flex items-center space-x-2 text-gray-300 py-2 text-md font-medium mr-3'>
-                                <IoIosArrowDown/>
+                    <MenuButton className="text-gray-200 cursor-pointer rounded-r-xl bg-[#413793] pl-3 hover:bg-[#2f2c45]">
+                        <div className='flex items-center space-x-2 text-gray-300 py-2 text-md font-medium mr-3'>
+                            <IoIosArrowDown/>
+                        </div>
+                    </MenuButton>
+                    <MenuItems
+                        anchor="bottom end"
+                        className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50 mt-2"
+                    >
+                        <MenuItem key={"askForValidation"} as="div">
+                            <div
+                                className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                onClick={(e) => {
+                                    e.preventDefault(); // prevents menu from closing
+                                }}
+                            >
+                                Ask for validation
                             </div>
-                        </MenuButton>
-                        <MenuItems
-                            anchor="bottom end"
-                            className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50 mt-2"
-                        >
-                            <MenuItem key={"askForValidation"} as="div">
-                                <div
-                                    className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                    onClick={(e) => {
-                                        e.preventDefault(); // prevents menu from closing
-                                    }}
-                                >
-                                    Ask for validation
-                                </div>
-                            </MenuItem>
-                            <MenuItem key={"export"} as="div">
-                                <div
-                                    className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                    onClick={(e) => {
-                                        e.preventDefault(); // prevents menu from closing
-                                    }}
-                                >
-                                    Export(.doc)
-                                </div>
-                            </MenuItem>
-                        </MenuItems>
+                        </MenuItem>
+                        <MenuItem key={"export"} as="div">
+                            <div
+                                className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                onClick={(e) => {
+                                    e.preventDefault(); // prevents menu from closing
+                                }}
+                            >
+                                Export(.doc)
+                            </div>
+                        </MenuItem>
+                    </MenuItems>
                     </Menu>
             </div>
         </div>
