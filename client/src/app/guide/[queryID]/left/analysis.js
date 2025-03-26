@@ -3,17 +3,29 @@
 import { ImCross } from "react-icons/im";
 import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, DotProps, ComposedChart  } from 'recharts';
 import LexicalSeoEditor from './seoEditor';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
+import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
+
+const CustomDot = ({ cx, cy, payload, value, index, color }) => {
+    return (
+        <svg x={cx - 4} y={cy - 4} width={8} height={8} fill={color} stroke="none">
+            <circle cx={4} cy={4} r={4} /> {/* Smaller radius for smaller dots */}
+        </svg>
+    );
+};
 
 export default function Analysis({data}) {
 
     const [selectedLinks, setSelectedLinks] = useState([]);
+    const [graphLineData, setGraphLineData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    console.log(data)
+    // // Use Lexical Composer Context to access editor
+    // const [editor] = useLexicalComposerContext();
 
     // Prepare graph data
     const graphData = data?.optimizationLevels?.map((keywordData) => {
@@ -25,6 +37,59 @@ export default function Analysis({data}) {
             overOptimized: parseInt(keywordData.optimizationRanges.overOptimized, 10),
         };
     }) || [];
+
+    // Handle the analysis trigger
+    const handleAnalyse = async () => {
+        setLoading(true);
+
+        try {
+            // Get the article content from the Lexical editor
+            const editorState = editor.getEditorState();
+            const content = editorState.read(() => {
+                // Get the raw text content from the Lexical editor
+                const rootElement = editor.getRootElement();
+                return rootElement.innerText.trim(); // Extract text content from the editor
+            });
+
+            // Get the list of keywords (you should pass the actual list of keywords)
+            const keywords = data?.keywords || [];
+
+            // Send request to backend API with the content and keywords
+            const response = await fetch("/api/calculate_optimization_levels", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    currentText: [content], // Send content as an array
+                    keywords: keywords,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                const keywordOptimizations = result.keywordOptimizations;
+
+                const newGraphLineData = [
+                    {
+                        name: "Series 1",
+                        data: keywordOptimizations.map((optimization) => ({
+                            name: optimization.keyword,
+                            value: optimization.value,
+                        })),
+                    },
+                ];
+
+                setGraphLineData(newGraphLineData);
+            } else {
+                console.error("Error in optimization response");
+            }
+        } catch (error) {
+            console.error("Error during analysis:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return(
         <div className="px-6">
@@ -118,10 +183,8 @@ export default function Analysis({data}) {
 
             <div className="mt-8" style={{ width: '100%', height: 350 }}>
                 <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                        width={500}
-                        height={500}
-                        data={graphData}
+                    <ComposedChart
+                        data={graphData} // Use graphData for the AreaChart
                         margin={{
                             top: 10,
                             right: 30,
@@ -130,7 +193,7 @@ export default function Analysis({data}) {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} tick={{ fontSize : 13 }}/>
+                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} tick={{ fontSize: 13 }} />
                         <YAxis
                             tick={false}
                             label={{
@@ -138,15 +201,53 @@ export default function Analysis({data}) {
                                 angle: -90,
                                 position: 'insideLeft',
                                 offset: 10,
-                                style: { textAnchor: 'middle', fontSize: 12 }
+                                style: { textAnchor: 'middle', fontSize: 12 },
                             }}
                         />
 
-                        <Area type="monotone" dataKey="subOptimized" stackId="1" stroke="#7CB5EC" fill="#7CB5EC" />
-                        <Area type="monotone" dataKey="standardOptimized" stackId="1" stroke="#90EE7E" fill="#90EE7E" />
-                        <Area type="monotone" dataKey="strongOptimized" stackId="1" stroke="#FFA500" fill="#FFA500" />
-                        <Area type="monotone" dataKey="overOptimized" stackId="1" stroke="#FF0000" fill="#FF0000" />
-                    </AreaChart>
+                        {/* Area layers */}
+                        <Area
+                            type="monotone"
+                            dataKey="subOptimized"
+                            stackId="1"
+                            stroke="#7CB5EC"
+                            fill="#7CB5EC"
+                        />
+                        <Area
+                            type="monotone"
+                            dataKey="standardOptimized"
+                            stackId="1"
+                            stroke="#90EE7E"
+                            fill="#90EE7E"
+                        />
+                        <Area
+                            type="monotone"
+                            dataKey="strongOptimized"
+                            stackId="1"
+                            stroke="#FFA500"
+                            fill="#FFA500"
+                        />
+                        <Area
+                            type="monotone"
+                            dataKey="overOptimized"
+                            stackId="1"
+                            stroke="#FF0000"
+                            fill="#FF0000"
+                        />
+
+                        {/* Line layers */}
+                        {graphLineData.map((s) => (
+                            <Line
+                                key={s.name} // Make sure key is unique
+                                data={s.data} // Use the same data structure for the line chart
+                                dataKey="value" // Ensure this matches your data structure
+                                name={s.name}
+                                stroke="#000000" // Line color (black)
+                                strokeWidth={2}  // Optional: Adjust line thickness
+                                dot={<CustomDot color="#000000" />}  // Dot color (black)
+                            />
+                        ))}
+                    </ComposedChart>
                 </ResponsiveContainer>
             </div>
 
@@ -184,11 +285,13 @@ export default function Analysis({data}) {
 
             <div className="flex justify-end mr-6">
                 <button
-                    className="bg-[#413793] text-white pl-6 py-1 rounded-xl cursor-pointer flex items-center space-x-3 text-sm"
+                    className="bg-[#413793] text-white pl-6 py-1 rounded-l-xl cursor-pointer flex items-center space-x-3 text-sm"
+                    onClick={handleAnalyse}
                 >
                     <span>Analyse</span>
-                    <Menu>
-                        <MenuButton className="text-gray-200 cursor-pointer rounded-lg hover:bg-[#2f2c45]">
+                </button>
+                <Menu>
+                        <MenuButton className="text-gray-200 cursor-pointer rounded-r-xl bg-[#413793] pl-3 hover:bg-[#2f2c45]">
                             <div className='flex items-center space-x-2 text-gray-300 py-2 text-md font-medium mr-3'>
                                 <IoIosArrowDown/>
                             </div>
@@ -219,7 +322,6 @@ export default function Analysis({data}) {
                             </MenuItem>
                         </MenuItems>
                     </Menu>
-                </button>
             </div>
         </div>
     )

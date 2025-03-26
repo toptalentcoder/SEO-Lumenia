@@ -72,23 +72,23 @@ export const createSeoGuide: Endpoint = {
             const keywords = extractWords(processedTokens);
             const semanticKeywords = await getSemanticKeywords(keywords, query);
 
-            const keywordFrequencies = processedTokens.map((tokens) => {
-                const frequencyMap = new Map<string, number>();
-                const keywordSet = new Set(semanticKeywords);
+            // const keywordFrequencies = processedTokens.map((tokens) => {
+            //     const frequencyMap = new Map<string, number>();
+            //     const keywordSet = new Set(semanticKeywords);
 
-                for (const token of tokens) {
-                    if (keywordSet.has(token)) {
-                        frequencyMap.set(token, (frequencyMap.get(token) || 0) + 1);
-                    }
-                }
+            //     for (const token of tokens) {
+            //         if (keywordSet.has(token)) {
+            //             frequencyMap.set(token, (frequencyMap.get(token) || 0) + 1);
+            //         }
+            //     }
 
-                const result: Record<string, number> = {};
-                for (const keyword of semanticKeywords) {
-                    result[keyword] = frequencyMap.get(keyword) || 0;
-                }
+            //     const result: Record<string, number> = {};
+            //     for (const keyword of semanticKeywords) {
+            //         result[keyword] = frequencyMap.get(keyword) || 0;
+            //     }
 
-                return result;
-            });
+            //     return result;
+            // });
 
                   // Calculate dynamic optimization ranges for each keyword across all URLs
             const optimizationLevels = calculateDynamicOptimizationRanges(
