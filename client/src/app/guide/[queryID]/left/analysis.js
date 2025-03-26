@@ -181,6 +181,46 @@ export default function Analysis({data}) {
             <div className="p-6 mt-10">
                 <LexicalSeoEditor data = {data}/>
             </div>
+
+            <div className="flex justify-end mr-6">
+                <button
+                    className="bg-[#413793] text-white pl-6 py-1 rounded-xl cursor-pointer flex items-center space-x-3 text-sm"
+                >
+                    <span>Analyse</span>
+                    <Menu>
+                        <MenuButton className="text-gray-200 cursor-pointer rounded-lg hover:bg-[#2f2c45]">
+                            <div className='flex items-center space-x-2 text-gray-300 py-2 text-md font-medium mr-3'>
+                                <IoIosArrowDown/>
+                            </div>
+                        </MenuButton>
+                        <MenuItems
+                            anchor="bottom end"
+                            className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50 mt-2"
+                        >
+                            <MenuItem key={"askForValidation"} as="div">
+                                <div
+                                    className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault(); // prevents menu from closing
+                                    }}
+                                >
+                                    Ask for validation
+                                </div>
+                            </MenuItem>
+                            <MenuItem key={"export"} as="div">
+                                <div
+                                    className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault(); // prevents menu from closing
+                                    }}
+                                >
+                                    Export(.doc)
+                                </div>
+                            </MenuItem>
+                        </MenuItems>
+                    </Menu>
+                </button>
+            </div>
         </div>
     )
 }

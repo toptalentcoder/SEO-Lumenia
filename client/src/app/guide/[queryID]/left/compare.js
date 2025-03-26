@@ -43,7 +43,7 @@ export default function Compare({ data }) {
                     <thead className="bg-white">
                         <tr>
                             <th className="w-1/10 px-1 py-3 text-left">Pos.</th>
-                            <th className="w-1/2 px-3 py-3 text-left text-md font-semibold text-gray-700 tracking-wide">Url</th>
+                            <th className="w-1/6 px-3 py-3 text-left text-md font-semibold text-gray-700 tracking-wide">Url</th>
                             <th className="w-1/10 px-3 py-3 text-center text-md font-semibold text-gray-700 tracking-wide">SOSEO</th>
                             <th className="w-1/10 px-3 py-3 text-center text-md font-semibold text-gray-700 tracking-wide">DSEO</th>
                             <th className="w-1/10 px-3 py-3 text-center text-md font-semibold text-gray-700 tracking-wide">#Top 1-20</th>
@@ -54,7 +54,7 @@ export default function Compare({ data }) {
                         {searchResults.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                 <td className="w-12 px-1 py-4 text-center">{index + 1}</td>
-                                <td className="w-1/4 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
+                                <td className="w-1/6 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
                                     <div>
                                         <div className="text-[#4A4291] flex items-center gap-1 text-sm">
                                             {row.title}

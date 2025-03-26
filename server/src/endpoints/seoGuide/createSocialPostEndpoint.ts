@@ -1,10 +1,10 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoOutline } from "@/service/createSeoEditor/generateSeoOutline";
+import { createSocialPost } from "@/service/createSocialPost/createSocialPost";
 import { Endpoint, PayloadRequest } from "payload";
 
-export const generateSeoOutlineEndpoint : Endpoint = {
+export const createSocialPostEndpoint : Endpoint = {
 
-    path : '/generate_seo_outline',
+    path : '/create_social_post',
 
     method : 'post',
 
@@ -17,9 +17,9 @@ export const generateSeoOutlineEndpoint : Endpoint = {
         }
 
         const body = await req.json();
-        const { query, keywords, language } = body;
+        const { query, tone, platform, content } = body;
 
-        if (!query || typeof query !== "string" || !Array.isArray(keywords)) {
+        if(!query || !tone || !platform || !content){
             return new Response(JSON.stringify({ error: "Missing or invalid query/keywords" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json" },
@@ -27,19 +27,18 @@ export const generateSeoOutlineEndpoint : Endpoint = {
         }
 
         try {
-            const outlines = await generateSeoOutline({ query, keywords, language });
+            const socialPost = await createSocialPost({ query, tone, platform, content });
 
-            return new Response(JSON.stringify({ success: true, outlines }), {
+            return new Response(JSON.stringify({ success: true, socialPost }), {
                 status: 200,
                 headers: { "Content-Type": "application/json" },
             });
         } catch (error) {
-            console.error("❌ generateSeooutlines error:", error);
-            return new Response(JSON.stringify({ error: "Failed to generate SEO outlines" }), {
+            console.error("❌ generateSeosocialPost error:", error);
+            return new Response(JSON.stringify({ error: "Failed to generate SEO socialPost" }), {
                 status: 500,
                 headers: { "Content-Type": "application/json" },
             });
         }
-
     })
 }
