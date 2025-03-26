@@ -43,7 +43,7 @@ export default function RightSection ({data}) {
 
             <div className="h-auto mb-6">
                 {activeTab === 'seoBrief' ? (
-                    <div className="bg-white p-4 rounded shadow"><SeoBrief data={data}/></div>
+                    <div className="bg-white p-4 rounded shadow"><SeoBrief data={data} content/></div>
                 ) : activeTab === 'yourWebpage' ? (
                     <div className="bg-white p-4 rounded shadow"><YourWebPageSection data={data}/></div>
                 ) : null}

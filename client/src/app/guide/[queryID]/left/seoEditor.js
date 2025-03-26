@@ -26,6 +26,8 @@ import {
     $getSelection,
     $isRangeSelection,
     FORMAT_TEXT_COMMAND,
+    $getRoot,
+    $getTextContent
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { RiPenNibLine, RiAlignLeft, RiAlignRight, RiAlignJustify, RiAlignCenter } from "react-icons/ri";
@@ -39,6 +41,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { LuPencil } from "react-icons/lu";
+import { useUser } from '../../../../context/UserContext';
+import { useParams } from "next/navigation";
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -89,6 +93,8 @@ export default function LexicalSeoEditor({data}) {
     const [ sourceMode, setSourceMode ] = useState(false);
     const [ htmlContent, setHtmlContent ] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const { user } = useUser();
+    const { queryID } = useParams();
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
@@ -109,7 +115,7 @@ export default function LexicalSeoEditor({data}) {
                     setSourceMode={setSourceMode}
                     setHtmlContent={setHtmlContent}
                 />
-                <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} />
+                <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} queryID = {queryID} email = {user.email} />
                 <SeoTranslateDropdown />
                 <EditorArea />
             </div>
@@ -271,9 +277,10 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 }
 
 // SEO-TXL Toolbar
-function SeoTxlToolbar({ data, setIsLoading }) {
+function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
 
     const [editor] = useLexicalComposerContext();
+
 
     const handleSEO_TXLQuestions = async () => {
         const query = data.query;
@@ -319,7 +326,7 @@ function SeoTxlToolbar({ data, setIsLoading }) {
             const response = await fetch("/api/generate_seo_outline", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query, keywords }),
+                body: JSON.stringify({ query, keywords, queryID : queryID, email : email }),
             });
 
             const result = await response.json();
@@ -555,7 +562,7 @@ function SeoTranslateDropdown() {
 }
 
 // Rich Text Editor Area
-function EditorArea() {
+function EditorArea({handleChange}) {
     return (
         <>
             <RichTextPlugin
@@ -568,11 +575,7 @@ function EditorArea() {
             <HistoryPlugin />
             <LinkPlugin />
             <ListPlugin />
-            <OnChangePlugin onChange={(editorState) => {
-                editorState.read(() => {
-                    // read state here if needed
-                });
-            }} />
+            <OnChangePlugin />
         </>
     );
 }

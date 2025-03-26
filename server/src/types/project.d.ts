@@ -5,6 +5,12 @@ export interface Project {
     domainName: string;
     seoGuides: string[] | [];
 }
+export interface ProjectSeoGuide {
+    seoGuides : Array<{
+        queryID : string;
+        seoEditor : string[];
+    }>
+}
 
 type KeywordCounts = Record<string, number>;
 type KeywordDistributions = KeywordCounts[];
