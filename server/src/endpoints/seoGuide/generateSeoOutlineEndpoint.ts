@@ -68,9 +68,7 @@ export const generateSeoOutlineEndpoint : Endpoint = {
                             guide.queryID === queryID
                                 ? {
                                     ...guide,
-                                    seoEditor: Array.isArray(guide.seoEditor)
-                                        ? [...guide.seoEditor, outlines]  // Safely spread if it's an array
-                                        : [outlines],  // Otherwise, initialize as an array
+                                    seoEditor: outlines.join(' '), // Join outlines into a single string
                                 }
                                 : guide
                         ),

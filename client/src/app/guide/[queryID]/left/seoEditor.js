@@ -291,7 +291,7 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
             const response = await fetch("/api/generate_seo_questions", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query, keywords }),
+                body: JSON.stringify({ query, keywords, queryID : queryID, email : email }),
             });
 
             const result = await response.json();
@@ -364,7 +364,7 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
             const response = await fetch("/api/generate_seo_auto", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ currentText }),
+                body: JSON.stringify({ currentText, queryID : queryID, email : email }),
             });
 
             const result = await response.json();
@@ -375,8 +375,6 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
             }
 
             const autoText = result.autoText;
-
-            console.log(autoText)
 
             editor.update(() => {
                 const textLines = Array.isArray(autoText)
@@ -408,7 +406,7 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
             const response = await fetch("/api/generate_seo_rephrase", {  // Use the correct endpoint
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ currentText }), // Send the current text to be rephrased
+                body: JSON.stringify({ currentText, queryID : queryID, email : email }), // Send the current text to be rephrased
             });
 
             const result = await response.json();
