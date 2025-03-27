@@ -68,12 +68,12 @@ export default function Compare({ data }) {
                                 </td>
                                 <td className="px-3 py-4 text-center ">
                                     <div className="bg-[#279AAC] text-white w-16 py-1 rounded-lg">
-                                        0
+                                        {Number.isNaN(parseInt(row.soseo, 10)) ? "-" : Math.round(parseFloat(row.soseo))}
                                     </div>
                                 </td>
                                 <td className="px-3 py-4 text-center">
                                     <div className="bg-[#708090] text-white w-16 py-1 rounded-lg">
-                                        0
+                                        {Number.isNaN(parseInt(row.dseo, 10)) ? "-" : Math.round(parseFloat(row.dseo))}
                                     </div>
                                 </td>
                                 <td className="px-3 py-4 text-center">N/A</td>

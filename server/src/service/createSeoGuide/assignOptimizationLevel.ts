@@ -5,7 +5,7 @@ const calculateContextualRelevance = (keywordFrequency: number, globalFrequency:
     const scaledGlobalFrequency = globalFrequency * 1000;
     // Calculate the differential frequency score
     const diff = scaledKeywordFrequency / scaledGlobalFrequency;  // Higher means keyword is more significant for SEO
-    return Math.min(100, Math.max(0, diff * 100));  // Cap between 0 and 100 for simplicity
+    return Math.min(100, Math.max(0, diff * 30));  // Cap between 0 and 100 for simplicity
 };
 
 type KeywordOptimization = {
@@ -28,21 +28,21 @@ export const calculateDynamicOptimizationRanges = (
 ): KeywordOptimization[] => {
     const keywordOptimizations: KeywordOptimization[] = [];
 
-    const calculateRanges = (frequencies: number[], globalFrequencies: number[]) => {
+    const calculateRanges = (frequencies: number[]) => {
         frequencies.sort((a, b) => a - b);
 
-        const maxFrequency = frequencies[frequencies.length - 1];
-        const minFrequency = frequencies[0];
+        // const maxFrequency = frequencies[frequencies.length - 1];
+        // const minFrequency = frequencies[0];
 
         const subOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.3)] * 1000 || 0;
         const standardOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.5)] * 1000  || 0;
-        const strongOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.75)] * 1000  || 0;
-        const overOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.9)] * 1000  || 0;;
+        const strongOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.75)] * 1000 || 0;
+        const overOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.9)] * 1000 || 0;;
 
         // Calculate differential relevance scores
-        const diffScores = frequencies.map((frequency, index) => 
-            calculateContextualRelevance(frequency, globalFrequencies[index])
-        );
+        // const diffScores = frequencies.map((frequency, index) => 
+        //     calculateContextualRelevance(frequency, globalFrequencies[index])
+        // );
 
         return {
             subOptimized: subOptimizedThreshold,
@@ -72,12 +72,12 @@ export const calculateDynamicOptimizationRanges = (
 
             const frequency = keywordCount / doc.length;
 
-            urlOptimizations[url] = frequency * 1000;
+            urlOptimizations[url] = frequency * 1000 ;
             keywordFrequencies.push(frequency);
             globalFrequencies.push(globalKeywordFrequencies[keyword] || 0); // Use global frequency for comparison
         });
 
-        const optimizationRanges = calculateRanges(keywordFrequencies, globalFrequencies);
+        const optimizationRanges = calculateRanges(keywordFrequencies);
 
         keywordOptimizations.push({
             keyword,

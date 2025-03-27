@@ -147,7 +147,6 @@ export default function Analysis({data}) {
         // Update graphLineData with the new data
         setGraphLineData(updatedGraphLineData);
     };
-    
 
     return(
         <div className="px-6">
