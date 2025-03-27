@@ -14,11 +14,25 @@ export const getSeoEditorDataEndpoint: Endpoint = {
         const { payload } = req;
         const { queryID, email } = req.query;
 
+        // CORS headers
+        const corsHeaders = {
+            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true"
+        };
+
         // Validate query parameters
         if (!queryID || typeof queryID !== "string" || !email || typeof email !== "string") {
             return new Response(
                 JSON.stringify({ error: "Missing or invalid queryID/email" }),
-                { status: 400, headers: { "Content-Type": "application/json" } }
+                {
+                    status: 400,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
+                    },
+                }
             );
         }
 
@@ -33,7 +47,13 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             if (!users.docs.length) {
                 return new Response(
                     JSON.stringify({ error: `User not found for email: ${email}` }),
-                    { status: 404, headers: { "Content-Type": "application/json" } }
+                    {
+                        status: 400,
+                        headers: {
+                            "Content-Type": "application/json",
+                            ...corsHeaders
+                        },
+                    }
                 );
             }
 
@@ -48,7 +68,13 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             if (!project) {
                 return new Response(
                     JSON.stringify({ error: `Project not found for queryID: ${queryID}` }),
-                    { status: 404, headers: { "Content-Type": "application/json" } }
+                    {
+                        status: 400,
+                        headers: {
+                            "Content-Type": "application/json",
+                            ...corsHeaders
+                        },
+                    }
                 );
             }
 
@@ -59,20 +85,38 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             if (!seoEditorData) {
                 return new Response(
                     JSON.stringify({ error: `seoEditor data not found for queryID: ${queryID}` }),
-                    { status: 404, headers: { "Content-Type": "application/json" } }
+                    {
+                        status: 400,
+                        headers: {
+                            "Content-Type": "application/json",
+                            ...corsHeaders
+                        },
+                    }
                 );
             }
 
             // Return the seoEditor data as a response
             return new Response(
                 JSON.stringify({ success: true, seoEditorData }),
-                { status: 200, headers: { "Content-Type": "application/json" } }
+                {
+                    status: 200,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
+                    },
+                }
             );
         } catch (error) {
             console.error("❌ getSeoEditorData error:", error);
             return new Response(
                 JSON.stringify({ error: "Failed to retrieve seoEditor data" }),
-                { status: 500, headers: { "Content-Type": "application/json" } }
+                {
+                    status: 500,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
+                    },
+                }
             );
         }
 

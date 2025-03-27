@@ -9,6 +9,9 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
 import { useState, useEffect } from "react";
 import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
+import { useParams } from "next/navigation";
+import { useUser } from '../../../../context/UserContext';
+import axios from 'axios';
 
 const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     return (
@@ -24,11 +27,8 @@ export default function Analysis({data}) {
     const [loading, setLoading] = useState(false);
     const [graphData, setGraphData] = useState([]);
     const [graphLineData, setGraphLineData] = useState([]);
-
-    // // Use Lexical Composer Context to access editor
-    // const [editor] = useLexicalComposerContext();
-
-
+    const { user } = useUser();
+    const { queryID } = useParams();
 
     useEffect(() => {
         // Only set graph data when data is available
@@ -63,16 +63,15 @@ export default function Analysis({data}) {
         setLoading(true);
 
         try {
-            // Get the article content from the Lexical editor
-            const editorState = editor.getEditorState();
-            const content = editorState.read(() => {
-                // Get the raw text content from the Lexical editor
-                const rootElement = editor.getRootElement();
-                return rootElement.innerText.trim(); // Extract text content from the editor
-            });
+            const responseSeoEditorContent = await axios.get(
+                `http://localhost:7777/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+            );
+
+            const content = responseSeoEditorContent.data.seoEditorData;
 
             // Get the list of keywords (you should pass the actual list of keywords)
-            const keywords = data?.keywords || [];
+            // Correct way to extract keywords from data
+            const keywords = data?.optimizationLevels?.map(item => item.keyword) || [];
 
             // Send request to backend API with the content and keywords
             const response = await fetch("/api/calculate_optimization_levels", {
@@ -87,6 +86,8 @@ export default function Analysis({data}) {
             });
 
             const result = await response.json();
+
+            console.log(result)
             if (result.success) {
                 const keywordOptimizations = result.keywordOptimizations;
 
