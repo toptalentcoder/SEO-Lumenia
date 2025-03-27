@@ -14,7 +14,7 @@ export async function createSocialPost({
     tone: string;
     platform: string;
     content: string | string[];
-}): Promise<string> {
+}): Promise<{socialMedia : string; tone : string; text : string; language : string}> {
     // Define tone and platform mappings for context
     const tone_map: { [key: string]: string } = {
         'friendly': "Write in a casual, warm, and welcoming style, like you're talking to a friend.",
@@ -82,5 +82,10 @@ export async function createSocialPost({
     // Get the content of the generated response
     const text = response.choices[0].message.content;
 
-    return text ?? "";
+    return {
+        socialMedia: platform || "",
+        tone: tone || "",
+        language: "en",
+        text: text || ""
+    };
 }

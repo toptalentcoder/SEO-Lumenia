@@ -17,6 +17,7 @@ import { createSocialPostEndpoint } from "./seoGuide/createSocialPostEndpoint";
 import { calculateOptimizationLevels } from "./seoGuide/calculateOptimizationLevels";
 import { verifySeoBriefEndpoint } from "./seoGuide/verifySeoBriefEndpoint";
 import { getSeoEditorDataEndpoint } from "./seoGuide/getSeoEditor";
+import { getSocialPostEndpoint } from "./seoGuide/getSocialPost";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -37,5 +38,6 @@ export const customEndpoints = [
     createSocialPostEndpoint,
     calculateOptimizationLevels,
     verifySeoBriefEndpoint,
-    getSeoEditorDataEndpoint
+    getSeoEditorDataEndpoint,
+    getSocialPostEndpoint
 ]
