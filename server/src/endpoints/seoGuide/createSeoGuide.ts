@@ -51,7 +51,7 @@ export const createSeoGuide: Endpoint = {
                 },
             });
 
-            const organicResults: OrganicResult[] = response.data['organic_results'] || [];
+            const organicResults: OrganicResult[] =await response.data['organic_results'] || [];
             const paaQuestions = response.data['related_questions'] || [];
             const PAAs = paaQuestions.map((item : {question : string}) => item.question);
             const links = organicResults.map((item: OrganicResult) => item.link);
@@ -65,6 +65,13 @@ export const createSeoGuide: Endpoint = {
             // Process the results concurrently
             const [pageContents, seoBrief] = await Promise.all([pageContentsPromise, seoBriefPromise]);
 
+            // Calculate the word count for each URL's content
+            const wordCounts = pageContents.map(content => {
+                const words = content ? content.split(/\s+/).filter(Boolean) : []; // Split by spaces and filter out empty strings, handle null case
+                return words.length; // Return word count
+            });
+
+
             const processedTokens = pageContents
                 .filter((text): text is string => !!text)
                 .map(processText);
@@ -72,37 +79,26 @@ export const createSeoGuide: Endpoint = {
             const keywords = extractWords(processedTokens);
             const semanticKeywords = await getSemanticKeywords(keywords, query);
 
-            // const keywordFrequencies = processedTokens.map((tokens) => {
-            //     const frequencyMap = new Map<string, number>();
-            //     const keywordSet = new Set(semanticKeywords);
-
-            //     for (const token of tokens) {
-            //         if (keywordSet.has(token)) {
-            //             frequencyMap.set(token, (frequencyMap.get(token) || 0) + 1);
-            //         }
-            //     }
-
-            //     const result: Record<string, number> = {};
-            //     for (const keyword of semanticKeywords) {
-            //         result[keyword] = frequencyMap.get(keyword) || 0;
-            //     }
-
-            //     return result;
-            // });
-
-                  // Calculate dynamic optimization ranges for each keyword across all URLs
+            // Calculate dynamic optimization ranges for each keyword across all URLs
             const optimizationLevels = calculateDynamicOptimizationRanges(
                 links,
                 processedTokens,
                 semanticKeywords
             );
 
+            // Add word count to each searchResult
+            const searchResults = organicResults.map((result, index) => ({
+                title: result.title,
+                link: result.link,
+                wordCount: wordCounts[index], // Add the word count for each URL's content
+            }));
+
             const seoGuides = {
                 query,
                 queryID,
                 queryEngine,
                 optimizationLevels,
-                searchResults: organicResults.map(({ title, link }) => ({ title, link })),
+                searchResults,
                 // seoScores,
                 language,
                 seoBrief,
