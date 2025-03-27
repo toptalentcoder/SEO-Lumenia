@@ -6,6 +6,7 @@ import { FaRobot } from "react-icons/fa6";
 import axios from "axios";
 import { useUser } from '../../../../context/UserContext';
 import { useParams } from "next/navigation";
+import { FiPlus, FiMinus } from "react-icons/fi";
 
 // Tone options
 const toneOptions = [
@@ -58,6 +59,7 @@ export default function SocialPost({data}) {
     const [seoEditorData, setSeoEditorData] = useState("");
     const { user } = useUser();
     const { queryID } = useParams();
+    const [openIndex, setOpenIndex] = useState(0); // Default first item open
 
     useEffect(() => {
         const fetchSeoEditorData = async () => {
@@ -67,7 +69,6 @@ export default function SocialPost({data}) {
                     `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
                 );
 
-                console.log(response.data.seoEditorData)
                 if (response.data.success) {
                     setSeoEditorData(response.data.seoEditorData);
                 }
@@ -105,6 +106,10 @@ export default function SocialPost({data}) {
         setIsSocialMediaOpen(false);
     };
 
+    const toggleFAQ = (index) => {
+        setOpenIndex(openIndex === index ? -1 : index);
+    };
+
     // Filter options based on search
     const filteredToneOptions = toneOptions.filter((option) =>
         option.label.toLowerCase().includes(searchToneTerm.toLowerCase())
@@ -125,8 +130,9 @@ export default function SocialPost({data}) {
             tone: selectedToneOption.label.toLowerCase(),
             platform: selectedSocialMedia.label.toLowerCase(),
             content: seoEditorData, // Replace with actual content
+            queryID : queryID,
+            email : user.email
         };
-        console.log(requestData);
 
         try {
             const response = await axios.post("/api/create_social_post", requestData);
@@ -141,6 +147,28 @@ export default function SocialPost({data}) {
             setIsLoading(false); // Hide loading spinner
         }
     };
+
+    useEffect(() => {
+        const fetchSocialPostData = async () => {
+            try {
+                setIsLoading(true);
+                const response = await axios.get(
+                    `/api/get_social_post?queryID=${queryID}&email=${user.email}`
+                );
+
+                console.log(response.data.socialPostData)
+                if (response.data.success) {
+                    setGeneratedPost(response.data.socialPostData);
+                }
+            } catch (error) {
+                console.error("Error fetching SEO editor data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchSocialPostData();
+    }, [queryID, user.email]);
 
     return (
         <div className="px-14">
@@ -299,17 +327,34 @@ export default function SocialPost({data}) {
                         <span><FaRobot/></span>
                     </div>
                 </div>
-            {/* Display the generated post */}
-            {generatedPost && (
-                <div className="mt-10">
-                    <div className="bg-gray-100 p-4 rounded-xl">
-                        <h3 className="font-semibold">Generated Post</h3>
-                        <p>{generatedPost}</p>
+            </div>
+
+            <div id="faq" className="py-16 text-center w-full">
+                    <h2 className="text-4xl font-bold text-gray-600 dark:text-white mb-8">FAQ</h2>
+                    <div className="max-w-5xl mx-auto space-y-4">
+                        {Array.isArray(generatedPost) &&
+                            generatedPost.map((faq, index) => (
+                                <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 transition-all">
+                                    <button
+                                        className="w-full flex items-center text-left text-lg font-semibold text-gray-600 dark:text-white"
+                                        onClick={() => toggleFAQ(index)}
+                                    >
+                                        {openIndex === index ? (
+                                            <FiMinus className="text-gray-500 dark:text-gray-300" />
+                                        ) : (
+                                            <FiPlus className="text-gray-500 dark:text-gray-300" />
+                                        )}
+                                        <div className="ml-3">{faq.socialMedia}</div>
+                                    </button>
+                                    <div className="ml-7">
+                                        {openIndex === index && faq.text && (
+                                            <p className="mt-2 text-gray-600 dark:text-gray-400 text-left">{faq.text}</p>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
                     </div>
                 </div>
-            )}
-
-            </div>
         </div>
-    )
+    );
 }

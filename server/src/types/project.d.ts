@@ -12,5 +12,12 @@ export interface ProjectSeoGuide {
     }>
 }
 
+export interface ProjectSocialPost {
+    seoGuides : Array<{
+        queryID : string;
+        socialPost : string[];
+    }>
+}
+
 type KeywordCounts = Record<string, number>;
 type KeywordDistributions = KeywordCounts[];

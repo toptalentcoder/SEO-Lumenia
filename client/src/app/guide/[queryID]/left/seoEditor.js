@@ -107,7 +107,6 @@ export default function LexicalSeoEditor({data}) {
                     `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
                 );
 
-                console.log(response.data.seoEditorData)
                 if (response.data.success) {
                     setSeoEditorData(response.data.seoEditorData);
                 }
