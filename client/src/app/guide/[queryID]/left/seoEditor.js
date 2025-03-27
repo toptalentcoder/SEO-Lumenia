@@ -25,6 +25,7 @@ import { $createHeadingNode } from '@lexical/rich-text';
 import {
     $getSelection,
     $isRangeSelection,
+    EditorState ,
     FORMAT_TEXT_COMMAND,
     $getRoot,
     $getTextContent
@@ -43,6 +44,7 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { LuPencil } from "react-icons/lu";
 import { useUser } from '../../../../context/UserContext';
 import { useParams } from "next/navigation";
+import axios from 'axios';
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -90,11 +92,34 @@ const editorConfig = {
 
 export default function LexicalSeoEditor({data}) {
 
+    const [seoEditorData, setSeoEditorData] = useState("");
     const [ sourceMode, setSourceMode ] = useState(false);
     const [ htmlContent, setHtmlContent ] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useUser();
     const { queryID } = useParams();
+
+    useEffect(() => {
+        const fetchSeoEditorData = async () => {
+            try {
+                setIsLoading(true);
+                const response = await axios.get(
+                    `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+                );
+
+                console.log(response.data.seoEditorData)
+                if (response.data.success) {
+                    setSeoEditorData(response.data.seoEditorData);
+                }
+            } catch (error) {
+                console.error("Error fetching SEO editor data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchSeoEditorData();
+    }, [queryID, user.email]);
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
@@ -117,7 +142,7 @@ export default function LexicalSeoEditor({data}) {
                 />
                 <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} queryID = {queryID} email = {user.email} />
                 <SeoTranslateDropdown />
-                <EditorArea />
+                <EditorArea seoEditorData={seoEditorData} />
             </div>
 
             {sourceMode && (
@@ -125,8 +150,8 @@ export default function LexicalSeoEditor({data}) {
                     <div className="bg-white p-4 rounded shadow-lg w-full max-w-3xl">
                         <h2 className="text-lg font-semibold mb-2">🧾 Source Code</h2>
                         <textarea
-                            value={htmlContent}
-                            onChange={(e) => setHtmlContent(e.target.value)}
+                            value={seoEditorData}
+                            onChange={(e) => setSeoEditorData(e.target.value)}
                             className="w-full h-[300px] border border-gray-300 rounded p-2 font-mono text-sm"
                         />
                         <div className="flex justify-end mt-3">
@@ -560,7 +585,21 @@ function SeoTranslateDropdown() {
 }
 
 // Rich Text Editor Area
-function EditorArea({handleChange}) {
+function EditorArea({seoEditorData }) {
+
+    const [editor] = useLexicalComposerContext();
+
+    // Only update the editor with the content when it's ready and the data is available
+    useEffect(() => {
+        if (seoEditorData && editor) {
+            editor.update(() => {
+                const textNode = $createTextNode(seoEditorData);
+                const paragraphNode = $createParagraphNode().append(textNode);
+                $insertNodes([paragraphNode]);
+            });
+        }
+    }, [seoEditorData, editor]);
+
     return (
         <>
             <RichTextPlugin
