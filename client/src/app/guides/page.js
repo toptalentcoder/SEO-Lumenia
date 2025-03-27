@@ -96,7 +96,7 @@ export default function SEOQueryDashboard() {
 
             console.log(result.json())
 
-            if(result){
+            if(result.success){
                 router.push('/aaa');
             }
         } catch (error) {

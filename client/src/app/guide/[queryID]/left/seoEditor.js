@@ -10,7 +10,7 @@ import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { ListItemNode, ListNode } from '@lexical/list';
-import { $createListNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
+import { INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
 import { FORMAT_ELEMENT_COMMAND } from 'lexical';
 import { HeadingNode } from '@lexical/rich-text';
 import { LinkNode, AutoLinkNode } from '@lexical/link';
@@ -25,10 +25,6 @@ import { $createHeadingNode } from '@lexical/rich-text';
 import {
     $getSelection,
     $isRangeSelection,
-    EditorState ,
-    FORMAT_TEXT_COMMAND,
-    $getRoot,
-    $getTextContent
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { RiPenNibLine, RiAlignLeft, RiAlignRight, RiAlignJustify, RiAlignCenter } from "react-icons/ri";
@@ -111,7 +107,7 @@ export default function LexicalSeoEditor({data}) {
                     setSeoEditorData(response.data.seoEditorData);
                 }
             } catch (error) {
-                console.error("Error fetching SEO editor data:", error);
+                setSeoEditorData("")
             } finally {
                 setIsLoading(false);
             }

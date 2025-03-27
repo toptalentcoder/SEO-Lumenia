@@ -75,9 +75,11 @@ export default function SocialPost({data}) {
 
                 if (response.data.success) {
                     setSeoEditorData(response.data.seoEditorData);
-                }
+                }else(
+                    setSeoEditorData("")
+                )
             } catch (error) {
-                console.error("Error fetching SEO editor data:", error);
+                setSeoEditorData("")
             } finally {
                 setIsLoading(false);
             }
@@ -163,9 +165,11 @@ export default function SocialPost({data}) {
                 console.log(response.data.socialPostData)
                 if (response.data.success) {
                     setGeneratedPost(response.data.socialPostData);
+                }else{
+                    setGeneratedPost([]);
                 }
             } catch (error) {
-                console.error("Error fetching SEO editor data:", error);
+                setGeneratedPost([]);
             } finally {
                 setIsLoading(false);
             }
