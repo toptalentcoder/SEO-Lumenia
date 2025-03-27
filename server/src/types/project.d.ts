@@ -8,7 +8,7 @@ export interface Project {
 export interface ProjectSeoGuide {
     seoGuides : Array<{
         queryID : string;
-        seoEditor : string[];
+        seoEditor : string;
     }>
 }
 
