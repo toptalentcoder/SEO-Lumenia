@@ -118,38 +118,36 @@ export default function Analysis({data}) {
             console.error("Optimization data not available.");
             return; // Exit if data is not available
         }
-
-        const selectedUrl = data.optimizationLevels.find(
-            (level) => Object.keys(level.urlOptimizations).includes(url)
-        );
-
-        if (!selectedUrl) {
-            console.error("Keyword not found in optimization levels.");
-            return; // Exit if the keyword is not found
-        }
-
-        const urlOptimizationData = selectedUrl.urlOptimizations;
-
-        // Check if urlOptimizations is not empty
-        if (!urlOptimizationData || !urlOptimizationData[url]) {
+    
+        // Find the optimization data for the specific URL
+        const selectedKeywordData = data.optimizationLevels.map((level) => {
+            const optimizationValue = level.urlOptimizations[url];
+    
+            return {
+                name: level.keyword,  // Keyword name
+                value: optimizationValue || 0, // Use the value for this specific URL or 0 if not available
+            };
+        });
+    
+        if (!selectedKeywordData || selectedKeywordData.length === 0) {
             console.error("No optimization data available for the URL.");
-            return; // Exit if no URL optimization data is available
+            return; // Exit if no optimization data is available for the URL
         }
-
+    
+        console.log(selectedKeywordData); // Log to check the result
+    
         // Map data to the format expected by graphLineData
         const updatedGraphLineData = [
             {
-                name: "URL Optimizations", // Customize the name here
-                data: data.optimizationLevels.map((optimization) => ({
-                    name: optimization.keyword,  // Use the keyword as name
-                    value: urlOptimizationData[Object.keys(urlOptimizationData).find((key) => key === url)] || 0, // Get the optimization value for that specific URL
-                })),
+                name: "URL Optimizations",
+                data: selectedKeywordData, // Use the data from the map
             },
         ];
-
+    
         // Update graphLineData with the new data
         setGraphLineData(updatedGraphLineData);
     };
+    
 
     return(
         <div className="px-6">
@@ -382,7 +380,7 @@ export default function Analysis({data}) {
                             </div>
                         </MenuItem>
                     </MenuItems>
-                    </Menu>
+                </Menu>
             </div>
         </div>
     )

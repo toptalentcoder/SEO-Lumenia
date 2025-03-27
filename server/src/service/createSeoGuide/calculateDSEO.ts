@@ -1,42 +1,28 @@
+import { calculateDynamicOptimizationRanges } from "./assignOptimizationLevel";
+import { calculateGlobalKeywordFrequencies } from "./calculateGlobalKeywordFrequencies";
 
-type KeywordCounts = Record<string, number>;
-type KeywordDistributions = KeywordCounts[];
+// Calculate DSEO score (risk of over-optimization) based on keyword frequency
+export const calculateDSEO = (keywords: string[], urls: string[], processedDocs: string[][], overOptimizationFactor: number = 1.5): number[] => {
+    const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedDocs);
+    const keywordOptimizations = calculateDynamicOptimizationRanges(urls, processedDocs, keywords, globalKeywordFrequencies);
 
+    return keywordOptimizations.map(keywordOptimization => {
+        const urlOptimizations = Object.values(keywordOptimization.urlOptimizations);
 
-/**
- * Calculates the SEO Danger Score (DSEO) for a given URL.
- * This score evaluates the risk of over-optimization based on keyword frequencies.
- */
-export function calculateDSEOForURL(keywordDistributions: KeywordDistributions): number {
-    let totalFrequency = 0;
-    let totalSquaredFrequency = 0;
-    let keywordCount = 0;
+        // Calculate the total frequency of the keyword across all URLs
+        const totalFrequency = urlOptimizations.reduce((acc, freq) => acc + freq, 0);
 
-    // Calculate frequency statistics for DSEO
-    for (let i = 0; i < keywordDistributions.length; i++) {
-        const keywordCounts = keywordDistributions[i];
-        for (const keyword in keywordCounts) {
-            const frequency = keywordCounts[keyword];
-            totalFrequency += frequency;
-            totalSquaredFrequency += frequency * frequency;
-            keywordCount++;
-        }
-    }
+        // Calculate the average frequency of the keyword across all URLs
+        const avgFrequency = totalFrequency / urlOptimizations.length;
 
-    const meanFrequency = totalFrequency / keywordCount;
-    const stdDeviation = Math.sqrt((totalSquaredFrequency / keywordCount) - (meanFrequency * meanFrequency));
+        // Calculate DSEO score: flag as over-optimized if a document's frequency exceeds the average * factor
+        const dseoScores = urlOptimizations.map(frequency => {
+            // Flag over-optimization if the frequency is greater than the average frequency * factor
+            return frequency > avgFrequency * overOptimizationFactor ? 100 : 0;
+        });
 
-    let dseoScore = 0;
-    for (let i = 0; i < keywordDistributions.length; i++) {
-        const keywordCounts = keywordDistributions[i];
-        for (const keyword in keywordCounts) {
-            const frequency = keywordCounts[keyword];
-            if (frequency > meanFrequency + 2 * stdDeviation) {
-                // Over-optimization detected
-                dseoScore += 10;
-            }
-        }
-    }
+        // Return maximum DSEO score across all documents (URLs)
+        return Math.max(...dseoScores); // If any document is over-optimized, it gets 100
+    });
+};
 
-    return Math.min(dseoScore, 200);  // Cap at 200% for the upper bound
-}
