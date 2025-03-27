@@ -211,6 +211,17 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
         });
     };
 
+    const handleInsertUrl = () => {
+        const url = prompt("Enter the URL:");
+
+        if (url) {
+            // Call Lexical's API to insert the URL as a link
+            editor.update(() => {
+                editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
+            });
+        }
+    };
+
     return (
         <div className="flex flex-wrap items-center gap-0 border-b pb-2 border-gray-300">
             <select
@@ -232,11 +243,7 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
             <button onClick={() => format('subscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 ml-4">X₂</button>
             <button onClick={() => format('superscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100">X²</button>
             <button
-                onClick={() => {
-                    const url = prompt("Enter URL");
-                    if (!url) return;
-                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
-                }}
+                onClick={handleInsertUrl}
                 className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4"
             >
                 <GoLink />
