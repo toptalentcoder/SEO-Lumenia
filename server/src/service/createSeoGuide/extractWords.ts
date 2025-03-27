@@ -22,7 +22,10 @@ export const extractWords = (documents: Document[], topN: number = 100): string[
         const uniqueWords = new Set(documents[i]); // Avoid duplicate words per doc
         for (const word of uniqueWords) {
             const score = tfidf.tfidf(word, i);
-            wordScores.set(word, (wordScores.get(word) || 0) + score);
+
+            const normalizedScore = score / documents[i].length; // Normalize the score by total document length
+
+            wordScores.set(word, (wordScores.get(word) || 0) + normalizedScore);
         }
     }
 

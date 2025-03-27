@@ -49,6 +49,11 @@ export const fetchPageContent = async (url: string): Promise<string | null> => {
             .get()
             .join(' ');
 
+        if (!textContent || textContent.trim() === "") {
+            console.log(`Empty or missing content from: ${url}`);
+            return null; // Skip processing for empty content
+        }
+
         return textContent.trim();
     } catch (_error) {
         console.log(`false : ${url}`);

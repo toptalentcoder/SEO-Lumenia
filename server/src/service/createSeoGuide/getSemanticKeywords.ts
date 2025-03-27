@@ -6,14 +6,21 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
  * Compute cosine similarity between two vectors
  */
 export function cosineSimilarity(vecA: number[], vecB: number[]): number {
-    let dot = 0, magA = 0, magB = 0;
-    for (let i = 0; i < vecA.length; i++) {
-        dot += vecA[i] * vecB[i];
-        magA += vecA[i] * vecA[i];
-        magB += vecB[i] * vecB[i];
+    const normalize = (vec: number[]) => {
+        const magnitude = Math.sqrt(vec.reduce((sum, val) => sum + val * val, 0));
+        return vec.map(val => val / magnitude);
+    };
+
+    const normalizedA = normalize(vecA);
+    const normalizedB = normalize(vecB);
+
+    let dot = 0;
+    for (let i = 0; i < normalizedA.length; i++) {
+        dot += normalizedA[i] * normalizedB[i];
     }
-    return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+    return dot;
 }
+
 
 const MAX_TOKENS = 8192;  // Maximum tokens for the OpenAI embeddings model
 

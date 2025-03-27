@@ -1,55 +1,31 @@
-import { cosineSimilarity, getEmbedding } from "./getSemanticKeywords";
+import { calculateDynamicOptimizationRanges } from "./assignOptimizationLevel";
+import { calculateGlobalKeywordFrequencies } from "./calculateGlobalKeywordFrequencies";
 
-// Calculate Semantic Importance based on embeddings
-const calculateSemanticImportance = async (keywords: string[], query: string): Promise<Record<string, number>> => {
-    const queryEmbedding = await getEmbedding(query);
-    const importance: Record<string, number> = {};
+export const calculateSOSEO = (keywords: string[], urls: string[], processedDocs: string[][]): number[] => {
+    const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedDocs);
+    const keywordOptimizations = calculateDynamicOptimizationRanges(urls, processedDocs, keywords, globalKeywordFrequencies);
 
-    for (const keyword of keywords) {
-        const keywordEmbedding = await getEmbedding(keyword);
-        const similarity = cosineSimilarity(queryEmbedding, keywordEmbedding);
-        importance[keyword] = similarity * 100; // Scale the similarity to a percentage
-    }
+    return keywordOptimizations.map(keywordOptimization => {
+        const urlOptimizations = Object.values(keywordOptimization.urlOptimizations);
 
-    return importance;
-};
+        // Calculate the total frequency of the keyword across all URLs
+        const totalFrequency = urlOptimizations.reduce((acc, freq) => acc + freq, 0);
 
-// Dynamic SOSEO and DSEO Calculation
-export const calculateSOSEOandDSEO = async (
-    keywordFrequencies: Record<string, number> | null | undefined, // Allow null/undefined
-    keywords: string[], 
-    content: string, 
-    competitorData: { soseo: number, dseo: number }[]
-): Promise<{ soseo: number, dseo: number }> => {
-    // Default to an empty object if keywordFrequencies is null or undefined
-    if (!keywordFrequencies) {
-        keywordFrequencies = {};
-    }
+        // Calculate the average frequency of the keyword across all URLs
+        const avgFrequency = totalFrequency / urlOptimizations.length;
 
-    const keywordImportance = await calculateSemanticImportance(keywords, content);
+        // Find the maximum frequency for normalization
+        const maxFrequency = Math.max(...urlOptimizations);
 
-    let totalKeywordFrequency = 0;
-    let totalImportance = 0;
+        // Get the optimization level for the keyword (from calculateDynamicOptimizationRanges)
+        const optimizationLevel = keywordOptimization.optimizationRanges.strongOptimized;
 
-    // Sum keyword frequencies and their dynamic importance
-    for (const [keyword, frequency] of Object.entries(keywordFrequencies)) {
-        const importance = keywordImportance[keyword] || 1;
-        totalKeywordFrequency += frequency;
-        totalImportance += importance;
-    }
+        // Normalize the frequency relative to the highest frequency observed and adjust by optimization level
+        const normalizedFrequency = (avgFrequency / maxFrequency) * optimizationLevel;
 
-    // SOSEO: Optimization score based on keyword frequencies and importance
-    const soseo = (totalKeywordFrequency / totalImportance) * 100;
+        // Use a scale from 0 to 300 to normalize the score
+        const score = Math.min(Math.max(normalizedFrequency, 0), 300);
 
-    // DSEO: Risk of over-optimization, based on frequency and repetition
-    const dseo = totalKeywordFrequency > 10 ? 100 : 50; // Adjust based on your own rules
-
-    // Compare to competitors' data
-    const averageCompetitorSOSEO = competitorData.reduce((acc, curr) => acc + curr.soseo, 0) / competitorData.length;
-    const averageCompetitorDSEO = competitorData.reduce((acc, curr) => acc + curr.dseo, 0) / competitorData.length;
-
-    return {
-        soseo: Math.max(soseo, averageCompetitorSOSEO),
-        dseo: Math.min(dseo, averageCompetitorDSEO),
-    };
+        return score;
+    });
 };

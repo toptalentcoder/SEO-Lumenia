@@ -7,8 +7,10 @@ import { processText } from "@/service/createSeoGuide/processText";
 import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 import axios from "axios";
-import { calculateSOSEOandDSEO } from "@/service/createSeoGuide/calculateSOSEO";
 import { calculateDynamicOptimizationRanges } from "@/service/createSeoGuide/assignOptimizationLevel";
+import { calculateSOSEO } from "@/service/createSeoGuide/calculateSOSEO";
+import { calculateDSEO } from "@/service/createSeoGuide/calculateDSEO";
+import { calculateGlobalKeywordFrequencies } from "@/service/createSeoGuide/calculateGlobalKeywordFrequencies";
 
 interface OrganicResult {
     title: string;
@@ -63,27 +65,44 @@ export const createSeoGuide: Endpoint = {
             const pageContentsPromise = Promise.all(links.map(fetchPageContent));
 
             // Process the results concurrently
-            const [pageContents, seoBrief] = await Promise.all([pageContentsPromise, seoBriefPromise]);
+            const [pageContentsResult, seoBriefResult] = await Promise.allSettled([pageContentsPromise, seoBriefPromise]);
+
+            // Handle resolved values or log errors
+            const resolvedPageContents = pageContentsResult.status === 'fulfilled' ? pageContentsResult.value : [];
+            const resolvedSeoBrief = seoBriefResult.status === 'fulfilled' ? seoBriefResult.value : null;
+
+            // Log errors if any promise is rejected
+            if (pageContentsResult.status === 'rejected') {
+                console.error("Failed to fetch page contents:", pageContentsResult.reason);
+            }
+            if (seoBriefResult.status === 'rejected') {
+                console.error("Failed to fetch SEO brief:", seoBriefResult.reason);
+            }
 
             // Calculate the word count for each URL's content
-            const wordCounts = pageContents.map(content => {
+            const wordCounts = resolvedPageContents.map(content => {
                 const words = content ? content.split(/\s+/).filter(Boolean) : []; // Split by spaces and filter out empty strings, handle null case
                 return words.length; // Return word count
             });
 
-
-            const processedTokens = pageContents
+            const processedTokens = resolvedPageContents
                 .filter((text): text is string => !!text)
                 .map(processText);
 
             const keywords = extractWords(processedTokens);
             const semanticKeywords = await getSemanticKeywords(keywords, query);
 
+            // Calculate SOSEO and DSEO for each URL
+            const soseoScores = calculateSOSEO(keywords, links, processedTokens);
+            const dseoScores = calculateDSEO(keywords, links, processedTokens);
+
+            const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedTokens);
             // Calculate dynamic optimization ranges for each keyword across all URLs
             const optimizationLevels = calculateDynamicOptimizationRanges(
                 links,
                 processedTokens,
-                semanticKeywords
+                semanticKeywords,
+                globalKeywordFrequencies
             );
 
             // Add word count to each searchResult
@@ -91,6 +110,8 @@ export const createSeoGuide: Endpoint = {
                 title: result.title,
                 link: result.link,
                 wordCount: wordCounts[index], // Add the word count for each URL's content
+                soseo: soseoScores[index],  // Add SOSEO score
+                dseo: dseoScores[index],    // Add DSEO score
             }));
 
             const seoGuides = {
@@ -101,7 +122,7 @@ export const createSeoGuide: Endpoint = {
                 searchResults,
                 // seoScores,
                 language,
-                seoBrief,
+                seoBrief : resolvedSeoBrief,
                 PAAs,
                 createdAt : Date.now()
             };

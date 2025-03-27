@@ -1,101 +1,93 @@
+// Helper function to calculate context relevance (differential corpus)
+const calculateContextualRelevance = (keywordFrequency: number, globalFrequency: number) => {
+
+    const scaledKeywordFrequency = keywordFrequency * 1000;
+    const scaledGlobalFrequency = globalFrequency * 1000;
+    // Calculate the differential frequency score
+    const diff = scaledKeywordFrequency / scaledGlobalFrequency;  // Higher means keyword is more significant for SEO
+    return Math.min(100, Math.max(0, diff * 100));  // Cap between 0 and 100 for simplicity
+};
+
 type KeywordOptimization = {
     keyword: string;
-    urlOptimizations: Record<string, number>; // Frequency value per URL
+    urlOptimizations: Record<string, number>;
     optimizationRanges: {
         name: string;
-        subOptimized: string;
-        standardOptimized: string;
-        strongOptimized: string;
-        overOptimized: string;
+        subOptimized: number;
+        standardOptimized: number;
+        strongOptimized: number;
+        overOptimized: number;
     };
 };
 
 export const calculateDynamicOptimizationRanges = (
     urls: string[],
     processedDocs: string[][],
-    keywords: string[]
+    keywords: string[],
+    globalKeywordFrequencies: Record<string, number> // Precomputed global frequencies for each keyword
 ): KeywordOptimization[] => {
     const keywordOptimizations: KeywordOptimization[] = [];
 
-    // Function to calculate dynamic ranges for each keyword, with smooth adjustments
-    const calculateRanges = (frequencies: number[]) => {
-        // Sort frequencies in ascending order
+    const calculateRanges = (frequencies: number[], globalFrequencies: number[]) => {
         frequencies.sort((a, b) => a - b);
 
-        // Normalize the frequencies to make the distribution smoother
         const maxFrequency = frequencies[frequencies.length - 1];
+        const minFrequency = frequencies[0];
 
-        // Apply a logarithmic scaling to smooth extreme values (if necessary)
-        const normalizedFrequencies = frequencies.map(frequency => {
-            // Prevent division by zero and use a small epsilon for low values
-            const epsilon = 0.0001;
-            const scaledFrequency = Math.log(frequency + epsilon) / Math.log(maxFrequency + epsilon);
-            return scaledFrequency;
-        });
+        const subOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.3)] * 1000 || 0;
+        const standardOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.5)] * 1000  || 0;
+        const strongOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.75)] * 1000  || 0;
+        const overOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.9)] * 1000  || 0;;
 
-        const minNorm = Math.min(...normalizedFrequencies);
-        const maxNorm = Math.max(...normalizedFrequencies);
-        const rangeNorm = maxNorm - minNorm;
-
-        // Calculate the thresholds with smooth adjustments
-        const suboptimizedThreshold = minNorm + rangeNorm * 0.6;  // 40% of the normalized range
-        const standardoptimizedThreshold = minNorm + rangeNorm * 0.77;  // 70% of the normalized range
-        const strongoptimizedThreshold = minNorm + rangeNorm * 0.9;  // 85% of the normalized range
-        const overoptimizedThreshold = minNorm + rangeNorm * 1;  // 100% of the normalized range
+        // Calculate differential relevance scores
+        const diffScores = frequencies.map((frequency, index) => 
+            calculateContextualRelevance(frequency, globalFrequencies[index])
+        );
 
         return {
-            subOptimized: `${((suboptimizedThreshold) * 10000).toFixed(0)}`,
-            standardOptimized: `${((standardoptimizedThreshold - suboptimizedThreshold + 0.5) * 10000).toFixed(0)}`,
-            strongOptimized: `${((strongoptimizedThreshold - standardoptimizedThreshold + 0.5) * 10000).toFixed(0)}`,
-            overOptimized: `${((overoptimizedThreshold - strongoptimizedThreshold + 0.5) * 10000).toFixed(0)}`,
+            subOptimized: subOptimizedThreshold,
+            standardOptimized: standardOptimizedThreshold,
+            strongOptimized: strongOptimizedThreshold,
+            overOptimized: overOptimizedThreshold
         };
     };
 
-    // Check for matching lengths
-    // if (urls.length !== processedDocs.length) {
-    //     console.error("Mismatch between the number of URLs and processed documents.");
-    //     return [];
-    // }
-
-    // Calculate frequency for each keyword across all URLs
-    for (const keyword of keywords) {
+    keywords.forEach(keyword => {
         const urlOptimizations: Record<string, number> = {};
         const keywordFrequencies: number[] = [];
+        const globalFrequencies: number[] = []; // Use global frequencies for each URL
 
-        // For each URL, count keyword occurrences
-        for (const [index, url] of urls.entries()) {
+        urls.forEach((url, index) => {
             const doc = processedDocs[index];
-
             if (!doc || doc.length === 0) {
-                console.warn(`Document for URL ${url} is either missing or empty!`);
-                urlOptimizations[url] = 0; // Set frequency to 0 if document is invalid
+                urlOptimizations[url] = 0;
                 keywordFrequencies.push(0);
-                continue; // Skip to the next URL if the document is missing or empty
+                globalFrequencies.push(globalKeywordFrequencies[keyword] || 0); // Use global frequency for comparison
+                return;
             }
 
-            // Normalize and match keyword (case insensitive and without punctuation)
             const keywordNormalized = keyword.toLowerCase();
-            const docNormalized = doc.flat().map(word => word.toLowerCase().replace(/[^\w\s]/g, '')); // Strip punctuation
-            const keywordCount = docNormalized.filter((word) => word === keywordNormalized).length;
+            const docNormalized = doc.flat().map(word => word.toLowerCase().replace(/[^\w\s]/g, ''));
+            const keywordCount = docNormalized.filter(word => word === keywordNormalized).length;
 
-            const frequency = keywordCount / doc.length; // Frequency as percentage of the document
-            urlOptimizations[url] = Math.round((frequency + 1) * 10000); // Store frequency per URL, multiplied by 10000
-            keywordFrequencies.push(frequency); // Add frequency for dynamic range calculation
-        }
+            const frequency = keywordCount / doc.length;
 
-        // Calculate dynamic ranges for the keyword based on frequency distribution
-        const optimizationRanges = calculateRanges(keywordFrequencies);
+            urlOptimizations[url] = frequency * 1000;
+            keywordFrequencies.push(frequency);
+            globalFrequencies.push(globalKeywordFrequencies[keyword] || 0); // Use global frequency for comparison
+        });
 
-        // Add to the result array with the "name" field inside optimizationRanges
+        const optimizationRanges = calculateRanges(keywordFrequencies, globalFrequencies);
+
         keywordOptimizations.push({
             keyword,
             urlOptimizations,
             optimizationRanges: {
-                name: keyword,  // Add the "name" field to the optimizationRanges
-                ...optimizationRanges,  // Spread the calculated ranges
+                name: keyword,
+                ...optimizationRanges,
             },
         });
-    }
+    });
 
     return keywordOptimizations;
 };
