@@ -3,10 +3,14 @@
 import { FaRobot, FaSpinner } from "react-icons/fa6";
 import {useState} from 'react'
 import axios from 'axios';
+import { useParams } from "next/navigation";
+import { useUser } from '../../../../context/UserContext';
 
-export default function SeoBrief({data, content}){
+export default function SeoBrief({data}){
 
     const { seoBrief } = data;
+    const { user } = useUser();
+    const { queryID } = useParams();
 
     const {
         primaryIntent,
@@ -26,9 +30,22 @@ export default function SeoBrief({data, content}){
     const handleVerifyClick = async () => {
         try {
             setIsLoading(true);
+
+            // Fetch SEO Editor content
+            const responseSeoEditorContent = await axios.get(
+                `http://localhost:7777/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+            );
+
+            const content = responseSeoEditorContent.data.seoEditorData;
+
             // Send content and SEO brief to the backend for verification
             const response = await axios.post("http://localhost:7777/api/verify_seo_brief", { content, seoBrief });
+
+            console.log(response.data)
             const { verificationResult, improvementText } = response.data;
+
+            console.log(verificationResult);
+            console.log(improvementText);
 
             // Update the verification state
             setVerificationResult(verificationResult);
