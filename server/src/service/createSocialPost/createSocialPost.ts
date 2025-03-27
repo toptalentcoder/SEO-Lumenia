@@ -13,7 +13,7 @@ export async function createSocialPost({
     query: string;
     tone: string;
     platform: string;
-    content: string[];
+    content: string | string[];
 }): Promise<string> {
     // Define tone and platform mappings for context
     const tone_map: { [key: string]: string } = {
@@ -31,13 +31,15 @@ export async function createSocialPost({
         'smart': "Write in a clever, insightful, and articulate manner. The tone should reflect intelligence and thoughtfulness, offering well-reasoned ideas or perspectives in a polished and sophisticated way."
     };
 
-    // Join the content array into a string with bullet points or numbering for clarity
-    const contentString = content.map((item, index) => `${index + 1}. ${item}`).join("\n");
+    // Handle content being either a string or an array
+    const contentString = Array.isArray(content)
+        ? content.map((item, index) => `${index + 1}. ${item}`).join("\n")  // If it's an array, format it as numbered list
+        : content;  // If it's a string, use it directly
 
     // Build the prompt dynamically based on the platform and query content
     let prompt: string;
 
-    if (platform === 'twitter') {
+    if (platform === 'x') {
         prompt = `
             Create a ${tone_map[tone]} Twitter post about the following topic: "${query}".
             The post should be concise (up to 280 characters), include relevant hashtags and emojis.

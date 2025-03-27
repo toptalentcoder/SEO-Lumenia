@@ -1,8 +1,11 @@
 "use client"
 
 import Image from 'next/image';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaRobot } from "react-icons/fa6";
+import axios from "axios";
+import { useUser } from '../../../../context/UserContext';
+import { useParams } from "next/navigation";
 
 // Tone options
 const toneOptions = [
@@ -40,7 +43,7 @@ const languageOptions = [
     { label: "Romanian" },
 ];
 
-export default function SocialPost() {
+export default function SocialPost({data}) {
     const [isToneOpen, setIsToneOpen] = useState(false);
     const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const [isSocialMediaOpen, setIsSocialMediaOpen] = useState(false);
@@ -50,6 +53,33 @@ export default function SocialPost() {
     const [selectedToneOption, setSelectedToneOption] = useState(toneOptions[0]);
     const [selectedLanguageOption, setSelectedLanguageOption] = useState(languageOptions[0]);
     const [selectedSocialMedia, setSelectedSocialMedia] = useState(socialMediaOptions[0]);
+    const [isLoading, setIsLoading] = useState(false); // To handle loading state
+    const [generatedPost, setGeneratedPost] = useState(""); // Store generated post
+    const [seoEditorData, setSeoEditorData] = useState("");
+    const { user } = useUser();
+    const { queryID } = useParams();
+
+    useEffect(() => {
+        const fetchSeoEditorData = async () => {
+            try {
+                setIsLoading(true);
+                const response = await axios.get(
+                    `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+                );
+
+                console.log(response.data.seoEditorData)
+                if (response.data.success) {
+                    setSeoEditorData(response.data.seoEditorData);
+                }
+            } catch (error) {
+                console.error("Error fetching SEO editor data:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchSeoEditorData();
+    }, [queryID, user.email]);
 
     // Handle dropdown toggle
     const handleToneToggleDropdown = () => setIsToneOpen(!isToneOpen);
@@ -85,6 +115,32 @@ export default function SocialPost() {
     const filteredSocialMediaOptions = socialMediaOptions.filter((option) =>
         option.label.toLowerCase().includes(searchSocialTerm.toLowerCase())
     );
+
+    // Handle the generate button click
+    const handleGenerateClick = async () => {
+        setIsLoading(true); // Show loading spinner
+
+        const requestData = {
+            query: data.query, // Replace with actual query, maybe from the state
+            tone: selectedToneOption.label.toLowerCase(),
+            platform: selectedSocialMedia.label.toLowerCase(),
+            content: seoEditorData, // Replace with actual content
+        };
+        console.log(requestData);
+
+        try {
+            const response = await axios.post("/api/create_social_post", requestData);
+            if (response.data.success) {
+                setGeneratedPost(response.data.socialPost); // Store generated post
+            } else {
+                console.error("Error generating social post", response.data.error);
+            }
+        } catch (error) {
+            console.error("Error generating social post:", error);
+        } finally {
+            setIsLoading(false); // Hide loading spinner
+        }
+    };
 
     return (
         <div className="px-14">
@@ -219,9 +275,15 @@ export default function SocialPost() {
                 <div className="relative group">
                     <div className="text-gray-600 text-sm mb-2 invisible">Generate</div>
                     <button
+                        onClick={handleGenerateClick} // Trigger the post request
                         className="bg-[#439B38] rounded-xl px-5 py-2 text-white text-sm"
+                        disabled={isLoading} // Disable the button when loading
                     >
-                        Generate
+                        {isLoading ? (
+                            <div className="w-4 h-4 border-4 border-t-4 border-white rounded-full animate-spin"></div>
+                        ) : (
+                            "Generate"
+                        )}
                     </button>
 
                     {/* Tooltip */}
@@ -237,7 +299,15 @@ export default function SocialPost() {
                         <span><FaRobot/></span>
                     </div>
                 </div>
-
+            {/* Display the generated post */}
+            {generatedPost && (
+                <div className="mt-10">
+                    <div className="bg-gray-100 p-4 rounded-xl">
+                        <h3 className="font-semibold">Generated Post</h3>
+                        <p>{generatedPost}</p>
+                    </div>
+                </div>
+            )}
 
             </div>
         </div>

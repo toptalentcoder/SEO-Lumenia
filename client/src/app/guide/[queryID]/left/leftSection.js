@@ -98,7 +98,7 @@ export default function LeftSection ({data}) {
                     </div>
                 ) : activeTab === 'SocialPost' ? (
                     <div>
-                        <SocialPost />
+                        <SocialPost data={data}/>
                     </div>
                 ) : activeTab === 'Monitoring' ? (
                     <div>
