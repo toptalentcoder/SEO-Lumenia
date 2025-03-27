@@ -7,6 +7,10 @@ import axios from "axios";
 import { useUser } from '../../../../context/UserContext';
 import { useParams } from "next/navigation";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import { FaTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 
 // Tone options
 const toneOptions = [
@@ -59,7 +63,7 @@ export default function SocialPost({data}) {
     const [seoEditorData, setSeoEditorData] = useState("");
     const { user } = useUser();
     const { queryID } = useParams();
-    const [openIndex, setOpenIndex] = useState(0); // Default first item open
+    const [openIndex, setOpenIndex] = useState(); // Default first item open
 
     useEffect(() => {
         const fetchSeoEditorData = async () => {
@@ -182,7 +186,7 @@ export default function SocialPost({data}) {
                 </div>
             </div>
 
-            <div className='mt-10 flex items-center space-x-4'>
+            <div className='mt-10 flex items-center space-x-4  border-b border-gray-300 pb-10'>
 
                 {/* Social Media Dropdown */}
                 <div className="relative inline-block w-52">
@@ -329,23 +333,45 @@ export default function SocialPost({data}) {
                 </div>
             </div>
 
-            <div id="faq" className="py-16 text-center w-full">
-                    <h2 className="text-4xl font-bold text-gray-600 dark:text-white mb-8">FAQ</h2>
-                    <div className="max-w-5xl mx-auto space-y-4">
+            <div id="faq" className=" mt-3 text-center w-full cursor-pointer">
+                    <div className="max-w-5xl mx-auto space-y-4 ">
                         {Array.isArray(generatedPost) &&
                             generatedPost.map((faq, index) => (
-                                <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 transition-all">
-                                    <button
-                                        className="w-full flex items-center text-left text-lg font-semibold text-gray-600 dark:text-white"
-                                        onClick={() => toggleFAQ(index)}
-                                    >
+                                <div key={index} className="bg-white dark:bg-gray-800 px-5 py-3 transition-all border-b border-gray-300 ">
+                                    <div className='flex justify-between'>
+                                        <button
+                                            className="w-full flex items-center text-left text-lg font-semibold text-gray-600 dark:text-white"
+                                            onClick={() => toggleFAQ(index)}
+                                        >
+                                            <div className='ml-3 mr-1'><US className='w-4 h-4'/></div>
+                                            <span>-</span>
+                                            <div>
+                                                {faq.socialMedia === "linkedin" ? <FaLinkedin className='w-4 h-4 ml-1'/> : null}
+                                                {faq.socialMedia === "facebook" ? <FaFacebook className='w-4 h-4 ml-1'/> : null}
+                                                {faq.socialMedia === "x" ? <FaTwitter className='w-4 h-4 ml-1'/> : null}
+                                            </div>
+                                            <div className="ml-1 text-sm">{faq.socialMedia === "x" ? "twitter" : faq.socialMedia}</div>
+                                            <span>-</span>
+                                            <div>
+                                                {toneOptions.map((option) => (
+                                                    <div key={option.label} className="flex items-center">
+                                                        {option.label.toLowerCase() === faq.tone ? (
+                                                            <>
+                                                                <span className="text-[#439B38] text-sm">{option.emoji}</span>
+                                                                <span className='text-sm'>{option.label}</span>  {/* Show the label of the tone */}
+                                                            </>
+                                                        ) : null}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </button>
                                         {openIndex === index ? (
-                                            <FiMinus className="text-gray-500 dark:text-gray-300" />
+                                            <FiMinus className=" dark:text-gray-300 bg-[#413793] text-white rounded-full w-4 h-4 p-0.5" />
                                         ) : (
-                                            <FiPlus className="text-gray-500 dark:text-gray-300" />
+                                            <FiPlus className="text-white dark:text-gray-300 bg-[#413793] rounded-full w-4 h-4 p-0.5"  />
                                         )}
-                                        <div className="ml-3">{faq.socialMedia}</div>
-                                    </button>
+                                    </div>
+
                                     <div className="ml-7">
                                         {openIndex === index && faq.text && (
                                             <p className="mt-2 text-gray-600 dark:text-gray-400 text-left">{faq.text}</p>
