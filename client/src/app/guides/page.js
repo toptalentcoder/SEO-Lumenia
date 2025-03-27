@@ -94,6 +94,8 @@ export default function SEOQueryDashboard() {
 
             const result = await response.json();
 
+            console.log(result.json())
+
             if(result){
                 router.push('/aaa');
             }
