@@ -20,7 +20,7 @@ const formatDate = (isoDate) => {
 };
 
 
-export default function QueryTable({ projectID }) {
+export default function QueryTable({ projectID, pendingQueryID, pendingQueryText }) {
 
     const { user } = useUser();
     const [rows, setRows] = useState([]);
@@ -142,6 +142,38 @@ export default function QueryTable({ projectID }) {
                         </thead>
 
                         <tbody className="divide-y divide-gray-300">
+                            {pendingQueryID && (
+                                <tr className="bg-yellow-50 animate-pulse">
+                                    <td className="text-center"><input type="checkbox" disabled /></td>
+                                    <td className="text-[#4A4291] px-3 py-4 text-md font-medium flex flex-col">
+                                        <div className="flex items-center gap-1">
+                                            <FaGoogle />
+                                            {pendingQueryText}
+                                        </div>
+                                        <div className="flex items-center space-x-2 text-sm text-gray-500">
+                                            <span>#</span>{pendingQueryID}<span>-</span>google
+                                        </div>
+                                    </td>
+                                    <td className="text-center text-gray-400">
+                                        <div className="flex items-center justify-center gap-2">
+                                            <US className="w-4 h-3" />
+                                            EN
+                                        </div>
+                                    </td>
+                                    <td className="text-center text-[#4A4291]">Default</td>
+                                    <td className="text-center text-gray-500">-</td>
+                                    <td className="text-center text-gray-500">-</td>
+                                    <td className="text-center text-gray-400">
+                                        <svg className="animate-spin h-5 w-5 text-[#4A4291]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v8z" />
+                                        </svg>
+                                    </td>
+                                    <td className="text-center"><BsThreeDots /></td>
+                                </tr>
+                            )}
+
                             {rows.map((row) => (
                                 <tr key={row.id} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                     <td className="w-12 px-1 py-4 text-center">

@@ -23,6 +23,7 @@ export default function SEOQueryDashboard() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
+    const [pendingQueryID, setPendingQueryID] = useState(null);
 
     const projectID = searchParams?.get("projectID")
 
@@ -65,7 +66,7 @@ export default function SEOQueryDashboard() {
         if(!search.trim()){
             return;
         }
-        console.log(user)
+
         if (!user?.availableFeatures || parseInt(user.availableFeatures.tokens || "0", 10) < 5) {
             alert("Not enough tokens. Please upgrade your plan!");
             return;
@@ -74,6 +75,7 @@ export default function SEOQueryDashboard() {
         setLoading(true); // 🔄 Disable the button
 
         const queryID = generateQueryId();
+        setPendingQueryID(queryID); // <-- Set pending ID
 
         try {
 
@@ -97,12 +99,13 @@ export default function SEOQueryDashboard() {
             console.log(result.json())
 
             if(result.success){
-                router.push('/aaa');
+                router.refresh(); // Reload data once API is done
             }
         } catch (error) {
             console.error("Failed to create SEO guide:", error);
         } finally {
             setLoading(false); // ✅ Re-enable the button
+            setPendingQueryID(null);
         }
 
     }
@@ -449,7 +452,11 @@ export default function SEOQueryDashboard() {
                     <span>Org.</span>
                 </div>
                 {/* Query Table */}
-                <QueryTable projectID={projectID} />
+                <QueryTable
+                    projectID={projectID}
+                    pendingQueryID={pendingQueryID}
+                    pendingQueryText={search}
+                />
             </div>
 
             {/* Create Project Modal */}
