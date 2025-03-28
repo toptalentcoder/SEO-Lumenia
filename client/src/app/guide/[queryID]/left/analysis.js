@@ -12,6 +12,7 @@ import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
 import axios from 'axios';
+import { FaSpinner } from "react-icons/fa6";
 
 const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     return (
@@ -29,6 +30,7 @@ export default function Analysis({data}) {
     const [graphLineData, setGraphLineData] = useState([]);
     const { user } = useUser();
     const { queryID } = useParams();
+    const [seoEditorData, setSeoEditorData] = useState("");
 
     useEffect(() => {
         // Only set graph data when data is available
@@ -60,14 +62,15 @@ export default function Analysis({data}) {
 
     // Handle the analysis trigger
     const handleAnalyse = async () => {
-        setLoading(true);
 
         try {
             const responseSeoEditorContent = await axios.get(
-                `http://localhost:7777/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+                `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
             );
 
             const content = responseSeoEditorContent.data.seoEditorData;
+
+            setLoading(true);
 
             // Get the list of keywords (you should pass the actual list of keywords)
             // Correct way to extract keywords from data
@@ -118,24 +121,22 @@ export default function Analysis({data}) {
             console.error("Optimization data not available.");
             return; // Exit if data is not available
         }
-    
+
         // Find the optimization data for the specific URL
         const selectedKeywordData = data.optimizationLevels.map((level) => {
             const optimizationValue = level.urlOptimizations[url];
-    
+
             return {
                 name: level.keyword,  // Keyword name
                 value: optimizationValue || 0, // Use the value for this specific URL or 0 if not available
             };
         });
-    
+
         if (!selectedKeywordData || selectedKeywordData.length === 0) {
             console.error("No optimization data available for the URL.");
             return; // Exit if no optimization data is available for the URL
         }
-    
-        console.log(selectedKeywordData); // Log to check the result
-    
+
         // Map data to the format expected by graphLineData
         const updatedGraphLineData = [
             {
@@ -143,7 +144,7 @@ export default function Analysis({data}) {
                 data: selectedKeywordData, // Use the data from the map
             },
         ];
-    
+
         // Update graphLineData with the new data
         setGraphLineData(updatedGraphLineData);
     };
@@ -346,7 +347,14 @@ export default function Analysis({data}) {
                     className="bg-[#413793] text-white pl-6 py-1 rounded-l-xl cursor-pointer flex items-center space-x-3 text-sm"
                     onClick={handleAnalyse}
                 >
+                    {loading ? (
+                    <FaSpinner className="animate-spin text-white" />
+                ) : (
+                    <>
                     <span>Analyse</span>
+                    </>
+                )}
+
                 </button>
                 <Menu>
                     <MenuButton className="text-gray-200 cursor-pointer rounded-r-xl bg-[#413793] pl-3 hover:bg-[#2f2c45]">

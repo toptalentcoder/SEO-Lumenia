@@ -129,6 +129,18 @@ export default function SocialPost({data}) {
 
     // Handle the generate button click
     const handleGenerateClick = async () => {
+        if(seoEditorData === ""){
+            alert("Please fill the SEO Editor before generating a post.");
+            return;
+        }
+        if(selectedSocialMedia === ""){
+            alert("Please select a social media platform.");
+            return;
+        }
+        if(selectedToneOption === ""){
+            alert("Please select a tone.");
+            return;
+        }
         setIsLoading(true); // Show loading spinner
 
         const requestData = {
