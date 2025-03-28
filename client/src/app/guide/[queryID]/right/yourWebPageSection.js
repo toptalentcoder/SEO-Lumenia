@@ -1,6 +1,54 @@
+"use client"
+
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { FaRobot } from "react-icons/fa6";
+import {useUser} from "../../../../context/UserContext";
 
 export default function YourWebPageSection({ data }) {
+
+    const [loading, setLoading] = useState(false);
+    const { queryID } = useParams();
+    const { user } = useUser();
+
+    const query = data.query;
+    const keywords = data?.optimizationLevels?.map(item => item.keyword);
+
+    const handleCreateTitleTagAndMetaDescription = async () => {
+        if (!user?.availableFeatures || parseInt(user.availableFeatures.ai_tokens || "0", 10) < 600) {
+            alert("Not enough AI tokens. Please upgrade your plan!");
+            return;
+        }
+
+        setLoading(true); // 🔄 Disable the button
+
+        try {
+
+            const response = await fetch('/api/generate_webpage_title_meta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: query,
+                    keywords: keywords,
+                    queryID: queryID,
+                    email : user.email,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                console.log(result)
+            }
+        } catch (error) {
+            console.error("Failed to create SEO guide:", error);
+        } finally {
+            setLoading(false); // ✅ Re-enable the button
+        }
+    }
+
     return (
         <div className="px-4">
             <div className="relative">
@@ -67,7 +115,11 @@ export default function YourWebPageSection({ data }) {
             <div className='flex justify-end mt-5 items-center space-x-4'>
                 <div className="relative group cursor-pointer">
                     <button
-                        className="bg-[#439B38] rounded-xl px-5 py-2 text-white text-sm"
+                        disabled={loading}
+                        className={`bg-[#439B38] rounded-xl px-5 py-2 text-white text-sm ${
+                            loading ? 'bg-gray-400 cursor-not-allowed' : '[#439B38] hover:bg-green-700 cursor-pointer'
+                        }`}
+                        onClick={handleCreateTitleTagAndMetaDescription}
                     >
                         Generate
                     </button>
