@@ -19,5 +19,12 @@ export interface ProjectSocialPost {
     }>
 }
 
+export interface ProjectWebpageTitleAndMeta {
+    seoGuides : Array<{
+        queryID : string;
+        webpageTitleMeta : string[];
+    }>
+}
+
 type KeywordCounts = Record<string, number>;
 type KeywordDistributions = KeywordCounts[];

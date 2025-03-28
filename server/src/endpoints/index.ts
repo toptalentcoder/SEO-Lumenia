@@ -18,6 +18,7 @@ import { calculateOptimizationLevels } from "./seoGuide/calculateOptimizationLev
 import { verifySeoBriefEndpoint } from "./seoGuide/verifySeoBriefEndpoint";
 import { getSeoEditorDataEndpoint } from "./seoGuide/getSeoEditor";
 import { getSocialPostEndpoint } from "./seoGuide/getSocialPost";
+import { generateWebpageTitleMetaEndpoint } from "./seoGuide/generateWebpageTitleMeta";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -39,5 +40,6 @@ export const customEndpoints = [
     calculateOptimizationLevels,
     verifySeoBriefEndpoint,
     getSeoEditorDataEndpoint,
-    getSocialPostEndpoint
+    getSocialPostEndpoint,
+    generateWebpageTitleMetaEndpoint
 ]
