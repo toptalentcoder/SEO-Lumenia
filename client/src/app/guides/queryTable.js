@@ -20,7 +20,7 @@ const formatDate = (isoDate) => {
 };
 
 
-export default function QueryTable({ projectID, pendingQueryID, pendingQueryText }) {
+export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, refreshTrigger }) {
 
     const { user } = useUser();
     const [rows, setRows] = useState([]);
@@ -60,7 +60,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         }
 
         fetchProjects();
-    }, [user]);
+    }, [user?.email, refreshTrigger]);
 
     const handleQueryIDPage = (queryID) => {
         if(queryID){

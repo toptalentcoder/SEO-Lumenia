@@ -24,6 +24,7 @@ export default function SEOQueryDashboard() {
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
     const [pendingQueryID, setPendingQueryID] = useState(null);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     const projectID = searchParams?.get("projectID")
 
@@ -96,10 +97,8 @@ export default function SEOQueryDashboard() {
 
             const result = await response.json();
 
-            console.log(result.json())
-
-            if(result.success){
-                router.refresh(); // Reload data once API is done
+            if (result.success) {
+                setRefreshTrigger(prev => prev + 1); // 👈 trigger refresh manually
             }
         } catch (error) {
             console.error("Failed to create SEO guide:", error);
@@ -456,6 +455,7 @@ export default function SEOQueryDashboard() {
                     projectID={projectID}
                     pendingQueryID={pendingQueryID}
                     pendingQueryText={search}
+                    refreshTrigger={refreshTrigger}
                 />
             </div>
 
