@@ -19,6 +19,7 @@ import { verifySeoBriefEndpoint } from "./seoGuide/verifySeoBriefEndpoint";
 import { getSeoEditorDataEndpoint } from "./seoGuide/getSeoEditor";
 import { getSocialPostEndpoint } from "./seoGuide/getSocialPost";
 import { generateWebpageTitleMetaEndpoint } from "./seoGuide/generateWebpageTitleMeta";
+import { getWebpageTitleMetaEndpoint } from "./seoGuide/getWebpageTitleMeta";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -41,5 +42,6 @@ export const customEndpoints = [
     verifySeoBriefEndpoint,
     getSeoEditorDataEndpoint,
     getSocialPostEndpoint,
-    generateWebpageTitleMetaEndpoint
+    generateWebpageTitleMetaEndpoint,
+    getWebpageTitleMetaEndpoint
 ]

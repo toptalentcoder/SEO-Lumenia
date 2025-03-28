@@ -4,15 +4,53 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { FaRobot } from "react-icons/fa6";
 import {useUser} from "../../../../context/UserContext";
+import axios from 'axios';
 
 export default function YourWebPageSection({ data }) {
 
     const [loading, setLoading] = useState(false);
     const { queryID } = useParams();
     const { user } = useUser();
+    const [webpageTitleMetaData, setWebpageTitleMetaData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const query = data.query;
     const keywords = data?.optimizationLevels?.map(item => item.keyword);
+
+    const [titleTag, setTitleTag] = useState("");
+    const [metaDescription, setMetaDescription] = useState("");
+
+    useEffect(() => {
+        const fetchWebpageTitleMetaData = async () => {
+            try {
+                setIsLoading(true);
+                const response = await axios.get(
+                    `/api/get_webpage_title_meta?queryID=${queryID}&email=${user.email}`
+                );
+
+                if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
+                    setWebpageTitleMetaData(response.data.webpageTitleMeta);
+
+                    const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
+                    const title = firstBlock
+                        .split("\n")
+                        .find((line) => line.startsWith("Title Tag")) || "";
+                    const meta = firstBlock
+                        .split("\n")
+                        .find((line) => line.startsWith("Meta Description")) || "";
+
+                    setTitleTag(title);
+                    setMetaDescription(meta);
+                }
+            } catch (error) {
+                setWebpageTitleMetaData("")
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchWebpageTitleMetaData();
+    }, [queryID, user.email]);
 
     const handleCreateTitleTagAndMetaDescription = async () => {
         if (!user?.availableFeatures || parseInt(user.availableFeatures.ai_tokens || "0", 10) < 600) {
@@ -40,7 +78,7 @@ export default function YourWebPageSection({ data }) {
             const result = await response.json();
 
             if (result.success) {
-                console.log(result)
+                console.log("Successfully webpage title tag and meta description saved...")
             }
         } catch (error) {
             console.error("Failed to create SEO guide:", error);
@@ -73,12 +111,14 @@ export default function YourWebPageSection({ data }) {
 
             <div className="relative mt-5">
                 <input
-                    id="hs-floating-input-email"
+                    id="title-tag"
+                    value={titleTag}
                     className="peer p-4 block w-full border border-gray-300 rounded-lg sm:text-sm placeholder:text-transparent focus:outline-1 focus:outline-[#4A4291] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
                         focus:pt-6 focus:pb-2
                         not-placeholder-shown:pt-6 not-placeholder-shown:pb-2
                         autofill:pt-6 autofill:pb-2"
                     placeholder="Title Tag"
+                    onChange={(e) => setTitleTag(e.target.value)}
                 />
                 <label
                     htmlFor="hs-floating-input-email"
@@ -95,11 +135,13 @@ export default function YourWebPageSection({ data }) {
                 <textarea
                     id="hs-floating-input-meta-description"
                     rows={2}  // Ensures 2 lines of text by default
+                    value={metaDescription}
                     className="peer p-4 block w-full border border-gray-300 rounded-lg sm:text-sm placeholder:text-transparent focus:outline-1 focus:outline-[#4A4291] disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-neutral-600
                         focus:pt-6 focus:pb-2
                         not-placeholder-shown:pt-6 not-placeholder-shown:pb-2
                         autofill:pt-6 autofill:pb-2"
                     placeholder="Meta Description"
+                    onChange={(e) => setMetaDescription(e.target.value)}
                 />
                 <label
                     htmlFor="hs-floating-input-email"
