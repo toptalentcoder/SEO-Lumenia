@@ -7,6 +7,8 @@ import { BsThreeDots } from "react-icons/bs"
 import { useRouter } from "next/navigation";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 import { FaGoogle } from "react-icons/fa";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -69,11 +71,41 @@ export default function QueryTable({ projectID }) {
     return (
         <div className="container mx-auto">
             {projectID ? (
-                <div>{projectID}</div>
+                <div>
+                    <div>
+                        <div className="mt-40 text-2xl font-semibold flex justify-center items-center text-gray-700">
+                            Unleash the Power of SEO with YourText.Guru!
+                        </div>
+                        <div className="mt-10 text-lg font-semibold flex justify-center items-center text-gray-600 mx-auto max-w-4/9 pb-15">
+                            <span className="text-center leading-8 max-w-3xl">
+                                Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
+                            </span>
+                        </div>
+                        <div className="flex justify-end items-center mt-10 mr-15 pb-15 gap-2">
+                            <button className="flex items-center gap-2 bg-white border border-[#279AAC] text-[#279AAC] px-4 py-1 rounded-xl hover:bg-[#279AAC] hover:text-white transition duration-300">
+                                <MdModeEdit/>
+                                <span className="text-sm">Edit project</span>
+                            </button>
+                            <button className="flex items-center gap-2 bg-white border border-[#CF2637] text-[#CF2637] px-4 py-1 rounded-xl hover:bg-[#CF2637] hover:text-white transition duration-300">
+                                <MdDelete />
+                                <span className="text-sm">delete project</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             ) : loading ? (
                 <div>Loading</div>
             ) : rows.length === 0 ? (
-                <div>aaa</div>
+                <div>
+                    <div className="mt-40 text-2xl font-semibold flex justify-center items-center text-gray-700">
+                        Unleash the Power of SEO with YourText.Guru!
+                    </div>
+                    <div className="mt-10 text-lg font-semibold flex justify-center items-center text-gray-600 mx-auto max-w-1/3 pb-30">
+                        <span className="text-center leading-8 max-w-3xl">
+                            Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
+                        </span>
+                    </div>
+                </div>
             ) : (
                 <div className="mx-auto overflow-hidden rounded-lg bg-white">
                     <table className="min-w-full border-collapse table-fixed">
