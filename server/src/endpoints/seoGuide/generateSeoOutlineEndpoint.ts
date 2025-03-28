@@ -60,7 +60,7 @@ export const generateSeoOutlineEndpoint : Endpoint = {
 
             let projectUpdated = false;
             const updatedProjects = existingProjects.map((project) => {
-                if (project.seoGuides.some(guide => guide.queryID === queryID)) {
+                if (Array.isArray(project.seoGuides) ? project.seoGuides.some(guide => guide.queryID === queryID) : null) {
                     projectUpdated = true;
                     return {
                         ...project,

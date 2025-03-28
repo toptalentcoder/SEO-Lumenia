@@ -47,7 +47,7 @@ export const calculateOptimizationLevels: Endpoint = {
             const keywordCount = docNormalized.filter((word) => word === keywordNormalized).length;
 
             // Calculate frequency (scaled by 10000 for better resolution)
-            const frequency = keywordCount / processedTokens.length * 10000;
+            const frequency = keywordCount / processedTokens.length;
 
             // Push the result to keywordOptimizations
             keywordOptimizations.push({
