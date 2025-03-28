@@ -62,7 +62,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             // Find the project with the given queryID
             const projects = user.projects as ProjectSeoGuide[] | undefined;
             const project = projects?.find((project: ProjectSeoGuide) =>
-                project.seoGuides.some(guide => guide.queryID === queryID)
+                Array.isArray(project.seoGuides) && project.seoGuides.some(guide => guide.queryID === queryID)
             );
 
             if (!project) {
