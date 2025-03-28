@@ -31,6 +31,14 @@ export const createSeoGuide: Endpoint = {
             );
         }
 
+        // CORS headers
+        const corsHeaders = {
+            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true"
+        };
+
         const { payload } = req;
         const body = await req.json();
         const { query, projectID, email, queryID, language, queryEngine } = body;
@@ -40,7 +48,10 @@ export const createSeoGuide: Endpoint = {
         if (!query || typeof query !== "string") {
             return new Response(JSON.stringify({ error: "Missing query in request body" }), {
                 status: 400,
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders
+                },
             });
         }
 
@@ -140,7 +151,7 @@ export const createSeoGuide: Endpoint = {
                         status: 400,
                         headers: {
                             "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*",
+                            ...corsHeaders
                         },
                     }
                 );
@@ -161,7 +172,13 @@ export const createSeoGuide: Endpoint = {
                 } else {
                     return new Response(
                         JSON.stringify({ error: "Default project not found" }),
-                        { status: 404, headers: { "Content-Type": "application/json" } }
+                        {
+                            status: 404,
+                            headers: {
+                                "Content-Type": "application/json",
+                                ...corsHeaders
+                            },
+                        }
                     );
                 }
             } else {
@@ -187,7 +204,13 @@ export const createSeoGuide: Endpoint = {
             if (!projectUpdated) {
                 return new Response(
                     JSON.stringify({ error: "Project not found" }),
-                    { status: 404, headers: { "Content-Type": "application/json" } }
+                    {
+                        status: 404,
+                        headers: {
+                            "Content-Type": "application/json",
+                            ...corsHeaders
+                        },
+                    }
                 );
             }
 
@@ -199,13 +222,22 @@ export const createSeoGuide: Endpoint = {
 
             return new Response(
                 JSON.stringify({ success: true, seoGuides }),
-                { status: 200, headers: { "Content-Type": "application/json" } }
+                {
+                    status: 200,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
+                    },
+                }
             );
         } catch (err) {
             console.error("❌ createSeoGuide error:", err);
             return new Response(JSON.stringify({ error: "Failed to create SEO guide" }), {
                 status: 500,
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders
+                },
             });
         }
     }),
