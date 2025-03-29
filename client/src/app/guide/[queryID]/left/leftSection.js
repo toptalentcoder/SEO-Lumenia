@@ -10,6 +10,7 @@ import Analysis from './analysis';
 import Compare from './compare';
 import SocialPost from './socialPost';
 import Explore from './explore';
+import Monitoring from './monitoring';
 
 export default function LeftSection ({data}) {
 
@@ -102,7 +103,7 @@ export default function LeftSection ({data}) {
                     </div>
                 ) : activeTab === 'Monitoring' ? (
                     <div>
-                        Monitoring
+                        <Monitoring data = {data} />
                     </div>
                 )  : activeTab === 'Explore' ? (
                     <div>

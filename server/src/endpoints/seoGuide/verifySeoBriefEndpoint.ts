@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { verifyContentWithSeoBrief } from "@/service/createSeoEditor/verifySeoBrief";
+import { verifyContentWithSeoBrief } from "@/services/createSeoEditor/verifySeoBrief";
 import { Endpoint, PayloadRequest } from "payload";
 
 // Verify content based on SEO brief

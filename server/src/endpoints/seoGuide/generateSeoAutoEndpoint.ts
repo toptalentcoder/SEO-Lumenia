@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { autoExpandSeoText } from "@/service/createSeoEditor/generateSeoAuto";
+import { autoExpandSeoText } from "@/services/createSeoEditor/generateSeoAuto";
 import { ProjectSeoGuide } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 

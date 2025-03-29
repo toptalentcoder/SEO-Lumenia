@@ -33,13 +33,13 @@ export default function SeoBrief({data}){
 
             // Fetch SEO Editor content
             const responseSeoEditorContent = await axios.get(
-                `http://localhost:7777/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+                `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
             );
 
             const content = responseSeoEditorContent.data.seoEditorData;
 
             // Send content and SEO brief to the backend for verification
-            const response = await axios.post("http://localhost:7777/api/verify_seo_brief", { content, seoBrief });
+            const response = await axios.post("/api/verify_seo_brief", { content, seoBrief });
 
             console.log(response.data)
             const { verificationResult, improvementText } = response.data;
