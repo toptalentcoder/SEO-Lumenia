@@ -1,6 +1,6 @@
 
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { rephraseText } from "@/service/createSeoEditor/generateSeoRephrase";
+import { rephraseText } from "@/services/createSeoEditor/generateSeoRephrase";
 import { ProjectSeoGuide } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 

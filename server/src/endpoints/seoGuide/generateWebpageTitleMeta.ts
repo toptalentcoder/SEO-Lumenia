@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateWebpageTitleMeta } from "@/service/createWebPageTitleAndMeta";
+import { generateWebpageTitleMeta } from "@/services/createWebPageTitleAndMeta";
 import { ProjectWebpageTitleAndMeta } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 

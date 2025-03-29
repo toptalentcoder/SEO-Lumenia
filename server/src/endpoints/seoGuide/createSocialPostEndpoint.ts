@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { createSocialPost } from "@/service/createSocialPost/createSocialPost";
+import { createSocialPost } from "@/services/createSocialPost/createSocialPost";
 import { ProjectSocialPost } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 
