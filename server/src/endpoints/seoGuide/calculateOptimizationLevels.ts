@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { processText } from "@/service/createSeoGuide/processText";
+import { processText } from "@/services/createSeoGuide/processText";
 import { Endpoint, PayloadRequest } from "payload";
 
 export const calculateOptimizationLevels: Endpoint = {

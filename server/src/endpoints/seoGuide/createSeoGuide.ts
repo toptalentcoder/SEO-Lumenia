@@ -1,16 +1,16 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoBrief } from "@/service/createSeoEditor/createSeoBrief";
-import { extractWords } from "@/service/createSeoGuide/extractWords";
-import { fetchPageContent } from "@/service/createSeoGuide/fetchPageContent";
-import { getSemanticKeywords } from "@/service/createSeoGuide/getSemanticKeywords";
-import { processText } from "@/service/createSeoGuide/processText";
+import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
+import { extractWords } from "@/services/createSeoGuide/extractWords";
+import { fetchPageContent } from "@/services/createSeoGuide/fetchPageContent";
+import { getSemanticKeywords } from "@/services/createSeoGuide/getSemanticKeywords";
+import { processText } from "@/services/createSeoGuide/processText";
 import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 import axios from "axios";
-import { calculateDynamicOptimizationRanges } from "@/service/createSeoGuide/assignOptimizationLevel";
-import { calculateSOSEO } from "@/service/createSeoGuide/calculateSOSEO";
-import { calculateDSEO } from "@/service/createSeoGuide/calculateDSEO";
-import { calculateGlobalKeywordFrequencies } from "@/service/createSeoGuide/calculateGlobalKeywordFrequencies";
+import { calculateDynamicOptimizationRanges } from "@/services/createSeoGuide/assignOptimizationLevel";
+import { calculateSOSEO } from "@/services/createSeoGuide/calculateSOSEO";
+import { calculateDSEO } from "@/services/createSeoGuide/calculateDSEO";
+import { calculateGlobalKeywordFrequencies } from "@/services/createSeoGuide/calculateGlobalKeywordFrequencies";
 
 interface OrganicResult {
     title: string;

@@ -11,6 +11,7 @@ import { FaTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
+import { useRouter } from "next/navigation";
 
 // Tone options
 const toneOptions = [
@@ -64,6 +65,7 @@ export default function SocialPost({data}) {
     const { user } = useUser();
     const { queryID } = useParams();
     const [openIndex, setOpenIndex] = useState(); // Default first item open
+    const router = useRouter();
 
     useEffect(() => {
         const fetchSeoEditorData = async () => {
@@ -156,6 +158,7 @@ export default function SocialPost({data}) {
             const response = await axios.post("/api/create_social_post", requestData);
             if (response.data.success) {
                 setGeneratedPost(response.data.socialPost); // Store generated post
+                await fetchSocialPostData();
             } else {
                 console.error("Error generating social post", response.data.error);
             }
@@ -166,27 +169,27 @@ export default function SocialPost({data}) {
         }
     };
 
-    useEffect(() => {
-        const fetchSocialPostData = async () => {
-            try {
-                setIsLoading(true);
-                const response = await axios.get(
-                    `/api/get_social_post?queryID=${queryID}&email=${user.email}`
-                );
+    const fetchSocialPostData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(
+                `/api/get_social_post?queryID=${queryID}&email=${user.email}`
+            );
 
-                console.log(response.data.socialPostData)
-                if (response.data.success) {
-                    setGeneratedPost(response.data.socialPostData);
-                }else{
-                    setGeneratedPost([]);
-                }
-            } catch (error) {
+            console.log(response.data.socialPostData)
+            if (response.data.success) {
+                setGeneratedPost(response.data.socialPostData);
+            }else{
                 setGeneratedPost([]);
-            } finally {
-                setIsLoading(false);
             }
-        };
+        } catch (error) {
+            setGeneratedPost([]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchSocialPostData();
     }, [queryID, user.email]);
 
