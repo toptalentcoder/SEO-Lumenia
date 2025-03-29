@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { FaMagnifyingGlassChart, FaCodeCompare  } from "react-icons/fa6";
 import { BsSend } from "react-icons/bs";
 import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { IoDocument } from "react-icons/io5";
