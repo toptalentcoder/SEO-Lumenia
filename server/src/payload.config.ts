@@ -15,6 +15,7 @@ import { customEndpoints } from './endpoints'
 import { paypalProductID } from './globals/paypalProductID'
 import { BillingPlan } from './collections/paypalPlan'
 import { createPlansAndGetID } from './services/paypal/plan/CreatePlan'
+import { startDailyRankTracking } from './services/cronjob/monitoring';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -50,6 +51,7 @@ export default buildConfig({
 
     conn.set('socketTimeoutMS', 30000)
     console.log('Paypal plan check');
-    createPlansAndGetID(payload)
+    createPlansAndGetID(payload);
+    startDailyRankTracking();
   }
 })
