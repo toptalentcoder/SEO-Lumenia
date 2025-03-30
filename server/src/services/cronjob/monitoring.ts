@@ -74,7 +74,7 @@ export function startDailyRankTracking(payload : Payload) {
                                 });
 
                                 const serpLinks = (res.data.organic_results as OrganicResult[] | undefined)?.map((r) => r.link) || [];
-                                const cronjob = guide.cronjob || {};
+                                const cronjob: { [link: string]: CronEntry[] } = JSON.parse(JSON.stringify(guide.cronjob || {}));
 
                                 for (const result of guide.searchResults) {
                                     const link = result.link;
