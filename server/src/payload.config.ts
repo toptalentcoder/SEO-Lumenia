@@ -52,6 +52,7 @@ export default buildConfig({
     conn.set('socketTimeoutMS', 30000)
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
-    startDailyRankTracking();
+    startDailyRankTracking(payload);
+    console.log('Daily rank tracking finsihed');
   }
 })
