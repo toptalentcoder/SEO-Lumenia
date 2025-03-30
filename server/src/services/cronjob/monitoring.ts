@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import payload from 'payload';
+import payload, { Payload } from 'payload';
 import axios from 'axios';
 
 // --------------- TYPES ------------------
@@ -44,7 +44,7 @@ interface OrganicResult {
 
 // --------------- DAILY TRACKING FUNCTION ------------------
 
-export function startDailyRankTracking() {
+export function startDailyRankTracking(payload : Payload) {
     // Runs every day at 2:00 AM
     cron.schedule('*/5 * * * *', async () => {
         console.log("🔁 Running daily SERP rank tracking...");
