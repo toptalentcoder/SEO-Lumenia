@@ -1,8 +1,8 @@
 import cron from 'node-cron';
-import payload, { Payload } from 'payload';
+import { Payload } from 'payload';
 import axios from 'axios';
 
-// --------------- TYPES ------------------
+// --------- TYPES ---------
 
 interface CronEntry {
     date: string;
@@ -40,27 +40,38 @@ interface User {
 
 interface OrganicResult {
     link: string;
+    title?: string;
 }
 
-// --------------- DAILY TRACKING FUNCTION ------------------
+// --------- CRONJOB ---------
 
-export function startDailyRankTracking(payload : Payload) {
-    // Runs every day at 2:00 AM
+export function startDailyRankTracking(payload: Payload) {
+    // 🔁 Every 5 minutes for testing (use '0 2 * * *' for daily at 2am)
     cron.schedule('*/5 * * * *', async () => {
         console.log("🔁 Running daily SERP rank tracking...");
 
         const SERP_API_KEY = process.env.SERP_API_KEY;
         const today = new Date().toISOString().split("T")[0];
 
-        const users = await payload.find({ collection: 'users', limit: 9999 });
+        // For the test mode
+        // const now = new Date();
+        // const today = `${now.toISOString().split("T")[0]}-${now.getHours()}-${now.getMinutes()}`;
 
-        for (const userDoc of users.docs) {
-            const user = userDoc as unknown as User;
 
-            const updatedProjects = await Promise.all(
-                (user.projects || []).map(async (project): Promise<Project> => {
-                    const updatedSeoGuides = await Promise.all(
-                        (project.seoGuides || []).map(async (guide): Promise<SeoGuide> => {
+        const { docs: shallowUsers } = await payload.find({ collection: 'users', limit: 9999 });
+
+        for (const shallowUser of shallowUsers) {
+            const user = await payload.findByID({
+                collection: 'users',
+                id: shallowUser.id
+            }) as unknown as User;
+
+            if (!user.projects?.length) continue;
+
+            const updatedProjects: Project[] = await Promise.all(
+                user.projects.map(async (project) => {
+                    const updatedSeoGuides: SeoGuide[] = await Promise.all(
+                        (project.seoGuides || []).map(async (guide) => {
                             if (!guide.query || !guide.queryID || !Array.isArray(guide.searchResults)) {
                                 return guide;
                             }
@@ -70,17 +81,18 @@ export function startDailyRankTracking(payload : Payload) {
                                     params: {
                                         q: guide.query,
                                         api_key: SERP_API_KEY,
-                                    },
+                                        num: 20
+                                    }
                                 });
 
-                                const serpLinks = (res.data.organic_results as OrganicResult[] | undefined)?.map((r) => r.link) || [];
+                                const serpResults = res.data.organic_results as OrganicResult[] || [];
+                                const serpLinks = serpResults.map((r) => r.link);
+                                const cronjob: { [link: string]: CronEntry[] } = { ...(guide.cronjob ?? {}) };
 
-                                const cronjob: { [link: string]: CronEntry[] } = guide.cronjob
-                                    ? JSON.parse(JSON.stringify(guide.cronjob))
-                                    : {};
+                                const originalLinks = guide.searchResults.map((r) => r.link);
+                                const linksToTrack = [...new Set([...originalLinks, ...serpLinks])];
 
-                                for (const result of guide.searchResults) {
-                                    const link = result.link;
+                                for (const link of linksToTrack) {
                                     const position = serpLinks.indexOf(link) + 1;
 
                                     if (position > 0) {
@@ -96,16 +108,23 @@ export function startDailyRankTracking(payload : Payload) {
                                     }
                                 }
 
+                                // (Optional) Add new links to searchResults (if they weren’t originally tracked)
+                                const newLinks = serpLinks.filter(link => !originalLinks.includes(link));
+                                for (const newLink of newLinks) {
+                                    guide.searchResults.push({
+                                        title: serpResults.find(r => r.link === newLink)?.title || '',
+                                        link: newLink,
+                                        wordCount: 0 // Could be filled later
+                                    });
+                                }
+
                                 return {
                                     ...guide,
-                                    cronjob
+                                    cronjob: { ...cronjob },
+                                    searchResults: guide.searchResults
                                 };
                             } catch (err) {
-                                if (err instanceof Error) {
-                                    console.error(`❌ SERP fetch error for "${guide.query}" (queryID: ${guide.queryID}):`, err.message);
-                                } else {
-                                    console.error(`❌ SERP fetch error for "${guide.query}" (queryID: ${guide.queryID}):`, err);
-                                }
+                                console.error(`❌ SERP fetch error for "${guide.query}" (queryID: ${guide.queryID}):`, err);
                                 return guide;
                             }
                         })
@@ -118,7 +137,7 @@ export function startDailyRankTracking(payload : Payload) {
                 })
             );
 
-            // Save updated user data
+            // Save updated user
             await payload.update({
                 collection: 'users',
                 id: user.id,
@@ -126,8 +145,10 @@ export function startDailyRankTracking(payload : Payload) {
                     projects: updatedProjects
                 }
             });
+
+            console.log(`✅ Updated user: ${user.email}`);
         }
 
-        console.log("✅ Daily SERP rank tracking complete.");
+        console.log("✅ All users' rank tracking complete.");
     });
 }
