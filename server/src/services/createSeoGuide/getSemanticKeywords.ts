@@ -8,66 +8,69 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 export function cosineSimilarity(vecA: number[], vecB: number[]): number {
     const normalize = (vec: number[]) => {
         const magnitude = Math.sqrt(vec.reduce((sum, val) => sum + val * val, 0));
-        return vec.map(val => val / magnitude);
+        return magnitude === 0 ? vec : vec.map(val => val / magnitude);
     };
 
     const normalizedA = normalize(vecA);
     const normalizedB = normalize(vecB);
 
-    let dot = 0;
-    for (let i = 0; i < normalizedA.length; i++) {
-        dot += normalizedA[i] * normalizedB[i];
-    }
-    return dot;
-}
-
-
-const MAX_TOKENS = 8192;  // Maximum tokens for the OpenAI embeddings model
-
-// Function to split the content into smaller chunks
-const splitTextIntoChunks = (text: string): string[] => {
-    const words = text.split(' ');
-    const chunks = [];
-    let chunk = '';
-
-    for (let i = 0; i < words.length; i++) {
-        if ((chunk + words[i]).length > MAX_TOKENS) {
-            chunks.push(chunk);
-            chunk = words[i];
-        } else {
-            chunk += ' ' + words[i];
-        }
-    }
-    if (chunk) chunks.push(chunk);  // Push the last chunk
-
-    return chunks;
-};
-
-// Usage in getEmbedding
-export async function getEmbedding(text: string): Promise<number[]> {
-    const chunks = splitTextIntoChunks(text);  // Split the content into chunks
-
-    let embeddings: number[] = [];
-
-    // Calculate embeddings for each chunk separately
-    for (const chunk of chunks) {
-        const response = await openai.embeddings.create({
-            model: 'text-embedding-ada-002',
-            input: chunk,
-        });
-
-        embeddings = embeddings.concat(response.data[0]?.embedding || []);
-    }
-
-    return embeddings;  // Return combined embeddings
+    return normalizedA.reduce((sum, a, i) => sum + a * normalizedB[i], 0);
 }
 
 /**
- * Get semantically related keywords using OpenAI embeddings
- * @param keywords Array of keyword strings
- * @param baseQuery A base query string to compare against
- * @param topN How many related keywords to return
- * @param threshold Similarity threshold (0.0–1.0)
+ * Average multiple embedding vectors into one.
+ */
+function averageVectors(vectors: number[][]): number[] {
+    if (vectors.length === 0) return [];
+
+    const length = vectors[0].length;
+    const avg = new Array(length).fill(0);
+
+    for (const vec of vectors) {
+        for (let i = 0; i < length; i++) {
+            avg[i] += vec[i];
+        }
+    }
+
+    return avg.map(v => v / vectors.length);
+}
+
+/**
+ * Split large text into chunks under OpenAI token limit.
+ */
+function splitTextIntoChunks(text: string, maxWords = 750): string[] {
+    const words = text.trim().split(/\s+/);
+    const chunks: string[] = [];
+
+    for (let i = 0; i < words.length; i += maxWords) {
+        chunks.push(words.slice(i, i + maxWords).join(' '));
+    }
+
+    return chunks;
+}
+
+/**
+ * Get an embedding for a single text (split if needed and averaged).
+ */
+export async function getEmbedding(text: string): Promise<number[]> {
+    const chunks = splitTextIntoChunks(text);
+
+    try {
+        const response = await openai.embeddings.create({
+            model: 'text-embedding-ada-002',
+            input: chunks,
+        });
+
+        const vectors = response.data.map(item => item.embedding);
+        return averageVectors(vectors);
+    } catch (err) {
+        console.error("Embedding error:", err);
+        return [];
+    }
+}
+
+/**
+ * Get semantically related keywords using OpenAI embeddings.
  */
 export async function getSemanticKeywords(
     keywords: string[],
@@ -76,24 +79,40 @@ export async function getSemanticKeywords(
     threshold: number = 0.7
 ): Promise<string[]> {
     const baseEmbedding = await getEmbedding(baseQuery);
-    const keywordSimilarityScores: { keyword: string; similarity: number }[] = [];
+    if (baseEmbedding.length === 0) return [];
 
-    // Fetch embeddings in parallel for better performance
-    const embeddingPromises = keywords.map(k => getEmbedding(k));
-    const allEmbeddings = await Promise.allSettled(embeddingPromises);
-
-    for (let i = 0; i < allEmbeddings.length; i++) {
-        const result = allEmbeddings[i];
-        if (result.status === 'fulfilled') {
-        const similarity = cosineSimilarity(baseEmbedding, result.value);
-        if (similarity >= threshold) {
-            keywordSimilarityScores.push({ keyword: keywords[i], similarity });
+    const keywordBatches = keywords.reduce((batches: string[][], keyword) => {
+        const lastBatch = batches[batches.length - 1];
+        if (lastBatch && lastBatch.length < 100) {
+            lastBatch.push(keyword);
+        } else {
+            batches.push([keyword]);
         }
+        return batches;
+    }, []);
+
+    const similarityScores: { keyword: string; similarity: number }[] = [];
+
+    for (const batch of keywordBatches) {
+        try {
+            const response = await openai.embeddings.create({
+                model: 'text-embedding-ada-002',
+                input: batch,
+            });
+
+            response.data.forEach((item, idx) => {
+                const keyword = batch[idx];
+                const similarity = cosineSimilarity(baseEmbedding, item.embedding);
+                if (similarity >= threshold) {
+                    similarityScores.push({ keyword, similarity });
+                }
+            });
+        } catch (err) {
+            console.warn("Batch embedding failed:", err);
         }
     }
 
-    // Return top N most similar keywords
-    return keywordSimilarityScores
+    return similarityScores
         .sort((a, b) => b.similarity - a.similarity)
         .slice(0, topN)
         .map(item => item.keyword);

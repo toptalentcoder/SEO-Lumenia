@@ -1,39 +1,45 @@
-import { TfIdf } from 'natural';
-
 type Document = string[];
 
 /**
- * Extracts top N words across documents using cumulative TF-IDF scoring.
- * @param documents - Tokenized documents (each is an array of words)
+ * Extracts top N keywords using TF * Document Frequency scoring.
+ * @param documents - Array of tokenized documents (each is an array of words)
  * @param topN - Number of top words to return
- * @returns Array of top N keywords
+ * @returns Array of top N keyword strings
  */
 export const extractWords = (documents: Document[], topN: number = 100): string[] => {
-    const tfidf = new TfIdf();
-
-    // Add documents to the TF-IDF model
-    for (let i = 0; i < documents.length; i++) {
-        tfidf.addDocument(documents[i].join(" "));
-    }
-
-    const wordScores = new Map<string, number>();
+    const wordTF = new Map<string, number>();     // Total term frequency across all docs
+    const wordDF = new Map<string, number>();     // Document frequency (in how many docs word appears)
 
     for (let i = 0; i < documents.length; i++) {
-        const uniqueWords = new Set(documents[i]); // Avoid duplicate words per doc
+        const doc = documents[i];
+        const wordCount: Record<string, number> = {};
+        const uniqueWords = new Set<string>();
+
+        for (const word of doc) {
+            wordCount[word] = (wordCount[word] || 0) + 1;
+            uniqueWords.add(word);
+        }
+
         for (const word of uniqueWords) {
-            const score = tfidf.tfidf(word, i);
+            wordDF.set(word, (wordDF.get(word) || 0) + 1);
+        }
 
-            const normalizedScore = score / documents[i].length; // Normalize the score by total document length
-
-            wordScores.set(word, (wordScores.get(word) || 0) + normalizedScore);
+        for (const word in wordCount) {
+            const tf = wordCount[word] / doc.length; // Term Frequency (TF)
+            wordTF.set(word, (wordTF.get(word) || 0) + tf);
         }
     }
 
-    // Convert to array and sort by score descending
-    const sorted = [...wordScores.entries()]
+    const keywordScores: [string, number][] = [];
+
+    for (const [word, tf] of wordTF.entries()) {
+        const df = wordDF.get(word) || 1;
+        const score = tf * df; // Higher if frequent + appears in many docs
+        keywordScores.push([word, score]);
+    }
+
+    return keywordScores
         .sort((a, b) => b[1] - a[1])
         .slice(0, topN)
         .map(([word]) => word);
-
-    return sorted;
 };
