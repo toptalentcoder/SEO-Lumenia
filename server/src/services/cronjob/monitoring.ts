@@ -47,7 +47,7 @@ interface OrganicResult {
 
 export function startDailyRankTracking(payload: Payload) {
     // 🔁 Every 5 minutes for testing (use '0 2 * * *' for daily at 2am)
-    cron.schedule('*/5 * * * *', async () => {
+    cron.schedule('0 0 * * *', async () => {
         console.log("🔁 Running daily SERP rank tracking...");
 
         const SERP_API_KEY = process.env.SERP_API_KEY;
