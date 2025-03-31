@@ -652,6 +652,7 @@ export default function SEOQueryDashboard() {
                     projectID={projectID}
                     pendingQueryID={pendingQueryID}
                     pendingQueryText={search}
+                    selectedQueryEngine={selectedQueryEngine}
                     refreshTrigger={refreshTrigger}
                 />
             </div>
