@@ -66,6 +66,10 @@ export default function SeoBrief({data}){
         );
     };
 
+    const isItemVerified = (section, item) => {
+        return verificationResult?.[section]?.includes(item);
+    };
+
     return(
         <div>
             <div className="font-semibold text-sm">Context and Objective:</div>
@@ -87,7 +91,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {mainTopics.map((topic, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.mainTopics?.includes(topic))}
+                        {renderVerificationIcon(isItemVerified("mainTopics", topic))}
                         <div className="leading-tight">
                             {topic}
                         </div>
@@ -96,48 +100,45 @@ export default function SeoBrief({data}){
             </div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Questions to Consider:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
-                {importantQuestions.map((topic, index) => (
+                {importantQuestions.map((question, index) => (
                     <div key={index} className="flex items-center gap-2">
                         {renderVerificationIcon(verificationResult?.importantQuestions?.includes(question))}
                         <div className="leading-tight">
-                            {topic}
+                        {question}
                         </div>
                     </div>
                 ))}
+
             </div>
             <div className="font-semibold text-sm mt-3">Writing Style and Tone:</div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Recommended Tone:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
-                {writingStyleAndTone.map((topic, index) => (
+                {writingStyleAndTone.map((tone, index) => (
                     <div key={index} className="flex items-center gap-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.writingStyleAndTone?.includes(topic))}
-                        <div className="leading-tight">
-                            {topic}
-                        </div>
+                        {renderVerificationIcon(verificationResult?.writingStyleAndTone?.includes(tone))}
+                        <div>{tone}</div>
                     </div>
                 ))}
+
             </div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Recommended Style:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
-                {recommendedStyle.map((topic, index) => (
+                {recommendedStyle.map((style, index) => (
                     <div key={index} className="flex items-center gap-2">
                         {renderVerificationIcon(verificationResult?.recommendedStyle?.includes(style))}
-                        <div className="leading-tight">
-                            {topic}.
-                        </div>
+                        <div className="leading-tight">{style}</div>
                     </div>
                 ))}
             </div>
             <div className="font-semibold text-sm mt-3">Value Proposition:</div>
             <div className="ml-10 mt-3 text-gray-900 text-sm">
-                {valueProposition.map((topic, index) => (
+                {valueProposition.map((prop, index) => (
                     <div key={index} className="inline-flex items-center gap-2">
                         {renderVerificationIcon(verificationResult?.valueProposition?.includes(prop))}
-                        <div className="leading-tight">
-                            {topic}.
-                        </div>
+                        <div>{prop}</div>
                     </div>
                 ))}
+
             </div>
 
             <button
