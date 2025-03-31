@@ -34,9 +34,9 @@ const calculateDynamicRanges = (smoothedFreqs: number[]): OptimizationRanges => 
     const sorted = [...smoothedFreqs].sort((a, b) => a - b);
 
     const p50 = getPercentile(sorted, 0.3);
-    const p70 = getPercentile(sorted, 0.5);
-    const p85 = getPercentile(sorted, 0.7);
-    const p95 = getPercentile(sorted, 0.85);
+    const p70 = getPercentile(sorted, 0.8);
+    const p85 = getPercentile(sorted, 1);
+    const p95 = getPercentile(sorted, 1.15);
 
     // const minBand = 0.01;
 

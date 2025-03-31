@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from '../../context/UserContext';
 import CreateProjectModal from '../../components/ui/CreateProjectModal'
 import QueryTable from './queryTable'
@@ -11,6 +11,14 @@ import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX,
 import { VscNewFile } from "react-icons/vsc";
 import { FaCoins } from "react-icons/fa6";
 import { GoOrganization } from "react-icons/go";
+
+// Query Media options
+const queryEngineOptions = [
+    { label: "Google"},
+    { label: "SearchGPT" },
+    { label: "Bing" },
+];
+
 
 export default function SEOQueryDashboard() {
 
@@ -25,6 +33,14 @@ export default function SEOQueryDashboard() {
     const [loading, setLoading] = useState(false);
     const [pendingQueryID, setPendingQueryID] = useState(null);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const [isQueryEngineOpen, setIsQueryEngineOpen] = useState(false);
+    const [selectedQueryEngine, setSelectedQueryEngine] = useState(queryEngineOptions[0]);
+    const [searchQueryTerm, setSearchQueryTerm] = useState("");
+    const [projects, setProjects] = useState([]);
+    const [isProjectMenuOpen, setIsProjectMenuOpen] = useState(false);
+    const [selectedProjectItem, setSelectedProjectItem] = useState(null);
+    const [projectTerm, setProjectTerm] = useState("");
+
 
     const projectID = searchParams?.get("projectID")
 
@@ -33,9 +49,26 @@ export default function SEOQueryDashboard() {
         return new String(randomID);
     };
 
+    useEffect(() => {
+        const fetchProjectList = async () => {
+            const response = await fetch(`/api/getProjectList?email=${user?.email}`);
+            const result = await response.json();
+            setProjects(result);
+        };
+
+        fetchProjectList();
+    }, [user])
+
     const handleFocus = () => {
         setIsFocused(true);
     };
+
+    useEffect(() => {
+        if (projects.length > 0 && !selectedProjectItem) {
+            const defaultProject = projects.find(p => p.projectName.toLowerCase() === "default");
+            setSelectedProjectItem(defaultProject || projects[0]);
+        }
+    }, [projects, selectedProjectItem]);
 
     const handleBlur = () => {
         setIsFocused(false);
@@ -108,6 +141,27 @@ export default function SEOQueryDashboard() {
         }
 
     }
+
+    const handleQueryEngineToggleDropdown = () => setIsQueryEngineOpen(!isQueryEngineOpen);
+    const handleQueryEngineSearchChange = (e) => setSearchQueryTerm(e.target.value);
+    const handleQueryEngineSelectOption = (option) => {
+        setSelectedQueryEngine(option);
+        setIsQueryEngineOpen(false);
+    };
+    const filteredqueryEngineOptions = queryEngineOptions.filter((option) =>
+        option.label.toLowerCase().includes(searchQueryTerm.toLowerCase())
+    );
+
+    const handleProjectMenuToggleDropdown = () => setIsProjectMenuOpen(!isProjectMenuOpen);
+    const handleProjectMenuSearchChange = (e) => setProjectTerm(e.target.value);
+    const handleProjectMenuSelectOption = (option) => {
+        setSelectedProjectItem(option);
+        setIsProjectMenuOpen(false);
+    };
+    const filteredProjectMenuOptions = projects?.filter((option) =>
+        option.projectName.toLowerCase().includes(projectTerm.toLowerCase())
+    );
+
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -391,13 +445,82 @@ export default function SEOQueryDashboard() {
 
                 {/* Additional Options when Focused */}
                 {isFocused && (
-                    <div id="additional-info" className="mt-2 text-sm flex justify-end">
-                        <select id="category" className="border p-1 rounded">
-                            <option value="adf">adf</option>
-                        </select>
-                        <select id="group" className="border p-1 rounded">
-                            <option value="No group">No group</option>
-                        </select>
+                    <div id="additional-info" className="mt-2 text-sm flex justify-end items-center space-x-3">
+
+                        {/* Project Menu Dropdown */}
+                        <div className="relative inline-block w-52">
+                            <button
+                                onClick={handleProjectMenuToggleDropdown}
+                                className='w-full px-4 py-2 text-left bg-white rounded-xl'
+                            >
+                                {selectedProjectItem.projectName}
+                            </button>
+
+                            {isProjectMenuOpen && (
+                                <div className="absolute w-full mt-2 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
+                                    <input
+                                        type="text"
+                                        value={projectTerm}
+                                        onChange={handleProjectMenuSearchChange}
+                                        placeholder="Search..."
+                                        className=" w-44 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300"
+                                    />
+                                    <div className="max-h-52 overflow-y-auto">
+                                        {filteredProjectMenuOptions.length === 0 ? (
+                                            <div className="px-4 py-2 text-gray-500">No results</div>
+                                        ) : (
+                                            filteredProjectMenuOptions.map((option) => (
+                                                <div
+                                                    key={option.projectID}
+                                                    onClick={() => handleProjectMenuSelectOption(option)}
+                                                    className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-200 text-black"
+                                                >
+                                                    {option.projectName}
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Search Engine Dropdown */}
+                        <div className="relative inline-block w-52">
+                            <button
+                                onClick={handleQueryEngineToggleDropdown}
+                                className='w-full px-4 py-2 text-left bg-white rounded-xl'
+                            >
+                                {selectedQueryEngine.label}
+                            </button>
+
+                            {isQueryEngineOpen && (
+                                <div className="absolute w-full mt-2 bg-white border border-[#4A4291] rounded-lg shadow-lg max-h-60 overflow-auto">
+                                    <input
+                                        type="text"
+                                        value={searchQueryTerm}
+                                        onChange={handleQueryEngineSearchChange}
+                                        placeholder="Search..."
+                                        className=" w-44 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300"
+                                    />
+                                    <div className="max-h-52 overflow-y-auto">
+                                        {filteredqueryEngineOptions.length === 0 ? (
+                                            <div className="px-4 py-2 text-gray-500">No results</div>
+                                        ) : (
+                                            filteredqueryEngineOptions.map((option) => (
+                                                <div
+                                                    key={option.label}
+                                                    onClick={() => handleQueryEngineSelectOption(option)}
+                                                    className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-200 text-black"
+                                                >
+                                                    {option.label}
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
                         <div className="relative inline-block">
                             <button
                                 disabled={loading}
@@ -445,10 +568,11 @@ export default function SEOQueryDashboard() {
                 onClick={() => handleBlur()}
             >
 
-                <div className="flex items-center px-12 py-4 mb-10 font-semibold gap-2 text-gray-400">
+                <div className="flex items-center px-12 py-4 mb-10 font-semibold gap-2 text-gray-500 text-lg">
                     <GoOrganization/>
                     {user?.username}
                     <span>Org.</span>
+                    <span>&gt;</span>
                 </div>
                 {/* Query Table */}
                 <QueryTable
