@@ -127,6 +127,24 @@ export const createSeoGuide: Endpoint = {
                 dseo: dseoScores[index],    // Add DSEO score
             }));
 
+            // Step 1: Build initial cronjob entries based on current SERP positions
+            const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
+
+            const cronjob: Record<string, { date: string; position: number }[]> = {};
+
+            organicResults.forEach((result, index) => {
+                const position = index + 1; // 1-based position
+                const url = result.link;
+
+                cronjob[url] = [
+                    {
+                        date: today,
+                        position,
+                    },
+                ];
+            });
+
+
             const seoGuides = {
                 query,
                 queryID,
@@ -136,6 +154,7 @@ export const createSeoGuide: Endpoint = {
                 language,
                 seoBrief : resolvedSeoBrief,
                 PAAs,
+                cronjob,
                 createdAt : Date.now()
             };
 
