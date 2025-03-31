@@ -19,7 +19,6 @@ const queryEngineOptions = [
     { label: "Bing" },
 ];
 
-
 export default function SEOQueryDashboard() {
 
     const { user } = useUser();
@@ -72,13 +71,6 @@ export default function SEOQueryDashboard() {
             setSelectedProjectItem(defaultProject || projects[0]);
         }
     }, [projects, selectedProjectItem]);
-
-    // useEffect(() => {
-    //     if (projects.length > 0 && !selectedProjectForTableItem) {
-    //         const defaultProject = projects.find(p => p.projectName.toLowerCase() === "default");
-    //         setSelectedProjectForTableItem(defaultProject || projects[0]);
-    //     }
-    // }, [projects, selectedProjectForTableItem]);
 
     const handleBlur = () => {
         setIsFocused(false);
@@ -177,6 +169,13 @@ export default function SEOQueryDashboard() {
     const handleProjectForTableMenuSelectOption = (option) => {
         setSelectedProjectForTableItem(option);
         setIsProjectMenuForTableOpen(false);
+
+        if (option?.projectID) {
+            router.push(`/guides?projectID=${option.projectID}`);
+        } else {
+            // Redirect to remove projectID from URL (for "All Projects")
+            router.push(`/guides`);
+        }
     };
     const filteredProjectForTableMenuOptions = projects?.filter((option) =>
         option.projectName.toLowerCase().includes(projectForTableTerm.toLowerCase())
