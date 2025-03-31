@@ -6,7 +6,8 @@ import { useUser } from '../../context/UserContext';
 import { BsThreeDots } from "react-icons/bs"
 import { useRouter } from "next/navigation";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaMicrosoft } from "react-icons/fa";
+import { RiOpenaiFill } from "react-icons/ri";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FaSpinner } from "react-icons/fa6";
@@ -131,6 +132,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     <td className="text-center"><input type="checkbox" disabled /></td>
                                     <td className="text-[#4A4291] px-3 py-4 text-md font-medium flex flex-col">
                                         <div className="flex items-center gap-1">
+                                            
                                             <FaGoogle />
                                             {pendingQueryText}
                                         </div>
@@ -172,7 +174,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     >
                                         <div>
                                             <div className="text-[#4A4291] flex items-center gap-1 text-md">
-                                                <FaGoogle/>
+                                                {row.queryEngine === "google" ? <FaGoogle/> : row.queryEngine === "bing" ? <FaMicrosoft className="text-blue-500"/> : <RiOpenaiFill/>}
                                                 {row.query}
                                             </div>
                                             <div className="flex items-center space-x-2 text-sm">
