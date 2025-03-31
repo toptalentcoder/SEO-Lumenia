@@ -10,7 +10,7 @@ import Analysis from './analysis';
 import Compare from './compare';
 import SocialPost from './socialPost';
 import Explore from './explore';
-import Monitoring from './monitoring';
+import Monitoring from './monitoring/monitoring';
 
 export default function LeftSection ({data}) {
 
