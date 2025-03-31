@@ -36,7 +36,13 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
             setLoading(true);
 
             try {
-                const response = await fetch(`http://localhost:7777/api/get-projects?email=${user.email}`);
+                let response;
+
+                if (projectID) {
+                    response = await fetch(`http://localhost:7777/api/get-project-guides?email=${user.email}&projectID=${projectID}`);
+                } else {
+                    response = await fetch(`http://localhost:7777/api/get-projects?email=${user.email}`);
+                }
                 const data = await response.json();
 
                 if(response.ok){
@@ -61,7 +67,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         }
 
         fetchProjects();
-    }, [user?.email, refreshTrigger]);
+    }, [user?.email, projectID, refreshTrigger]);
 
     const handleQueryIDPage = (queryID) => {
         if(queryID){
@@ -71,30 +77,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
 
     return (
         <div className="container mx-auto">
-            {projectID ? (
-                <div>
-                    <div>
-                        <div className="mt-40 text-2xl font-semibold flex justify-center items-center text-gray-700">
-                            Unleash the Power of SEO with YourText.Guru!
-                        </div>
-                        <div className="mt-10 text-lg font-semibold flex justify-center items-center text-gray-600 mx-auto max-w-4/9 pb-15">
-                            <span className="text-center leading-8 max-w-3xl">
-                                Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
-                            </span>
-                        </div>
-                        <div className="flex justify-end items-center mt-10 mr-15 pb-15 gap-2">
-                            <button className="flex items-center gap-2 bg-white border border-[#279AAC] text-[#279AAC] px-4 py-1 rounded-xl hover:bg-[#279AAC] hover:text-white transition duration-300">
-                                <MdModeEdit/>
-                                <span className="text-sm">Edit project</span>
-                            </button>
-                            <button className="flex items-center gap-2 bg-white border border-[#CF2637] text-[#CF2637] px-4 py-1 rounded-xl hover:bg-[#CF2637] hover:text-white transition duration-300">
-                                <MdDelete />
-                                <span className="text-sm">delete project</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            ) : loading ? (
+            {loading ? (
                 <div className="flex justify-center"><FaSpinner className="animate-spin text-white w-30 h-30" /></div>
             ) : rows.length === 0 ? (
                 <div>
