@@ -21,6 +21,8 @@ import { getSocialPostEndpoint } from "./seoGuide/getSocialPost";
 import { generateWebpageTitleMetaEndpoint } from "./seoGuide/generateWebpageTitleMeta";
 import { getWebpageTitleMetaEndpoint } from "./seoGuide/getWebpageTitleMeta";
 import { getCronjobData } from "./getCronjobData";
+import { getMonitoringUrl } from "./seoGuide/monitoring/getMonitoring";
+import { setMonitoringUrl } from "./seoGuide/monitoring/setMonitoring";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -45,5 +47,7 @@ export const customEndpoints = [
     getSocialPostEndpoint,
     generateWebpageTitleMetaEndpoint,
     getWebpageTitleMetaEndpoint,
-    getCronjobData
+    getCronjobData,
+    getMonitoringUrl,
+    setMonitoringUrl
 ]
