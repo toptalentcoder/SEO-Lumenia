@@ -41,6 +41,7 @@ import { LuPencil } from "react-icons/lu";
 import { useUser } from '../../../../context/UserContext';
 import { useParams } from "next/navigation";
 import axios from 'axios';
+import LottieLoader from '../../../../components/ui/LottieLoader';
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -121,15 +122,11 @@ export default function LexicalSeoEditor({data}) {
             <div className="rounded-md border border-gray-300 bg-white p-3 space-y-1">
 
                 {/* Loading banner */}
-                {isLoading && (
-                    <div className="absolute justify-center mx-auto my-auto bg-blue-100 text-blue-700 text-sm py-2 px-4 rounded-t-md flex items-center space-x-2 z-10">
-                        <svg className="animate-spin h-4 w-4 text-blue-500" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                        </svg>
-                        <span>Generating SEO-TXL Questions...</span>
+                {isLoading &&
+                    <div className="fixed inset-0 flex items-center justify-center bg-white/50 z-50">
+                        <LottieLoader />
                     </div>
-                )}
+                }
 
                 <FormatToolbar
                     setSourceMode={setSourceMode}
