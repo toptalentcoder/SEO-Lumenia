@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
+
 import { extractWords } from "@/services/createSeoGuide/extractWords";
 import { fetchPageContent } from "@/services/createSeoGuide/fetchPageContent";
 import { getSemanticKeywords } from "@/services/createSeoGuide/getSemanticKeywords";
@@ -11,6 +11,7 @@ import { calculateDynamicOptimizationRanges } from "@/services/createSeoGuide/as
 import { calculateSOSEO } from "@/services/createSeoGuide/calculateSOSEO";
 import { calculateDSEO } from "@/services/createSeoGuide/calculateDSEO";
 import { calculateGlobalKeywordFrequencies } from "@/services/createSeoGuide/calculateGlobalKeywordFrequencies";
+import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
 
 interface OrganicResult {
     title: string;
@@ -107,13 +108,14 @@ export const createSeoGuide: Endpoint = {
             const soseoScores = calculateSOSEO(keywords, links, processedTokens);
             const dseoScores = calculateDSEO(keywords, links, processedTokens);
 
+            console.log(soseoScores)
+
             const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedTokens);
             // Calculate dynamic optimization ranges for each keyword across all URLs
             const optimizationLevels = calculateDynamicOptimizationRanges(
                 links,
                 processedTokens,
                 semanticKeywords,
-                globalKeywordFrequencies
             );
 
             // Add word count to each searchResult
@@ -131,7 +133,6 @@ export const createSeoGuide: Endpoint = {
                 queryEngine,
                 optimizationLevels,
                 searchResults,
-                // seoScores,
                 language,
                 seoBrief : resolvedSeoBrief,
                 PAAs,

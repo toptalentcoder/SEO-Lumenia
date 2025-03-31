@@ -3,7 +3,7 @@ import { calculateGlobalKeywordFrequencies } from "./calculateGlobalKeywordFrequ
 
 export const calculateSOSEO = (keywords: string[], urls: string[], processedDocs: string[][]): number[] => {
     const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedDocs);
-    const keywordOptimizations = calculateDynamicOptimizationRanges(urls, processedDocs, keywords, globalKeywordFrequencies);
+    const keywordOptimizations = calculateDynamicOptimizationRanges(urls, processedDocs, keywords);
 
     return keywordOptimizations.map(keywordOptimization => {
         const urlOptimizations = Object.values(keywordOptimization.urlOptimizations);

@@ -1,93 +1,92 @@
-// Helper function to calculate context relevance (differential corpus)
-const calculateContextualRelevance = (keywordFrequency: number, globalFrequency: number) => {
-
-    const scaledKeywordFrequency = keywordFrequency * 1000;
-    const scaledGlobalFrequency = globalFrequency * 1000;
-    // Calculate the differential frequency score
-    const diff = scaledKeywordFrequency / scaledGlobalFrequency;  // Higher means keyword is more significant for SEO
-    return Math.min(100, Math.max(0, diff * 30));  // Cap between 0 and 100 for simplicity
+type OptimizationRanges = {
+    name: string;
+    subOptimized: number;
+    standardOptimized: number;
+    strongOptimized: number;
+    overOptimized: number;
 };
 
 type KeywordOptimization = {
     keyword: string;
     urlOptimizations: Record<string, number>;
-    optimizationRanges: {
-        name: string;
-        subOptimized: number;
-        standardOptimized: number;
-        strongOptimized: number;
-        overOptimized: number;
+    optimizationRanges: OptimizationRanges;
+};
+
+// Log smoothing using softmax-like scaling (0–1 range)
+const smoothNormalize = (frequencies: number[]): number[] => {
+    const logFreqs = frequencies.map(f => Math.log10(f + 1));
+    const min = Math.min(...logFreqs);
+    const max = Math.max(...logFreqs);
+
+    // Optional: Apply extra smoothing to reduce peaks
+    const scaled = logFreqs.map(f => (f - min) / (max - min || 1));
+    const adjusted = scaled.map(x => 0.6 + 0.4 * x); // compress range to [0.6, 1]
+    return adjusted;
+};
+
+// Get percentile
+const getPercentile = (sorted: number[], p: number): number => {
+    const index = Math.floor(p * sorted.length);
+    return sorted[Math.min(index, sorted.length - 1)];
+};
+
+const calculateDynamicRanges = (smoothedFreqs: number[]): OptimizationRanges => {
+    const sorted = [...smoothedFreqs].sort((a, b) => a - b);
+
+    const p50 = getPercentile(sorted, 0.3);
+    const p70 = getPercentile(sorted, 0.5);
+    const p85 = getPercentile(sorted, 0.7);
+    const p95 = getPercentile(sorted, 0.85);
+
+    // const minBand = 0.01;
+
+    return {
+        name: '',
+        subOptimized: p50 * 10000,
+        standardOptimized: (p70 - p50) * 10000,
+        strongOptimized: (p85 - p70) * 10000,
+        overOptimized: (p95 - p85) * 10000
     };
 };
 
 export const calculateDynamicOptimizationRanges = (
     urls: string[],
     processedDocs: string[][],
-    keywords: string[],
-    globalKeywordFrequencies: Record<string, number> // Precomputed global frequencies for each keyword
+    keywords: string[]
 ): KeywordOptimization[] => {
-    const keywordOptimizations: KeywordOptimization[] = [];
+    const result: KeywordOptimization[] = [];
 
-    const calculateRanges = (frequencies: number[]) => {
-        frequencies.sort((a, b) => a - b);
+    for (const keyword of keywords) {
+        const freqs: number[] = [];
 
-        // const maxFrequency = frequencies[frequencies.length - 1];
-        // const minFrequency = frequencies[0];
-
-        const subOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.3)] * 1000 || 0;
-        const standardOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.5)] * 1000  || 0;
-        const strongOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.75)] * 1000 || 0;
-        const overOptimizedThreshold = frequencies[Math.floor(frequencies.length * 0.9)] * 1000 || 0;;
-
-        // Calculate differential relevance scores
-        // const diffScores = frequencies.map((frequency, index) => 
-        //     calculateContextualRelevance(frequency, globalFrequencies[index])
-        // );
-
-        return {
-            subOptimized: subOptimizedThreshold,
-            standardOptimized: standardOptimizedThreshold,
-            strongOptimized: strongOptimizedThreshold,
-            overOptimized: overOptimizedThreshold
-        };
-    };
-
-    keywords.forEach(keyword => {
-        const urlOptimizations: Record<string, number> = {};
-        const keywordFrequencies: number[] = [];
-        const globalFrequencies: number[] = []; // Use global frequencies for each URL
-
-        urls.forEach((url, index) => {
+        urls.forEach((_, index) => {
             const doc = processedDocs[index];
             if (!doc || doc.length === 0) {
-                urlOptimizations[url] = 0;
-                keywordFrequencies.push(0);
-                globalFrequencies.push(globalKeywordFrequencies[keyword] || 0); // Use global frequency for comparison
+                freqs.push(0);
                 return;
             }
 
-            const keywordNormalized = keyword.toLowerCase();
-            const docNormalized = doc.flat().map(word => word.toLowerCase().replace(/[^\w\s]/g, ''));
-            const keywordCount = docNormalized.filter(word => word === keywordNormalized).length;
-
-            const frequency = keywordCount / doc.length;
-
-            urlOptimizations[url] = frequency * 1000 ;
-            keywordFrequencies.push(frequency);
-            globalFrequencies.push(globalKeywordFrequencies[keyword] || 0); // Use global frequency for comparison
+            const cleanedDoc = doc.map(word => word.toLowerCase().replace(/[^\w\s]/g, ''));
+            const count = cleanedDoc.filter(w => w === keyword.toLowerCase()).length;
+            const freq = count / cleanedDoc.length;
+            freqs.push(freq);
         });
 
-        const optimizationRanges = calculateRanges(keywordFrequencies);
+        const smoothed = smoothNormalize(freqs);
+        const ranges = calculateDynamicRanges(smoothed);
+        ranges.name = keyword;
 
-        keywordOptimizations.push({
+        const urlOptimizations: Record<string, number> = {};
+        urls.forEach((url, i) => {
+            urlOptimizations[url] = smoothed[i] * 10000;
+        });
+
+        result.push({
             keyword,
             urlOptimizations,
-            optimizationRanges: {
-                name: keyword,
-                ...optimizationRanges,
-            },
+            optimizationRanges: ranges,
         });
-    });
+    }
 
-    return keywordOptimizations;
+    return result;
 };

@@ -4,7 +4,7 @@ import { calculateGlobalKeywordFrequencies } from "./calculateGlobalKeywordFrequ
 // Calculate DSEO score (risk of over-optimization) based on keyword frequency
 export const calculateDSEO = (keywords: string[], urls: string[], processedDocs: string[][], overOptimizationFactor: number = 1.5): number[] => {
     const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedDocs);
-    const keywordOptimizations = calculateDynamicOptimizationRanges(urls, processedDocs, keywords, globalKeywordFrequencies);
+    const keywordOptimizations = calculateDynamicOptimizationRanges(urls, processedDocs, keywords);
 
     return keywordOptimizations.map(keywordOptimization => {
         const urlOptimizations = Object.values(keywordOptimization.urlOptimizations);
