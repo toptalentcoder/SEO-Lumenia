@@ -22,7 +22,7 @@ const formatDate = (isoDate) => {
 };
 
 
-export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, refreshTrigger }) {
+export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger }) {
 
     const { user } = useUser();
     const [rows, setRows] = useState([]);
@@ -132,12 +132,16 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     <td className="text-center"><input type="checkbox" disabled /></td>
                                     <td className="text-[#4A4291] px-3 py-4 text-md font-medium flex flex-col">
                                         <div className="flex items-center gap-1">
-                                            
-                                            <FaGoogle />
+                                            {selectedQueryEngine.label === "Google" && <FaGoogle />}
+                                            {selectedQueryEngine.label === "Bing" && <FaMicrosoft className="text-blue-500" />}
+                                            {selectedQueryEngine.label === "SearchGPT" && <RiOpenaiFill className="text-green-600" />}
                                             {pendingQueryText}
                                         </div>
                                         <div className="flex items-center space-x-2 text-sm text-gray-500">
-                                            <span>#</span>{pendingQueryID}<span>-</span>google
+                                            <span>#</span>
+                                            {pendingQueryID}
+                                            <span>-</span>
+                                            {selectedQueryEngine.label.toLowerCase()}
                                         </div>
                                     </td>
                                     <td className="text-center text-gray-400">
