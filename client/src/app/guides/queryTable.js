@@ -9,6 +9,7 @@ import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX,
 import { FaGoogle } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { FaSpinner } from "react-icons/fa6";
 
 const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -94,7 +95,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                     </div>
                 </div>
             ) : loading ? (
-                <div>Loading</div>
+                <div className="flex justify-center"><FaSpinner className="animate-spin text-white w-30 h-30" /></div>
             ) : rows.length === 0 ? (
                 <div>
                     <div className="mt-40 text-2xl font-semibold flex justify-center items-center text-gray-700">
