@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 import { CiSearch } from "react-icons/ci";
 import axios from 'axios';
-import {useUser} from '../../../../context/UserContext';
+import {useUser} from '../../../../../context/UserContext';
 import { useParams } from "next/navigation";
+import PositionHistoryChart from './PositionHistoryChart';
+import SerpEvolutionTable from './TableComponent';
 
 export default function Monitoring({ data }) {
     const [inputUrl, setInputUrl] = useState('');
@@ -42,11 +44,12 @@ export default function Monitoring({ data }) {
 
         try {
             const res = await axios.get("/api/getCronjobData", {
-            params: { email : user.email, url: monitoringUrl, queryID },
+                params: { email : user.email, url: monitoringUrl, queryID },
             });
 
-            if (res.status === 200 && res.data?.cronjob?.length > 0) {
-            setCronData(res.data.cronjob);
+            if (res.status === 200) {
+                console.log(res.data)
+                setCronData(res.data);
             }
         } catch (err) {
             console.error("❌ Failed to fetch cronjob data", err);
@@ -58,6 +61,12 @@ export default function Monitoring({ data }) {
 
     // 3. Handle "Follow" button
     const handleFollow = async () => {
+
+        if (!inputUrl || !user?.email || !queryID) {
+            console.error("❌ Missing required data to follow");
+            return;
+        }
+
         try {
             await axios.post("/api/setMonitoringUrl", {
                 email : user.email,
@@ -76,7 +85,28 @@ export default function Monitoring({ data }) {
     return (
         <div className="flex items-center justify-center text-center">
             {cronData ? (
-                <div>aaa</div>
+                <div className="w-full max-w-6xl mx-auto px-4">
+                    <div className="text-lg font-semibold text-[#413793]">Next Update Tomorrow</div>
+                    <div className='flex items-center space-x-2 mt-5 justify-center mb-20'>
+                        <input
+                            className='border border-gray-400 rounded-lg p-2 w-lg outline-none focus:border-[#413793]'
+                            placeholder='URL'
+                            value={inputUrl ?? ''} // ← this ensures it's a controlled input
+                            onChange={(e) => setInputUrl(e.target.value)}
+                        />
+                        <button
+                            className='bg-[#413793] text-white rounded-lg px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-[#353252]'
+                            // onClick={handleFollow}
+                        >
+                            <CiSearch />
+                            <span>Change URL</span>
+                        </button>
+                    </div>
+                    <PositionHistoryChart cronjob={cronData.cronjob} />
+                    <div className='mt-20'>
+                        <SerpEvolutionTable data={cronData.data} />
+                    </div>
+                </div>
             ) : (
                 <div>
                     <div className="text-lg font-semibold text-[#413793]">Monitor this query each day</div>
@@ -85,6 +115,7 @@ export default function Monitoring({ data }) {
                         <input
                             className='border border-gray-400 rounded-lg p-2 w-lg outline-none focus:border-[#413793]'
                             placeholder='URL'
+                            value={inputUrl ?? ''} // ← this ensures it's a controlled input
                             onChange={(e) => setInputUrl(e.target.value)}
                         />
                         <button
