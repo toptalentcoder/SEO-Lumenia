@@ -24,6 +24,7 @@ import { getCronjobData } from "./getCronjobData";
 import { getMonitoringUrl } from "./seoGuide/monitoring/getMonitoring";
 import { setMonitoringUrl } from "./seoGuide/monitoring/setMonitoring";
 import { getUserProjectList } from "./projectManagement/getProjectList";
+import { getProjectGuides } from "./projectManagement/getProjectByProjectID";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -36,6 +37,7 @@ export const customEndpoints = [
     getUserProjectInfo,
     getUserProjects,
     getUserProjectList,
+    getProjectGuides,
     getSeoGuideByQueryID,
     generateSeoQuestionsEndpoint,
     generateSeoOutlineEndpoint,
