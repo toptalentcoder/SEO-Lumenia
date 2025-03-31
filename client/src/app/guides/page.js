@@ -41,6 +41,9 @@ export default function SEOQueryDashboard() {
     const [selectedProjectItem, setSelectedProjectItem] = useState(null);
     const [projectTerm, setProjectTerm] = useState("");
 
+    const [isProjectMenuForTableOpen, setIsProjectMenuForTableOpen] = useState(false);
+    const [selectedProjectForTableItem, setSelectedProjectForTableItem] = useState(null);
+    const [projectForTableTerm, setProjectForTableTerm] = useState("");
 
     const projectID = searchParams?.get("projectID")
 
@@ -69,6 +72,13 @@ export default function SEOQueryDashboard() {
             setSelectedProjectItem(defaultProject || projects[0]);
         }
     }, [projects, selectedProjectItem]);
+
+    // useEffect(() => {
+    //     if (projects.length > 0 && !selectedProjectForTableItem) {
+    //         const defaultProject = projects.find(p => p.projectName.toLowerCase() === "default");
+    //         setSelectedProjectForTableItem(defaultProject || projects[0]);
+    //     }
+    // }, [projects, selectedProjectForTableItem]);
 
     const handleBlur = () => {
         setIsFocused(false);
@@ -160,6 +170,16 @@ export default function SEOQueryDashboard() {
     };
     const filteredProjectMenuOptions = projects?.filter((option) =>
         option.projectName.toLowerCase().includes(projectTerm.toLowerCase())
+    );
+
+    const handleProjectForTableMenuToggleDropdown = () => setIsProjectMenuForTableOpen(!isProjectMenuForTableOpen);
+    const handleProjectForTableMenuSearchChange = (e) => setProjectForTableTerm(e.target.value);
+    const handleProjectForTableMenuSelectOption = (option) => {
+        setSelectedProjectForTableItem(option);
+        setIsProjectMenuForTableOpen(false);
+    };
+    const filteredProjectForTableMenuOptions = projects?.filter((option) =>
+        option.projectName.toLowerCase().includes(projectForTableTerm.toLowerCase())
     );
 
 
@@ -453,7 +473,8 @@ export default function SEOQueryDashboard() {
                                 onClick={handleProjectMenuToggleDropdown}
                                 className='w-full px-4 py-2 text-left bg-white rounded-xl'
                             >
-                                {selectedProjectItem.projectName}
+                                {selectedProjectItem?.projectName || "Default"}
+
                             </button>
 
                             {isProjectMenuOpen && (
@@ -568,11 +589,58 @@ export default function SEOQueryDashboard() {
                 onClick={() => handleBlur()}
             >
 
-                <div className="flex items-center px-12 py-4 mb-10 font-semibold gap-2 text-gray-500 text-lg">
+                <div className="flex items-center px-12 py-4 mb-10 font-semibold gap-2 text-gray-500 text-lg w-full">
                     <GoOrganization/>
                     {user?.username}
                     <span>Org.</span>
                     <span>&gt;</span>
+                    {/* Project Menu Dropdown */}
+                    <div className="relative inline-block w-60">
+                        <button
+                            onClick={handleProjectForTableMenuToggleDropdown}
+                            className='w-full px-4 py-2 text-left bg-white rounded-xl'
+                        >
+                            {selectedProjectForTableItem?.projectName ||  "All Projects and Guides"}
+
+                        </button>
+
+                        {isProjectMenuForTableOpen && (
+                            <div className="absolute w-full mt-2 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
+                                <input
+                                    type="text"
+                                    value={projectForTableTerm}
+                                    onChange={handleProjectForTableMenuSearchChange}
+                                    placeholder="Search..."
+                                    className=" w-52 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300"
+                                />
+
+
+                                <div className="max-h-52 overflow-y-auto">
+
+                                    <div
+                                        className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-200 text-black border-b border-t border-gray-300"
+                                        onClick={() => handleProjectForTableMenuSelectOption(null)}
+                                    >
+                                        All Projects and Guides
+                                    </div>
+
+                                    {filteredProjectForTableMenuOptions.length === 0 ? (
+                                        <div className="px-4 py-2 text-gray-500">No results</div>
+                                    ) : (
+                                        filteredProjectForTableMenuOptions.map((option) => (
+                                            <div
+                                                key={option.projectID}
+                                                onClick={() => handleProjectForTableMenuSelectOption(option)}
+                                                className="flex items-center px-4 py-2 text-sm cursor-pointer hover:bg-gray-200 text-black"
+                                            >
+                                                {option.projectName}
+                                            </div>
+                                        ))
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 {/* Query Table */}
                 <QueryTable
