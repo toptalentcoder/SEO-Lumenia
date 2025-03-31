@@ -29,6 +29,7 @@
     "next": "15.2.2",
     "node-cron": "^3.0.3",
     "openai": "^4.89.0",
+    "p-limit": "^6.2.0",
     "payload": "latest",
     "react": "19.0.0",
     "react-dom": "19.0.0",
