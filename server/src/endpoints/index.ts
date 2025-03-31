@@ -23,6 +23,7 @@ import { getWebpageTitleMetaEndpoint } from "./seoGuide/getWebpageTitleMeta";
 import { getCronjobData } from "./getCronjobData";
 import { getMonitoringUrl } from "./seoGuide/monitoring/getMonitoring";
 import { setMonitoringUrl } from "./seoGuide/monitoring/setMonitoring";
+import { getUserProjectList } from "./projectManagement/getProjectList";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -34,6 +35,7 @@ export const customEndpoints = [
     addProjectToUser,
     getUserProjectInfo,
     getUserProjects,
+    getUserProjectList,
     getSeoGuideByQueryID,
     generateSeoQuestionsEndpoint,
     generateSeoOutlineEndpoint,

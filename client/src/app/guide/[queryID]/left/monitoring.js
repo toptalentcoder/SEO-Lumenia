@@ -16,61 +16,61 @@ export default function Monitoring({ data }) {
 
 
 
-  // 1. Fetch the monitoring URL if already set
-  useEffect(() => {
-    const fetchMonitoringUrl = async () => {
-        if (!user?.email || !queryID) return;
-      try {
-        const res = await axios.get("/api/getMonitoringUrl", {
-          params: { email : user.email, queryID },
-        });
-        if (res.data?.monitoringUrl) {
-          setMonitoringUrl(res.data.monitoringUrl);
+    // 1. Fetch the monitoring URL if already set
+    useEffect(() => {
+        const fetchMonitoringUrl = async () => {
+            if (!user?.email || !queryID) return;
+            try {
+                const res = await axios.get("/api/getMonitoringUrl", {
+                    params: { email : user.email, queryID },
+                });
+                if (res.data?.monitoringUrl) {
+                    setMonitoringUrl(res.data.monitoringUrl);
+                }
+            } catch (err) {
+                console.error("❌ Failed to fetch monitoringUrl", err);
+            }
+        };
+
+        fetchMonitoringUrl();
+    }, [user.email, queryID]);
+
+    // 2. When monitoringUrl is set, fetch the actual cron tracking data
+    useEffect(() => {
+        const fetchCronData = async () => {
+        if (!monitoringUrl) return;
+
+        try {
+            const res = await axios.get("/api/getCronjobData", {
+            params: { email : user.email, url: monitoringUrl, queryID },
+            });
+
+            if (res.status === 200 && res.data?.cronjob?.length > 0) {
+            setCronData(res.data.cronjob);
+            }
+        } catch (err) {
+            console.error("❌ Failed to fetch cronjob data", err);
         }
-      } catch (err) {
-        console.error("❌ Failed to fetch monitoringUrl", err);
-      }
-    };
+        };
 
-    fetchMonitoringUrl();
-  }, [user.email, queryID]);
+        fetchCronData();
+    }, [monitoringUrl, user.email, queryID]);
 
-  // 2. When monitoringUrl is set, fetch the actual cron tracking data
-  useEffect(() => {
-    const fetchCronData = async () => {
-      if (!monitoringUrl) return;
+    // 3. Handle "Follow" button
+    const handleFollow = async () => {
+        try {
+            await axios.post("/api/setMonitoringUrl", {
+                email : user.email,
+                queryID,
+                url: inputUrl,
+            });
 
-      try {
-        const res = await axios.get("/api/getCronjobData", {
-          params: { email : user.email, url: monitoringUrl, queryID },
-        });
-
-        if (res.status === 200 && res.data?.cronjob?.length > 0) {
-          setCronData(res.data.cronjob);
+            setMonitoringUrl(inputUrl); // Triggers the useEffect to fetch cron data
+            setInputUrl(""); // Optional: clear input
+        } catch (err) {
+            console.error("❌ Failed to set monitoring URL", err);
         }
-      } catch (err) {
-        console.error("❌ Failed to fetch cronjob data", err);
-      }
     };
-
-    fetchCronData();
-  }, [monitoringUrl, user.email, queryID]);
-
-  // 3. Handle "Follow" button
-  const handleFollow = async () => {
-    try {
-      await axios.post("/api/setMonitoringUrl", {
-        email : user.email,
-        queryID,
-        url: inputUrl,
-      });
-
-      setMonitoringUrl(inputUrl); // Triggers the useEffect to fetch cron data
-      setInputUrl(""); // Optional: clear input
-    } catch (err) {
-      console.error("❌ Failed to set monitoring URL", err);
-    }
-  };
 
 
     return (

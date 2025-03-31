@@ -7,7 +7,7 @@ import { GoOrganization } from "react-icons/go";
 import { BsThreeDots } from "react-icons/bs"
 import LeftSection from './left/leftSection';
 import RightSection from './right/rightSection';
-
+import { FaSpinner } from "react-icons/fa6";
 
 export default function GuidePage() {
 
@@ -27,7 +27,7 @@ export default function GuidePage() {
         fetchQuery();
     }, [user, queryID]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className="flex justify-center"><FaSpinner className="animate-spin text-white w-30 h-30" /></div>;
     if (!data) return <div>Not Found</div>;
 
     return(
