@@ -113,6 +113,12 @@ export default function SEOQueryDashboard() {
         const queryID = generateQueryId();
         setPendingQueryID(queryID); // <-- Set pending ID
 
+        // 🔁 Smart projectID resolution
+        const resolvedProjectID =
+            selectedProjectItem?.projectID ||
+            projectID ||
+            'Default';
+
         try {
 
             const response = await fetch('/api/createSeoGuide', {
@@ -123,8 +129,8 @@ export default function SEOQueryDashboard() {
                 body: JSON.stringify({
                     query: search,
                     queryID : queryID,
-                    queryEngine : "google",
-                    projectID : projectID ? projectID : 'Default',
+                    queryEngine : selectedQueryEngine.label.toLowerCase(),
+                    projectID : resolvedProjectID,
                     email : user.email,
                     language : "EN"
                 }),
