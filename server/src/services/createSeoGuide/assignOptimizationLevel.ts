@@ -31,21 +31,21 @@ const getPercentile = (sorted: number[], p: number): number => {
 };
 
 const calculateDynamicRanges = (smoothedFreqs: number[]): OptimizationRanges => {
-    const sorted = [...smoothedFreqs].sort((a, b) => a - b);
+    const sorted = [...smoothedFreqs].sort((a, b) => b - a);
 
     const p50 = getPercentile(sorted, 0.5);
-    const p70 = getPercentile(sorted, 0.2);
-    const p85 = getPercentile(sorted, 0.15);
-    const p95 = getPercentile(sorted, 0.13);
+    const p70 = getPercentile(sorted, 0.7);
+    const p85 = getPercentile(sorted, 0.85);
+    const p95 = getPercentile(sorted, 0.95);
 
     // const minBand = 0.01;
 
     return {
         name: '',
-        subOptimized: p50 * 10000,
-        standardOptimized: (p70 ) * 10000,
-        strongOptimized: (p85 ) * 10000,
-        overOptimized: (p95) * 10000
+        subOptimized: p50 * 1000,
+        standardOptimized: (p70 ) * 400,
+        strongOptimized: (p85 ) * 300,
+        overOptimized: (p95) * 250
     };
 };
 
@@ -78,7 +78,7 @@ export const calculateDynamicOptimizationRanges = (
 
         const urlOptimizations: Record<string, number> = {};
         urls.forEach((url, i) => {
-            urlOptimizations[url] = smoothed[i] * 10000;
+            urlOptimizations[url] = smoothed[i] * 1000;
         });
 
         result.push({

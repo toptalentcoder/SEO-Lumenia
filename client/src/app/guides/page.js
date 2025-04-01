@@ -121,6 +121,9 @@ export default function SEOQueryDashboard() {
 
         try {
 
+            console.log(search, queryID, selectedQueryEngine.label.toLowerCase(), resolvedProjectID, user.email)
+
+
             const response = await fetch('/api/createSeoGuide', {
                 method: 'POST',
                 headers: {
