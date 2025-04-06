@@ -19,18 +19,22 @@ export default function GuidePage() {
     const [isDirty, setIsDirty] = useState(false);
 
     const handleSave = async () => {
-        const html = document.querySelector('[contenteditable="true"]')?.innerHTML;
-        if (!html) return;
+        const text = document.querySelector('[contenteditable="true"]')?.innerText;
+        if (!text) return;
 
         await fetch("/api/save_seo_editor_data", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                email: data.email,
+                email: user.email,
                 queryID: data.queryID,
-                content: html,
+                content: text,
             }),
         });
+
+        // Signal to Lexical to reset the dirty state
+        const event = new CustomEvent("seo-editor-reset-dirty");
+        window.dispatchEvent(event);
 
         setIsDirty(false);
     };

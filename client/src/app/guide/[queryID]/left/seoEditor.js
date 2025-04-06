@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from 'react';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -9,23 +9,19 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
-import { ListItemNode, ListNode } from '@lexical/list';
-import { INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from '@lexical/list';
-import { FORMAT_ELEMENT_COMMAND } from 'lexical';
+import { INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, ListItemNode, ListNode } from '@lexical/list';
 import { HeadingNode } from '@lexical/rich-text';
-import { LinkNode, AutoLinkNode } from '@lexical/link';
+import { LinkNode, AutoLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
-import { TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
     $createParagraphNode,
     $createTextNode,
     $insertNodes,
-} from 'lexical';
-import { $createHeadingNode } from '@lexical/rich-text';
-import {
     $getSelection,
     $isRangeSelection,
+    FORMAT_ELEMENT_COMMAND,
 } from 'lexical';
+import { $createHeadingNode } from '@lexical/rich-text';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { RiPenNibLine, RiAlignLeft, RiAlignRight, RiAlignJustify, RiAlignCenter } from "react-icons/ri";
 import { FaRegEye } from "react-icons/fa";
@@ -95,6 +91,8 @@ export default function LexicalSeoEditor({data, onDirtyChange}) {
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useUser();
     const { queryID } = useParams();
+    const [hasUserEdited, setHasUserEdited] = useState(false);
+
 
     useEffect(() => {
         const fetchSeoEditorData = async () => {
@@ -587,6 +585,8 @@ function SeoTranslateDropdown() {
 function EditorArea({seoEditorData, onDirtyChange }) {
 
     const [editor] = useLexicalComposerContext();
+    const initialHTMLRef = useRef(""); // Store initial HTML
+    const skipNextChange = useRef(false); // Track programmatic changes
 
     // Only update the editor with the content when it's ready and the data is available
     useEffect(() => {
@@ -595,6 +595,35 @@ function EditorArea({seoEditorData, onDirtyChange }) {
                 const textNode = $createTextNode(seoEditorData);
                 const paragraphNode = $createParagraphNode().append(textNode);
                 $insertNodes([paragraphNode]);
+            });
+        }
+    }, [seoEditorData, editor]);
+
+    useEffect(() => {
+        const handleResetDirty = () => {
+            initialHTMLRef.current = editor.getRootElement().innerHTML;
+            onDirtyChange(false);
+        };
+
+        window.addEventListener("seo-editor-reset-dirty", handleResetDirty);
+        return () => window.removeEventListener("seo-editor-reset-dirty", handleResetDirty);
+    }, [editor, onDirtyChange]);
+
+    // Load the initial content only once
+    useEffect(() => {
+        if (seoEditorData && editor) {
+            skipNextChange.current = true; // prevent flag on programmatic insert
+
+            editor.update(() => {
+                const textNode = $createTextNode(seoEditorData);
+                const paragraphNode = $createParagraphNode().append(textNode);
+                $insertNodes([paragraphNode]);
+
+                // Save initial HTML once it's inserted
+                setTimeout(() => {
+                    initialHTMLRef.current = editor.getRootElement().innerHTML;
+                    skipNextChange.current = false;
+                }, 50); // wait for DOM update
             });
         }
     }, [seoEditorData, editor]);
@@ -613,7 +642,14 @@ function EditorArea({seoEditorData, onDirtyChange }) {
             <ListPlugin />
             <OnChangePlugin
                 onChange={() => {
-                    onDirtyChange(true);
+                    if (skipNextChange.current) return;
+
+                    const currentHTML = editor.getRootElement().innerHTML;
+
+                    // Only fire dirty if it's different from initial
+                    if (currentHTML !== initialHTMLRef.current) {
+                        onDirtyChange(true);
+                    }
                 }}
             />
         </>
