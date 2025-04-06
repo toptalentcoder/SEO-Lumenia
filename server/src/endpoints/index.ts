@@ -26,6 +26,7 @@ import { setMonitoringUrl } from "./seoGuide/monitoring/setMonitoring";
 import { getUserProjectList } from "./projectManagement/getProjectList";
 import { getProjectGuides } from "./projectManagement/getProjectByProjectID";
 import { saveSeoEditorDataEndpoint } from "./seoGuide/saveSeoEditorDataEndpoint";
+import { translateSeoEditorEndpoint } from "./seoGuide/translateSeoEditorEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -45,6 +46,7 @@ export const customEndpoints = [
     generateSeoAutoEndpoint,
     generateSeoRephraseEndpoint,
     saveSeoEditorDataEndpoint,
+    translateSeoEditorEndpoint,
     createSeoGuide,
     createSocialPostEndpoint,
     calculateOptimizationLevels,

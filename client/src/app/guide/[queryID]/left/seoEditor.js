@@ -20,6 +20,7 @@ import {
     $getSelection,
     $isRangeSelection,
     FORMAT_ELEMENT_COMMAND,
+    $getRoot
 } from 'lexical';
 import { $createHeadingNode } from '@lexical/rich-text';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -131,7 +132,7 @@ export default function LexicalSeoEditor({data, onDirtyChange}) {
                     setHtmlContent={setHtmlContent}
                 />
                 <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} queryID = {queryID} email = {user.email} />
-                <SeoTranslateDropdown />
+                <SeoTranslateDropdown setIsLoading={setIsLoading}/>
                 <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange} />
             </div>
 
@@ -493,93 +494,95 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
 }
 
 // Translate dropdown
-function SeoTranslateDropdown() {
+function SeoTranslateDropdown({setIsLoading}) {
+    const [editor] = useLexicalComposerContext();
+    const { user } = useUser();
+    const { queryID } = useParams();
 
-    const [selectedLanguage, setSelectedLanguage] = useState(''); // state to track the selected value
+    const handleTranslate = async (language) => {
+        const root = editor.getRootElement();
+        const currentText = root.innerText.trim();
+        if (!currentText) return;
 
-    const handleLanguageChange = (event) => {
-        setSelectedLanguage(event.target.value);
+        setIsLoading(true);
+
+        try {
+            const res = await fetch("/api/translate_seo_editor_text", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    currentText,
+                    language,
+                    queryID,
+                    email: user.email,
+                }),
+            });
+
+            const result = await res.json();
+            if (result.success && result.translatedText) {
+                editor.update(() => {
+                    $getRoot().clear();
+
+                    const lines = result.translatedText.split(/\n+/).filter(line => line.trim());
+                    const nodes = lines.map((line) =>
+                        $createParagraphNode().append($createTextNode(line.trim()))
+                    );
+                    $insertNodes(nodes);
+                });
+            } else {
+                console.error("Translation failed:", result);
+            }
+        } catch (err) {
+            console.error("Translation error:", err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
+    const languages = [
+        "English",
+        "French",
+        "Spanish",
+        "German",
+        "Dutch",
+        "Italian",
+        "Portuguese(Portugal)",
+        "Portuguese(Brazil)",
+        "Polish",
+        "Romanian",
+    ];
+
     return (
-        <div className="border-b pb-2 border-gray-300  shadow-lg">
+        <div className="border-b pb-2 border-gray-300 shadow-lg">
             <Menu>
                 <MenuButton className="text-black cursor-pointer">
-                    <div className='flex items-center space-x-2 text-black hover:bg-blue-100 hover:text-black rounded-md px-3 py-2 text-md font-medium'>
-                        <AiOutlineGlobal/>
+                    <div className="flex items-center space-x-2 text-black hover:bg-blue-100 hover:text-black rounded-md px-3 py-2 text-md font-medium">
+                        <AiOutlineGlobal />
                         <span className="text-sm">SEO-TXL Translate to...</span>
-                        <IoIosArrowDown/>
+                        <IoIosArrowDown />
                     </div>
                 </MenuButton>
                 <MenuItems
                     anchor="bottom start"
                     className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl"
                 >
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">English</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">French</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Spanish</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">German</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Dutch</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Italian</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Portuguese(Portugal)</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Portuguese(Brazil)</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Polish</span>
-                        </div>
-                    </MenuItem>
-                    <MenuItem>
-                        <div className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100">
-                            <LuPencil/>
-                            <span className="text-sm">Romanian</span>
-                        </div>
-                    </MenuItem>
+                    {languages.map((lang) => (
+                        <MenuItem key={lang}>
+                            <div
+                                className="flex items-center space-x-4 px-5 py-2 hover:bg-blue-100 cursor-pointer"
+                                onClick={() => handleTranslate(lang)}
+                            >
+                                <LuPencil />
+                                <span className="text-sm">{lang}</span>
+                            </div>
+                        </MenuItem>
+                    ))}
                 </MenuItems>
             </Menu>
         </div>
     );
 }
+
 
 // Rich Text Editor Area
 function EditorArea({seoEditorData, onDirtyChange }) {
