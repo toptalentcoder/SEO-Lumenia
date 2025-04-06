@@ -16,6 +16,26 @@ export default function GuidePage() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const [isDirty, setIsDirty] = useState(false);
+
+    const handleSave = async () => {
+        const html = document.querySelector('[contenteditable="true"]')?.innerHTML;
+        if (!html) return;
+
+        await fetch("/api/save_seo_editor_data", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: data.email,
+                queryID: data.queryID,
+                content: html,
+            }),
+        });
+
+        setIsDirty(false);
+    };
+
+
     useEffect(() => {
         const fetchQuery = async () => {
             const res = await fetch(`/api/getSeoGuideByQueryID?email=${user?.email}&queryID=${queryID}`);
@@ -50,12 +70,24 @@ export default function GuidePage() {
 
             <div className="flex flex-col lg:flex-row">
                 <div className="bg-white w-full lg:w-2/3 lg:order-0 order-0 lg:mr-3 mt-10">
-                    <LeftSection data={data}/>
+                    <LeftSection data={data} setIsDirty={setIsDirty}/>
                 </div>
                 <div className="w-full lg:w-1/3 lg:order-1 order-1 lg:ml-3 mt-10">
                     <RightSection data={data}/>
                 </div>
             </div>
+
+            {isDirty && (
+                <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-300 ease-in-out">
+                    <button
+                        onClick={handleSave}
+                        className="bg-green-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-700"
+                    >
+                    💾 Save Changes
+                    </button>
+                </div>
+            )}
+
         </div>
     )
 };
