@@ -22,7 +22,7 @@ const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     );
 };
 
-export default function Analysis({data}) {
+export default function Analysis({data, setIsDirty }) {
 
     const [selectedLinks, setSelectedLinks] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -339,7 +339,7 @@ export default function Analysis({data}) {
             </div>
 
             <div className="p-6 mt-10">
-                <LexicalSeoEditor data = {data}/>
+                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} />
             </div>
 
             <div className="flex justify-end mr-6">

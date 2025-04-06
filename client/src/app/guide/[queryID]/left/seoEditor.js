@@ -87,7 +87,7 @@ const editorConfig = {
     ],
 };
 
-export default function LexicalSeoEditor({data}) {
+export default function LexicalSeoEditor({data, onDirtyChange}) {
 
     const [seoEditorData, setSeoEditorData] = useState("");
     const [ sourceMode, setSourceMode ] = useState(false);
@@ -134,7 +134,7 @@ export default function LexicalSeoEditor({data}) {
                 />
                 <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} queryID = {queryID} email = {user.email} />
                 <SeoTranslateDropdown />
-                <EditorArea seoEditorData={seoEditorData} />
+                <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange} />
             </div>
 
             {sourceMode && (
@@ -584,7 +584,7 @@ function SeoTranslateDropdown() {
 }
 
 // Rich Text Editor Area
-function EditorArea({seoEditorData }) {
+function EditorArea({seoEditorData, onDirtyChange }) {
 
     const [editor] = useLexicalComposerContext();
 
@@ -611,7 +611,11 @@ function EditorArea({seoEditorData }) {
             <HistoryPlugin />
             <LinkPlugin />
             <ListPlugin />
-            <OnChangePlugin />
+            <OnChangePlugin
+                onChange={() => {
+                    onDirtyChange(true);
+                }}
+            />
         </>
     );
 }
