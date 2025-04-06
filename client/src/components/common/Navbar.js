@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";  // ✅ Importing useRouter from next/router
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image";
@@ -45,6 +46,7 @@ const getUserInitials = (name) => {
 export default function Navbar() {
 
     const { user, setUser } = useUser();
+    const router = useRouter();  // ✅ Importing router from next/router
 
     // ✅ State to store profile data
     const [profileImage, setProfileImage] = useState(null);
@@ -80,7 +82,10 @@ export default function Navbar() {
                         </DisclosureButton>
                     </div>
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="flex shrink-0 items-center">
+                        <div
+                            className="flex shrink-0 items-center cursor-pointer"
+                            onClick={() => router.push("/dashboard")}
+                        >
                             <Image
                                 src="/images/logo.png"
                                 alt="Hero Image"
