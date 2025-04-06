@@ -618,6 +618,8 @@ function EditorArea({seoEditorData, onDirtyChange }) {
             skipNextChange.current = true; // prevent flag on programmatic insert
 
             editor.update(() => {
+                const root = $getRoot();
+                root.clear(); // ✅ This clears all child nodes safely
                 const textNode = $createTextNode(seoEditorData);
                 const paragraphNode = $createParagraphNode().append(textNode);
                 $insertNodes([paragraphNode]);
