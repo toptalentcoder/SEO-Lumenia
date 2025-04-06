@@ -12,7 +12,7 @@ import SocialPost from './socialPost';
 import Explore from './explore';
 import Monitoring from './monitoring/monitoring';
 
-export default function LeftSection ({data}) {
+export default function LeftSection ({data, setIsDirty }) {
 
     const [activeTab, setActiveTab] = useState("Analysis");
 
@@ -91,7 +91,7 @@ export default function LeftSection ({data}) {
             <div>
                 {activeTab === 'Analysis' ? (
                     <div>
-                        <Analysis data={data}/>
+                        <Analysis data={data} setIsDirty={setIsDirty} />
                     </div>
                 ) : activeTab === 'Compare' ? (
                     <div>
