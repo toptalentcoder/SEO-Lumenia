@@ -19,10 +19,7 @@ export const saveSeoEditorDataEndpoint: Endpoint = {
         if (!req.json) {
             return new Response(
                 JSON.stringify({ error: "Invalid request: Missing JSON parsing function" }),
-                {
-                    status: 400,
-                    headers: { "Content-Type": "application/json", ...corsHeaders },
-                }
+                { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
             );
         }
 
@@ -32,7 +29,7 @@ export const saveSeoEditorDataEndpoint: Endpoint = {
         if (!queryID || !email || !content) {
             return new Response(
                 JSON.stringify({ error: "Missing required fields: queryID, email, or content" }),
-                { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders }, }
+                { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
             );
         }
 
@@ -51,30 +48,17 @@ export const saveSeoEditorDataEndpoint: Endpoint = {
             }
 
             const user = users.docs[0];
-            const existingProjects: ProjectSeoGuide[] = Array.isArray(user.projects)
-                ? (user.projects as ProjectSeoGuide[])
-                : [];
 
-            let projectUpdated = false;
-            const updatedProjects = existingProjects.map((project) => {
-                if (project.seoGuides.some((guide) => guide.queryID === queryID)) {
-                    projectUpdated = true;
-                    return {
-                        ...project,
-                        seoGuides: project.seoGuides.map((guide) =>
-                        guide.queryID === queryID ? { ...guide, seoEditor: content } : guide
-                        ),
-                    };
-                }
-                return project;
+            const updatedProjects: ProjectSeoGuide[] = (Array.isArray(user.projects) ? user.projects as ProjectSeoGuide[] : []).map((project: ProjectSeoGuide) => {
+                const updatedGuides = (project.seoGuides || []).map(guide => {
+                    if (guide.queryID === queryID) {
+                        return { ...guide, seoEditor: content }; // ✅ overwrite
+                    }
+                    return guide;
+                });
+
+                return { ...project, seoGuides: updatedGuides };
             });
-
-            if (!projectUpdated) {
-                return new Response(
-                    JSON.stringify({ error: "Project not found for given queryID" }),
-                    { status: 404, headers: { "Content-Type": "application/json", ...corsHeaders } }
-                );
-            }
 
             await payload.update({
                 collection: "users",
