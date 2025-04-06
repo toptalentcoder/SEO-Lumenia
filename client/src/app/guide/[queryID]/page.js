@@ -83,12 +83,12 @@ export default function GuidePage() {
 
             {isDirty && (
                 <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-opacity duration-300 ease-in-out">
-                    <button
-                        onClick={handleSave}
-                        className="bg-green-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-700"
+                    <div
+                        className="bg-[#333333] text-white px-6 py-2.5 rounded-xl shadow-lg text-sm"
                     >
-                    💾 Save Changes
-                    </button>
+                        Text not saved yet
+                        <span className="font-semibold cursor-pointer ml-1.5 underline text-[#EBB71A]" onClick={handleSave}>Save</span>
+                    </div>
                 </div>
             )}
 
