@@ -3,9 +3,15 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import Image from 'next/image';
-import { FaSearch } from "react-icons/fa";
-import { FaSun } from "react-icons/fa";
+import { FaSun, FaCheckCircle, FaLightbulb, FaTools, FaSearch, FaEye, FaExternalLinkAlt  } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { GoGraph } from "react-icons/go";
+import { FaScissors, FaPencil, FaLink, FaListCheck } from "react-icons/fa6";
+import { MdPeopleAlt } from "react-icons/md";
+import { PiNetworkFill } from "react-icons/pi";
+import { TiWeatherPartlySunny } from "react-icons/ti";
+import { IoPeople } from "react-icons/io5";
+
 
 const HeroTop = () => {
 
@@ -155,35 +161,39 @@ const RecentKeywordsList = () => (
     </div>
 );
 
-const Card = ({ title, description, buttonText }) => (
+const Card = ({ title, description, buttonText, reactIcons }) => (
     <div className="bg-white p-4 rounded-2xl shadow-md flex flex-col">
+        <div className="flex text-[7rem] mb-2 odd:text-[#279AAC] even:text-[#EBB71A] justify-center">{reactIcons}</div>
         <p className="font-semibold text-lg mb-2 justify-center flex">{title}</p>
         <p className="text-sm text-gray-700 mb-4 flex justify-center text-center">{description}</p>
         <button className="flex bg-[#41388A] text-white px-4 py-2 rounded-xl text-sm justify-center">{buttonText}</button>
     </div>
 );
 
-const ContentStrategyCards = () => (
-    <section className="mt-6">
-        <h2 className="text-xl font-bold mb-4">Content Strategy</h2>
-        <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
-            <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" />
-            <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" />
-            <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" />
-            <Card title="Analyze Competitors" description="Compare rankings to find opportunities for growth." buttonText="Analyze Now" />
-            <Card title="Generate Ideas" description="Use our Digital Brainstormer to inspire new content ideas." buttonText="Start Brainstorming" />
-            <Card title="SEO Writing" description="Write effortlessly while following our SEO optimization guide." buttonText="Start Writing Now" />
-        </div>
-    </section>
-);
+const ContentStrategyCards = () => {
+
+    return(
+        <section className="mt-6">
+            <h2 className="text-xl font-bold mb-4">Content Strategy</h2>
+            <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
+                <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" reactIcons={<FaCheckCircle />} />
+                <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" reactIcons={<GoGraph />} />
+                <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" reactIcons={<FaScissors/>} />
+                <Card title="Analyze Competitors" description="Compare rankings to find opportunities for growth." buttonText="Analyze Now" reactIcons={<IoPeople />}/>
+                <Card title="Generate Ideas" description="Use our Digital Brainstormer to inspire new content ideas." buttonText="Start Brainstorming" reactIcons={<FaLightbulb/>} />
+                <Card title="SEO Writing" description="Write effortlessly while following our SEO optimization guide." buttonText="Start Writing Now" reactIcons={<FaPencil/>} />
+            </div>
+        </section>
+    );
+};
 
 const LinkingCards = () => (
     <section className="mt-6">
         <h2 className="text-xl font-bold mb-4">Linking</h2>
         <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
-            <Card title="Evaluate Links" description="Assess the quality of inbound and outbound links to strengthen your link profile." buttonText="Evaluate Now" />
-            <Card title="Internal PageRank" description="Enhance your site's structure to boost internal linking and PageRank." buttonText="Optimize Now" />
-            <Card title="Top Backlinks" description="Find the most valuable backlinks for your site and learn how to acquire more." buttonText="Find Backlinks Now" />
+            <Card title="Evaluate Links" description="Assess the quality of inbound and outbound links to strengthen your link profile." buttonText="Evaluate Now" reactIcons={<FaLink/>} />
+            <Card title="Internal PageRank" description="Enhance your site's structure to boost internal linking and PageRank." buttonText="Optimize Now" reactIcons={<PiNetworkFill/>} />
+            <Card title="Top Backlinks" description="Find the most valuable backlinks for your site and learn how to acquire more." buttonText="Find Backlinks Now" reactIcons={<FaExternalLinkAlt/>} />
         </div>
     </section>
 );
@@ -192,10 +202,10 @@ const MonitoringCards = () => (
     <section className="mt-6 mb-10">
         <h2 className="text-xl font-bold mb-4">Monitoring & Tech</h2>
         <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
-            <Card title="Project Tracking" description="Keep track of your SEO projects and fine-tune your strategies in real time." buttonText="Track Projects Now" />
-            <Card title="SERP Tracking" description="Monitor your keyword positions and adjust your SEO efforts accordingly." buttonText="SERP Monitoring" />
-            <Card title="Technical SEO" description="Identify and resolve technical issues to improve your site's SEO performance." buttonText="Fix Issues Now" />
-            <Card title="SERP Weather" description="Get updates on SERP volatility to adapt your strategies." buttonText="Check It Now" />
+            <Card title="Project Tracking" description="Keep track of your SEO projects and fine-tune your strategies in real time." buttonText="Track Projects Now" reactIcons={<FaListCheck />} />
+            <Card title="SERP Tracking" description="Monitor your keyword positions and adjust your SEO efforts accordingly." buttonText="SERP Monitoring" reactIcons={<FaEye />} />
+            <Card title="Technical SEO" description="Identify and resolve technical issues to improve your site's SEO performance." buttonText="Fix Issues Now" reactIcons={<FaTools />}/>
+            <Card title="SERP Weather" description="Get updates on SERP volatility to adapt your strategies." buttonText="Check It Now" reactIcons={<TiWeatherPartlySunny />}/>
         </div>
     </section>
 );
