@@ -4,43 +4,58 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import Image from 'next/image';
 import { FaSearch } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
+const HeroTop = () => {
 
-const HeroTop = () => (
-    <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 w-full">
-        <div className="bg-[#C0E1E8] rounded-2xl flex items-center shadow-md relative h-40">
-            <div className="absolute -top-6 left-0 z-10">
-                <Image
-                    src="/images/dashboard/guide.png"
-                    alt="Guide Mascot"
-                    width={200}
-                    height={200}
-                    className="rounded-full"
-                />
-            </div>
-            <div className="bg-[#C0E1E8] rounded-2xl flex items-center pl-60 pr-6 py-6 ">
-                <div>
-                    <p className="text-sm text-[#3AB4D5]">
-                        <strong>Yourtext.guru</strong> has always been here to help you optimize your content for Google.
-                        Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
-                    </p>
-                    <button className="mt-3 px-4 py-2 bg-[#279AAC] text-white rounded-xl text-sm cursor-pointer">
-                        Create a new guide
-                    </button>
+    const router = useRouter();
+
+    return(
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 w-full">
+            <div className="bg-[#C0E1E8] rounded-2xl flex items-center shadow-md relative h-40">
+                <div className="absolute -top-6 left-0 z-10">
+                    <Image
+                        src="/images/dashboard/guide.png"
+                        alt="Guide Mascot"
+                        width={200}
+                        height={200}
+                        className="rounded-full"
+                    />
                 </div>
+                <div className="bg-[#C0E1E8] rounded-2xl flex items-center pl-60 pr-6 py-6 ">
+                    <div>
+                        <p className="text-sm text-[#3AB4D5]">
+                            <strong>Yourtext.guru</strong> has always been here to help you optimize your content for Google.
+                            Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
+                        </p>
+                        <button
+                            className="mt-3 px-4 py-2 bg-[#279AAC] text-white rounded-xl text-sm cursor-pointer"
+                            onClick={() => router.push("/guides")}
+                        >
+                            Create a new guide
+                        </button>
+                    </div>
 
-                <span className="absolute top-2 left-40 bg-white px-2 py-1 text-xs font-semibold rounded shadow">
-                    NEW
-                </span>
+                    <span className="absolute top-2 left-40 bg-white px-2 py-1 text-xs font-semibold rounded shadow">
+                        NEW
+                    </span>
+                </div>
+            </div>
+
+            <div
+                className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex items-center justify-between cursor-pointer"
+                onClick={() => router.push("/serp-weather")}
+            >
+                <div className="flex items-center gap-2">
+                    <div className="text-8xl font-bold"><FaSun/> </div>
+                    <div className="text-6xl font-sans">Sunny</div>
+                </div>
+                <p className="text-md font-semibold">SERP WEATHER</p>
             </div>
         </div>
-
-        <div className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex flex-col justify-between">
-            <div className="text-2xl font-bold">☀️ Sunny</div>
-            <p className="text-sm">SERP WEATHER</p>
-        </div>
-    </div>
-);
+    )
+};
 
 const KeywordPromptCard = () => (
     <div className="relative h-40">
@@ -74,7 +89,6 @@ const KeywordPromptCard = () => (
         </div>
     </div>
 );
-
 
 const SearchBar = () => (
     <div className="relative h-40">
@@ -142,17 +156,17 @@ const RecentKeywordsList = () => (
 );
 
 const Card = ({ title, description, buttonText }) => (
-    <div className="bg-white p-4 rounded-2xl shadow-md">
-        <p className="font-semibold text-lg mb-2">{title}</p>
-        <p className="text-sm text-gray-700 mb-4">{description}</p>
-        <button className="bg-[#492ccf] text-white px-4 py-2 rounded-full text-sm">{buttonText}</button>
+    <div className="bg-white p-4 rounded-2xl shadow-md flex flex-col">
+        <p className="font-semibold text-lg mb-2 justify-center flex">{title}</p>
+        <p className="text-sm text-gray-700 mb-4 flex justify-center text-center">{description}</p>
+        <button className="flex bg-[#41388A] text-white px-4 py-2 rounded-xl text-sm justify-center">{buttonText}</button>
     </div>
 );
 
 const ContentStrategyCards = () => (
     <section className="mt-6">
         <h2 className="text-xl font-bold mb-4">Content Strategy</h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
             <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" />
             <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" />
             <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" />
@@ -166,7 +180,7 @@ const ContentStrategyCards = () => (
 const LinkingCards = () => (
     <section className="mt-6">
         <h2 className="text-xl font-bold mb-4">Linking</h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
             <Card title="Evaluate Links" description="Assess the quality of inbound and outbound links to strengthen your link profile." buttonText="Evaluate Now" />
             <Card title="Internal PageRank" description="Enhance your site's structure to boost internal linking and PageRank." buttonText="Optimize Now" />
             <Card title="Top Backlinks" description="Find the most valuable backlinks for your site and learn how to acquire more." buttonText="Find Backlinks Now" />
@@ -177,7 +191,7 @@ const LinkingCards = () => (
 const MonitoringCards = () => (
     <section className="mt-6 mb-10">
         <h2 className="text-xl font-bold mb-4">Monitoring & Tech</h2>
-        <div className="grid md:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
             <Card title="Project Tracking" description="Keep track of your SEO projects and fine-tune your strategies in real time." buttonText="Track Projects Now" />
             <Card title="SERP Tracking" description="Monitor your keyword positions and adjust your SEO efforts accordingly." buttonText="SERP Monitoring" />
             <Card title="Technical SEO" description="Identify and resolve technical issues to improve your site's SEO performance." buttonText="Fix Issues Now" />
