@@ -98,14 +98,6 @@ export default function Navbar() {
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-3">
                                 <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
-                                    {/* <RxPencil1/>
-                                    <a
-                                        key={'write_for_seo'}
-                                        href='#'
-                                        className=''
-                                    >
-                                        Write For SEO
-                                    </a> */}
                                     <Link href="/guides">
                                         <button className="flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium cursor-pointer">
                                             <RxPencil1/>
@@ -140,28 +132,28 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/positioning/explorer"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Keyword Explorer
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                        <a
-                                                href="#"
+                                            <Link
+                                                href="/keyword-cannibalization"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Keyword Cannibalization
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                        <a
-                                                href="#"
+                                            <Link
+                                                href="/content-gap"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Content Gap
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -177,28 +169,28 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/positioning/host"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Website Rankings
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                        <a
-                                                href="#"
+                                            <Link
+                                                href="/positioning/kw_by_url"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 SEO Keywords by URL
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                        <a
-                                                href="#"
+                                            <Link
+                                                href="/positioning/url"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 URLs Rankings
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -214,36 +206,36 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/tools/digital_brainstormer"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Digital Brainstormer
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/tools/entities"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Entities
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/tools/questions"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Questions
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/tools/ideas"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Ideas
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -258,12 +250,12 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/guides"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Optimize Your Content
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -279,12 +271,12 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/gallery"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Get Images
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                     </MenuItems>
                                 </Menu>
@@ -315,12 +307,12 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="linking"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Evaluate Links
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -335,20 +327,20 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/top/pages"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Internal Pagerank
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                        <a
-                                                href="#"
+                                            <Link
+                                                href="/top/links"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Best Backlinks
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                     </MenuItems>
                                 </Menu>
@@ -379,20 +371,20 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/projects"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Projects Monitoring
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/monitoring"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 SERP Monitoring
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -407,20 +399,20 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/duplicate/host"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Page Duplication
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                        <a
-                                                href="#"
+                                            <Link
+                                                href="/backlinks/404"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 404 Link Recovery
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -435,12 +427,12 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/serp_weather"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Serp Weather
-                                            </a>
+                                            </Link>
                                         </MenuItem>
 
                                         <div className='px-4 text-gray-300'>
@@ -455,28 +447,28 @@ export default function Navbar() {
                                             </span>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/organization/hosts"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Unlocked Websites
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/organization/exports"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 My Rankings Exports
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                         <MenuItem>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href="/gallery/own"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 My Images
-                                            </a>
+                                            </Link>
                                         </MenuItem>
                                     </MenuItems>
                                 </Menu>
