@@ -42,7 +42,7 @@ export const createSeoGuide: Endpoint = {
 
         const { payload } = req;
         const body = await req.json();
-        const { query, projectID, email, queryID, language, queryEngine } = body;
+        const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr  } = body;
 
         const SERP_API_KEY = process.env.SERP_API_KEY;
 
@@ -62,6 +62,9 @@ export const createSeoGuide: Endpoint = {
                 params: {
                     q: query,
                     api_key: SERP_API_KEY,
+                    hl: hl || 'en',             // Language
+                    gl: gl || 'us',             // Country
+                    lr: lr || 'lang_en'         // Only French content
                 },
             });
 

@@ -542,7 +542,7 @@ export default function Navbar() {
                         </Menu>
 
                         {/* Profile dropdown */}
-                        <Menu as="div" className="relative ml-3">
+                        <Menu as="div" className="relative ml-3 z-11">
                             <div>
                                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                                 <span className="absolute -inset-1.5" />
