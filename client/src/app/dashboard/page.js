@@ -3,25 +3,39 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import Image from 'next/image';
+import { FaSearch } from "react-icons/fa";
+
 
 const HeroTop = () => (
     <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 w-full">
-        <div className="bg-[#C0E1E8] rounded-2xl p-4 flex items-center shadow-md relative">
-            <Image
-                src="/images/dashboard/guide.png"
-                alt="Guide Mascot" width={125} height={125}
-                className='w-40 h-40 mr-4' />
-            <div>
-                <p className="text-sm text-[#3AB4D5]">
-                <strong>Yourtext.guru</strong> has always been here to help you optimize your content for Google.
-                    Now, you can also do it for <span className="text-[#3AB4D5] font-semibold">SearchGPT</span> and <span className="text-[#3AB4D5] font-semibold">Bing!</span>
-                </p>
-                <button className="mt-3 px-4 py-2 bg-[#279AAC] text-white rounded-xl text-sm">Create a new guide</button>
+        <div className="bg-[#C0E1E8] rounded-2xl flex items-center shadow-md relative h-40">
+            <div className="absolute -top-6 left-0 z-10">
+                <Image
+                    src="/images/dashboard/guide.png"
+                    alt="Guide Mascot"
+                    width={200}
+                    height={200}
+                    className="rounded-full"
+                />
             </div>
-            <span className="absolute top-2 left-20 bg-white px-2 py-1 text-xs font-semibold rounded shadow">NEW</span>
+            <div className="bg-[#C0E1E8] rounded-2xl flex items-center pl-60 pr-6 py-6 ">
+                <div>
+                    <p className="text-sm text-[#3AB4D5]">
+                        <strong>Yourtext.guru</strong> has always been here to help you optimize your content for Google.
+                        Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
+                    </p>
+                    <button className="mt-3 px-4 py-2 bg-[#279AAC] text-white rounded-xl text-sm cursor-pointer">
+                        Create a new guide
+                    </button>
+                </div>
+
+                <span className="absolute top-2 left-40 bg-white px-2 py-1 text-xs font-semibold rounded shadow">
+                    NEW
+                </span>
+            </div>
         </div>
 
-        <div className="bg-gradient-to-r from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex flex-col justify-between">
+        <div className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex flex-col justify-between">
             <div className="text-2xl font-bold">☀️ Sunny</div>
             <p className="text-sm">SERP WEATHER</p>
         </div>
@@ -29,44 +43,68 @@ const HeroTop = () => (
 );
 
 const KeywordPromptCard = () => (
-    <div className="bg-yellow-100 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between shadow-md w-full">
-        <div className="flex-1">
-            <p className="font-semibold text-gray-800">Optimize your SEO now!</p>
-            <p className="text-sm text-gray-700 mb-2">Find the best keywords</p>
-            <div className="flex items-center border border-yellow-400 bg-white rounded-md overflow-hidden max-w-md">
-                <input
-                type="text"
-                placeholder="Keyword"
-                className="px-3 py-2 text-sm flex-grow focus:outline-none"
-                />
-                <button className="bg-yellow-400 px-3 py-2">🔍</button>
+    <div className="relative h-40">
+        {/* Floating image */}
+        <div className="absolute -top-8 right-6 z-10">
+            <Image
+                src="/images/dashboard/optimize.png"
+                alt="optimize"
+                width={220}
+                height={220}
+            />
+        </div>
+
+        {/* Main card */}
+        <div className="bg-[#F5E8C0] h-full rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-start justify-between pr-28">
+            <div className="flex-1">
+                <div className="h-16 mb-3">
+                <p className="font-semibold text-gray-600 mb-2 text-md">Optimize your SEO now!</p>
+                <p className="text-gray-600 text-md">Find the best keywords</p>
+                </div>
+
+                <div className="flex items-center rounded-md max-w-md gap-2">
+                    <input
+                        type="text"
+                        placeholder="Keyword"
+                        className="px-3 py-2 text-sm focus:outline-none bg-white rounded-xl"
+                    />
+                    <button className="bg-[#EBB71A] text-white px-2.5 py-2.5 rounded-xl cursor-pointer"><FaSearch/></button>
+                </div>
             </div>
         </div>
-        <Image
-            src="/images/dashboard/optimize.png"
-            alt="optimize" width={125} height={125}
-            className='w-40 h-40 mr-4' />
     </div>
 );
 
+
 const SearchBar = () => (
-    <div className="bg-[#e6e3f6] rounded-2xl p-4 shadow-md flex flex-col md:flex-row items-center justify-between">
-        <div>
-            <p className="font-semibold mb-2 text-gray-800">Welcome on YourTextGuru!</p>
-            <p className="text-sm text-gray-700 mb-2">Enter a website address and explore its SEO universe.</p>
-            <div className="flex items-center border rounded-lg overflow-hidden bg-white">
-                <input
-                type="text"
-                placeholder="Website URL to explore"
-                className="px-4 py-2 text-sm flex-grow focus:outline-none"
-                />
-                <button className="bg-[#492ccf] text-white px-4 py-2">🔍</button>
+    <div className="relative h-40">
+        {/* Floating image */}
+        <div className="absolute -top-7 right-6 z-10">
+            <Image
+                src="/images/dashboard/welcome.png"
+                alt="welcome"
+                width={220}
+                height={220}
+            />
+        </div>
+
+        {/* Main card */}
+        <div className="bg-[#C7C6DE] rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-start justify-between pr-28">
+            <div>
+                <div className="h-16 mb-3">
+                    <p className="font-semibold mb-3 text-gray-600 text-md">Welcome on YourTextGuru!</p>
+                    <p className="text-md text-gray-600">Enter a website address and explore its SEO universe.</p>
+                </div>
+                <div className="flex items-center rounded-lg gap-2">
+                    <input
+                        type="text"
+                        placeholder="Website URL to explore"
+                        className="px-4 py-2 text-sm focus:outline-[#413793] focus:outline-1 bg-white rounded-lg flex-grow"
+                    />
+                    <button className="bg-[#41388C] text-white px-2.5 py-2.5 rounded-xl cursor-pointer"><FaSearch/></button>
+                </div>
             </div>
         </div>
-        <Image
-            src="/images/dashboard/welcome.png"
-            alt="welcome" width={125} height={125}
-            className='w-40 h-40 mr-4' />
     </div>
 );
 
@@ -153,7 +191,7 @@ export default function DashboardPage() {
 
     return (
         <div className="bg-[#f5f7fb] min-h-screen text-gray-800">
-            <main className="max-w-full mx-auto px-12 py-6 space-y-6">
+            <main className="max-w-full mx-auto px-12 py-6 space-y-10">
                 <HeroTop />
                 <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4">
                     <SearchBar />
