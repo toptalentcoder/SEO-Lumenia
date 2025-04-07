@@ -8,6 +8,7 @@ interface FlattenedProjectInfo {
     queryID: string;
     queryEngine: string;
     language: string;
+    gl: string;
     createdAt: string;
 }
 
@@ -19,6 +20,7 @@ interface Project {
         queryID?: string;
         queryEngine?: string;
         language?: string;
+        gl? : string;
         createdAt?: number | string;
     }[];
 }
@@ -109,6 +111,7 @@ export const getUserProjects: Endpoint = {
                     queryID: guide.queryID || '',
                     queryEngine: guide.queryEngine || '',
                     language: guide.language || 'unknown',
+                    gl : guide.language || 'unknown',
                     createdAt:
                         typeof guide.createdAt === 'number'
                         ? new Date(guide.createdAt).toISOString()

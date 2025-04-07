@@ -1,11 +1,12 @@
 import { OpenAI } from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateSeoBrief(query: string) {
+export async function generateSeoBrief(query: string, language: string) {
+    console.log(language)
     const prompt = `
-        Generate a comprehensive SEO brief for the query: ${query}
+        Generate a comprehensive SEO brief for the query: ${query}.
 
-        The SEO brief should have the following structure:
+        The SEO brief should have the following structure. The content of the SEO brief should be written in ${language}, but the section headings must remain in English exactly as shown:
 
         1. **Primary Intent**:
             - Provide a single word (e.g., "Informational", "Transactional").

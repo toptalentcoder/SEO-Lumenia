@@ -20,6 +20,25 @@ interface OrganicResult {
     dseo?: number;  // Optional property for SEO optimization level
 }
 
+const hlToFullLanguageMap: Record<string, string> = {
+    en: 'English',
+    es: 'Spanish',
+    fr: 'French',
+    de: 'German',
+    it: 'Italian',
+    pt: 'Portuguese',
+    pl: 'Polish',
+    ro: 'Romanian',
+    nl: 'Dutch',
+    ar: 'Arabic',
+    hi: 'Hindi',
+    ja: 'Japanese',
+    zh: 'Chinese',
+    ru: 'Russian',
+    tr: 'Turkish'
+    // Add more if needed
+};
+
 export const createSeoGuide: Endpoint = {
     path: "/createSeoGuide",
     method: "post",
@@ -74,7 +93,8 @@ export const createSeoGuide: Endpoint = {
             const links = organicResults.map((item: OrganicResult) => item.link);
 
             // Generate SEO brief concurrently
-            const seoBriefPromise = generateSeoBrief(query);
+            const fullLanguageName = hlToFullLanguageMap[language] || 'English';
+            const seoBriefPromise = generateSeoBrief(query, fullLanguageName);
 
             // Fetch page content concurrently
             const pageContentsPromise = Promise.all(links.map(fetchPageContent));
@@ -113,7 +133,7 @@ export const createSeoGuide: Endpoint = {
 
             console.log(soseoScores)
 
-            const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedTokens);
+            // const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedTokens);
             // Calculate dynamic optimization ranges for each keyword across all URLs
             const optimizationLevels = calculateDynamicOptimizationRanges(
                 links,
@@ -155,6 +175,7 @@ export const createSeoGuide: Endpoint = {
                 optimizationLevels,
                 searchResults,
                 language,
+                gl,
                 seoBrief : resolvedSeoBrief,
                 PAAs,
                 cronjob,

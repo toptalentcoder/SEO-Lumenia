@@ -21,8 +21,38 @@ const formatDate = (isoDate) => {
     });
 };
 
+const flagMap = {
+    us: <US className="w-4 h-3" />,
+    fr: <FR className="w-4 h-3" />,
+    de: <DE className="w-4 h-3" />,
+    za: <ZA className="w-4 h-3" />,
+    ch: <CH className="w-4 h-3" />,
+    ar: <AR className="w-4 h-3" />,
+    be: <BE className="w-4 h-3" />,
+    cl: <CL className="w-4 h-3" />,
+    lu: <LU className="w-4 h-3" />,
+    at: <AT className="w-4 h-3" />,
+    co: <CO className="w-4 h-3" />,
+    ma: <MA className="w-4 h-3" />,
+    ae: <AE className="w-4 h-3" />,
+    au: <AU className="w-4 h-3" />,
+    es: <ES className="w-4 h-3" />,
+    it: <IT className="w-4 h-3" />,
+    ca: <CA className="w-4 h-3" />,
+    mx: <MX className="w-4 h-3" />,
+    nl: <NL className="w-4 h-3" />,
+    eg: <EG className="w-4 h-3" />,
+    pe: <PE className="w-4 h-3" />,
+    pl: <PL className="w-4 h-3" />,
+    gb: <GB className="w-4 h-3" />,
+    ad: <AD className="w-4 h-3" />,
+    br: <BR className="w-4 h-3" />,
+    in: <IN className="w-4 h-3" />,
+    pt: <PT className="w-4 h-3" />,
+    ro: <RO className="w-4 h-3" />
+};
 
-export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger }) {
+export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger, language }) {
 
     const { user } = useUser();
     const [rows, setRows] = useState([]);
@@ -55,6 +85,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         projectName : project.projectName,
                         projectID : project.projectID,
                         language : project.language,
+                        gl: project.gl || 'us',
                         createdAt : project. createdAt
                     }))
 
@@ -146,8 +177,8 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     </td>
                                     <td className="text-center text-gray-400">
                                         <div className="flex items-center justify-center gap-2">
-                                            <US className="w-4 h-3" />
-                                            EN
+                                            {flagMap[language.gl?.toLowerCase()]}
+                                            {language.hl.toUpperCase()}
                                         </div>
                                     </td>
                                     <td className="text-center text-[#4A4291]">Default</td>
@@ -191,8 +222,8 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     </td>
                                     <td className="w-1/8 px-3 py-4 text-md text-gray-400 text-center">
                                         <div className="flex items-center gap-2 justify-center">
-                                            <US className="w-4 h-3"/>
-                                            {row.language}
+                                            {flagMap[row.gl?.toLowerCase()]}
+                                            {row.language.toUpperCase()}
                                         </div>
                                     </td>
                                     <td className="w-1/6 px-3 py-4 text-lg text-[#4A4291] font-sans text-center">
