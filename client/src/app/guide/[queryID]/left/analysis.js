@@ -70,8 +70,6 @@ export default function Analysis({data, setIsDirty }) {
                 const response = await fetch(`/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`);
                 const result = await response.json();
 
-                console.log(result)
-
                 if (result.success && result.category) {
                     const categories = result.category.split(',').map((c) => c.trim());
                     setDetectedCategories(categories);
@@ -105,6 +103,24 @@ export default function Analysis({data, setIsDirty }) {
         }
     }, [user?.email, queryID]);
 
+    useEffect(() => {
+        const fetchSavedScores = async () => {
+            try {
+                const res = await fetch(`/api/get_soseo_dseo?queryID=${queryID}&email=${user.email}`);
+                const result = await res.json();
+                if (result.success) {
+                    setSoseoScore(result.soseo);
+                    setDseoScore(result.dseo);
+                }
+            } catch (err) {
+                console.error("Failed to fetch SOSEO/DSEO", err);
+            }
+        };
+
+        if (user?.email && queryID) {
+            fetchSavedScores();
+        }
+    }, [user?.email, queryID]);
 
     // Handle the analysis trigger
     const handleAnalyse = async () => {
@@ -176,8 +192,6 @@ export default function Analysis({data, setIsDirty }) {
                     setDetectedCategories(categories.category.split(',').map(c => c.trim()));
                 }
 
-                console.log()
-
                 // After setGraphLineData(newGraphLineData);
                 const soseoDseoRes = await fetch("/api/calculate_soseo_dseo", {
                     method: "POST",
@@ -194,6 +208,16 @@ export default function Analysis({data, setIsDirty }) {
                     setDseoScore(Math.round(soseoDseoResult.dseo.reduce((a, b) => a + b, 0)));
                 }
 
+                await fetch("/api/save_soseo_dseo", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: user.email,
+                        queryID,
+                        soseo: Math.round(soseoDseoResult.soseo.reduce((a, b) => a + b, 0)),
+                        dseo: Math.round(soseoDseoResult.dseo.reduce((a, b) => a + b, 0)),
+                    }),
+                });
 
                 await fetch("/api/save_seo_editor_data", {
                     method: "POST",
