@@ -33,6 +33,9 @@ export default function Analysis({data, setIsDirty }) {
     const [seoEditorData, setSeoEditorData] = useState("");
     const editorRef = useRef(null);
     const [detectedCategories, setDetectedCategories] = useState([]);
+    const [soseoScore, setSoseoScore] = useState(0);
+    const [dseoScore, setDseoScore] = useState(0);
+
 
     useEffect(() => {
         // Only set graph data when data is available
@@ -83,6 +86,25 @@ export default function Analysis({data, setIsDirty }) {
         }
     }, [user?.email, queryID]);
 
+    useEffect(() => {
+        const fetchSavedGraphData = async () => {
+            try {
+                const res = await fetch(`/api/get_optimization_graph_data?queryID=${queryID}&email=${user.email}`);
+                const result = await res.json();
+
+                if (result.success && Array.isArray(result.graphLineData)) {
+                    setGraphLineData(result.graphLineData);
+                }
+            } catch (err) {
+                console.error("Error fetching saved graph data", err);
+            }
+        };
+
+        if (user?.email && queryID) {
+            fetchSavedGraphData();
+        }
+    }, [user?.email, queryID]);
+
 
     // Handle the analysis trigger
     const handleAnalyse = async () => {
@@ -126,6 +148,16 @@ export default function Analysis({data, setIsDirty }) {
 
                 setGraphLineData(newGraphLineData);
 
+                await fetch("/api/save_optimization_graph_data", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: user.email,
+                        queryID: queryID,
+                        graphLineData: newGraphLineData
+                    }),
+                });
+
                 const categoryResponse = await fetch("/api/generate_seo_category", {
                     method: "POST",
                     headers: {
@@ -143,6 +175,25 @@ export default function Analysis({data, setIsDirty }) {
                 if (categories?.category) {
                     setDetectedCategories(categories.category.split(',').map(c => c.trim()));
                 }
+
+                console.log()
+
+                // After setGraphLineData(newGraphLineData);
+                const soseoDseoRes = await fetch("/api/calculate_soseo_dseo", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        keywords,
+                        processedDocs: [content.split(/\s+/)]
+                    }),
+                });
+
+                const soseoDseoResult = await soseoDseoRes.json();
+                if (soseoDseoResult.success) {
+                    setSoseoScore(Math.round(soseoDseoResult.soseo.reduce((a, b) => a + b, 0)));
+                    setDseoScore(Math.round(soseoDseoResult.dseo.reduce((a, b) => a + b, 0)));
+                }
+
 
                 await fetch("/api/save_seo_editor_data", {
                     method: "POST",
@@ -217,7 +268,7 @@ export default function Analysis({data, setIsDirty }) {
                             <ImCross className="w-3 h-3"/>
                         </div>
                         <span className="text-xl">SOSEO</span>
-                        <span className="ml-4">0</span>
+                        <span className="ml-4">{soseoScore}</span>
                     </div>
 
                     <div className="flex items-center gap-2 bg-gray-200 px-2 py-1 rounded-lg">
@@ -225,7 +276,7 @@ export default function Analysis({data, setIsDirty }) {
                             <FaCheck className="w-3 h-3"/>
                         </div>
                         <span className="text-xl">DSEO</span>
-                        <span className="ml-4">0</span>
+                        <span className="ml-4">{dseoScore}</span>
                     </div>
 
                     <div className="flex items-center gap-2 bg-gray-200 px-6 py-1 rounded-lg">

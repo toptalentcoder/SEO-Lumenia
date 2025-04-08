@@ -131,8 +131,6 @@ export const createSeoGuide: Endpoint = {
             const soseoScores = calculateSOSEO(keywords, links, processedTokens);
             const dseoScores = calculateDSEO(keywords, links, processedTokens);
 
-            console.log(soseoScores)
-
             // const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedTokens);
             // Calculate dynamic optimization ranges for each keyword across all URLs
             const optimizationLevels = calculateDynamicOptimizationRanges(
