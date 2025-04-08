@@ -31,6 +31,8 @@ import { generateSeoCategoryEndpoint } from "./seoGuide/generateSeoCategoryEndpo
 import { saveOptimizationGraphDataEndpoint } from "./seoGuide/saveGraphdDataEndpoint";
 import { getOptimizationGraphDataEndpoint } from "./seoGuide/getGraphDataEndpoint";
 import { calculateSoseoDseoEndpoint } from "./seoGuide/calculateSoseoAndDseoEndpoint";
+import { saveSoseoDseoEndpoint } from "./seoGuide/save_soseo_dseo";
+import { getSoseoDseoEndpoint } from "./seoGuide/get_soseo_dseo";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -65,5 +67,7 @@ export const customEndpoints = [
     generateSeoCategoryEndpoint,
     saveOptimizationGraphDataEndpoint,
     getOptimizationGraphDataEndpoint,
-    calculateSoseoDseoEndpoint
+    calculateSoseoDseoEndpoint,
+    saveSoseoDseoEndpoint,
+    getSoseoDseoEndpoint
 ]
