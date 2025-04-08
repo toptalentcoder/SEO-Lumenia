@@ -103,6 +103,19 @@ export default function Analysis({data, setIsDirty }) {
 
                 setGraphLineData(newGraphLineData);
 
+                const categoryResponse = await fetch("/api/generate_seo_category", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        content: content,
+                    }),
+                })
+
+                const categories  = await categoryResponse.json();
+                console.log(categories)
+
                 await fetch("/api/save_seo_editor_data", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

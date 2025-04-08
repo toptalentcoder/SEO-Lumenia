@@ -27,6 +27,7 @@ import { getUserProjectList } from "./projectManagement/getProjectList";
 import { getProjectGuides } from "./projectManagement/getProjectByProjectID";
 import { saveSeoEditorDataEndpoint } from "./seoGuide/saveSeoEditorDataEndpoint";
 import { translateSeoEditorEndpoint } from "./seoGuide/translateSeoEditorEndpoint";
+import { generateSeoCategoryEndpoint } from "./seoGuide/generateSeoCategoryEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -57,5 +58,6 @@ export const customEndpoints = [
     getWebpageTitleMetaEndpoint,
     getCronjobData,
     getMonitoringUrl,
-    setMonitoringUrl
+    setMonitoringUrl,
+    generateSeoCategoryEndpoint
 ]
