@@ -83,6 +83,25 @@ export default function Analysis({data, setIsDirty }) {
         }
     }, [user?.email, queryID]);
 
+    useEffect(() => {
+        const fetchSavedGraphData = async () => {
+            try {
+                const res = await fetch(`/api/get_optimization_graph_data?queryID=${queryID}&email=${user.email}`);
+                const result = await res.json();
+
+                if (result.success && Array.isArray(result.graphLineData)) {
+                    setGraphLineData(result.graphLineData);
+                }
+            } catch (err) {
+                console.error("Error fetching saved graph data", err);
+            }
+        };
+
+        if (user?.email && queryID) {
+            fetchSavedGraphData();
+        }
+    }, [user?.email, queryID]);
+
 
     // Handle the analysis trigger
     const handleAnalyse = async () => {
@@ -125,6 +144,16 @@ export default function Analysis({data, setIsDirty }) {
                 ];
 
                 setGraphLineData(newGraphLineData);
+
+                await fetch("/api/save_optimization_graph_data", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: user.email,
+                        queryID: queryID,
+                        graphLineData: newGraphLineData
+                    }),
+                });
 
                 const categoryResponse = await fetch("/api/generate_seo_category", {
                     method: "POST",
