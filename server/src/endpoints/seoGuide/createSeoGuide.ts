@@ -12,6 +12,7 @@ import { calculateSOSEO } from "@/services/createSeoGuide/calculateSOSEO";
 import { calculateDSEO } from "@/services/createSeoGuide/calculateDSEO";
 import { calculateGlobalKeywordFrequencies } from "@/services/createSeoGuide/calculateGlobalKeywordFrequencies";
 import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
+import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculateSOSEOandDSEO";
 
 interface OrganicResult {
     title: string;
@@ -128,8 +129,10 @@ export const createSeoGuide: Endpoint = {
             const semanticKeywords = await getSemanticKeywords(keywords, query);
 
             // Calculate SOSEO and DSEO for each URL
-            const soseoScores = calculateSOSEO(keywords, links, processedTokens);
-            const dseoScores = calculateDSEO(keywords, links, processedTokens);
+            // const soseoScores = calculateSOSEO(keywords, links, processedTokens);
+            // const dseoScores = calculateDSEO(keywords, links, processedTokens);
+            const { soseoScores, dseoScores } = calculateSoseoDseoForAllDocs(keywords, processedTokens);
+
 
             // const globalKeywordFrequencies = calculateGlobalKeywordFrequencies(keywords, processedTokens);
             // Calculate dynamic optimization ranges for each keyword across all URLs
