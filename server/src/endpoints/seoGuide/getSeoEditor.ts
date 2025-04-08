@@ -81,6 +81,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             // Retrieve the seoEditor data for the given queryID
             const seoGuide = project.seoGuides.find(guide => guide.queryID === queryID);
             const seoEditorData = seoGuide ? seoGuide.seoEditor : null;
+            const category = seoGuide?.category || null;
 
             if (!seoEditorData) {
                 return new Response(
@@ -97,7 +98,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
 
             // Return the seoEditor data as a response
             return new Response(
-                JSON.stringify({ success: true, seoEditorData }),
+                JSON.stringify({ success: true, seoEditorData, category }),
                 {
                     status: 200,
                     headers: {
