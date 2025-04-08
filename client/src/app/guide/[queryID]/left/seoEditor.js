@@ -84,7 +84,72 @@ const editorConfig = {
     ],
 };
 
-export default function LexicalSeoEditor({data, onDirtyChange}) {
+function LexicalEditorInner({
+    data,
+    onDirtyChange,
+    editorRef,
+    seoEditorData,
+    isLoading,
+    setIsLoading,
+    sourceMode,
+    setSourceMode,
+    htmlContent,
+    setHtmlContent,
+}) {
+    const { user } = useUser();
+    const { queryID } = useParams();
+    const [editor] = useLexicalComposerContext();
+
+    // Assign DOM ref for external access
+    useEffect(() => {
+        if (editorRef && editorRef.current === null) {
+            editorRef.current = editor.getRootElement();
+        }
+    }, [editor, editorRef]);
+
+    return (
+        <div className="rounded-md border border-gray-300 bg-white p-3 space-y-1">
+            {isLoading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-white/50 z-50">
+                    <LottieLoader />
+                </div>
+            )}
+
+            <FormatToolbar setSourceMode={setSourceMode} setHtmlContent={setHtmlContent} />
+            <SeoTxlToolbar
+                data={data}
+                setIsLoading={setIsLoading}
+                queryID={queryID}
+                email={user.email}
+            />
+            <SeoTranslateDropdown setIsLoading={setIsLoading} />
+            <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange}  editorRef={editorRef} />
+
+            {sourceMode && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-4 rounded shadow-lg w-full max-w-3xl">
+                        <h2 className="text-lg font-semibold mb-2">🧾 Source Code</h2>
+                        <textarea
+                            value={seoEditorData}
+                            onChange={(e) => setSeoEditorData(e.target.value)}
+                            className="w-full h-[300px] border border-gray-300 rounded p-2 font-mono text-sm"
+                        />
+                        <div className="flex justify-end mt-3">
+                            <button
+                                onClick={() => setSourceMode(false)}
+                                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                            >
+                            Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default function LexicalSeoEditor({data, onDirtyChange, editorRef }) {
 
     const [seoEditorData, setSeoEditorData] = useState("");
     const [ sourceMode, setSourceMode ] = useState(false);
@@ -118,44 +183,18 @@ export default function LexicalSeoEditor({data, onDirtyChange}) {
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
-            <div className="rounded-md border border-gray-300 bg-white p-3 space-y-1">
-
-                {/* Loading banner */}
-                {isLoading &&
-                    <div className="fixed inset-0 flex items-center justify-center bg-white/50 z-50">
-                        <LottieLoader />
-                    </div>
-                }
-
-                <FormatToolbar
-                    setSourceMode={setSourceMode}
-                    setHtmlContent={setHtmlContent}
-                />
-                <SeoTxlToolbar data = {data} setIsLoading={setIsLoading} queryID = {queryID} email = {user.email} />
-                <SeoTranslateDropdown setIsLoading={setIsLoading}/>
-                <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange} />
-            </div>
-
-            {sourceMode && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-4 rounded shadow-lg w-full max-w-3xl">
-                        <h2 className="text-lg font-semibold mb-2">🧾 Source Code</h2>
-                        <textarea
-                            value={seoEditorData}
-                            onChange={(e) => setSeoEditorData(e.target.value)}
-                            className="w-full h-[300px] border border-gray-300 rounded p-2 font-mono text-sm"
-                        />
-                        <div className="flex justify-end mt-3">
-                            <button
-                                onClick={() => setSourceMode(false)}
-                                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+        <LexicalEditorInner
+            data={data}
+            onDirtyChange={onDirtyChange}
+            editorRef={editorRef}
+            seoEditorData={seoEditorData}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            sourceMode={sourceMode}
+            setSourceMode={setSourceMode}
+            htmlContent={htmlContent}
+            setHtmlContent={setHtmlContent}
+        />
         </LexicalComposer>
     );
 }
@@ -585,7 +624,7 @@ function SeoTranslateDropdown({setIsLoading}) {
 
 
 // Rich Text Editor Area
-function EditorArea({seoEditorData, onDirtyChange }) {
+function EditorArea({seoEditorData, onDirtyChange, editorRef  }) {
 
     const [editor] = useLexicalComposerContext();
     const initialHTMLRef = useRef(""); // Store initial HTML
@@ -637,7 +676,10 @@ function EditorArea({seoEditorData, onDirtyChange }) {
         <>
             <RichTextPlugin
                 contentEditable={
-                    <ContentEditable className="h-[250px] overflow-y-auto outline-none p-2 text-sm" />
+                    <ContentEditable
+                        ref={editorRef}
+                        className="h-[250px] overflow-y-auto outline-none p-2 text-sm"
+                    />
                 }
                 placeholder={<div className="text-gray-400 px-2">Start writing here...</div>}
                 ErrorBoundary={LexicalErrorBoundary}
