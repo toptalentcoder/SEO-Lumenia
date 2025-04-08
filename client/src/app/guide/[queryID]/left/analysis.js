@@ -32,6 +32,7 @@ export default function Analysis({data, setIsDirty }) {
     const { queryID } = useParams();
     const [seoEditorData, setSeoEditorData] = useState("");
     const editorRef = useRef(null);
+    const [detectedCategories, setDetectedCategories] = useState([]);
 
     useEffect(() => {
         // Only set graph data when data is available
@@ -59,6 +60,28 @@ export default function Analysis({data, setIsDirty }) {
             setGraphLineData(initialGraphLineData);
         }
     }, [data]); // Run this effect whenever the 'data' changes
+
+    useEffect(() => {
+        const fetchInitialCategories = async () => {
+            try {
+                const response = await fetch(`/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`);
+                const result = await response.json();
+
+                console.log(result)
+
+                if (result.success && result.category) {
+                    const categories = result.category.split(',').map((c) => c.trim());
+                    setDetectedCategories(categories);
+                }
+            } catch (err) {
+                console.error("❌ Failed to fetch initial categories:", err);
+            }
+        };
+
+        if (user?.email && queryID) {
+            fetchInitialCategories();
+        }
+    }, [user?.email, queryID]);
 
 
     // Handle the analysis trigger
@@ -110,11 +133,16 @@ export default function Analysis({data, setIsDirty }) {
                     },
                     body: JSON.stringify({
                         content: content,
+                        email : user.email,
+                        queryID: queryID,
                     }),
                 })
 
                 const categories  = await categoryResponse.json();
-                console.log(categories)
+
+                if (categories?.category) {
+                    setDetectedCategories(categories.category.split(',').map(c => c.trim()));
+                }
 
                 await fetch("/api/save_seo_editor_data", {
                     method: "POST",
@@ -362,53 +390,77 @@ export default function Analysis({data, setIsDirty }) {
                 <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} editorRef={editorRef} />
             </div>
 
-            <div className="flex justify-end mr-6">
-                <button
-                    className="bg-[#413793] text-white pl-6 py-1 rounded-l-xl cursor-pointer flex items-center space-x-3 text-sm"
-                    onClick={handleAnalyse}
-                >
-                    {loading ? (
-                        <FaSpinner className="animate-spin text-white" />
-                        ) : (
-                            <>
-                                <span>Analyse</span>
-                            </>
-                        )
-                    }
+            <div className="flex justify-between mr-6 items-center">
 
-                </button>
-                <Menu>
-                    <MenuButton className="text-gray-200 cursor-pointer rounded-r-xl bg-[#413793] pl-3 hover:bg-[#2f2c45]">
-                        <div className='flex items-center space-x-2 text-gray-300 py-2 text-md font-medium mr-3'>
-                            <IoIosArrowDown/>
+                {detectedCategories.length > 0 && (
+                    <div className="flex justify-end ml-7">
+                        <div className="flex flex-wrap gap-2">
+                            {detectedCategories.map((cat, index) => (
+                                <span
+                                    key={index}
+                                    className="bg-[#EBB71A] text-white text-sm font-semibold px-3 py-1 rounded-xl"
+                                >
+                                    {cat}
+                                </span>
+                            ))}
                         </div>
-                    </MenuButton>
-                    <MenuItems
-                        anchor="bottom end"
-                        className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50 mt-2"
+                    </div>
+                )}
+
+                {detectedCategories.length <= 0 && (
+                    <div className="flex justify-end mr-6 mt-2">
+                    </div>
+                )}
+
+                <div className="flex justify-end">
+                    <button
+                        className="bg-[#413793] text-white pl-6 py-1 rounded-l-xl cursor-pointer flex items-center space-x-3 text-sm"
+                        onClick={handleAnalyse}
                     >
-                        <MenuItem key={"askForValidation"} as="div">
-                            <div
-                                className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                onClick={(e) => {
-                                    e.preventDefault(); // prevents menu from closing
-                                }}
-                            >
-                                Ask for validation
+                        {loading ? (
+                            <FaSpinner className="animate-spin text-white" />
+                            ) : (
+                                <>
+                                    <span>Analyse</span>
+                                </>
+                            )
+                        }
+
+                    </button>
+                    <Menu>
+                        <MenuButton className="text-gray-200 cursor-pointer rounded-r-xl bg-[#413793] pl-3 hover:bg-[#2f2c45]">
+                            <div className='flex items-center space-x-2 text-gray-300 py-2 text-md font-medium mr-3'>
+                                <IoIosArrowDown/>
                             </div>
-                        </MenuItem>
-                        <MenuItem key={"export"} as="div">
-                            <div
-                                className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                                onClick={(e) => {
-                                    e.preventDefault(); // prevents menu from closing
-                                }}
-                            >
-                                Export(.doc)
-                            </div>
-                        </MenuItem>
-                    </MenuItems>
-                </Menu>
+                        </MenuButton>
+                        <MenuItems
+                            anchor="bottom end"
+                            className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50 mt-2"
+                        >
+                            <MenuItem key={"askForValidation"} as="div">
+                                <div
+                                    className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault(); // prevents menu from closing
+                                    }}
+                                >
+                                    Ask for validation
+                                </div>
+                            </MenuItem>
+                            <MenuItem key={"export"} as="div">
+                                <div
+                                    className="flex items-center gap-2 px-5 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault(); // prevents menu from closing
+                                    }}
+                                >
+                                    Export(.doc)
+                                </div>
+                            </MenuItem>
+                        </MenuItems>
+                    </Menu>
+                </div>
+
             </div>
         </div>
     )
