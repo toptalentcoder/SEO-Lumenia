@@ -34,7 +34,7 @@ export const generateSeoCategoryEndpoint : Endpoint = {
         }
 
         const body = await req.json();
-        const { content } = body;
+        const { content, email, queryID } = body;
 
         if(!content || typeof content !== "string") {
             return new Response(JSON.stringify({ error: "Missing or invalid content" }), {
@@ -52,67 +52,71 @@ export const generateSeoCategoryEndpoint : Endpoint = {
             const categoryJson = await categoryResponse.json();
 
             const category = categoryJson.categories;
-            // const newWebpageTitleMeta = [webpageTitleMeta];
 
-            // const users = await payload.find({
-            //     collection: "users",
-            //     where: { email: { equals: email } },
-            //     limit: 1,
-            // });
+            // Find user
+            const users = await payload.find({
+                collection: "users",
+                where: { email: { equals: email } },
+                limit: 1,
+            });
 
-            // if (!users.docs.length) {
-            //     return new Response(
-            //         JSON.stringify({ error: `User not found for email: ${email}` }),
-            //         {
-            //             status: 400,
-            //             headers: {
-            //                 "Content-Type": "application/json",
-            //                 "Access-Control-Allow-Origin": "*",
-            //             },
-            //         }
-            //     );
-            // }
+            if (!users.docs.length) {
+                return new Response(
+                    JSON.stringify({ error: `User not found for email: ${email}` }),
+                    {
+                        status: 404,
+                        headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders,
+                        },
+                    }
+                );
+            }
 
-            // const user = users.docs[0];
+            const user = users.docs[0];
+            const existingProjects: { seoGuides?: { queryID: string }[] }[] = Array.isArray(user.projects) ? user.projects as { seoGuides?: { queryID: string }[] }[] : [];
 
-            // const existingProjects: ProjectWebpageTitleAndMeta[] = Array.isArray(user.projects)
-            //     ? (user.projects as ProjectWebpageTitleAndMeta[])
-            //     : [];
+            let projectUpdated = false;
 
-            // let projectUpdated = false;
+            const updatedProjects = existingProjects.map((project: { seoGuides?: { queryID: string }[] }) => {
+                if (
+                    Array.isArray(project.seoGuides) &&
+                    project.seoGuides.some((guide) => guide.queryID === queryID)
+                ) {
+                    projectUpdated = true;
+                    return {
+                        ...project,
+                        seoGuides: project.seoGuides.map((guide) =>
+                            guide.queryID === queryID
+                            ? {
+                                ...guide,
+                                category, // 👈 Save the category here
+                                }
+                            : guide
+                        ),
+                    };
+                }
+                return project;
+            });
 
-            // const updatedProjects = existingProjects.map((project) => {
-            //     if (Array.isArray(project.seoGuides) && project.seoGuides.some(guide => guide.queryID === queryID)) {
-            //         projectUpdated = true;
-            //         return {
-            //             ...project,
-            //             seoGuides: project.seoGuides.map(guide =>
-            //                 guide.queryID === queryID
-            //                     ? {
-            //                         ...guide,
-            //                         // Ensure webpageTitleMeta is always an array before updating
-            //                         webpageTitleMeta: Array.isArray(guide.webpageTitleMeta)
-            //                             ? [...guide.webpageTitleMeta, ...newWebpageTitleMeta] // Append the new social post
-            //                             : [...newWebpageTitleMeta], // If not an array, initialize it as an array
-            //                     }
-            //                     : guide
-            //             ),
-            //         };
-            //     }
-            //     return project;
-            // });
-            // if (!projectUpdated) {
-            //     return new Response(
-            //         JSON.stringify({ error: "Project not found" }),
-            //         { status: 404, headers: { "Content-Type": "application/json" } }
-            //     );
-            // }
+            if (!projectUpdated) {
+                return new Response(
+                    JSON.stringify({ error: "Project not found" }),
+                    {
+                    status: 404,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders,
+                    },
+                    }
+                );
+            }
 
-            // await payload.update({
-            //     collection: "users",
-            //     where: { email: { equals: email } },
-            //     data: { projects: updatedProjects },
-            // });
+            await payload.update({
+                collection: "users",
+                where: { email: { equals: email } },
+                data: { projects: updatedProjects },
+            });
 
             return new Response(JSON.stringify({ success: true, category }), {
                 status: 200,

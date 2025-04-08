@@ -9,6 +9,7 @@ export interface ProjectSeoGuide {
     seoGuides : Array<{
         queryID : string;
         seoEditor : string;
+        category : string;
     }>
 }
 
