@@ -7,7 +7,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import LexicalSeoEditor from './seoEditor';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
@@ -31,6 +31,7 @@ export default function Analysis({data, setIsDirty }) {
     const { user } = useUser();
     const { queryID } = useParams();
     const [seoEditorData, setSeoEditorData] = useState("");
+    const editorRef = useRef(null);
 
     useEffect(() => {
         // Only set graph data when data is available
@@ -64,11 +65,8 @@ export default function Analysis({data, setIsDirty }) {
     const handleAnalyse = async () => {
 
         try {
-            const responseSeoEditorContent = await axios.get(
-                `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
-            );
 
-            const content = responseSeoEditorContent.data.seoEditorData;
+            const content = editorRef.current?.innerText?.trim() || "";
 
             setLoading(true);
 
@@ -90,7 +88,6 @@ export default function Analysis({data, setIsDirty }) {
 
             const result = await response.json();
 
-            console.log(result)
             if (result.success) {
                 const keywordOptimizations = result.keywordOptimizations;
 
@@ -105,6 +102,16 @@ export default function Analysis({data, setIsDirty }) {
                 ];
 
                 setGraphLineData(newGraphLineData);
+
+                await fetch("/api/save_seo_editor_data", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: user.email,
+                        queryID: queryID,
+                        content: content,
+                    }),
+                });
             } else {
                 console.error("Error in optimization response");
             }
@@ -339,7 +346,7 @@ export default function Analysis({data, setIsDirty }) {
             </div>
 
             <div className="p-6 mt-10">
-                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} />
+                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} editorRef={editorRef} />
             </div>
 
             <div className="flex justify-end mr-6">
@@ -348,12 +355,13 @@ export default function Analysis({data, setIsDirty }) {
                     onClick={handleAnalyse}
                 >
                     {loading ? (
-                    <FaSpinner className="animate-spin text-white" />
-                ) : (
-                    <>
-                    <span>Analyse</span>
-                    </>
-                )}
+                        <FaSpinner className="animate-spin text-white" />
+                        ) : (
+                            <>
+                                <span>Analyse</span>
+                            </>
+                        )
+                    }
 
                 </button>
                 <Menu>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { FaMagnifyingGlassChart, FaCodeCompare  } from "react-icons/fa6";
 import { IoReturnUpForwardOutline } from "react-icons/io5";
 import { MdAutoGraph } from "react-icons/md";
@@ -11,10 +11,12 @@ import Compare from './compare';
 import SocialPost from './socialPost';
 import Explore from './explore';
 import Monitoring from './monitoring/monitoring';
+import LexicalSeoEditor from './seoEditor';
 
 export default function LeftSection ({data, setIsDirty }) {
 
     const [activeTab, setActiveTab] = useState("Analysis");
+    const editorRef = useRef(null);
 
     return(
         <div>
@@ -91,7 +93,7 @@ export default function LeftSection ({data, setIsDirty }) {
             <div>
                 {activeTab === 'Analysis' ? (
                     <div>
-                        <Analysis data={data} setIsDirty={setIsDirty} />
+                        <Analysis data={data} setIsDirty={setIsDirty}/>
                     </div>
                 ) : activeTab === 'Compare' ? (
                     <div>
