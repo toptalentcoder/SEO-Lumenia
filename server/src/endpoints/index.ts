@@ -9,14 +9,14 @@ import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
 import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
 import { addProjectToUser } from "./projectManagement/postProject";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
-import { generateSeoAutoEndpoint } from "./seoGuide/generateSeoAutoEndpoint";
-import { generateSeoOutlineEndpoint } from "./seoGuide/generateSeoOutlineEndpoint";
-import { generateSeoQuestionsEndpoint } from "./seoGuide/generateSeoQuestions";
-import { generateSeoRephraseEndpoint } from "./seoGuide/generateSeoRephraseEndpoint";
+import { generateSeoAutoEndpoint } from "./seoGuide/seoEditor/generateSeoAutoEndpoint";
+import { generateSeoOutlineEndpoint } from "./seoGuide/seoEditor/generateSeoOutlineEndpoint";
+import { generateSeoQuestionsEndpoint } from "./seoGuide/seoEditor/generateSeoQuestions";
+import { generateSeoRephraseEndpoint } from "./seoGuide/seoEditor/generateSeoRephraseEndpoint";
 import { createSocialPostEndpoint } from "./seoGuide/createSocialPostEndpoint";
 import { calculateOptimizationLevels } from "./seoGuide/calculateOptimizationLevels";
 import { verifySeoBriefEndpoint } from "./seoGuide/verifySeoBriefEndpoint";
-import { getSeoEditorDataEndpoint } from "./seoGuide/getSeoEditor";
+import { getSeoEditorDataEndpoint } from "./seoGuide/seoEditor/getSeoEditor";
 import { getSocialPostEndpoint } from "./seoGuide/getSocialPost";
 import { generateWebpageTitleMetaEndpoint } from "./seoGuide/generateWebpageTitleMeta";
 import { getWebpageTitleMetaEndpoint } from "./seoGuide/getWebpageTitleMeta";
@@ -25,14 +25,14 @@ import { getMonitoringUrl } from "./seoGuide/monitoring/getMonitoring";
 import { setMonitoringUrl } from "./seoGuide/monitoring/setMonitoring";
 import { getUserProjectList } from "./projectManagement/getProjectList";
 import { getProjectGuides } from "./projectManagement/getProjectByProjectID";
-import { saveSeoEditorDataEndpoint } from "./seoGuide/saveSeoEditorDataEndpoint";
+import { saveSeoEditorDataEndpoint } from "./seoGuide/seoEditor/saveSeoEditorDataEndpoint";
 import { translateSeoEditorEndpoint } from "./seoGuide/translateSeoEditorEndpoint";
 import { generateSeoCategoryEndpoint } from "./seoGuide/generateSeoCategoryEndpoint";
 import { saveOptimizationGraphDataEndpoint } from "./seoGuide/saveGraphdDataEndpoint";
 import { getOptimizationGraphDataEndpoint } from "./seoGuide/getGraphDataEndpoint";
-import { calculateSoseoDseoEndpoint } from "./seoGuide/calculateSoseoAndDseoEndpoint";
-import { saveSoseoDseoEndpoint } from "./seoGuide/save_soseo_dseo";
-import { getSoseoDseoEndpoint } from "./seoGuide/get_soseo_dseo";
+import { calculateSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/calculateSoseoAndDseoEndpoint";
+import { saveSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/save_soseo_dseo";
+import { getSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/get_soseo_dseo";
 
 export const customEndpoints = [
     googleAuthEndpoint,
