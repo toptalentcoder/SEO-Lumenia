@@ -28,6 +28,8 @@ import { getProjectGuides } from "./projectManagement/getProjectByProjectID";
 import { saveSeoEditorDataEndpoint } from "./seoGuide/saveSeoEditorDataEndpoint";
 import { translateSeoEditorEndpoint } from "./seoGuide/translateSeoEditorEndpoint";
 import { generateSeoCategoryEndpoint } from "./seoGuide/generateSeoCategoryEndpoint";
+import { saveOptimizationGraphDataEndpoint } from "./seoGuide/saveGraphdDataEndpoint";
+import { getOptimizationGraphDataEndpoint } from "./seoGuide/getGraphDataEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -59,5 +61,7 @@ export const customEndpoints = [
     getCronjobData,
     getMonitoringUrl,
     setMonitoringUrl,
-    generateSeoCategoryEndpoint
+    generateSeoCategoryEndpoint,
+    saveOptimizationGraphDataEndpoint,
+    getOptimizationGraphDataEndpoint
 ]
