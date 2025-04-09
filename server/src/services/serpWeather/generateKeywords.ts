@@ -14,11 +14,11 @@ export async function generateKeywordsForSERPWeatherCategory(category : string) 
     const prompt = `
         Generate a list of 10 high-quality, SEO-relevant keywords for the "${category}" category.
         Each keyword must:
-        - Be a popular search query that a user might enter into Google.
-        - Be suitable for rank tracking or SERP volatility monitoring
-        - Focued on informational, commercial, or navigational intent.
-        - Avoid placeholder text. Output only the keyword phrases, comma-separated.
-        Return the output as a comma-separated flat list with no numbering.
+            - Be a popular search query that a user might enter into Google.
+            - Be suitable for rank tracking or SERP volatility monitoring
+            - Focued on informational, commercial, or navigational intent.
+            - Avoid placeholder text. Output only the keyword phrases, comma-separated.
+            Return the output as a comma-separated flat list with no numbering.
         ${seedText}
     `
 
