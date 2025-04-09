@@ -1,7 +1,7 @@
 import { CollectionConfig } from "payload";
 
-const Keywords: CollectionConfig = {
-    slug: "keywords",
+export const SerpWeatherKeywords: CollectionConfig = {
+    slug: "serpWeatherKeywords",
     admin: {
         useAsTitle: "keyword",
         defaultColumns: ["keyword", "category", "intent", "features", "createdAt"],
@@ -48,5 +48,3 @@ const Keywords: CollectionConfig = {
         },
     ],
 };
-
-export default Keywords;
