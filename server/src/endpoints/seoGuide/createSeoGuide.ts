@@ -1,5 +1,4 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-
 import { extractWords } from "@/services/createSeoGuide/extractWords";
 import { fetchPageContent } from "@/services/createSeoGuide/fetchPageContent";
 import { getSemanticKeywords } from "@/services/createSeoGuide/getSemanticKeywords";
@@ -8,12 +7,8 @@ import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 import axios from "axios";
 import { calculateDynamicOptimizationRanges } from "@/services/createSeoGuide/assignOptimizationLevel";
-import { calculateSOSEO } from "@/services/createSeoGuide/calculateSOSEO";
-import { calculateDSEO } from "@/services/createSeoGuide/calculateDSEO";
-import { calculateGlobalKeywordFrequencies } from "@/services/createSeoGuide/calculateGlobalKeywordFrequencies";
 import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
-import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculateSOSEOandDSEO";
-
+import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculateSoseoAndDseo";
 interface OrganicResult {
     title: string;
     link: string;
