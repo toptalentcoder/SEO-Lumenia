@@ -33,6 +33,7 @@ import { getOptimizationGraphDataEndpoint } from "./seoGuide/getGraphDataEndpoin
 import { calculateSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/calculateSoseoAndDseoEndpoint";
 import { saveSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/save_soseo_dseo";
 import { getSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/get_soseo_dseo";
+import { generateKeywordsEndpoint } from "./serpWeather/generateKeywordsEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -69,5 +70,6 @@ export const customEndpoints = [
     getOptimizationGraphDataEndpoint,
     calculateSoseoDseoEndpoint,
     saveSoseoDseoEndpoint,
-    getSoseoDseoEndpoint
+    getSoseoDseoEndpoint,
+    generateKeywordsEndpoint
 ]

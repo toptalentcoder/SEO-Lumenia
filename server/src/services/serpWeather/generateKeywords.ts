@@ -12,16 +12,15 @@ export async function generateKeywordsForSERPWeatherCategory(category : string) 
         : "";
 
     const prompt = `
-        Generate a list of 500 real, SEO-relevant keywords for the "${category}" category.
+        Generate a list of 10 high-quality, SEO-relevant keywords for the "${category}" category.
         Each keyword must:
-        - Reflect natural, human-like Google search queries
-        - Be diverse across subtopics within the category
+        - Be a popular search query that a user might enter into Google.
         - Be suitable for rank tracking or SERP volatility monitoring
-        - Be commercial or informational in nature
-        - Avoid duplicates, placeholders, or generic patterns
+        - Focued on informational, commercial, or navigational intent.
+        - Avoid placeholder text. Output only the keyword phrases, comma-separated.
         Return the output as a comma-separated flat list with no numbering.
         ${seedText}
-    `;
+    `
 
     const response = await openai.chat.completions.create({
         model : 'gpt-4',
@@ -30,6 +29,6 @@ export async function generateKeywordsForSERPWeatherCategory(category : string) 
     });
 
     const text = response.choices[0].message?.content ?? "";
-    return text.split(",").map(k => k.trim()).filter(k => k.length > 0);
+    return text.split(",").map(k => k.trim()).filter(k => k.length > 0).slice(0, 10);
 
 }
