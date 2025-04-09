@@ -17,6 +17,7 @@ import { BillingPlan } from './collections/paypalPlan'
 import { createPlansAndGetID } from './services/paypal/plan/CreatePlan'
 import { startDailyRankTracking } from './services/cronjob/monitoring';
 import { SerpWeatherKeywords } from './collections/SerpWeatherKeywords';
+import { SerpSnapshots } from './collections/SerpSanpShots';
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -29,7 +30,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, BillingPlan, SerpWeatherKeywords],
+  collections: [Users, Media, BillingPlan, SerpWeatherKeywords, SerpSnapshots],
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
   editor: lexicalEditor(),
