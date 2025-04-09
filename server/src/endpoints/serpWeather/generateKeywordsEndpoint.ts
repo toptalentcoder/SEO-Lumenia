@@ -1,14 +1,24 @@
-// import { withErrorHandling } from "@/middleware/errorMiddleware";
-// import { Endpoint, PayloadRequest } from "payload";
+import { withErrorHandling } from "@/middleware/errorMiddleware";
+import { saveKeywordsForSERPWeatherCategory } from "@/services/serpWeather/saveKeywordsToDB";
+import { Endpoint, PayloadRequest } from "payload";
 
-// export const generateKeywordsEndpoint : Endpoint = {
+export const generateKeywordsEndpoint : Endpoint = {
 
-//     path : "/generateKeywords",
+    path : "/generateKeywords",
 
-//     method : "post",
+    method : "get",
 
-//     handler : withErrorHandling(async (req : PayloadRequest) => {
+    handler : withErrorHandling(async (req : PayloadRequest) : Promise<Response> => {
 
-//         const { category }
-//     })
-// }
+        const {payload} = req;
+
+        await saveKeywordsForSERPWeatherCategory(payload);
+
+        return new Response(JSON.stringify({ success: true }), {
+            status: 200,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    })
+}
