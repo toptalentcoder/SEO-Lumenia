@@ -15,11 +15,11 @@ export const generateKeywordsEndpoint : Endpoint = {
         const {payload} = req;
 
 
-        const date = new Date().toISOString().split("T")[0]; // Today
-        const result = await calculateImprovedSerpVolatility(payload, date);
-        //await trackKeywordTop10(payload);
+        // const date = new Date().toISOString().split("T")[0]; // Today
+        // const result = await calculateImprovedSerpVolatility(payload, date);
+        await trackKeywordTop10(payload);
 
-        return new Response(JSON.stringify({ success: true, result }), {
+        return new Response(JSON.stringify({ success: true }), {
             status: 200,
             headers: {
                 "Content-Type": "application/json",
