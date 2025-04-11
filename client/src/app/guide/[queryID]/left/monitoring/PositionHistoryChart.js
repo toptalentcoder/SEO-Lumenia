@@ -24,10 +24,10 @@ export default function PositionHistoryChart({ cronjob }) {
                         tickCount={25}
                         interval={0}
                         label={{
-                        value: 'Position',
-                        angle: -90,
-                        position: 'insideLeft',
-                        style: { textAnchor: 'middle' },
+                            value: 'Position',
+                            angle: -90,
+                            position: 'insideLeft',
+                            style: { textAnchor: 'middle' },
                         }}
                     />
                     <Tooltip />
