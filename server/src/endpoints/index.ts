@@ -73,5 +73,6 @@ export const customEndpoints = [
     saveSoseoDseoEndpoint,
     getSoseoDseoEndpoint,
     generateKeywordsEndpoint,
-    getMonitoringData
+    getMonitoringData,
+
 ]
