@@ -23,7 +23,7 @@ export default function Linking(){
 
     return(
         <div className='px-10 py-7'>
-            <p className='text-gray-600 font-semibold text-2xl'>Internal PageRank Leaderboard</p>
+            <p className='text-gray-600 font-semibold text-2xl'>Page Duplication Analysis</p>
 
             <div className='bg-white rounded-2xl mt-2 p-6'>
                 <div className='flex items-center justify-center gap-2'>
@@ -41,8 +41,8 @@ export default function Linking(){
                         </div>
                     ) : currentView === 'input' ? (
                         <div className='w-1/3 text-center'>
-                            <h1 className='font-semibold text-2xl text-gray-700'>Check Your Internal Authority Vision</h1>
-                            <p className='mt-10 text-xl text-gray-600'>Ensure the pages you want to highlight are technically prioritized by your internal linking structure. Enter your site&#39;s URL to see which pages are getting the most internal link equity.</p>
+                            <h1 className='font-semibold text-2xl text-gray-700'>Uncover Your Content&#39;s Uniqueness in a Click.</h1>
+                            <p className='mt-10 text-xl text-gray-600'>Our tool scans for internal content duplication on a site, revealing similarities. Just start with a website&#39;s address.</p>
                         </div>
                     ) : (
                         <div>
