@@ -1,4 +1,4 @@
-import { internalPageRankYourTextGuru } from '@/services/internalPageRank';
+import { internalPageRank } from '@/services/internalPageRank';
 import { Endpoint, PayloadRequest } from 'payload';
 
 // Define the Payload endpoint
@@ -8,7 +8,7 @@ export const myTestEndpoint: Endpoint = {
     handler: async () => {
         try {
 
-            const result = await internalPageRankYourTextGuru();
+            const result = await internalPageRank("https://www.cnet.com");
 
             // Return the collected results
             return new Response(
