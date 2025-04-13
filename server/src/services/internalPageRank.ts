@@ -1,77 +1,88 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-const BASE_URL = 'https://wilmington-services.co.uk/';
+const TIMEOUT = 8000;
 
 async function fetchHTML(url: string): Promise<string | null> {
-  try {
-    const res = await axios.get(url, { timeout: 10000 });
-    return res.data;
-  } catch {
-    return null;
-  }
+    try {
+        const res = await axios.get(url, { timeout: TIMEOUT });
+        return res.data;
+    } catch {
+        return null;
+    }
 }
 
-function extractWeightedLinks(html: string): Record<string, number> {
-  const $ = cheerio.load(html);
-  const counts: Record<string, number> = {};
+function extractWeightedLinks(html: string, base: string): Record<string, number> {
+    const $ = cheerio.load(html);
+    const counts: Record<string, number> = {};
 
-  function add(url: string, weight = 1) {
-    const cleanUrl = url.split('#')[0].replace(/\/$/, '');
-    counts[cleanUrl] = (counts[cleanUrl] || 0) + weight;
-  }
+    const add = (url: string, weight = 1) => {
+        const clean = url.split('#')[0].replace(/\/$/, '');
+        if (clean.startsWith(base)) {
+            counts[clean] = (counts[clean] || 0) + weight;
+        }
+    };
 
-  const weightBySelector: [string, number][] = [
-    ['nav a[href]', 3],
-    ['header a[href]', 3],
-    ['main a[href]', 2],
-    ['section a[href]', 2],
-    ['footer a[href]', 1],
-    ['a[href]', 1],
-  ];
+    const selectors: [string, number][] = [
+        ['nav a[href]', 3],
+        ['header a[href]', 3],
+        ['main a[href]', 2],
+        ['section a[href]', 2],
+        ['footer a[href]', 1],
+        ['a[href]', 1],
+    ];
 
-  for (const [selector, weight] of weightBySelector) {
-    $(selector).each((_, el) => {
-      const href = $(el).attr('href');
-      if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    for (const [selector, weight] of selectors) {
+        $(selector).each((_, el) => {
+            const href = $(el).attr('href');
+            if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      let absUrl = '';
-      if (href.startsWith('/')) absUrl = new URL(href, BASE_URL).href;
-      else if (href.startsWith(BASE_URL)) absUrl = href;
-      else return;
+            let absUrl = '';
+            if (href.startsWith('/')) absUrl = new URL(href, base).href;
+            else if (href.startsWith(base)) absUrl = href;
+            else return;
 
-      add(absUrl, weight);
-    });
-  }
+            add(absUrl, weight);
+        });
+    }
 
-  return counts;
+    return counts;
 }
 
-function normalizeScores(counts: Record<string, number>): { url: string; score: number }[] {
-  const entries = Object.entries(counts);
-  const root = BASE_URL.replace(/\/$/, '');
-  const rootCount = counts[root] || 0;
+function normalizeScores(counts: Record<string, number>, base: string): { url: string; score: number }[] {
+    const root = base.replace(/\/$/, '');
+    const others = Object.entries(counts).filter(([url]) => url !== root);
 
-  const others = entries.filter(([url]) => url !== root);
-  const values = others.map(([, count]) => count);
-  const max = Math.max(...values, 1);
+    const max = Math.max(...others.map(([, c]) => c), 1);
 
-  const scored = others.map(([url, count]) => ({
-    url,
-    score: Math.round((count / max) * 90 + 10), // 10–99 scaling
-  }));
+    const results = others.map(([url, count]) => ({
+        url,
+        score: Math.round((count / max) * 90 + 10),
+    }));
 
-  scored.push({ url: root, score: 100 });
+    results.push({ url: root, score: 100 });
 
-  return scored.sort((a, b) => b.score - a.score).slice(0, 100);
+    return results.sort((a, b) => b.score - a.score).slice(0, 100);
 }
 
-export async function internalPageRankYourTextGuru() {
-  const html = await fetchHTML(BASE_URL);
-  if (!html) return [];
+export async function internalPageRank(baseUrl: string) {
+    const rootHTML = await fetchHTML(baseUrl);
+    if (!rootHTML) return [];
 
-  const weightedCounts = extractWeightedLinks(html);
-  const scored = normalizeScores(weightedCounts);
+    const counts = extractWeightedLinks(rootHTML, baseUrl);
+    const firstLevelLinks = Object.keys(counts);
 
-  return scored;
+    const htmlResults = await Promise.allSettled(firstLevelLinks.map(link => fetchHTML(link)));
+
+    for (let i = 0; i < htmlResults.length; i++) {
+        const result = htmlResults[i];
+        if (result.status === 'fulfilled' && result.value) {
+            const moreLinks = extractWeightedLinks(result.value, baseUrl);
+            for (const [url, count] of Object.entries(moreLinks)) {
+                counts[url] = (counts[url] || 0) + count;
+            }
+        }
+    }
+
+    return normalizeScores(counts, baseUrl);
 }
