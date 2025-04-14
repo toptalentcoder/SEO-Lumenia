@@ -87,7 +87,7 @@ export default function Navbar() {
                             onClick={() => router.push("/dashboard")}
                         >
                             <Image
-                                src="/images/logo.png"
+                                src="/images/favicon.svg"
                                 alt="Hero Image"
                                 width={20} // Bigger size for a premium look
                                 height={20}
