@@ -14,7 +14,6 @@ export const generateKeywordsEndpoint : Endpoint = {
 
         const {payload} = req;
 
-
         // const date = new Date().toISOString().split("T")[0]; // Today
         // const result = await calculateImprovedSerpVolatility(payload, date);
         await trackKeywordTop10(payload);
