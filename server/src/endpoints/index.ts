@@ -36,6 +36,7 @@ import { getSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/get_soseo_dseo";
 import { generateKeywordsEndpoint } from "./serpWeather/generateKeywordsEndpoint";
 import { getMonitoringData } from "./seoGuide/monitoring/getMonitoringData";
 import { myTestEndpoint } from "./mytest";
+import { getAllUserProjects } from "./projectManagement/getAllUserProject";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -49,6 +50,7 @@ export const customEndpoints = [
     getUserProjects,
     getUserProjectList,
     getProjectGuides,
+    getAllUserProjects,
     getSeoGuideByQueryID,
     generateSeoQuestionsEndpoint,
     generateSeoOutlineEndpoint,
