@@ -22,10 +22,10 @@ const HeroTop = () => {
             <div className="bg-[#C0E1E8] rounded-2xl flex items-center shadow-md relative h-40">
                 <div className="absolute -top-6 left-0 z-10">
                     <Image
-                        src="/images/dashboard/guide.png"
+                        src="/images/dashboard/avatar-pc.png"
                         alt="Guide Mascot"
-                        width={200}
-                        height={200}
+                        width={180}
+                        height={150}
                         className="rounded-full"
                     />
                 </div>
@@ -66,11 +66,11 @@ const HeroTop = () => {
 const KeywordPromptCard = () => (
     <div className="relative h-40">
         {/* Floating image */}
-        <div className="absolute -top-8 right-6 z-10">
+        <div className="absolute -top-3 right-3">
             <Image
-                src="/images/dashboard/optimize.png"
+                src="/images/dashboard/avatar-gp.png"
                 alt="optimize"
-                width={220}
+                width={400}
                 height={220}
             />
         </div>
@@ -99,11 +99,11 @@ const KeywordPromptCard = () => (
 const SearchBar = () => (
     <div className="relative h-40">
         {/* Floating image */}
-        <div className="absolute -top-7 right-6 z-10">
+        <div className="absolute -top-3 right-3 z-10">
             <Image
-                src="/images/dashboard/welcome.png"
+                src="/images/dashboard/avatar-sp.png"
                 alt="welcome"
-                width={220}
+                width={400}
                 height={220}
             />
         </div>
