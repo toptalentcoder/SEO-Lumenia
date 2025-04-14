@@ -5,6 +5,7 @@ export interface Project {
     projectID : string;
     projectName: string;
     domainName: string;
+    createdAt? : Date;
 }
 
 export const addProjectToUser: Endpoint = {
@@ -101,7 +102,7 @@ export const addProjectToUser: Endpoint = {
         }
 
         // ✅ Define new project correctly
-        const newProject: Project = { projectID, projectName, domainName };
+        const newProject: Project = { projectID, projectName, domainName, createdAt: new Date() };
 
         // ✅ Update project list
         const updatedProjects: Project[] = [...existingProjects, newProject];
