@@ -31,7 +31,7 @@ export default function Linking(){
             </div>
 
             <div className='bg-white rounded-lg p-10 flex items-start gap-7 mt-8'>
-                <Image src="/avatar.png" alt="alt" width={100} height={100} className='rounded-xl' />
+                <Image src="/images/speyronnet-expert.jpg" alt="alt" width={130} height={130} className='rounded-xl border border-gray-200' />
                 <div className='bg-[#F8FAFD] rounded-lg p-6 border border-gray-300'>
                     <h1 className='text-gray-700 font-semibold text-lg mb-5'>Guillaume Peyronnet - The SEO Expert Guides You</h1>
                     <p className='text-gray-600 text-lg'>Evaluate the strength of your current and future links. To simulate a link to a page that doesn&#39;t exist yet, simply add /* to the end of the URL. For example, use https://example.org/* to indicate that you want to simulate a page from the example.org website.. Link strength is calculated by combining source popularity, trustworthiness, and semantic relevance between the linked pages. This helps you better understand and optimize your linking strategies. The batch mode allows you to industrialize the search for backlinks with the highest ROI.</p>
@@ -109,7 +109,7 @@ export default function Linking(){
                         placeholder='Enter the target URL of the link'
                     />
 
-<div className='bg-white px-6 py-4 rounded-xl'>
+                    <div className='bg-white px-6 py-4 rounded-xl'>
                         <div className='space-y-6 mb-7'>
                             <div className='flex justify-between items-center'>
                                 <div className='flex items-center gap-4'>

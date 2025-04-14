@@ -41,6 +41,15 @@ export default function Linking(){
                         </div>
                     ) : currentView === 'input' ? (
                         <div className='w-1/3 text-center'>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 247.37 245.85"
+                                className="w-20 h-20 text-[#4A4291] fill-current mx-auto mb-14"
+                            >
+                                <path d="m187.77,18.02c-39.17-24.03-88.44-24.03-128.09,0l63.93,76.9L187.77,18.02Z" />
+                                <path d="m89.23,149.48L16.18,63.44C-17.71,124.01,3.44,200.19,62.8,234.79c8.41,4.57,17.3,8.41,26.2,11.05v-96.37h.24Z" />
+                                <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
+                            </svg>
                             <h1 className='font-semibold text-2xl text-gray-700'>Check Your Internal Authority Vision</h1>
                             <p className='mt-10 text-xl text-gray-600'>Ensure the pages you want to highlight are technically prioritized by your internal linking structure. Enter your site&#39;s URL to see which pages are getting the most internal link equity.</p>
                         </div>
