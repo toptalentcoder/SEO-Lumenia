@@ -4,6 +4,7 @@ import { Endpoint, PayloadRequest } from "payload";
 interface FlattenedGuide {
     projectName: string;
     projectID: string;
+    domainName ? : string;
     query: string;
     queryID: string;
     queryEngine: string;
@@ -14,6 +15,7 @@ interface FlattenedGuide {
 interface Project {
     projectName?: string;
     projectID?: string;
+    domainName ? : string;
     seoGuides?: {
         query?: string;
         queryID?: string;
@@ -94,6 +96,7 @@ export const getProjectGuides: Endpoint = {
         const guides: FlattenedGuide[] = (selectedProject.seoGuides || []).map((guide) => ({
             projectName: selectedProject.projectName || '',
             projectID: selectedProject.projectID || '',
+            domainName : selectedProject.domainName || '',
             query: guide.query || '',
             queryID: guide.queryID || '',
             queryEngine: guide.queryEngine || '',
