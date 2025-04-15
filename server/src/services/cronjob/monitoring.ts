@@ -1,6 +1,7 @@
 import cron from 'node-cron';
 import { Payload } from 'payload';
 import axios from 'axios';
+import { saveKeywordsForSERPWeatherCategory } from '../serpWeather/saveKeywordsToDB';
 
 // --------- TYPES ---------
 
@@ -56,7 +57,6 @@ export function startDailyRankTracking(payload: Payload) {
         // For the test mode
         // const now = new Date();
         // const today = `${now.toISOString().split("T")[0]}-${now.getHours()}-${now.getMinutes()}`;
-
 
         const { docs: shallowUsers } = await payload.find({ collection: 'users', limit: 9999 });
 
@@ -150,5 +150,9 @@ export function startDailyRankTracking(payload: Payload) {
         }
 
         console.log("✅ All users' rank tracking complete.");
+
+        await saveKeywordsForSERPWeatherCategory(payload);
+
+        console.log("✅ All Keywords for SERP Weather Category saved.")
     });
 }
