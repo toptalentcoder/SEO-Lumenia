@@ -1,4 +1,3 @@
-// ✅ 3. Volatility Calculator
 import { Payload } from "payload";
 
 interface SerpResult {
@@ -10,51 +9,43 @@ interface SerpResult {
 interface SnapshotDoc {
     keyword: string;
     category: string;
-    date: string;
-    results: SerpResult[];
+    tracking: {
+        date: string;
+        results: SerpResult[];
+    }[];
 }
 
-export async function calculateImprovedSerpVolatility(payload: Payload, date: string): Promise<Record<string, number>> {
+export async function calculateImprovedSerpVolatility(
+    payload: Payload,
+    date: string
+): Promise<Record<string, number>> {
     const today = date;
-    const yesterday = new Date(new Date(today).getTime() - 86400000).toISOString().split("T")[0];
+    const yesterday = new Date(
+        new Date(today).getTime() - 86400000
+    ).toISOString().split("T")[0];
 
-    const todaySnapshots = await payload.find({
+    // ✅ fetch all and filter in-memory
+    const snapshotData = await payload.find({
         collection: "serpSnapshots",
-        where: { date: { equals: today } },
         limit: 10000,
     });
-
-    const yesterdaySnapshots = await payload.find({
-        collection: "serpSnapshots",
-        where: { date: { equals: yesterday } },
-        limit: 10000,
-    });
-
-    const yesterdayMap = new Map<string, SerpResult[]>();
-    const yesterdayDocs = yesterdaySnapshots.docs as unknown as SnapshotDoc[];
-    for (const doc of yesterdayDocs) {
-        yesterdayMap.set(doc.keyword, doc.results);
-    }
 
     const categoryFlux: Record<string, { totalChange: number; count: number }> = {};
 
-    for (const todayDoc of (todaySnapshots.docs as unknown as SnapshotDoc[]).filter((doc): doc is SnapshotDoc =>
-        typeof doc.keyword === "string" &&
-        typeof doc.category === "string" &&
-        typeof doc.date === "string" &&
-        Array.isArray(doc.results)
-    )) {
-        const yesterdayResults = yesterdayMap.get(todayDoc.keyword) || [];
-        const todayResults = todayDoc.results;
+    for (const doc of snapshotData.docs as unknown as SnapshotDoc[]) {
+        const todayEntry = doc.tracking.find((t) => t.date === today);
+        const yesterdayEntry = doc.tracking.find((t) => t.date === yesterday);
 
-        const flux = calculateFlux(todayResults, yesterdayResults);
+        if (!todayEntry || !yesterdayEntry) continue;
 
-        if (!categoryFlux[todayDoc.category]) {
-            categoryFlux[todayDoc.category] = { totalChange: 0, count: 0 };
+        const flux = calculateFlux(todayEntry.results, yesterdayEntry.results);
+
+        if (!categoryFlux[doc.category]) {
+            categoryFlux[doc.category] = { totalChange: 0, count: 0 };
         }
 
-        categoryFlux[todayDoc.category].totalChange += flux;
-        categoryFlux[todayDoc.category].count++;
+        categoryFlux[doc.category].totalChange += flux;
+        categoryFlux[doc.category].count++;
     }
 
     const finalScores: Record<string, number> = {};
@@ -66,7 +57,7 @@ export async function calculateImprovedSerpVolatility(payload: Payload, date: st
     }
 
     return finalScores;
-}
+    }
 
 function calculateFlux(today: SerpResult[], yesterday: SerpResult[]): number {
     const fluxMap = new Map<string, number>();
@@ -75,21 +66,19 @@ function calculateFlux(today: SerpResult[], yesterday: SerpResult[]): number {
     let flux = 0;
     const matched = new Set<string>();
 
-    // Flux for persistent or new entries
     today.forEach((entry) => {
         const prevRank = fluxMap.get(entry.link);
-        if (prevRank) {
-            flux += Math.abs(prevRank - entry.rank); // moved
+        if (prevRank !== undefined) {
+            flux += Math.abs(prevRank - entry.rank);
         } else {
-            flux += 10 - entry.rank; // new entry in top 10
+            flux += 10 - entry.rank;
         }
         matched.add(entry.link);
     });
 
-    // Flux for dropped entries
     yesterday.forEach((entry) => {
         if (!matched.has(entry.link)) {
-            flux += 10; // dropped from top 10
+            flux += 10;
         }
     });
 
