@@ -1,7 +1,6 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { calculateImprovedSerpVolatility } from "@/services/serpWeather/calculateSerpVolatility";
-import { saveKeywordsForSERPWeatherCategory } from "@/services/serpWeather/saveKeywordsToDB";
-import { trackKeywordTop10 } from "@/services/serpWeather/trackKeywords";
+import { saveDailyVolatilityScores } from "@/services/serpWeather/trackKeywords";
 import { Endpoint, PayloadRequest } from "payload";
 
 export const generateKeywordsEndpoint : Endpoint = {
@@ -16,7 +15,7 @@ export const generateKeywordsEndpoint : Endpoint = {
 
         // const date = new Date().toISOString().split("T")[0]; // Today
         // const result = await calculateImprovedSerpVolatility(payload, date);
-        await trackKeywordTop10(payload);
+        await saveDailyVolatilityScores(payload);
 
         return new Response(JSON.stringify({ success: true }), {
             status: 200,
