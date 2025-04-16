@@ -19,6 +19,7 @@ import { startDailyRankTracking } from './services/cronjob/monitoring';
 import { SerpWeatherKeywords } from './collections/SerpWeatherKeywords';
 import { SerpVolatilityScores } from './collections/SerpVolatilityScores';
 import { SerpSnapshots } from './collections/SerpSnapShots';
+import { InternalPageRanks } from './collections/internalPageRank';
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -31,7 +32,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, BillingPlan, SerpWeatherKeywords, SerpVolatilityScores, SerpSnapshots],
+  collections: [Users, Media, BillingPlan, SerpWeatherKeywords, SerpVolatilityScores, SerpSnapshots, InternalPageRanks],
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
   editor: lexicalEditor(),
