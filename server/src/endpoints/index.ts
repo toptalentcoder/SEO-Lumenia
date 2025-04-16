@@ -37,6 +37,7 @@ import { generateKeywordsEndpoint } from "./serpWeather/generateKeywordsEndpoint
 import { getMonitoringData } from "./seoGuide/monitoring/getMonitoringData";
 import { myTestEndpoint } from "./mytest";
 import { getAllUserProjects } from "./projectManagement/getAllUserProject";
+import { internalPageRankEndpoint } from "./internalPageRankEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -77,5 +78,6 @@ export const customEndpoints = [
     getSoseoDseoEndpoint,
     generateKeywordsEndpoint,
     getMonitoringData,
+    internalPageRankEndpoint,
     myTestEndpoint
 ]
