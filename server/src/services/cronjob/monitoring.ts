@@ -2,6 +2,7 @@ import cron from 'node-cron';
 import { Payload } from 'payload';
 import axios from 'axios';
 import { saveKeywordsForSERPWeatherCategory } from '../serpWeather/saveKeywordsToDB';
+import { internalPageRank } from '../internalPageRank';
 
 // --------- TYPES ---------
 
@@ -154,5 +155,29 @@ export function startDailyRankTracking(payload: Payload) {
         await saveKeywordsForSERPWeatherCategory(payload);
 
         console.log("✅ All Keywords for SERP Weather Category saved.")
+
+
+        // Internal page rank cronjob
+        const { docs } = await payload.find({
+            collection: 'internalPageRanks',
+            limit: 100,
+        });
+
+        for (const record of docs) {
+            const scores = await internalPageRank(record.baseUrl);
+
+            await payload.update({
+                collection: 'internalPageRanks',
+                where: { baseUrl: { equals: record.baseUrl } },
+                data: {
+                    scores,
+                    lastCrawledAt: new Date().toISOString(),
+                },
+            });
+
+            console.log(`🔄 Refreshed PageRank for ${record.baseUrl}`);
+        }
+
+        console.log("✅ Monthly global internal PageRank refresh complete.");
     });
 }
