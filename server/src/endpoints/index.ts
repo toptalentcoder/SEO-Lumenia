@@ -38,6 +38,7 @@ import { getMonitoringData } from "./seoGuide/monitoring/getMonitoringData";
 import { myTestEndpoint } from "./mytest";
 import { getAllUserProjects } from "./projectManagement/getAllUserProject";
 import { internalPageRankEndpoint } from "./internalPageRankEndpoint";
+import { pageDuplicationEndpoint } from "./pageDuplicationEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -79,5 +80,6 @@ export const customEndpoints = [
     generateKeywordsEndpoint,
     getMonitoringData,
     internalPageRankEndpoint,
-    myTestEndpoint
+    myTestEndpoint,
+    pageDuplicationEndpoint
 ]
