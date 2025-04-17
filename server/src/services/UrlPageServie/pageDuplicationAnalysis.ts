@@ -18,7 +18,20 @@ function cosineSimilarity(a: string, b: string): number {
     return magnitudeA && magnitudeB ? (dotProduct / (magnitudeA * magnitudeB)) * 100 : 0;
 }
 
-export async function pageDuplicationAnalysis(baseUrl: string, payload : Payload): Promise<void> {
+export async function pageDuplicationAnalysis(baseUrl: string, payload: Payload): Promise<void> {
+    // ✅ Return early if already exists
+    const existing = await payload.find({
+        collection: 'page-duplicates',
+        where: { baseUrl: { equals: baseUrl } },
+        limit: 1,
+    });
+
+    if (existing.docs.length) {
+        console.log(`🟡 Page duplicates for ${baseUrl} already exist. Skipping analysis.`);
+        return;
+    }
+
+    // ✅ Continue if not cached
     const { urls } = await getOrFetchInternalUrls(baseUrl, payload);
 
     const pages = await Promise.all(
@@ -32,6 +45,13 @@ export async function pageDuplicationAnalysis(baseUrl: string, payload : Payload
         })
     );
 
+    const duplicates: {
+        urlA: string;
+        urlB: string;
+        score: number;
+        status: 'Perfect' | 'OK' | 'Danger';
+    }[] = [];
+
     for (let i = 0; i < pages.length; i++) {
         for (let j = i + 1; j < pages.length; j++) {
         const a = pages[i];
@@ -41,17 +61,23 @@ export async function pageDuplicationAnalysis(baseUrl: string, payload : Payload
         const score = Math.round(cosineSimilarity(a.content, b.content));
         const status = score >= 85 ? 'Danger' : score >= 50 ? 'OK' : 'Perfect';
 
-        await payload.create({
-            collection: 'page-duplicates',
-            data: {
-                baseUrl,
-                urlA: a.url,
-                urlB: b.url,
-                score,
-                status,
-                analyzedAt: new Date().toISOString(),
-            },
+        duplicates.push({
+            urlA: a.url,
+            urlB: b.url,
+            score,
+            status,
         });
         }
     }
+
+    await payload.create({
+        collection: 'page-duplicates',
+        data: {
+        baseUrl,
+        duplicates,
+        analyzedAt: new Date().toISOString(),
+        },
+    });
+
+    console.log(`✅ Page duplication analysis completed for ${baseUrl}`);
 }

@@ -1,10 +1,11 @@
+// src/collections/PageDuplicates.ts
 import type { CollectionConfig } from 'payload';
 
 export const PageDuplicates: CollectionConfig = {
     slug: 'page-duplicates',
     admin: {
-        useAsTitle: 'urlA',
-        defaultColumns: ['baseUrl', 'urlA', 'urlB', 'score', 'status', 'analyzedAt'],
+        useAsTitle: 'baseUrl',
+        defaultColumns: ['baseUrl', 'analyzedAt'],
     },
     access: {
         read: () => true,
@@ -16,33 +17,27 @@ export const PageDuplicates: CollectionConfig = {
             name: 'baseUrl',
             type: 'text',
             required: true,
+            unique: true,
         },
         {
-            name: 'urlA',
-            type: 'text',
+            name: 'duplicates',
+            type: 'array',
             required: true,
-        },
-        {
-            name: 'urlB',
-            type: 'text',
-            required: true,
-        },
-        {
-            name: 'score',
-            type: 'number',
-            required: true,
-            min: 0,
-            max: 100,
-        },
-        {
-            name: 'status',
-            type: 'select',
-            options: [
-                { label: 'Perfect', value: 'Perfect' },
-                { label: 'OK', value: 'OK' },
-                { label: 'Danger', value: 'Danger' },
+            fields: [
+                { name: 'urlA', type: 'text', required: true },
+                { name: 'urlB', type: 'text', required: true },
+                { name: 'score', type: 'number', required: true, min: 0, max: 100 },
+                {
+                    name: 'status',
+                    type: 'select',
+                    required: true,
+                    options: [
+                        { label: 'Perfect', value: 'Perfect' },
+                        { label: 'OK', value: 'OK' },
+                        { label: 'Danger', value: 'Danger' },
+                    ],
+                },
             ],
-            required: true,
         },
         {
             name: 'analyzedAt',
