@@ -2,7 +2,7 @@ import cron from 'node-cron';
 import { Payload } from 'payload';
 import axios from 'axios';
 import { saveKeywordsForSERPWeatherCategory } from '../serpWeather/saveKeywordsToDB';
-import { internalPageRank } from '../internalPageRank';
+import { internalPageRank } from '../UrlPageServie/internalPageRank';
 
 // --------- TYPES ---------
 
