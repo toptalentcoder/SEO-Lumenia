@@ -2,9 +2,20 @@
 
 import { useState } from 'react';
 import { useSearchView } from '../../../hooks/useSearchView';
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { ExternalLink } from "lucide-react";
 import Image from 'next/image';
+import { FaCirclePlus } from "react-icons/fa6";
+import { IoIosCloseCircle } from "react-icons/io";
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+    Cell
+} from 'recharts';
 
 export default function PageDuplication() {
     const { currentView, switchToResults, switchToInput } = useSearchView();
@@ -12,6 +23,8 @@ export default function PageDuplication() {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState([]);
     const [summary, setSummary] = useState(null);
+    const [histogram, setHistogram] = useState([]);
+
 
     const handleSearch = async () => {
         if (!inputUrl) return;
@@ -26,6 +39,7 @@ export default function PageDuplication() {
             if (json?.result?.data?.length) {
                 setResult(json.result.data);
                 setSummary(json.result.summary);
+                setHistogram(json.result.histogram);
                 switchToResults(json.result.data); // Switch view to results
             }
         } catch (err) {
@@ -55,30 +69,70 @@ export default function PageDuplication() {
 
     const renderTable = () => (
         <div className="mt-10">
-            <div className="bg-white rounded-xl p-8 flex items-start gap-6 mb-6">
-                <Image src="/images/pcalvet-expert.jpg" alt="Expert" width={100} height={100} className="rounded-xl border" />
-                <div className="bg-[#F8FAFD] rounded-lg p-6 border border-gray-300">
-                <h1 className="text-gray-700 font-semibold text-lg mb-3">Guillaume Peyronnet - The SEO Expert Guides You</h1>
-                <p className="text-gray-600 text-lg">Identified specific page pairs on this site showing significant duplication. Review them to confirm if intentional, as it may impact SEO.</p>
-                </div>
-            </div>
 
             {summary && (
-                <div className="flex gap-6 mb-6">
-                    <div className="bg-green-100 text-green-700 p-4 rounded-lg w-1/3 text-center">
-                        <div className="text-xl font-bold">Perfect</div>
-                        <div className="text-2xl">{summary.perfect}</div>
+                <div className="flex gap-6 mb-6 justify-center">
+                    <div className="bg-white text-green-700 p-4 rounded-lg w-1/6 text-center shadow-2xl">
+                        <div className='flex justify-between items-center'>
+                            <div className="text-sm font-bold text-gray-500">Perfect</div>
+                            <div className="text-2xl text-gray-500">{summary.perfect}K</div>
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <div className="text-3xl font-bold"><FaCheckCircle/></div>
+                            <div className="text-sm text-gray-500">{summary.perfect}</div>
+                        </div>
                     </div>
-                    <div className="bg-yellow-100 text-yellow-700 p-4 rounded-lg w-1/3 text-center">
-                        <div className="text-xl font-bold">OK</div>
-                        <div className="text-2xl">{summary.ok}</div>
+                    <div className="bg-white text-yellow-500 p-4 rounded-lg w-1/6 text-center shadow-2xl">
+                        <div className='flex justify-between items-center'>
+                            <div className="text-sm font-bold text-gray-500">OK</div>
+                            <div className="text-2xl text-gray-500">{summary.ok}K</div>
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <div className="text-3xl font-bold"><FaCirclePlus/></div>
+                            <div className="text-sm text-gray-500">{summary.ok}</div>
+                        </div>
                     </div>
-                    <div className="bg-red-100 text-red-700 p-4 rounded-lg w-1/3 text-center">
-                        <div className="text-xl font-bold">Danger</div>
-                        <div className="text-2xl">{summary.danger}</div>
+                    <div className="bg-white text-red-700 p-4 rounded-lg w-1/6 text-center shadow-2xl">
+                        <div className='flex justify-between items-center'>
+                            <div className="text-sm font-bold text-gray-500">Danger!</div>
+                            <div className="text-2xl text-gray-500">{summary.danger}K</div>
+                        </div>
+                        <div className='flex justify-between items-center'>
+                            <div className="text-4xl font-bold"><IoIosCloseCircle/></div>
+                            <div className="text-sm text-gray-500">{summary.danger}</div>
+                        </div>
                     </div>
                 </div>
             )}
+
+            {histogram?.length > 0 && (
+                <div className="bg-white rounded-xl p-8 mb-10 mt-14">
+                    <ResponsiveContainer width="100%" height={300}>
+                        <BarChart data={histogram}>
+                            <XAxis dataKey="score" tickFormatter={(tick) => `${tick}%`} />
+                            <YAxis />
+                            <Tooltip formatter={(value) => `${value.toLocaleString()} pairs`} />
+                            <Bar dataKey="count">
+                            {histogram.map((entry, index) => {
+                                const color =
+                                entry.score >= 85 ? '#DC2626' : entry.score >= 50 ? '#FACC15' : '#22C55E';
+                                return <Cell key={`cell-${index}`} fill={color} />;
+                            })}
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+            )}
+
+
+            <div className="bg-white rounded-xl p-8 flex items-start gap-6 mb-6">
+                <Image src="/images/pcalvet-expert.jpg" alt="Expert" width={100} height={100} className="rounded-xl border" />
+                <div className="bg-[#F8FAFD] rounded-lg p-6 border border-gray-300">
+                <h1 className="text-gray-700 font-semibold text-lg mb-3">Pierre Calvet - The SEO Expert Guides You</h1>
+                <p className="text-gray-600 text-lg">Identified specific page pairs on this site show significant duplication. Review them to confirm if intentional, as it may impact SEO.</p>
+                </div>
+            </div>
+
 
             <div className="text-right mb-4">
                 <button
@@ -92,27 +146,27 @@ export default function PageDuplication() {
             <table className="w-full text-left text-sm rounded-lg border border-gray-200 overflow-hidden">
                 <thead className="border-b border-gray-200 text-lg">
                     <tr>
-                        <th className="py-3 px-4">Score</th>
-                        <th className="py-3 px-4">URL A</th>
-                        <th className="py-3 px-4">URL B</th>
+                        <th className="py-3 px-4">Duplication Score</th>
+                        <th className="py-3 px-4"></th>
+                        <th className="py-3 px-4"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {result.map((item, index) => (
                         <tr key={index} className="border-b border-gray-100 odd:bg-gray-50 even:bg-white">
-                            <td className="py-2 px-4">
+                            <td className="py-2 px-4 w-1/12">
                                 <span className={`inline-block text-white font-bold px-3 py-1 rounded-xl text-sm ${
-                                item.status === 'Danger' ? 'bg-red-600' : item.status === 'OK' ? 'bg-yellow-500' : 'bg-green-600'
+                                    item.status === 'Danger' ? 'bg-red-600' : item.status === 'OK' ? 'bg-yellow-500' : 'bg-green-600'
                                 }`}>
-                                {item.score}%
+                                    {item.score}%
                                 </span>
                             </td>
-                            <td className="py-2 px-4 text-blue-800">
+                            <td className="py-2 px-4 text-blue-800 w-1/4">
                                 <a href={item.urlA} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
                                     {item.urlA} <ExternalLink size={14} />
                                 </a>
                             </td>
-                            <td className="py-2 px-4 text-blue-800">
+                            <td className="py-2 px-4 text-blue-800 w-1/4">
                                 <a href={item.urlB} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
                                     {item.urlB} <ExternalLink size={14} />
                                 </a>
