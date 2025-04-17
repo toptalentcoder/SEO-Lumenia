@@ -1,46 +1,154 @@
-"use client"
+"use client";
 
 import { useState } from 'react';
 import { useSearchView } from '../../../hooks/useSearchView';
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle } from "react-icons/fa";
+import { ExternalLink } from "lucide-react";
+import Image from 'next/image';
 
-export default function Linking(){
-
-    const {currentView, responseData, switchToResults, switchToInput } = useSearchView();
+export default function PageDuplication() {
+    const { currentView, switchToResults, switchToInput } = useSearchView();
+    const [inputUrl, setInputUrl] = useState("");
     const [loading, setLoading] = useState(false);
+    const [result, setResult] = useState([]);
+    const [summary, setSummary] = useState(null);
 
-    const handleSearch = async (data) => {
-        setLoading(true); // Start loading animation
-
+    const handleSearch = async () => {
+        if (!inputUrl) return;
+        setLoading(true);
         try {
-            // Store the response and show results
-            switchToResults(data);
-        } catch (error) {
-            console.error("Search failed:", error);
+            const res = await fetch("/api/page-duplication", {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: inputUrl }),
+                headers: { "Content-Type": "application/json" },
+            });
+            const json = await res.json();
+            if (json?.result?.data?.length) {
+                setResult(json.result.data);
+                setSummary(json.result.summary);
+                switchToResults(json.result.data); // Switch view to results
+            }
+        } catch (err) {
+            console.error("Fetch failed", err);
         } finally {
-            setLoading(false); // Stop loading animation
+            setLoading(false);
         }
     };
 
-    return(
-        <div className='px-10 py-7'>
-            <p className='text-gray-600 font-semibold text-2xl'>Page Duplication Analysis</p>
+    const exportToCSV = () => {
+        if (!result.length) return;
+        const headers = ["Score", "URL A", "URL B"];
+        const rows = result.map(d => [d.score, d.urlA, d.urlB]);
+        const csvContent = [headers, ...rows]
+        .map(row => row.map(cell => `"${cell}"`).join(","))
+        .join("\n");
 
-            <div className='bg-white rounded-2xl mt-2 p-6'>
-                <div className='flex items-center justify-center gap-2'>
-                    <input
-                        type='text'
-                        className='border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2'
-                        placeholder='Website'
-                    />
-                    <button className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm">OK</button>
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", "page-duplicates.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const renderTable = () => (
+        <div className="mt-10">
+            <div className="bg-white rounded-xl p-8 flex items-start gap-6 mb-6">
+                <Image src="/images/pcalvet-expert.jpg" alt="Expert" width={100} height={100} className="rounded-xl border" />
+                <div className="bg-[#F8FAFD] rounded-lg p-6 border border-gray-300">
+                <h1 className="text-gray-700 font-semibold text-lg mb-3">Guillaume Peyronnet - The SEO Expert Guides You</h1>
+                <p className="text-gray-600 text-lg">Identified specific page pairs on this site showing significant duplication. Review them to confirm if intentional, as it may impact SEO.</p>
                 </div>
-                <div className='flex justify-center mt-20 mb-20'>
+            </div>
+
+            {summary && (
+                <div className="flex gap-6 mb-6">
+                    <div className="bg-green-100 text-green-700 p-4 rounded-lg w-1/3 text-center">
+                        <div className="text-xl font-bold">Perfect</div>
+                        <div className="text-2xl">{summary.perfect}</div>
+                    </div>
+                    <div className="bg-yellow-100 text-yellow-700 p-4 rounded-lg w-1/3 text-center">
+                        <div className="text-xl font-bold">OK</div>
+                        <div className="text-2xl">{summary.ok}</div>
+                    </div>
+                    <div className="bg-red-100 text-red-700 p-4 rounded-lg w-1/3 text-center">
+                        <div className="text-xl font-bold">Danger</div>
+                        <div className="text-2xl">{summary.danger}</div>
+                    </div>
+                </div>
+            )}
+
+            <div className="text-right mb-4">
+                <button
+                    className="bg-[#41388C] text-white text-sm px-5 py-2.5 rounded-lg"
+                    onClick={exportToCSV}
+                >
+                    Export (CSV)
+                </button>
+            </div>
+
+            <table className="w-full text-left text-sm rounded-lg border border-gray-200 overflow-hidden">
+                <thead className="border-b border-gray-200 text-lg">
+                    <tr>
+                        <th className="py-3 px-4">Score</th>
+                        <th className="py-3 px-4">URL A</th>
+                        <th className="py-3 px-4">URL B</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {result.map((item, index) => (
+                        <tr key={index} className="border-b border-gray-100 odd:bg-gray-50 even:bg-white">
+                            <td className="py-2 px-4">
+                                <span className={`inline-block text-white font-bold px-3 py-1 rounded-xl text-sm ${
+                                item.status === 'Danger' ? 'bg-red-600' : item.status === 'OK' ? 'bg-yellow-500' : 'bg-green-600'
+                                }`}>
+                                {item.score}%
+                                </span>
+                            </td>
+                            <td className="py-2 px-4 text-blue-800">
+                                <a href={item.urlA} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                                    {item.urlA} <ExternalLink size={14} />
+                                </a>
+                            </td>
+                            <td className="py-2 px-4 text-blue-800">
+                                <a href={item.urlB} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                                    {item.urlB} <ExternalLink size={14} />
+                                </a>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+
+    return (
+        <div className="px-10 py-7">
+            <p className="text-gray-600 font-semibold text-2xl">Page Duplication Analysis</p>
+            <div className="bg-white rounded-2xl mt-2 p-6">
+                <div className="flex items-center justify-center gap-2">
+                    <input
+                        type="text"
+                        value={inputUrl}
+                        onChange={(e) => setInputUrl(e.target.value)}
+                        className="border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2"
+                        placeholder="Website"
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
+                    >
+                        OK
+                    </button>
+                </div>
+
+                <div className="flex justify-center mb-20">
                     {loading ? (
-                        <div>
-                            Loading....
-                        </div>
-                    ) : currentView === 'input' ? (
-                        <div className='w-1/3 text-center'>
+                        <div className="mt-10">Loading...</div>
+                    ) : currentView === "input" && result.length === 0 ? (
+                        <div className="w-1/3 text-center mt-20">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 247.37 245.85"
@@ -50,18 +158,18 @@ export default function Linking(){
                                 <path d="m89.23,149.48L16.18,63.44C-17.71,124.01,3.44,200.19,62.8,234.79c8.41,4.57,17.3,8.41,26.2,11.05v-96.37h.24Z" />
                                 <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
                             </svg>
-                            <h1 className='font-semibold text-2xl text-gray-700'>Uncover Your Content&#39;s Uniqueness in a Click.</h1>
-                            <p className='mt-10 text-xl text-gray-600'>Our tool scans for internal content duplication on a site, revealing similarities. Just start with a website&#39;s address.</p>
+                            <h1 className="font-semibold text-2xl text-gray-700">
+                                Uncover Your Content’s Uniqueness in a Click
+                            </h1>
+                            <p className="mt-10 text-xl text-gray-600">
+                                Scan for duplicate content within your website and identify high-similarity page pairs.
+                            </p>
                         </div>
                     ) : (
-                        <div>
-                            ResultView
-                        </div>
+                        renderTable()
                     )}
                 </div>
-
             </div>
-
         </div>
-    )
+    );
 }
