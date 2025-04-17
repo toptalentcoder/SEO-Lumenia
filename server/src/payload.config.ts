@@ -21,6 +21,7 @@ import { SerpVolatilityScores } from './collections/SerpVolatilityScores';
 import { SerpSnapshots } from './collections/SerpSnapShots';
 import { InternalPageRanks } from './collections/internalPageRank';
 import { InternalUrls } from './collections/internalUrlsCollection';
+import { PageDuplicates } from './collections/pageDuplicates';
 
 
 
@@ -34,7 +35,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, BillingPlan, SerpWeatherKeywords, SerpVolatilityScores, SerpSnapshots, InternalPageRanks, InternalUrls],
+  collections: [Users, Media, BillingPlan, SerpWeatherKeywords, SerpVolatilityScores, SerpSnapshots, InternalPageRanks, InternalUrls, PageDuplicates],
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
   editor: lexicalEditor(),
