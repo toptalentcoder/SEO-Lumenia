@@ -18,10 +18,10 @@ export const pageDuplicationEndpoint: Endpoint = {
             });
         }
 
-        await pageDuplicationAnalysis(baseUrl, payload);
+        const result = await pageDuplicationAnalysis(baseUrl, payload);
 
         return new Response(
-            JSON.stringify({ success: true }),
+            JSON.stringify({ success: true, result }),
             { status: 200, headers: { "Content-Type": "application/json" } }
         );
     },
