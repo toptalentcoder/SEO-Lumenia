@@ -1,7 +1,7 @@
 import { Endpoint } from "payload";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { PayloadRequest } from "payload";
-import { internalPageRank } from "@/services/internalPageRank";
+import { internalPageRank } from "@/services/UrlPageServie/internalPageRank";
 
 export const internalPageRankEndpoint: Endpoint = {
     path: "/internal_pagerank",
@@ -31,7 +31,7 @@ export const internalPageRankEndpoint: Endpoint = {
             );
         }
 
-        const scores = await internalPageRank(baseUrl);
+        const scores = await internalPageRank(baseUrl, payload);
 
         await payload.create({
             collection: "internalPageRanks",

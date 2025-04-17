@@ -1,27 +1,11 @@
-import axios from 'axios';
 import * as cheerio from 'cheerio';
-
-const TIMEOUT = 8000;
-
-async function fetchHTML(url: string): Promise<string | null> {
-    try {
-        const res = await axios.get(url, { timeout: TIMEOUT });
-        return res.data;
-    } catch {
-        return null;
-    }
-}
+import { getOrFetchInternalUrls } from './getOrFetchInternalPageUrls';
+import { fetchHTML } from './fetchHtml';
+import { Payload } from 'payload';
 
 function extractWeightedLinks(html: string, base: string): Record<string, number> {
     const $ = cheerio.load(html);
     const counts: Record<string, number> = {};
-
-    const add = (url: string, weight = 1) => {
-        const clean = url.split('#')[0].replace(/\/$/, '');
-        if (clean.startsWith(base)) {
-            counts[clean] = (counts[clean] || 0) + weight;
-        }
-    };
 
     const selectors: [string, number][] = [
         ['nav a[href]', 3],
@@ -42,7 +26,8 @@ function extractWeightedLinks(html: string, base: string): Record<string, number
             else if (href.startsWith(base)) absUrl = href;
             else return;
 
-            add(absUrl, weight);
+            const clean = absUrl.split('#')[0].replace(/\/$/, '');
+            if (clean.startsWith(base)) counts[clean] = (counts[clean] || 0) + weight;
         });
     }
 
@@ -52,7 +37,6 @@ function extractWeightedLinks(html: string, base: string): Record<string, number
 function normalizeScores(counts: Record<string, number>, base: string): { url: string; score: number }[] {
     const root = base.replace(/\/$/, '');
     const others = Object.entries(counts).filter(([url]) => url !== root);
-
     const max = Math.max(...others.map(([, c]) => c), 1);
 
     const results = others.map(([url, count]) => ({
@@ -61,21 +45,18 @@ function normalizeScores(counts: Record<string, number>, base: string): { url: s
     }));
 
     results.push({ url: root, score: 100 });
-
     return results.sort((a, b) => b.score - a.score).slice(0, 100);
 }
 
-export async function internalPageRank(baseUrl: string) {
-    const rootHTML = await fetchHTML(baseUrl);
-    if (!rootHTML) return [];
+export async function internalPageRank(baseUrl: string, payload : Payload) {
+    const { urls, rootHTML } = await getOrFetchInternalUrls(baseUrl, payload);
+    const html = rootHTML || await fetchHTML(baseUrl);
+    if (!html) return [];
 
-    const counts = extractWeightedLinks(rootHTML, baseUrl);
-    const firstLevelLinks = Object.keys(counts);
+    const counts = extractWeightedLinks(html, baseUrl);
+    const htmlResults = await Promise.allSettled(urls.map(link => fetchHTML(link)));
 
-    const htmlResults = await Promise.allSettled(firstLevelLinks.map(link => fetchHTML(link)));
-
-    for (let i = 0; i < htmlResults.length; i++) {
-        const result = htmlResults[i];
+    for (const result of htmlResults) {
         if (result.status === 'fulfilled' && result.value) {
             const moreLinks = extractWeightedLinks(result.value, baseUrl);
             for (const [url, count] of Object.entries(moreLinks)) {
