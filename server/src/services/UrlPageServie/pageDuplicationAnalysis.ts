@@ -18,6 +18,26 @@ function cosineSimilarity(a: string, b: string): number {
     return magnitudeA && magnitudeB ? (dotProduct / (magnitudeA * magnitudeB)) * 100 : 0;
 }
 
+function buildHistogram(pairs: any[]) {
+    const frequencyMap: Record<number, number> = {};
+
+    for (const { score } of pairs) {
+        frequencyMap[score] = (frequencyMap[score] || 0) + 1;
+    }
+
+    // Create a dense 3–99 histogram
+    const histogram = Array.from({ length: 97 }, (_, i) => {
+        const score = i + 3;
+        return {
+            score,
+            count: frequencyMap[score] || 0,
+        };
+    });
+
+    return histogram;
+}
+
+
 function stratifiedSample(pairs: any[], count: number) {
     const danger = pairs.filter(d => d.status === 'Danger');
     const ok = pairs.filter(d => d.status === 'OK');
@@ -42,7 +62,7 @@ function stratifiedSample(pairs: any[], count: number) {
 export async function pageDuplicationAnalysis(
     baseUrl: string,
     payload: Payload
-): Promise<{ fromCache: boolean; data: any[]; summary: any }> {
+): Promise<{ fromCache: boolean; data: any[]; summary: any; histogram : any }> {
     // 1. Check cache
     const existing = await payload.find({
         collection: 'page-duplicates',
@@ -53,13 +73,16 @@ export async function pageDuplicationAnalysis(
     if (existing.docs.length) {
         const cached = existing.docs[0].duplicates;
         const { sample, summary } = stratifiedSample(cached, 100);
+        const histogram = buildHistogram(cached);
 
         return {
             fromCache: true,
             data: sample,
             summary,
+            histogram,
         };
     }
+
 
     // 2. Fetch internal URLs and contents
     const { urls } = await getOrFetchInternalUrls(baseUrl, payload);
@@ -113,9 +136,12 @@ export async function pageDuplicationAnalysis(
         },
     });
 
+    const histogram = buildHistogram(duplicates);
+
     return {
         fromCache: false,
         data: sample,
         summary,
+        histogram,
     };
 }
