@@ -1,4 +1,4 @@
-import { internalPageRank } from '@/services/internalPageRank';
+import { internalPageRank } from '@/services/UrlPageServie/internalPageRank';
 import { Endpoint, PayloadRequest } from 'payload';
 
 // Define the Payload endpoint
