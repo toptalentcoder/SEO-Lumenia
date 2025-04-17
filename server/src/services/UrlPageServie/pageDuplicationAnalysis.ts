@@ -18,8 +18,32 @@ function cosineSimilarity(a: string, b: string): number {
     return magnitudeA && magnitudeB ? (dotProduct / (magnitudeA * magnitudeB)) * 100 : 0;
 }
 
-export async function pageDuplicationAnalysis(baseUrl: string, payload: Payload): Promise<void> {
-    // ✅ Return early if already exists
+function stratifiedSample(pairs: any[], count: number) {
+    const danger = pairs.filter(d => d.status === 'Danger');
+    const ok = pairs.filter(d => d.status === 'OK');
+    const perfect = pairs.filter(d => d.status === 'Perfect');
+
+    const sample = [
+        ...danger.slice(0, 33),
+        ...ok.slice(0, 33),
+        ...perfect.slice(0, 34),
+    ].slice(0, count);
+
+    const summary = {
+        total: pairs.length,
+        danger: danger.length,
+        ok: ok.length,
+        perfect: perfect.length,
+    };
+
+    return { sample, summary };
+}
+
+export async function pageDuplicationAnalysis(
+    baseUrl: string,
+    payload: Payload
+): Promise<{ fromCache: boolean; data: any[]; summary: any }> {
+    // 1. Check cache
     const existing = await payload.find({
         collection: 'page-duplicates',
         where: { baseUrl: { equals: baseUrl } },
@@ -27,11 +51,17 @@ export async function pageDuplicationAnalysis(baseUrl: string, payload: Payload)
     });
 
     if (existing.docs.length) {
-        console.log(`🟡 Page duplicates for ${baseUrl} already exist. Skipping analysis.`);
-        return;
+        const cached = existing.docs[0].duplicates;
+        const { sample, summary } = stratifiedSample(cached, 100);
+
+        return {
+            fromCache: true,
+            data: sample,
+            summary,
+        };
     }
 
-    // ✅ Continue if not cached
+    // 2. Fetch internal URLs and contents
     const { urls } = await getOrFetchInternalUrls(baseUrl, payload);
 
     const pages = await Promise.all(
@@ -45,6 +75,7 @@ export async function pageDuplicationAnalysis(baseUrl: string, payload: Payload)
         })
     );
 
+    // 3. Compare every pair
     const duplicates: {
         urlA: string;
         urlB: string;
@@ -54,22 +85,25 @@ export async function pageDuplicationAnalysis(baseUrl: string, payload: Payload)
 
     for (let i = 0; i < pages.length; i++) {
         for (let j = i + 1; j < pages.length; j++) {
-        const a = pages[i];
-        const b = pages[j];
-        if (!a.content || !b.content) continue;
+            const a = pages[i];
+            const b = pages[j];
+            if (!a.content || !b.content) continue;
 
-        const score = Math.round(cosineSimilarity(a.content, b.content));
-        const status = score >= 85 ? 'Danger' : score >= 50 ? 'OK' : 'Perfect';
+            const score = Math.round(cosineSimilarity(a.content, b.content));
+            const status = score >= 85 ? 'Danger' : score >= 50 ? 'OK' : 'Perfect';
 
-        duplicates.push({
-            urlA: a.url,
-            urlB: b.url,
-            score,
-            status,
-        });
+            duplicates.push({
+                urlA: a.url,
+                urlB: b.url,
+                score,
+                status,
+            });
         }
     }
 
+    const { sample, summary } = stratifiedSample(duplicates, 100);
+
+    // 4. Save all results, return only the sample
     await payload.create({
         collection: 'page-duplicates',
         data: {
@@ -79,5 +113,9 @@ export async function pageDuplicationAnalysis(baseUrl: string, payload: Payload)
         },
     });
 
-    console.log(`✅ Page duplication analysis completed for ${baseUrl}`);
+    return {
+        fromCache: false,
+        data: sample,
+        summary,
+    };
 }
