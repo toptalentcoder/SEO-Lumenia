@@ -79,7 +79,9 @@ export default function PageDuplication() {
                         </div>
                         <div className='flex justify-between items-center'>
                             <div className="text-3xl font-bold"><FaCheckCircle/></div>
-                            <div className="text-sm text-gray-500">{summary.perfect}</div>
+                            <div className="text-sm text-gray-500">
+                                {Math.round((summary.perfect / summary.total) * 100)}%
+                            </div>
                         </div>
                     </div>
                     <div className="bg-white text-yellow-500 p-4 rounded-lg w-1/6 text-center shadow-2xl">
@@ -89,7 +91,9 @@ export default function PageDuplication() {
                         </div>
                         <div className='flex justify-between items-center'>
                             <div className="text-3xl font-bold"><FaCirclePlus/></div>
-                            <div className="text-sm text-gray-500">{summary.ok}</div>
+                            <div className="text-sm text-gray-500">
+                                {Math.round((summary.ok / summary.total) * 100)}%
+                            </div>
                         </div>
                     </div>
                     <div className="bg-white text-red-700 p-4 rounded-lg w-1/6 text-center shadow-2xl">
@@ -99,7 +103,9 @@ export default function PageDuplication() {
                         </div>
                         <div className='flex justify-between items-center'>
                             <div className="text-4xl font-bold"><IoIosCloseCircle/></div>
-                            <div className="text-sm text-gray-500">{summary.danger}</div>
+                            <div className="text-sm text-gray-500">
+                                {Math.round((summary.danger / summary.total) * 100)}%
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +117,6 @@ export default function PageDuplication() {
                         <BarChart data={histogram}>
                             <XAxis dataKey="score" tickFormatter={(tick) => `${tick}%`} />
                             <YAxis />
-                            <Tooltip formatter={(value) => `${value.toLocaleString()} pairs`} />
                             <Bar dataKey="count">
                             {histogram.map((entry, index) => {
                                 const color =
