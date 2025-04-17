@@ -8,13 +8,15 @@ export function discoverInternalLinks(html: string, base: string): string[] {
         const href = $(el).attr('href');
         if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-        let absUrl = '';
-        if (href.startsWith('/')) absUrl = new URL(href, base).href;
-        else if (href.startsWith(base)) absUrl = href;
-        else return;
-
-        absUrl = absUrl.split('#')[0].replace(/\/$/, '');
-        if (absUrl.startsWith(base)) found.add(absUrl);
+        try {
+            const absUrl = new URL(href, base).href;
+            const clean = absUrl.split('#')[0].replace(/\/$/, '');
+            if (clean.startsWith(base)) {
+                found.add(clean);
+            }
+        } catch {
+            // ignore invalid URLs
+        }
     });
 
     return [...found];
