@@ -192,7 +192,7 @@ export default function PageDuplication() {
                         type="text"
                         value={inputUrl}
                         onChange={(e) => setInputUrl(e.target.value)}
-                        className="border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2"
+                        className="border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2 text-gray-700"
                         placeholder="Website"
                     />
                     <button
@@ -205,7 +205,7 @@ export default function PageDuplication() {
 
                 <div className="flex justify-center mb-20">
                     {loading ? (
-                        <div className="mt-10">Loading...</div>
+                        <div className="mt-10 text-gray-700">Loading...</div>
                     ) : currentView === "input" && result.length === 0 ? (
                         <div className="w-1/3 text-center mt-20">
                             <svg

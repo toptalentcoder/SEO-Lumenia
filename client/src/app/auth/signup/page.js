@@ -98,14 +98,14 @@ export default function SignupPage() {
     };
 
     return (
-        <main className="min-h-screen bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-gray-200 flex flex-col items-center py-8">
-            <div className="mt-24 w-full max-w-lg bg-white dark:bg-slate-800 shadow-lg rounded-lg p-8 mx-auto">
+        <main className="min-h-screen bg-gray-100 text-gray-800 flex flex-col items-center py-8">
+            <div className="mt-24 w-full max-w-lg bg-white shadow-lg rounded-lg p-8 mx-auto">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Sign Up</h2>
+                    <h2 className="text-2xl font-bold text-gray-900">Sign Up</h2>
                     <GoogleAuthButton action="signup" />
                 </div>
 
-                <hr className="border-t border-gray-300 dark:border-gray-500 mb-6" />
+                <hr className="border-t border-gray-300 mb-6" />
 
                 {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
                 {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
@@ -117,8 +117,8 @@ export default function SignupPage() {
                     <FormInput id="confirmPassword" label="Confirm Password" type="password" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleChange} />
 
                     <div className="flex items-center mt-4">
-                        <input id="terms" name="terms" type="checkbox" checked={formData.terms} onChange={handleChange} className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-400" />
-                        <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-200">
+                        <input id="terms" name="terms" type="checkbox" checked={formData.terms} onChange={handleChange} className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                        <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
                             I agree to the{" "}
                             <a href="#" className="text-blue-600 font-medium">
                                 Terms and Conditions
@@ -153,7 +153,7 @@ export default function SignupPage() {
                 </form>
 
                 <div className="mt-4 text-center">
-                    <p className="text-sm text-gray-700 dark:text-gray-200">
+                    <p className="text-sm text-gray-700">
                         Already have an account?{" "}
                         <Link href="/auth/signin" className="text-blue-600 font-medium hover:underline">
                             Sign In

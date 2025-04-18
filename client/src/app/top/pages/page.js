@@ -121,7 +121,7 @@ export default function Linking() {
                         type="text"
                         value={inputUrl}
                         onChange={(e) => setInputUrl(e.target.value)}
-                        className="border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2"
+                        className="border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2 text-gray-700"
                         placeholder="Website"
                     />
                     <button

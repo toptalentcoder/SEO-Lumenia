@@ -98,12 +98,12 @@ export default function SigninPage() {
     };
 
     return (
-        <main className="min-h-screen bg-gray-100 w-full flex items-center justify-center text-gray-800 dark:text-gray-200">
-        <div className="w-full max-w-md bg-white dark:bg-slate-800 shadow-lg rounded-lg p-8">
+        <main className="min-h-screen bg-gray-100 w-full flex items-center justify-center text-gray-800">
+        <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
             <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Sign In</h2>
+            <h2 className="text-2xl font-bold text-gray-900 ">Sign In</h2>
             </div>
-            <hr className="border-t border-gray-300 dark:border-gray-500 mb-6" />
+            <hr className="border-t border-gray-300 mb-6" />
             {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
             <form className="space-y-4" onSubmit={handleSubmit}>
             <FormInput id="email" label="Email" type="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} className="w-full" />
@@ -127,12 +127,12 @@ export default function SigninPage() {
                 </button>
             </div>
             </form>
-            <hr className="border-t border-gray-300 dark:border-gray-500 my-6" />
+            <hr className="border-t border-gray-300  my-6" />
             <div className="flex justify-center">
             <GoogleAuthButton action="signin" />
             </div>
             <div className="text-center mt-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">Don&apos;t have an account? <button onClick={goToSignUp} className="text-blue-600 font-medium hover:underline">Sign up here</button></p>
+            <p className="text-sm text-gray-600">Don&apos;t have an account? <button onClick={goToSignUp} className="text-blue-600 font-medium hover:underline">Sign up here</button></p>
             </div>
         </div>
         </main>

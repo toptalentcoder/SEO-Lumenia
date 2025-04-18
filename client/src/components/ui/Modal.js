@@ -2,21 +2,21 @@ export default function Modal({ isOpen, onClose, title, children, hideOKBUtton }
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-dark bg-transparent">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-[90%] max-w-md">
+        <div className="fixed inset-0 flex items-center justify-center bg-transparent">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md">
                 {/* Modal Header */}
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h2>
+                    <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
                     <button
                         onClick={onClose}
-                        className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white"
+                        className="text-gray-500 hover:text-gray-700"
                     >
                         ✕
                     </button>
                 </div>
 
                 {/* Modal Content */}
-                <div className="text-gray-700 dark:text-gray-200">{children}</div>
+                <div className="text-gray-700">{children}</div>
 
                 {/* Close Button */}
                 {/* {!hideOKBUtton && (

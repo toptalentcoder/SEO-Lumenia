@@ -29,7 +29,7 @@ export default function TopLinks(){
                 <div className='flex items-center justify-center gap-2'>
                     <input
                         type='text'
-                        className='border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2'
+                        className='border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2 text-gray-700'
                         placeholder='Website'
                     />
                     <button className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm">OK</button>
