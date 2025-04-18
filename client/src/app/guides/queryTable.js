@@ -22,7 +22,7 @@ const formatDate = (isoDate) => {
 };
 
 const flagMap = {
-    us: <US className="w-4 h-3" />,
+    en: <US className="w-4 h-3" />,
     fr: <FR className="w-4 h-3" />,
     de: <DE className="w-4 h-3" />,
     za: <ZA className="w-4 h-3" />,
@@ -70,9 +70,9 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                 let response;
 
                 if (projectID) {
-                    response = await fetch(`http://localhost:7777/api/get-project-guides?email=${user.email}&projectID=${projectID}`);
+                    response = await fetch(`/api/get-project-guides?email=${user.email}&projectID=${projectID}`);
                 } else {
-                    response = await fetch(`http://localhost:7777/api/get-projects?email=${user.email}`);
+                    response = await fetch(`/api/get-projects?email=${user.email}`);
                 }
                 const data = await response.json();
 
@@ -88,6 +88,8 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         gl: project.gl || 'us',
                         createdAt : project. createdAt
                     }))
+
+                    console.log(formattedProjects)
 
                     setRows(formattedProjects);
                 }

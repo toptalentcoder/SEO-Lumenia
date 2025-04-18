@@ -89,7 +89,7 @@ export default function Monitoring({ data }) {
                     <div className="text-lg font-semibold text-[#413793]">Next Update Tomorrow</div>
                     <div className='flex items-center space-x-2 mt-5 justify-center mb-20'>
                         <input
-                            className='border border-gray-400 rounded-lg p-2 w-lg outline-none focus:border-[#413793]'
+                            className='border border-gray-400 rounded-lg p-2 w-lg outline-none focus:border-[#413793] text-gray-700'
                             placeholder='URL'
                             value={inputUrl ?? ''} // ← this ensures it's a controlled input
                             onChange={(e) => setInputUrl(e.target.value)}
@@ -113,7 +113,7 @@ export default function Monitoring({ data }) {
                     <div className="text-gray-600 mt-2 text-sm font-semibold">You have 50 SEO monitoring requests remaining.</div>
                     <div className='flex items-center space-x-2 mt-5'>
                         <input
-                            className='border border-gray-400 rounded-lg p-2 w-lg outline-none focus:border-[#413793]'
+                            className='border border-gray-400 rounded-lg p-2 w-lg outline-none focus:border-[#413793] text-gray-700'
                             placeholder='URL'
                             value={inputUrl ?? ''} // ← this ensures it's a controlled input
                             onChange={(e) => setInputUrl(e.target.value)}
