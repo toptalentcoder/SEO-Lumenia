@@ -21,7 +21,7 @@ export default function RightSection ({data}) {
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
                         activeTab === "seoBrief"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-600 "
                     }`}
                 >
                     <RiPresentationFill className="text-[#413793]"/>
@@ -32,7 +32,7 @@ export default function RightSection ({data}) {
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
                         activeTab === "yourWebpage"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-600 "
                     }`}
                 >
                     <IoDocument className="text-[#413793]"/>
@@ -51,7 +51,7 @@ export default function RightSection ({data}) {
             <div className="bg-white rounded-2xl p-4 shadow">
                 <div className="flex items-center gap-3 border-b border-gray-200 pb-5">
                     <HiChatBubbleLeftRight className="text-blue-400 text-2xl"/>
-                    <span>Comments</span>
+                    <span className="text-gray-600">Comments</span>
                 </div>
                 <div className="h-80"/>
                 <div className="flex border-t border-gray-200 items-center justify-between gap-3 pt-5">

@@ -212,7 +212,7 @@ export default function SocialPost({data}) {
                     <div className='text-gray-600 text-sm mb-2'>Social Media</div>
                     <button
                         onClick={handleSocialMediaToggleDropdown}
-                        className='w-full px-4 py-1 text-left bg-white border border-[#4A4291] rounded-lg'
+                        className='w-full px-4 py-1 text-left bg-white border border-[#4A4291] rounded-lg text-gray-700'
                     >
                         {selectedSocialMedia.label}
                     </button>
@@ -250,7 +250,7 @@ export default function SocialPost({data}) {
                     <div className='text-gray-600 text-sm mb-2'>Tone</div>
                     <button
                         onClick={handleToneToggleDropdown}
-                        className='w-full px-4 py-1 text-left bg-white border border-[#4A4291] rounded-lg'
+                        className='w-full px-4 py-1 text-left bg-white border border-[#4A4291] rounded-lg text-gray-700'
                     >
                         <span className='mr-2'>{selectedToneOption.emoji}</span>
                         {selectedToneOption.label}
@@ -290,7 +290,7 @@ export default function SocialPost({data}) {
                     <div className='text-gray-600 text-sm mb-2'>Language</div>
                     <button
                         onClick={handleLanguageToggleDropdown}
-                        className='w-full px-4 py-1 text-left bg-white border border-[#4A4291] rounded-lg'
+                        className='w-full px-4 py-1 text-left bg-white border border-[#4A4291] rounded-lg text-gray-700'
                     >
                         {selectedLanguageOption.label}
                     </button>
@@ -302,7 +302,7 @@ export default function SocialPost({data}) {
                                 value={searchLanguageTerm}
                                 onChange={handleLanguageSearchChange}
                                 placeholder="Search..."
-                                className=" w-40 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300"
+                                className=" w-40 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300 text-gray-700"
                             />
                             <div className="max-h-52">
                                 {filteredLanguageOptions.length === 0 ? (
