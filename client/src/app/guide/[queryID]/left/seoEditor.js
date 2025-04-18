@@ -46,7 +46,7 @@ const editorConfig = {
         console.error('Lexical Error:', error);
     },
     theme: {
-        paragraph: 'mb-2',
+        paragraph: 'mb-2 text-gray-800',
         text: {
             bold: 'font-bold',
             italic: 'italic',
@@ -255,7 +255,7 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
     return (
         <div className="flex flex-wrap items-center gap-0 border-b pb-2 border-gray-300">
             <select
-                className="px-3 py-2 text-md rounded cursor-pointer hover:bg-blue-100 focus:outline-none"
+                className="px-3 py-2 text-md rounded cursor-pointer hover:bg-blue-100 focus:outline-none text-gray-800"
                 onChange={(e) => applyHeadingBlock(e.target.value)}
             >
                 <option value="paragraph">Paragraph</option>
@@ -266,15 +266,15 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                 <option value="h5" className="text-md font-semibold hover:bg-blue-100">h5</option>
                 <option value="h6" className="text-sm font-semibold hover:bg-blue-100">h6</option>
             </select>
-            <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100 ml-6">B</button>
-            <button onClick={() => format('italic')} className="italic px-3 py-1 font-semibold hover:bg-blue-100">I</button>
-            <button onClick={() => format('underline')} className="underline px-3 py-1 font-semibold hover:bg-blue-100">U</button>
-            <button onClick={() => format('strikethrough')} className="line-through px-3 py-1 font-semibold hover:bg-blue-100">S</button>
-            <button onClick={() => format('subscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 ml-4">X₂</button>
-            <button onClick={() => format('superscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100">X²</button>
+            <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100 ml-6 text-gray-800">B</button>
+            <button onClick={() => format('italic')} className="italic px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">I</button>
+            <button onClick={() => format('underline')} className="underline px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">U</button>
+            <button onClick={() => format('strikethrough')} className="line-through px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">S</button>
+            <button onClick={() => format('subscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800">X₂</button>
+            <button onClick={() => format('superscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">X²</button>
             <button
                 onClick={handleInsertUrl}
-                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4"
+                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800"
             >
                 <GoLink />
             </button>
@@ -284,7 +284,7 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                         editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
                     });
                 }}
-                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4"
+                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800"
             >
                 <FaListUl />
             </button>
@@ -294,31 +294,31 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                         editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND);
                     });
                 }}
-                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100"
+                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800"
             >
                 <FaListOl />
             </button>
             <button
                 onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
-                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4"
+                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4 text-gray-800"
             >
                 <RiAlignLeft />
             </button>
             <button
                 onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
-                className="text-lg px-2 py-1 hover:bg-blue-100"
+                className="text-lg px-2 py-1 hover:bg-blue-100 text-gray-800"
             >
                 <RiAlignCenter />
             </button>
             <button
                 onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
-                className="text-lg px-2 py-1 hover:bg-blue-100"
+                className="text-lg px-2 py-1 hover:bg-blue-100 text-gray-800"
             >
                 <RiAlignRight />
             </button>
             <button
                 onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
-                className="text-lg px-2 py-1 hover:bg-blue-100"
+                className="text-lg px-2 py-1 hover:bg-blue-100 text-gray-800"
             >
                 <RiAlignJustify />
             </button>
@@ -329,11 +329,11 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                     setHtmlContent(html);
                     setSourceMode(true);
                 }}
-                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4"
+                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4 text-gray-800"
             >
                 <IoCodeSlash />
             </button>
-            <button className="text-md ml-auto text-gray-700 px-2 py-1 hover:bg-blue-100 rounded">▶ Import URL</button>
+            <button className="text-md ml-auto px-2 py-1 hover:bg-blue-100 rounded text-gray-800">▶ Import URL</button>
         </div>
     );
 }
@@ -496,33 +496,33 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
 
     return (
         <div className="flex flex-wrap items-center gap-4 border-b border-gray-300 pb-2">
-            <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'>
+            <button className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1 text-gray-800'>
                 <RiPenNibLine/>
                 <span className='text-sm'>SEO-TXL Writer</span>
             </button>
             <button
-                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1 text-gray-800'
                 onClick={handleSeoTxlAuto}
             >
                 <FaRegEye/>
                 <span className='text-sm'>SEO-TXL Auto</span>
             </button>
             <button
-                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1 text-gray-800'
                 onClick={handleSeoTxlOutline}
             >
                 <BsListCheck/>
                 <span className='text-sm'>SEO-TXL Outline</span>
             </button>
             <button
-                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1 text-gray-800'
                 onClick={() => handleSEO_TXLQuestions()}
             >
                 <IoDocumentOutline/>
                 <span className='text-sm'>SEO-TXL Questions</span>
             </button>
             <button
-                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1'
+                className='flex items-center space-x-2 hover:bg-blue-100 py-2 px-1 text-gray-800'
                 onClick={handleSeoTxlRephrase}
             >
                 <MdOutlineWbSunny/>
@@ -592,9 +592,9 @@ function SeoTranslateDropdown({setIsLoading}) {
     ];
 
     return (
-        <div className="border-b pb-2 border-gray-300 shadow-lg">
+        <div className="border-b pb-2 border-gray-300 shadow-lg text-gray-800">
             <Menu>
-                <MenuButton className="text-black cursor-pointer">
+                <MenuButton className="cursor-pointer text-gray-800">
                     <div className="flex items-center space-x-2 text-black hover:bg-blue-100 hover:text-black rounded-md px-3 py-2 text-md font-medium">
                         <AiOutlineGlobal />
                         <span className="text-sm">SEO-TXL Translate to...</span>
@@ -603,7 +603,7 @@ function SeoTranslateDropdown({setIsLoading}) {
                 </MenuButton>
                 <MenuItems
                     anchor="bottom start"
-                    className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl"
+                    className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl text-gray-800"
                 >
                     {languages.map((lang) => (
                         <MenuItem key={lang}>

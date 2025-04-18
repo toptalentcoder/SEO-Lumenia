@@ -291,23 +291,23 @@ export default function Analysis({data, setIsDirty }) {
                         <div className="bg-[#FFA500] text-white rounded-full p-2">
                             <ImCross className="w-3 h-3"/>
                         </div>
-                        <span className="text-xl">SOSEO</span>
-                        <span className="ml-4">{soseoScore}</span>
+                        <span className="text-xl text-gray-800">SOSEO</span>
+                        <span className="ml-4 text-gray-800">{soseoScore}</span>
                     </div>
 
                     <div className="flex items-center gap-2 bg-gray-200 px-2 py-1 rounded-lg">
                         <div className="bg-[#008000] text-white rounded-full p-2">
                             <FaCheck className="w-3 h-3"/>
                         </div>
-                        <span className="text-xl">DSEO</span>
-                        <span className="ml-4">{dseoScore}</span>
+                        <span className="text-xl text-gray-800">DSEO</span>
+                        <span className="ml-4 text-gray-800" >{dseoScore}</span>
                     </div>
 
                     <div className="flex items-center gap-2 bg-gray-200 px-6 py-1 rounded-lg">
-                        <div className="">
-                            <FaGoogle className="w-5 h-5"/>
+                        <div className="text-gray-800">
+                            <FaGoogle className="w-5 h-5 "/>
                         </div>
-                        <span className="text-xl">Guide for Google</span>
+                        <span className="text-xl text-gray-800">Guide for Google</span>
                     </div>
 
                 </div>
@@ -315,7 +315,7 @@ export default function Analysis({data, setIsDirty }) {
                 <div className="flex justify-end">
                     <Menu>
                         <MenuButton className="text-gray-200 cursor-pointer border border-gray-300 rounded-lg">
-                            <div className='flex items-center space-x-2 text-gray-300 hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-md font-medium'>
+                            <div className='flex items-center space-x-2 text-gray-300 hover:bg-gray-300 hover:text-black rounded-md px-3 py-2 text-xs font-medium'>
                                 <a
                                     key={'write_for_seo'}
                                     href='#'
@@ -436,19 +436,19 @@ export default function Analysis({data, setIsDirty }) {
             <div className="flex items-center gap-4 justify-center mt-4">
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#FF0000]"></div>
-                    <span className="text-sm font-semibold">Over-optimiztion</span>
+                    <span className="text-sm font-semibold text-gray-800">Over-optimiztion</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#FFA500]"></div>
-                    <span className="text-sm font-semibold">Strong-optimiztion</span>
+                    <span className="text-sm font-semibold text-gray-800">Strong-optimiztion</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#90EE7E]"></div>
-                    <span className="text-sm font-semibold">Standard-optimiztion</span>
+                    <span className="text-sm font-semibold text-gray-800">Standard-optimiztion</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#7CB5EC]"></div>
-                    <span className="text-sm font-semibold">Sub-optimiztion</span>
+                    <span className="text-sm font-semibold text-gray-800">Sub-optimiztion</span>
                 </div>
                 <div className="flex items-center space-x-2">
                     {/* Horizontal bar + dot + horizontal bar */}
@@ -457,7 +457,7 @@ export default function Analysis({data, setIsDirty }) {
                         <div className="w-2 h-2 bg-black rounded-full" />
                         <div className="w-2 h-0.5 bg-black" />
                     </div>
-                    <span className="font-semibold text-sm">Your content</span>
+                    <span className="font-semibold text-sm text-gray-800">Your content</span>
                 </div>
             </div>
 

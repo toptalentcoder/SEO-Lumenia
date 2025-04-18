@@ -1,6 +1,6 @@
 import { FaQuestion } from "react-icons/fa6";
 
-export default function Compare({ data }) {
+export default function Compared({ data }) {
 
     const searchResults = data.searchResults;
 
@@ -15,7 +15,7 @@ export default function Compare({ data }) {
                 <span className="text-[12px]">{formattedDate}</span>
             </div>
 
-            <div className="mt-3">
+            <div className="mt-3 text-gray-900 text-sm font-semibold">
                 SERP Intents
             </div>
 
@@ -42,7 +42,7 @@ export default function Compare({ data }) {
                 <table className="min-w-full border-collapse table-fixed border-b-2 border-gray-900">
                     <thead className="bg-white">
                         <tr>
-                            <th className="w-1/10 px-1 py-3 text-left">Pos.</th>
+                            <th className="w-1/10 px-1 py-3 text-left text-gray-700">Pos.</th>
                             <th className="w-1/6 px-3 py-3 text-left text-md font-semibold text-gray-700 tracking-wide">Url</th>
                             <th className="w-1/10 px-3 py-3 text-center text-md font-semibold text-gray-700 tracking-wide">SOSEO</th>
                             <th className="w-1/10 px-3 py-3 text-center text-md font-semibold text-gray-700 tracking-wide">DSEO</th>
@@ -53,13 +53,13 @@ export default function Compare({ data }) {
                     <tbody className="divide-y divide-gray-300">
                         {searchResults.map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
-                                <td className="w-12 px-1 py-4 text-center">{index + 1}</td>
+                                <td className="w-12 px-1 py-4 text-center text-gray-700">{index + 1}</td>
                                 <td className="w-1/6 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
                                     <div>
                                         <div className="text-[#4A4291] flex items-center gap-1 text-sm">
                                             {row.title}
                                         </div>
-                                        <div className="flex items-center space-x-2 text-sm">
+                                        <div className="flex items-center space-x-2 text-sm text-gray-700">
                                             <a href={row.link} target="_blank" rel="noopener noreferrer">
                                                 {row.link}
                                             </a>
@@ -76,8 +76,8 @@ export default function Compare({ data }) {
                                         {Number.isNaN(parseInt(row.dseo, 10)) ? "-" : Math.round(parseFloat(row.dseo))}
                                     </div>
                                 </td>
-                                <td className="px-3 py-4 text-center">N/A</td>
-                                <td className="px-3 py-4 text-center text-sm">{row.wordCount || "?"}</td>
+                                <td className="px-3 py-4 text-center text-gray-700">N/A</td>
+                                <td className="px-3 py-4 text-center text-sm text-gray-700">{row.wordCount || "?"}</td>
                             </tr>
                         ))}
                     </tbody>

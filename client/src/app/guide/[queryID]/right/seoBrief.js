@@ -72,7 +72,7 @@ export default function SeoBrief({data}){
 
     return(
         <div>
-            <div className="font-semibold text-sm">Context and Objective:</div>
+            <div className="font-semibold text-sm text-gray-600">Context and Objective:</div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Primary Intent:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">{primaryIntent}</div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Objective:</div>
@@ -86,7 +86,7 @@ export default function SeoBrief({data}){
                     </div>
                 ))}
             </div>
-            <div className="font-semibold text-sm mt-3">Main Topics to Cover:</div>
+            <div className="font-semibold text-sm mt-3 text-gray-600">Main Topics to Cover:</div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Key Subjects:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {mainTopics.map((topic, index) => (
@@ -98,7 +98,7 @@ export default function SeoBrief({data}){
                     </div>
                 ))}
             </div>
-            <div className="ml-10 mt-3 text-gray-400 text-sm">Questions to Consider:</div>
+            <div className="ml-10 mt-3 text-gray-400 text-sm ">Questions to Consider:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {importantQuestions.map((question, index) => (
                     <div key={index} className="flex items-center gap-2">
@@ -110,7 +110,7 @@ export default function SeoBrief({data}){
                 ))}
 
             </div>
-            <div className="font-semibold text-sm mt-3">Writing Style and Tone:</div>
+            <div className="font-semibold text-sm mt-3 text-gray-600">Writing Style and Tone:</div>
             <div className="ml-10 mt-3 text-gray-400 text-sm">Recommended Tone:</div>
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {writingStyleAndTone.map((tone, index) => (
@@ -130,7 +130,7 @@ export default function SeoBrief({data}){
                     </div>
                 ))}
             </div>
-            <div className="font-semibold text-sm mt-3">Value Proposition:</div>
+            <div className="font-semibold text-sm mt-3 text-gray-600">Value Proposition:</div>
             <div className="ml-10 mt-3 text-gray-900 text-sm">
                 {valueProposition.map((prop, index) => (
                     <div key={index} className="inline-flex items-center gap-2">

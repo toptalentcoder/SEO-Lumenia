@@ -55,9 +55,17 @@ export default buildConfig({
     ...(customEndpoints || []), // Ensure customEndpoints is defined
   ],
   onInit : async(payload) => {
+
+    const server = (payload as any).server;
+
+    if (server) {
+      server.setTimeout(600000) // 60 seconds
+      console.log('⏱️ Payload server timeout set to 60 seconds')
+    }
+
     const conn = mongoose.connection
 
-    conn.set('socketTimeoutMS', 30000)
+    conn.set('socketTimeoutMS', 300000)
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
     startDailyRankTracking(payload);
