@@ -4,7 +4,7 @@ export default function SerpEvolutionTable({ data }) {
     return (
         <div className="w-full">
             <div className="text-md font-semibold justify-start flex mb-10 text-gray-500">SERP history : Data from {new Date().toISOString().split("T")[0]}</div>
-            <table className="w-full text-sm border-collapse">
+            <table className="w-full text-sm border-collapse text-gray-700">
                 <thead>
                     <tr className="bg-gray-100 text-left">
                     <th className="px-2 py-2">Position</th>

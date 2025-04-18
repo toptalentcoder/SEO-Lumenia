@@ -7,7 +7,7 @@ import { MdAutoGraph } from "react-icons/md";
 import { FaImage } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import Analysis from './analysis';
-import Compare from './compare';
+import Compared from './compared';
 import SocialPost from './socialPost';
 import Explore from './explore';
 import Monitoring from './monitoring/monitoring';
@@ -24,32 +24,33 @@ export default function LeftSection ({data, setIsDirty }) {
             <div className="flex mb-10 justify-start w-full bg-[#F8FAFD]">
                 <button
                     onClick={() => setActiveTab("Analysis")}
-                    className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
+                    style={{ fontFamily: "var(--font-nunito)"}}
+                    className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-lg ${
                         activeTab === "Analysis"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-800"
                     }`}
                 >
                     <FaMagnifyingGlassChart className="text-[#413793]"/>
                     Analysis
                 </button>
                 <button
-                    onClick={() => setActiveTab("Compare")}
+                    onClick={() => setActiveTab("Compared")}
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
-                        activeTab === "Compare"
+                        activeTab === "Compared"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-600"
                     }`}
                 >
                     <FaCodeCompare className="text-[#413793]"/>
-                    Compare
+                    Compared
                 </button>
                 <button
                     onClick={() => setActiveTab("SocialPost")}
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
                         activeTab === "SocialPost"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-600 "
                     }`}
                 >
                     <IoReturnUpForwardOutline className="text-[#413793] font-semibold"/>
@@ -60,29 +61,18 @@ export default function LeftSection ({data, setIsDirty }) {
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
                         activeTab === "Monitoring"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-600 "
                     }`}
                 >
                     <MdAutoGraph className="text-[#413793]"/>
                     Monitoring
                 </button>
-                {/* <button
-                    onClick={() => setActiveTab("Images")}
-                    className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
-                        activeTab === "Images"
-                            ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
-                    }`}
-                >
-                    <FaImage className="text-[#413793]"/>
-                    Images
-                </button> */}
                 <button
                     onClick={() => setActiveTab("Explore")}
                     className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
                         activeTab === "Explore"
                             ? " text-[#413793] border-t-4 border-[#413793] bg-white"
-                            : "bg-[#F8FAFD] text-gray-600 dark:text-gray-200"
+                            : "bg-[#F8FAFD] text-gray-600 "
                     }`}
                 >
                     <IoSearch className="text-[#413793]"/>
@@ -95,9 +85,9 @@ export default function LeftSection ({data, setIsDirty }) {
                     <div>
                         <Analysis data={data} setIsDirty={setIsDirty}/>
                     </div>
-                ) : activeTab === 'Compare' ? (
+                ) : activeTab === 'Compared' ? (
                     <div>
-                        <Compare data = {data} />
+                        <Compared data = {data} />
                     </div>
                 ) : activeTab === 'SocialPost' ? (
                     <div>

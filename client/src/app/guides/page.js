@@ -214,7 +214,7 @@ export default function SEOQueryDashboard() {
 
                     {/* Textarea */}
                     <textarea
-                        className={`flex-1 bg-white p-3 border transition-all duration-300 ease-in-out ml-44 focus:outline-none
+                        className={`flex-1 bg-white p-3 border transition-all duration-300 ease-in-out ml-44 focus:outline-none text-gray-700
                             ${isFocused ? 'h-24' : 'h-12'} ${isFocused ? '' : 'overflow-hidden'}
                             ${isFocused ? 'border-[1.5px] border-[#9770C8]' : 'border-gray-300'}
                             ${isFocused ? 'rounded-r-xl' : 'rounded-r-lg'}`}
@@ -233,20 +233,20 @@ export default function SEOQueryDashboard() {
                         <div className="relative inline-block w-52">
                             <button
                                 onClick={handleProjectMenuToggleDropdown}
-                                className='w-full px-4 py-2 text-left bg-white rounded-xl'
+                                className='w-full px-4 py-2 text-left bg-white rounded-xl text-gray-700'
                             >
                                 {selectedProjectItem?.projectName || "Default"}
 
                             </button>
 
                             {isProjectMenuOpen && (
-                                <div className="absolute w-full mt-2 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
+                                <div className="absolute w-full mt-2 bg-white border rounded-md shadow-lg max-h-60 overflow-auto text-gray-700">
                                     <input
                                         type="text"
                                         value={projectTerm}
                                         onChange={handleProjectMenuSearchChange}
                                         placeholder="Search..."
-                                        className=" w-44 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300"
+                                        className=" w-44 px-4 py-1 mx-3 my-2 text-sm border rounded-lg focus:outline-none border-gray-300 text-gray-700"
                                     />
                                     <div className="max-h-52 overflow-y-auto">
                                         {filteredProjectMenuOptions.length === 0 ? (
@@ -271,7 +271,7 @@ export default function SEOQueryDashboard() {
                         <div className="relative inline-block w-52">
                             <button
                                 onClick={handleQueryEngineToggleDropdown}
-                                className='w-full px-4 py-2 text-left bg-white rounded-xl'
+                                className='w-full px-4 py-2 text-left bg-white rounded-xl text-gray-700'
                             >
                                 {selectedQueryEngine.label}
                             </button>
