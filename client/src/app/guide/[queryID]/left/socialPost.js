@@ -356,10 +356,10 @@ export default function SocialPost({data}) {
                     <div className="max-w-5xl mx-auto space-y-4 ">
                         {Array.isArray(generatedPost) &&
                             generatedPost.map((faq, index) => (
-                                <div key={index} className="bg-white dark:bg-gray-800 px-5 py-3 transition-all border-b border-gray-300 ">
+                                <div key={index} className="bg-white px-5 py-3 transition-all border-b border-gray-300 ">
                                     <div className='flex justify-between'>
                                         <button
-                                            className="w-full flex items-center text-left text-lg font-semibold text-gray-600 dark:text-white"
+                                            className="w-full flex items-center text-left text-lg font-semibold text-gray-600"
                                             onClick={() => toggleFAQ(index)}
                                         >
                                             <div className='ml-3 mr-1'><US className='w-4 h-4'/></div>
@@ -385,15 +385,15 @@ export default function SocialPost({data}) {
                                             </div>
                                         </button>
                                         {openIndex === index ? (
-                                            <FiMinus className=" dark:text-gray-300 bg-[#413793] text-white rounded-full w-4 h-4 p-0.5" />
+                                            <FiMinus className=" bg-[#413793] text-white rounded-full w-4 h-4 p-0.5" />
                                         ) : (
-                                            <FiPlus className="text-white dark:text-gray-300 bg-[#413793] rounded-full w-4 h-4 p-0.5"  />
+                                            <FiPlus className="text-white bg-[#413793] rounded-full w-4 h-4 p-0.5"  />
                                         )}
                                     </div>
 
                                     <div className="ml-7">
                                         {openIndex === index && faq.text && (
-                                            <p className="mt-2 text-gray-600 dark:text-gray-400 text-left">{faq.text}</p>
+                                            <p className="mt-2 text-gray-600 text-left">{faq.text}</p>
                                         )}
                                     </div>
                                 </div>
