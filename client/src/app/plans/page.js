@@ -200,7 +200,7 @@ export default function PricingTable() {
                     className={`px-6 py-2 cursor-pointer flex items-center gap-4 text-2xl ${
                         activeTab === "subscription"
                             ? " text-[#413793] border-t-4 border-[#413793] shadow"
-                            : "bg-white text-gray-600 dark:text-gray-200"
+                            : "bg-white text-gray-600"
                     }`}
                 >
                     <FaWallet className="text-[#413793]"/>
@@ -211,7 +211,7 @@ export default function PricingTable() {
                     className={`px-6 py-2 cursor-pointer flex items-center gap-4 text-2xl ${
                         activeTab === "api"
                             ? " text-[#413793] border-t-4 border-[#413793] shadow"
-                            : "bg-white text-gray-600 dark:text-gray-200"
+                            : "bg-white text-gray-600"
                     }`}
                 >
                     <IoCodeSlashSharp className="text-[#413793]"/>
@@ -226,7 +226,7 @@ export default function PricingTable() {
             <div className="flex items-center space-x-2">
                 {/* Monthly Label */}
                 <span
-                    className={`cursor-pointer text-gray-600 dark:text-gray-200`}
+                    className={`cursor-pointer text-gray-600`}
                     onClick={() => setBillingCycle("monthly")}
                 >
                     Monthly
@@ -234,7 +234,7 @@ export default function PricingTable() {
 
                 {/* Toggle Switch */}
                 <div
-                    className={`relative inline-block w-12 h-6 rounded-full cursor-pointer ${billingCycle === "annually" ? "bg-[#413793]" : "bg-gray-300 dark:bg-gray-600"}`}
+                    className={`relative inline-block w-12 h-6 rounded-full cursor-pointer ${billingCycle === "annually" ? "bg-[#413793]" : "bg-gray-300"}`}
                     onClick={() => setBillingCycle(billingCycle === "monthly" ? "annually" : "monthly")}
                 >
                 {/* Knob */}
@@ -247,7 +247,7 @@ export default function PricingTable() {
 
                 {/* Annual Label */}
                 <span
-                    className={`cursor-pointer text-gray-600 dark:text-gray-200`}
+                    className={`cursor-pointer text-gray-600`}
                     onClick={() => setBillingCycle("annually")}
                 >
                     Annual
@@ -290,8 +290,8 @@ export default function PricingTable() {
                             return (
                                 <div
                                     key={index}
-                                    className={`p-6 rounded-3xl shadow-xl bg-white dark:bg-slate-800 w-lg items-stretch ${
-                                        isCurrentPlan ? "border-primary dark:bg-slate-600" : "border-gray-300 dark:border-gray-700"
+                                    className={`p-6 rounded-3xl shadow-xl bg-white w-lg items-stretch ${
+                                        isCurrentPlan ? "border-primary" : "border-gray-300"
                                     }`}
                                 >
                                     <div className="flex space-x-4">
@@ -308,23 +308,23 @@ export default function PricingTable() {
                                         </div>
 
                                         <div>
-                                            <h3 className="text-[#413793] dark:text-[#413793] text-xl font-bold mb-2">{plan.plan_name ?? "No Name"}</h3>
+                                            <h3 className="text-[#413793] text-xl font-bold mb-2">{plan.plan_name ?? "No Name"}</h3>
 
-                                            <p className="text-3xl font-bold mb-4 text-gray-600 dark:text-gray-200">
+                                            <p className="text-3xl font-bold mb-4 text-gray-600">
                                                 {plan.currency === "USD" ? "$" : "€"}
                                                 {planPrice}
-                                                <span className="text-sm text-gray-400 dark:text-gray-200"> / {billingCycle}</span>
-                                                <span className="text-2xl text-gray-400 dark:text-gray-200"> Excluding VAT</span>
+                                                <span className="text-sm text-gray-400"> / {billingCycle}</span>
+                                                <span className="text-2xl text-gray-400"> Excluding VAT</span>
                                             </p>
 
-                                            <p className="text-gray-500 dark:text-gray-200 mb-4 h-32 text-sm">{plan.description ?? "No Description Available"}</p>
+                                            <p className="text-gray-500 mb-4 h-32 text-sm">{plan.description ?? "No Description Available"}</p>
 
                                             <div className="flex items-center space-x-7">
                                                 {activeTab === 'subscription' ? (
                                                     <div>
                                                         <div className="mt-6 text-sm">
                                                             Each month, you receive:
-                                                            <ul className="mt-3 space-y-2 text-gray-600 dark:text-gray-200">
+                                                            <ul className="mt-3 space-y-2 text-gray-600">
                                                                 <div className="flex items-center space-x-2">
                                                                     <PiNotePencilBold className="text-[#413793] text-lg"/>
                                                                     <li>{plan.features?.subscription_features?.tokens / 5 ?? "N/A"} guides ({plan.features?.subscription_features?.tokens ?? "N/A"} tokens, valid for 1 month)</li>
@@ -337,7 +337,7 @@ export default function PricingTable() {
                                                         </div>
                                                         <div className="mt-3 text-sm">
                                                             Other Perks:
-                                                            <ul className="mt-3 space-y-2 text-gray-600 dark:text-gray-200">
+                                                            <ul className="mt-3 space-y-2 text-gray-600">
                                                                 <div className="flex items-center space-x-2">
                                                                     <FcBusinessman className="text-[#413793] text-lg"/>
                                                                     <li>up to {plan.features?.subscription_features?.seats ?? "N/A"} seats</li>
@@ -366,7 +366,7 @@ export default function PricingTable() {
                                                 className={`flex px-4 py-2 rounded-lg items-center mt-7 mx-auto ${
                                                     isCurrentPlan
                                                         ? "bg-[#9770C8] text-white"
-                                                        : "bg-[#413793] border-gray-300 hover:border-gray-400 dark:border-0 dark:bg-slate-700 dark:hover:bg-slate-600 text-primary dark:text-gray-200 cursor-pointer"
+                                                        : "bg-[#413793] border-gray-300 hover:border-gray-400 cursor-pointer"
                                                 }`}
                                                 disabled={!!isCurrentPlan}
                                                 onClick={() => {
@@ -397,16 +397,16 @@ export default function PricingTable() {
             {/* Subscription Confirmation Modal */}
             {isModalOpen && selectedPlan && (
                 <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
-                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-11/12 sm:w-96">
-                        <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                    <div className="bg-white p-6 rounded-lg shadow-md w-11/12 sm:w-96">
+                        <h2 className="text-lg font-bold text-gray-900">
                             Confirm Subscription
                         </h2>
-                        <p className="text-gray-700 dark:text-gray-300 mt-2">
+                        <p className="text-gray-700 mt-2">
                             Are you sure you want to subscribe to <strong>{selectedPlan.name}</strong>?
                         </p>
                         <div className="mt-4 flex justify-end space-x-2">
                             <button
-                                className="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-gray-200 rounded-lg"
+                                className="px-4 py-2 bg-gray-300 text-gray-900"
                                 onClick={() => setIsModalOpen(false)}
                                 disabled={isProcessing}
                             >

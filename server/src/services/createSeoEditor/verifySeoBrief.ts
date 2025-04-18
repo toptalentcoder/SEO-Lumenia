@@ -112,7 +112,8 @@ export async function verifyContentWithSeoBrief(
             Content:
                 ${content}
 
-            Suggest missing elements or areas for improvement:
+            Give a thoughtful review of the content based on the SEO brief. Always suggest improvements, refinements, or enhancements, even if the content already includes all required elements. Focus on depth, clarity, structure, style, tone, keyword use, and overall alignment with the brief. Avoid saying everything is perfect.
+
         `;
 
         const suggestionResponse = await openai.chat.completions.create({
