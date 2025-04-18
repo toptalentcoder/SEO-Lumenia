@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import { useState } from 'react';
 import { useMediaQuery } from "react-responsive";
 import Image from 'next/image';
 import { FaSun, FaCheckCircle, FaLightbulb, FaTools, FaSearch, FaEye, FaExternalLinkAlt  } from "react-icons/fa";
@@ -11,7 +12,7 @@ import { MdPeopleAlt } from "react-icons/md";
 import { PiNetworkFill } from "react-icons/pi";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { IoPeople } from "react-icons/io5";
-
+import ModalWebsiteDetails from "./modalWebsiteDetails";
 
 const HeroTop = () => {
 
@@ -96,37 +97,61 @@ const KeywordPromptCard = () => (
     </div>
 );
 
-const SearchBar = () => (
-    <div className="relative h-40">
-        {/* Floating image */}
-        <div className="absolute -top-3 right-3 z-10">
-            <Image
-                src="/images/dashboard/avatar-sp.png"
-                alt="welcome"
-                width={400}
-                height={220}
-            />
-        </div>
+const SearchBar = () => {
 
-        {/* Main card */}
-        <div className="bg-[#C7C6DE] rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-start justify-between pr-28">
-            <div>
-                <div className="h-16 mb-3">
-                    <p className="font-semibold mb-3 text-gray-600 text-md">Welcome on YourTextGuru!</p>
-                    <p className="text-md text-gray-600">Enter a website address and explore its SEO universe.</p>
-                </div>
-                <div className="flex items-center rounded-lg gap-2">
-                    <input
-                        type="text"
-                        placeholder="Website URL to explore"
-                        className="px-4 py-2 text-sm focus:outline-[#413793] focus:outline-1 bg-white rounded-lg flex-grow"
-                    />
-                    <button className="bg-[#41388C] text-white px-2.5 py-2.5 rounded-xl cursor-pointer"><FaSearch/></button>
+    const [url, setUrl] = useState("");
+    const [showModal, setShowModal] = useState(false);
+
+    const handleSearch = (e) => {
+        console.log("aaaa")
+        e.preventDefault(); // prevent form submit
+        if (!url.trim()) return;
+        setShowModal(true);
+    };
+
+
+    return(
+        <div className="relative h-40">
+            {/* Floating image */}
+            <div className="absolute -top-3 right-3 z-10">
+                <Image
+                    src="/images/dashboard/avatar-sp.png"
+                    alt="welcome"
+                    width={400}
+                    height={220}
+                />
+            </div>
+
+            {/* Main card */}
+            <div className="bg-[#C7C6DE] rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-start justify-between pr-28">
+                <div>
+                    <div className="h-16 mb-3">
+                        <p className="font-semibold mb-3 text-gray-600 text-md">Welcome on YourTextGuru!</p>
+                        <p className="text-md text-gray-600">Enter a website address and explore its SEO universe.</p>
+                    </div>
+                    <div className="flex items-center rounded-lg gap-2">
+                        <input
+                            type="text"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            placeholder="Website URL to explore"
+                            className="px-4 py-2 text-sm focus:outline-[#413793] focus:outline-1 bg-white rounded-lg flex-grow"
+                        />
+                        <button
+                            className="bg-[#41388C] text-white px-2.5 py-2.5 rounded-xl cursor-pointer"
+                            onClick={handleSearch}
+                        >
+                            <FaSearch/>
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            {showModal && <ModalWebsiteDetails url={url} onClose={() => setShowModal(false)} />}
         </div>
-    </div>
-);
+    )
+
+};
 
 const SEOContentCard = () => (
     <div className="bg-white rounded-2xl p-4 shadow-md">
