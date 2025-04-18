@@ -33,7 +33,7 @@ const GoogleAuthButton = ({ action }) => {
     return (
         <button
             onClick={handleClick}
-            className={`flex items-center justify-center gap-x-2 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:text-gray-200 dark:hover:bg-gray-600 ${
+            className={`flex items-center justify-center gap-x-2 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 ${
                 action === 'signup' ? 'w-auto' : 'w-full'
             }`}
             aria-label={buttonText}

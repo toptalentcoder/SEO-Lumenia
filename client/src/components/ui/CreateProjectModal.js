@@ -60,14 +60,14 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
                 <input
                     type="text"
                     placeholder="Enter Project Name"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-slate-800 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
                 />
                 <input
                     type="text"
                     placeholder="Enter Domain Name"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-slate-800 dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     value={domainName}
                     onChange={(e) => setDomainName(e.target.value)}
                 />
