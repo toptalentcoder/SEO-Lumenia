@@ -21,7 +21,7 @@ export const SerpSnapshots: CollectionConfig = {
       name: "tracking",
       type: "array",
       fields: [
-        { name: "date", type: "date", required: true },
+        { name: "date", type: "text", required: true },
         {
           name: "results",
           type: "array",

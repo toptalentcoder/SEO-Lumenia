@@ -13,11 +13,11 @@ export const generateKeywordsEndpoint : Endpoint = {
 
         const {payload} = req;
 
-        // const date = new Date().toISOString().split("T")[0]; // Today
-        // const result = await calculateImprovedSerpVolatility(payload, date);
-        await saveDailyVolatilityScores(payload);
+        const date = new Date().toISOString().split("T")[0]; // Today
+        const result = await calculateImprovedSerpVolatility(payload, date);
+        // await saveDailyVolatilityScores(payload);
 
-        return new Response(JSON.stringify({ success: true }), {
+        return new Response(JSON.stringify({ result }), {
             status: 200,
             headers: {
                 "Content-Type": "application/json",
