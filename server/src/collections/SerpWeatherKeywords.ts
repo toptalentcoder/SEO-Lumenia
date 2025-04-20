@@ -4,7 +4,7 @@ export const SerpWeatherKeywords: CollectionConfig = {
     slug: "serpWeatherKeywords",
     admin: {
         useAsTitle: "keyword",
-        defaultColumns: ["keyword", "category", "intent", "features", "createdAt"],
+        defaultColumns: ["keyword", "category", "intent", "features", "volatilityScore", "createdAt"],
     },
     fields: [
         {
@@ -29,17 +29,26 @@ export const SerpWeatherKeywords: CollectionConfig = {
             name: "intent",
             type: "select",
             options: ["informational", "commercial", "navigational", "transactional"],
+            required: true,
         },
         {
             name: "features",
             type: "array",
+            unique: true,
             fields: [
                 {
-                    name: "feature",
-                    type: "select",
-                    options: ["People Also Ask", "Knowledge Graph", "Image Pack", "Related", "News Pack"],
+                name: "feature",
+                type: "select",
+                options: ["People Also Ask", "Knowledge Graph", "Image Pack", "Related", "News Pack"],
                 },
             ],
+        },
+        {
+            name: "volatilityScore",
+            type: "number",
+            admin: {
+                position: "sidebar",
+            },
         },
         {
             name: "source",
