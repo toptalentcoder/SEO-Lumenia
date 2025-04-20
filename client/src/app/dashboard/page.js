@@ -8,10 +8,10 @@ import { FaSun, FaCheckCircle, FaLightbulb, FaTools, FaSearch, FaEye, FaExternal
 import { useRouter } from "next/navigation";
 import { GoGraph } from "react-icons/go";
 import { FaScissors, FaPencil, FaLink, FaListCheck } from "react-icons/fa6";
-import { MdPeopleAlt } from "react-icons/md";
 import { PiNetworkFill } from "react-icons/pi";
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { IoPeople } from "react-icons/io5";
+import { FaCircleExclamation } from "react-icons/fa6";
 import ModalWebsiteDetails from "./modalWebsiteDetails";
 
 const HeroTop = () => {
@@ -51,14 +51,18 @@ const HeroTop = () => {
             </div>
 
             <div
-                className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex items-center justify-between cursor-pointer"
+                className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex justify-between cursor-pointer"
                 onClick={() => router.push("/serp-weather")}
             >
                 <div className="flex items-center gap-2">
                     <div className="text-8xl font-bold"><FaSun/> </div>
-                    <div className="text-6xl font-sans">Sunny</div>
+                    <div className="text-[44.8px] font-semibold">Sunny</div>
                 </div>
-                <p className="text-md font-semibold">SERP WEATHER</p>
+                <div className="h-full flex-col justify-around">
+                    <div className="text-lg flex justify-end"><FaCircleExclamation /></div>
+                    <div className="text-md font-semibold flex justify-center items-center">SERP WEATHER</div>
+                </div>
+
             </div>
         </div>
     )
