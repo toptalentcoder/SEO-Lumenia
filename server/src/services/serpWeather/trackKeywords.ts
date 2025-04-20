@@ -10,6 +10,13 @@ interface OrganicResult {
     link: string;
 }
 
+function getScoreLevel(score: number): "low" | "medium" | "high" | "extreme" {
+    if (score >= 80) return "extreme";
+    if (score >= 60) return "high";
+    if (score >= 40) return "medium";
+    return "low";
+}
+
 export async function saveDailyVolatilityScores(payload: Payload) {
     const keywords = await payload.find({
         collection: "serpWeatherKeywords",
@@ -30,16 +37,16 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                 },
             });
 
+            if (!Array.isArray(response.data.organic_results)) {
+                console.warn(`⚠️ No organic_results for ${keyword}`);
+                continue;
+            }
+
             const top10 = (response.data.organic_results || []).slice(0, 10).map((item: OrganicResult, index: number) => ({
                 rank: index + 1,
                 title: item.title,
                 link: item.link,
             }));
-
-            const todayEntry = {
-                date: today,
-                results: top10,
-            };
 
             const existing = await payload.find({
                 collection: "serpSnapshots",
@@ -47,19 +54,29 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                 limit: 1,
             });
 
+            const newEntry = {
+                date: today,
+                results: top10,
+            };
+
             if (existing.totalDocs > 0) {
                 const doc = existing.docs[0];
-                const prevTracking = doc.tracking || [];
+                const prevTracking: { date: string }[] = doc.tracking || [];
 
-                const updatedTracking = [
-                    ...prevTracking.filter((t: { date: string }) => t.date !== today),
-                    todayEntry,
-                ];
+                // Remove today's entry if it already exists
+                const filteredTracking = prevTracking.filter(t => t.date !== today);
+
+                // Add today's entry and sort descending by date, then keep latest 30
+                const prunedTracking = [...filteredTracking, newEntry]
+                    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                    .slice(0, 30);
 
                 await payload.update({
                     collection: "serpSnapshots",
                     id: doc.id,
-                    data: { tracking: updatedTracking },
+                    data: {
+                        tracking: prunedTracking ,
+                    },
                 });
             } else {
                 await payload.create({
@@ -67,7 +84,7 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                     data: {
                         keyword: keyword.toLowerCase().trim(),
                         category,
-                        tracking: [todayEntry],
+                        tracking: [newEntry],
                     },
                 });
             }
@@ -96,6 +113,7 @@ export async function saveDailyVolatilityScores(payload: Payload) {
     }
 
     const scores = await calculateImprovedSerpVolatility(payload, today);
+    console.log("🧪 Calculated scores:", scores);
 
     for (const category of Object.keys(scores)) {
         const rawScore = scores[category];
@@ -117,6 +135,7 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                 category,
                 date: today,
                 score,
+                scoreLevel: getScoreLevel(score),
                 features: {
                     peopleAlsoAsk: +(100 * (stats.peopleAlsoAsk || 0) / count).toFixed(2),
                     imagePack: +(100 * (stats.imagePack || 0) / count).toFixed(2),

@@ -40,6 +40,8 @@ export async function calculateImprovedSerpVolatility(
 
         const flux = calculateFlux(todayEntry.results, yesterdayEntry.results);
 
+        console.log(flux)
+
         if (!categoryFlux[doc.category]) {
             categoryFlux[doc.category] = { totalChange: 0, count: 0 };
         }
@@ -59,6 +61,7 @@ export async function calculateImprovedSerpVolatility(
     return finalScores;
     }
 
+// Add a secondary metric like overlap ratio if needed
 function calculateFlux(today: SerpResult[], yesterday: SerpResult[]): number {
     const fluxMap = new Map<string, number>();
     yesterday.forEach((entry) => fluxMap.set(entry.link, entry.rank));
