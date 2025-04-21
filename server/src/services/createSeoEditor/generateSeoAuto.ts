@@ -1,17 +1,18 @@
 import { OpenAI } from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function autoExpandSeoText(rawContent: string): Promise<string> {
+export async function autoExpandSeoText(rawContent: string, language: string = "English"): Promise<string> {
     const prompt = `
         You are an SEO expert and writer.
 
         Take the following content and enhance it to be more semantically complete, natural-sounding, and optimized for SEO. Expand the points with helpful, specific, and engaging phrasing. Don't remove the structure — just enrich each part with meaningful detail.
+        The content should be written in ${language} language.
 
         Here is the content:
 
         ${rawContent}
 
-        Return the rewritten version only.
+        Return the rewritten version only, ensuring it is in ${language} language.
     `;
 
     const response = await openai.chat.completions.create({

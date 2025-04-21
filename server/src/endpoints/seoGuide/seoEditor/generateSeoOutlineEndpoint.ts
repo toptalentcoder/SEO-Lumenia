@@ -31,7 +31,7 @@ export const generateSeoOutlineEndpoint : Endpoint = {
         }
 
         try {
-            const outlines = await generateSeoOutline({ query, keywords, language });
+            const outline = await generateSeoOutline({ query, keywords, language });
 
             // const users = await payload.find({
             //     collection: "users",
@@ -90,13 +90,13 @@ export const generateSeoOutlineEndpoint : Endpoint = {
             //     data: { projects: updatedProjects },
             // });
 
-            return new Response(JSON.stringify({ success: true, outlines }), {
+            return new Response(JSON.stringify({ success: true, outline }), {
                 status: 200,
                 headers: { "Content-Type": "application/json" },
             });
         } catch (error) {
-            console.error("❌ generateSeooutlines error:", error);
-            return new Response(JSON.stringify({ error: "Failed to generate SEO outlines" }), {
+            console.error("❌ generateSeoOutline error:", error);
+            return new Response(JSON.stringify({ error: "Failed to generate SEO outline" }), {
                 status: 500,
                 headers: { "Content-Type": "application/json" },
             });

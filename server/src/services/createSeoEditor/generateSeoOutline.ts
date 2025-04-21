@@ -15,6 +15,7 @@ export async function generateSeoOutline({
         You are an SEO strategist.
 
         Generate a detailed, hierarchical outline for an SEO article based on the query: "${query}".
+        The outline should be in ${language} language.
 
         Use the following keywords where appropriate: ${keywords.join(', ')}
 
@@ -32,6 +33,7 @@ export async function generateSeoOutline({
         - Recommendations and examples
 
         Make the outline comprehensive but not too long (max 5 main sections).
+        All content should be in ${language} language.
     `;
 
     const response = await openai.chat.completions.create({
