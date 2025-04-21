@@ -39,6 +39,10 @@ import { myTestEndpoint } from "./mytest";
 import { getAllUserProjects } from "./projectManagement/getAllUserProject";
 import { internalPageRankEndpoint } from "./internalPageRankEndpoint";
 import { pageDuplicationEndpoint } from "./pageDuplicationEndpoint";
+import { getSerpWeatherDataEndpoint } from "./serpWeather/getSerpWeatherDataEndpoint";
+import { trackKeywordsEndpoint } from "./serpWeather/trackKeywordsEndpoint";
+import { getHistoricalVolatilityEndpoint } from "./serpWeather/getHistoricalVolatilityEndpoint";
+import { addTestDataEndpoint } from "./serpWeather/addTestDataEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -81,5 +85,9 @@ export const customEndpoints = [
     getMonitoringData,
     internalPageRankEndpoint,
     myTestEndpoint,
-    pageDuplicationEndpoint
+    pageDuplicationEndpoint,
+    getSerpWeatherDataEndpoint,
+    trackKeywordsEndpoint,
+    getHistoricalVolatilityEndpoint,
+    addTestDataEndpoint,
 ]

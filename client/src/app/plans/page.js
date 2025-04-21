@@ -396,7 +396,7 @@ export default function PricingTable() {
 
             {/* Subscription Confirmation Modal */}
             {isModalOpen && selectedPlan && (
-                <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50">
                     <div className="bg-white p-6 rounded-lg shadow-md w-11/12 sm:w-96">
                         <h2 className="text-lg font-bold text-gray-900">
                             Confirm Subscription
