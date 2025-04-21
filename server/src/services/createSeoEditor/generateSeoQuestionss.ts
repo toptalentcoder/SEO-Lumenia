@@ -17,12 +17,13 @@ export async function generateSeoQuestions({
         Based on the topic: "${query}" and the following keywords:
         ${keywords.join(', ')}
 
-        Generate 20 SEO-optimized FAQ-style questions. The questions should:
+        Generate 20 SEO-optimized FAQ-style questions in ${language}. The questions should:
         - Be helpful and conversational
         - Use relevant industry terms and product names from the keywords
         - Include a mix of search intent: comparison, how-to, technical explanation, problems, reviews
         - Cover SEO-rich angles: "kill switch", "split tunneling", "money-back guarantee", "free vs premium", "speed test", etc.
         - Be suitable for use in featured snippets or People Also Ask sections
+        - Be written in ${language} language
 
         Format:
         1. [question 1]
