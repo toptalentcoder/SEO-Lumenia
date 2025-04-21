@@ -10,6 +10,18 @@ export interface ProjectSeoGuide {
         queryID : string;
         seoEditor : string;
         category : string;
+        briefVerification?: {
+            verificationResult: {
+                objective: boolean;
+                mainTopics: string[];
+                importantQuestions: string[];
+                writingStyleAndTone: string[];
+                recommendedStyle: string[];
+                valueProposition: string[];
+            };
+            improvementText: string;
+            verifiedAt: string;
+        };
     }>
 }
 
