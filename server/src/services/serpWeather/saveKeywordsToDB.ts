@@ -1,6 +1,7 @@
 import { seedKeywordsMap } from "@/globals/seedKeywordsMap";
 import { Payload } from "payload";
 import { generateKeywordsForSERPWeatherCategory } from "./generateKeywords";
+import { SerpWeatherKeyword } from "@/payload-types";
 
 export const saveKeywordsForSERPWeatherCategory = async (payload: Payload) => {
   const results: Record<string, number> = {};
@@ -35,13 +36,13 @@ export const saveKeywordsForSERPWeatherCategory = async (payload: Payload) => {
             id: existingMap.get(lower),
             data: {
               source: "auto-generated",
-              updatedAt: new Date(),
+              updatedAt: new Date().toISOString(),
             },
           });
         } else {
           toInsert.push({
             keyword,
-            category,
+            category: category as SerpWeatherKeyword["category"],
             source: "auto-generated",
           });
         }
@@ -50,7 +51,13 @@ export const saveKeywordsForSERPWeatherCategory = async (payload: Payload) => {
       // Step 2: Insert new keywords in parallel
       await Promise.allSettled(
         toInsert.map((data) =>
-          payload.create({ collection: "serpWeatherKeywords", data })
+          payload.create({
+            collection: "serpWeatherKeywords", 
+            data: {
+              ...data,
+              intent: "informational" as const // Default to informational intent
+            }
+          })
         )
       );
 

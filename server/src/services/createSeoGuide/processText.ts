@@ -1,7 +1,7 @@
 import { removeStopwords } from 'stopword';
-import { WordTokenizer } from 'natural'
+import winkTokenizer from 'wink-tokenizer';
 
-const tokenizer = new WordTokenizer();
+const tokenizer = new winkTokenizer();
 
 export const processText = (text: string): string[] => {
     if (!text || typeof text !== 'string' || !text.trim()) {
@@ -17,6 +17,9 @@ export const processText = (text: string): string[] => {
         .trim();
 
     // Tokenize and remove stopwords
-    const tokens = tokenizer.tokenize(cleanedText);
+    const tokens = tokenizer.tokenize(cleanedText)
+        .filter(t => t.tag === 'word')
+        .map(t => t.value);
+
     return removeStopwords(tokens);
 };

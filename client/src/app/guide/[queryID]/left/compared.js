@@ -8,6 +8,9 @@ export default function Compared({ data }) {
     const createdAt = data.createdAt ? new Date(Number(data.createdAt)) : null;
     const formattedDate = createdAt ? createdAt.toLocaleDateString("en-GB") : "Invalid Date";
 
+    // Extract unique categories from search results
+    const uniqueCategories = [...new Set(searchResults.flatMap(result => result.categories).filter(Boolean))];
+
     return (
         <div className="px-6">
             <div className="flex items-center space-x-2 text-gray-600">
@@ -19,19 +22,16 @@ export default function Compared({ data }) {
                 SERP Intents
             </div>
 
-            <div className="flex items-center space-x-3 mt-4">
-                <div className="px-2 py-1 rounded-lg text-white bg-[#279AAC] text-sm">
-                    Business and Economy
-                </div>
-                <div className="px-2 py-1 rounded-lg text-white bg-[#279AAC] text-sm">
-                    Politics and government
-                </div>
-                <div className="px-2 py-1 rounded-lg text-white bg-[#279AAC] text-sm">
-                    Leisure
-                </div>
-                <div className="px-2 py-1 rounded-lg text-white bg-[#279AAC] text-sm">
-                    Sport
-                </div>
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+                {uniqueCategories.length > 0 ? (
+                    uniqueCategories.map((category, index) => (
+                        <div key={index} className="px-2 py-1 rounded-lg text-white bg-[#279AAC] text-sm">
+                            {category}
+                        </div>
+                    ))
+                ) : (
+                    <div className="text-gray-500 text-sm">No categories detected</div>
+                )}
             </div>
 
             <div className="mt-7 text-[#279AAC] bg-[#DFEEF0] rounded-lg p-5">
@@ -55,7 +55,7 @@ export default function Compared({ data }) {
                             <tr key={index} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                 <td className="w-12 px-1 py-4 text-center text-gray-700">{index + 1}</td>
                                 <td className="w-1/6 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
-                                    <div>
+                                    <div className="space-y-1">
                                         <div className="text-[#4A4291] flex items-center gap-1 text-sm">
                                             {row.title}
                                         </div>
@@ -63,6 +63,13 @@ export default function Compared({ data }) {
                                             <a href={row.link} target="_blank" rel="noopener noreferrer">
                                                 {row.link}
                                             </a>
+                                        </div>
+                                        <div className="flex flex-wrap gap-1">
+                                            {(row.categories || ["Uncategorized"]).map((category, catIndex) => (
+                                                <div key={catIndex} className="bg-[#4E4E4E] text-white px-2 py-0.5 rounded-xl text-[10px]">
+                                                    {category}
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </td>
