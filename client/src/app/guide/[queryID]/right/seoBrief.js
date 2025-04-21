@@ -39,7 +39,11 @@ export default function SeoBrief({data}){
             const content = responseSeoEditorContent.data.seoEditorData;
 
             // Send content and SEO brief to the backend for verification
-            const response = await axios.post("/api/verify_seo_brief", { content, seoBrief });
+            const response = await axios.post("/api/verify_seo_brief", { 
+                content, 
+                seoBrief,
+                language: data.language
+            });
 
             console.log(response.data)
             const { verificationResult, improvementText } = response.data;
