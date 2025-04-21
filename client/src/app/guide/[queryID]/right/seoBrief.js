@@ -1,7 +1,7 @@
 "use client"
 
 import { FaRobot, FaSpinner } from "react-icons/fa6";
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
@@ -25,7 +25,28 @@ export default function SeoBrief({data}){
     // State for verification results and improvement suggestions
     const [verificationResult, setVerificationResult] = useState(null);
     const [improvementSuggestions, setImprovementSuggestions] = useState("");
-    const [isLoading, setIsLoading] = useState(false);  // New state for loading
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Load verification state when component mounts
+    useEffect(() => {
+        const loadVerificationState = async () => {
+            try {
+                const response = await axios.get(
+                    `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+                );
+
+                if (response.data.success && response.data.briefVerification) {
+                    const { verificationResult, improvementText } = response.data.briefVerification;
+                    setVerificationResult(verificationResult);
+                    setImprovementSuggestions(improvementText);
+                }
+            } catch (error) {
+                console.error("Error loading verification state:", error);
+            }
+        };
+
+        loadVerificationState();
+    }, [queryID, user.email]);
 
     const handleVerifyClick = async () => {
         try {
@@ -42,7 +63,9 @@ export default function SeoBrief({data}){
             const response = await axios.post("/api/verify_seo_brief", { 
                 content, 
                 seoBrief,
-                language: data.language
+                language: data.language,
+                queryID,
+                email: user.email
             });
 
             console.log(response.data)

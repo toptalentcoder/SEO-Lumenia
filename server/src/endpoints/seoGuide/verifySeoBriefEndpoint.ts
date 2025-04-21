@@ -37,10 +37,10 @@ export const verifySeoBriefEndpoint: Endpoint = {
         }
 
         const body = await req.json();
-        const { content, seoBrief, language }: { content: string; seoBrief: SeoBrief; language?: string } = body;
+        const { content, seoBrief, language, queryID, email }: { content: string; seoBrief: SeoBrief; language?: string; queryID: string; email: string } = body;
 
-        if (!content || !seoBrief) {
-            return new Response(JSON.stringify({ error: "Missing content or brief" }), {
+        if (!content || !seoBrief || !queryID || !email) {
+            return new Response(JSON.stringify({ error: "Missing content, brief, queryID, or email" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json", ...corsHeaders },
             });
@@ -48,6 +48,51 @@ export const verifySeoBriefEndpoint: Endpoint = {
 
         try {
             const result = await verifyContentWithSeoBrief(content, seoBrief, language);
+
+            // Save verification state
+            const { payload } = req;
+            const users = await payload.find({
+                collection: "users",
+                where: { email: { equals: email } },
+                limit: 1,
+            });
+
+            if (users.docs.length > 0) {
+                const user = users.docs[0];
+                const updatedProjects = (Array.isArray(user.projects) ? user.projects : []).map((project) => {
+                    return typeof project === "object" && project !== null
+                        ? {
+                            ...project,
+                            seoGuides: ((project as { seoGuides?: { queryID: string }[] }).seoGuides || []).map((guide) => {
+                                if (guide.queryID === queryID) {
+                                    return {
+                                        ...guide,
+                                        briefVerification: {
+                                            verificationResult: {
+                                                objective: result.objective,
+                                                mainTopics: result.mainTopics,
+                                                importantQuestions: result.importantQuestions,
+                                                writingStyleAndTone: result.writingStyleAndTone,
+                                                recommendedStyle: result.recommendedStyle,
+                                                valueProposition: result.valueProposition,
+                                            },
+                                            improvementText: result.improvementText,
+                                            verifiedAt: new Date().toISOString()
+                                        }
+                                    };
+                                }
+                                return guide;
+                            }),
+                        }
+                        : project;
+                });
+
+                await payload.update({
+                    collection: "users",
+                    where: { email: { equals: email } },
+                    data: { projects: updatedProjects },
+                });
+            }
 
             return new Response(
                 JSON.stringify({
