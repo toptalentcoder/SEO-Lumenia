@@ -347,13 +347,14 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
     const handleSEO_TXLQuestions = async () => {
         const query = data.query;
         const keywords = data?.optimizationLevels?.map(item => item.keyword);
+        const language = data.language || "English";
 
         try {
             setIsLoading(true);
             const response = await fetch("/api/generate_seo_questions", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query, keywords, queryID : queryID, email : email }),
+                body: JSON.stringify({ query, keywords, language, queryID: queryID, email: email }),
             });
 
             const result = await response.json();
@@ -374,7 +375,7 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
             });
         } catch (err) {
             console.error("Error generating SEO-TXL Questions:", err);
-        }finally {
+        } finally {
             setIsLoading(false); // Done
         }
     }
@@ -382,33 +383,34 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
     const handleSeoTxlOutline = async () => {
         const query = data.query;
         const keywords = data?.optimizationLevels?.map(item => item.keyword);
+        const language = data.language || "English";
         setIsLoading(true); // Optional loading state
 
         try {
             const response = await fetch("/api/generate_seo_outline", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query, keywords, queryID : queryID, email : email }),
+                body: JSON.stringify({ query, keywords, language, queryID: queryID, email: email }),
             });
 
             const result = await response.json();
 
-            if (!result.success || !Array.isArray(result.outlines)) {
-                console.error("Failed to generate outlines", result);
+            if (!result.success || !Array.isArray(result.outline)) {
+                console.error("Failed to generate outline", result);
                 return;
             }
 
-            const outlines = result.outlines;
+            const outline = result.outline;
 
             editor.update(() => {
-                const nodes = outlines.map((q, i) =>
-                    $createParagraphNode().append($createTextNode(`${i + 1}. ${q}`))
+                const nodes = outline.map((line) =>
+                    $createParagraphNode().append($createTextNode(line))
                 );
 
-                $insertNodes(nodes); // ✅ Correct way to insert nodes
+                $insertNodes(nodes);
             });
         } catch (err) {
-            console.error("Failed to generate outline", err);
+            console.error("Error generating SEO-TXL Outline:", err);
         } finally {
             setIsLoading(false);
         }
@@ -417,40 +419,37 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
     const handleSeoTxlAuto = async () => {
         const root = editor.getRootElement();
         const currentText = root.innerText.trim();
-
         if (!currentText) return;
 
-        setIsLoading(true); // Optional loading indicator
+        setIsLoading(true);
 
         try {
             const response = await fetch("/api/generate_seo_auto", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ currentText, queryID : queryID, email : email }),
+                body: JSON.stringify({
+                    currentText,
+                    queryID,
+                    email: user.email,
+                }),
             });
 
             const result = await response.json();
+            if (result.success && result.autoText) {
+                editor.update(() => {
+                    $getRoot().clear();
 
-            if (!result.success || !result.autoText) {
-                console.error("Failed to generate auto content", result);
-                return;
+                    const lines = result.autoText.split(/\n+/).filter(line => line.trim());
+                    const nodes = lines.map((line) =>
+                        $createParagraphNode().append($createTextNode(line.trim()))
+                    );
+                    $insertNodes(nodes);
+                });
+            } else {
+                console.error("Auto-expansion failed:", result);
             }
-
-            const autoText = result.autoText;
-
-            editor.update(() => {
-                const textLines = Array.isArray(autoText)
-                    ? autoText
-                    : autoText.split(/\n+/).filter(line => line.trim() !== "");
-
-                const nodes = textLines.map((line, i) =>
-                    $createParagraphNode().append($createTextNode(line.trim()))
-                );
-
-                $insertNodes(nodes);
-            });
         } catch (err) {
-            console.error("Failed to run SEO-TXL Auto:", err);
+            console.error("Auto-expansion error:", err);
         } finally {
             setIsLoading(false);
         }
@@ -458,39 +457,40 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
 
     const handleSeoTxlRephrase = async () => {
         const root = editor.getRootElement();
-        const currentText = root.innerText.trim(); // Get the raw text from the editor
-
+        const currentText = root.innerText.trim();
         if (!currentText) return;
 
-        setIsLoading(true); // Show loading indicator
+        setIsLoading(true);
 
         try {
-            const response = await fetch("/api/generate_seo_rephrase", {  // Use the correct endpoint
+            const response = await fetch("/api/generate_seo_rephrase", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ currentText, queryID : queryID, email : email }), // Send the current text to be rephrased
+                body: JSON.stringify({
+                    currentText,
+                    queryID,
+                    email: user.email,
+                }),
             });
 
             const result = await response.json();
-            if (!result.success || !result.rephrasedText) {
-                console.error("Failed to rephrase the content:", result);
-                return;
+            if (result.success && result.rephrasedText) {
+                editor.update(() => {
+                    $getRoot().clear();
+
+                    const lines = result.rephrasedText.split(/\n+/).filter(line => line.trim());
+                    const nodes = lines.map((line) =>
+                        $createParagraphNode().append($createTextNode(line.trim()))
+                    );
+                    $insertNodes(nodes);
+                });
+            } else {
+                console.error("Rephrasing failed:", result);
             }
-
-            const rephrasedText = result.rephrasedText;
-
-            // Now, update the editor with the rephrased content
-            editor.update(() => {
-                const lines = rephrasedText.split(/\n+/).filter(line => line.trim() !== "");
-                const nodes = lines.map((line, i) =>
-                    $createParagraphNode().append($createTextNode(line.trim()))
-                );
-                $insertNodes(nodes); // Insert the rephrased nodes into the editor
-            });
         } catch (err) {
-            console.error("Error during rephrase:", err);
+            console.error("Rephrasing error:", err);
         } finally {
-            setIsLoading(false); // Hide the loading indicator
+            setIsLoading(false);
         }
     };
 
