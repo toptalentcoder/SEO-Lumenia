@@ -36,7 +36,7 @@ export const createSocialPostEndpoint : Endpoint = {
 
         const body = await req.json();
 
-        const { query, tone, platform, content, queryID, email } = body;
+        const { query, tone, platform, content, queryID, email, language } = body;
 
         if(!query || !tone || !platform || !content){
             return new Response(JSON.stringify({ error: "Missing or invalid query/keywords" }),
@@ -50,7 +50,7 @@ export const createSocialPostEndpoint : Endpoint = {
         );}
 
         try {
-            const socialPost = await createSocialPost({ query, tone, platform, content });
+            const socialPost = await createSocialPost({ query, tone, platform, content, language });
             const newSocialPost = [socialPost];  // Wrapping the socialPost object in an array
 
             const users = await payload.find({

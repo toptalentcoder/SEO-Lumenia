@@ -37,16 +37,16 @@ const socialMediaOptions = [
     { label: "Facebook" },
 ];
 
-// Language options
+// Language options with flag mapping
 const languageOptions = [
-    { label: "English" },
-    { label: "French" },
-    { label: "Spanish" },
-    { label: "Italian" },
-    { label: "Portuguese" },
-    { label: "Deutch" },
-    { label: "German" },
-    { label: "Romanian" },
+    { label: "English", flag: "GB" },
+    { label: "French", flag: "FR" },
+    { label: "Spanish", flag: "ES" },
+    { label: "Italian", flag: "IT" },
+    { label: "Portuguese", flag: "PT" },
+    { label: "Dutch", flag: "NL" },
+    { label: "German", flag: "DE" },
+    { label: "Romanian", flag: "RO" },
 ];
 
 export default function SocialPost({data}) {
@@ -66,6 +66,31 @@ export default function SocialPost({data}) {
     const { queryID } = useParams();
     const [openIndex, setOpenIndex] = useState(); // Default first item open
     const router = useRouter();
+
+    // Set the language based on the query language when component mounts
+    useEffect(() => {
+        if (data && data.language) {
+            // Find the matching language option
+            const matchingLanguage = languageOptions.find(
+                option => option.label.toLowerCase() === data.language.toLowerCase()
+            );
+            
+            if (matchingLanguage) {
+                setSelectedLanguageOption(matchingLanguage);
+            } else {
+                // If no exact match is found, try to find a partial match
+                const partialMatch = languageOptions.find(
+                    option => data.language.toLowerCase().includes(option.label.toLowerCase()) || 
+                              option.label.toLowerCase().includes(data.language.toLowerCase())
+                );
+                
+                if (partialMatch) {
+                    setSelectedLanguageOption(partialMatch);
+                }
+                // If still no match, keep the default (English)
+            }
+        }
+    }, [data]);
 
     useEffect(() => {
         const fetchSeoEditorData = async () => {
@@ -146,12 +171,13 @@ export default function SocialPost({data}) {
         setIsLoading(true); // Show loading spinner
 
         const requestData = {
-            query: data.query, // Replace with actual query, maybe from the state
+            query: data.query,
             tone: selectedToneOption.label.toLowerCase(),
             platform: selectedSocialMedia.label.toLowerCase(),
-            content: seoEditorData, // Replace with actual content
-            queryID : queryID,
-            email : user.email
+            content: seoEditorData,
+            queryID: queryID,
+            email: user.email,
+            language: selectedLanguageOption.label.toLowerCase() // Include the selected language
         };
 
         try {
@@ -193,10 +219,32 @@ export default function SocialPost({data}) {
         fetchSocialPostData();
     }, [queryID, user.email]);
 
+    // Add a function to get the flag component based on language
+    const getFlagComponent = (language) => {
+        const languageOption = languageOptions.find(
+            option => option.label.toLowerCase() === language.toLowerCase()
+        );
+        
+        if (languageOption) {
+            switch (languageOption.flag) {
+                case "GB": return <GB className='w-4 h-4'/>;
+                case "FR": return <FR className='w-4 h-4'/>;
+                case "ES": return <ES className='w-4 h-4'/>;
+                case "IT": return <IT className='w-4 h-4'/>;
+                case "PT": return <PT className='w-4 h-4'/>;
+                case "NL": return <NL className='w-4 h-4'/>;
+                case "DE": return <DE className='w-4 h-4'/>;
+                case "RO": return <RO className='w-4 h-4'/>;
+                default: return <US className='w-4 h-4'/>;
+            }
+        }
+        return <US className='w-4 h-4'/>;
+    };
+
     return (
         <div className="px-14">
             <div className="flex items-center space-x-8">
-                <Image src="/avatar.png" alt="alt" width={125} height={125} className='rounded-xl' />
+                <Image src="/images/speyronnet-expert.jpg" alt="alt" width={125} height={125} className='rounded-xl border border-gray-200 shadow-sm' />
                 <div className='bg-gray-50 rounded-xl border border-gray-300 py-4 px-4'>
                     <div className='flex-shrink-0 font-semibold text-gray-700'>Sylvain Peyronnet - The SEO Expert Guides You</div>
                     <div className='flex-shrink-0 mt-5 text-gray-700'>
@@ -362,7 +410,7 @@ export default function SocialPost({data}) {
                                             className="w-full flex items-center text-left text-lg font-semibold text-gray-600"
                                             onClick={() => toggleFAQ(index)}
                                         >
-                                            <div className='ml-3 mr-1'><US className='w-4 h-4'/></div>
+                                            <div className='ml-3 mr-1'>{getFlagComponent(faq.language)}</div>
                                             <span>-</span>
                                             <div>
                                                 {faq.socialMedia === "linkedin" ? <FaLinkedin className='w-4 h-4 ml-1'/> : null}

@@ -8,12 +8,14 @@ export async function createSocialPost({
     query,
     tone,
     platform,
-    content
+    content,
+    language
 }: {
     query: string;
     tone: string;
     platform: string;
     content: string | string[];
+    language?: string;
 }): Promise<{socialMedia : string; tone : string; text : string; language : string}> {
     // Define tone and platform mappings for context
     const tone_map: { [key: string]: string } = {
@@ -39,27 +41,33 @@ export async function createSocialPost({
     // Build the prompt dynamically based on the platform and query content
     let prompt: string;
 
+    // Add language instruction if language is provided
+    const languageInstruction = language ? `Write the post in ${language} language.` : '';
+
     if (platform === 'x') {
         prompt = `
             Create a ${tone_map[tone]} Twitter post about the following topic: "${query}".
             The post should be concise (up to 280 characters), include relevant hashtags and emojis.
-            Here’s the content to reference:
+            ${languageInstruction}
+            Here's the content to reference:
             ${contentString}
             The post should be catchy and encourage engagement.
         `;
     } else if (platform === 'linkedin') {
         prompt = `
             Create a ${tone_map[tone]} LinkedIn post about the following topic: "${query}".
-            The post should be conversational, engaging, and provide value. Make sure it’s detailed, offering insights into the topic.
+            The post should be conversational, engaging, and provide value. Make sure it's detailed, offering insights into the topic.
             It should encourage readers to reflect on the topic and share their experiences or thoughts.
-            Here’s the content to reference:
+            ${languageInstruction}
+            Here's the content to reference:
             ${contentString}
         `;
     } else if (platform === 'facebook') {
         prompt = `
             Create a fun and engaging Facebook post about the following topic: "${query}".
             The post should be lighthearted, with a mix of humor and relatable commentary. It should be engaging and conversational, encouraging users to interact with the post by commenting, liking, and sharing their experiences.
-            Here’s the content to reference:
+            ${languageInstruction}
+            Here's the content to reference:
             ${contentString}
             The post should feel like a friendly conversation, with an engaging and slightly humorous tone that encourages sharing of experiences.
         `;
@@ -67,7 +75,8 @@ export async function createSocialPost({
         prompt = `
             Create a ${tone_map[tone]} post for ${platform} about the topic: "${query}".
             The post should be engaging and appropriate for the platform.
-            Here’s the content to reference:
+            ${languageInstruction}
+            Here's the content to reference:
             ${contentString}
         `;
     }
@@ -85,7 +94,7 @@ export async function createSocialPost({
     return {
         socialMedia: platform || "",
         tone: tone || "",
-        language: "en",
+        language: language || "en",
         text: text || ""
     };
 }
