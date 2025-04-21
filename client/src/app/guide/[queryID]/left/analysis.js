@@ -14,6 +14,61 @@ import { useUser } from '../../../../context/UserContext';
 import axios from 'axios';
 import { FaSpinner } from "react-icons/fa6";
 
+const hlToFullLanguageMap = {
+    en: 'English',
+    es: 'Spanish',
+    fr: 'French',
+    de: 'German',
+    it: 'Italian',
+    pt: 'Portuguese',
+    pl: 'Polish',
+    ro: 'Romanian',
+    nl: 'Dutch',
+    ar: 'Arabic',
+    hi: 'Hindi',
+    ja: 'Japanese',
+    zh: 'Chinese',
+    ru: 'Russian',
+    tr: 'Turkish'
+};
+
+const glToFullCountryMap = {
+    us: 'USA',
+    gb: 'United Kingdom',
+    fr: 'France',
+    de: 'Germany',
+    es: 'Spain',
+    it: 'Italy',
+    pt: 'Portugal',
+    nl: 'Netherlands',
+    pl: 'Poland',
+    ro: 'Romania',
+    ru: 'Russia',
+    jp: 'Japan',
+    cn: 'China',
+    kr: 'South Korea',
+    in: 'India',
+    au: 'Australia',
+    ca: 'Canada',
+    br: 'Brazil',
+    mx: 'Mexico',
+    ar: 'Argentina',
+    cl: 'Chile',
+    co: 'Colombia',
+    pe: 'Peru',
+    za: 'South Africa',
+    eg: 'Egypt',
+    ma: 'Morocco',
+    ae: 'UAE',
+    sa: 'Saudi Arabia',
+    tr: 'Turkey',
+    at: 'Austria',
+    be: 'Belgium',
+    ch: 'Switzerland',
+    lu: 'Luxembourg',
+    ad: 'Andorra'
+};
+
 const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     return (
         <svg x={cx - 4} y={cy - 4} width={8} height={8} fill={color} stroke="none">
@@ -276,7 +331,7 @@ export default function Analysis({data, setIsDirty }) {
         <div className="px-6">
             <div className="flex items-center gap-2 justify-end">
                 <div className="px-2 py-1 bg-amber-300 rounded-xl text-white text-sm">
-                    French (France)
+                    {data?.language && data?.gl ? `${hlToFullLanguageMap[data.language]} (${glToFullCountryMap[data.gl]})` : "English (USA)"}
                 </div>
                 <div className="px-2 py-1 bg-amber-300 rounded-xl text-white text-sm">
                     50 days remaining
