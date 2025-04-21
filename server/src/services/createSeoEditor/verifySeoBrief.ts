@@ -50,7 +50,8 @@ async function verifyItemPresence(
 
 export async function verifyContentWithSeoBrief(
     content: string,
-    seoBrief: SeoBrief
+    seoBrief: SeoBrief,
+    language?: string
 ) {
     const verificationResult: Record<keyof SeoBrief, string[] | boolean> = {
         objective: false,
@@ -100,6 +101,7 @@ export async function verifyContentWithSeoBrief(
     try {
         const suggestionPrompt = `
             You are an SEO assistant. Given the following SEO brief and article content, suggest what could be improved or added.
+            ${language ? `Please provide your response in ${language} language.` : ''}
 
             SEO Brief:
             - Objective: ${seoBrief.objective.join(", ")}
@@ -113,7 +115,6 @@ export async function verifyContentWithSeoBrief(
                 ${content}
 
             Give a thoughtful review of the content based on the SEO brief. Always suggest improvements, refinements, or enhancements, even if the content already includes all required elements. Focus on depth, clarity, structure, style, tone, keyword use, and overall alignment with the brief. Avoid saying everything is perfect.
-
         `;
 
         const suggestionResponse = await openai.chat.completions.create({
@@ -123,6 +124,7 @@ export async function verifyContentWithSeoBrief(
         });
 
         improvementText = suggestionResponse.choices[0].message.content?.trim() ?? "";
+        
     } catch (error) {
         console.warn("GPT failed to generate improvement text:", error);
     }
