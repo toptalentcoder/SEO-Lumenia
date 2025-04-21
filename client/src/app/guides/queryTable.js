@@ -11,6 +11,37 @@ import { RiOpenaiFill } from "react-icons/ri";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FaSpinner } from "react-icons/fa6";
+import { Menu } from '@headlessui/react';
+
+// Delete Confirmation Modal Component
+const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, queryToDelete }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black bg-black/50 z-50 flex items-center justify-center">
+            <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Delete Query</h3>
+                <p className="text-gray-600 mb-6">
+                    Are you sure you want to delete this query? This action cannot be undone.
+                </p>
+                <div className="flex justify-end space-x-4">
+                    <button
+                        onClick={onClose}
+                        className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        onClick={onConfirm}
+                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -58,6 +89,9 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
     const [rows, setRows] = useState([]);
     const [loading, setLoading] = useState(true);
     const router = useRouter(); // For navigation
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [queryToDelete, setQueryToDelete] = useState(null);
+    const [deleteLoading, setDeleteLoading] = useState(false);
 
     useEffect(() => {
         if(!user.email) return;
@@ -108,6 +142,52 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
             router.push(`/guide/${queryID}`);
         }
     }
+
+    const handleDelete = async () => {
+        if (!queryToDelete || !user?.email) {
+            console.error('Missing required data:', { queryToDelete, userEmail: user?.email });
+            return;
+        }
+        
+        setDeleteLoading(true);
+        try {
+            const response = await fetch('/api/delete_query', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: user.email,
+                    queryID: queryToDelete.queryID,
+                }),
+            });
+
+            if (response.ok) {
+                // Remove the deleted query from the rows
+                setRows(rows.filter(row => row.queryID !== queryToDelete.queryID));
+                setIsDeleteModalOpen(false);
+            } else {
+                const errorData = await response.json();
+                console.error('Failed to delete query:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    error: errorData
+                });
+                alert(`Failed to delete query: ${errorData.error || 'Please try again.'}`);
+            }
+        } catch (error) {
+            console.error('Error deleting query:', error);
+            alert('An error occurred while deleting the query. Please check your connection and try again.');
+        } finally {
+            setDeleteLoading(false);
+            setQueryToDelete(null);
+        }
+    };
+
+    const handleDeleteClick = (row) => {
+        setQueryToDelete(row);
+        setIsDeleteModalOpen(true);
+    };
 
     return (
         <div className="container mx-auto">
@@ -202,7 +282,39 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                                 d="M4 12a8 8 0 018-8v8z" />
                                         </svg>
                                     </td>
-                                    <td className="text-center"><BsThreeDots /></td>
+                                    <td className="w-12 px-1 py-4 text-center relative">
+                                        <Menu>
+                                            <Menu.Button className="hover:bg-gray-100 p-1 rounded-full">
+                                                <BsThreeDots className="text-gray-600" />
+                                            </Menu.Button>
+                                            <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <button
+                                                            className={`${
+                                                                active ? 'bg-gray-100' : ''
+                                                            } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
+                                                            onClick={() => handleQueryIDPage(row.queryID)}
+                                                        >
+                                                            <MdModeEdit className="mr-2" /> Edit
+                                                        </button>
+                                                    )}
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <button
+                                                            className={`${
+                                                                active ? 'bg-gray-100' : ''
+                                                            } flex w-full items-center px-4 py-2 text-sm text-red-600`}
+                                                            onClick={() => handleDeleteClick(row)}
+                                                        >
+                                                            <MdDelete className="mr-2" /> Delete
+                                                        </button>
+                                                    )}
+                                                </Menu.Item>
+                                            </Menu.Items>
+                                        </Menu>
+                                    </td>
                                 </tr>
                             )}
 
@@ -249,8 +361,38 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     <td className="w-1/6 px-3 py-4 text-lg text-gray-400 font-sans text-center">
                                         {formatDate(row.createdAt)}
                                     </td>
-                                    <td className="w-12 px-1 py-4 text-center">
-                                        <BsThreeDots />
+                                    <td className="w-12 px-1 py-4 text-center relative">
+                                        <Menu>
+                                            <Menu.Button className="hover:bg-gray-100 p-1 rounded-full">
+                                                <BsThreeDots className="text-gray-600" />
+                                            </Menu.Button>
+                                            <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <button
+                                                            className={`${
+                                                                active ? 'bg-gray-100' : ''
+                                                            } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
+                                                            onClick={() => handleQueryIDPage(row.queryID)}
+                                                        >
+                                                            <MdModeEdit className="mr-2" /> Edit
+                                                        </button>
+                                                    )}
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <button
+                                                            className={`${
+                                                                active ? 'bg-gray-100' : ''
+                                                            } flex w-full items-center px-4 py-2 text-sm text-red-600`}
+                                                            onClick={() => handleDeleteClick(row)}
+                                                        >
+                                                            <MdDelete className="mr-2" /> Delete
+                                                        </button>
+                                                    )}
+                                                </Menu.Item>
+                                            </Menu.Items>
+                                        </Menu>
                                     </td>
                                 </tr>
                             ))}
@@ -259,6 +401,16 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
 
                 </div>
             )}
+
+            <DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => {
+                    setIsDeleteModalOpen(false);
+                    setQueryToDelete(null);
+                }}
+                onConfirm={handleDelete}
+                queryToDelete={queryToDelete}
+            />
         </div>
     );
 
