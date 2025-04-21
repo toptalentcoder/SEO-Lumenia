@@ -37,7 +37,7 @@ export const verifySeoBriefEndpoint: Endpoint = {
         }
 
         const body = await req.json();
-        const { content, seoBrief }: { content: string; seoBrief: SeoBrief } = body;
+        const { content, seoBrief, language }: { content: string; seoBrief: SeoBrief; language?: string } = body;
 
         if (!content || !seoBrief) {
             return new Response(JSON.stringify({ error: "Missing content or brief" }), {
@@ -47,7 +47,7 @@ export const verifySeoBriefEndpoint: Endpoint = {
         }
 
         try {
-            const result = await verifyContentWithSeoBrief(content, seoBrief);
+            const result = await verifyContentWithSeoBrief(content, seoBrief, language);
 
             return new Response(
                 JSON.stringify({
