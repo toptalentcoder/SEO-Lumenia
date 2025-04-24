@@ -22,8 +22,7 @@ import { SerpSnapshots } from './collections/SerpSnapShots';
 import { InternalPageRanks } from './collections/internalPageRank';
 import { InternalUrls } from './collections/internalUrlsCollection';
 import { PageDuplicates } from './collections/pageDuplicates';
-
-
+import { BacklinkSites } from './collections/backlinkSites';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +34,18 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, BillingPlan, SerpWeatherKeywords, SerpVolatilityScores, SerpSnapshots, InternalPageRanks, InternalUrls, PageDuplicates],
+  collections: [
+    Users,
+    Media,
+    BillingPlan,
+    SerpWeatherKeywords,
+    SerpVolatilityScores,
+    SerpSnapshots,
+    InternalPageRanks,
+    InternalUrls,
+    PageDuplicates,
+    BacklinkSites
+  ],
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
   editor: lexicalEditor(),

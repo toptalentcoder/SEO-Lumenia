@@ -76,6 +76,7 @@ export interface Config {
     internalPageRanks: InternalPageRank;
     'internal-url': InternalUrl;
     'page-duplicates': PageDuplicate;
+    'backlink-sites': BacklinkSite;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -91,6 +92,7 @@ export interface Config {
     internalPageRanks: InternalPageRanksSelect<false> | InternalPageRanksSelect<true>;
     'internal-url': InternalUrlSelect<false> | InternalUrlSelect<true>;
     'page-duplicates': PageDuplicatesSelect<false> | PageDuplicatesSelect<true>;
+    'backlink-sites': BacklinkSitesSelect<false> | BacklinkSitesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -368,6 +370,27 @@ export interface PageDuplicate {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "backlink-sites".
+ */
+export interface BacklinkSite {
+  id: string;
+  domain: string;
+  backlinks?:
+    | {
+        sourceUrl: string;
+        targetUrl: string;
+        authorityScore: number;
+        linkStrength: number;
+        anchorText: string;
+        followType: 'follow' | 'nofollow';
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -408,6 +431,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'page-duplicates';
         value: string | PageDuplicate;
+      } | null)
+    | ({
+        relationTo: 'backlink-sites';
+        value: string | BacklinkSite;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -651,6 +678,26 @@ export interface PageDuplicatesSelect<T extends boolean = true> {
         id?: T;
       };
   analyzedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "backlink-sites_select".
+ */
+export interface BacklinkSitesSelect<T extends boolean = true> {
+  domain?: T;
+  backlinks?:
+    | T
+    | {
+        sourceUrl?: T;
+        targetUrl?: T;
+        authorityScore?: T;
+        linkStrength?: T;
+        anchorText?: T;
+        followType?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
