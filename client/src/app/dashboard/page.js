@@ -1,7 +1,6 @@
 'use client';
 
-import React from "react";
-import { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import Image from 'next/image';
 import { FaSun, FaCheckCircle, FaLightbulb, FaTools, FaSearch, FaEye, FaExternalLinkAlt  } from "react-icons/fa";
@@ -14,6 +13,7 @@ import { IoPeople } from "react-icons/io5";
 import { FaCircleExclamation } from "react-icons/fa6";
 import ModalWebsiteDetails from "./modalWebsiteDetails";
 import ModalSerpWeather from "./modalSerpWeather";
+import { useUser } from "../../context/UserContext";
 
 const HeroTop = () => {
     const router = useRouter();
@@ -191,16 +191,85 @@ const SEOContentCard = () => (
     </div>
 );
 
-const ActivityPanel = () => (
-    <div className="bg-white rounded-2xl p-4 shadow-md text-sm">
-        <p className="font-semibold mb-2">📌 Recent Team Activity</p>
-        <ul className="list-disc list-inside text-gray-700">
-            <li>Guide Generated: top famous people in the world (Mar 31)</li>
-            <li>Guide Request: best swimming shorts (Mar 25)</li>
-            <li>Guide Generated: what is the best vpn (Mar 27)</li>
-        </ul>
-    </div>
-);
+const BacklinkHistoryPanel = () => {
+    const { user } = useUser();
+    const [history, setHistory] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const router = useRouter();
+
+    useEffect(() => {
+        const fetchHistory = async () => {
+            if (!user?.email) return;
+            
+            try {
+                const res = await fetch("/api/user-backlink-history", {
+                    method: "POST",
+                    body: JSON.stringify({ email: user.email }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                
+                const data = await res.json();
+                if (data && !data.error) {
+                    setHistory(data);
+                }
+            } catch (error) {
+                console.error("Error fetching backlink history:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchHistory();
+    }, [user?.email]);
+
+    const handleHistoryClick = (domain) => {
+        router.push(`/top/links?url=${encodeURIComponent(domain)}`);
+    };
+
+    const displayedHistory = showAll ? history : history.slice(0, 5);
+
+    return (
+        <div className="bg-white rounded-2xl p-4 shadow-md text-sm">
+            <div className="flex justify-between items-center mb-2">
+                <p className="font-semibold">🔗 Recent Backlink Searches</p>
+                {history.length > 5 && (
+                    <button 
+                        onClick={() => setShowAll(!showAll)}
+                        className="text-[#41388C] text-xs hover:underline"
+                    >
+                        {showAll ? "Show Less" : "Show All"}
+                    </button>
+                )}
+            </div>
+            {loading ? (
+                <div className="text-gray-500">Loading history...</div>
+            ) : history.length === 0 ? (
+                <div className="text-gray-500">No backlink search history yet.</div>
+            ) : (
+                <ul className="list-disc list-inside text-gray-700">
+                    {displayedHistory.map((item, index) => (
+                        <li 
+                            key={index} 
+                            className="mb-1 cursor-pointer hover:text-[#41388C] transition-colors"
+                            onClick={() => handleHistoryClick(item.domain)}
+                        >
+                            <span className="font-medium">{item.domain}</span>
+                            <span className="text-gray-500 text-xs ml-2">
+                                ({new Date(item.searchedAt).toLocaleDateString()})
+                            </span>
+                            <span className="text-gray-500 text-xs ml-2">
+                                - {item.backlinkCount} backlinks
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+};
 
 const RecentKeywordsList = () => (
     <div className="bg-white rounded-2xl p-4 shadow-md">
@@ -280,7 +349,7 @@ export default function DashboardPage() {
                     {!isMobile && <KeywordPromptCard />}
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
-                    <ActivityPanel />
+                    <BacklinkHistoryPanel />
                     <RecentKeywordsList />
                 </div>
                 {isMobile && <KeywordPromptCard />}
