@@ -1,7 +1,21 @@
 import { seedKeywordsMap } from "@/globals/seedKeywordsMap";
 import { Payload } from "payload";
 import { generateKeywordsForSERPWeatherCategory } from "./generateKeywords";
-import { SerpWeatherKeyword } from "@/payload-types";
+import { SerpWeatherKeywords } from "@/collections/SerpWeatherKeywords";
+
+type SerpWeatherKeyword = {
+    category: "News" | "Adult" | "Games" | "Health" | "Sports" | "Finance" | "Science" | "Shopping" |
+        "Reference" | "Real Estate" | "Food & Drink" | "Home & Garden" | "Pets & Animals" |
+        "Autos & Vehicles" | "Beauty & Fitness" | "Jobs & Education" | "Law & Government" |
+        "People & Society" | "Hobbies & Leisure" | "Books & Literature" | "Internet & Telecom" |
+        "Online & Communities" | "Arts & Entertainment" | "Business & Industrial" |
+        "Computers & Electronics" | "Travel & Transportation";
+    keyword: string;
+    intent: "informational" | "commercial" | "navigational" | "transactional";
+    source: string;
+    features?: Array<{ feature: "People Also Ask" | "Knowledge Graph" | "Image Pack" | "Related" | "News Pack" }>;
+    volatilityScore?: number;
+};
 
 export const saveKeywordsForSERPWeatherCategory = async (payload: Payload) => {
   const results: Record<string, number> = {};

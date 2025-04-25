@@ -35,7 +35,6 @@ import { saveSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/save_soseo_dseo";
 import { getSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/get_soseo_dseo";
 import { generateKeywordsEndpoint } from "./serpWeather/generateKeywordsEndpoint";
 import { getMonitoringData } from "./seoGuide/monitoring/getMonitoringData";
-import { myTestEndpoint } from "./mytest";
 import { getAllUserProjects } from "./projectManagement/getAllUserProject";
 import { internalPageRankEndpoint } from "./internalPageRankEndpoint";
 import { pageDuplicationEndpoint } from "./pageDuplicationEndpoint";
@@ -44,9 +43,10 @@ import { trackKeywordsEndpoint } from "./serpWeather/trackKeywordsEndpoint";
 import { getHistoricalVolatilityEndpoint } from "./serpWeather/getHistoricalVolatilityEndpoint";
 import { addTestDataEndpoint } from "./serpWeather/addTestDataEndpoint";
 import { deleteQueryEndpoint } from "./seoGuide/deleteQuery";
-import { backlinksOverviewEndpoint } from "./backlinksOverview";
-import { userBacklinkHistoryEndpoint } from "./userBacklinkHistory";
-import { searchBacklinksEndpoint } from "./searchBacklinks";
+import { backlinksOverviewEndpoint } from "./backlinks_overview/backlinksOverview";
+import { userBacklinkHistoryEndpoint } from "./backlinks_overview/userBacklinkHistory";
+import { searchBacklinksEndpoint } from "./backlinks_overview/searchBacklinks";
+import { saveKeywordsForSERPWeatherCategoryEndpoint } from "./saveKeywordsForSerpWeatherEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -88,7 +88,7 @@ export const customEndpoints = [
     generateKeywordsEndpoint,
     getMonitoringData,
     internalPageRankEndpoint,
-    myTestEndpoint,
+    saveKeywordsForSERPWeatherCategoryEndpoint,
     pageDuplicationEndpoint,
     getSerpWeatherDataEndpoint,
     trackKeywordsEndpoint,
