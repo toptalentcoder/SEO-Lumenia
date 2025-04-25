@@ -49,7 +49,7 @@ export const searchBacklinksEndpoint : Endpoint = {
                     const cleanAnchor = anchor?.replace(/^"+|"+$/g, "").trim() || "No anchor text";
                     const authorityScore = pageAscore?.replace("\r", "").trim() || "0";
                     const followType = nofollow === "true" ? "nofollow" : "dofollow";
-          
+
                     const anchorBoost = cleanAnchor && cleanAnchor.length > 2 ? 1.2 : 0.8;
                     const linkStrength = Math.round(parseInt(authorityScore) * (followType === "dofollow" ? 1 : 0.5) * anchorBoost);
 
@@ -75,8 +75,6 @@ export const searchBacklinksEndpoint : Endpoint = {
                     authorityScore: string;
                     linkStrength: number;
                 } | null): backlink is NonNullable<typeof backlink> => backlink !== null);
-
-                console.log(backlinks)
 
             // Save the backlinks data to the user's history
             const existingSite = await req.payload.find({
