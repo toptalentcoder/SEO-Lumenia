@@ -48,11 +48,21 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                 link: item.link,
             }));
 
+            const normalizedKeyword = keyword.toLowerCase().trim();
+            
+            // Log the search criteria for debugging
+            console.log(`Searching for snapshot with keyword: "${normalizedKeyword}" and category: "${category}"`);
+            
             const existing = await payload.find({
                 collection: "serpSnapshots",
-                where: { keyword: { equals: keyword.toLowerCase().trim() } },
+                where: { 
+                    keyword: { equals: normalizedKeyword },
+                    category: { equals: category }
+                },
                 limit: 1,
             });
+
+            console.log(`Found ${existing.totalDocs} existing snapshots for this keyword and category`);
 
             const newEntry = {
                 date: today,
@@ -61,6 +71,8 @@ export async function saveDailyVolatilityScores(payload: Payload) {
 
             if (existing.totalDocs > 0) {
                 const doc = existing.docs[0];
+                console.log(`Updating existing snapshot with ID: ${doc.id}`);
+                
                 const prevTracking: { date: string }[] = doc.tracking || [];
 
                 // Remove today's entry if it already exists
@@ -75,18 +87,51 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                     collection: "serpSnapshots",
                     id: doc.id,
                     data: {
-                        tracking: prunedTracking ,
+                        tracking: prunedTracking,
                     },
                 });
             } else {
-                await payload.create({
+                // Check if there are any records with the same keyword but different case
+                const caseInsensitiveCheck = await payload.find({
                     collection: "serpSnapshots",
-                    data: {
-                        keyword: keyword.toLowerCase().trim(),
-                        category,
-                        tracking: [newEntry],
+                    where: {
+                        keyword: { like: normalizedKeyword },
+                        category: { equals: category }
                     },
+                    limit: 1,
                 });
+                
+                if (caseInsensitiveCheck.totalDocs > 0) {
+                    // Found a record with the same keyword but different case
+                    const doc = caseInsensitiveCheck.docs[0];
+                    console.log(`Found a record with the same keyword but different case. Updating ID: ${doc.id}`);
+                    
+                    const prevTracking: { date: string }[] = doc.tracking || [];
+                    const filteredTracking = prevTracking.filter(t => t.date !== today);
+                    const prunedTracking = [...filteredTracking, newEntry]
+                        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                        .slice(0, 30);
+                    
+                    await payload.update({
+                        collection: "serpSnapshots",
+                        id: doc.id,
+                        data: {
+                            keyword: normalizedKeyword, // Normalize the keyword
+                            tracking: prunedTracking,
+                        },
+                    });
+                } else {
+                    // Create new record only if one doesn't exist for this exact keyword and category
+                    console.log(`Creating new snapshot for keyword: "${normalizedKeyword}" and category: "${category}"`);
+                    await payload.create({
+                        collection: "serpSnapshots",
+                        data: {
+                            keyword: normalizedKeyword,
+                            category,
+                            tracking: [newEntry],
+                        },
+                    });
+                }
             }
 
             if (!featureCountByCategory[category]) {

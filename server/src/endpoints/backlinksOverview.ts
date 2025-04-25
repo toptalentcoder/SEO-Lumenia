@@ -6,9 +6,8 @@ export const backlinksOverviewEndpoint : Endpoint = {
     path: "/backlinks-overview",
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-
         const body = req.json ? await req.json() : {};
-        const { baseUrl } = body;
+        const { baseUrl, email } = body;
 
         if (!baseUrl) {
             return new Response(JSON.stringify({ error: "Missing baseUrl" }), {
@@ -17,47 +16,46 @@ export const backlinksOverviewEndpoint : Endpoint = {
             });
         }
 
-        try{
-            const response = await axios.get('https://api.semrush.com/analytics/v1/', {
-                params: {
-                    type : 'backlinks',
-                    target : baseUrl,
-                    key : process.env.SEMRUSH_API_KEY,
-                    target_type : 'domain',
-                    database : 'us',
-                    export_columns: 'source_url,target_url,anchor,nofollow,page_ascore'
+        if (!email) {
+            return new Response(JSON.stringify({ error: "Missing email" }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" },
+            });
+        }
+
+        try {
+            // Check if we have data for this domain in the user's history
+            const existingSite = await req.payload.find({
+                collection: 'backlink-sites',
+                where: {
+                    domain: {
+                        equals: baseUrl,
+                    },
                 },
-            })
+            });
 
-            const backlinks = response.data
-                .split('\n')
-                .slice(1)
-                .map((line: string) => {
-                    const [sourceUrl, targetUrl, anchor, nofollow, pageAscore] = line.split(';');
+            if (existingSite.docs.length > 0) {
+                const site = existingSite.docs[0];
+                const userHistory = site.searchHistory?.find(
+                    (history: any) => history.userEmail === email
+                );
 
-                    const anchorText = anchor?.trim();
-                    const authorityScore = Number(pageAscore) || 0;
-                    const followType = nofollow === "true" ? "nofollow" : "dofollow";
-          
-                    const anchorBoost = anchorText.length > 2 ? 1.2 : 0.8;
-                    const linkStrength = Math.round(authorityScore * (followType === "dofollow" ? 1 : 0.5) * anchorBoost);
+                if (userHistory) {
+                    return new Response(JSON.stringify(userHistory.backlinks), {
+                        status: 200,
+                        headers: { "Content-Type": "application/json" },
+                    });
+                }
+            }
 
-                    return {
-                        sourceUrl,
-                        targetUrl,
-                        anchor,
-                        followType,
-                        pageAscore,
-                        linkStrength
-                    }
-                })
-                .filter(Boolean)
-                .slice(0, 100);
+            // If no history found for this user, return error
+            return new Response(JSON.stringify({ 
+                error: "No search history found for this domain. Please use the search function first." 
+            }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" },
+            });
 
-                return new Response(JSON.stringify(backlinks), {
-                    status: 200,
-                    headers: { "Content-Type": "application/json" },
-                });
         } catch (error) {
             console.error("Error fetching backlinks:", error);
             return new Response(JSON.stringify({ error: "Failed to fetch backlinks" }), {
