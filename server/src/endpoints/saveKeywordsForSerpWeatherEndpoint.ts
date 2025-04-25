@@ -1,20 +1,19 @@
-import { internalPageRank } from '@/services/UrlPageServie/internalPageRank';
+import { saveKeywordsForSERPWeatherCategory } from '@/services/serpWeather/saveKeywordsToDB';
 import { Endpoint, PayloadRequest } from 'payload';
 
 // Define the Payload endpoint
-export const myTestEndpoint: Endpoint = {
-    path: '/test',
+export const saveKeywordsForSERPWeatherCategoryEndpoint: Endpoint = {
+    path: '/save-keywords-for-serp-weather-category',
     method: 'get',
-    handler: async () => {
+    handler: async (req: PayloadRequest) => {
         try {
 
-            const result = await internalPageRank("https://www.cnet.com");
+            await saveKeywordsForSERPWeatherCategory(req.payload);
 
             // Return the collected results
             return new Response(
                 JSON.stringify({
                     message: 'Fetch completed.',
-                    result : result
                 }),
                 {
                     status: 200,

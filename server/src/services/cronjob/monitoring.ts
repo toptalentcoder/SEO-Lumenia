@@ -152,11 +152,6 @@ export function startDailyRankTracking(payload: Payload) {
 
         console.log("✅ All users' rank tracking complete.");
 
-        await saveKeywordsForSERPWeatherCategory(payload);
-
-        console.log("✅ All Keywords for SERP Weather Category saved.")
-
-
         // Internal page rank cronjob
         const { docs } = await payload.find({
             collection: 'internalPageRanks',
@@ -164,7 +159,7 @@ export function startDailyRankTracking(payload: Payload) {
         });
 
         for (const record of docs) {
-            const scores = await internalPageRank(record.baseUrl);
+            const scores = await internalPageRank(record.baseUrl, payload);
 
             await payload.update({
                 collection: 'internalPageRanks',
