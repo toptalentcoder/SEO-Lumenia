@@ -1,19 +1,30 @@
 "use client"
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchView } from '../../../hooks/useSearchView';
 import { useUser } from '../../../context/UserContext';
 import Image from 'next/image';
 import { ExternalLink } from "lucide-react";
 import { US } from 'country-flag-icons/react/3x2';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function TopLinks(){
 
     const {currentView, responseData, switchToResults, switchToInput } = useSearchView();
-    const [loading, setLoading] = useState(false);
-    const [inputUrl, setInputUrl] = useState("");
     const { user } = useUser();
+    const [inputUrl, setInputUrl] = useState("");
     const [result, setResult] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const url = searchParams.get('url');
+
+    useEffect(() => {
+        if (url) {
+            setInputUrl(url);
+            handleHistorySearch(url);
+        }
+    }, [url]);
 
     const getBaseGrade = (score) => {
         if (score >= 95) return 'a';
@@ -80,14 +91,44 @@ export default function TopLinks(){
         document.body.removeChild(link);
     };
 
-    const handleSearch = async (data) => {
-        if (!inputUrl) return;
+    const handleHistorySearch = async (domain) => {
+        if (!user?.email) return;
+        setLoading(true);
+
+        try {
+            const res = await fetch("/api/backlinks-overview", {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: domain, email: user.email }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await res.json();
+            if (data && !data.error && Array.isArray(data)) {
+                setResult(data);
+                switchToResults(data);
+            } else if (data.error) {
+                // If no history found, fall back to Semrush search
+                handleSearch(domain);
+            }
+        } catch (error) {
+            console.error("Error fetching backlink history:", error);
+            // Fall back to Semrush search on error
+            handleSearch(domain);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSearch = async (domain) => {
+        if (!domain) return;
         setLoading(true);
 
         try {
             const res = await fetch("/api/search-backlinks", {
                 method: "POST",
-                body: JSON.stringify({ baseUrl: inputUrl, email : user.email }),
+                body: JSON.stringify({ baseUrl: domain, email: user.email }),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -96,12 +137,12 @@ export default function TopLinks(){
             const data = await res.json();
             if (data && Array.isArray(data) && data.length > 0) {
                 setResult(data);
-                switchToResults(data); // This will change currentView to "results"
+                switchToResults(data);
             }
         } catch (error) {
             console.error("Search failed:", error);
         } finally {
-            setLoading(false); // Stop loading animation
+            setLoading(false);
         }
     };
 
