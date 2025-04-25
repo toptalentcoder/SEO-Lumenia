@@ -45,6 +45,8 @@ import { getHistoricalVolatilityEndpoint } from "./serpWeather/getHistoricalVola
 import { addTestDataEndpoint } from "./serpWeather/addTestDataEndpoint";
 import { deleteQueryEndpoint } from "./seoGuide/deleteQuery";
 import { backlinksOverviewEndpoint } from "./backlinksOverview";
+import { userBacklinkHistoryEndpoint } from "./userBacklinkHistory";
+import { searchBacklinksEndpoint } from "./searchBacklinks";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -93,5 +95,7 @@ export const customEndpoints = [
     getHistoricalVolatilityEndpoint,
     addTestDataEndpoint,
     deleteQueryEndpoint,
-    backlinksOverviewEndpoint
+    backlinksOverviewEndpoint,
+    userBacklinkHistoryEndpoint,
+    searchBacklinksEndpoint
 ]
