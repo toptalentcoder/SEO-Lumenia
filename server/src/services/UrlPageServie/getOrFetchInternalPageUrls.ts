@@ -1,4 +1,3 @@
-
 import { fetchHTML } from './fetchHtml';
 import { discoverInternalLinks } from './discoverInternalLinks';
 import { Payload } from 'payload';
@@ -13,7 +12,7 @@ export async function getOrFetchInternalUrls(baseUrl: string, payload : Payload)
     if (existing.docs.length) {
         console.log('[INFO] Found internal URLs in cache for:', baseUrl);
         return {
-            urls: existing.docs[0].urls.map((u: { url: string }) => u.url),
+            urls: existing.docs[0].urls?.map((u: { url: string }) => u.url) ?? [],
         };
     }
 

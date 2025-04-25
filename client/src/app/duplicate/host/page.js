@@ -30,20 +30,39 @@ export default function PageDuplication() {
         if (!inputUrl) return;
         setLoading(true);
         try {
-            const res = await fetch("/api/page-duplication", {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
+
+            const res = await fetch("http://localhost:7777/api/page-duplication", {
                 method: "POST",
                 body: JSON.stringify({ baseUrl: inputUrl }),
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                signal: controller.signal,
+                keepalive: true,
             });
-            const json = await res.json();
-            if (json?.result?.data?.length) {
-                setResult(json.result.data);
-                setSummary(json.result.summary);
-                setHistogram(json.result.histogram);
-                switchToResults(json.result.data); // Switch view to results
+
+            clearTimeout(timeoutId);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
             }
-        } catch (err) {
-            console.error("Fetch failed", err);
+
+            const data = await res.json();
+            if (data?.data?.length) {
+                setResult(data.data);
+                setSummary(data.summary);
+                setHistogram(data.histogram);
+                switchToResults(data.data);
+            }
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                console.error("Request timed out");
+                // You might want to show a message to the user here
+            } else {
+                console.error("Search failed:", error);
+            }
         } finally {
             setLoading(false);
         }
@@ -205,7 +224,13 @@ export default function PageDuplication() {
 
                 <div className="flex justify-center mb-20">
                     {loading ? (
-                        <div className="mt-10 text-gray-700">Loading...</div>
+                        <div className="mt-10 flex flex-col items-center gap-4">
+                            <div className="relative w-16 h-16">
+                                <div className="absolute top-0 left-0 w-full h-full border-4 border-[#41388C] border-t-transparent rounded-full animate-spin"></div>
+                                <div className="absolute top-0 left-0 w-full h-full border-4 border-[#41388C] border-t-transparent rounded-full animate-spin" style={{ animationDelay: '-0.3s' }}></div>
+                            </div>
+                            <p className="text-gray-600 font-medium">Analyzing your website...</p>
+                        </div>
                     ) : currentView === "input" && result.length === 0 ? (
                         <div className="w-1/3 text-center mt-20">
                             <svg
@@ -218,7 +243,7 @@ export default function PageDuplication() {
                                 <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
                             </svg>
                             <h1 className="font-semibold text-2xl text-gray-700">
-                                Uncover Your Content’s Uniqueness in a Click
+                                Uncover Your Content&apos;s Uniqueness in a Click
                             </h1>
                             <p className="mt-10 text-xl text-gray-600">
                                 Scan for duplicate content within your website and identify high-similarity page pairs.
