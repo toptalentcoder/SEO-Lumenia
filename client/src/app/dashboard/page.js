@@ -13,10 +13,11 @@ import { TiWeatherPartlySunny } from "react-icons/ti";
 import { IoPeople } from "react-icons/io5";
 import { FaCircleExclamation } from "react-icons/fa6";
 import ModalWebsiteDetails from "./modalWebsiteDetails";
+import ModalSerpWeather from "./modalSerpWeather";
 
 const HeroTop = () => {
-
     const router = useRouter();
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     return(
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 w-full">
@@ -58,12 +59,30 @@ const HeroTop = () => {
                     <div className="text-8xl font-bold"><FaSun/> </div>
                     <div className="text-[44.8px] font-semibold">Sunny</div>
                 </div>
-                <div className="h-full flex-col justify-around">
-                    <div className="text-lg flex justify-end"><FaCircleExclamation /></div>
-                    <div className="text-md font-semibold flex justify-center items-center">SERP WEATHER</div>
+                <div className="h-full flex flex-col">
+                    <div className="text-lg flex justify-end">
+                        <div 
+                            className="transform transition-transform hover:scale-125 cursor-pointer"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsSettingsOpen(true);
+                            }}
+                        >
+                            <FaCircleExclamation />
+                        </div>
+                    </div>
+                    <div className="text-md font-semibold flex-grow flex items-center">SERP WEATHER</div>
                 </div>
-
             </div>
+
+            <ModalSerpWeather 
+                isOpen={isSettingsOpen}
+                onClose={() => setIsSettingsOpen(false)}
+                onSave={() => {
+                    // Handle save logic here
+                    setIsSettingsOpen(false);
+                }}
+            />
         </div>
     )
 };
