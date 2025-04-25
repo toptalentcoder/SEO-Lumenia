@@ -29,31 +29,29 @@ export default function TopLinks(){
     const getBaseGrade = (score) => {
         if (score >= 95) return 'a';
         if (score >= 90) return 'b';
-        if (score >= 85) return 'b';
         if (score >= 80) return 'b';
-        if (score >= 75) return 'c';
-        if (score >= 70) return 'c';
+        if (score >= 70) return 'b';
         if (score >= 65) return 'c';
-        if (score >= 60) return 'd';
-        if (score >= 55) return 'd';
+        if (score >= 60) return 'c';
+        if (score >= 55) return 'c';
         if (score >= 50) return 'd';
-        if (score >= 40) return 'e';
-        return 'f';
+        if (score >= 45) return 'd';
+        if (score >= 40) return 'd';
+        return 'e';
     };
       
     const getFullGradeLabel = (score) => {
         if (score >= 95) return 'A';
         if (score >= 90) return 'B+';
-        if (score >= 85) return 'B';
-        if (score >= 80) return 'B-';
-        if (score >= 75) return 'C+';
-        if (score >= 70) return 'C';
-        if (score >= 65) return 'C-';
-        if (score >= 60) return 'D+';
-        if (score >= 55) return 'D';
-        if (score >= 50) return 'D-';
-        if (score >= 40) return 'E';
-        return 'F';
+        if (score >= 80) return 'B';
+        if (score >= 70) return 'B-';
+        if (score >= 65) return 'C+';
+        if (score >= 60) return 'C';
+        if (score >= 55) return 'C-';
+        if (score >= 50) return 'D+';
+        if (score >= 45) return 'D';
+        if (score >= 40) return 'D-';
+        return 'E';
     };
       
 
@@ -176,9 +174,9 @@ export default function TopLinks(){
                     <thead className="bg-gray-50 border-b border-gray-200">
                         <tr>
                             <th className="py-3 px-4 w-[8%] text-gray-600 text-center font-medium">Link Strength</th>
-                            <th className="py-3 px-4 w-[30%] text-gray-600 text-left font-medium">Source Page</th>
+                            <th className="py-3 px-4 w-[25%] text-gray-600 text-left font-medium">Source Page</th>
                             <th className="py-3 px-4 w-[8%] text-gray-600 text-center font-medium">Authority</th>
-                            <th className="py-3 px-4 w-[20%] text-gray-600 text-center font-medium">Anchor</th>
+                            <th className="py-3 px-4 w-[25%] text-gray-600 text-center font-medium">Anchor</th>
                             <th className="py-3 px-4 w-[8%] text-gray-600 text-center font-medium">Type</th>
                             <th className="py-3 px-4 w-[26%] text-gray-600 text-left font-medium">Target page</th>
                         </tr>
@@ -191,12 +189,20 @@ export default function TopLinks(){
                                         {item.linkStrength}
                                     </span>
                                 </td>
-                                <td className="py-3 px-4">
-                                    <div className="flex items-center gap-2">
-                                        <US className="w-4 h-3 flex-shrink-0" />
-                                        <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-[#41388C] hover:text-[#352d73] transition-colors duration-200 flex items-start gap-1 text-sm break-words whitespace-pre-wrap  truncate inline-block flex">
-                                            {decodeURIComponent(item.sourceUrl)} <ExternalLink size={14} className="flex-shrink-0 mt-1" />
-                                        </a>
+                                <td className="py-3 px-4 min-w-[200px]">
+                                    <div className="flex items-start gap-2">
+                                        <US className="w-4 h-3 flex-shrink-0 mt-1" />
+                                        <div className="flex-1 min-w-0">
+                                            <a 
+                                                href={item.sourceUrl} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="text-[#41388C] hover:text-[#352d73] transition-colors duration-200 break-words text-sm inline-flex items-start gap-1"
+                                            >
+                                                <span className="break-all">{decodeURIComponent(item.sourceUrl)}</span>
+                                                <ExternalLink size={14} className="flex-shrink-0 mt-1" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
                                 <td className="py-3 px-4 text-center">
@@ -214,11 +220,10 @@ export default function TopLinks(){
                                         </div>
                                     </div>
                                 </td>
-
                                 <td className="py-3 px-4">
-                                    <div className="text-center">
-                                        <div className="text-gray-400 flex-shrink-0">🔗</div>
-                                        <span className="text-gray-600 text-xs font-medium break-words whitespace-pre-wrap">
+                                    <div className="flex-col justify-center items-center mx-auto gap-2">
+                                        <div className="text-gray-400 flex justify-center items-center mt-1">🔗</div>
+                                        <span className="text-gray-600 flex justify-center items-center text-xs font-medium break-words">
                                             {item.anchorText}
                                         </span>
                                     </div>
@@ -232,10 +237,18 @@ export default function TopLinks(){
                                         {item.followType}
                                     </span>
                                 </td>
-                                <td className="py-3 px-4">
-                                    <a href={item.targetUrl} target="_blank" rel="noopener noreferrer" className="text-[#41388C] hover:text-[#352d73] transition-colors duration-200 flex items-start gap-1 text-sm break-words whitespace-pre-wrap">
-                                        {decodeURIComponent(item.targetUrl)} <ExternalLink size={14} className="flex-shrink-0 mt-1" />
-                                    </a>
+                                <td className="py-3 px-4 min-w-[200px]">
+                                    <div className="flex-1 min-w-0">
+                                        <a 
+                                            href={item.targetUrl} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="text-[#41388C] hover:text-[#352d73] transition-colors duration-200 break-words text-sm inline-flex items-start gap-1"
+                                        >
+                                            <span className="break-all">{decodeURIComponent(item.targetUrl)}</span>
+                                            <ExternalLink size={14} className="flex-shrink-0 mt-1" />
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
