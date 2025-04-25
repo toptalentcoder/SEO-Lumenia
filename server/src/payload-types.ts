@@ -375,14 +375,21 @@ export interface PageDuplicate {
 export interface BacklinkSite {
   id: string;
   domain: string;
-  backlinks?:
+  searchHistory?:
     | {
-        sourceUrl: string;
-        targetUrl: string;
-        authorityScore: number;
-        linkStrength: number;
-        anchorText: string;
-        followType: 'follow' | 'nofollow';
+        userEmail: string;
+        searchedAt: string;
+        backlinks?:
+          | {
+              sourceUrl: string;
+              targetUrl: string;
+              authorityScore: string;
+              linkStrength: number;
+              anchorText: string;
+              followType: 'dofollow' | 'nofollow';
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -687,15 +694,22 @@ export interface PageDuplicatesSelect<T extends boolean = true> {
  */
 export interface BacklinkSitesSelect<T extends boolean = true> {
   domain?: T;
-  backlinks?:
+  searchHistory?:
     | T
     | {
-        sourceUrl?: T;
-        targetUrl?: T;
-        authorityScore?: T;
-        linkStrength?: T;
-        anchorText?: T;
-        followType?: T;
+        userEmail?: T;
+        searchedAt?: T;
+        backlinks?:
+          | T
+          | {
+              sourceUrl?: T;
+              targetUrl?: T;
+              authorityScore?: T;
+              linkStrength?: T;
+              anchorText?: T;
+              followType?: T;
+              id?: T;
+            };
         id?: T;
       };
   updatedAt?: T;
