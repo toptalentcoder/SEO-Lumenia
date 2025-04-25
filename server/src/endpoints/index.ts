@@ -8,7 +8,6 @@ import { getUserProjects } from "./projectManagement/getProject";
 import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
 import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
 import { addProjectToUser } from "./projectManagement/postProject";
-import { createSeoGuide } from "./seoGuide/createSeoGuide";
 import { generateSeoAutoEndpoint } from "./seoGuide/seoEditor/generateSeoAutoEndpoint";
 import { generateSeoOutlineEndpoint } from "./seoGuide/seoEditor/generateSeoOutlineEndpoint";
 import { generateSeoQuestionsEndpoint } from "./seoGuide/seoEditor/generateSeoQuestions";
@@ -47,6 +46,8 @@ import { backlinksOverviewEndpoint } from "./backlinks_overview/backlinksOvervie
 import { userBacklinkHistoryEndpoint } from "./backlinks_overview/userBacklinkHistory";
 import { searchBacklinksEndpoint } from "./backlinks_overview/searchBacklinks";
 import { saveKeywordsForSERPWeatherCategoryEndpoint } from "./saveKeywordsForSerpWeatherEndpoint";
+import { getProgressEndpoint } from "./seoGuide/getProgress";
+import { createSeoGuide } from "./seoGuide/createSeoGuide";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -97,5 +98,6 @@ export const customEndpoints = [
     deleteQueryEndpoint,
     backlinksOverviewEndpoint,
     userBacklinkHistoryEndpoint,
-    searchBacklinksEndpoint
+    searchBacklinksEndpoint,
+    getProgressEndpoint
 ]

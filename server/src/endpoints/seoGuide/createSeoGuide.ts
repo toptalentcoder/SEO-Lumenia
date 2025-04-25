@@ -51,7 +51,7 @@ export const createSeoGuide: Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"
@@ -60,8 +60,6 @@ export const createSeoGuide: Endpoint = {
         const { payload } = req;
         const body = await req.json();
         const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr  } = body;
-
-        const SERP_API_KEY = process.env.SERP_API_KEY;
 
         if (!query || typeof query !== "string") {
             return new Response(JSON.stringify({ error: "Missing query in request body" }), {
@@ -73,19 +71,19 @@ export const createSeoGuide: Endpoint = {
             });
         }
 
-        try {
-            // Set a timeout for the entire operation
-            const timeoutPromise = new Promise((_, reject) => {
-                setTimeout(() => reject(new Error("Operation timed out")), 120000); // 2 minutes timeout
-            });
+        // Set a timeout for the entire operation
+        const timeoutPromise = new Promise<Response>((_, reject) => {
+            setTimeout(() => reject(new Error("Operation timed out")), 300000); // 5 minutes timeout
+        });
 
+        try {
             // Create a promise for the actual operation
-            const operationPromise = (async () => {
+            const operationPromise = (async (): Promise<Response> => {
                 // Fetch SERP API data using axios (including PAA questions)
                 const response = await axios.get('https://serpapi.com/search', {
                     params: {
                         q: query,
-                        api_key: SERP_API_KEY,
+                        api_key: process.env.SERP_API_KEY,
                         hl: hl || 'en',             // Language
                         gl: gl || 'us',             // Country
                         lr: lr || 'lang_en'         // Only French content
@@ -199,7 +197,8 @@ export const createSeoGuide: Endpoint = {
                     seoBrief : resolvedSeoBrief,
                     PAAs,
                     cronjob,
-                    createdAt : Date.now()
+                    createdAt : Date.now(),
+                    createdBy: email
                 };
 
                 const users = await payload.find({
@@ -297,10 +296,11 @@ export const createSeoGuide: Endpoint = {
             })();
 
             // Race between the operation and the timeout
-            return await Promise.race([operationPromise, timeoutPromise]) as Response;
-        } catch (err) {
-            console.error("❌ createSeoGuide error:", err);
-            return new Response(JSON.stringify({ error: "Failed to create SEO guide" }), {
+            return await Promise.race([operationPromise, timeoutPromise]);
+        } catch (error: unknown) {
+            console.error("❌ createSeoGuide error:", error);
+            const errorMessage = error instanceof Error ? error.message : "Failed to create SEO guide";
+            return new Response(JSON.stringify({ error: errorMessage }), {
                 status: 500,
                 headers: {
                     "Content-Type": "application/json",
