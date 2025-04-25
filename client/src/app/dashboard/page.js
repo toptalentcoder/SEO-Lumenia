@@ -22,47 +22,64 @@ const HeroTop = () => {
     return(
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 w-full">
             <div className="bg-[#C0E1E8] rounded-2xl flex items-center shadow-md relative h-40">
-                <div className="absolute -top-6 left-0 z-10">
-                    <Image
-                        src="/images/dashboard/avatar-pc.png"
-                        alt="Guide Mascot"
-                        width={180}
-                        height={150}
-                        className="rounded-full"
-                    />
+                {/* Avatar image */}
+                <div className="absolute -top-8 left-2 z-10">
+                    <div className="relative">
+                        <div className="w-[193px] h-[193px] relative">
+                            <Image
+                                src="/images/dashboard/avatar-pc.png"
+                                alt="Guide Mascot"
+                                fill
+                                style={{ objectFit: 'contain', objectPosition: 'center' }}
+                                priority
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="bg-[#C0E1E8] rounded-2xl flex items-center pl-60 pr-6 py-6 ">
-                    <div>
-                        <p className="text-sm text-[#3AB4D5]">
-                            <strong>Yourtext.guru</strong> has always been here to help you optimize your content for Google.
-                            Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
+
+                {/* NEW label */}
+                <div className="absolute -top-3 left-40">
+                    <div className="relative">
+                        <div className="absolute inset-0 animate-ping rounded-lg bg-white/50" />
+                        <div className="relative bg-white px-6 py-1.5 rounded-lg shadow-md group cursor-pointer">
+                            <span className="text-[#3AB4D5] text-sm font-semibold relative">
+                                NEW
+                                <div className="absolute -bottom-1 -left-1 -right-1 h-[calc(100%+8px)] border-2 border-[#3AB4D5] rounded-lg scale-0 transition-transform duration-300 group-hover:scale-100 origin-top-left"></div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Content */}
+                <div className="flex items-center pl-64 md:pl-64 pr-6 py-6">
+                    <div className="relative w-full">
+                        <p className="text-[#3AB4D5] text-lg leading-relaxed">
+                            <span className="font-semibold">Yourtext.guru</span> has always been here to help you optimize your content for Google. Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
                         </p>
                         <button
-                            className="mt-3 px-4 py-2 bg-[#279AAC] text-white rounded-xl text-sm cursor-pointer"
+                            className="mt-6 px-4 py-1.5 bg-[#279AAC] text-white rounded-xl text-base font-medium 
+                                    transition-all duration-300 hover:bg-[#1d7a8a] cursor-pointer"
                             onClick={() => router.push("/guides")}
                         >
                             Create a new guide
                         </button>
                     </div>
-
-                    <span className="absolute top-2 left-40 bg-white px-2 py-1 text-xs font-semibold rounded shadow">
-                        NEW
-                    </span>
                 </div>
             </div>
 
             <div
-                className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex justify-between cursor-pointer"
+                className="bg-gradient-to-r h-40 from-[#15A18D] to-[#37ED7E] rounded-2xl p-4 text-white shadow-md flex justify-between cursor-pointer
+                         transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg"
                 onClick={() => router.push("/serp-weather")}
             >
                 <div className="flex items-center gap-2">
-                    <div className="text-8xl font-bold"><FaSun/> </div>
+                    <div className="text-8xl font-bold"><FaSun/></div>
                     <div className="text-[44.8px] font-semibold">Sunny</div>
                 </div>
                 <div className="h-full flex flex-col">
                     <div className="text-lg flex justify-end">
                         <div 
-                            className="transform transition-transform hover:scale-125 cursor-pointer"
+                            className="transform transition-all duration-300 hover:scale-125 hover:rotate-12 cursor-pointer"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setIsSettingsOpen(true);
@@ -79,12 +96,11 @@ const HeroTop = () => {
                 isOpen={isSettingsOpen}
                 onClose={() => setIsSettingsOpen(false)}
                 onSave={() => {
-                    // Handle save logic here
                     setIsSettingsOpen(false);
                 }}
             />
         </div>
-    )
+    );
 };
 
 const KeywordPromptCard = () => (
@@ -341,7 +357,7 @@ export default function DashboardPage() {
     const isMobile = useMediaQuery({ maxWidth: 767 });
 
     return (
-        <div className="bg-[#f5f7fb] min-h-screen text-gray-800">
+        <div className="bg-[#f5f7fb] min-h-screen text-gray-800 mt-5">
             <main className="max-w-full mx-auto px-12 py-6 space-y-10">
                 <HeroTop />
                 <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4">
