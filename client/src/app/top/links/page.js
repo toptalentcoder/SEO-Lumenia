@@ -2,24 +2,207 @@
 
 import { useState } from 'react';
 import { useSearchView } from '../../../hooks/useSearchView';
+import { useUser } from '../../../context/UserContext';
+import Image from 'next/image';
+import { ExternalLink } from "lucide-react";
+import { US } from 'country-flag-icons/react/3x2';
 
 export default function TopLinks(){
 
     const {currentView, responseData, switchToResults, switchToInput } = useSearchView();
     const [loading, setLoading] = useState(false);
+    const [inputUrl, setInputUrl] = useState("");
+    const { user } = useUser();
+    const [result, setResult] = useState([]);
+
+    const getBaseGrade = (score) => {
+        if (score >= 95) return 'a';
+        if (score >= 90) return 'b';
+        if (score >= 85) return 'b';
+        if (score >= 80) return 'b';
+        if (score >= 75) return 'c';
+        if (score >= 70) return 'c';
+        if (score >= 65) return 'c';
+        if (score >= 60) return 'd';
+        if (score >= 55) return 'd';
+        if (score >= 50) return 'd';
+        if (score >= 40) return 'e';
+        return 'f';
+    };
+      
+    const getFullGradeLabel = (score) => {
+        if (score >= 95) return 'A';
+        if (score >= 90) return 'B+';
+        if (score >= 85) return 'B';
+        if (score >= 80) return 'B-';
+        if (score >= 75) return 'C+';
+        if (score >= 70) return 'C';
+        if (score >= 65) return 'C-';
+        if (score >= 60) return 'D+';
+        if (score >= 55) return 'D';
+        if (score >= 50) return 'D-';
+        if (score >= 40) return 'E';
+        return 'F';
+    };
+      
+
+    const exportToCSV = () => {
+        if (!result || result.length === 0) return;
+        
+        // Create CSV header
+        const headers = ["Link Strength", "Source Page", "Source Authority", "Anchor", "Type", "Target page"];
+        
+        // Create CSV rows
+        const csvRows = result.map(item => [
+            item.linkStrength,
+            item.sourceUrl,
+            item.authorityScore,
+            item.anchorText,
+            item.followType,
+            item.targetUrl
+        ]);
+        
+        // Combine header and rows
+        const csvContent = [
+            headers.join(","),
+            ...csvRows.map(row => row.join(","))
+        ].join("\n");
+        
+        // Create a blob and download link
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.setAttribute("href", url);
+        link.setAttribute("download", `backlinks_${inputUrl.replace(/[^a-zA-Z0-9]/g, "_")}.csv`);
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
     const handleSearch = async (data) => {
-        setLoading(true); // Start loading animation
+        if (!inputUrl) return;
+        setLoading(true);
 
         try {
-            // Store the response and show results
-            switchToResults(data);
+            const res = await fetch("/api/search-backlinks", {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: inputUrl, email : user.email }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await res.json();
+            if (data && Array.isArray(data) && data.length > 0) {
+                setResult(data);
+                switchToResults(data); // This will change currentView to "results"
+            }
         } catch (error) {
             console.error("Search failed:", error);
         } finally {
             setLoading(false); // Stop loading animation
         }
     };
+
+    const renderTable = () => (
+        <div >
+            <div className="flex items-center gap-4 mb-6">
+                <div className='bg-white rounded-lg p-10 flex items-start gap-7 mt-8'>
+                    <Image src="/images/speyronnet-expert.jpg" alt="alt" width={130} height={130} className='rounded-xl border border-gray-200' />
+                    <div className='bg-[#F8FAFD] rounded-lg p-6 border border-gray-300'>
+                        <h1 className='text-gray-700 font-semibold text-lg mb-5'>
+                            Sylvain Peyronnet - The SEO Expert Guides You
+                        </h1>
+                        <p className="text-gray-600 text-lg">
+                            With our backlink strength calculation, you can easily see in the table which links have the most impact. By ranking backlinks based on a score that combines source popularity, trustworthiness, and content relevance between linked pages, we highlight the links that are the most powerful, reliable, and relevant to your site. Focus your efforts on these backlinks to maximize their value for your SEO and improve your site&apos;s overall performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mt-4 text-right">
+                <button
+                    className="bg-[#41388C] text-white text-sm px-5 py-2 rounded-xl cursor-pointer hover:bg-[#352d73] transition-colors duration-200 flex items-center gap-2 ml-auto"
+                    onClick={exportToCSV}
+                >
+                    Export (CSV)
+                </button>
+            </div>
+
+            <div className="overflow-hidden rounded-lg shadow-sm mt-6">
+                <table className="text-left text-sm w-full">
+                    <thead className="bg-gray-50 border-b border-gray-200">
+                        <tr>
+                            <th className="py-3 px-4 w-[8%] text-gray-600 text-center font-medium">Link Strength</th>
+                            <th className="py-3 px-4 w-[30%] text-gray-600 text-left font-medium">Source Page</th>
+                            <th className="py-3 px-4 w-[8%] text-gray-600 text-center font-medium">Authority</th>
+                            <th className="py-3 px-4 w-[20%] text-gray-600 text-center font-medium">Anchor</th>
+                            <th className="py-3 px-4 w-[8%] text-gray-600 text-center font-medium">Type</th>
+                            <th className="py-3 px-4 w-[26%] text-gray-600 text-left font-medium">Target page</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                        {result.map((item, index) => (
+                            <tr key={index} className="transition-colors duration-150 odd:bg-gray-50 even:bg-white">
+                                <td className="py-3 px-4 text-center">
+                                    <span className="inline-block bg-[#41388C] text-white text-sm font-bold px-3 py-1 rounded-xl">
+                                        {item.linkStrength}
+                                    </span>
+                                </td>
+                                <td className="py-3 px-4">
+                                    <div className="flex items-center gap-2">
+                                        <US className="w-4 h-3 flex-shrink-0" />
+                                        <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-[#41388C] hover:text-[#352d73] transition-colors duration-200 flex items-start gap-1 text-sm break-words whitespace-pre-wrap  truncate inline-block flex">
+                                            {decodeURIComponent(item.sourceUrl)} <ExternalLink size={14} className="flex-shrink-0 mt-1" />
+                                        </a>
+                                    </div>
+                                </td>
+                                <td className="py-3 px-4 text-center">
+                                    <div className="relative w-[30px] h-[40px] mx-auto">
+                                        <Image
+                                            src={`/images/medals/medal-${getBaseGrade(item.authorityScore)}.svg`}
+                                            alt={`Medal ${getFullGradeLabel(item.authorityScore)}`}
+                                            fill
+                                            className="object-contain"
+                                        />
+                                        <div className="absolute left-0 w-full top-[18%] h-[50%] flex items-center justify-center pointer-events-none">
+                                            <span className="text-white font-bold text-[12px] leading-none tracking-wide drop-shadow-sm">
+                                                {getFullGradeLabel(item.authorityScore)}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td className="py-3 px-4">
+                                    <div className="text-center">
+                                        <div className="text-gray-400 flex-shrink-0">🔗</div>
+                                        <span className="text-gray-600 text-xs font-medium break-words whitespace-pre-wrap">
+                                            {item.anchorText}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td className="py-3 px-4 text-center">
+                                    <span
+                                        className={`inline-block text-white text-xs font-medium px-3 py-1 rounded-full
+                                            ${item.followType.toLowerCase() === 'dofollow' ? 'bg-[#439B38]' : 'bg-[#41388C]'}
+                                        `}
+                                    >
+                                        {item.followType}
+                                    </span>
+                                </td>
+                                <td className="py-3 px-4">
+                                    <a href={item.targetUrl} target="_blank" rel="noopener noreferrer" className="text-[#41388C] hover:text-[#352d73] transition-colors duration-200 flex items-start gap-1 text-sm break-words whitespace-pre-wrap">
+                                        {decodeURIComponent(item.targetUrl)} <ExternalLink size={14} className="flex-shrink-0 mt-1" />
+                                    </a>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
 
     return(
         <div className='px-10 py-7'>
@@ -29,12 +212,19 @@ export default function TopLinks(){
                 <div className='flex items-center justify-center gap-2'>
                     <input
                         type='text'
+                        value={inputUrl}
+                        onChange={(e) => setInputUrl(e.target.value)}
                         className='border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2 text-gray-700'
                         placeholder='Website'
                     />
-                    <button className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm">OK</button>
+                    <button
+                        className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
+                        onClick={handleSearch}
+                    >
+                        OK
+                    </button>
                 </div>
-                <div className='flex justify-center mt-20 mb-20'>
+                <div className='flex justify-center mt-4 mb-20'>
                     {loading ? (
                         <div>
                             Loading....
@@ -54,9 +244,7 @@ export default function TopLinks(){
                             <p className='mt-10 text-xl text-gray-600'>Identify which backlinks truly make a difference for your site. Our advanced backlink strength calculation combines source popularity, trustworthiness, and content relevance to show you the links with the most impact. Enter your site&#39;s URL to see a ranked list of your top backlinks and start optimizing your SEO strategy today.</p>
                         </div>
                     ) : (
-                        <div>
-                            ResultView
-                        </div>
+                        renderTable()
                     )}
                 </div>
 
