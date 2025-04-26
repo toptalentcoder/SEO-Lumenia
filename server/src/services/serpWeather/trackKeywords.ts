@@ -3,7 +3,6 @@ import axios from "axios";
 import { calculateImprovedSerpVolatility } from "./calculateSerpVolatility";
 
 const SERP_API_KEY = process.env.SERP_API_KEY;
-const today = new Date().toISOString().split("T")[0];
 
 interface OrganicResult {
     title: string;
@@ -18,6 +17,7 @@ function getScoreLevel(score: number): "low" | "medium" | "high" | "extreme" {
 }
 
 export async function saveDailyVolatilityScores(payload: Payload) {
+    const today = new Date().toISOString().split("T")[0];
     const keywords = await payload.find({
         collection: "serpWeatherKeywords",
         limit: 1000,
