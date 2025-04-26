@@ -395,7 +395,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                                     />
                                                 ) : (
                                                     <span className="text-white p-2 bg-[#279AAC] rounded-full text-sm">
-                                                        {getUserInitials(user?.username || user?.name)}
+                                                        {getUserInitials(user?.username || user?.name || row.username)}
                                                     </span>
                                                 )
                                             ) : (
