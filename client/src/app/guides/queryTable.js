@@ -14,6 +14,35 @@ import { FaSpinner } from "react-icons/fa6";
 import { Menu, Transition } from '@headlessui/react';
 import Image from "next/image";
 import { Fragment } from 'react';
+import { useRef } from "react";
+
+const getBaseGrade = (score) => {
+    if (score >= 95) return 'a';
+    if (score >= 90) return 'b';
+    if (score >= 80) return 'b';
+    if (score >= 70) return 'b';
+    if (score >= 65) return 'c';
+    if (score >= 60) return 'c';
+    if (score >= 55) return 'c';
+    if (score >= 50) return 'd';
+    if (score >= 45) return 'd';
+    if (score >= 40) return 'd';
+    return 'e';
+};
+  
+const getFullGradeLabel = (score) => {
+    if (score >= 95) return 'A';
+    if (score >= 90) return 'B+';
+    if (score >= 80) return 'B';
+    if (score >= 70) return 'B-';
+    if (score >= 65) return 'C+';
+    if (score >= 60) return 'C';
+    if (score >= 55) return 'C-';
+    if (score >= 50) return 'D+';
+    if (score >= 45) return 'D';
+    if (score >= 40) return 'D-';
+    return 'E';
+};
 
 // Delete Confirmation Modal Component
 const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, queryToDelete }) => {
@@ -106,6 +135,24 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [queryToDelete, setQueryToDelete] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const [isEditProjectModalOpen, setIsEditProjectModalOpen] = useState(false);
+    const [isDeleteProjectModalOpen, setIsDeleteProjectModalOpen] = useState(false);
+    const [editProjectName, setEditProjectName] = useState("");
+    const [editDomainName, setEditDomainName] = useState("");
+    const [projectInfo, setProjectInfo] = useState(null);
+    const [showMetrics, setShowMetrics] = useState(true);
+    const metricsRef = useRef();
+    const [showFloatingMenu, setShowFloatingMenu] = useState(false);
+    const [selectedLocale, setSelectedLocale] = useState({ code: 'us', label: 'English (USA)', icon: <US className="w-5 h-4" /> });
+    const floatingMenuRef = useRef();
+
+    // Define locale options for the language selector
+    const localeOptions = [
+        { code: 'fr', label: 'French (France)', icon: <FR className="w-5 h-4" /> },
+        { code: 'gb', label: 'English (Great Britain)', icon: <GB className="w-5 h-4" /> },
+        { code: 'us', label: 'English (USA)', icon: <US className="w-5 h-4" /> },
+        { code: 'es', label: 'Spanish (Spain)', icon: <ES className="w-5 h-4" /> },
+    ];
 
     useEffect(() => {
         if(!user.email) return;
@@ -153,6 +200,25 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
 
         fetchProjects();
     }, [user, projectID, refreshTrigger]);
+
+    // Fetch project info for editing
+    useEffect(() => {
+        if (projectID && user?.email) {
+            fetch(`/api/getProjectItemInfo?email=${user.email}&projectID=${projectID}`)
+                .then(res => res.json())
+                .then(data => setProjectInfo(data.matchingProject));
+        }
+    }, [projectID, user]);
+
+    // Floating metrics image scroll transition
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 100) setShowMetrics(true);
+            else setShowMetrics(true);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const handleQueryIDPage = (queryID) => {
         if(queryID){
@@ -206,8 +272,116 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         setIsDeleteModalOpen(true);
     };
 
+    // Edit project handler
+    const handleEditProject = async () => {
+        const response = await fetch("/api/edit-project", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: user.email,
+                projectID,
+                projectName: editProjectName,
+                domainName: editDomainName,
+            }),
+        });
+        if (response.ok) {
+            setIsEditProjectModalOpen(false);
+            window.location.reload();
+        } else {
+            alert("Failed to edit project");
+        }
+    };
+
+    // Delete project handler
+    const handleDeleteProject = async () => {
+        const response = await fetch("/api/delete-project", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: user.email,
+                projectID,
+            }),
+        });
+        if (response.ok) {
+            setIsDeleteProjectModalOpen(false);
+            router.push("/projects");
+        } else {
+            alert("Failed to delete project");
+        }
+    };
+
     return (
         <div className="container mx-auto pb-12">
+
+            {projectID && projectInfo && projectInfo.projectName !== 'Default' && (
+                <div className="fixed z-50 bottom-4 right-4 transition-all duration-500 opacity-100 bg-white rounded-xl px-4 py-1.5" style={{ pointerEvents: "auto",  boxShadow: "0 8px 32px 0 rgba(60,60,100,0.18), 0 0px 8px 0 rgba(60,60,100, 0.30)" }}>
+                    <div className="flex items-center justify-between gap-24 text-gray-800">
+                        <span>www.cnet.com</span>
+                        <div className="py-3 px-4 text-center">
+                            <div className="relative w-[30px] h-[40px] mx-auto">
+                                <Image
+                                    src={`/images/medals/medal-a.svg`}
+                                    alt={`Medal A`}
+                                    fill
+                                    className="object-contain"
+                                />
+                                <div className="absolute left-0 w-full top-[18%] h-[50%] flex items-center justify-center pointer-events-none">
+                                    <span className="text-red-400 font-bold text-[12px] leading-none tracking-wide drop-shadow-sm">
+                                        A
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-semibold">30000</div>
+                            <div className="text-sm">#Baclinks URL</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-2xl font-semibold">30000</div>
+                            <div className="text-sm">#Baclinks HOST</div>
+                        </div>
+                        <div className="text-center">
+                            <div className="text-xl font-semibold">500+</div>
+                            <div className="text-sm">#Top Keywords</div>
+                        </div>
+                        <div className="flex flex-col items-center gap-0.5 ml-4">
+                            <button
+                                className="bg-[#4A4291] text-white px-6 py-1 rounded-xl shadow text-base font-semibold focus:outline-none"
+                                onClick={() => setShowFloatingMenu((v) => !v)}
+                                style={{ minWidth: 90 }}
+                            >
+                                More...
+                            </button>
+                            <div className="flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium mt-1">
+                                {selectedLocale.icon} {selectedLocale.label}
+                            </div>
+                        </div>
+                    </div>
+                    {showFloatingMenu && (
+                        <div
+                            ref={floatingMenuRef}
+                            className="absolute z-50 bottom-[110%] right-0 w-72 bg-white rounded-2xl shadow-xl p-4 flex flex-col gap-2 text-gray-800 border border-gray-100 animate-fade-in"
+                        >
+                            <div className="text-xs font-semibold text-gray-400 mb-2">Your Project</div>
+                            <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Project Overview</button>
+                            <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Page Duplication Analysis</button>
+                            <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Google Rankings</button>
+                            <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Keywords by URL</button>
+                            <div className="text-xs font-semibold text-gray-400 mt-3 mb-2">SERP Locale</div>
+                            {localeOptions.map((opt) => (
+                                <button
+                                    key={opt.code}
+                                    className={`flex items-center gap-2 py-0.5 px-2 rounded-lg hover:bg-gray-100 text-sm w-full ${selectedLocale.code === opt.code ? 'bg-gray-100 font-semibold' : ''}`}
+                                    onClick={() => { setSelectedLocale(opt); setShowFloatingMenu(false); }}
+                                >
+                                    {opt.icon} {opt.label}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
+            
             {loading ? (
                 <div className="flex justify-center"><FaSpinner className="animate-spin text-white w-30 h-30" /></div>
             ) : rows.length > 0 || (pendingQueryID && pendingQueryText) ? (
@@ -459,7 +633,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                     </table>
                 </div>
             ) : (
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center mb-28">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 247.37 245.85"
@@ -474,6 +648,72 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                     </div>
                     <div className="mt-10 text-lg font-semibold text-gray-600 text-center max-w-3xl">
                         Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
+                    </div>
+                </div>
+            )}
+
+            {/* Project Edit/Delete Buttons */}
+            {projectID && projectInfo && projectInfo.projectName !== 'Default' && (
+                <div className="flex justify-end gap-2 mb-32 text-sm">
+                    <button
+                        className="px-4 py-1.5 bg-white border border-[#4A4291] text-[#4A4291] rounded-lg hover:bg-[#4A4291] hover:text-white transition flex items-center gap-2"
+                        onClick={() => {
+                            setEditProjectName(projectInfo.projectName || "");
+                            setEditDomainName(projectInfo.domainName || "");
+                            setIsEditProjectModalOpen(true);
+                        }}
+                    >
+                        <MdModeEdit /> Edit project
+                    </button>
+                    <button
+                        className="px-4 py-1.5 bg-white border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition flex items-center gap-2"
+                        onClick={() => setIsDeleteProjectModalOpen(true)}
+                    >
+                        <MdDelete /> Delete project
+                    </button>
+                </div>
+            )}
+            {/* Edit Project Modal */}
+            {isEditProjectModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                    <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl text-gray-800">
+                        <h2 className="text-xl font-semibold mb-3 border-b border-gray-300 pb-2">{editProjectName}</h2>
+                        <div className="flex items-center gap-2 mb-3">
+                            <span className="text-sm w-20 text-end">Name</span>
+                            <input
+                                className="w-full px-3 py-1 border border-gray-300 rounded-lg focus:border-none"
+                                value={editProjectName}
+                                onChange={e => setEditProjectName(e.target.value)}
+                                placeholder="Project Name"
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-3">
+                            <span className="text-sm w-20 text-end">Website</span>
+                            <input
+                                className="w-full px-3 py-1 border border-gray-300 rounded-lg focus:border-none"
+                                value={editDomainName}
+                                onChange={e => setEditDomainName(e.target.value)}
+                                placeholder="Domain Name"
+                            />
+                        </div>
+                            
+                        <div className="flex justify-end gap-2">
+                            <button className="px-4 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-lg cursor-pointer" onClick={() => setIsEditProjectModalOpen(false)}>Cancel</button>
+                            <button className="px-4 py-1.5 bg-[#4A4291] hover:bg-[#4A4291]/80 text-white rounded-lg cursor-pointer" onClick={handleEditProject}>Save</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Delete Project Modal */}
+            {isDeleteProjectModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                    <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl text-gray-800">
+                        <h2 className="text-lg font-semibold mb-4 text-red-600 border-b border-gray-300 pb-2">Delete this Project</h2>
+                        <p className="mb-6">You are going to delete your project. You won&apos;t be able to retrieve it after this, neither of the guides linked to it. Are you sure about that?</p>
+                        <div className="flex justify-end gap-2">
+                            <button className="px-4 py-1.5 bg-gray-200 hover:bg-gray-300 rounded-lg cursor-pointer" onClick={() => setIsDeleteProjectModalOpen(false)}>Cancel</button>
+                            <button className="px-4 py-1.5 bg-red-600 hover:bg-red-600/80 text-white rounded-lg cursor-pointer" onClick={handleDeleteProject}>Delete</button>
+                        </div>
                     </div>
                 </div>
             )}
