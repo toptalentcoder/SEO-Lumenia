@@ -11,7 +11,9 @@ import { RiOpenaiFill } from "react-icons/ri";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FaSpinner } from "react-icons/fa6";
-import { Menu } from '@headlessui/react';
+import { Menu, Transition } from '@headlessui/react';
+import Image from "next/image";
+import { Fragment } from 'react';
 
 // Delete Confirmation Modal Component
 const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, queryToDelete }) => {
@@ -83,6 +85,18 @@ const flagMap = {
     ro: <RO className="w-4 h-3" />
 };
 
+const getUserInitials = (name) => {
+    if (!name || typeof name !== "string") return "U";
+    const words = name.trim().split(" ");
+    if (words.length === 0) return "U";
+    if (words.length === 1) {
+        // If single word, take first two letters
+        return words[0].substring(0, 2).toUpperCase();
+    }
+    // Take first letter of first two words
+    return (words[0][0] + words[1][0]).toUpperCase();
+};
+
 export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger, language }) {
 
     const { user } = useUser();
@@ -120,7 +134,10 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         projectID : project.projectID,
                         language : project.language,
                         gl: project.gl || 'us',
-                        createdAt : project. createdAt
+                        createdAt : project.createdAt,
+                        createdBy: project.createdBy,
+                        username: project.username,
+                        creatorProfilePicture: project.createdBy === user?.email ? user?.profilePicture?.url : null
                     }))
 
                     console.log(formattedProjects)
@@ -135,7 +152,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         }
 
         fetchProjects();
-    }, [user?.email, projectID, refreshTrigger]);
+    }, [user, projectID, refreshTrigger]);
 
     const handleQueryIDPage = (queryID) => {
         if(queryID){
@@ -151,7 +168,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         
         setDeleteLoading(true);
         try {
-            const response = await fetch('/api/delete_query', {
+            const response = await fetch('/api/deleteQuery', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -190,31 +207,11 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
     };
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto pb-12">
             {loading ? (
                 <div className="flex justify-center"><FaSpinner className="animate-spin text-white w-30 h-30" /></div>
-            ) : rows.length === 0 ? (
-                <div>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 247.37 245.85"
-                        className="w-20 h-20 text-[#4A4291] fill-current mx-auto"
-                    >
-                        <path d="m187.77,18.02c-39.17-24.03-88.44-24.03-128.09,0l63.93,76.9L187.77,18.02Z" />
-                        <path d="m89.23,149.48L16.18,63.44C-17.71,124.01,3.44,200.19,62.8,234.79c8.41,4.57,17.3,8.41,26.2,11.05v-96.37h.24Z" />
-                        <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
-                    </svg>
-                    <div className="mt-10 text-2xl font-semibold flex justify-center items-center text-gray-700">
-                        Unleash the Power of SEO with YourText.Guru!
-                    </div>
-                    <div className="mt-10 text-lg font-semibold flex justify-center items-center text-gray-600 mx-auto max-w-1/3 pb-30">
-                        <span className="text-center leading-8 max-w-3xl">
-                            Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
-                        </span>
-                    </div>
-                </div>
-            ) : (
-                <div className="mx-auto overflow-hidden rounded-lg bg-white">
+            ) : rows.length > 0 || (pendingQueryID && pendingQueryText) ? (
+                <div className="mx-auto overflow-visible rounded-lg bg-white">
                     <table className="min-w-full border-collapse table-fixed">
                         <thead className="bg-white">
                             <tr>
@@ -249,7 +246,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         </thead>
 
                         <tbody className="divide-y divide-gray-300">
-                            {pendingQueryID && (
+                            {pendingQueryID && pendingQueryText && (
                                 <tr className="bg-yellow-50 animate-pulse">
                                     <td className="text-center"><input type="checkbox" disabled /></td>
                                     <td className="text-[#4A4291] px-3 py-4 text-md font-medium flex flex-col">
@@ -274,45 +271,75 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                     </td>
                                     <td className="text-center text-[#4A4291]">Default</td>
                                     <td className="text-center text-gray-500">-</td>
-                                    <td className="text-center text-gray-500">-</td>
-                                    <td className="text-center text-gray-400">
-                                        <svg className="animate-spin h-5 w-5 text-[#4A4291]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                            <path className="opacity-75" fill="currentColor"
-                                                d="M4 12a8 8 0 018-8v8z" />
-                                        </svg>
+                                    <td className="text-center text-gray-600">
+                                        <div className="flex justify-center">
+                                            {user?.profilePicture?.url ? (
+                                                <Image
+                                                    src={user.profilePicture.url}
+                                                    alt={user.username || "User"}
+                                                    width={32}
+                                                    height={32}
+                                                    className="rounded-full object-cover"
+                                                />
+                                            ) : (
+                                                <span className="text-white p-2 bg-[#279AAC] rounded-full text-sm">
+                                                    {getUserInitials(user?.username || user?.name)}
+                                                </span>
+                                            )}
+                                        </div>
                                     </td>
-                                    <td className="w-12 px-1 py-4 text-center relative">
-                                        <Menu>
-                                            <Menu.Button className="hover:bg-gray-100 p-1 rounded-full">
-                                                <BsThreeDots className="text-gray-600" />
-                                            </Menu.Button>
-                                            <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-                                                <Menu.Item>
-                                                    {({ active }) => (
-                                                        <button
-                                                            className={`${
-                                                                active ? 'bg-gray-100' : ''
-                                                            } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
-                                                            onClick={() => handleQueryIDPage(row.queryID)}
-                                                        >
-                                                            <MdModeEdit className="mr-2" /> Edit
-                                                        </button>
-                                                    )}
-                                                </Menu.Item>
-                                                <Menu.Item>
-                                                    {({ active }) => (
-                                                        <button
-                                                            className={`${
-                                                                active ? 'bg-gray-100' : ''
-                                                            } flex w-full items-center px-4 py-2 text-sm text-red-600`}
-                                                            onClick={() => handleDeleteClick(row)}
-                                                        >
-                                                            <MdDelete className="mr-2" /> Delete
-                                                        </button>
-                                                    )}
-                                                </Menu.Item>
-                                            </Menu.Items>
+                                    <td className="text-center text-gray-400">
+                                        <div className="flex justify-center">
+                                            <svg className="animate-spin h-5 w-5 text-[#4A4291]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                <path className="opacity-75" fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8v8z" />
+                                            </svg>
+                                        </div>
+                                    </td>
+                                    <td className="w-12 px-1 py-4 text-center">
+                                        <Menu as="div" className="relative inline-block text-left">
+                                            <div>
+                                                <Menu.Button className="hover:bg-gray-100 p-1 rounded-full">
+                                                    <BsThreeDots className="text-gray-600" />
+                                                </Menu.Button>
+                                            </div>
+                                            <Transition
+                                                as={Fragment}
+                                                enter="transition ease-out duration-100"
+                                                enterFrom="transform opacity-0 scale-95"
+                                                enterTo="transform opacity-100 scale-100"
+                                                leave="transition ease-in duration-75"
+                                                leaveFrom="transform opacity-100 scale-100"
+                                                leaveTo="transform opacity-0 scale-95"
+                                            >
+                                                <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <button
+                                                                className={`${
+                                                                    active ? 'bg-gray-100' : ''
+                                                                } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
+                                                                onClick={() => handleQueryIDPage(pendingQueryID)}
+                                                            >
+                                                                <MdModeEdit className="mr-2" /> Edit
+                                                            </button>
+                                                        )}
+                                                    </Menu.Item>
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <button
+                                                                className={`${
+                                                                    active ? 'bg-gray-100' : ''
+                                                                } flex w-full items-center px-4 py-2 text-sm text-red-600`}
+                                                                onClick={() => handleDeleteClick({ queryID: pendingQueryID })}
+                                                            >
+                                                                <MdDelete className="mr-2" /> Delete
+                                                            </button>
+                                                        )}
+                                                    </Menu.Item>
+                                                </Menu.Items>
+                                            </Transition>
                                         </Menu>
                                     </td>
                                 </tr>
@@ -356,49 +383,98 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                         {/* Placeholder or validation info */}
                                     </td>
                                     <td className="w-1/8 px-3 py-4 text-lg text-gray-600 text-center">
-                                        {row.projectName}
+                                        <div className="flex justify-center">
+                                            {row.createdBy === user?.email ? (
+                                                row.creatorProfilePicture ? (
+                                                    <Image
+                                                        src={row.creatorProfilePicture}
+                                                        alt={user.username || "User"}
+                                                        width={32}
+                                                        height={32}
+                                                        className="rounded-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <span className="text-white p-2 bg-[#279AAC] rounded-full text-sm">
+                                                        {getUserInitials(user?.username || user?.name)}
+                                                    </span>
+                                                )
+                                            ) : (
+                                                <span className="text-white p-2 bg-gray-400 rounded-full text-sm">
+                                                    {getUserInitials(row.username)}
+                                                </span>
+                                            )}
+                                        </div>
                                     </td>
                                     <td className="w-1/6 px-3 py-4 text-lg text-gray-400 font-sans text-center">
                                         {formatDate(row.createdAt)}
                                     </td>
-                                    <td className="w-12 px-1 py-4 text-center relative">
-                                        <Menu>
-                                            <Menu.Button className="hover:bg-gray-100 p-1 rounded-full">
-                                                <BsThreeDots className="text-gray-600" />
-                                            </Menu.Button>
-                                            <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
-                                                <Menu.Item>
-                                                    {({ active }) => (
-                                                        <button
-                                                            className={`${
-                                                                active ? 'bg-gray-100' : ''
-                                                            } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
-                                                            onClick={() => handleQueryIDPage(row.queryID)}
-                                                        >
-                                                            <MdModeEdit className="mr-2" /> Edit
-                                                        </button>
-                                                    )}
-                                                </Menu.Item>
-                                                <Menu.Item>
-                                                    {({ active }) => (
-                                                        <button
-                                                            className={`${
-                                                                active ? 'bg-gray-100' : ''
-                                                            } flex w-full items-center px-4 py-2 text-sm text-red-600`}
-                                                            onClick={() => handleDeleteClick(row)}
-                                                        >
-                                                            <MdDelete className="mr-2" /> Delete
-                                                        </button>
-                                                    )}
-                                                </Menu.Item>
-                                            </Menu.Items>
+                                    <td className="w-12 px-1 py-4 text-center">
+                                        <Menu as="div" className="relative inline-block text-left">
+                                            <div>
+                                                <Menu.Button className="hover:bg-gray-100 p-1 rounded-full">
+                                                    <BsThreeDots className="text-gray-600" />
+                                                </Menu.Button>
+                                            </div>
+                                            <Transition
+                                                as={Fragment}
+                                                enter="transition ease-out duration-100"
+                                                enterFrom="transform opacity-0 scale-95"
+                                                enterTo="transform opacity-100 scale-100"
+                                                leave="transition ease-in duration-75"
+                                                leaveFrom="transform opacity-100 scale-100"
+                                                leaveTo="transform opacity-0 scale-95"
+                                            >
+                                                <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <button
+                                                                className={`${
+                                                                    active ? 'bg-gray-100' : ''
+                                                                } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
+                                                                onClick={() => handleQueryIDPage(row.queryID)}
+                                                            >
+                                                                <MdModeEdit className="mr-2" /> Edit
+                                                            </button>
+                                                        )}
+                                                    </Menu.Item>
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <button
+                                                                className={`${
+                                                                    active ? 'bg-gray-100' : ''
+                                                                } flex w-full items-center px-4 py-2 text-sm text-red-600`}
+                                                                onClick={() => handleDeleteClick(row)}
+                                                            >
+                                                                <MdDelete className="mr-2" /> Delete
+                                                            </button>
+                                                        )}
+                                                    </Menu.Item>
+                                                </Menu.Items>
+                                            </Transition>
                                         </Menu>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-
+                </div>
+            ) : (
+                <div className="flex flex-col items-center justify-center">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 247.37 245.85"
+                        className="w-20 h-20 text-[#4A4291] fill-current"
+                    >
+                        <path d="m187.77,18.02c-39.17-24.03-88.44-24.03-128.09,0l63.93,76.9L187.77,18.02Z" />
+                        <path d="m89.23,149.48L16.18,63.44C-17.71,124.01,3.44,200.19,62.8,234.79c8.41,4.57,17.3,8.41,26.2,11.05v-96.37h.24Z" />
+                        <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
+                    </svg>
+                    <div className="mt-10 text-2xl font-semibold text-gray-700">
+                        Unleash the Power of SEO with YourText.Guru!
+                    </div>
+                    <div className="mt-10 text-lg font-semibold text-gray-600 text-center max-w-3xl">
+                        Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
+                    </div>
                 </div>
             )}
 
