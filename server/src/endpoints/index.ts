@@ -8,6 +8,8 @@ import { getUserProjects } from "./projectManagement/getProject";
 import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
 import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
 import { addProjectToUser } from "./projectManagement/postProject";
+import { editProject } from "./projectManagement/editProject";
+import { deleteProject } from "./projectManagement/deleteProject";
 import { generateSeoAutoEndpoint } from "./seoGuide/seoEditor/generateSeoAutoEndpoint";
 import { generateSeoOutlineEndpoint } from "./seoGuide/seoEditor/generateSeoOutlineEndpoint";
 import { generateSeoQuestionsEndpoint } from "./seoGuide/seoEditor/generateSeoQuestions";
@@ -57,6 +59,8 @@ export const customEndpoints = [
     saveSubscriptionToUserCollection,
     getUserDataForRefreshPageEndpoint,
     addProjectToUser,
+    editProject,
+    deleteProject,
     getUserProjectInfo,
     getUserProjects,
     getUserProjectList,
