@@ -54,7 +54,7 @@ const HeroTop = () => {
                 <div className="flex items-center pl-64 md:pl-64 pr-6 py-6">
                     <div className="relative w-full">
                         <p className="text-[#3AB4D5] text-lg leading-relaxed">
-                            <span className="font-semibold">Yourtext.guru</span> has always been here to help you optimize your content for Google. Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
+                            <span className="font-semibold">Lumenia</span> has always been here to help you optimize your content for Google. Now, you can also do it for <span className="font-semibold">SearchGPT</span> and <span className="font-semibold">Bing!</span>
                         </p>
                         <button
                             className="mt-6 px-4 py-1.5 bg-[#279AAC] text-white rounded-xl text-base font-medium 

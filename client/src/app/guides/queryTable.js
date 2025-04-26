@@ -238,6 +238,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify({
                     email: user.email,
@@ -245,22 +246,18 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                 }),
             });
 
-            if (response.ok) {
-                // Remove the deleted query from the rows
-                setRows(rows.filter(row => row.queryID !== queryToDelete.queryID));
-                setIsDeleteModalOpen(false);
-            } else {
-                const errorData = await response.json();
-                console.error('Failed to delete query:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    error: errorData
-                });
-                alert(`Failed to delete query: ${errorData.error || 'Please try again.'}`);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to delete query');
             }
+
+            // Remove the deleted query from the rows
+            setRows(rows.filter(row => row.queryID !== queryToDelete.queryID));
+            setIsDeleteModalOpen(false);
         } catch (error) {
             console.error('Error deleting query:', error);
-            alert('An error occurred while deleting the query. Please check your connection and try again.');
+            alert(error.message || 'An error occurred while deleting the query');
         } finally {
             setDeleteLoading(false);
             setQueryToDelete(null);
@@ -294,19 +291,30 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
 
     // Delete project handler
     const handleDeleteProject = async () => {
-        const response = await fetch("/api/delete-project", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email: user.email,
-                projectID,
-            }),
-        });
-        if (response.ok) {
+        try {
+            const response = await fetch("/api/delete-project", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    email: user.email,
+                    projectID,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to delete project");
+            }
+
             setIsDeleteProjectModalOpen(false);
-            router.push("/projects");
-        } else {
-            alert("Failed to delete project");
+            router.push("/guides");
+        } catch (error) {
+            console.error("Error deleting project:", error);
+            alert(error.message || "An error occurred while deleting the project");
         }
     };
 
@@ -644,7 +652,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
                     </svg>
                     <div className="mt-10 text-2xl font-semibold text-gray-700">
-                        Unleash the Power of SEO with YourText.Guru!
+                        Unleash the Power of SEO with Lumenia!
                     </div>
                     <div className="mt-10 text-lg font-semibold text-gray-600 text-center max-w-3xl">
                         Enter your SEO target, and in minutes, start crafting optimized content. Boost your visibility and impact. Your journey towards SEO success starts now!
