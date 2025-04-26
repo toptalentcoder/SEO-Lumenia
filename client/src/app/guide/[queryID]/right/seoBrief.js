@@ -59,8 +59,13 @@ export default function SeoBrief({data}){
 
             const content = responseSeoEditorContent.data.seoEditorData;
 
-            // Send content and SEO brief to the backend for verification
-            const response = await axios.post("/api/verify_seo_brief", { 
+            // Create a timeout promise
+            const timeoutPromise = new Promise((_, reject) => {
+                setTimeout(() => reject(new Error('Request timeout')), 30000); // 30 seconds timeout
+            });
+
+            // Create the request promise
+            const requestPromise = axios.post("http://localhost:7777/api/verify_seo_brief", { 
                 content, 
                 seoBrief,
                 language: data.language,
@@ -68,19 +73,25 @@ export default function SeoBrief({data}){
                 email: user.email
             });
 
-            console.log(response.data)
-            const { verificationResult, improvementText } = response.data;
+            // Race between the request and timeout
+            const response = await Promise.race([requestPromise, timeoutPromise]);
 
-            console.log(verificationResult);
-            console.log(improvementText);
+            const { verificationResult, improvementText } = response.data;
 
             // Update the verification state
             setVerificationResult(verificationResult);
             setImprovementSuggestions(improvementText);
         } catch (error) {
             console.error("Error verifying brief:", error);
-        }finally {
-            setIsLoading(false); // Set loading to false once the request is complete
+            if (error.message === 'Request timeout') {
+                setImprovementSuggestions("The verification process took too long. Please try again.");
+            } else if (error.code === 'ECONNRESET') {
+                setImprovementSuggestions("Connection was reset. Please try again.");
+            } else {
+                setImprovementSuggestions("An error occurred during verification. Please try again.");
+            }
+        } finally {
+            setIsLoading(false);
         }
     };
 

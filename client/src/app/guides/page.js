@@ -125,8 +125,10 @@ export default function SEOQueryDashboard() {
             'Default';
 
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
-            const response = await fetch('/api/createSeoGuide', {
+            const response = await fetch('http://localhost:7777/api/createSeoGuide', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -142,7 +144,15 @@ export default function SEOQueryDashboard() {
                     gl: selectedLanguage.gl,
                     lr: selectedLanguage.lr
                 }),
+                signal: controller.signal,
+                keepalive: true,
             });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
             const result = await response.json();
 
@@ -150,12 +160,17 @@ export default function SEOQueryDashboard() {
                 setRefreshTrigger(prev => prev + 1); // 👈 trigger refresh manually
             }
         } catch (error) {
-            console.error("Failed to create SEO guide:", error);
+            if (error.name === 'AbortError') {
+                console.error("Request timed out");
+                alert("The request took too long. Please try again.");
+            } else {
+                console.error("Failed to create SEO guide:", error);
+                alert("Failed to create SEO guide. Please try again.");
+            }
         } finally {
             setLoading(false); // ✅ Re-enable the button
             setPendingQueryID(null);
         }
-
     }
 
     const handleQueryEngineToggleDropdown = () => setIsQueryEngineOpen(!isQueryEngineOpen);

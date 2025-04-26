@@ -1,8 +1,14 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 
+interface Project {
+    seoGuides?: Array<{
+        queryID: string;
+    }>;
+}
+
 export const deleteQueryEndpoint: Endpoint = {
-    path: "/delete_query",
+    path: "/deleteQuery",
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         const { payload } = req;
@@ -11,7 +17,14 @@ export const deleteQueryEndpoint: Endpoint = {
 
         if (!email || !queryID) {
             return new Response(
-                JSON.stringify({ error: "Missing email or queryID" }),
+                JSON.stringify({ 
+                    success: false,
+                    error: "Missing required fields",
+                    details: {
+                        email: !email ? "Email is required" : null,
+                        queryID: !queryID ? "Query ID is required" : null
+                    }
+                }),
                 { status: 400, headers: { "Content-Type": "application/json" } }
             );
         }
@@ -24,22 +37,56 @@ export const deleteQueryEndpoint: Endpoint = {
 
         if (!users.docs.length) {
             return new Response(
-                JSON.stringify({ error: "User not found" }),
+                JSON.stringify({ 
+                    success: false,
+                    error: "User not found",
+                    details: { email }
+                }),
                 { status: 404, headers: { "Content-Type": "application/json" } }
             );
         }
 
         const user = users.docs[0];
-        const updatedProjects = (Array.isArray(user.projects) ? user.projects : []).map((project) => {
-            return typeof project === "object" && project !== null
-                ? {
-                    ...project,
-                    seoGuides: ((project as { seoGuides?: { queryID: string }[] }).seoGuides || []).filter(
-                        (guide) => guide.queryID !== queryID
-                    ),
+        let queryFound = false;
+
+        if (!Array.isArray(user.projects)) {
+            return new Response(
+                JSON.stringify({ 
+                    success: false,
+                    error: "Invalid user projects data",
+                    details: { email }
+                }),
+                { status: 400, headers: { "Content-Type": "application/json" } }
+            );
+        }
+
+        const updatedProjects = user.projects.map((project: unknown) => {
+            if (!project || typeof project !== 'object') return project;
+
+            const filteredGuides = ((project as Project).seoGuides || []).filter((guide) => {
+                if (guide.queryID === queryID) {
+                    queryFound = true;
+                    return false;
                 }
-                : project;
+                return true;
+            });
+
+            return {
+                ...project,
+                seoGuides: filteredGuides
+            };
         });
+
+        if (!queryFound) {
+            return new Response(
+                JSON.stringify({ 
+                    success: false,
+                    error: "Query not found",
+                    details: { queryID }
+                }),
+                { status: 404, headers: { "Content-Type": "application/json" } }
+            );
+        }
 
         try {
             await payload.update({
@@ -49,13 +96,20 @@ export const deleteQueryEndpoint: Endpoint = {
             });
 
             return new Response(
-                JSON.stringify({ success: true }),
+                JSON.stringify({ 
+                    success: true,
+                    message: "Query deleted successfully"
+                }),
                 { status: 200, headers: { "Content-Type": "application/json" } }
             );
         } catch (error) {
             console.error("Error updating user:", error);
             return new Response(
-                JSON.stringify({ error: "Failed to update user data" }),
+                JSON.stringify({ 
+                    success: false,
+                    error: "Failed to update user data",
+                    details: error instanceof Error ? error.message : "Unknown error"
+                }),
                 { status: 500, headers: { "Content-Type": "application/json" } }
             );
         }

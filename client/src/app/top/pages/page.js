@@ -6,6 +6,13 @@ import { ExternalLink } from "lucide-react"; // optional icon
 import Image from 'next/image';
 import { FaLock } from "react-icons/fa";
 
+function formatUrl(url) {
+    if (!url) return '';
+    // Remove any existing protocol
+    const cleanUrl = url.replace(/^https?:\/\//, '');
+    // Add https:// prefix
+    return `https://${cleanUrl}`;
+}
 
 export default function Linking() {
     const { currentView, switchToResults, switchToInput } = useSearchView();
@@ -18,21 +25,38 @@ export default function Linking() {
         setLoading(true);
 
         try {
-            const res = await fetch("/api/internal_pagerank", {
+            const formattedUrl = formatUrl(inputUrl);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
+
+            const res = await fetch("http://localhost:7777/api/internal_pagerank", {
                 method: "POST",
-                body: JSON.stringify({ baseUrl: inputUrl }),
+                body: JSON.stringify({ baseUrl: formattedUrl }),
                 headers: {
                     "Content-Type": "application/json",
                 },
+                signal: controller.signal,
+                keepalive: true,
             });
+
+            clearTimeout(timeoutId);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
 
             const data = await res.json();
             if (data?.data?.length) {
                 setResult(data.data);
-                switchToResults(data.data); // optional
+                switchToResults(data.data);
             }
         } catch (error) {
-            console.error("Search failed:", error);
+            if (error.name === 'AbortError') {
+                console.error("Request timed out");
+                // You might want to show a message to the user here
+            } else {
+                console.error("Search failed:", error);
+            }
         } finally {
             setLoading(false);
         }
@@ -134,7 +158,13 @@ export default function Linking() {
 
                 <div className="flex justify-center mb-20">
                     {loading ? (
-                        <div>Loading....</div>
+                        <div className="mt-10 flex flex-col items-center gap-4">
+                            <div className="relative w-16 h-16">
+                                <div className="absolute top-0 left-0 w-full h-full border-4 border-[#41388C] border-t-transparent rounded-full animate-spin"></div>
+                                <div className="absolute top-0 left-0 w-full h-full border-4 border-[#41388C] border-t-transparent rounded-full animate-spin" style={{ animationDelay: '-0.3s' }}></div>
+                            </div>
+                            <p className="text-gray-600 font-medium">Analyzing your website...</p>
+                        </div>
                     ) : currentView === "input" && result.length === 0 ? (
                         <div className="w-1/3 text-center mt-20">
                             <svg
@@ -154,7 +184,9 @@ export default function Linking() {
                             </p>
                         </div>
                     ) : (
-                        renderTable()
+                        <div className="mt-6">
+                            {renderTable()}
+                        </div>
                     )}
                 </div>
             </div>
