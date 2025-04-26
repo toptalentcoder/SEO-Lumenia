@@ -10,6 +10,7 @@ interface FlattenedGuide {
     queryEngine: string;
     language: string;
     createdAt: string;
+    createdBy: string;
 }
 
 interface Project {
@@ -22,6 +23,7 @@ interface Project {
         queryEngine?: string;
         language?: string;
         createdAt?: number | string;
+        createdBy?: string;
     }[];
 }
 
@@ -105,6 +107,7 @@ export const getProjectGuides: Endpoint = {
                 typeof guide.createdAt === 'number'
                     ? new Date(guide.createdAt).toISOString()
                     : 'unknown',
+            createdBy: guide.createdBy || 'unknown',        
         })).sort((a, b) => {
             if (a.createdAt === 'unknown') return 1;
             if (b.createdAt === 'unknown') return -1;
