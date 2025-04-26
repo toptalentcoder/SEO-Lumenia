@@ -51,7 +51,7 @@ export default function Compared({ data }) {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-300">
-                        {searchResults.map((row, index) => (
+                        {searchResults.slice(0, 10).map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                 <td className="w-12 px-1 py-4 text-center text-gray-700">{index + 1}</td>
                                 <td className="w-1/6 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
