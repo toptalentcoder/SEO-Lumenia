@@ -22,6 +22,7 @@ interface Project {
         language?: string;
         gl? : string;
         createdAt?: number | string;
+        createdBy?: string;
     }[];
 }
 
@@ -116,6 +117,7 @@ export const getUserProjects: Endpoint = {
                         typeof guide.createdAt === 'number'
                         ? new Date(guide.createdAt).toISOString()
                         : 'unknown',
+                    createdBy: guide.createdBy || 'unknown',
                 }));
             })
             .sort((a, b) => {
