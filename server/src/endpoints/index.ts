@@ -52,6 +52,7 @@ import { saveKeywordsForSERPWeatherCategoryEndpoint } from "./saveKeywordsForSer
 import { getProgressEndpoint } from "./seoGuide/getProgress";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
 import { getPageDuplicationEndpoint } from "./page_duplication/getPageDuplicationEndpoint";
+import { getNumberOf25TopKeywordsEndpoint } from "./getNumberOf25TopKeywordsEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -108,5 +109,6 @@ export const customEndpoints = [
     searchBacklinksEndpoint,
     getProgressEndpoint,
     getInternalPageRankEndpoint,
-    getPageDuplicationEndpoint
+    getPageDuplicationEndpoint,
+    getNumberOf25TopKeywordsEndpoint
 ]
