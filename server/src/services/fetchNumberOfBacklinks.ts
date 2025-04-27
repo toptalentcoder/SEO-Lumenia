@@ -1,6 +1,8 @@
 export async function fetchNumberOfBacklinks(domain: string) {
     const apiKey = process.env.SEMRUSH_API_KEY;
-    const encodedDomain = encodeURIComponent(domain);
+    // Ensure domain has trailing slash before encoding
+    const domainWithSlash = domain.endsWith('/') ? domain : `${domain}/`;
+    const encodedDomain = encodeURIComponent(domainWithSlash);
 
     const url = `https://api.semrush.com/analytics/v1/?key=${apiKey}&type=backlinks_overview&target=${encodedDomain}&target_type=url&export_columns=domains_num,urls_num`;
 
