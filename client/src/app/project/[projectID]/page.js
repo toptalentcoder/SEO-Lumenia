@@ -14,36 +14,70 @@ import { FaPen } from "react-icons/fa";
 import { FaList } from "react-icons/fa";
 import { IoIosPodium } from "react-icons/io";
 import { PiNetworkFill } from "react-icons/pi";
+import { FaLock } from "react-icons/fa";
+import { ExternalLink } from "lucide-react";
 
 export default function ProjectIDPage() {
   const { projectID } = useParams();
   const { user } = useUser();
   const [guides, setGuides] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [internalPagerank, setInternalPagerank] = useState([]);
+  const [pagerankLoading, setPagerankLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchProjectGuides = async () => {
-      try {
-        const res = await fetch(
-          `/api/get-project-guides?email=${user.email}&projectID=${projectID}`
-        );
-        const data = await res.json();
-        setGuides(data);
-      } catch (err) {
-        console.error("Failed to fetch guides:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const projectName = guides[0]?.projectName;
+  const domainName = guides[0]?.domainName;
 
+  // 1. Fetch Guides
+  useEffect(() => {
     if (projectID && user?.email) {
+      const fetchProjectGuides = async () => {
+        try {
+          const res = await fetch(
+            `/api/get-project-guides?email=${user.email}&projectID=${projectID}`
+          );
+          const data = await res.json();
+
+          setGuides(data);
+        } catch (err) {
+          console.error("Failed to fetch guides:", err);
+        } finally {
+          setLoading(false);
+        }
+      };
       fetchProjectGuides();
     }
   }, [projectID, user]);
 
-  const projectName = guides[0]?.projectName;
-  const domainName = guides[0]?.domainName;
+  // 2. Fetch Internal Pagerank after Guides are loaded
+  useEffect(() => {
+    const domainName = guides.length > 0 ? guides[0].domainName : undefined;
+    if (domainName) {
+      const fetchInternalPagerank = async () => {
+        try {
+          const res = await fetch("/api/get-internal-pagerank", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ baseUrl: domainName }),
+          });
+          const data = await res.json();
+          if (data?.data) {
+            setInternalPagerank(data.data);
+          }
+        } catch (err) {
+          console.error("Failed to fetch internal pagerank:", err);
+        } finally {
+          setPagerankLoading(false);
+        }
+      };
+      fetchInternalPagerank();
+    }
+  }, [guides]);
+
+
 
   return (
     <div className="px-6 md:px-12 py-8">
@@ -350,7 +384,38 @@ export default function ProjectIDPage() {
               <h2>Internal Pagerank</h2>
             </div>
             <div className="bg-white p-5 rounded-xl shadow-sm">
-              <div className='w-full text-center'>
+              {pagerankLoading ? (
+                <div className="w-full text-center">
+                  <p className="text-gray-400 text-sm">Loading internal pagerank data...</p>
+                </div>
+              ) : internalPagerank.length > 0 ? (
+                <table className="w-full text-left text-sm rounded-lg border border-gray-200 overflow-hidden">
+                  <thead className="border-b border-gray-200 text-sm">
+                    <tr>
+                      <th className="py-3 px-4 text-gray-800 w-1/2">Internal Pagerank</th>
+                      <th className="py-3 px-4 text-gray-800 w-1/2">Page URL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {internalPagerank.slice(0, 5).map((item) => (
+                      <tr key={item.url} className="border-b border-gray-100 odd:bg-gray-50 even:bg-white">
+                        <td className="py-1 px-4">
+                          <span className="inline-block bg-[#41388C] text-white text-lg font-bold px-4 py-0.5 rounded-xl">
+                            {item.score}
+                          </span>
+                        </td>
+                        <td className="py-1 px-4 flex items-center gap-2">
+                          <FaLock className="text-[#A0CC9A]"/>
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[#41388C] flex items-center gap-1 text-lg">
+                            {new URL(item.url).pathname || "/"} <ExternalLink size={15} />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div className='w-full text-center'>
                   <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 247.37 245.85"
@@ -361,7 +426,8 @@ export default function ProjectIDPage() {
                       <path d="m247.37,125.45c0-21.39-5.77-43.02-16.1-61.76l-73.06,86.04v95.65c52.63-15.14,89.16-63.93,89.16-119.92Z" />
                   </svg>
                   <p className='mt-4 text-xl text-gray-600'>No Internal Pagerank</p>
-              </div>
+                </div>
+              )}
             </div>
           </div>
 

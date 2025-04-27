@@ -23,11 +23,13 @@ import { InternalPageRanks } from './collections/internalPageRank';
 import { InternalUrls } from './collections/internalUrlsCollection';
 import { PageDuplicates } from './collections/pageDuplicates';
 import { BacklinkSites } from './collections/backlinkSites';
+import { internalPageRankEndpoint } from './endpoints/internal_page_rank/internalPageRankEndpoint';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   admin: {
     user: Users.slug,
     importMap: {
@@ -44,7 +46,7 @@ export default buildConfig({
     InternalPageRanks,
     InternalUrls,
     PageDuplicates,
-    BacklinkSites
+    BacklinkSites,
   ],
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
@@ -63,6 +65,7 @@ export default buildConfig({
   ],
   endpoints: [
     ...(customEndpoints || []), // Ensure customEndpoints is defined
+    internalPageRankEndpoint,
   ],
   onInit : async(payload) => {
 

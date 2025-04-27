@@ -23,7 +23,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
         };
 
         // Validate query parameters
-        if (!queryID || typeof queryID !== "string" || !email || typeof email !== "string") {
+        if (!queryID || !email || typeof email !== "string") {
             return new Response(
                 JSON.stringify({ error: "Missing or invalid queryID/email" }),
                 {

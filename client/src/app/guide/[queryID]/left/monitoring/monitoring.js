@@ -48,7 +48,6 @@ export default function Monitoring({ data }) {
             });
 
             if (res.status === 200) {
-                console.log(res.data)
                 setCronData(res.data);
             }
         } catch (err) {

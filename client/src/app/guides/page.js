@@ -61,21 +61,29 @@ export default function SEOQueryDashboard() {
             const response = await fetch(`/api/getProjectList?email=${user?.email}`);
             const result = await response.json();
             setProjects(result);
+
+            // Set selectedProjectItem based on URL projectID parameter
+            if (projectID && result.length > 0) {
+                const projectFromUrl = result.find(p => p.projectID === projectID);
+                if (projectFromUrl) {
+                    setSelectedProjectItem(projectFromUrl);
+                    return; // Exit early if we found a matching project
+                }
+            }
+            
+            // If no projectID in URL or no matching project found, set default
+            if (result.length > 0) {
+                const defaultProject = result.find(p => p.projectName.toLowerCase() === "default");
+                setSelectedProjectItem(defaultProject || result[0]);
+            }
         };
 
         fetchProjectList();
-    }, [user])
+    }, [user, projectID]);
 
     const handleFocus = () => {
         setIsFocused(true);
     };
-
-    useEffect(() => {
-        if (projects.length > 0 && !selectedProjectItem) {
-            const defaultProject = projects.find(p => p.projectName.toLowerCase() === "default");
-            setSelectedProjectItem(defaultProject || projects[0]);
-        }
-    }, [projects, selectedProjectItem]);
 
     const handleBlur = () => {
         setIsFocused(false);

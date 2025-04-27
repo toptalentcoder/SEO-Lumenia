@@ -202,7 +202,6 @@ export default function SocialPost({data}) {
                 `/api/get_social_post?queryID=${queryID}&email=${user.email}`
             );
 
-            console.log(response.data.socialPostData)
             if (response.data.success) {
                 setGeneratedPost(response.data.socialPostData);
             }else{

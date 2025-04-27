@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useSearchView } from '../../../hooks/useSearchView';
 import { FaCheckCircle } from "react-icons/fa";
 import { ExternalLink } from "lucide-react";
@@ -18,6 +19,7 @@ import {
 } from 'recharts';
 
 export default function PageDuplication() {
+    const searchParams = useSearchParams();
     const { currentView, switchToResults, switchToInput } = useSearchView();
     const [inputUrl, setInputUrl] = useState("");
     const [loading, setLoading] = useState(false);
@@ -26,8 +28,50 @@ export default function PageDuplication() {
     const [histogram, setHistogram] = useState([]);
 
 
-    const handleSearch = async () => {
-        if (!inputUrl) return;
+
+    const fetchExistingResults = async (host) => {
+        if (!host) return;
+        setLoading(true);
+        try {
+            const res = await fetch(`http://localhost:7777/api/get-page-duplication`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ baseUrl: host }),
+            });
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const data = await res.json();
+            if (data?.data?.length) {
+                setResult(data.data);
+                setSummary(data.summary);
+                setHistogram(data.histogram);
+                switchToResults(data.data);
+            }
+        } catch (error) {
+            console.error("Failed to fetch existing results:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        const host = searchParams.get('host');
+        if (host) {
+            setInputUrl(host);
+            fetchExistingResults(host);
+        }
+    }, [searchParams]);
+
+    const handleSearch = async (url = inputUrl) => {
+        // Don't handle search if there's a URL parameter
+        if (searchParams.get('host')) return;
+        
+        if (!url) return;
         setLoading(true);
         try {
             const controller = new AbortController();
@@ -35,7 +79,7 @@ export default function PageDuplication() {
 
             const res = await fetch("http://localhost:7777/api/page-duplication", {
                 method: "POST",
-                body: JSON.stringify({ baseUrl: inputUrl }),
+                body: JSON.stringify({ baseUrl: url }),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -59,7 +103,6 @@ export default function PageDuplication() {
         } catch (error) {
             if (error.name === 'AbortError') {
                 console.error("Request timed out");
-                // You might want to show a message to the user here
             } else {
                 console.error("Search failed:", error);
             }
@@ -215,7 +258,7 @@ export default function PageDuplication() {
                         placeholder="Website"
                     />
                     <button
-                        onClick={handleSearch}
+                        onClick={() => handleSearch(inputUrl)}
                         className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
                     >
                         OK
