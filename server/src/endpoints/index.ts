@@ -37,8 +37,9 @@ import { getSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/get_soseo_dseo";
 import { generateKeywordsEndpoint } from "./serpWeather/generateKeywordsEndpoint";
 import { getMonitoringData } from "./seoGuide/monitoring/getMonitoringData";
 import { getAllUserProjects } from "./projectManagement/getAllUserProject";
-import { internalPageRankEndpoint } from "./internalPageRankEndpoint";
-import { pageDuplicationEndpoint } from "./pageDuplicationEndpoint";
+import { internalPageRankEndpoint } from "./internal_page_rank/internalPageRankEndpoint";
+import { getInternalPageRankEndpoint } from "./internal_page_rank/getInternalPageRankEndpoint";
+import { pageDuplicationEndpoint } from "./page_duplication/pageDuplicationEndpoint";
 import { getSerpWeatherDataEndpoint } from "./serpWeather/getSerpWeatherDataEndpoint";
 import { trackKeywordsEndpoint } from "./serpWeather/trackKeywordsEndpoint";
 import { getHistoricalVolatilityEndpoint } from "./serpWeather/getHistoricalVolatilityEndpoint";
@@ -50,6 +51,7 @@ import { searchBacklinksEndpoint } from "./backlinks_overview/searchBacklinks";
 import { saveKeywordsForSERPWeatherCategoryEndpoint } from "./saveKeywordsForSerpWeatherEndpoint";
 import { getProgressEndpoint } from "./seoGuide/getProgress";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
+import { getPageDuplicationEndpoint } from "./page_duplication/getPageDuplicationEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -93,6 +95,7 @@ export const customEndpoints = [
     generateKeywordsEndpoint,
     getMonitoringData,
     internalPageRankEndpoint,
+    getInternalPageRankEndpoint,
     saveKeywordsForSERPWeatherCategoryEndpoint,
     pageDuplicationEndpoint,
     getSerpWeatherDataEndpoint,
@@ -103,5 +106,7 @@ export const customEndpoints = [
     backlinksOverviewEndpoint,
     userBacklinkHistoryEndpoint,
     searchBacklinksEndpoint,
-    getProgressEndpoint
+    getProgressEndpoint,
+    getInternalPageRankEndpoint,
+    getPageDuplicationEndpoint
 ]

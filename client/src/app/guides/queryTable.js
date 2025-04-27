@@ -201,13 +201,23 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         fetchProjects();
     }, [user, projectID, refreshTrigger]);
 
-    // Fetch project info for editing
+    // Fetch project info when projectID changes
     useEffect(() => {
-        if (projectID && user?.email) {
-            fetch(`/api/getProjectItemInfo?email=${user.email}&projectID=${projectID}`)
-                .then(res => res.json())
-                .then(data => setProjectInfo(data.matchingProject));
-        }
+        const fetchProjectInfo = async () => {
+            if (projectID && user?.email) {
+                try {
+                    const response = await fetch(`/api/getProjectItemInfo?email=${user.email}&projectID=${projectID}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setProjectInfo(data.matchingProject);
+                    }
+                } catch (error) {
+                    console.error("Error fetching project info:", error);
+                }
+            }
+        };
+
+        fetchProjectInfo();
     }, [projectID, user]);
 
     // Floating metrics image scroll transition
@@ -324,7 +334,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
             {projectID && projectInfo && projectInfo.projectName !== 'Default' && (
                 <div className="fixed z-50 bottom-4 right-4 transition-all duration-500 opacity-100 bg-white rounded-xl px-4 py-1.5" style={{ pointerEvents: "auto",  boxShadow: "0 8px 32px 0 rgba(60,60,100,0.18), 0 0px 8px 0 rgba(60,60,100, 0.30)" }}>
                     <div className="flex items-center justify-between gap-24 text-gray-800">
-                        <span>www.cnet.com</span>
+                        <span>{projectInfo.domainName}</span>
                         <div className="py-3 px-4 text-center">
                             <div className="relative w-[30px] h-[40px] mx-auto">
                                 <Image
@@ -371,8 +381,24 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                             className="absolute z-50 bottom-[110%] right-0 w-72 bg-white rounded-2xl shadow-xl p-4 flex flex-col gap-2 text-gray-800 border border-gray-100 animate-fade-in"
                         >
                             <div className="text-xs font-semibold text-gray-400 mb-2">Your Project</div>
-                            <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Project Overview</button>
-                            <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Page Duplication Analysis</button>
+                            <button
+                                className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium"
+                                onClick={() => {
+                                    setShowFloatingMenu(false);
+                                    router.push(`/project/${projectID}`);
+                                }}
+                            >
+                                Project Overview
+                            </button>
+                            <button
+                                className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium"
+                                onClick={() => {
+                                    setShowFloatingMenu(false);
+                                    router.push(`/duplicate/host?host=${projectInfo.domainName}`);
+                                }}
+                            >
+                                Page Duplication Analysis
+                            </button>
                             <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Google Rankings</button>
                             <button className="text-left text-sm py-0.5 px-2 rounded-lg hover:bg-gray-100 font-medium">Keywords by URL</button>
                             <div className="text-xs font-semibold text-gray-400 mt-3 mb-2">SERP Locale</div>
@@ -395,37 +421,46 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
             ) : rows.length > 0 || (pendingQueryID && pendingQueryText) ? (
                 <div className="mx-auto overflow-visible rounded-lg bg-white">
                     <table className="min-w-full border-collapse table-fixed">
-                        <thead className="bg-white">
-                            <tr>
-                                <th className="w-12 px-1 py-3 text-center">
-                                    <input
-                                        type="checkbox"
-                                        className="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded"
-                                    />
-                                </th>
-                                <th className="w-1/4 px-3 py-3 text-left text-md font-semibold text-gray-400 uppercase tracking-wide">
-                                    QUERY
-                                </th>
-                                <th className="w-1/8 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
-                                    LANGUAGE
-                                </th>
-                                <th className="w-1/6 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
-                                    PROJECT
-                                </th>
-                                <th className="w-1/8 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
-                                    VALIDATION
-                                </th>
-                                <th className="w-1/8 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
-                                    CREATED BY
-                                </th>
-                                <th className="w-1/6 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
-                                    CREATED ON
-                                </th>
-                                <th className="w-12 px-1 py-2 text-center">
-                                    <span className="sr-only">Actions</span>
-                                </th>
-                            </tr>
-                        </thead>
+                        {rows.filter(row => 
+                            row.query && 
+                            row.queryID && 
+                            row.queryEngine && 
+                            row.language && 
+                            row.createdAt && 
+                            row.createdBy
+                        ).length > 0 && (
+                            <thead className="bg-white">
+                                <tr>
+                                    <th className="w-12 px-1 py-3 text-center">
+                                        <input
+                                            type="checkbox"
+                                            className="form-checkbox h-4 w-4 text-blue-600 border-gray-300 rounded"
+                                        />
+                                    </th>
+                                    <th className="w-1/4 px-3 py-3 text-left text-md font-semibold text-gray-400 uppercase tracking-wide">
+                                        QUERY
+                                    </th>
+                                    <th className="w-1/8 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
+                                        LANGUAGE
+                                    </th>
+                                    <th className="w-1/6 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
+                                        PROJECT
+                                    </th>
+                                    <th className="w-1/8 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
+                                        VALIDATION
+                                    </th>
+                                    <th className="w-1/8 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
+                                        CREATED BY
+                                    </th>
+                                    <th className="w-1/6 px-3 py-3 text-center text-md font-semibold text-gray-400 uppercase tracking-wide">
+                                        CREATED ON
+                                    </th>
+                                    <th className="w-12 px-1 py-2 text-center">
+                                        <span className="sr-only">Actions</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                        )}
 
                         <tbody className="divide-y divide-gray-300">
                             {pendingQueryID && pendingQueryText && (
@@ -451,7 +486,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                             {language.hl.toUpperCase()}
                                         </div>
                                     </td>
-                                    <td className="text-center text-[#4A4291]">Default</td>
+                                    <td className="text-center text-[#4A4291]">{projectInfo ? projectInfo.projectName : "Default"}</td>
                                     <td className="text-center text-gray-500">-</td>
                                     <td className="text-center text-gray-600">
                                         <div className="flex justify-center">
@@ -527,7 +562,16 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                 </tr>
                             )}
 
-                            {rows.map((row) => (
+                            {rows
+                                .filter(row => 
+                                    row.query && 
+                                    row.queryID && 
+                                    row.queryEngine && 
+                                    row.language && 
+                                    row.createdAt && 
+                                    row.createdBy
+                                )
+                                .map((row) => (
                                 <tr key={row.id} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                     <td className="w-12 px-1 py-4 text-center">
                                         <input
@@ -641,7 +685,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                     </table>
                 </div>
             ) : (
-                <div className="flex flex-col items-center justify-center mb-28">
+                <div className="flex flex-col items-center justify-center">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 247.37 245.85"
@@ -662,7 +706,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
 
             {/* Project Edit/Delete Buttons */}
             {projectID && projectInfo && projectInfo.projectName !== 'Default' && (
-                <div className="flex justify-end gap-2 mb-32 text-sm">
+                <div className="flex justify-end gap-2 mb-32 mt-28 text-sm">
                     <button
                         className="px-4 py-1.5 bg-white border border-[#4A4291] text-[#4A4291] rounded-lg hover:bg-[#4A4291] hover:text-white transition flex items-center gap-2"
                         onClick={() => {

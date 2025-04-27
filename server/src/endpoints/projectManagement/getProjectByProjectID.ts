@@ -95,6 +95,27 @@ export const getProjectGuides: Endpoint = {
             );
         }
 
+        // If there are no SEO guides, return project info with empty guides array
+        if (!selectedProject.seoGuides || selectedProject.seoGuides.length === 0) {
+            return new Response(
+                JSON.stringify([{
+                    projectName: selectedProject.projectName || '',
+                    projectID: selectedProject.projectID || '',
+                    domainName: selectedProject.domainName || '',
+                    query: '',
+                    queryID: '',
+                    queryEngine: '',
+                    language: '',
+                    createdAt: '',
+                    createdBy: ''
+                }]),
+                {
+                    status: 200,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                }
+            );
+        }
+
         const guides: FlattenedGuide[] = (selectedProject.seoGuides || []).map((guide) => ({
             projectName: selectedProject.projectName || '',
             projectID: selectedProject.projectID || '',
@@ -102,12 +123,12 @@ export const getProjectGuides: Endpoint = {
             query: guide.query || '',
             queryID: guide.queryID || '',
             queryEngine: guide.queryEngine || '',
-            language: guide.language || 'unknown',
+            language: guide.language || '',
             createdAt:
                 typeof guide.createdAt === 'number'
                     ? new Date(guide.createdAt).toISOString()
-                    : 'unknown',
-            createdBy: guide.createdBy || 'unknown',        
+                    : '',
+            createdBy: guide.createdBy || '',        
         })).sort((a, b) => {
             if (a.createdAt === 'unknown') return 1;
             if (b.createdAt === 'unknown') return -1;
