@@ -53,6 +53,7 @@ import { getProgressEndpoint } from "./seoGuide/getProgress";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
 import { getPageDuplicationEndpoint } from "./page_duplication/getPageDuplicationEndpoint";
 import { getNumberOf25TopKeywordsEndpoint } from "./getNumberOf25TopKeywordsEndpoint";
+import { getNumberOfBacklinksEndpoint } from "./getNumberOfBacklinksEndpoint";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -110,5 +111,6 @@ export const customEndpoints = [
     getProgressEndpoint,
     getInternalPageRankEndpoint,
     getPageDuplicationEndpoint,
-    getNumberOf25TopKeywordsEndpoint
+    getNumberOf25TopKeywordsEndpoint,
+    getNumberOfBacklinksEndpoint
 ]
