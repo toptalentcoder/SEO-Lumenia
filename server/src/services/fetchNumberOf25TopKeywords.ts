@@ -1,7 +1,9 @@
 export async function fetchSemrushKeywords(domain: string) {
 
     const apiKey = process.env.SEMRUSH_API_KEY;
-    const encodedDomain = encodeURIComponent(domain);
+    // Ensure domain has trailing slash before encoding
+    const domainWithSlash = domain.endsWith('/') ? domain : `${domain}/`;
+    const encodedDomain = encodeURIComponent(domainWithSlash);
   
     const url = `https://api.semrush.com/analytics/?key=${apiKey}&type=url_organic&url=${encodedDomain}&database=us&display_sort=po_asc&display_limit=100&export_columns=Ph,Po`;
   
