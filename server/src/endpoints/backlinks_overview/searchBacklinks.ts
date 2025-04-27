@@ -16,6 +16,16 @@ export const searchBacklinksEndpoint : Endpoint = {
             });
         }
 
+        // Validate baseUrl format
+        try {
+            new URL(baseUrl);
+        } catch (e) {
+            return new Response(JSON.stringify({ error: "Invalid baseUrl format" }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" },
+            });
+        }
+
         if (!email) {
             return new Response(JSON.stringify({ error: "Missing email" }), {
                 status: 400,
@@ -80,7 +90,7 @@ export const searchBacklinksEndpoint : Endpoint = {
             const existingSite = await req.payload.find({
                 collection: 'backlink-sites',
                 where: {
-                    domain: {
+                    baseUrl: {
                         equals: baseUrl,
                     },
                 },
@@ -129,19 +139,30 @@ export const searchBacklinksEndpoint : Endpoint = {
                 });
             } else {
                 // Create new site with search history
-                await req.payload.create({
-                    collection: 'backlink-sites',
-                    data: {
-                        domain: baseUrl,
-                        searchHistory: [
-                            {
-                                userEmail: email,
-                                searchedAt: new Date().toISOString(),
-                                backlinks: backlinks
-                            }
-                        ]
-                    }
-                });
+                try {
+                    await req.payload.create({
+                        collection: 'backlink-sites',
+                        data: {
+                            baseUrl: baseUrl,
+                            searchHistory: [
+                                {
+                                    userEmail: email,
+                                    searchedAt: new Date().toISOString(),
+                                    backlinks: backlinks
+                                }
+                            ]
+                        }
+                    });
+                } catch (error) {
+                    console.error("Error creating backlink site:", error);
+                    return new Response(JSON.stringify({ 
+                        error: "Failed to create backlink site",
+                        details: error instanceof Error ? error.message : "Unknown error"
+                    }), {
+                        status: 500,
+                        headers: { "Content-Type": "application/json" },
+                    });
+                }
             }
 
             return new Response(JSON.stringify(backlinks), {
