@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchView } from "../../../hooks/useSearchView";
 import { ExternalLink } from "lucide-react"; // optional icon
 import Image from 'next/image';
 import { FaLock } from "react-icons/fa";
+import { useSearchParams } from 'next/navigation';
+
+function isValidDomain(domain) {
+    const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
+    return domainRegex.test(domain);
+}
 
 function formatUrl(url) {
     if (!url) return '';
@@ -19,9 +25,58 @@ export default function Linking() {
     const [loading, setLoading] = useState(false);
     const [inputUrl, setInputUrl] = useState("");
     const [result, setResult] = useState([]);
+    const [inputError, setInputError] = useState("");
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        const host = searchParams.get('host');
+        if (host) {
+            setInputUrl(host);
+            if (isValidDomain(host)) {
+                fetchFromDatabase(host);
+            } else {
+                setInputError("Invalid domain name format");
+            }
+        }
+    }, [searchParams]);
+
+    const fetchFromDatabase = async (host) => {
+        setLoading(true);
+        try {
+            const res = await fetch(`/api/get-internal-pagerank`, {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: host }),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            const data = await res.json();
+            if (data?.data?.length) {
+                setResult(data.data);
+                switchToResults(data.data);
+            }
+        } catch (error) {
+            console.error("Database fetch failed:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleSearch = async () => {
-        if (!inputUrl) return;
+        if (!inputUrl) {
+            setInputError("Please enter a domain name");
+            return;
+        }
+
+        if (!isValidDomain(inputUrl)) {
+            setInputError("Please enter a valid domain name (e.g., example.com)");
+            return;
+        }
+
+        setInputError("");
         setLoading(true);
 
         try {
@@ -53,7 +108,6 @@ export default function Linking() {
         } catch (error) {
             if (error.name === 'AbortError') {
                 console.error("Request timed out");
-                // You might want to show a message to the user here
             } else {
                 console.error("Search failed:", error);
             }
@@ -108,8 +162,8 @@ export default function Linking() {
             <table className="w-full text-left text-sm rounded-lg border border-gray-200 overflow-hidden mt-10">
                 <thead className="border-b border-gray-200 text-lg">
                     <tr>
-                        <th className="py-3 px-4">Internal Pagerank</th>
-                        <th className="py-3 px-4">Page URL</th>
+                        <th className="py-3 px-4 text-gray-800">Internal Pagerank</th>
+                        <th className="py-3 px-4 text-gray-800">Page URL</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -141,13 +195,21 @@ export default function Linking() {
 
             <div className="bg-white rounded-2xl mt-2 p-6">
                 <div className="flex items-center justify-center gap-2">
-                    <input
-                        type="text"
-                        value={inputUrl}
-                        onChange={(e) => setInputUrl(e.target.value)}
-                        className="border border-gray-300 focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-1/2 text-gray-700"
-                        placeholder="Website"
-                    />
+                    <div className="w-1/2">
+                        <input
+                            type="text"
+                            value={inputUrl}
+                            onChange={(e) => {
+                                setInputUrl(e.target.value);
+                                setInputError("");
+                            }}
+                            className={`border ${inputError ? 'border-red-500' : 'border-gray-300'} focus:outline-[#413793] focus:outline-1 rounded-lg px-4 py-2 w-full text-gray-700`}
+                            placeholder="Enter domain (e.g., example.com)"
+                        />
+                        {inputError && (
+                            <p className="text-red-500 text-sm mt-1">{inputError}</p>
+                        )}
+                    </div>
                     <button
                         onClick={handleSearch}
                         className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"

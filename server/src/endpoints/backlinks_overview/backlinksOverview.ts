@@ -24,11 +24,11 @@ export const backlinksOverviewEndpoint : Endpoint = {
         }
 
         try {
-            // Check if we have data for this domain in the user's history
+            // Check if we have data for this baseUrl in the user's history
             const existingSite = await req.payload.find({
                 collection: 'backlink-sites',
                 where: {
-                    domain: {
+                    baseUrl: {
                         equals: baseUrl,
                     },
                 },
@@ -50,7 +50,7 @@ export const backlinksOverviewEndpoint : Endpoint = {
 
             // If no history found for this user, return error
             return new Response(JSON.stringify({ 
-                error: "No search history found for this domain. Please use the search function first." 
+                error: "No search history found for this baseUrl. Please use the search function first." 
             }), {
                 status: 404,
                 headers: { "Content-Type": "application/json" },
