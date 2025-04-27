@@ -68,7 +68,10 @@ export const internalPageRankEndpoint: Endpoint = {
                     collection: "internalPageRanks",
                     data: {
                         baseUrl: formattedUrl,
-                        scores,
+                        scores: scores.map(score => ({
+                            url: score.url,
+                            score: score.score
+                        })),
                         lastCrawledAt: new Date().toISOString(),
                     },
                 });

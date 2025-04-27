@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload';
 export const BacklinkSites: CollectionConfig = {
   slug: 'backlink-sites',
   admin: {
-    useAsTitle: 'domain',
+    useAsTitle: 'baseUrl',
   },
   access: {
     read: () => true,
@@ -13,7 +13,7 @@ export const BacklinkSites: CollectionConfig = {
   },
   fields: [
     {
-      name: 'domain',
+      name: 'baseUrl',
       type: 'text',
       required: true,
       unique : true

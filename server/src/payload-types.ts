@@ -374,7 +374,7 @@ export interface PageDuplicate {
  */
 export interface BacklinkSite {
   id: string;
-  domain: string;
+  baseUrl: string;
   searchHistory?:
     | {
         userEmail: string;
@@ -693,7 +693,7 @@ export interface PageDuplicatesSelect<T extends boolean = true> {
  * via the `definition` "backlink-sites_select".
  */
 export interface BacklinkSitesSelect<T extends boolean = true> {
-  domain?: T;
+  baseUrl?: T;
   searchHistory?:
     | T
     | {

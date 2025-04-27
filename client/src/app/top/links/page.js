@@ -120,25 +120,55 @@ export default function TopLinks(){
     };
 
     const handleSearch = async (domain) => {
-        if (!domain) return;
+        console.log('Starting search with domain:', domain);
+        if (!domain) {
+            console.log('No domain provided');
+            return;
+        }
+
+        // Format the URL properly
+        let formattedUrl = domain.trim();
+        if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+            formattedUrl = 'https://' + formattedUrl;
+        }
+        
+        // Remove trailing slash if present
+        formattedUrl = formattedUrl.replace(/\/$/, '');
+        
+        console.log('Formatted URL:', formattedUrl);
         setLoading(true);
+        setResult([]); // Clear previous results
 
         try {
+            console.log('Making API request...');
             const res = await fetch("/api/search-backlinks", {
                 method: "POST",
-                body: JSON.stringify({ baseUrl: domain, email: user.email }),
+                body: JSON.stringify({ 
+                    baseUrl: formattedUrl, 
+                    email: user.email 
+                }),
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
 
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
             const data = await res.json();
+            console.log('API response:', data);
+            
             if (data && Array.isArray(data) && data.length > 0) {
                 setResult(data);
                 switchToResults(data);
+            } else {
+                console.log('No valid data received');
+                setResult([]);
             }
         } catch (error) {
             console.error("Search failed:", error);
+            setResult([]);
         } finally {
             setLoading(false);
         }
@@ -272,16 +302,20 @@ export default function TopLinks(){
                         placeholder='Website'
                     />
                     <button
-                        className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
-                        onClick={handleSearch}
+                        className="bg-[#41388C] hover:bg-[#352d73] transition-colors duration-200 text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
+                        onClick={() => {
+                            console.log('OK button clicked, inputUrl:', inputUrl);
+                            handleSearch(inputUrl);
+                        }}
                     >
                         OK
                     </button>
                 </div>
                 <div className='flex justify-center mt-4 mb-20'>
                     {loading ? (
-                        <div>
-                            Loading....
+                        <div className="flex flex-col items-center justify-center gap-4">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#41388C]"></div>
+                            <p className="text-gray-600 text-lg font-medium">Analyzing backlinks...</p>
                         </div>
                     ) : currentView === 'input' ? (
                         <div className='w-1/3 text-center'>
