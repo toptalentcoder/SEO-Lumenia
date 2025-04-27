@@ -270,9 +270,9 @@ const BacklinkHistoryPanel = () => {
                         <li 
                             key={index} 
                             className="mb-1 cursor-pointer hover:text-[#41388C] transition-colors"
-                            onClick={() => handleHistoryClick(item.domain)}
+                            onClick={() => handleHistoryClick(item.baseUrl)}
                         >
-                            <span className="font-medium">{item.domain}</span>
+                            <span className="font-medium">{item.baseUrl}</span>
                             <span className="text-gray-500 text-xs ml-2">
                                 ({new Date(item.searchedAt).toLocaleDateString()})
                             </span>

@@ -34,7 +34,7 @@ export const userBacklinkHistoryEndpoint: Endpoint = {
                         (history: any) => history.userEmail === email
                     );
                     return {
-                        domain: site.domain, // Using domain property from BacklinkSite
+                        baseUrl: site.baseUrl, // Using baseUrl property from BacklinkSite
                         searchedAt: userHistoryEntry?.searchedAt, // Added optional chaining
                         backlinkCount: userHistoryEntry?.backlinks?.length || 0, // Added optional chaining
                     };

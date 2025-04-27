@@ -389,31 +389,40 @@ export default function ProjectIDPage() {
                   <p className="text-gray-400 text-sm">Loading internal pagerank data...</p>
                 </div>
               ) : internalPagerank.length > 0 ? (
-                <table className="w-full text-left text-sm rounded-lg border border-gray-200 overflow-hidden">
-                  <thead className="border-b border-gray-200 text-sm">
-                    <tr>
-                      <th className="py-3 px-4 text-gray-800 w-1/2">Internal Pagerank</th>
-                      <th className="py-3 px-4 text-gray-800 w-1/2">Page URL</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {internalPagerank.slice(0, 5).map((item) => (
-                      <tr key={item.url} className="border-b border-gray-100 odd:bg-gray-50 even:bg-white">
-                        <td className="py-1 px-4">
-                          <span className="inline-block bg-[#41388C] text-white text-lg font-bold px-4 py-0.5 rounded-xl">
-                            {item.score}
-                          </span>
-                        </td>
-                        <td className="py-1 px-4 flex items-center gap-2">
-                          <FaLock className="text-[#A0CC9A]"/>
-                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[#41388C] flex items-center gap-1 text-lg">
-                            {new URL(item.url).pathname || "/"} <ExternalLink size={15} />
-                          </a>
-                        </td>
+                <div className="w-full">
+                  <table className="w-full text-left text-sm rounded-lg border border-gray-200 overflow-hidden">
+                    <thead className="border-b border-gray-200 text-sm">
+                      <tr>
+                        <th className="py-3 px-4 text-gray-800 w-1/2">Internal Pagerank</th>
+                        <th className="py-3 px-4 text-gray-800 w-1/2">Page URL</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {internalPagerank.slice(0, 5).map((item) => (
+                        <tr key={item.url} className="border-b border-gray-100 odd:bg-gray-50 even:bg-white">
+                          <td className="py-1 px-4">
+                            <span className="inline-block bg-[#41388C] text-white text-lg font-bold px-4 py-0.5 rounded-xl">
+                              {item.score}
+                            </span>
+                          </td>
+                          <td className="py-1 px-4 flex items-center gap-2">
+                            <FaLock className="text-[#A0CC9A]"/>
+                            <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[#41388C] flex items-center gap-1 text-lg">
+                              {new URL(item.url).pathname || "/"} <ExternalLink size={15} />
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <div className="text-gray-700 text-sm mt-6 flex justify-center">
+                    <button
+                      className="bg-gray-300 rounded-lg px-2 py-1 cursor-pointer hover:bg-gray-400"
+                      onClick={() => router.push(`/top/pages?host=${domainName}`)}
+                    >See more</button>
+                  </div>
+                </div>
               ) : (
                 <div className='w-full text-center'>
                   <svg
