@@ -88,7 +88,7 @@ export const createSeoGuide: Endpoint = {
                         gl: gl || 'us',             // Country
                         lr: lr || 'lang_en'         // Only French content
                     },
-                    timeout: 30000, // 30 seconds timeout for SERP API
+                    timeout: 300000, // 30 seconds timeout for SERP API
                 });
 
                 const organicResults: OrganicResult[] = await response.data['organic_results'] || [];

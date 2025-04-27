@@ -29,24 +29,42 @@ export default function SeoBrief({data}){
 
     // Load verification state when component mounts
     useEffect(() => {
+
+        if (!user?.email) return; 
+
         const loadVerificationState = async () => {
             try {
                 const response = await axios.get(
                     `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
                 );
 
-                if (response.data.success && response.data.briefVerification) {
-                    const { verificationResult, improvementText } = response.data.briefVerification;
-                    setVerificationResult(verificationResult);
-                    setImprovementSuggestions(improvementText);
-                }
+                if (response.data.success) {
+                    if (response.data.briefVerification != null) {
+                      const { verificationResult, improvementText } = response.data.briefVerification;
+                      setVerificationResult(verificationResult);
+                      setImprovementSuggestions(improvementText);
+                    } else {
+                      setVerificationResult(null);
+                      setImprovementSuggestions("");
+                    }
+                  }
+                  
             } catch (error) {
-                console.error("Error loading verification state:", error);
+                console.error("Error loading verification state:", {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status,
+                    request: {
+                        url: error.config?.url,
+                        method: error.config?.method,
+                        params: error.config?.params
+                    }
+                });
             }
         };
 
         loadVerificationState();
-    }, [queryID, user.email]);
+    }, [queryID, user]);
 
     const handleVerifyClick = async () => {
         try {
@@ -65,7 +83,7 @@ export default function SeoBrief({data}){
             });
 
             // Create the request promise
-            const requestPromise = axios.post("http://localhost:7777/api/verify_seo_brief", { 
+            const requestPromise = axios.post("/api/verify_seo_brief", { 
                 content, 
                 seoBrief,
                 language: data.language,
