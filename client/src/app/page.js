@@ -14,7 +14,10 @@ import { FaRegThumbsUp } from "react-icons/fa6";
 import { FaChartLine } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaRegLightbulb } from "react-icons/fa";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { BiSolidQuoteAltRight } from "react-icons/bi";
 
 
 const manrope = Manrope({ subsets: ['latin'] });
@@ -719,6 +722,175 @@ export default function Home() {
               📜 See all our subscription plans & bundles in detail 🔍
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section id="reviews" className="py-24 bg-[#4517AD]">
+        <div className="">
+          <h3 className="text-center mb-12 text-[32px] font-bold text-white">What our users are saying</h3>
+
+          <Slider
+            className="testimonial-slider"
+            dots={false}
+            infinite={true}
+            speed={500}
+            slidesToShow={3}
+            slidesToScroll={1}
+            autoplay = {true}
+            autoplaySpeed = {3000}
+            cssEase= {'linear'}
+            pauseOnHover = {true}
+            arrows= {false}
+            centerMode={true}
+            centerPadding="90px"
+            responsive={[
+              {
+                breakpoint: 1024,
+                settings: {
+                  slidesToShow: 2,
+                  centerPadding: "60px"
+                }
+              },
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 1,
+                  centerPadding: "40px"
+                }
+              }
+            ]}
+          >
+            {/* Testimonial 1 */}
+            <div className="px-4">
+              <div className="bg-white rounded-xl px-8 py-16 relative">
+                <div className="mb-6">
+                  <p className="text-[21px] text-gray-700 leading-relaxed">Thanks to YourTextGuru, my clients write faster and more efficiently, without having to worry about the technical SEO side.</p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-16 h-16 relative mr-4 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/welcome/people/sbertrand.jpg"
+                      alt="Sandrine Bertrand"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h6 className="text-[21px] font-bold text-[#4517AD]">Sandrine Bertrand</h6>
+                    <span className="text-[16px] text-gray-600">SEO Consultant</span>
+                  </div>
+                </div>
+                <div className="text-[100px] text-[#4517AD] absolute -bottom-7 right-7">
+                  <BiSolidQuoteAltRight />
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="px-4">
+              <div className="bg-white rounded-xl px-8 py-16 relative">
+                <div className="mb-6">
+                  <p className="text-[21px] text-gray-700 leading-relaxed">YourTextGuru is a key tool in my content strategy. It helps us stay one step ahead of our competitors!</p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-16 h-16 relative mr-4 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/welcome/people/plaroche.jpg"
+                      alt="Patrice Laroche"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h6 className="text-[21px] font-bold text-[#4517AD]">Patrice Laroche</h6>
+                    <span className="text-[16px] text-gray-600">SEO Project Manager</span>
+                  </div>
+                </div>
+                <div className="text-[100px] text-[#4517AD] absolute -bottom-7 right-7">
+                  <BiSolidQuoteAltRight />
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="px-4">
+              <div className="bg-white rounded-xl px-8 py-16 relative">
+                <div className="mb-6">
+                  <p className="text-[21px] text-gray-700 leading-relaxed">Visible ranking gains within weeks, and incredibly easy to use. A must-have for SEO.</p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-16 h-16 relative mr-4 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/welcome/people/osaniez.jpg"
+                      alt="Olivier Saniez"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h6 className="text-[21px] font-bold text-[#4517AD]">Olivier Saniez</h6>
+                    <span className="text-[16px] text-gray-600">SEO Specialist</span>
+                  </div>
+                </div>
+                <div className="text-[100px] text-[#4517AD] absolute -bottom-7 right-7">
+                  <BiSolidQuoteAltRight />
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 4 */}
+            <div className="px-4">
+              <div className="bg-white rounded-xl px-8 py-16 relative">
+                <div className="mb-6">
+                  <p className="text-[21px] text-gray-700 leading-relaxed">I can&apos;t work without YourTextGuru anymore. It boosts my clients&apos; visibility and supports me every single day.</p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-16 h-16 relative mr-4 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/welcome/people/pcaillaud.jpg"
+                      alt="Philippe Caillaud"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h6 className="text-[21px] font-bold text-[#4517AD]">Philippe Caillaud</h6>
+                    <span className="text-[16px] text-gray-600">SEO Specialist</span>
+                  </div>
+                </div>
+                <div className="text-[100px] text-[#4517AD] absolute -bottom-7 right-7">
+                  <BiSolidQuoteAltRight />
+                </div>
+              </div>
+            </div>
+
+            {/* Testimonial 5 */}
+            <div className="px-4">
+              <div className="bg-white rounded-xl px-8 py-16 relative">
+                <div className="mb-6">
+                  <p className="text-[21px] text-gray-700 leading-relaxed">An essential tool for writing complete guides and optimizing SEO content. Every web marketer should give it a try!</p>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-16 h-16 relative mr-4 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/welcome/people/sdecampou.jpg"
+                      alt="Sylvain de Campou"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h6 className="text-[21px] font-bold text-[#4517AD]">Sylvain de Campou</h6>
+                    <span className="text-[16px] text-gray-600">Web Marketing Consultant</span>
+                  </div>
+                </div>
+                <div className="text-[100px] text-[#4517AD] absolute -bottom-7 right-7">
+                  <BiSolidQuoteAltRight />
+                </div>
+              </div>
+            </div>
+          </Slider>
         </div>
       </section>
 
