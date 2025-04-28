@@ -1185,7 +1185,7 @@ export default function Home() {
                     
                     <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">What&apos;s the subscription commitment period?</h4>
                     <div className="text-gray-600">
-                      Subscriptions are available on a monthly or yearly basis with automatic renewal. Payment is processed at the start of each period. You can cancel at any time (up to the day before renewal) directly from your client area: this will stop the automatic renewal, and you’ll keep access to the tool until the end of the current period.
+                      Subscriptions are available on a monthly or yearly basis with automatic renewal. Payment is processed at the start of each period. You can cancel at any time (up to the day before renewal) directly from your client area: this will stop the automatic renewal, and you&apos;ll keep access to the tool until the end of the current period.
                     </div>
                   </div>
                 </div>
@@ -1323,7 +1323,7 @@ export default function Home() {
                   <div className="pt-1">
                     <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Does yourtext.guru work with CMS platforms like WordPress or Shopify?</h4>
                     <div className="text-gray-600">
-                      Yes! Even though we don’t have native integrations yet, you can easily copy-paste your generated content into WordPress, Shopify, Webflow, or any CMS.
+                      Yes! Even though we don&apos;t have native integrations yet, you can easily copy-paste your generated content into WordPress, Shopify, Webflow, or any CMS.
                       Plus, our APIs let you automate some SEO tasks and integrate the tool directly into your workflow.
                     </div>
                   </div>
@@ -1371,6 +1371,43 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* CTA Section */}
+      <section className="mb-24">
+        <div className="">
+          <div className="bg-[#F1FAFB] overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center">
+              {/* Image Column */}
+              <div className="w-full md:w-5/12">
+                <Image
+                  src="/images/welcome/blog-expert.png"
+                  alt="Lab equipment: test tubes, microscope, Erlenmeyer flask"
+                  width={400}
+                  height={300}
+                  className="w-full"
+                />
+              </div>
+
+              {/* Content Column */}
+              <div className="w-full md:w-7/12 text-center py-12 px-16">
+                <h3 className="text-[#4517AD] text-[32px] font-bold mb-6">
+                  Proof of our<br />SEO &amp; AI expertise
+                </h3>
+                <Link
+                  href="https://central.yourtext.guru"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-3 bg-[#4517AD] text-white hover:bg-[#073C63] transition-colors duration-300 mt-5"
+                >
+                  Read our expert articles on the blog
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
 
     </div>
   );
