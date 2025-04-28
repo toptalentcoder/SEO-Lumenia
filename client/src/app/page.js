@@ -4,6 +4,10 @@ import Image from 'next/image';
 import Link from "next/link";
 import { US, FR, ES } from 'country-flag-icons/react/3x2';
 import { useState, useEffect } from 'react';
+import { Manrope } from 'next/font/google';
+import LogoCarousel from '../components/LogoCarousel';
+
+const manrope = Manrope({ subsets: ['latin'] });
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -91,10 +95,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-10">
             {/* Left Column */}
             <div className="w-full md:w-[35%] z-10">
-              <h1 className="text-5xl font-bold text-white mb-8">
+              <h1 className="text-5xl font-bold text-white mb-8 font-['Manrope'],sans-serif">
                 The SEO tool built by experts—accessible to everyone
               </h1>
-              <p className="text-[20.8px] leading-relaxed text-white mb-8">
+              <p className="text-[20.8px] leading-relaxed text-white mb-8 font-['Manrope'],sans-serif">
                 You create great content, but <strong>Google</strong>, <strong>Bing</strong>, and{' '}
                 <strong>SearchGPT</strong> barely notice? Your traffic just won&apos;t take off? Stop wasting time guessing what search engines want.
                 <br /><br />
@@ -103,13 +107,13 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link 
                   href="/auth/signup" 
-                  className="px-12 py-3 bg-white hover:bg-[#001F3F] text-[#4517BC] hover:text-white transition-colors font-medium cursor-pointer"
+                  className="px-12 py-3 bg-white hover:bg-[#001F3F] text-[#4517BC] hover:text-white transition-colors font-medium cursor-pointer font-['Manrope'],sans-serif"
                 >
                   Try it now!
                 </Link>
                 <Link 
                   href="mailto:demo@yourtext.guru?subject=Request%20a%20demo&body=Instructions%20for%20your%20demo%20request%0D%0A%0D%0ATo%20help%20us%20tailor%20the%20demo%20to%20your%20needs%2C%20please%20include%20the%20following%20information%3A%0D%0A%0D%0A1%EF%B8%8F%E2%83%A3%20Your%20company%20and%20industry%0D%0A%0D%0A2%EF%B8%8F%E2%83%A3%20Your%20main%20goal%3A%20What%20problem%20are%20you%20trying%20to%20solve%20with%20our%20solution%3F%0D%0A%0D%0A3%EF%B8%8F%E2%83%A3%20Approximate%20number%20of%20users%20involved%0D%0A%0D%0A4%EF%B8%8F%E2%83%A3%20Any%20specific%20features%20you%27d%20like%20us%20to%20focus%20on%0D%0A%0D%0A5%EF%B8%8F%E2%83%A3%20Your%20availability%20for%20the%20demo%20%28please%20propose%20multiple%20time%20slots%29%0D%0A%0D%0AWith%20these%20details%2C%20we%20can%20prepare%20a%20targeted%20demo%20and%20respond%20precisely%20to%20your%20expectations.%0D%0A%0D%0AThank%20you%21"
-                  className="px-12 py-3 bg-[#001F3F] text-white font-medium"
+                  className="px-12 py-3 bg-[#001F3F] text-white font-medium font-['Manrope'],sans-serif"
                 >
                   Request a demo
                 </Link>
@@ -134,6 +138,15 @@ export default function Home() {
           className="absolute bottom-0 left-0 w-full h-[200px] bg-no-repeat bg-cover bg-center"
           style={{ backgroundImage: 'url(/images/welcome/landing-hero.svg)' }}
         ></div>
+      </section>
+
+      {/* Client Logo Carousel Section */}
+      <section className="md:mx-20">
+        <div className="container mx-auto">
+          <div className="text-center">
+            <LogoCarousel />
+          </div>
+        </div>
       </section>
 
       {/* Add animation keyframes for floating effect */}
