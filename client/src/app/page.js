@@ -21,6 +21,7 @@ import { BiSolidQuoteAltRight } from "react-icons/bi";
 import { FaSearch, FaGoogle, FaClone, FaFile, FaEdit, FaChartBar, FaLink, FaStopCircle, FaBrain, FaImage, FaRobot, FaSitemap, FaUsers } from "react-icons/fa";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { BsQuestionCircleFill } from "react-icons/bs";
+import { FaTwitter, FaFacebook, FaYoutube } from "react-icons/fa";
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -66,7 +67,7 @@ export default function Home() {
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/logo.svg"
-                alt="Yourtext.Guru"
+                alt="Lumenia"
                 width={32}
                 height={32}
                 className="mr-2"
@@ -133,7 +134,7 @@ export default function Home() {
                 You create great content, but <strong>Google</strong>, <strong>Bing</strong>, and{' '}
                 <strong>SearchGPT</strong> barely notice? Your traffic just won&apos;t take off? Stop wasting time guessing what search engines want.
                 <br /><br />
-                <strong>Switch to yourtext.guru</strong>
+                <strong>Switch to Lumenia</strong>
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link 
@@ -143,7 +144,7 @@ export default function Home() {
                   Try it now!
                 </Link>
                 <Link 
-                  href="mailto:demo@yourtext.guru?subject=Request%20a%20demo&body=Instructions%20for%20your%20demo%20request%0D%0A%0D%0ATo%20help%20us%20tailor%20the%20demo%20to%20your%20needs%2C%20please%20include%20the%20following%20information%3A%0D%0A%0D%0A1%EF%B8%8F%E2%83%A3%20Your%20company%20and%20industry%0D%0A%0D%0A2%EF%B8%8F%E2%83%A3%20Your%20main%20goal%3A%20What%20problem%20are%20you%20trying%20to%20solve%20with%20our%20solution%3F%0D%0A%0D%0A3%EF%B8%8F%E2%83%A3%20Approximate%20number%20of%20users%20involved%0D%0A%0D%0A4%EF%B8%8F%E2%83%A3%20Any%20specific%20features%20you%27d%20like%20us%20to%20focus%20on%0D%0A%0D%0A5%EF%B8%8F%E2%83%A3%20Your%20availability%20for%20the%20demo%20%28please%20propose%20multiple%20time%20slots%29%0D%0A%0D%0AWith%20these%20details%2C%20we%20can%20prepare%20a%20targeted%20demo%20and%20respond%20precisely%20to%20your%20expectations.%0D%0A%0D%0AThank%20you%21"
+                  href="mailto:demo@Lumenia?subject=Request%20a%20demo&body=Instructions%20for%20your%20demo%20request%0D%0A%0D%0ATo%20help%20us%20tailor%20the%20demo%20to%20your%20needs%2C%20please%20include%20the%20following%20information%3A%0D%0A%0D%0A1%EF%B8%8F%E2%83%A3%20Your%20company%20and%20industry%0D%0A%0D%0A2%EF%B8%8F%E2%83%A3%20Your%20main%20goal%3A%20What%20problem%20are%20you%20trying%20to%20solve%20with%20our%20solution%3F%0D%0A%0D%0A3%EF%B8%8F%E2%83%A3%20Approximate%20number%20of%20users%20involved%0D%0A%0D%0A4%EF%B8%8F%E2%83%A3%20Any%20specific%20features%20you%27d%20like%20us%20to%20focus%20on%0D%0A%0D%0A5%EF%B8%8F%E2%83%A3%20Your%20availability%20for%20the%20demo%20%28please%20propose%20multiple%20time%20slots%29%0D%0A%0D%0AWith%20these%20details%2C%20we%20can%20prepare%20a%20targeted%20demo%20and%20respond%20precisely%20to%20your%20expectations.%0D%0A%0D%0AThank%20you%21"
                   className="px-12 py-3 bg-[#001F3F] text-white font-medium font-['Manrope'],sans-serif"
                 >
                   Request a demo
@@ -155,7 +156,7 @@ export default function Home() {
             <div className="w-full md:w-[35%] mt-12 md:mt-0 z-10">
               <Image
                 src="/images/welcome/hero-img.png"
-                alt="yourtext.guru: SEO tool"
+                alt="Lumenia: SEO tool"
                 width={600}
                 height={400}
                 className="transform -mb-12 animate-float"
@@ -198,7 +199,7 @@ export default function Home() {
                     <RxRocket className="text-5xl text-gray-900 mb-4" />
                   </div>
                   <h4 className="text-[21.328px] font-bold mb-3">A Benchmark Since 2016</h4>
-                  <p className="text-gray-900 text-[19.2px]">YourText.Guru is trusted by thousands of SEO professionals, agencies, and content creators.</p>
+                  <p className="text-gray-900 text-[19.2px]">Lumenia is trusted by thousands of SEO professionals, agencies, and content creators.</p>
                 </div>
 
                 {/* Box 2 */}
@@ -216,7 +217,7 @@ export default function Home() {
                     <LuNotebookPen className="text-5xl text-gray-900 mb-4" />
                   </div>
                   <h4 className="text-[21.328px] font-bold mb-3">Renowned Educators</h4>
-                  <p className="text-gray-900 text-[19.2px]">At yourtext.guru, the Peyronnet Brothers have trained thousands of SEO pros since 2013.</p>
+                  <p className="text-gray-900 text-[19.2px]">At Lumenia, the Peyronnet Brothers have trained thousands of SEO pros since 2013.</p>
                 </div>
 
                 {/* Box 4 */}
@@ -234,7 +235,7 @@ export default function Home() {
                     <FaRegThumbsUp className="text-5xl text-gray-900 mb-4" />
                   </div>
                   <h4 className="text-[21.328px] font-bold mb-3">Trusted by SEO Pros</h4>
-                  <p className="text-gray-900 text-[19.2px]">SEO agencies and freelancers have relied on yourtext.guru from day one — a true sign of our reliability and impact.</p>
+                  <p className="text-gray-900 text-[19.2px]">SEO agencies and freelancers have relied on Lumenia from day one — a true sign of our reliability and impact.</p>
                 </div>
 
                 {/* Box 6 */}
@@ -285,7 +286,7 @@ export default function Home() {
                 <div className="dtr-feature-content">
                   <h3 className="text-[38px] font-bold mb-4 text-gray-900">Your truly <strong>high-performing</strong> SEO copilot</h3>
                   <p className="text-2xl font-medium mb-4 text-gray-600">All the essential SEO tools—<strong>zero hassle</strong></p>
-                  <p className="text-gray-600 text-[16px]">Tired of juggling <strong>10 different tools</strong>? YourText.Guru has your entire <strong>content strategy</strong> covered: <strong>keyword research</strong>, <strong>AI-assisted writing</strong>, <strong>competitor analysis</strong>. Less stress, <strong>more results</strong>.</p>
+                  <p className="text-gray-600 text-[16px]">Tired of juggling <strong>10 different tools</strong>? Lumenia has your entire <strong>content strategy</strong> covered: <strong>keyword research</strong>, <strong>AI-assisted writing</strong>, <strong>competitor analysis</strong>. Less stress, <strong>more results</strong>.</p>
                 </div>
               </div>
             </div>
@@ -517,12 +518,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why YourText.Guru Section */}
+      {/* Why Lumenia Section */}
       <section className="py-24">
         <div className="container mx-auto px-4">
           {/* Section Title */}
           <div className="text-center mb-12">
-            <h2 className="text-[37.328px] font-bold mb-6 text-gray-900">Why YourText.Guru is the SEO tool you&apos;ve been looking for</h2>
+            <h2 className="text-[37.328px] font-bold mb-6 text-gray-900">Why Lumenia is the SEO tool you&apos;ve been looking for</h2>
             <div className="relative w-full h-[1px] mb-16">
               <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[60px] h-[3px] bg-[#4517AD]"></div>
             </div>
@@ -542,7 +543,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="text-[21.328px] font-bold mb-2 text-gray-900">An <strong>intuitive and high-performance</strong> SEO assistant</h4>
-                  <p className="text-[16px] text-gray-600">You write, YourText.Guru helps optimize—with <strong>clear and actionable recommendations</strong>. No more guesswork, just real results.</p>
+                  <p className="text-[16px] text-gray-600">You write, Lumenia helps optimize—with <strong>clear and actionable recommendations</strong>. No more guesswork, just real results.</p>
                 </div>
               </div>
 
@@ -557,7 +558,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="text-[21.328px] font-bold mb-2 text-gray-900"><strong>A data-driven approach to SEO</strong></h4>
-                  <p className="text-[16px] text-gray-600">No more gut feeling. YourText.Guru relies on <strong>real-world data</strong> to help you <strong>create better-performing content</strong>.</p>
+                  <p className="text-[16px] text-gray-600">No more gut feeling. Lumenia relies on <strong>real-world data</strong> to help you <strong>create better-performing content</strong>.</p>
                 </div>
               </div>
             </div>
@@ -1168,7 +1169,7 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="py-24">
         <div className="container mx-auto px-4">
-          <h3 className="text-[#4517AD] mb-10 text-[32px] font-bold">Frequently Asked Questions about yourtext.guru</h3>
+          <h3 className="text-[#4517AD] mb-10 text-[32px] font-bold">Frequently Asked Questions about Lumenia</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left Column */}
@@ -1196,7 +1197,7 @@ export default function Home() {
                   </div>
                   <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
                   <div className="pt-1">
-                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can I try yourtext.guru before subscribing?</h4>
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can I try Lumenia before subscribing?</h4>
                     <div className="text-gray-600">
                     Yes! We offer a demo mode so you can explore the interface and test some of the features. Want to know more? Check out our test page or get in touch with us.
                     </div>
@@ -1227,7 +1228,7 @@ export default function Home() {
                   <div className="pt-1">
                     <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Is a subscription better than using tokens?</h4>
                     <div className="text-gray-600">
-                      Definitely, especially if you&apos;re producing a decent volume of guides—it&apos;s just more cost-effective. But more importantly, a subscription unlocks <strong>all</strong> yourtext.guru features—not just SEO text optimization. Content strategy, analysis, optimization… everything&apos;s there to help you go way beyond basic writing. And as a bonus, a subscription gives you access to AI tokens, so you can tap into the full power of generative tools.
+                      Definitely, especially if you&apos;re producing a decent volume of guides—it&apos;s just more cost-effective. But more importantly, a subscription unlocks <strong>all</strong> Lumenia features—not just SEO text optimization. Content strategy, analysis, optimization… everything&apos;s there to help you go way beyond basic writing. And as a bonus, a subscription gives you access to AI tokens, so you can tap into the full power of generative tools.
                       More possibilities, more efficiency, and better control over your content strategy.
                     </div>
                   </div>
@@ -1247,7 +1248,7 @@ export default function Home() {
                         <li>Track content progress together.</li>
                         <li>Manage user access and permissions (up to 20 users depending on your plan).</li>
                       </ul>
-                      SEO is <strong>not a solo sport</strong>, and yourtext.guru makes collaboration smooth and efficient.
+                      SEO is <strong>not a solo sport</strong>, and Lumenia makes collaboration smooth and efficient.
                     </div>
                   </div>
                 </div>
@@ -1260,7 +1261,7 @@ export default function Home() {
                   <div className="pt-1">
                     <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Are there discounts for yearly subscriptions?</h4>
                     <div className="text-gray-600">
-                      Yes, when you subscribe to a yearly plan, you get up to 9% off compared to the monthly rate. It&apos;s the ideal solution if you use yourtext.guru regularly and want to maximize ROI.
+                      Yes, when you subscribe to a yearly plan, you get up to 9% off compared to the monthly rate. It&apos;s the ideal solution if you use Lumenia regularly and want to maximize ROI.
                     </div>
                   </div>
                 </div>
@@ -1307,9 +1308,9 @@ export default function Home() {
                   {/* Vertical Line */}
                   <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
                   <div className="pt-1">
-                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can yourtext.guru replace a writer or an SEO expert?</h4>
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can Lumenia replace a writer or an SEO expert?</h4>
                     <div className="text-gray-600">
-                      Nope—and that&apos;s not the goal. Yourtext.guru is a <strong>powerful assistant</strong> that helps with writing and content optimization, but it doesn&apos;t replace human expertise. The tool <strong>saves you time, gives you sharp recommendations, and helps you structure a winning SEO strategy.</strong> It&apos;s <strong>a copilot</strong>, not autopilot.
+                      Nope—and that&apos;s not the goal. Lumenia is a <strong>powerful assistant</strong> that helps with writing and content optimization, but it doesn&apos;t replace human expertise. The tool <strong>saves you time, gives you sharp recommendations, and helps you structure a winning SEO strategy.</strong> It&apos;s <strong>a copilot</strong>, not autopilot.
                     </div>
                   </div>
                 </div>
@@ -1321,7 +1322,7 @@ export default function Home() {
                   {/* Vertical Line */}
                   <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
                   <div className="pt-1">
-                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Does yourtext.guru work with CMS platforms like WordPress or Shopify?</h4>
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Does Lumenia work with CMS platforms like WordPress or Shopify?</h4>
                     <div className="text-gray-600">
                       Yes! Even though we don&apos;t have native integrations yet, you can easily copy-paste your generated content into WordPress, Shopify, Webflow, or any CMS.
                       Plus, our APIs let you automate some SEO tasks and integrate the tool directly into your workflow.
@@ -1336,9 +1337,9 @@ export default function Home() {
                   {/* Vertical Line */}
                   <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
                   <div className="pt-1">
-                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">How can I automate repetitive tasks in yourtext.guru?</h4>
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">How can I automate repetitive tasks in Lumenia?</h4>
                     <div className="text-gray-600">
-                    We offer API plans, so once you&apos;ve set up a connector on your side, you can programmatically use yourtext.guru—with just one constraint: the rate limit.
+                    We offer API plans, so once you&apos;ve set up a connector on your side, you can programmatically use Lumenia—with just one constraint: the rate limit.
                     </div>
                   </div>
                 </div>
@@ -1373,7 +1374,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="mb-24">
+      <section>
         <div className="">
           <div className="bg-[#F1FAFB] overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
@@ -1394,7 +1395,7 @@ export default function Home() {
                   Proof of our<br />SEO &amp; AI expertise
                 </h3>
                 <Link
-                  href="https://central.yourtext.guru"
+                  href="https://central.Lumenia"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-8 py-3 bg-[#4517AD] text-white hover:bg-[#073C63] transition-colors duration-300 mt-5"
@@ -1408,10 +1409,163 @@ export default function Home() {
       </section>
 
       {/* Footer */}
+      <footer 
+        className="bg-[#001F3F] bg-cover bg-no-repeat bg-center py-24"
+        style={{ backgroundImage: 'url(/images/welcome/footer-bg.png)' }}
+      >
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
+            {/* Logo and Description */}
+            <div className="lg:col-span-4">
+              <Link href="/en" className="block mb-6 w-[203px]">
+                <Image 
+                  src="/images/welcome/logo-yourtextguru-white.svg" 
+                  alt="logo"
+                  width={203}
+                  height={50}
+                />
+              </Link>
+              <p className="text-white mb-4 text-[16px]">
+                Lumenia is a SaaS tool designed to optimize web writing and content strategy. It helps you structure, analyze, and improve your texts for better SEO—while keeping full control of your content.
+              </p>
+              <p className="text-white">© 2025 Lumenia</p>
+            </div>
 
-    </div>
-  );
-}
+            {/* Lumenia Links */}
+            <div className="lg:col-span-2">
+              <h4 className="text-gray-300 text-[21.328px] font-bold mb-6">Lumenia</h4>
+              <ul className="space-y-3 text-[16px]">
+                <li><Link href="/en#features" className="text-white hover:text-white transition-colors">Features</Link></li>
+                <li><Link href="/en/pricing#plans" className="text-white hover:text-white transition-colors">Pricing</Link></li>
+                <li><Link href="/en/legals" className="text-white hover:text-white transition-colors">Legal Notices</Link></li>
+                <li><Link href="/en/legals" className="text-white hover:text-white transition-colors">Terms &amp; Conditions</Link></li>
+                <li><Link href="/en/coupon-code" className="text-white hover:text-white transition-colors">Coupon Code</Link></li>
+              </ul>
+            </div>
+
+            {/* Support Links */}
+            <div className="lg:col-span-2">
+              <h4 className="text-gray-300 text-[21.328px] font-bold mb-6">Support</h4>
+              <ul className="space-y-3 text-[16px]">
+                <li><Link href="/en/support" className="text-white hover:text-white transition-colors">Technical</Link></li>
+                <li><Link href="/en/sales" className="text-white hover:text-white transition-colors">Sales</Link></li>
+                <li>
+                  <a 
+                    href="https://support.Lumenia/portal/en/home" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noreferrer noopener"
+                  >
+                    Knowledge Base
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://www.youtube.com/@YourTextGuru/playlists" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noreferrer noopener"
+                  >
+                    YTG Video Tutorials
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://central.Lumenia" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noreferrer noopener"
+                  >
+                    AI &amp; SEO
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Partners Links */}
+            <div className="lg:col-span-4">
+              <h4 className="text-gray-300 text-[21.328px] font-bold mb-6">Partners</h4>
+              <ul className="space-y-3 mb-8 text-[16px]">
+                <li>
+                  <a 
+                    href="https://www.trikaya.fr" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    Trikaya Communication
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://freres.peyronnet.eu" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    SEO Training
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://divioseo.fr/" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    Web Development
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://freres.peyronnet.eu/courses/masterclass-cocon-seo/" 
+                    className="text-white hover:text-white transition-colors"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    SEO Topical Mesh
+                  </a>
+                </li>
+              </ul>
+              
+              {/* Social Links */}
+              <div className="flex items-center justify-center sm:justify-start space-x-6">
+                <a 
+                  href="https://twitter.com/yourtextguru" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white/60 hover:text-white transition-colors"
+                  title="twitter"
+                >
+                  <FaTwitter className="text-2xl" />
+                </a>
+                <a 
+                  href="https://www.facebook.com/groups/2102639773116540/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white transition-colors"
+                  title="facebook"
+                >
+                  <FaFacebook className="text-2xl" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/c/YourTextGuru" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-white/60 hover:text-white transition-colors"
+                  title="youtube"
+                >
+                  <FaYoutube className="text-2xl" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      </div>
+    );
+  }
 
 
 function FeatureBox({ icon, title, link, linkText, description, beforeLink }) {
