@@ -7,20 +7,9 @@ import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
 
 export default function SeoBrief({data}){
-
     const { seoBrief } = data;
     const { user } = useUser();
     const { queryID } = useParams();
-
-    const {
-        primaryIntent,
-        objective,
-        mainTopics,
-        importantQuestions,
-        writingStyleAndTone,
-        recommendedStyle,
-        valueProposition,
-    } = seoBrief;
 
     // State for verification results and improvement suggestions
     const [verificationResult, setVerificationResult] = useState(null);
@@ -29,7 +18,6 @@ export default function SeoBrief({data}){
 
     // Load verification state when component mounts
     useEffect(() => {
-
         if (!user?.email) return; 
 
         const loadVerificationState = async () => {
@@ -65,6 +53,21 @@ export default function SeoBrief({data}){
 
         loadVerificationState();
     }, [queryID, user]);
+
+    // Add null check for seoBrief
+    if (!seoBrief) {
+        return <div>Loading SEO brief...</div>;
+    }
+
+    const {
+        primaryIntent,
+        objective,
+        mainTopics,
+        importantQuestions,
+        writingStyleAndTone,
+        recommendedStyle,
+        valueProposition,
+    } = seoBrief;
 
     const handleVerifyClick = async () => {
         try {
