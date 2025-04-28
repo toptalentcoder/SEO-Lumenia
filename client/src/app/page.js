@@ -13,6 +13,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { FaChartLine } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import { FaRegLightbulb } from "react-icons/fa";
 
 
 
@@ -509,6 +510,88 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Why YourText.Guru Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          {/* Section Title */}
+          <div className="text-center mb-12">
+            <h2 className="text-[37.328px] font-bold mb-6 text-gray-900">Why YourText.Guru is the SEO tool you&apos;ve been looking for</h2>
+            <div className="relative w-full h-[1px] mb-16">
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[60px] h-[3px] bg-[#4517AD]"></div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Column 1 */}
+            <div className="space-y-20">
+              {/* Feature 1 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-[50px] h-[50px] border-4 border-[#B6E4D5] rounded-full flex items-center justify-center">
+                    <div className="w-[40px] h-[40px] bg-[#4517AD] border-2 border-white rounded-full flex items-center justify-center text-white">
+                      <LuNotebookPen className="text-xl" />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-[21.328px] font-bold mb-2 text-gray-900">An <strong>intuitive and high-performance</strong> SEO assistant</h4>
+                  <p className="text-[16px] text-gray-600">You write, YourText.Guru helps optimize—with <strong>clear and actionable recommendations</strong>. No more guesswork, just real results.</p>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-[50px] h-[50px] border-4 border-[#B6E4D5] rounded-full flex items-center justify-center">
+                    <div className="w-[40px] h-[40px] bg-[#4517AD] border-2 border-white rounded-full flex items-center justify-center text-white">
+                      <FaRegLightbulb className="text-xl" />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-[21.328px] font-bold mb-2 text-gray-900"><strong>A data-driven approach to SEO</strong></h4>
+                  <p className="text-[16px] text-gray-600">No more gut feeling. YourText.Guru relies on <strong>real-world data</strong> to help you <strong>create better-performing content</strong>.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="space-y-20">
+              {/* Feature 3 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-[50px] h-[50px] border-4 border-[#B6E4D5] rounded-full flex items-center justify-center">
+                    <div className="w-[40px] h-[40px] bg-[#4517AD] border-2 border-white rounded-full flex items-center justify-center text-white">
+                      <RxRocket className="text-xl" />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-[21.328px] font-bold mb-2 text-gray-900"><strong>Built for pros, easy for everyone</strong></h4>
+                  <p className="text-[16px] text-gray-600">Whether you&apos;re an <strong>agency, freelancer, e-commerce seller, or blogger</strong>, you&apos;ll get <strong>tailored recommendations</strong>—no SEO expertise required.</p>
+                </div>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0">
+                  <div className="w-[50px] h-[50px] border-4 border-[#B6E4D5] rounded-full flex items-center justify-center">
+                    <div className="w-[40px] h-[40px] bg-[#4517AD] border-2 border-white rounded-full flex items-center justify-center text-white">
+                      <FaChartLine className="text-xl" />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-[21.328px] font-bold mb-2 text-gray-900"><strong>Stop letting competitors set the pace</strong></h4>
+                  <p className="text-[16px] text-gray-600">Your content deserves the top spot. Discover <strong>what they&apos;re doing</strong>, exploit their weaknesses, and <strong>overtake them with a winning strategy</strong>.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
     </div>
   );
