@@ -23,9 +23,9 @@ export default function Home() {
 
       {/* Navbar */}
       <nav className={`fixed w-full bg-white border-b z-50 transition-all duration-300 ${
-        scrolled ? 'py-3' : 'py-6'
+        scrolled ? 'py-3' : 'py-[38px]'
       }`}>
-        <div className="container mx-auto px-40">
+        <div className="container mx-auto px-56">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center">
@@ -82,46 +82,71 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-[#051C2C] text-white pt-32 pb-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-8">
-              The SEO tool built by experts—accessible to everyone
-            </h1>
-            <p className="text-xl text-gray-300 mb-12">
-              Optimize your content, improve your rankings, and drive more organic traffic
-            </p>
-            <div className="flex justify-center gap-6 mb-16">
-              <button className="px-8 py-3 bg-[#5438DC] text-white rounded-lg hover:bg-[#4329bd] transition-colors">
-                Get Started Free
-              </button>
-              <button className="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#051C2C] transition-colors">
-                See Live Demo
-              </button>
-            </div>
-            <div className="bg-white/10 rounded-xl p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold mb-2">50K+</h3>
-                  <p className="text-gray-300">Active Users</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold mb-2">1M+</h3>
-                  <p className="text-gray-300">Keywords Tracked</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold mb-2">98%</h3>
-                  <p className="text-gray-300">Client Satisfaction</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold mb-2">24/7</h3>
-                  <p className="text-gray-300">Expert Support</p>
-                </div>
+      <section className="relative bg-black pt-28">
+        {/* Blue Overlay */}
+        <div className="absolute inset-0 bg-[#073C63] opacity-80"></div>
+        
+        {/* Content */}
+        <div className="relative container mx-auto px-4 pt-24 pb-12">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10">
+            {/* Left Column */}
+            <div className="w-full md:w-[35%] z-10">
+              <h1 className="text-5xl font-bold text-white mb-8">
+                The SEO tool built by experts—accessible to everyone
+              </h1>
+              <p className="text-[20.8px] leading-relaxed text-white mb-8">
+                You create great content, but <strong>Google</strong>, <strong>Bing</strong>, and{' '}
+                <strong>SearchGPT</strong> barely notice? Your traffic just won&apos;t take off? Stop wasting time guessing what search engines want.
+                <br /><br />
+                <strong>Switch to yourtext.guru</strong>
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link 
+                  href="/auth/signup" 
+                  className="px-12 py-3 bg-white hover:bg-[#001F3F] text-[#4517BC] hover:text-white transition-colors font-medium cursor-pointer"
+                >
+                  Try it now!
+                </Link>
+                <Link 
+                  href="mailto:demo@yourtext.guru?subject=Request%20a%20demo&body=Instructions%20for%20your%20demo%20request%0D%0A%0D%0ATo%20help%20us%20tailor%20the%20demo%20to%20your%20needs%2C%20please%20include%20the%20following%20information%3A%0D%0A%0D%0A1%EF%B8%8F%E2%83%A3%20Your%20company%20and%20industry%0D%0A%0D%0A2%EF%B8%8F%E2%83%A3%20Your%20main%20goal%3A%20What%20problem%20are%20you%20trying%20to%20solve%20with%20our%20solution%3F%0D%0A%0D%0A3%EF%B8%8F%E2%83%A3%20Approximate%20number%20of%20users%20involved%0D%0A%0D%0A4%EF%B8%8F%E2%83%A3%20Any%20specific%20features%20you%27d%20like%20us%20to%20focus%20on%0D%0A%0D%0A5%EF%B8%8F%E2%83%A3%20Your%20availability%20for%20the%20demo%20%28please%20propose%20multiple%20time%20slots%29%0D%0A%0D%0AWith%20these%20details%2C%20we%20can%20prepare%20a%20targeted%20demo%20and%20respond%20precisely%20to%20your%20expectations.%0D%0A%0D%0AThank%20you%21"
+                  className="px-12 py-3 bg-[#001F3F] text-white font-medium"
+                >
+                  Request a demo
+                </Link>
               </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="w-full md:w-[35%] mt-12 md:mt-0 z-10">
+              <Image
+                src="/images/welcome/hero-img.png"
+                alt="yourtext.guru: SEO tool"
+                width={600}
+                height={400}
+                className="transform -mb-12 animate-float"
+              />
             </div>
           </div>
         </div>
+
+        {/* SVG Background */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-[200px] bg-no-repeat bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/welcome/landing-hero.svg)' }}
+        ></div>
       </section>
+
+      {/* Add animation keyframes for floating effect */}
+      <style jsx global>{`
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+      `}</style>
 
       {/* Features Section */}
       <section className="py-20 bg-white">
