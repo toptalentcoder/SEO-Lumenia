@@ -18,13 +18,15 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BiSolidQuoteAltRight } from "react-icons/bi";
-
+import { FaSearch, FaGoogle, FaClone, FaFile, FaEdit, FaChartBar, FaLink, FaStopCircle, FaBrain, FaImage, FaRobot, FaSitemap, FaUsers } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const manrope = Manrope({ subsets: ['latin'] });
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [parallaxOffset, setParallaxOffset] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -894,6 +896,328 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Lumenia Section */}
+      <section id="features" className="pt-16 pb-20 bg-white">
+        <div className="container mx-auto px-4 w-2/3">
+          <h2 className="text-[37.328px] font-bold text-center text-gray-900">Lumenia: The SEO tool built by experts, designed for your productivity</h2>
+          <p className="text-center mt-4 text-gray-600">Lumenia combines expert-level SEO precision with the simplicity of an all-in-one tool.</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+
+            {/* Feature Item */}
+            <FeatureBox
+              icon="search"
+              title="Which keywords should I target to boost my traffic?"
+              beforeLink="The"
+              link="/en/keyword-explorer"
+              linkText="Keyword Explorer"
+              description="highlights the best opportunities based on traffic potential, SEO difficulty, and business value."
+            />
+
+            <FeatureBox
+              icon="google"
+              title="How to analyze a website's Google rankings?"
+              beforeLink="Use our"
+              link="/en/google-rankings"
+              linkText="ranking explorer"
+              description="identify strengths and weaknesses and refine your SEO strategy."
+            />
+
+            <FeatureBox
+              icon="clone"
+              title="How to detect keyword overlaps?"
+              beforeLink="Lumenia identifies SEO"
+              link="/en/seo-cannibalization"
+              linkText="SEO cannibalization"
+              description="help you avoid wasting efforts."
+            />
+
+            <FeatureBox
+              icon="file"
+              title="How to write content that ranks?"
+              beforeLink="Lumenia"
+              link="/en/semantic-optimization"
+              linkText="guides you"
+              description="with a precise SEO brief, SEO score, and essential keywords to include to optimize your content."
+            />
+
+            <FeatureBox
+              icon="edit"
+              title="How to write efficiently without wasting time?"
+              beforeLink="Chill Mode subtly guides"
+              link="/en/semantic-optimization"
+              linkText="your SEO writing"
+              description="while PRO Mode gives you full control."
+            />
+
+            <FeatureBox
+              icon="chart-bar"
+              title="How to capitalize on SEO opportunities your competitors already seized?"
+              beforeLink="The"
+              link="/en/content-gap-analysis"
+              linkText="Content Gap"
+              description="highlights keywords and topics your competitors rank for—but you don't (yet)."
+            />
+
+            <FeatureBox
+              icon="link"
+              title="How to evaluate backlink strength?"
+              beforeLink="Our algorithm analyzes the"
+              link="/en/backlink-value"
+              linkText="the value of a link"
+              description="-existing or hypothetical-s0 you can focus on backlinks that truly move the needle."
+            />
+
+            <FeatureBox
+              icon="stop-circle"
+              title="What about broken links hurting my SEO?"
+              beforeLink="The"
+              link="/en/broken-links"
+              linkText="404 recovery tool"
+              description="finds dead pages that still receive backlinks."
+            />
+
+            <FeatureBox
+              icon="brain"
+              title="Need fresh content ideas?"
+              beforeLink="The"
+              link="/en/inspiration"
+              linkText="Digital Brainstormer"
+              description="generates relevant topics tailored to personas-perfect for building your editorial strategy."
+            />
+
+            <FeatureBox
+              icon="image"
+              title="How to enrich content with unique visuals?"
+              beforeLink="Access a"
+              link="/en/ai-images"
+              linkText="curated library of AI-generated images"
+              description="illustrate your content creatively and stand out."
+            />
+
+            <FeatureBox
+              icon="chart-bar"
+              title="How to track my Google rankings over time?"
+              beforeLink="Track your keywords with our"
+              link="/en/keyword-monitoring"
+              linkText="monitoring tool"
+              description="Spot drops and gains to fine-tune your strategy."
+            />
+
+            <FeatureBox
+              icon="people-carry"
+              title="How to work collaboratively on SEO?"
+              beforeLink="Manage your SEO projects as a"
+              link="/en/team"
+              linkText="team"
+              description="with lumenia. Invite collaborators, assign roles, and streamline teamwork."
+            />
+
+            <FeatureBox
+              icon="robot"
+              title="How to use AI to supercharge my content?"
+              beforeLink="Our"
+              link="/en/llm-generation"
+              linkText="generative AI"
+              description="helps you create and optimize SEO content for better rankings."
+            />
+
+            <FeatureBox
+              icon="sitemap"
+              title="How to structure my site for SEO performance?"
+              beforeLink="Apply the"
+              link="/en/topical-mesh"
+              linkText="topical mesh method"
+              description="to boost your pages' relevance and visibility."
+            />
+
+            <FeatureBox
+              icon="link"
+              title="How to optimize internal linking?"
+              beforeLink="Boost your SEO with"
+              link="/en/internal-linking"
+              linkText="smart internal links"
+              description=". Lumeniaanalyzes your pages and recommends the best connections."
+            />
+          </div>
+
+          <div className="text-center mt-12">
+            <a href="/auth/signup" className="btn btn-primary inline-block px-12 py-3 bg-[#001F3F] text-white transition">Try lumenia now!</a>
+          </div>
+        </div>
+      </section>
+
+      {/* SEO Strategy Section */}
+      <section 
+        className="py-24 bg-[#F1FAFB] relative parallax"
+        style={{ 
+          backgroundImage: 'url(/images/welcome/seo/section-bg1.png)',
+          backgroundSize: 'auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-[37.328px] font-bold mb-4 text-gray-900">Build an Effective SEO Strategy</h2>
+            <p className="text-xl text-gray-600">4 steps to use Lumenia and boost your rankings</p>
+            <div className="w-24 h-1 bg-[#28a745] mx-auto mt-4"></div>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            {/* Image Column */}
+            <div className="w-full md:w-1/2">
+              <div className="tab-content">
+                {activeTab === 1 && (
+                  <Image
+                    src="/images/welcome/seo/work-1.png"
+                    alt="SEO Strategy Step 1"
+                    width={600}
+                    height={400}
+                    className="w-full"
+                  />
+                )}
+                {activeTab === 2 && (
+                  <Image
+                    src="/images/welcome/seo/work-2.png"
+                    alt="SEO Strategy Step 2"
+                    width={600}
+                    height={400}
+                    className="w-full"
+                  />
+                )}
+                {activeTab === 3 && (
+                  <Image
+                    src="/images/welcome/seo/work-3.png"
+                    alt="SEO Strategy Step 3"
+                    width={600}
+                    height={400}
+                    className="w-full"
+                  />
+                )}
+                {activeTab === 4 && (
+                  <Image
+                    src="/images/welcome/seo/work-4.png"
+                    alt="SEO Strategy Step 4"
+                    width={600}
+                    height={400}
+                    className="w-full"
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* Steps Column */}
+            <div className="w-full md:w-1/2">
+              <div className="space-y-6">
+                {/* Step 1 */}
+                <div 
+                  className={`p-6 cursor-pointer transition-all ${activeTab === 1 ? 'border-2 border-[#001F3F] bg-white text-gray-900' : 'text-gray-400'}`}
+                  onClick={() => setActiveTab(1)}
+                >
+                  <h4 className="text-[21.328px] font-semibold mb-4">1️⃣ Pick the Right Keywords</h4>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li>Use the <strong>Keyword Explorer</strong> to spot high-impact strategic keywords.</li>
+                    <li>Uncover SEO opportunities and avoid keyword cannibalization with deep analysis.</li>
+                  </ul>
+                </div>
+
+                {/* Step 2 */}
+                <div 
+                  className={`p-6 cursor-pointer transition-all ${activeTab === 2 ? 'border-2 border-[#001F3F] bg-white text-gray-900' : 'text-gray-400'}`}
+                  onClick={() => setActiveTab(2)}
+                >
+                  <h4 className="text-[21.328px] font-semibold mb-4">2️⃣ Analyze the Competition</h4>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li><strong>Content Gap Analysis</strong> shows you where your competitors rank and you don&apos;t.</li>
+                    <li>Discover the keywords and strategies giving them the edge.</li>
+                  </ul>
+                </div>
+
+                {/* Step 3 */}
+                <div 
+                                    className={`p-6 cursor-pointer transition-all ${activeTab === 3 ? 'border-2 border-[#001F3F] bg-white text-gray-900' : 'text-gray-400'}`}
+                  onClick={() => setActiveTab(3)}
+                >
+                  <h4 className="text-[21.328px] font-semibold mb-4">3️⃣ Write SEO-Optimized Content</h4>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li>Use <strong>Chill Mode</strong> for stress-free, guided optimization.</li>
+                    <li>Switch to <strong>PRO Mode</strong> for full control and advanced tweaking.</li>
+                  </ul>
+                </div>
+
+                {/* Step 4 */}
+                <div 
+                  className={`p-6 cursor-pointer transition-all ${activeTab === 4 ? 'border-2 border-[#001F3F] bg-white text-gray-900' : 'text-gray-400'}`}
+                  onClick={() => setActiveTab(4)}
+                >
+                  <h4 className="text-[21.328px] font-semibold mb-4">4️⃣ Track and Adjust Your Strategy</h4>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li>Analyze your <strong>rankings</strong>, <strong>backlinks</strong>, and the impact of your optimizations.</li>
+                    <li>Manage your SEO <strong>project by project</strong> with detailed dashboards.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}
+
+
+function FeatureBox({ icon, title, link, linkText, description, beforeLink }) {
+  const getIcon = (iconName) => {
+    switch (iconName) {
+      case "search":
+        return <FaSearch className="text-4xl text-gray-500" />;
+      case "google":
+        return <FaGoogle className="text-4xl text-gray-500" />;
+      case "clone":
+        return <FaClone className="text-4xl text-gray-500" />;
+      case "file":
+        return <FaFile className="text-4xl text-gray-500" />;
+      case "edit":
+        return <FaEdit className="text-4xl text-gray-500" />;
+      case "chart-bar":
+        return <FaChartBar className="text-4xl text-gray-500" />;
+      case "link":
+        return <FaLink className="text-4xl text-gray-500" />;
+      case "stop-circle":
+        return <FaStopCircle className="text-4xl text-gray-500" />;
+      case "brain":
+        return <FaBrain className="text-4xl text-gray-500" />;
+      case "image":
+        return <FaImage className="text-4xl text-gray-500" />;
+      case "robot":
+        return <FaRobot className="text-4xl text-gray-500" />;
+      case "sitemap":
+        return <FaSitemap className="text-4xl text-gray-500" />;
+      case "people-carry":
+        return <FaUsers className="text-4xl text-gray-500" />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="flex flex-col space-y-4">
+      <div className="text-4xl">
+        {getIcon(icon)}
+      </div>
+      <h4 className="text-[21.328px] font-semibold text-gray-900">{title}</h4>
+      <p className="text-gray-600 text-[16px]">
+        {beforeLink}{' '}
+        <a href={link} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:underline font-bold inline-flex items-center">
+          {linkText}
+          {' '}
+          <FaExternalLinkAlt className="text-gray-600 ml-2 text-[16px]" />
+        </a>{'  '}
+        {description}
+      </p>
     </div>
   );
 }
