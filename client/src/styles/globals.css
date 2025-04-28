@@ -1,3 +1,4 @@
+@import url('https://cdn.mobirise.com/mobirise-icons/mobirise-icons.css');
 @import "tailwindcss";
 
 :root {
@@ -21,4 +22,13 @@ body {
 /* Correct example */
 .text-[amber-50] {
   color: var(--color-amber-50);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
