@@ -28,50 +28,12 @@ export default function Linking() {
     const [inputError, setInputError] = useState("");
     const searchParams = useSearchParams();
 
-    useEffect(() => {
-        const host = searchParams.get('host');
-        if (host) {
-            setInputUrl(host);
-            if (isValidDomain(host)) {
-                fetchFromDatabase(host);
-            } else {
-                setInputError("Invalid domain name format");
-            }
-        }
-    }, [searchParams]);
-
-    const fetchFromDatabase = async (host) => {
-        setLoading(true);
-        try {
-            const res = await fetch(`/api/get-internal-pagerank`, {
-                method: "POST",
-                body: JSON.stringify({ baseUrl: host }),
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            const data = await res.json();
-            if (data?.data?.length) {
-                setResult(data.data);
-                switchToResults(data.data);
-            }
-        } catch (error) {
-            console.error("Database fetch failed:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleSearch = async () => {
-        if (!inputUrl) {
-            setInputError("Please enter a domain name");
+    async function handleSearch(domain) {
+        if (!domain || loading) {
             return;
         }
 
-        if (!isValidDomain(inputUrl)) {
+        if (!isValidDomain(domain)) {
             setInputError("Please enter a valid domain name (e.g., example.com)");
             return;
         }
@@ -80,7 +42,7 @@ export default function Linking() {
         setLoading(true);
 
         try {
-            const formattedUrl = formatUrl(inputUrl);
+            const formattedUrl = formatUrl(domain);
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
@@ -104,17 +66,94 @@ export default function Linking() {
             if (data?.data?.length) {
                 setResult(data.data);
                 switchToResults(data.data);
+            } else {
+                setInputError("No data found for this domain");
+                switchToInput();
             }
         } catch (error) {
             if (error.name === 'AbortError') {
-                console.error("Request timed out");
+                setInputError("Request timed out. Please try again.");
             } else {
-                console.error("Search failed:", error);
+                setInputError("Failed to fetch data. Please try again.");
+            }
+            switchToInput();
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function fetchFromDatabase(host) {
+        if (!host || loading) {
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
+
+            const res = await fetch(`/api/get-internal-pagerank`, {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: host }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const data = await res.json();
+            if (data?.data?.length) {
+                setResult(data.data);
+                switchToResults(data.data);
+            } else {
+                // If no data found, try the external API
+                await handleSearch(host);
+            }
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                setInputError("Request timed out. Please try again.");
+            } else {
+                // If database fetch fails, try the external API
+                await handleSearch(host);
             }
         } finally {
             setLoading(false);
         }
-    };
+    }
+
+    // Handle URL parameter
+    useEffect(() => {
+        const host = searchParams.get('host');
+        let mounted = true;
+
+        if (host && !loading) {
+            setInputUrl(host);
+            if (isValidDomain(host)) {
+                (async () => {
+                    try {
+                        await fetchFromDatabase(host);
+                    } catch (error) {
+                        if (mounted) {
+                            setInputError("Failed to fetch data");
+                        }
+                    }
+                })();
+            } else {
+                setInputError("Invalid domain name format");
+            }
+        }
+
+        return () => {
+            mounted = false;
+        };
+    }, [searchParams]);
 
     const exportToCSV = () => {
         if (!result.length) return;
@@ -211,7 +250,7 @@ export default function Linking() {
                         )}
                     </div>
                     <button
-                        onClick={handleSearch}
+                        onClick={() => fetchFromDatabase(inputUrl)}
                         className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
                     >
                         OK
