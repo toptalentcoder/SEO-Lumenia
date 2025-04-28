@@ -12,6 +12,8 @@ import { LuNotebookPen } from "react-icons/lu";
 import { FaRegHeart } from "react-icons/fa6";
 import { FaRegThumbsUp } from "react-icons/fa6";
 import { FaChartLine } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+
 
 
 const manrope = Manrope({ subsets: ['latin'] });
@@ -309,6 +311,201 @@ export default function Home() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Founders Section */}
+      <section 
+        className="py-24 bg-[#F1FAFB] relative parallax"
+        style={{ 
+          backgroundImage: 'url(/images/welcome/section-bg1.png)',
+          backgroundSize: 'auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="">
+          <div className="text-center mb-12">
+            <h2 className="text-[37.328px] font-bold mb-6 text-gray-900">All our founders are techies!</h2>
+            <div className="w-24 h-1 bg-[#28a745] mx-auto"></div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 w-full mx-auto">
+            {/* Founder 1 */}
+            <div className="relative group">
+              <div className="bg-white shadow-lg text-center overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src="/images/welcome/founders/gpeyronnet.jpg"
+                    alt="Portrait of Guillaume Peyronnet"
+                    width={200}
+                    height={200}
+                    className="w-full"
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <a 
+                      href="https://www.linkedin.com/in/gpeyronnet" 
+                      target="_blank" 
+                      className="w-10 h-10 bg-[#0077b5] hover:bg-[#073C63] rounded-full flex items-center justify-center text-white"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-white" />
+                    </a>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h4 className="text-[21.328px] font-bold mb-1 mt-9 text-gray-900">Guillaume<br />Peyronnet</h4>
+                  <p className="text-[16px] text-gray-600 mb-9">SEO Data Pioneer<br />3 academic papers</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Founder 2 */}
+            <div className="relative group">
+              <div className="bg-white shadow-lg text-center overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src="/images/welcome/founders/speyronnet.jpg"
+                    alt="Portrait of Sylvain Peyronnet"
+                    width={200}
+                    height={200}
+                    className="w-full"
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <a 
+                      href="https://www.linkedin.com/in/sypsyp/" 
+                      target="_blank" 
+                      className="w-10 h-10 bg-[#0077b5] hover:bg-[#073C63] rounded-full flex items-center justify-center text-white"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-white" />
+                    </a>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h4 className="text-[21.328px] font-bold mb-1 mt-9 text-gray-900">Sylvain<br />Peyronnet</h4>
+                  <p className="text-[16px] text-gray-600 mb-9">PhD<br />SEO Data Pioneer<br />Former Full Professor<br />50+ academic papers</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Founder 3 */}
+            <div className="relative group">
+              <div className="bg-white shadow-lg text-center overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src="/images/welcome/founders/emarchand.jpg"
+                    alt="Portrait of Emmanuel Marchand"
+                    width={200}
+                    height={200}
+                    className="w-full"
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <a 
+                      href="https://www.linkedin.com/in/emmanuel-marchand-045b857b/" 
+                      target="_blank" 
+                      className="w-10 h-10 bg-[#0077b5] hover:bg-[#073C63] rounded-full flex items-center justify-center text-white"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-white" />
+                    </a>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h4 className="text-[21.328px] font-bold mb-1 mt-9 text-gray-900">Emmanuel<br />Marchand</h4>
+                  <p className="text-[16px] text-gray-600 mb-9">R&D Researcher<br />4 academic papers</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Founder 4 */}
+            <div className="relative group">
+              <div className="bg-white shadow-lg text-center overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src="/images/welcome/founders/gpitel.jpg"
+                    alt="Portrait of Guillaume Pitel"
+                    width={200}
+                    height={200}
+                    className="w-full"
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <a 
+                      href="https://www.linkedin.com/in/guillaumepitel/" 
+                      target="_blank" 
+                      className="w-10 h-10 bg-[#0077b5] hover:bg-[#073C63] rounded-full flex items-center justify-center text-white"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-white" />
+                    </a>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h4 className="text-[21.328px] font-bold mb-1 mt-9 text-gray-900">Guillaume<br />Pitel</h4>
+                  <p className="text-[16px] text-gray-600 mb-9">PhD<br />48 academic papers<br />4 patents</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Founder 5 */}
+            <div className="relative group">
+              <div className="bg-white shadow-lg text-center overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src="/images/welcome/founders/tlargillier.jpg"
+                    alt="Portrait of Thomas Largillier"
+                    width={200}
+                    height={200}
+                    className="w-full"
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <a 
+                      href="https://www.linkedin.com/in/thomas-largillier-3a39961a4/" 
+                      target="_blank" 
+                      className="w-10 h-10 bg-[#0077b5] hover:bg-[#073C63] rounded-full flex items-center justify-center text-white"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-white" />
+                    </a>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h4 className="text-[21.328px] font-bold mb-1 mt-9 text-gray-900">Thomas<br />Largillier</h4>
+                  <p className="text-[16px] text-gray-600 mb-9">PhD<br />R&D Researcher<br />Associate Professor<br />20 academic papers</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Founder 6 */}
+            <div className="relative group">
+              <div className="bg-white shadow-lg text-center overflow-hidden">
+                <div className="relative">
+                  <Image
+                    src="/images/welcome/founders/gfouquier.jpg"
+                    alt="Portrait of Geoffroy Fouquier"
+                    width={200}
+                    height={200}
+                    className="w-full"
+                  />
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                    <a 
+                      href="https://www.linkedin.com/in/geoffroy-fouquier-93291b4/" 
+                      target="_blank" 
+                      className="w-10 h-10 bg-[#0077b5] hover:bg-[#073C63] rounded-full flex items-center justify-center text-white"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-white" />
+                    </a>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h4 className="text-[21.328px] font-bold mb-1 mt-9 text-gray-900">Geoffroy<br />Fouquier</h4>
+                  <p className="text-[16px] text-gray-600 mb-9">PhD<br />Research Engineer<br />20 academic papers</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
