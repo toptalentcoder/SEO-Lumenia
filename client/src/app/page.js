@@ -20,6 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { BiSolidQuoteAltRight } from "react-icons/bi";
 import { FaSearch, FaGoogle, FaClone, FaFile, FaEdit, FaChartBar, FaLink, FaStopCircle, FaBrain, FaImage, FaRobot, FaSitemap, FaUsers } from "react-icons/fa";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { BsQuestionCircleFill } from "react-icons/bs";
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -1137,7 +1138,7 @@ export default function Home() {
 
                 {/* Step 3 */}
                 <div 
-                                    className={`p-6 cursor-pointer transition-all ${activeTab === 3 ? 'border-2 border-[#001F3F] bg-white text-gray-900' : 'text-gray-400'}`}
+                  className={`p-6 cursor-pointer transition-all ${activeTab === 3 ? 'border-2 border-[#001F3F] bg-white text-gray-900' : 'text-gray-400'}`}
                   onClick={() => setActiveTab(3)}
                 >
                   <h4 className="text-[21.328px] font-semibold mb-4">3️⃣ Write SEO-Optimized Content</h4>
@@ -1157,6 +1158,213 @@ export default function Home() {
                     <li>Analyze your <strong>rankings</strong>, <strong>backlinks</strong>, and the impact of your optimizations.</li>
                     <li>Manage your SEO <strong>project by project</strong> with detailed dashboards.</li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <h3 className="text-[#4517AD] mb-10 text-[32px] font-bold">Frequently Asked Questions about yourtext.guru</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Left Column */}
+            <div>
+              <div className="space-y-6 relative">
+                
+                <div className="faq-item flex gap-4 relative">
+                  
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">What&apos;s the subscription commitment period?</h4>
+                    <div className="text-gray-600">
+                      Subscriptions are available on a monthly or yearly basis with automatic renewal. Payment is processed at the start of each period. You can cancel at any time (up to the day before renewal) directly from your client area: this will stop the automatic renewal, and you’ll keep access to the tool until the end of the current period.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can I try yourtext.guru before subscribing?</h4>
+                    <div className="text-gray-600">
+                    Yes! We offer a demo mode so you can explore the interface and test some of the features. Want to know more? Check out our test page or get in touch with us.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">What happens if I go over my token or usage quota?</h4>
+                    <div className="text-gray-600">
+                      If you hit the limits of your plan (guides, AI tokens, rank tracking, etc.), you have a few options:
+                      Buy additional token packs.
+                      Upgrade to a higher-tier plan with more resources.
+                      You always stay in control of your usage via your personal dashboard.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Is a subscription better than using tokens?</h4>
+                    <div className="text-gray-600">
+                      Definitely, especially if you&apos;re producing a decent volume of guides—it&apos;s just more cost-effective. But more importantly, a subscription unlocks <strong>all</strong> yourtext.guru features—not just SEO text optimization. Content strategy, analysis, optimization… everything&apos;s there to help you go way beyond basic writing. And as a bonus, a subscription gives you access to AI tokens, so you can tap into the full power of generative tools.
+                      More possibilities, more efficiency, and better control over your content strategy.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can my team collaborate on the same project?</h4>
+                    <div className="text-gray-600">
+                      Absolutely! With <strong>team-enabled plans</strong>, you can:
+                      <ul className="list-disc list-inside mt-2 space-y-1">
+                        <li>Share projects with collaborators.</li>
+                        <li>Track content progress together.</li>
+                        <li>Manage user access and permissions (up to 20 users depending on your plan).</li>
+                      </ul>
+                      SEO is <strong>not a solo sport</strong>, and yourtext.guru makes collaboration smooth and efficient.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Are there discounts for yearly subscriptions?</h4>
+                    <div className="text-gray-600">
+                      Yes, when you subscribe to a yearly plan, you get up to 9% off compared to the monthly rate. It&apos;s the ideal solution if you use yourtext.guru regularly and want to maximize ROI.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div>
+              <div className="space-y-6 relative">
+                
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  {/* Vertical Line */}
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">How many people can use one account?</h4>
+                    <div className="text-gray-600">
+                      An account is tied to a single person—one email, one user. If you&apos;re working as a team, within a company, or with external writers, we offer plans that are better suited. Everyone having their own account is just safer and more practical.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  {/* Vertical Line */}
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">What payment methods do you accept?</h4>
+                    <div className="text-gray-600">
+                      We accept credit card payments through Stripe.
+                      For yearly subscriptions or token packs of 500 or more, bank transfer is also available. Just reach out to support to arrange it.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  {/* Vertical Line */}
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Can yourtext.guru replace a writer or an SEO expert?</h4>
+                    <div className="text-gray-600">
+                      Nope—and that&apos;s not the goal. Yourtext.guru is a <strong>powerful assistant</strong> that helps with writing and content optimization, but it doesn&apos;t replace human expertise. The tool <strong>saves you time, gives you sharp recommendations, and helps you structure a winning SEO strategy.</strong> It&apos;s <strong>a copilot</strong>, not autopilot.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  {/* Vertical Line */}
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Does yourtext.guru work with CMS platforms like WordPress or Shopify?</h4>
+                    <div className="text-gray-600">
+                      Yes! Even though we don’t have native integrations yet, you can easily copy-paste your generated content into WordPress, Shopify, Webflow, or any CMS.
+                      Plus, our APIs let you automate some SEO tasks and integrate the tool directly into your workflow.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  {/* Vertical Line */}
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">How can I automate repetitive tasks in yourtext.guru?</h4>
+                    <div className="text-gray-600">
+                    We offer API plans, so once you&apos;ve set up a connector on your side, you can programmatically use yourtext.guru—with just one constraint: the rate limit.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="faq-item flex gap-4 relative">
+                  <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center relative z-10">
+                    <BsQuestionCircleFill className="text-[#4517AD] text-[32px]" />
+                  </div>
+                  <div className="absolute left-[23px] top-[40px] bottom-0 w-[2px] mt-4 bg-[#28a745]"></div>
+                  <div className="pt-1">
+                    <h4 className="text-[21.328px] font-bold mb-4 text-gray-900">Which languages are supported for guides?</h4>
+                    <div className="text-gray-600">
+                      We support multiple languages and dialects, including:
+                      <ul className="list-disc list-inside mt-2 space-y-1">
+                        <li>French (France, Belgium, Switzerland, Canada, Luxembourg, Morocco, Andorra)</li>
+                        <li>English (USA, UK, Australia, Canada, India, South Africa, Egypt, UAE)</li>
+                        <li>Spanish (Spain, Mexico, Colombia, Argentina, Chile, Peru, USA)</li>
+                        <li>German (Germany, Austria, Switzerland, Belgium)</li>
+                        <li>Italian (Italy, Switzerland)</li>
+                        <li>Portuguese (Portugal, Brazil)</li>
+                        <li>Dutch (Netherlands)</li>
+                        <li>Polish (Poland)</li>
+                        <li>Romanian (Romania)</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
