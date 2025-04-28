@@ -592,6 +592,135 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing Plans Section */}
+      <section 
+        id="plans" 
+        className="py-24 bg-[#F1FAFB] relative parallax"
+        style={{ 
+          backgroundImage: 'url(/images/welcome/section-bg2.png)',
+          backgroundSize: 'auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="container mx-auto px-4">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <h2 className="text-[37.328px] font-bold mb-4 text-gray-900">Plans tailored to your SEO strategy</h2>
+            <p className="text-xl text-gray-600 mb-6">Whether you&apos;re a freelancer, agency, or company, choose the plan that fits you best.</p>
+            <div className="relative w-full h-[1px] mb-16">
+              <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[60px] h-[3px] bg-[#4517AD]"></div>
+            </div>
+          </div>
+
+          {/* Pricing Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 max-w-6xl mx-auto">
+            {/* Lite Plan */}
+            <div className="bg-[#B6E4D5] shadow-lg p-8 relative">
+              <div className="text-center mb-6">
+                <Image
+                  src="/images/welcome/prices/ptable-icon1.png"
+                  alt="Lite Plan"
+                  width={120}
+                  height={120}
+                  className="mx-auto"
+                />
+                <h3 className="text-[32px] font-bold text-gray-900 mt-4">Lite</h3>
+                <div className="mt-4">
+                  <span className="text-[60px] font-bold text-[#475668]">107$US</span>
+                  <span className="text-gray-600 block">per month, excl. tax</span>
+                </div>
+              </div>
+              <Link 
+                href="/subscription/list#tab-plans"
+                className="block w-2/3 mx-auto py-3 text-center bg-[#001F3F] text-white hover:bg-[#001F3F] transition-colors mb-8"
+              >
+                Subscribe now
+              </Link>
+              <ul className="space-y-4 text-lg text-gray-600 text-center">
+                <li className="flex items-center justify-center"><span className="font-semibold">2 members</span></li>
+                <li>Monthly allowance:</li>
+                <li className="font-semibold">50 SEO guides</li>
+                <li className="font-semibold">25,000 AI tokens</li>
+              </ul>
+            </div>
+
+            {/* Lite+ Plan */}
+            <div className="bg-[#008000] shadow-lg p-8 relative transform scale-105 z-10">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white text-[#28a745] px-6 py-1 rounded-full font-semibold">
+                Most popular
+              </div>
+              <div className="text-center mb-6">
+                <Image
+                  src="/images/welcome/prices/ptable-icon2.png"
+                  alt="Lite+ Plan"
+                  width={120}
+                  height={120}
+                  className="mx-auto"
+                />
+                <h3 className="text-[32px] font-bold text-white mt-4">Lite+</h3>
+                <div className="mt-4">
+                  <span className="text-[60px] font-bold text-white">140$US</span>
+                  <span className="text-white block">per month, excl. tax</span>
+                </div>
+              </div>
+              <Link 
+                href="/subscription/list#tab-plans"
+                className="block w-2/3 mx-auto py-3 text-center bg-[#001F3F] text-white transition-colors mb-8"
+              >
+                Subscribe now
+              </Link>
+              <ul className="space-y-4 text-lg text-white text-center">
+                <li className="flex items-center justify-center"><span className="font-semibold">2 members</span></li>
+                <li>Monthly allowance:</li>
+                <li className="font-semibold">100 SEO guides</li>
+                <li className="font-semibold">50,000 AI tokens</li>
+              </ul>
+            </div>
+
+            {/* Essential Plan */}
+            <div className="bg-[#B6E4D5] shadow-lg p-8 relative">
+              <div className="text-center mb-6">
+                <Image
+                  src="/images/welcome/prices/ptable-icon3.png"
+                  alt="Essential Plan"
+                  width={120}
+                  height={120}
+                  className="mx-auto"
+                />
+                <h3 className="text-[32px] font-bold text-gray-900 mt-4">Essential Plan</h3>
+                <div className="mt-4">
+                  <span className="text-[60px] font-bold text-[#4517AD]">247$US</span>
+                  <span className="text-gray-600 block">per month, excl. tax</span>
+                </div>
+              </div>
+              <Link 
+                href="/subscription/list#tab-plans"
+                className="block w-2/3 mx-auto py-3 text-center bg-[#001F3F] text-white hover:bg-[#001F3F] transition-colors mb-8"
+              >
+                Subscribe now
+              </Link>
+              <ul className="space-y-4 text-lg text-gray-600 text-center">
+                <li className="flex items-center justify-center"><span className="font-semibold">5 members + 2 guests</span></li>
+                <li>Monthly allowance:</li>
+                <li className="font-semibold">375 SEO guides</li>
+                <li className="font-semibold">187,500 AI tokens</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* See All Plans Button */}
+          <div className="text-center mt-16">
+            <Link 
+              href="/en/pricing"
+              className="inline-flex items-center px-12 py-3 text-gray-900 border-2 border-gray-900 hover:bg-[#001F3F] hover:text-white transition-colors text-lg"
+            >
+              📜 See all our subscription plans & bundles in detail 🔍
+            </Link>
+          </div>
+        </div>
+      </section>
 
     </div>
   );
