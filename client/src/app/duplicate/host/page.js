@@ -27,8 +27,6 @@ export default function PageDuplication() {
     const [summary, setSummary] = useState(null);
     const [histogram, setHistogram] = useState([]);
 
-
-
     const fetchExistingResults = async (host) => {
         if (!host) return;
         setLoading(true);
