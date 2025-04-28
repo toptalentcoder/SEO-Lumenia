@@ -6,16 +6,38 @@ import { US, FR, ES } from 'country-flag-icons/react/3x2';
 import { useState, useEffect } from 'react';
 import { Manrope } from 'next/font/google';
 import LogoCarousel from '../components/LogoCarousel';
+import { RxRocket } from "react-icons/rx";
+import { TbUsers } from "react-icons/tb";
+import { LuNotebookPen } from "react-icons/lu";
+import { FaRegHeart } from "react-icons/fa6";
+import { FaRegThumbsUp } from "react-icons/fa6";
+import { FaChartLine } from "react-icons/fa";
+
 
 const manrope = Manrope({ subsets: ['latin'] });
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
       setScrolled(isScrolled);
+      
+      // Update parallax effect
+      const parallaxElements = document.querySelectorAll('.parallax');
+      parallaxElements.forEach((element) => {
+        const offset = window.pageYOffset;
+        const elementTop = element.offsetTop;
+        const elementHeight = element.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        
+        if (offset > elementTop - viewportHeight && offset < elementTop + elementHeight) {
+          const parallaxValue = ((offset - (elementTop - viewportHeight)) * 0.4);
+          element.style.backgroundPositionY = `${parallaxValue}px`;
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -23,7 +45,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
 
       {/* Navbar */}
       <nav className={`fixed w-full bg-white border-b z-50 transition-all duration-300 ${
@@ -149,95 +171,148 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Add animation keyframes for floating effect */}
-      <style jsx global>{`
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-          100% { transform: translateY(0px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-      `}</style>
+      {/* Expertise Section */}
+      <section 
+        className="relative bg-[#F1FAFB] pt-24 pb-20"
+        style={{ backgroundImage: 'url(/images/welcome/landing2-hero.svg)', backgroundPosition: 'center bottom', backgroundRepeat: 'no-repeat' }}
+        id="expertise"
+      >
+        <div className="container mx-auto px-4 w-2/3">
+          <div className="text-black">
+            <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-16">🏆 Trusted SEO Expertise for Over 9 Years 🏆</h1>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {/* Box 1 */}
+                <div className="p-6">
+                  <div className='flex justify-center'>
+                    <RxRocket className="text-5xl text-gray-900 mb-4" />
+                  </div>
+                  <h4 className="text-[21.328px] font-bold mb-3">A Benchmark Since 2016</h4>
+                  <p className="text-gray-900 text-[19.2px]">YourText.Guru is trusted by thousands of SEO professionals, agencies, and content creators.</p>
+                </div>
+
+                {/* Box 2 */}
+                <div className="p-6">
+                  <div className="flex justify-center">
+                    <TbUsers className="text-5xl text-gray-900 mb-4" />
+                  </div>
+                  <h4 className="text-[21.328px] font-bold mb-3">A Team of Experts</h4>
+                  <p className="text-gray-900 text-[19.2px]">12 specialists, including 6 engineers and 4 PhDs in algorithms and artificial intelligence. Some have been doing SEO since 2000.</p>
+                </div>
+
+                {/* Box 3 */}
+                <div className="p-6">
+                  <div className="flex justify-center">
+                    <LuNotebookPen className="text-5xl text-gray-900 mb-4" />
+                  </div>
+                  <h4 className="text-[21.328px] font-bold mb-3">Renowned Educators</h4>
+                  <p className="text-gray-900 text-[19.2px]">At yourtext.guru, the Peyronnet Brothers have trained thousands of SEO pros since 2013.</p>
+                </div>
+
+                {/* Box 4 */}
+                <div className="p-6">
+                  <div className="flex justify-center">
+                    <FaRegHeart className="text-5xl text-gray-900 mb-4" />
+                  </div>
+                  <h4 className="text-[21.328px] font-bold mb-3">Scientific Excellence</h4>
+                  <p className="text-gray-900 text-[19.2px]">Over 18,250 person-days of research, more than 125 scientific publications, and patented innovations.</p>
+                </div>
+
+                {/* Box 5 */}
+                <div className="p-6">
+                  <div className="flex justify-center">
+                    <FaRegThumbsUp className="text-5xl text-gray-900 mb-4" />
+                  </div>
+                  <h4 className="text-[21.328px] font-bold mb-3">Trusted by SEO Pros</h4>
+                  <p className="text-gray-900 text-[19.2px]">SEO agencies and freelancers have relied on yourtext.guru from day one — a true sign of our reliability and impact.</p>
+                </div>
+
+                {/* Box 6 */}
+                <div className="p-6">
+                  <div className="flex justify-center">
+                    <FaChartLine className="text-5xl text-gray-900 mb-4" />
+                  </div>
+                  <h4 className="text-[21.328px] font-bold mb-3">Ongoing R&D</h4>
+                  <p className="text-gray-900 text-[19.2px]">We stay on top of the latest in SEO and AI—because staying ahead of the curve is not optional.</p>
+                </div>
+              </div>
+
+              <div className="mt-10 -mb-32 relative z-10">
+                <Image
+                  src="/images/welcome/hero.png"
+                  alt="SEO Expertise"
+                  width={1600}
+                  height={800}
+                  className="mx-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section 
+        className="pt-24 pb-16 bg-[#F1FAFB] relative mt-24 parallax"
+        style={{ 
+          backgroundImage: 'url(/images/welcome/section-bg1.png)',
+          backgroundSize: 'auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundPositionY: '0px'
+        }}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Powerful Features for SEO Success</h2>
-            <p className="text-xl text-gray-600">Everything you need to optimize your website and content</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-xl bg-gray-50 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-[#5438DC] rounded-lg mb-4 flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
+          <div className="grid grid-cols-1 md:grid-cols-3 md:w-3/4 mx-auto gap-8">
+            
+            {/* Feature 1 */}
+            <div className="group">
+              <div className="bg-white rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.1)] p-8 text-center h-full">
+                <div className="flex justify-center mb-6">
+                  <RxRocket className="text-[3rem] text-[#28a745]" />
+                </div>
+                <div className="dtr-feature-content">
+                  <h3 className="text-[38px] font-bold mb-4 text-gray-900">Your truly <strong>high-performing</strong> SEO copilot</h3>
+                  <p className="text-2xl font-medium mb-4 text-gray-600">All the essential SEO tools—<strong>zero hassle</strong></p>
+                  <p className="text-gray-600 text-[16px]">Tired of juggling <strong>10 different tools</strong>? YourText.Guru has your entire <strong>content strategy</strong> covered: <strong>keyword research</strong>, <strong>AI-assisted writing</strong>, <strong>competitor analysis</strong>. Less stress, <strong>more results</strong>.</p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-2">Keyword Tracking</h3>
-              <p className="text-gray-600">Monitor your rankings for thousands of keywords in real-time</p>
             </div>
-            <div className="p-6 rounded-xl bg-gray-50 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-[#5438DC] rounded-lg mb-4 flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
+
+            {/* Feature 2 */}
+            <div className="group">
+              <div className="bg-white rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.1)] p-8 text-center">
+                <div className="flex justify-center mb-6">
+                  <LuNotebookPen className="text-[3rem] text-[#28a745]" />
+                </div>
+                <div className="dtr-feature-content">
+                  <h3 className="text-[38px] font-bold mb-4 text-gray-900">Write <strong>flawless</strong> SEO content</h3>
+                  <p className="text-2xl font-medium mb-4 text-gray-600"><strong>Chill Mode</strong> for speed, <strong>PRO Mode</strong> for precision</p>
+                  <p className="text-gray-600">No more <strong>blank page syndrome</strong>. Whether you&apos;re a <strong>beginner</strong> or an <strong>SEO pro</strong>, our AI guides you with <strong>dynamic scoring</strong> for <strong>top-tier content</strong>. <strong>Write faster, rank higher.</strong></p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-2">Competitor Analysis</h3>
-              <p className="text-gray-600">Track your competitors and uncover their SEO strategies</p>
             </div>
-            <div className="p-6 rounded-xl bg-gray-50 hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-[#5438DC] rounded-lg mb-4 flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
+
+            {/* Feature 3 */}
+            <div className="group">
+              <div className="bg-white rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.1)] p-8 text-center h-full">
+                <div className="flex justify-center mb-6">
+                  <FaChartLine className="text-[3rem] text-[#28a745]" />
+                </div>
+                <div className="dtr-feature-content">
+                  <h3 className="text-[38px] font-bold mb-4 text-gray-900">Spy on your competitors<br /><strong>(and outrank them)</strong></h3>
+                  <p className="text-2xl font-medium mb-4 text-gray-600"><strong>Spot their weaknesses, seize the edge, dominate!</strong></p>
+                  <p className="text-gray-600">They&apos;re ahead of you on Google? <strong>Not for long.</strong> Uncover <strong>their blind spots</strong>, identify <strong>SEO gaps</strong>, and craft <strong>content that crushes theirs</strong>. SEO is a game of <strong>strategy</strong>.</p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-2">Content Optimization</h3>
-              <p className="text-gray-600">AI-powered suggestions to improve your content&apos;s performance</p>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">What our clients say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-200 mr-4"></div>
-                  <div>
-                    <h4 className="font-bold">Client Name</h4>
-                    <p className="text-gray-600 text-sm">Position, Company</p>
-                  </div>
-                </div>
-                <p className="text-gray-600">&ldquo;The insights and recommendations provided by YourText.Guru have been invaluable for our SEO strategy.&rdquo;</p>
-                <div className="flex text-yellow-400 mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[#5438DC] text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-8">Ready to improve your SEO?</h2>
-          <p className="text-xl mb-12 max-w-2xl mx-auto">Join thousands of satisfied users who have transformed their SEO strategy with YourText.Guru</p>
-          <button className="px-8 py-3 bg-white text-[#5438DC] rounded-lg hover:bg-gray-100 transition-colors text-lg font-semibold">
-            Start your free trial
-          </button>
-        </div>
-      </section>
     </div>
   );
 }
