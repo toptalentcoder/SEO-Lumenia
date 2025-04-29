@@ -141,7 +141,7 @@ export default function SignupPage() {
                                     <h4 className="text-[21.328px] font-bold text-gray-900">Sign in!</h4>
                                     </div>
                                     
-                                    <p className="text-gray-600 text-[16px]">Create your account to unlock the SEO magic of YourText.Guru!</p>
+                                    <p className="text-gray-600 text-[16px]">Create your account to unlock the SEO magic of Lumenia!</p>
                                     <form className="space-y-4" onSubmit={handleSubmit}>
                                         <input type="hidden" name="_token" value="KsG7xlS8al4PDbJDNKymwFr6W3QCqs0ylNGR1XyU" />
 
