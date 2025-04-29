@@ -16,14 +16,21 @@ export default function FooterLandingEn() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4">
                     {/* Logo and Description */}
                     <div className="lg:col-span-4">
-                    <Link href="/en" className="block mb-6 w-[203px]">
-                        <Image 
-                        src="/images/welcome/logo-yourtextguru-white.svg" 
-                        alt="logo"
-                        width={203}
-                        height={50}
-                        />
-                    </Link>
+                        <div className="flex items-center mb-6">
+                            <Link href="" className="block">
+                                <Image
+                                    src="/images/favicon.svg"
+                                    alt="Hero Image"
+                                    width={32} // Bigger size for a premium look
+                                    height={32}
+                                    className="h-10 w-auto text-blue-600"
+                                />
+                            </Link>
+                            <div>
+                                <span className="text-2xl font-semibold text-white ml-6">Lumenia</span>
+                            </div>
+                        </div>
+
                     <p className="text-white mb-4 text-[16px]">
                         Lumenia is a SaaS tool designed to optimize web writing and content strategy. It helps you structure, analyze, and improve your texts for better SEO—while keeping full control of your content.
                     </p>
