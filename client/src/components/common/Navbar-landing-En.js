@@ -44,16 +44,16 @@ export default function NavbarLandingEn() {
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center">
-                    <Image
-                        src="/images/logo.svg"
-                        alt="Lumenia"
-                        width={32}
-                        height={32}
-                        className="mr-2"
-                    />
-                    <div>
-                        <span className="text-xl font-semibold text-[#41368D]">Lumenia</span>
-                    </div>
+                        <Image
+                            src="/images/favicon2.svg"
+                            alt="Hero Image"
+                            width={32} // Bigger size for a premium look
+                            height={32}
+                            className="h-10 w-auto text-blue-600"
+                        />
+                        <div>
+                            <span className="text-2xl font-semibold text-[#41368D] ml-6">Lumenia</span>
+                        </div>
                     </Link>
 
                     {/* Navigation Links */}
