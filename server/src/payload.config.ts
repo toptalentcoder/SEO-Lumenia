@@ -24,6 +24,7 @@ import { InternalUrls } from './collections/internalUrlsCollection';
 import { PageDuplicates } from './collections/pageDuplicates';
 import { BacklinkSites } from './collections/backlinkSites';
 import { internalPageRankEndpoint } from './endpoints/internal_page_rank/internalPageRankEndpoint';
+import { testData } from './collections/test';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -47,6 +48,7 @@ export default buildConfig({
     InternalUrls,
     PageDuplicates,
     BacklinkSites,
+    testData
   ],
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend

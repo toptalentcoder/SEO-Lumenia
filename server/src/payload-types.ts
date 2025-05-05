@@ -77,6 +77,7 @@ export interface Config {
     'internal-url': InternalUrl;
     'page-duplicates': PageDuplicate;
     'backlink-sites': BacklinkSite;
+    test: Test;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -93,6 +94,7 @@ export interface Config {
     'internal-url': InternalUrlSelect<false> | InternalUrlSelect<true>;
     'page-duplicates': PageDuplicatesSelect<false> | PageDuplicatesSelect<true>;
     'backlink-sites': BacklinkSitesSelect<false> | BacklinkSitesSelect<true>;
+    test: TestSelect<false> | TestSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -398,6 +400,16 @@ export interface BacklinkSite {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "test".
+ */
+export interface Test {
+  id: string;
+  aaaaa?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -442,6 +454,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'backlink-sites';
         value: string | BacklinkSite;
+      } | null)
+    | ({
+        relationTo: 'test';
+        value: string | Test;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -712,6 +728,15 @@ export interface BacklinkSitesSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "test_select".
+ */
+export interface TestSelect<T extends boolean = true> {
+  aaaaa?: T;
   updatedAt?: T;
   createdAt?: T;
 }
