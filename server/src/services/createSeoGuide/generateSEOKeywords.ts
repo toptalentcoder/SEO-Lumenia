@@ -1,4 +1,4 @@
-const { OpenAI } = require("openai");
+import { OpenAI } from "openai";
 
 // Initialize the OpenAI client
 const openai = new OpenAI({
@@ -20,13 +20,28 @@ export async function generateSEOKeywords(query : string, location : string, lan
         const response = await openai.chat.completions.create({
             model: 'gpt-4',
             messages: [{ role: 'user', content: prompt }],
-            max_tokens: 2048,
+            max_tokens: 4096,
             temperature: 0.7
         });
 
-        const keywordList = response.choices[0].message.content.trim();
+        const content = response.choices[0].message.content?.trim() ?? "";
+        console.log("📤 Raw OpenAI response:\n", content.slice(0, 500));
+
+        // Try to extract the JSON object (including nested brackets)
+        const match = content.match(/\{\s*"[^"]+"\s*:\s*\[\s*([\s\S]*?)\]\s*\}/);
+    
+        if (!match) throw new Error("❌ No valid JSON object found in response.");
+    
+        // Add back the brackets to make a complete object
+        const jsonText = `{ "${query}": [${match[1]}] }`;
+    
+        const parsed = JSON.parse(jsonText);
+        const keywords = parsed[query];
+    
+        if (!Array.isArray(keywords)) throw new Error("Parsed result is not a valid keyword array");
+    
+        return keywords;
         
-        return keywordList;
     } catch (error) {
         console.error("Error generating SEO keywords:", error);
     }

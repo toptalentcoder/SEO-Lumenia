@@ -1,6 +1,7 @@
 import { Payload } from "payload";
 import axios from "axios";
 import { calculateImprovedSerpVolatility } from "./calculateSerpVolatility";
+import mongoose from "mongoose";
 
 const SERP_API_KEY = process.env.SERP_API_KEY;
 
@@ -49,13 +50,13 @@ export async function saveDailyVolatilityScores(payload: Payload) {
             }));
 
             const normalizedKeyword = keyword.toLowerCase().trim();
-            
+
             // Log the search criteria for debugging
             console.log(`Searching for snapshot with keyword: "${normalizedKeyword}" and category: "${category}"`);
-            
+
             const existing = await payload.find({
                 collection: "serpSnapshots",
-                where: { 
+                where: {
                     keyword: { equals: normalizedKeyword },
                     category: { equals: category }
                 },
@@ -72,7 +73,7 @@ export async function saveDailyVolatilityScores(payload: Payload) {
             if (existing.totalDocs > 0) {
                 const doc = existing.docs[0];
                 console.log(`Updating existing snapshot with ID: ${doc.id}`);
-                
+
                 const prevTracking: { date: string }[] = doc.tracking || [];
 
                 // Remove today's entry if it already exists
@@ -100,18 +101,18 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                     },
                     limit: 1,
                 });
-                
+
                 if (caseInsensitiveCheck.totalDocs > 0) {
                     // Found a record with the same keyword but different case
                     const doc = caseInsensitiveCheck.docs[0];
                     console.log(`Found a record with the same keyword but different case. Updating ID: ${doc.id}`);
-                    
+
                     const prevTracking: { date: string }[] = doc.tracking || [];
                     const filteredTracking = prevTracking.filter(t => t.date !== today);
                     const prunedTracking = [...filteredTracking, newEntry]
                         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                         .slice(0, 30);
-                    
+
                     await payload.update({
                         collection: "serpSnapshots",
                         id: doc.id,
@@ -121,16 +122,28 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                         },
                     });
                 } else {
+
                     // Create new record only if one doesn't exist for this exact keyword and category
                     console.log(`Creating new snapshot for keyword: "${normalizedKeyword}" and category: "${category}"`);
-                    await payload.create({
-                        collection: "serpSnapshots",
+
+                    const mongoose = payload.db.connection;
+                    const model = await mongoose.model('serpSnapshots')
+                    await model.create({
                         data: {
                             keyword: normalizedKeyword,
                             category,
                             tracking: [newEntry],
                         },
-                    });
+                    })
+
+                    // await payload.create({
+                    //     collection: "serpSnapshots",
+                    //     data: {
+                    //         keyword: normalizedKeyword,
+                    //         category,
+                    //         tracking: [newEntry],
+                    //     },
+                    // });
                 }
             }
 
