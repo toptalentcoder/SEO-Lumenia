@@ -10,7 +10,8 @@ import { calculateDynamicOptimizationRanges } from "@/services/createSeoGuide/as
 import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
 import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculateSOSEOandDSEO";
 import { categorizeUrls } from "@/services/createSeoGuide/categorizeUrls";
-
+import { generateSEOKeywords } from "@/services/createSeoGuide/generateSEOKeywords";
+import { checkUrlPresenceAcrossKeywords } from "@/services/createSeoGuide/checkUrlPresenceAcrossKeywords";
 interface OrganicResult {
     title: string;
     link: string;
@@ -86,18 +87,28 @@ export const createSeoGuide: Endpoint = {
                         api_key: process.env.SERP_API_KEY,
                         hl: hl || 'en',             // Language
                         gl: gl || 'us',             // Country
-                        lr: lr || 'lang_en'         // Only French content
+                        lr: lr || 'lang_en'         // language content
                     },
-                    timeout: 300000, // 30 seconds timeout for SERP API
+                    timeout: 300000, // 5 minutes timeout for SERP API
                 });
+
+                const fullLanguageName = hlToFullLanguageMap[language] || 'English';
 
                 const organicResults: OrganicResult[] = await response.data['organic_results'] || [];
                 const paaQuestions = response.data['related_questions'] || [];
                 const PAAs = paaQuestions.map((item : {question : string}) => item.question);
                 const links = organicResults.map((item: OrganicResult) => item.link);
 
+                // === 2. Generate SEO Keywords ===
+                const keywordList = await generateSEOKeywords(query, gl || "us", fullLanguageName);
+                if (!keywordList) throw new Error("❌ Failed to generate keywords");
+
+                // === 3. Check SERP Presence for each URL ===
+                const serpPresence = await checkUrlPresenceAcrossKeywords(keywordList, links, gl || "us", hl || "en");
+
+
                 // Generate SEO brief concurrently
-                const fullLanguageName = hlToFullLanguageMap[language] || 'English';
+    
                 const seoBriefPromise = generateSeoBrief(query, fullLanguageName);
 
                 // Fetch page content concurrently
@@ -165,7 +176,8 @@ export const createSeoGuide: Endpoint = {
                     wordCount: wordCounts[index], // Add the word count for each URL's content
                     soseo: soseoScores[index],  // Add SOSEO score
                     dseo: dseoScores[index],    // Add DSEO score
-                    categories: urlCategories[index] || ["Uncategorized"] // Add categories array for each URL
+                    categories: urlCategories[index] || ["Uncategorized"], // Add categories array for each URL
+                    presenceCount: serpPresence[result.link] || 0
                 }));
 
                 // Step 1: Build initial cronjob entries based on current SERP positions
