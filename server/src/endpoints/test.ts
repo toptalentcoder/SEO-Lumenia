@@ -23,7 +23,7 @@ export const testEndpoint: Endpoint = {
         ];
 
         const body = await req.json();
-        const { query, location, language } = body;
+        const { query, location, language, gl, hl } = body;
 
         console.log(`Generating keywords for: "${query}" in ${location} market...`);
 
@@ -39,7 +39,7 @@ export const testEndpoint: Endpoint = {
 
         console.log(`Generated ${keywordsResponse.length} keywords. Checking SERP rankings...`);
 
-        const results = await checkUrlPresenceAcrossKeywords(keywordsResponse, TARGET_URLS, location);
+        const results = await checkUrlPresenceAcrossKeywords(keywordsResponse, TARGET_URLS, gl, hl);
 
         console.log("\n📊 URL Top 20 Presence Summary:");
         for (const [url, count] of Object.entries(results)) {

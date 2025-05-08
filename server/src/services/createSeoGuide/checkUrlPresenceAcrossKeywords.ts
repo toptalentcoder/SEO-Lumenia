@@ -1,7 +1,7 @@
 import pLimit from "p-limit";
 import { fetchSerpResults } from "./fetchSerpResults";
 
-export async function checkUrlPresenceAcrossKeywords(keywords: string[], targetUrls: string[], location: string, concurrency = 50) {
+export async function checkUrlPresenceAcrossKeywords(keywords: string[], targetUrls: string[], gl: string, hl: string, concurrency = 50) {
     const urlMatchCount: Record<string, number> = {};
     for (const url of targetUrls) {
         urlMatchCount[url] = 0;
@@ -12,7 +12,7 @@ export async function checkUrlPresenceAcrossKeywords(keywords: string[], targetU
     const tasks = keywords.map((keyword) =>
         limit(async () => {
             try {
-                const results = await fetchSerpResults(keyword, location);
+                const results = await fetchSerpResults(keyword, gl, hl);
                 for (const url of targetUrls) {
                     if (results.some((r: any) => r.link.includes(url))) {
                         urlMatchCount[url]++;
