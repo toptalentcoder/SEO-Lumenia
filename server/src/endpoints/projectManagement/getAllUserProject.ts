@@ -49,7 +49,7 @@ export const getAllUserProjects: Endpoint = {
         }
 
         const user = users.docs[0];
-        const rawProjects = user.projects;
+        const rawProjects = user.projects as Project[];
 
         if (!Array.isArray(rawProjects)) {
             return new Response(

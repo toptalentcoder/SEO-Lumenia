@@ -24,6 +24,8 @@ import { InternalUrls } from './collections/internalUrlsCollection';
 import { PageDuplicates } from './collections/pageDuplicates';
 import { BacklinkSites } from './collections/backlinkSites';
 import { internalPageRankEndpoint } from './endpoints/internal_page_rank/internalPageRankEndpoint';
+import { startWorkers } from './workers/startWorkers'; // Import the function instead of the file
+import { setPayloadInstance } from './workers/seoGuideWorker';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -68,7 +70,6 @@ export default buildConfig({
     internalPageRankEndpoint,
   ],
   onInit : async(payload) => {
-
     const server = (payload as any).server;
 
     if (server) {
@@ -82,6 +83,13 @@ export default buildConfig({
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
     startDailyRankTracking(payload);
-    console.log('Daily rank tracking finsihed');
+    console.log('Daily rank tracking finished');
+    
+    // Set payload instance for worker
+    setPayloadInstance(payload);
+    
+    // Start workers after other initializations
+    await startWorkers(payload);
+    console.log('✅ SEO Guide workers started');
   }
 })

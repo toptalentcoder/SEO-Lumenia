@@ -110,7 +110,7 @@ export const googleAuthHandler = async (req: PayloadRequest) : Promise<Response>
         if (loggedInUser) {
 
             // Step 5: Redirect to the frontend with the token
-            const frontendUrl = `http://localhost:3000/auth/google/callback?userData=${encodeURIComponent(JSON.stringify(loggedInUser))}`;
+            const frontendUrl = `https://lumenia.io/auth/google/callback?userData=${encodeURIComponent(JSON.stringify(loggedInUser))}`;
 
             // Return a 302 redirect to the frontend with the token
             return Response.redirect(frontendUrl, 302);

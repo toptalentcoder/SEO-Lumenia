@@ -27,13 +27,11 @@ export default function PageDuplication() {
     const [summary, setSummary] = useState(null);
     const [histogram, setHistogram] = useState([]);
 
-
-
     const fetchExistingResults = async (host) => {
         if (!host) return;
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:7777/api/get-page-duplication`, {
+            const res = await fetch(`https://lumenia.io/api/get-page-duplication`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -77,7 +75,7 @@ export default function PageDuplication() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
-            const res = await fetch("http://localhost:7777/api/page-duplication", {
+            const res = await fetch("https://lumenia.io/api/page-duplication", {
                 method: "POST",
                 body: JSON.stringify({ baseUrl: url }),
                 headers: {
