@@ -10,6 +10,10 @@ import { calculateDynamicOptimizationRanges } from "@/services/createSeoGuide/as
 import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
 import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculateSOSEOandDSEO";
 import { categorizeUrls } from "@/services/createSeoGuide/categorizeUrls";
+import { generateSEOKeywords } from "@/services/createSeoGuide/generateSEOKeywords";
+import { checkUrlPresenceAcrossKeywords } from "@/services/createSeoGuide/checkUrlPresenceAcrossKeywords";
+import { seoGuideQueue } from "@/lib/seoGuideQueue";
+import { checkRedisConnection } from "@/lib/redis";
 
 interface OrganicResult {
     title: string;
@@ -42,271 +46,122 @@ export const createSeoGuide: Endpoint = {
     method: "post",
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-        if (!req.json) {
-            return new Response(
-                JSON.stringify({ error: "Invalid request: Missing JSON parsing function" }),
-                { status: 400, headers: { "Content-Type": "application/json" } }
-            );
-        }
-
         // CORS headers
         const corsHeaders = {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Allow-Credentials": "true"
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "86400"
         };
 
-        const { payload } = req;
-        const body = await req.json();
-        const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr  } = body;
-
-        if (!query || typeof query !== "string") {
-            return new Response(JSON.stringify({ error: "Missing query in request body" }), {
-                status: 400,
-                headers: {
-                    "Content-Type": "application/json",
-                    ...corsHeaders
-                },
+        // Handle preflight OPTIONS request
+        if (req.method === "OPTIONS") {
+            return new Response(null, {
+                status: 204,
+                headers: corsHeaders
             });
         }
 
-        // Set a timeout for the entire operation
-        const timeoutPromise = new Promise<Response>((_, reject) => {
-            setTimeout(() => reject(new Error("Operation timed out")), 300000); // 5 minutes timeout
-        });
+        if (!req.json) {
+            return new Response(
+                JSON.stringify({ error: "Invalid request: Missing JSON parsing function" }),
+                { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+            );
+        }
+
+        // Check Redis connection
+        const isRedisConnected = await checkRedisConnection();
+        if (!isRedisConnected) {
+            return new Response(
+                JSON.stringify({ 
+                    error: "Service temporarily unavailable. Please try again in a few moments.",
+                    code: "REDIS_CONNECTION_ERROR"
+                }),
+                { 
+                    status: 503, 
+                    headers: { 
+                        "Content-Type": "application/json", 
+                        ...corsHeaders 
+                    } 
+                }
+            );
+        }
+
+        const { payload } = req;
+        const body = await req.json();
+        const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr } = body;
+
+        if (!query || typeof query !== "string") {
+            return new Response(
+                JSON.stringify({ error: "Missing query in request body" }),
+                {
+                    status: 400,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
+                    },
+                }
+            );
+        }
 
         try {
-            // Create a promise for the actual operation
-            const operationPromise = (async (): Promise<Response> => {
-                // Fetch SERP API data using axios (including PAA questions)
-                const response = await axios.get('https://serpapi.com/search', {
-                    params: {
-                        q: query,
-                        api_key: process.env.SERP_API_KEY,
-                        hl: hl || 'en',             // Language
-                        gl: gl || 'us',             // Country
-                        lr: lr || 'lang_en'         // Only French content
+            // Add job to queue with retention settings
+            const job = await seoGuideQueue.add('createSeoGuide', {
+                query,
+                projectID,
+                email,
+                queryID,
+                language,
+                queryEngine,
+                hl,
+                gl,
+                lr
+            }, {
+                attempts: 3,
+                backoff: {
+                    type: 'exponential',
+                    delay: 1000
+                },
+                removeOnComplete: {
+                    age: 3600, // Keep completed jobs for 1 hour
+                    count: 100 // Keep last 100 completed jobs
+                },
+                removeOnFail: {
+                    age: 24 * 3600 // Keep failed jobs for 24 hours
+                }
+            });
+
+            return new Response(
+                JSON.stringify({ 
+                    success: true, 
+                    message: "SEO guide creation started",
+                    jobId: job.id
+                }),
+                {
+                    status: 202,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
                     },
-                    timeout: 300000, // 30 seconds timeout for SERP API
-                });
-
-                const organicResults: OrganicResult[] = await response.data['organic_results'] || [];
-                const paaQuestions = response.data['related_questions'] || [];
-                const PAAs = paaQuestions.map((item : {question : string}) => item.question);
-                const links = organicResults.map((item: OrganicResult) => item.link);
-
-                // Generate SEO brief concurrently
-                const fullLanguageName = hlToFullLanguageMap[language] || 'English';
-                const seoBriefPromise = generateSeoBrief(query, fullLanguageName);
-
-                // Fetch page content concurrently
-                const pageContentsPromise = Promise.all(links.map(fetchPageContent));
-
-                // Process the results concurrently
-                const [pageContentsResult, seoBriefResult] = await Promise.allSettled([pageContentsPromise, seoBriefPromise]);
-
-                // Handle resolved values or log errors
-                const resolvedPageContents = pageContentsResult.status === 'fulfilled' ? pageContentsResult.value : [];
-                const resolvedSeoBrief = seoBriefResult.status === 'fulfilled' ? seoBriefResult.value : null;
-
-                // Log errors if any promise is rejected
-                if (pageContentsResult.status === 'rejected') {
-                    console.error("Failed to fetch page contents:", pageContentsResult.reason);
                 }
-                if (seoBriefResult.status === 'rejected') {
-                    console.error("Failed to fetch SEO brief:", seoBriefResult.reason);
-                }
-
-                // Calculate the word count for each URL's content
-                const wordCounts = resolvedPageContents.map(content => {
-                    const words = content ? content.split(/\s+/).filter(Boolean) : []; // Split by spaces and filter out empty strings, handle null case
-                    return words.length; // Return word count
-                });
-
-                const processedTokens = resolvedPageContents
-                    .filter((text): text is string => !!text)
-                    .map(processText);
-
-                const keywords = extractWords(processedTokens);
-                const semanticKeywords = await getSemanticKeywords(keywords, query);
-
-                // Calculate SOSEO and DSEO for each URL
-                const { soseoScores, dseoScores } = calculateSoseoDseoForAllDocs(keywords, processedTokens);
-
-                // Calculate dynamic optimization ranges for each keyword across all URLs
-                const optimizationLevels = calculateDynamicOptimizationRanges(
-                    links,
-                    processedTokens,
-                    semanticKeywords,
-                );
-
-                // Prepare data for URL categorization
-                const urlDataForCategorization = organicResults.map((result, index) => ({
-                    url: result.link,
-                    title: result.title,
-                    content: resolvedPageContents[index] || ''
-                }));
-
-                // Categorize URLs based on content and query with retry logic
-                let urlCategories;
-                try {
-                    urlCategories = await categorizeUrls(urlDataForCategorization, query, language);
-                } catch (catError) {
-                    console.error("Error categorizing URLs:", catError);
-                    // Provide fallback categories if categorization fails
-                    urlCategories = organicResults.map(() => ["Uncategorized"]);
-                }
-
-                // Add word count and category to each searchResult
-                const searchResults = organicResults.map((result, index) => ({
-                    title: result.title,
-                    link: result.link,
-                    wordCount: wordCounts[index], // Add the word count for each URL's content
-                    soseo: soseoScores[index],  // Add SOSEO score
-                    dseo: dseoScores[index],    // Add DSEO score
-                    categories: urlCategories[index] || ["Uncategorized"] // Add categories array for each URL
-                }));
-
-                // Step 1: Build initial cronjob entries based on current SERP positions
-                const today = new Date().toISOString().split("T")[0]; // Format: YYYY-MM-DD
-
-                const cronjob: Record<string, { date: string; position: number }[]> = {};
-
-                organicResults.forEach((result, index) => {
-                    const position = index + 1; // 1-based position
-                    const url = result.link;
-
-                    cronjob[url] = [
-                        {
-                            date: today,
-                            position,
-                        },
-                    ];
-                });
-
-
-                const seoGuides = {
-                    query,
-                    queryID,
-                    queryEngine,
-                    optimizationLevels,
-                    searchResults,
-                    language,
-                    gl,
-                    seoBrief : resolvedSeoBrief,
-                    PAAs,
-                    cronjob,
-                    createdAt : Date.now(),
-                    createdBy: email
-                };
-
-                const users = await payload.find({
-                    collection: "users",
-                    where: { email: { equals: email } },
-                    limit: 1,
-                });
-
-                if (!users.docs.length) {
-                    return new Response(
-                        JSON.stringify({ error: `User not found for email: ${email}` }),
-                        {
-                            status: 400,
-                            headers: {
-                                "Content-Type": "application/json",
-                                ...corsHeaders
-                            },
-                        }
-                    );
-                }
-
-                const user = users.docs[0];
-                let projectId: string;
-
-                if (projectID === "Default") {
-                    const defaultProject = Array.isArray(user.projects)
-                        ? (user.projects as Project[]).find(
-                            (project) => project.projectName === "Default"
-                        )
-                        : undefined;
-
-                    if (defaultProject) {
-                        projectId = defaultProject.projectID;
-                    } else {
-                        return new Response(
-                            JSON.stringify({ error: "Default project not found" }),
-                            {
-                                status: 404,
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    ...corsHeaders
-                                },
-                            }
-                        );
-                    }
-                } else {
-                    projectId = projectID;
-                }
-
-                const existingProjects: Project[] = Array.isArray(user.projects)
-                    ? (user.projects as Project[])
-                    : [];
-
-                let projectUpdated = false;
-                const updatedProjects = existingProjects.map((project) => {
-                    if (project.projectID === projectId) {
-                        projectUpdated = true;
-                        return {
-                            ...project,
-                            seoGuides: [...(project.seoGuides || []), seoGuides],
-                        };
-                    }
-                    return project;
-                });
-
-                if (!projectUpdated) {
-                    return new Response(
-                        JSON.stringify({ error: "Project not found" }),
-                        {
-                            status: 404,
-                            headers: {
-                                "Content-Type": "application/json",
-                                ...corsHeaders
-                            },
-                        }
-                    );
-                }
-
-                await payload.update({
-                    collection: "users",
-                    where: { email: { equals: email } },
-                    data: { projects: updatedProjects },
-                });
-
-                return new Response(
-                    JSON.stringify({ success: true, seoGuides }),
-                    {
-                        status: 200,
-                        headers: {
-                            "Content-Type": "application/json",
-                            ...corsHeaders
-                        },
-                    }
-                );
-            })();
-
-            // Race between the operation and the timeout
-            return await Promise.race([operationPromise, timeoutPromise]);
+            );
         } catch (error: unknown) {
             console.error("❌ createSeoGuide error:", error);
             const errorMessage = error instanceof Error ? error.message : "Failed to create SEO guide";
-            return new Response(JSON.stringify({ error: errorMessage }), {
-                status: 500,
-                headers: {
-                    "Content-Type": "application/json",
-                    ...corsHeaders
-                },
-            });
+            return new Response(
+                JSON.stringify({ 
+                    error: errorMessage,
+                    code: "QUEUE_ERROR"
+                }),
+                {
+                    status: 500,
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...corsHeaders
+                    },
+                }
+            );
         }
     }),
 };

@@ -1,15 +1,9 @@
+@import url('https://cdn.mobirise.com/mobirise-icons/mobirise-icons.css');
 @import "tailwindcss";
 
 :root {
   --background: #F8FAFD;
   --foreground: #F8FAFD;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,3 +23,47 @@ body {
 .text-[amber-50] {
   color: var(--color-amber-50);
 }
+
+/* Animation for floating effect */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Testimonial Slider Styles */
+.testimonial-slider {
+  padding: 0 90px;
+}
+
+.testimonial-slider .slick-slide {
+  opacity: 0.3;
+  transform: scale(0.85);
+  transition: all 0.5s ease;
+}
+
+.testimonial-slider .slick-center {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hide the default slick arrows */
+.testimonial-slider .slick-prev,
+.testimonial-slider .slick-next {
+  display: none !important;
+}
+
+/* Ensure left to right animation */
+.testimonial-slider .slick-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.testimonial-slider .slick-slide {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+

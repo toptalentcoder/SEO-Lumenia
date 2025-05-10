@@ -3,10 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUser } from "../../../context/UserContext";
-import GoogleAuthButton from "../../../components/forms/GoogleAuthButton";
-import FormInput from "../../../components/forms/FormInput";
-import { BiLogInCircle } from "react-icons/bi";
-import Link from "next/link";
+import NavbarLandingEn from "../../../components/common/Navbar-landing-En";
+import FooterLandingEn from "../../../components/common/Footer-landing-En";
 
 export default function SignupPage() {
     const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +14,11 @@ export default function SignupPage() {
         password: "",
         confirmPassword: "",
         terms: false,
+        name: "",
+        keycode: "",
+        cgu: false,
+        email_alternative: "",
+        email_solo: "super"
     });
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
@@ -61,7 +64,13 @@ export default function SignupPage() {
         setIsLoading(true);
 
         if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match.");
+            setError("Passwords do not match. Please make sure both passwords are identical.");
+            setIsLoading(false);
+            return;
+        }
+
+        if (!formData.cgu) {
+            setError("Please accept the legal terms to continue.");
             setIsLoading(false);
             return;
         }
@@ -79,88 +88,150 @@ export default function SignupPage() {
                 }),
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                throw new Error("Sign-up failed. Please try again.");
+                throw new Error(data.message || "Sign-up failed. Please try again.");
             }
 
-            const data = await response.json();
-            setSuccess("Sign-up successful! Redirecting...");
-
+            setSuccess("Account created successfully! Redirecting to login page...");
             console.log("Signup successful:", data);
 
-            setTimeout(() => router.push("/auth/signin"), 1000);
+            setTimeout(() => router.push("/auth/signin"), 2000);
         } catch (err) {
             console.error(err);
-            setError(err.message || "An unexpected error occurred.");
+            setError(err.message || "An unexpected error occurred. Please try again later.");
         } finally {
             setIsLoading(false);
         }
     };
 
     return (
-        <main className="min-h-screen bg-gray-100 text-gray-800 flex flex-col items-center py-8">
-            <div className="mt-24 w-full max-w-lg bg-white shadow-lg rounded-lg p-8 mx-auto">
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-gray-900">Sign Up</h2>
-                    <GoogleAuthButton action="signup" />
-                </div>
+        <div className="min-h-screen bg-white">
+            <NavbarLandingEn/>
 
-                <hr className="border-t border-gray-300 mb-6" />
-
-                {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-                {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
-
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                    <FormInput id="fullName" label="Full Name" type="text" placeholder="Enter your full name" value={formData.fullName} onChange={handleChange} />
-                    <FormInput id="email" label="Email Address" type="email" placeholder="Enter your email address" value={formData.email} onChange={handleChange} />
-                    <FormInput id="password" label="Password" type="password" placeholder="Enter your password" value={formData.password} onChange={handleChange} />
-                    <FormInput id="confirmPassword" label="Confirm Password" type="password" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleChange} />
-
-                    <div className="flex items-center mt-4">
-                        <input id="terms" name="terms" type="checkbox" checked={formData.terms} onChange={handleChange} className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-                        <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                            I agree to the{" "}
-                            <a href="#" className="text-blue-600 font-medium">
-                                Terms and Conditions
-                            </a>
-                        </label>
+            <section id="blog" className="py-24 bg-blue-50 relative overflow-hidden" style={{
+                backgroundImage: "url('/images/welcome/section-bg2.png')",
+                backgroundSize: 'auto',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                backgroundPosition: 'center',
+                backgroundPositionY: '0px'
+            }}>
+                <div className="container mx-auto px-4">
+                    <div className="flex flex-wrap mt-28">
+                        {/* section intro row starts */}
+                        <div className="mb-24 w-3/4 mx-auto">
+                            <div className="text-left">
+                                <h2 className="text-[37.328px] font-bold text-gray-900">Sign in!</h2>
+                                <div className="w-24 h-1 bg-green-400 mt-4 ml-4"></div>
+                            </div>
+                        </div>
+                        {/* section intro row ends */}
                     </div>
+                    {/* row starts */}
+                    <div className="flex flex-wrap">
+                        {/* column 1 starts */}
+                        <div className="w-3/4 justify-center mx-auto">
+                            {/* blog item 1 starts */}
+                            <div className="bg-white p-8">
+                                {/* image */}
+                                <div className="space-y-6 text-left">
+                                    <div className="flex justify-start">
+                                    <h4 className="text-[21.328px] font-bold text-gray-900">Sign in!</h4>
+                                    </div>
+                                    
+                                    <p className="text-gray-600 text-[16px]">Create your account to unlock the SEO magic of Lumenia!</p>
+                                    <form className="space-y-4" onSubmit={handleSubmit}>
+                                        <input type="hidden" name="_token" value="KsG7xlS8al4PDbJDNKymwFr6W3QCqs0ylNGR1XyU" />
 
-                    <div className="flex justify-center mt-6">
-                        <button
-                            type="submit"
-                            disabled={!formData.terms || isLoading}
-                            className={`w-full py-3 px-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium rounded-md shadow-sm flex items-center gap-x-2 justify-center max-w-xs transition ${
-                                (!formData.terms || isLoading) ? "opacity-50 cursor-not-allowed" : "hover:from-blue-600 hover:to-purple-600"
-                            }`}
-                        >
-                            {isLoading ? (
-                                <>
-                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 01-8 8z"></path>
-                                    </svg>
-                                    <span>Signing Up...</span>
-                                </>
-                            ) : (
-                                <>
-                                    <BiLogInCircle />
-                                    <span>Sign Up</span>
-                                </>
-                            )}
-                        </button>
+                                        {error && (
+                                            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+                                                <div className="flex">
+                                                    <div className="flex-shrink-0">
+                                                        <svg className="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <div className="ml-3">
+                                                        <p className="text-sm text-red-700">{error}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {success && (
+                                            <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+                                                <div className="flex">
+                                                    <div className="flex-shrink-0">
+                                                        <svg className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <div className="ml-3">
+                                                        <p className="text-sm text-green-700">{success}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div>
+                                            <label htmlFor="fullName" className="block text-[16px] font-semibold text-gray-900">Name*</label>
+                                            <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="email" className="block text-[16px] font-semibold text-gray-900">Email (Preferably your professional email)*</label>
+                                            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="password" className="block text-[16px] font-semibold text-gray-900">Password*</label>
+                                            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="confirmPassword" className="block text-[16px] font-semibold text-gray-900">Password confirmation*</label>
+                                            <input type="password" name="password_confirmation" id="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="keycode" className="block text-[16px] font-semibold text-gray-900">Coupon code</label>
+                                            <input type="text" id="keycode" name="keycode" value={formData.keycode} onChange={handleChange} placeholder="(not mandatory)" className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                        </div>
+
+                                        <div className="flex items-center mt-24 justify-start text-left">
+                                            <input type="checkbox" name="cgu" id="cgu" checked={formData.cgu} onChange={handleChange} value="1" className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                                            <label htmlFor="cgu" className="ml-2 block text-[16px] font-semibold text-[#001F3F] text-left">
+                                                I accept the {" "}
+                                                <a href="/en/legals" target="_blank" rel="noopener" className="text-[#001F3F] hover:text-[#4517AD] underline">
+                                                    legals terms
+                                                </a>
+                                            </label>
+                                        </div>
+
+                                        <div className="mt-6">
+                                            <button 
+                                                type="submit" 
+                                                disabled={isLoading}
+                                                className="flex justify-center py-3.5 px-10 border border-transparent text-[16px] text-white bg-[#001F3F] hover:bg-[#4517AD] focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {isLoading ? 'Creating Account...' : 'Confirm'}
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            {/* blog item 1 ends */}
+                        </div>
+                        {/* column 1 ends */}
                     </div>
-                </form>
-
-                <div className="mt-4 text-center">
-                    <p className="text-sm text-gray-700">
-                        Already have an account?{" "}
-                        <Link href="/auth/signin" className="text-blue-600 font-medium hover:underline">
-                            Sign In
-                        </Link>
-                    </p>
+                    {/* row starts */}
                 </div>
-            </div>
-        </main>
+            </section>
+
+            <FooterLandingEn />
+
+        </div>
     );
 }

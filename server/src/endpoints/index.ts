@@ -48,12 +48,12 @@ import { deleteQueryEndpoint } from "./seoGuide/deleteQuery";
 import { backlinksOverviewEndpoint } from "./backlinks_overview/backlinksOverview";
 import { userBacklinkHistoryEndpoint } from "./backlinks_overview/userBacklinkHistory";
 import { searchBacklinksEndpoint } from "./backlinks_overview/searchBacklinks";
-import { saveKeywordsForSERPWeatherCategoryEndpoint } from "./saveKeywordsForSerpWeatherEndpoint";
 import { getProgressEndpoint } from "./seoGuide/getProgress";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
 import { getPageDuplicationEndpoint } from "./page_duplication/getPageDuplicationEndpoint";
 import { getNumberOf25TopKeywordsEndpoint } from "./getNumberOf25TopKeywordsEndpoint";
 import { getNumberOfBacklinksEndpoint } from "./getNumberOfBacklinksEndpoint";
+import { getSeoGuideStatus } from './seoGuide/getSeoGuideStatus';
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -98,7 +98,6 @@ export const customEndpoints = [
     getMonitoringData,
     internalPageRankEndpoint,
     getInternalPageRankEndpoint,
-    saveKeywordsForSERPWeatherCategoryEndpoint,
     pageDuplicationEndpoint,
     getSerpWeatherDataEndpoint,
     trackKeywordsEndpoint,
@@ -112,5 +111,6 @@ export const customEndpoints = [
     getInternalPageRankEndpoint,
     getPageDuplicationEndpoint,
     getNumberOf25TopKeywordsEndpoint,
-    getNumberOfBacklinksEndpoint
+    getNumberOfBacklinksEndpoint,
+    getSeoGuideStatus
 ]
