@@ -1,3 +1,4 @@
+
 import { OpenAI } from 'openai';
 
 const openai = new OpenAI({
@@ -42,3 +43,4 @@ export async function generateSEOKeywords(query: string, country: string, langua
 
   return keywords;
 }
+
