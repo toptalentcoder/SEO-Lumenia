@@ -51,6 +51,11 @@ export default function SEOQueryDashboard() {
         label: 'English (USA)'
     });
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [progress, setProgress] = useState(0);
+    const [isAborted, setIsAborted] = useState(false);
+
     const generateQueryId = () => {
         const randomID = Math.floor(10000000 + Math.random() * 90000000);
         return new String(randomID);
@@ -121,65 +126,115 @@ export default function SEOQueryDashboard() {
             return;
         }
 
-        setLoading(true); // 🔄 Disable the button
+        setIsLoading(true);
+        setError(null);
+        setProgress(0);
+        setIsAborted(false);
 
         const queryID = generateQueryId();
-        setPendingQueryID(queryID); // <-- Set pending ID
+        setPendingQueryID(queryID);
 
-        // 🔁 Smart projectID resolution
         const resolvedProjectID =
             selectedProjectItem?.projectID ||
             projectID ||
             'Default';
 
-        try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
+        let pollInterval;
 
-            const response = await fetch('http://localhost:7777/api/createSeoGuide', {
+        try {
+            // Initial request to create job
+            const response = await fetch(`https://lumenia.io/api/createSeoGuide`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     query: search,
-                    queryID : queryID,
-                    queryEngine : selectedQueryEngine.label.toLowerCase(),
-                    projectID : resolvedProjectID,
-                    email : user.email,
+                    queryID: queryID,
+                    queryEngine: selectedQueryEngine.label.toLowerCase(),
+                    projectID: resolvedProjectID,
+                    email: user.email,
                     language: selectedLanguage.hl,
                     hl: selectedLanguage.hl,
                     gl: selectedLanguage.gl,
                     lr: selectedLanguage.lr
-                }),
-                signal: controller.signal,
-                keepalive: true,
+                })
             });
-
-            clearTimeout(timeoutId);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const result = await response.json();
+            const { jobId } = await response.json();
+            
+            // Start polling for job status
+            pollInterval = setInterval(async () => {
+                try {
+                    const statusResponse = await fetch(`https://lumenia.io/api/seoGuideStatus/${jobId}`);
+                    const statusData = await statusResponse.json();
 
-            if (result.success) {
-                setRefreshTrigger(prev => prev + 1); // 👈 trigger refresh manually
-            }
+                    if (!statusResponse.ok) {
+                        throw new Error(statusData.error || 'Failed to get job status');
+                    }
+
+                    // Update progress
+                    if (statusData.progress) {
+                        setProgress(statusData.progress);
+                    }
+
+                    // Handle different job states
+                    switch (statusData.status) {
+                        case 'completed':
+                            clearInterval(pollInterval);
+                            setIsLoading(false);
+                            setProgress(100);
+                            // Clear pending query ID to remove the loading row
+                            setPendingQueryID(null);
+                            // Trigger refresh of the query table
+                            setRefreshTrigger(prev => prev + 1);
+
+                            break;
+                        case 'failed':
+                            clearInterval(pollInterval);
+                            setIsLoading(false);
+                            setPendingQueryID(null);
+                            setError(statusData.failedReason || 'Failed to create SEO guide');
+                            break;
+                        case 'stalled':
+                            clearInterval(pollInterval);
+                            setIsLoading(false);
+                            setPendingQueryID(null);
+                            setError('Job stalled. Please try again.');
+                            break;
+                        case 'active':
+                        case 'waiting':
+                        case 'delayed':
+                            // Keep loading state active while job is processing
+                            setIsLoading(true);
+                            break;
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                    // Keep loading state active on temporary errors
+                    setIsLoading(true);
+                }
+            }, 5000); // Poll every 5 seconds
+
         } catch (error) {
-            if (error.name === 'AbortError') {
-                console.error("Request timed out");
-                alert("The request took too long. Please try again.");
-            } else {
-                console.error("Failed to create SEO guide:", error);
-                alert("Failed to create SEO guide. Please try again.");
-            }
-        } finally {
-            setLoading(false); // ✅ Re-enable the button
+            setIsLoading(false);
             setPendingQueryID(null);
+            setError(error.message || 'Failed to create SEO guide');
         }
-    }
+
+        // Cleanup function
+        return () => {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+            }
+        };
+    };
 
     const handleQueryEngineToggleDropdown = () => setIsQueryEngineOpen(!isQueryEngineOpen);
     const handleQueryEngineSearchChange = (e) => setSearchQueryTerm(e.target.value);
@@ -329,17 +384,47 @@ export default function SEOQueryDashboard() {
 
                         <div className="relative inline-block">
                             <button
-                                disabled={loading}
+                                disabled={isLoading}
                                 className={`ml-2 py-2 px-4 rounded-xl text-white ${
-                                    loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#439B38] hover:bg-green-700 cursor-pointer'
+                                    isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#439B38] hover:bg-green-700 cursor-pointer'
                                 }`}
                                 onClick={handleCreateSEOGuide}
                             >
-                                Create a SEO Guide
+                                {isLoading ? (
+                                    <div className="flex items-center space-x-2">
+                                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                        <span>Creating...</span>
+                                    </div>
+                                ) : (
+                                    'Create a SEO Guide'
+                                )}
                             </button>
 
+                            {isLoading && (
+                                <div className="absolute top-full left-0 mt-2 w-full bg-gray-200 rounded-full h-2">
+                                    <div 
+                                        className="bg-[#439B38] h-2 rounded-full transition-all duration-300"
+                                        style={{ width: `${progress}%` }}
+                                    ></div>
+                                </div>
+                            )}
+
+                            {error && (
+                                <div className="absolute top-full left-0 mt-2 w-full bg-red-100 text-red-700 px-4 py-2 rounded-lg">
+                                    {error}
+                                    {isAborted && (
+                                        <button 
+                                            className="ml-2 text-red-700 underline"
+                                            onClick={handleCreateSEOGuide}
+                                        >
+                                            Retry
+                                        </button>
+                                    )}
+                                </div>
+                            )}
+
                             {/* Tooltip - Only visible when search is typed */}
-                            {search.trim().length > 0 && (
+                            {search.trim().length > 0 && !isLoading && (
                                 <div className="absolute top-1/2 left-full ml-3 transform -translate-y-1/2 bg-[#4A4291] text-white text-xs px-3 py-1 rounded-lg shadow-lg flex items-center space-x-1">
                                     {/* Triangle Pointer */}
                                     <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-6 border-t-transparent border-b-6 border-b-transparent border-r-6 border-r-[#4A4291]"></div>

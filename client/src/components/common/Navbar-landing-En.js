@@ -76,21 +76,23 @@ export default function NavbarLandingEn() {
                         Start your free trial!
                     </Link>
 
+
                     {/* Language Selector */}
-                    <div className="flex items-center space-x-2">
-                        <div className="flex flex-col items-center text-[10px] text-gray-600 space-y-1 cursor-pointer">
-                        <US className="w-5 h-3.5" title="US" />
-                        <span>US</span>
-                        </div>
-                        <div className="flex flex-col items-center text-[10px] text-gray-600 space-y-1 cursor-pointer">
-                        <FR className="w-5 h-3.5" title="FR" />
-                        <span>FR</span>
-                        </div>
-                        <div className="flex flex-col items-center text-[10px] text-gray-600 space-y-1 cursor-pointer">
-                        <ES className="w-5 h-3.5" title="ES" />
-                        <span>ES</span>
-                        </div>
-                    </div>
+//                     <div className="flex items-center space-x-2">
+//                         <div className="flex flex-col items-center text-[10px] text-gray-600 space-y-1 cursor-pointer">
+//                         <US className="w-5 h-3.5" title="US" />
+//                         <span>US</span>
+//                         </div>
+//                         <div className="flex flex-col items-center text-[10px] text-gray-600 space-y-1 cursor-pointer">
+//                         <FR className="w-5 h-3.5" title="FR" />
+//                         <span>FR</span>
+//                         </div>
+//                         <div className="flex flex-col items-center text-[10px] text-gray-600 space-y-1 cursor-pointer">
+//                         <ES className="w-5 h-3.5" title="ES" />
+//                         <span>ES</span>
+//                         </div>
+//                     </div>
+
                     </div>
                 </div>
                 </div>

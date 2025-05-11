@@ -1,0 +1,1153 @@
+2025-04-27T10:06:06: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:06:06: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:06:06: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:06:06: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:06:06: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:08:05: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:08:05: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:08:05: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:08:05: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:08:06: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:13:08: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:13:08: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:13:09: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:13:09: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:13:09: /usr/bin/node: --expose-gc is not allowed in NODE_OPTIONS
+2025-04-27T10:15:47: /usr/bin/node: --optimize-for-size is not allowed in NODE_OPTIONS
+2025-04-27T10:15:47: /usr/bin/node: --optimize-for-size is not allowed in NODE_OPTIONS
+2025-04-27T10:15:47: /usr/bin/node: --optimize-for-size is not allowed in NODE_OPTIONS
+2025-04-27T10:15:48: /usr/bin/node: --optimize-for-size is not allowed in NODE_OPTIONS
+2025-04-27T10:15:48: /usr/bin/node: --optimize-for-size is not allowed in NODE_OPTIONS
+2025-04-27T10:59:38: Error in page duplication endpoint: Error: Operation timed out
+2025-04-27T10:59:38:     at Timeout._onTimeout (.next/server/chunks/6097.js:157:11283)
+2025-04-27T10:59:38: Error: {
+2025-04-27T10:59:38:   "message": "An error occurred.",
+2025-04-27T10:59:38:   "context": "API Request Error",
+2025-04-27T10:59:38:   "type": "Error",
+2025-04-27T10:59:38:   "causes": [
+2025-04-27T10:59:38:     "An unknown error occurred."
+2025-04-27T10:59:38:   ],
+2025-04-27T10:59:38:   "timestamp": "2025-04-27T10:59:38.707Z",
+2025-04-27T10:59:38:   "stack": "Error: aborted\n    at connResetException (node:internal/errors:720:14)\n    at abortIncoming (node:_http_server:782:17)\n    at socketOnClose (node:_http_server:776:3)\n    at Socket.emit (node:events:529:35)\n    at TCP.<anonymous> (node:net:351:12)\n    at TCP.callbackTrampoline (node:internal/async_hooks:128:17)"
+2025-04-27T10:59:38: }
+2025-04-27T10:59:38: Error: {
+2025-04-27T10:59:38:   "message": "An error occurred.",
+2025-04-27T10:59:38:   "context": "API Request Error",
+2025-04-27T10:59:38:   "type": "Error",
+2025-04-27T10:59:38:   "causes": [
+2025-04-27T10:59:38:     "An unknown error occurred."
+2025-04-27T10:59:38:   ],
+2025-04-27T10:59:38:   "timestamp": "2025-04-27T10:59:38.710Z",
+2025-04-27T10:59:38:   "stack": "Error: aborted\n    at connResetException (node:internal/errors:720:14)\n    at abortIncoming (node:_http_server:782:17)\n    at socketOnClose (node:_http_server:776:3)\n    at Socket.emit (node:events:529:35)\n    at TCP.<anonymous> (node:net:351:12)\n    at TCP.callbackTrampoline (node:internal/async_hooks:128:17)"
+2025-04-27T10:59:38: }
+2025-04-27T10:59:38: Error: {
+2025-04-27T10:59:38:   "message": "An error occurred.",
+2025-04-27T10:59:38:   "context": "API Request Error",
+2025-04-27T10:59:38:   "type": "Error",
+2025-04-27T10:59:38:   "causes": [
+2025-04-27T10:59:38:     "An unknown error occurred."
+2025-04-27T10:59:38:   ],
+2025-04-27T10:59:38:   "timestamp": "2025-04-27T10:59:38.720Z",
+2025-04-27T10:59:38:   "stack": "Error: aborted\n    at connResetException (node:internal/errors:720:14)\n    at abortIncoming (node:_http_server:782:17)\n    at socketOnClose (node:_http_server:776:3)\n    at Socket.emit (node:events:529:35)\n    at TCP.<anonymous> (node:net:351:12)\n    at TCP.callbackTrampoline (node:internal/async_hooks:128:17)"
+2025-04-27T10:59:38: }
+2025-04-27T10:59:38: Error: {
+2025-04-27T10:59:38:   "message": "An error occurred.",
+2025-04-27T10:59:38:   "context": "API Request Error",
+2025-04-27T10:59:38:   "type": "Error",
+2025-04-27T10:59:38:   "causes": [
+2025-04-27T10:59:38:     "An unknown error occurred."
+2025-04-27T10:59:38:   ],
+2025-04-27T10:59:38:   "timestamp": "2025-04-27T10:59:38.726Z",
+2025-04-27T10:59:38:   "stack": "Error: aborted\n    at connResetException (node:internal/errors:720:14)\n    at abortIncoming (node:_http_server:782:17)\n    at socketOnClose (node:_http_server:776:3)\n    at Socket.emit (node:events:529:35)\n    at TCP.<anonymous> (node:net:351:12)\n    at TCP.callbackTrampoline (node:internal/async_hooks:128:17)"
+2025-04-27T10:59:38: }
+2025-04-27T10:59:38: Error: {
+2025-04-27T10:59:38:   "message": "An error occurred.",
+2025-04-27T10:59:38:   "context": "API Request Error",
+2025-04-27T10:59:38:   "type": "Error",
+2025-04-27T10:59:38:   "causes": [
+2025-04-27T10:59:38:     "An unknown error occurred."
+2025-04-27T10:59:38:   ],
+2025-04-27T10:59:38:   "timestamp": "2025-04-27T10:59:38.731Z",
+2025-04-27T10:59:38:   "stack": "Error: aborted\n    at connResetException (node:internal/errors:720:14)\n    at abortIncoming (node:_http_server:782:17)\n    at socketOnClose (node:_http_server:776:3)\n    at Socket.emit (node:events:529:35)\n    at TCP.<anonymous> (node:net:351:12)\n    at TCP.callbackTrampoline (node:internal/async_hooks:128:17)"
+2025-04-27T10:59:38: }
+2025-04-27T12:37:47: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-04-27T12:51:15: Error in page duplication endpoint: E: The following field is invalid: Duplicates
+2025-04-27T12:51:15:     at y (.next/server/chunks/9094.js:70:38333)
+2025-04-27T12:51:15:     at async K (.next/server/chunks/9094.js:111:142665)
+2025-04-27T12:51:15:     at async e4 (.next/server/chunks/6097.js:157:10616)
+2025-04-27T12:51:15:     at async (.next/server/chunks/6097.js:157:11347)
+2025-04-27T12:51:15:     at async (.next/server/chunks/6097.js:157:11595)
+2025-04-27T12:51:15:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-27T12:51:15:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-04-27T12:51:15:     at async (.next/server/chunks/3137.js:1:67960) {
+2025-04-27T12:51:15:   data: [Object],
+2025-04-27T12:51:15:   isOperational: true,
+2025-04-27T12:51:15:   isPublic: false,
+2025-04-27T12:51:15:   status: 400,
+2025-04-27T12:51:15:   [cause]: [Object]
+2025-04-27T12:51:15: }
+2025-04-27T12:51:33: Error in page duplication endpoint: E: The following field is invalid: Duplicates
+2025-04-27T12:51:33:     at y (.next/server/chunks/9094.js:70:38333)
+2025-04-27T12:51:33:     at async K (.next/server/chunks/9094.js:111:142665)
+2025-04-27T12:51:33:     at async e4 (.next/server/chunks/6097.js:157:10616)
+2025-04-27T12:51:33:     at async (.next/server/chunks/6097.js:157:11347)
+2025-04-27T12:51:33:     at async (.next/server/chunks/6097.js:157:11595)
+2025-04-27T12:51:33:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-27T12:51:33:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-04-27T12:51:33:     at async (.next/server/chunks/3137.js:1:67960) {
+2025-04-27T12:51:33:   data: [Object],
+2025-04-27T12:51:33:   isOperational: true,
+2025-04-27T12:51:33:   isPublic: false,
+2025-04-27T12:51:33:   status: 400,
+2025-04-27T12:51:33:   [cause]: [Object]
+2025-04-27T12:51:33: }
+2025-04-27T12:51:47: Error in page duplication endpoint: E: The following field is invalid: Duplicates
+2025-04-27T12:51:47:     at y (.next/server/chunks/9094.js:70:38333)
+2025-04-27T12:51:47:     at async K (.next/server/chunks/9094.js:111:142665)
+2025-04-27T12:51:47:     at async e4 (.next/server/chunks/6097.js:157:10616)
+2025-04-27T12:51:47:     at async (.next/server/chunks/6097.js:157:11347)
+2025-04-27T12:51:47:     at async (.next/server/chunks/6097.js:157:11595)
+2025-04-27T12:51:47:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-27T12:51:47:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-04-27T12:51:47:     at async (.next/server/chunks/3137.js:1:67960) {
+2025-04-27T12:51:47:   data: [Object],
+2025-04-27T12:51:47:   isOperational: true,
+2025-04-27T12:51:47:   isPublic: false,
+2025-04-27T12:51:47:   status: 400,
+2025-04-27T12:51:47:   [cause]: [Object]
+2025-04-27T12:51:47: }
+2025-04-27T22:40:43: Error creating backlink site: E: The following field is invalid: Search History 1 > Backlinks 87 > Link Strength
+2025-04-27T22:40:43:     at y (.next/server/chunks/9094.js:70:38333)
+2025-04-27T22:40:43:     at async K (.next/server/chunks/9094.js:111:142665)
+2025-04-27T22:40:43:     at async (.next/server/chunks/6097.js:157:23310)
+2025-04-27T22:40:43:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-27T22:40:43:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-04-27T22:40:43:     at async (.next/server/chunks/3137.js:1:67960) {
+2025-04-27T22:40:43:   data: [Object],
+2025-04-27T22:40:43:   isOperational: true,
+2025-04-27T22:40:43:   isPublic: false,
+2025-04-27T22:40:43:   status: 400,
+2025-04-27T22:40:43:   [cause]: [Object]
+2025-04-27T22:40:43: }
+2025-04-27T22:41:03: Error creating backlink site: E: The following field is invalid: Search History 1 > Backlinks 87 > Link Strength
+2025-04-27T22:41:03:     at y (.next/server/chunks/9094.js:70:38333)
+2025-04-27T22:41:03:     at async K (.next/server/chunks/9094.js:111:142665)
+2025-04-27T22:41:03:     at async (.next/server/chunks/6097.js:157:23310)
+2025-04-27T22:41:03:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-27T22:41:03:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-04-27T22:41:03:     at async (.next/server/chunks/3137.js:1:67960) {
+2025-04-27T22:41:03:   data: [Object],
+2025-04-27T22:41:03:   isOperational: true,
+2025-04-27T22:41:03:   isPublic: false,
+2025-04-27T22:41:03:   status: 400,
+2025-04-27T22:41:03:   [cause]: [Object]
+2025-04-27T22:41:03: }
+2025-04-27T23:39:33: Error creating backlink site: E: The following field is invalid: Search History 1 > Backlinks 87 > Link Strength
+2025-04-27T23:39:33:     at y (.next/server/chunks/9094.js:70:38333)
+2025-04-27T23:39:33:     at async K (.next/server/chunks/9094.js:111:142665)
+2025-04-27T23:39:33:     at async (.next/server/chunks/6097.js:157:23310)
+2025-04-27T23:39:33:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-27T23:39:33:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-04-27T23:39:33:     at async (.next/server/chunks/3137.js:1:67960) {
+2025-04-27T23:39:33:   data: [Object],
+2025-04-27T23:39:33:   isOperational: true,
+2025-04-27T23:39:33:   isPublic: false,
+2025-04-27T23:39:33:   status: 400,
+2025-04-27T23:39:33:   [cause]: [Object]
+2025-04-27T23:39:33: }
+2025-04-28T00:00:10: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-04-28T01:17:27: Failed to fetch SEO brief: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:27:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:27:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:27:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:27:     at async tf (.next/server/chunks/6097.js:190:9)
+2025-04-28T01:17:27:     at async (.next/server/chunks/6097.js:207:2172)
+2025-04-28T01:17:27:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:27:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T01:17:27:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T01:17:27:   status: 429,
+2025-04-28T01:17:27:   headers: [Object],
+2025-04-28T01:17:27:   request_id: 'req_6cb53c0acd211fbb56d3567436c851cb',
+2025-04-28T01:17:27:   error: [Object],
+2025-04-28T01:17:27:   code: 'insufficient_quota',
+2025-04-28T01:17:27:   param: null,
+2025-04-28T01:17:27:   type: 'insufficient_quota'
+2025-04-28T01:17:27: }
+2025-04-28T01:17:30: Embedding error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:30:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:30:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:30:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:30:     at async tc (.next/server/chunks/6097.js:157:26461)
+2025-04-28T01:17:30:     at async tp (.next/server/chunks/6097.js:157:26810)
+2025-04-28T01:17:30:     at async (.next/server/chunks/6097.js:207:2532)
+2025-04-28T01:17:30:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:30:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T01:17:30:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T01:17:30:   status: 429,
+2025-04-28T01:17:30:   headers: [Object],
+2025-04-28T01:17:30:   request_id: 'req_e50eb93447819d6723faa5705fc7957e',
+2025-04-28T01:17:30:   error: [Object],
+2025-04-28T01:17:30:   code: 'insufficient_quota',
+2025-04-28T01:17:30:   param: null,
+2025-04-28T01:17:30:   type: 'insufficient_quota'
+2025-04-28T01:17:30: }
+2025-04-28T01:17:32: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:32:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:32:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:32:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:32:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:32:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:32:   status: 429,
+2025-04-28T01:17:32:   headers: [Object],
+2025-04-28T01:17:32:   request_id: 'req_8e749013382c995e0ca4a2e525c8b5c1',
+2025-04-28T01:17:32:   error: [Object],
+2025-04-28T01:17:32:   code: 'insufficient_quota',
+2025-04-28T01:17:32:   param: null,
+2025-04-28T01:17:32:   type: 'insufficient_quota'
+2025-04-28T01:17:32: }
+2025-04-28T01:17:32: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:32:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:32:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:32:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:32:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:32:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:32:   status: 429,
+2025-04-28T01:17:32:   headers: [Object],
+2025-04-28T01:17:32:   request_id: 'req_7e57b28f1114a703e62f04853d237ee8',
+2025-04-28T01:17:32:   error: [Object],
+2025-04-28T01:17:32:   code: 'insufficient_quota',
+2025-04-28T01:17:32:   param: null,
+2025-04-28T01:17:32:   type: 'insufficient_quota'
+2025-04-28T01:17:32: }
+2025-04-28T01:17:32: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:32:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:32:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:32:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:32:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:32:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:32:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:32:   status: 429,
+2025-04-28T01:17:32:   headers: [Object],
+2025-04-28T01:17:32:   request_id: 'req_62d0ca2b7b27a218ba18b1127ebcd464',
+2025-04-28T01:17:32:   error: [Object],
+2025-04-28T01:17:32:   code: 'insufficient_quota',
+2025-04-28T01:17:32:   param: null,
+2025-04-28T01:17:32:   type: 'insufficient_quota'
+2025-04-28T01:17:32: }
+2025-04-28T01:17:34: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:34:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:34:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:34:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:34:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:34:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:34:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:34:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:34:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:34:   status: 429,
+2025-04-28T01:17:34:   headers: [Object],
+2025-04-28T01:17:34:   request_id: 'req_21386820d94a1357d9245ae4f8cd0b9c',
+2025-04-28T01:17:34:   error: [Object],
+2025-04-28T01:17:34:   code: 'insufficient_quota',
+2025-04-28T01:17:34:   param: null,
+2025-04-28T01:17:34:   type: 'insufficient_quota'
+2025-04-28T01:17:34: }
+2025-04-28T01:17:34: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:34:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:34:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:34:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:34:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:34:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:34:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:34:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:34:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:34:   status: 429,
+2025-04-28T01:17:34:   headers: [Object],
+2025-04-28T01:17:34:   request_id: 'req_735cf4c824d25466657908f336a2396d',
+2025-04-28T01:17:34:   error: [Object],
+2025-04-28T01:17:34:   code: 'insufficient_quota',
+2025-04-28T01:17:34:   param: null,
+2025-04-28T01:17:34:   type: 'insufficient_quota'
+2025-04-28T01:17:34: }
+2025-04-28T01:17:35: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:35:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:35:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:35:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:35:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:35:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:35:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:35:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:35:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:35:   status: 429,
+2025-04-28T01:17:35:   headers: [Object],
+2025-04-28T01:17:35:   request_id: 'req_549b6a2a99b2cdca63fa8d9bede9e166',
+2025-04-28T01:17:35:   error: [Object],
+2025-04-28T01:17:35:   code: 'insufficient_quota',
+2025-04-28T01:17:35:   param: null,
+2025-04-28T01:17:35:   type: 'insufficient_quota'
+2025-04-28T01:17:35: }
+2025-04-28T01:17:37: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:37:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:37:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:37:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:37:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:37:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:37:   status: 429,
+2025-04-28T01:17:37:   headers: [Object],
+2025-04-28T01:17:37:   request_id: 'req_82c3dee6693fe2fde467b4ea766cf56d',
+2025-04-28T01:17:37:   error: [Object],
+2025-04-28T01:17:37:   code: 'insufficient_quota',
+2025-04-28T01:17:37:   param: null,
+2025-04-28T01:17:37:   type: 'insufficient_quota'
+2025-04-28T01:17:37: }
+2025-04-28T01:17:37: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:37:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:37:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:37:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:37:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:37:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:37:   status: 429,
+2025-04-28T01:17:37:   headers: [Object],
+2025-04-28T01:17:37:   request_id: 'req_e202823f8355d455d750c03fde9214eb',
+2025-04-28T01:17:37:   error: [Object],
+2025-04-28T01:17:37:   code: 'insufficient_quota',
+2025-04-28T01:17:37:   param: null,
+2025-04-28T01:17:37:   type: 'insufficient_quota'
+2025-04-28T01:17:37: }
+2025-04-28T01:17:37: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:17:37:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:17:37:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:17:37:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:17:37:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:17:37:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:17:37:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:17:37:   status: 429,
+2025-04-28T01:17:37:   headers: [Object],
+2025-04-28T01:17:37:   request_id: 'req_1d5cd83b498a47fccee24160e03bda3c',
+2025-04-28T01:17:37:   error: [Object],
+2025-04-28T01:17:37:   code: 'insufficient_quota',
+2025-04-28T01:17:37:   param: null,
+2025-04-28T01:17:37:   type: 'insufficient_quota'
+2025-04-28T01:17:37: }
+2025-04-28T01:24:26: Failed to fetch SEO brief: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:26:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:26:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:26:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:26:     at async tf (.next/server/chunks/6097.js:190:9)
+2025-04-28T01:24:26:     at async (.next/server/chunks/6097.js:207:2172)
+2025-04-28T01:24:26:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:26:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T01:24:26:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T01:24:26:   status: 429,
+2025-04-28T01:24:26:   headers: [Object],
+2025-04-28T01:24:26:   request_id: 'req_69c99e4aa45da1293bc8eda12212b130',
+2025-04-28T01:24:26:   error: [Object],
+2025-04-28T01:24:26:   code: 'insufficient_quota',
+2025-04-28T01:24:26:   param: null,
+2025-04-28T01:24:26:   type: 'insufficient_quota'
+2025-04-28T01:24:26: }
+2025-04-28T01:24:29: Embedding error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:29:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:29:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:29:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:29:     at async tc (.next/server/chunks/6097.js:157:26461)
+2025-04-28T01:24:29:     at async tp (.next/server/chunks/6097.js:157:26810)
+2025-04-28T01:24:29:     at async (.next/server/chunks/6097.js:207:2532)
+2025-04-28T01:24:29:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:29:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T01:24:29:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T01:24:29:   status: 429,
+2025-04-28T01:24:29:   headers: [Object],
+2025-04-28T01:24:29:   request_id: 'req_5dd611b1d7c5f8c454ab0da1c39a96c9',
+2025-04-28T01:24:29:   error: [Object],
+2025-04-28T01:24:29:   code: 'insufficient_quota',
+2025-04-28T01:24:29:   param: null,
+2025-04-28T01:24:29:   type: 'insufficient_quota'
+2025-04-28T01:24:29: }
+2025-04-28T01:24:31: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:31:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:31:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:31:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:31:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:31:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:31:   status: 429,
+2025-04-28T01:24:31:   headers: [Object],
+2025-04-28T01:24:31:   request_id: 'req_0cb9e6b3e0aaf623396031fcbe49e7e0',
+2025-04-28T01:24:31:   error: [Object],
+2025-04-28T01:24:31:   code: 'insufficient_quota',
+2025-04-28T01:24:31:   param: null,
+2025-04-28T01:24:31:   type: 'insufficient_quota'
+2025-04-28T01:24:31: }
+2025-04-28T01:24:31: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:31:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:31:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:31:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:31:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:31:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:31:   status: 429,
+2025-04-28T01:24:31:   headers: [Object],
+2025-04-28T01:24:31:   request_id: 'req_a6fcb218e94f67b2c8c0b6a8a7f7ae8d',
+2025-04-28T01:24:31:   error: [Object],
+2025-04-28T01:24:31:   code: 'insufficient_quota',
+2025-04-28T01:24:31:   param: null,
+2025-04-28T01:24:31:   type: 'insufficient_quota'
+2025-04-28T01:24:31: }
+2025-04-28T01:24:31: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:31:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:31:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:31:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:31:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:31:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:31:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:31:   status: 429,
+2025-04-28T01:24:31:   headers: [Object],
+2025-04-28T01:24:31:   request_id: 'req_6fee547901118f7dde6bfd14c9ed632b',
+2025-04-28T01:24:31:   error: [Object],
+2025-04-28T01:24:31:   code: 'insufficient_quota',
+2025-04-28T01:24:31:   param: null,
+2025-04-28T01:24:31:   type: 'insufficient_quota'
+2025-04-28T01:24:31: }
+2025-04-28T01:24:33: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:33:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:33:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:33:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:33:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:33:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:33:   status: 429,
+2025-04-28T01:24:33:   headers: [Object],
+2025-04-28T01:24:33:   request_id: 'req_4fd1bce90e39f320fc2537497d3fc8ab',
+2025-04-28T01:24:33:   error: [Object],
+2025-04-28T01:24:33:   code: 'insufficient_quota',
+2025-04-28T01:24:33:   param: null,
+2025-04-28T01:24:33:   type: 'insufficient_quota'
+2025-04-28T01:24:33: }
+2025-04-28T01:24:33: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:33:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:33:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:33:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:33:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:33:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:33:   status: 429,
+2025-04-28T01:24:33:   headers: [Object],
+2025-04-28T01:24:33:   request_id: 'req_8cf87ecaf878a1c396d18502b8497ad4',
+2025-04-28T01:24:33:   error: [Object],
+2025-04-28T01:24:33:   code: 'insufficient_quota',
+2025-04-28T01:24:33:   param: null,
+2025-04-28T01:24:33:   type: 'insufficient_quota'
+2025-04-28T01:24:33: }
+2025-04-28T01:24:33: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:33:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:33:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:33:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:33:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:33:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:33:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:33:   status: 429,
+2025-04-28T01:24:33:   headers: [Object],
+2025-04-28T01:24:33:   request_id: 'req_82f2317dd366e680fa4b183b24c7bd2b',
+2025-04-28T01:24:33:   error: [Object],
+2025-04-28T01:24:33:   code: 'insufficient_quota',
+2025-04-28T01:24:33:   param: null,
+2025-04-28T01:24:33:   type: 'insufficient_quota'
+2025-04-28T01:24:33: }
+2025-04-28T01:24:35: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:35:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:35:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:35:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:35:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:35:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:35:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:35:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:35:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:35:   status: 429,
+2025-04-28T01:24:35:   headers: [Object],
+2025-04-28T01:24:35:   request_id: 'req_f69eb31c14414800ef981e4a962edb05',
+2025-04-28T01:24:35:   error: [Object],
+2025-04-28T01:24:35:   code: 'insufficient_quota',
+2025-04-28T01:24:35:   param: null,
+2025-04-28T01:24:35:   type: 'insufficient_quota'
+2025-04-28T01:24:35: }
+2025-04-28T01:24:35: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T01:24:35:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T01:24:35:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T01:24:35:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T01:24:35:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T01:24:35:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T01:24:35:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T01:24:35:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T01:24:35:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T01:24:35:   status: 429,
+2025-04-28T01:24:35:   headers: [Object],
+2025-04-28T01:24:35:   request_id: 'req_08694f47f4a398007a19b4922cc62fe7',
+2025-04-28T01:24:35:   error: [Object],
+2025-04-28T01:24:35:   code: 'insufficient_quota',
+2025-04-28T01:24:35:   param: null,
+2025-04-28T01:24:35:   type: 'insufficient_quota'
+2025-04-28T01:24:35: }
+2025-04-28T03:35:57: Failed to fetch SEO brief: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:35:57:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:35:57:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:35:57:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:35:57:     at async tf (.next/server/chunks/6097.js:190:9)
+2025-04-28T03:35:57:     at async (.next/server/chunks/6097.js:207:2172)
+2025-04-28T03:35:57:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:35:57:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T03:35:57:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T03:35:57:   status: 429,
+2025-04-28T03:35:57:   headers: [Object],
+2025-04-28T03:35:57:   request_id: 'req_c9c203cfc7e9c409b938f0139cf1eda2',
+2025-04-28T03:35:57:   error: [Object],
+2025-04-28T03:35:57:   code: 'insufficient_quota',
+2025-04-28T03:35:57:   param: null,
+2025-04-28T03:35:57:   type: 'insufficient_quota'
+2025-04-28T03:35:57: }
+2025-04-28T03:36:00: Embedding error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:00:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:00:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:00:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:00:     at async tc (.next/server/chunks/6097.js:157:26461)
+2025-04-28T03:36:00:     at async tp (.next/server/chunks/6097.js:157:26810)
+2025-04-28T03:36:00:     at async (.next/server/chunks/6097.js:207:2532)
+2025-04-28T03:36:00:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:00:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T03:36:00:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T03:36:00:   status: 429,
+2025-04-28T03:36:00:   headers: [Object],
+2025-04-28T03:36:00:   request_id: 'req_e2c3d4d88cda54d10f44791a31beb366',
+2025-04-28T03:36:00:   error: [Object],
+2025-04-28T03:36:00:   code: 'insufficient_quota',
+2025-04-28T03:36:00:   param: null,
+2025-04-28T03:36:00:   type: 'insufficient_quota'
+2025-04-28T03:36:00: }
+2025-04-28T03:36:02: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:02:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:02:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:02:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:02:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:02:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:02:   status: 429,
+2025-04-28T03:36:02:   headers: [Object],
+2025-04-28T03:36:02:   request_id: 'req_b48f1f986e00ebc134adca1dadb1db2c',
+2025-04-28T03:36:02:   error: [Object],
+2025-04-28T03:36:02:   code: 'insufficient_quota',
+2025-04-28T03:36:02:   param: null,
+2025-04-28T03:36:02:   type: 'insufficient_quota'
+2025-04-28T03:36:02: }
+2025-04-28T03:36:02: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:02:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:02:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:02:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:02:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:02:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:02:   status: 429,
+2025-04-28T03:36:02:   headers: [Object],
+2025-04-28T03:36:02:   request_id: 'req_744a0e9bc3fb361e566429c4b8039d92',
+2025-04-28T03:36:02:   error: [Object],
+2025-04-28T03:36:02:   code: 'insufficient_quota',
+2025-04-28T03:36:02:   param: null,
+2025-04-28T03:36:02:   type: 'insufficient_quota'
+2025-04-28T03:36:02: }
+2025-04-28T03:36:02: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:02:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:02:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:02:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:02:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:02:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:02:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:02:   status: 429,
+2025-04-28T03:36:02:   headers: [Object],
+2025-04-28T03:36:02:   request_id: 'req_e1a911da5f0b766b4afd644cf4f18b3c',
+2025-04-28T03:36:02:   error: [Object],
+2025-04-28T03:36:02:   code: 'insufficient_quota',
+2025-04-28T03:36:02:   param: null,
+2025-04-28T03:36:02:   type: 'insufficient_quota'
+2025-04-28T03:36:02: }
+2025-04-28T03:36:04: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:04:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:04:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:04:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:04:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:04:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:04:   status: 429,
+2025-04-28T03:36:04:   headers: [Object],
+2025-04-28T03:36:04:   request_id: 'req_9edeccb4b6085c6590922bfcdd37add2',
+2025-04-28T03:36:04:   error: [Object],
+2025-04-28T03:36:04:   code: 'insufficient_quota',
+2025-04-28T03:36:04:   param: null,
+2025-04-28T03:36:04:   type: 'insufficient_quota'
+2025-04-28T03:36:04: }
+2025-04-28T03:36:04: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:04:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:04:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:04:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:04:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:04:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:04:   status: 429,
+2025-04-28T03:36:04:   headers: [Object],
+2025-04-28T03:36:04:   request_id: 'req_e3ef30a960a91f5f2e2d1c0ba4e63fe8',
+2025-04-28T03:36:04:   error: [Object],
+2025-04-28T03:36:04:   code: 'insufficient_quota',
+2025-04-28T03:36:04:   param: null,
+2025-04-28T03:36:04:   type: 'insufficient_quota'
+2025-04-28T03:36:04: }
+2025-04-28T03:36:04: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:04:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:04:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:04:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:04:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:04:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:04:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:04:   status: 429,
+2025-04-28T03:36:04:   headers: [Object],
+2025-04-28T03:36:04:   request_id: 'req_1f0eac120abd6ba10220785d804b898b',
+2025-04-28T03:36:04:   error: [Object],
+2025-04-28T03:36:04:   code: 'insufficient_quota',
+2025-04-28T03:36:04:   param: null,
+2025-04-28T03:36:04:   type: 'insufficient_quota'
+2025-04-28T03:36:04: }
+2025-04-28T03:36:06: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:06:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:06:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:06:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:06:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:06:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:06:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:06:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:06:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:06:   status: 429,
+2025-04-28T03:36:06:   headers: [Object],
+2025-04-28T03:36:06:   request_id: 'req_55a792cd0e8c65d6785993a23b5bea83',
+2025-04-28T03:36:06:   error: [Object],
+2025-04-28T03:36:06:   code: 'insufficient_quota',
+2025-04-28T03:36:06:   param: null,
+2025-04-28T03:36:06:   type: 'insufficient_quota'
+2025-04-28T03:36:06: }
+2025-04-28T03:36:06: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:36:06:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:36:06:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:36:06:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:36:06:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:36:06:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:36:06:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:36:06:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:36:06:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:36:06:   status: 429,
+2025-04-28T03:36:06:   headers: [Object],
+2025-04-28T03:36:06:   request_id: 'req_cbf7db72fc4162e31a7612c03b7b5a54',
+2025-04-28T03:36:06:   error: [Object],
+2025-04-28T03:36:06:   code: 'insufficient_quota',
+2025-04-28T03:36:06:   param: null,
+2025-04-28T03:36:06:   type: 'insufficient_quota'
+2025-04-28T03:36:06: }
+2025-04-28T03:55:46: Failed to fetch SEO brief: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:46:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:46:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:46:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:46:     at async tf (.next/server/chunks/6097.js:190:9)
+2025-04-28T03:55:46:     at async (.next/server/chunks/6097.js:207:2172)
+2025-04-28T03:55:46:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:46:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T03:55:46:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T03:55:46:   status: 429,
+2025-04-28T03:55:46:   headers: [Object],
+2025-04-28T03:55:46:   request_id: 'req_c4b2d67e3e6c65d8e8ec4b766c19ca89',
+2025-04-28T03:55:46:   error: [Object],
+2025-04-28T03:55:46:   code: 'insufficient_quota',
+2025-04-28T03:55:46:   param: null,
+2025-04-28T03:55:46:   type: 'insufficient_quota'
+2025-04-28T03:55:46: }
+2025-04-28T03:55:49: Embedding error: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:49:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:49:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:49:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:49:     at async tc (.next/server/chunks/6097.js:157:26461)
+2025-04-28T03:55:49:     at async tp (.next/server/chunks/6097.js:157:26810)
+2025-04-28T03:55:49:     at async (.next/server/chunks/6097.js:207:2532)
+2025-04-28T03:55:49:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:49:     at async (.next/server/chunks/6097.js:1:5237)
+2025-04-28T03:55:49:     at async td (.next/server/chunks/3137.js:1:65277) {
+2025-04-28T03:55:49:   status: 429,
+2025-04-28T03:55:49:   headers: [Object],
+2025-04-28T03:55:49:   request_id: 'req_071f20ea6c6b597644f2dd20669bcd30',
+2025-04-28T03:55:49:   error: [Object],
+2025-04-28T03:55:49:   code: 'insufficient_quota',
+2025-04-28T03:55:49:   param: null,
+2025-04-28T03:55:49:   type: 'insufficient_quota'
+2025-04-28T03:55:49: }
+2025-04-28T03:55:50: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:50:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:50:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:50:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:50:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:50:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:50:   status: 429,
+2025-04-28T03:55:50:   headers: [Object],
+2025-04-28T03:55:50:   request_id: 'req_8abb901b98a39acf813a35e2377e0e6a',
+2025-04-28T03:55:50:   error: [Object],
+2025-04-28T03:55:50:   code: 'insufficient_quota',
+2025-04-28T03:55:50:   param: null,
+2025-04-28T03:55:50:   type: 'insufficient_quota'
+2025-04-28T03:55:50: }
+2025-04-28T03:55:50: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:50:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:50:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:50:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:50:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:50:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:50:   status: 429,
+2025-04-28T03:55:50:   headers: [Object],
+2025-04-28T03:55:50:   request_id: 'req_c1a34c49698cd34a2940dc742680d762',
+2025-04-28T03:55:50:   error: [Object],
+2025-04-28T03:55:50:   code: 'insufficient_quota',
+2025-04-28T03:55:50:   param: null,
+2025-04-28T03:55:50:   type: 'insufficient_quota'
+2025-04-28T03:55:50: }
+2025-04-28T03:55:50: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:50:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:50:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:50:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:50:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:50:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:50:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:50:   status: 429,
+2025-04-28T03:55:50:   headers: [Object],
+2025-04-28T03:55:50:   request_id: 'req_d7f03c9b0062cda0a3b9e4ec2abcee83',
+2025-04-28T03:55:50:   error: [Object],
+2025-04-28T03:55:50:   code: 'insufficient_quota',
+2025-04-28T03:55:50:   param: null,
+2025-04-28T03:55:50:   type: 'insufficient_quota'
+2025-04-28T03:55:50: }
+2025-04-28T03:55:53: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:53:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:53:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:53:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:53:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:53:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:53:   status: 429,
+2025-04-28T03:55:53:   headers: [Object],
+2025-04-28T03:55:53:   request_id: 'req_15e88a17c2dda6584ffc53c29b3b99bb',
+2025-04-28T03:55:53:   error: [Object],
+2025-04-28T03:55:53:   code: 'insufficient_quota',
+2025-04-28T03:55:53:   param: null,
+2025-04-28T03:55:53:   type: 'insufficient_quota'
+2025-04-28T03:55:53: }
+2025-04-28T03:55:53: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:53:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:53:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:53:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:53:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:53:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:53:   status: 429,
+2025-04-28T03:55:53:   headers: [Object],
+2025-04-28T03:55:53:   request_id: 'req_071c0cdab417edad88fefddcefb06851',
+2025-04-28T03:55:53:   error: [Object],
+2025-04-28T03:55:53:   code: 'insufficient_quota',
+2025-04-28T03:55:53:   param: null,
+2025-04-28T03:55:53:   type: 'insufficient_quota'
+2025-04-28T03:55:53: }
+2025-04-28T03:55:53: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:53:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:53:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:53:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:53:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:53:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:53:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:53:   status: 429,
+2025-04-28T03:55:53:   headers: [Object],
+2025-04-28T03:55:53:   request_id: 'req_8505dbfb5a1c42ad977db154bb9982ae',
+2025-04-28T03:55:53:   error: [Object],
+2025-04-28T03:55:53:   code: 'insufficient_quota',
+2025-04-28T03:55:53:   param: null,
+2025-04-28T03:55:53:   type: 'insufficient_quota'
+2025-04-28T03:55:53: }
+2025-04-28T03:55:55: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:55:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:55:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:55:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:55:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:55:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:55:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:55:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:55:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:55:   status: 429,
+2025-04-28T03:55:55:   headers: [Object],
+2025-04-28T03:55:55:   request_id: 'req_6aa3cf19ebfb7f6813ea64bcbf574197',
+2025-04-28T03:55:55:   error: [Object],
+2025-04-28T03:55:55:   code: 'insufficient_quota',
+2025-04-28T03:55:55:   param: null,
+2025-04-28T03:55:55:   type: 'insufficient_quota'
+2025-04-28T03:55:55: }
+2025-04-28T03:55:55: Error categorizing URL: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-04-28T03:55:55:     at tK.generate (.next/server/chunks/9094.js:74:250953)
+2025-04-28T03:55:55:     at nP.makeStatusError (.next/server/chunks/9094.js:74:265305)
+2025-04-28T03:55:55:     at nP.makeRequest (.next/server/chunks/9094.js:74:266249)
+2025-04-28T03:55:55:     at async tS (.next/server/chunks/6097.js:207:19)
+2025-04-28T03:55:55:     at async tb (.next/server/chunks/6097.js:207:491)
+2025-04-28T03:55:55:     at async (.next/server/chunks/6097.js:207:2663)
+2025-04-28T03:55:55:     at async (.next/server/chunks/6097.js:207:4116)
+2025-04-28T03:55:55:     at async (.next/server/chunks/6097.js:1:5237) {
+2025-04-28T03:55:55:   status: 429,
+2025-04-28T03:55:55:   headers: [Object],
+2025-04-28T03:55:55:   request_id: 'req_ace9fca253115a27d140e867fb107920',
+2025-04-28T03:55:55:   error: [Object],
+2025-04-28T03:55:55:   code: 'insufficient_quota',
+2025-04-28T03:55:55:   param: null,
+2025-04-28T03:55:55:   type: 'insufficient_quota'
+2025-04-28T03:55:55: }
+2025-04-28T03:57:36: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-04-28T04:31:20: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-04-29T00:00:12: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-04-29T00:00:26: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-04-29T00:00:33: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-04-30T00:00:31: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-04-30T00:00:44: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-04-30T00:00:51: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-01T00:00:18: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-01T00:00:34: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-01T00:00:41: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-02T00:00:18: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-02T00:00:32: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-02T00:00:41: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-03T00:00:17: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-03T00:00:32: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-03T00:00:39: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-04T00:00:26: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-04T00:00:40: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-04T00:00:47: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-05T00:00:23: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-05T00:00:37: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-05T00:00:44: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-06T00:00:17: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-06T00:00:31: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-06T00:00:36: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-07T00:00:34: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-07T00:00:48: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-07T00:00:55: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-08T00:00:39: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-08T00:00:53: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-08T00:00:59: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-08T18:01:18: Error generating SEO keywords: Error: ❌ No valid JSON object found in response.
+2025-05-08T18:01:18:     at tj (.next/server/chunks/1361.js:211:313)
+2025-05-08T18:01:18:     at async (.next/server/chunks/1361.js:211:2347)
+2025-05-08T18:01:18:     at async (.next/server/chunks/1361.js:211:4468)
+2025-05-08T18:01:18:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:01:18:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:01:18:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:01:18: ❌ createSeoGuide error: Error: ❌ Failed to generate keywords
+2025-05-08T18:01:18:     at <unknown> (.next/server/chunks/1361.js:211:2381)
+2025-05-08T18:01:18:     at async (.next/server/chunks/1361.js:211:4468)
+2025-05-08T18:01:18:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:01:18:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:01:18:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:02:23: Error generating SEO keywords: Error: ❌ No valid JSON object found in response.
+2025-05-08T18:02:23:     at tj (.next/server/chunks/1361.js:211:313)
+2025-05-08T18:02:23:     at async (.next/server/chunks/1361.js:211:2347)
+2025-05-08T18:02:23:     at async (.next/server/chunks/1361.js:211:4468)
+2025-05-08T18:02:23:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:02:23:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:02:23:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:02:23: ❌ createSeoGuide error: Error: ❌ Failed to generate keywords
+2025-05-08T18:02:23:     at <unknown> (.next/server/chunks/1361.js:211:2381)
+2025-05-08T18:02:23:     at async (.next/server/chunks/1361.js:211:4468)
+2025-05-08T18:02:23:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:02:23:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:02:23:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:07:06: Error generating SEO keywords: Error: ❌ No valid JSON object found in response.
+2025-05-08T18:07:06:     at tj (.next/server/chunks/1361.js:211:313)
+2025-05-08T18:07:06:     at async (.next/server/chunks/1361.js:211:2347)
+2025-05-08T18:07:06:     at async (.next/server/chunks/1361.js:211:4468)
+2025-05-08T18:07:06:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:07:06:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:07:06:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:07:06: ❌ createSeoGuide error: Error: ❌ Failed to generate keywords
+2025-05-08T18:07:06:     at <unknown> (.next/server/chunks/1361.js:211:2381)
+2025-05-08T18:07:06:     at async (.next/server/chunks/1361.js:211:4468)
+2025-05-08T18:07:06:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:07:06:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:07:06:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:14:06: ❌ Error generating SEO keywords: Error: ❌ No recognizable JSON structure.
+2025-05-08T18:14:06:     at tj (.next/server/chunks/1361.js:211:318)
+2025-05-08T18:14:06:     at async (.next/server/chunks/1361.js:211:2427)
+2025-05-08T18:14:06:     at async (.next/server/chunks/1361.js:211:4548)
+2025-05-08T18:14:06:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:14:06:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:14:06:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:14:06: ❌ createSeoGuide error: Error: ❌ No recognizable JSON structure.
+2025-05-08T18:14:06:     at tj (.next/server/chunks/1361.js:211:318)
+2025-05-08T18:14:06:     at async (.next/server/chunks/1361.js:211:2427)
+2025-05-08T18:14:06:     at async (.next/server/chunks/1361.js:211:4548)
+2025-05-08T18:14:06:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:14:06:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:14:06:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:15:16: ❌ Error generating SEO keywords: Error: ❌ No recognizable JSON structure.
+2025-05-08T18:15:16:     at tj (.next/server/chunks/1361.js:211:318)
+2025-05-08T18:15:16:     at async (.next/server/chunks/1361.js:211:2427)
+2025-05-08T18:15:16:     at async (.next/server/chunks/1361.js:211:4548)
+2025-05-08T18:15:16:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:15:16:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:15:16:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-08T18:15:16: ❌ createSeoGuide error: Error: ❌ No recognizable JSON structure.
+2025-05-08T18:15:16:     at tj (.next/server/chunks/1361.js:211:318)
+2025-05-08T18:15:16:     at async (.next/server/chunks/1361.js:211:2427)
+2025-05-08T18:15:16:     at async (.next/server/chunks/1361.js:211:4548)
+2025-05-08T18:15:16:     at async (.next/server/chunks/1361.js:1:5172)
+2025-05-08T18:15:16:     at async td (.next/server/chunks/3137.js:1:65277)
+2025-05-08T18:15:16:     at async (.next/server/chunks/3137.js:1:67960)
+2025-05-09T00:00:38: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-09T00:00:51: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-09T00:00:58: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-09T02:53:17: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:17:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:17: Error: Command timed out
+2025-05-09T02:53:17:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:22: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:22:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:27: Error: Command timed out
+2025-05-09T02:53:27:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:27: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:27:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:32: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:32:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:37: Error: Command timed out
+2025-05-09T02:53:37:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:37: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:37:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:42: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:42:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:47: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:47:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:49: Error: Command timed out
+2025-05-09T02:53:49:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:52: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:52:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:58: ❌ Worker error: Error: Command timed out
+2025-05-09T02:53:58:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:53:59: Error: Command timed out
+2025-05-09T02:53:59:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:03: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:03:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:08: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:08:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:09: Error: Command timed out
+2025-05-09T02:54:09:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:13: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:13:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:18: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:18:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:19: Error: Command timed out
+2025-05-09T02:54:19:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:23: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:23:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:28: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:28:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:29: Error: Command timed out
+2025-05-09T02:54:29:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:33: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:33:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:38: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:38:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:39: Error: Command timed out
+2025-05-09T02:54:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:43: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:43:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:49: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:49:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:49: Error: Command timed out
+2025-05-09T02:54:49:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:54: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:54:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:59: ❌ Worker error: Error: Command timed out
+2025-05-09T02:54:59:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:54:59: Error: Command timed out
+2025-05-09T02:54:59:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:04: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:04:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:09: Error: Command timed out
+2025-05-09T02:55:09:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:09: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:09:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:14: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:14:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:19: Error: Command timed out
+2025-05-09T02:55:19:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:19: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:19:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:24: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:24:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:29: Error: Command timed out
+2025-05-09T02:55:29:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:29: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:29:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:34: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:34:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:39: Error: Command timed out
+2025-05-09T02:55:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:40: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:40:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:45: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:45:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:49: Error: Command timed out
+2025-05-09T02:55:49:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:50: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:50:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:55: ❌ Worker error: Error: Command timed out
+2025-05-09T02:55:55:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:55:59: Error: Command timed out
+2025-05-09T02:55:59:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:00: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:00:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:05: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:05:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:09: Error: Command timed out
+2025-05-09T02:56:09:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:10: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:10:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:15: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:15:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:19: Error: Command timed out
+2025-05-09T02:56:19:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:20: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:20:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:26: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:26:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:29: Error: Command timed out
+2025-05-09T02:56:29:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:31: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:31:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:36: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:36:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:39: Error: Command timed out
+2025-05-09T02:56:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:41: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:41:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:46: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:46:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:49: Error: Command timed out
+2025-05-09T02:56:49:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:51: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:51:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:56: ❌ Worker error: Error: Command timed out
+2025-05-09T02:56:56:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:56:59: Error: Command timed out
+2025-05-09T02:56:59:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:01: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:01:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:06: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:06:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:09: Error: Command timed out
+2025-05-09T02:57:09:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:11: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:11:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:17: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:17:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:19: Error: Command timed out
+2025-05-09T02:57:19:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:22: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:22:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:27: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:27:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:29: Error: Command timed out
+2025-05-09T02:57:29:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:32: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:32:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:37: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:37:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:39: Error: Command timed out
+2025-05-09T02:57:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:42: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:42:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:47: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:47:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:49: Error: Command timed out
+2025-05-09T02:57:49:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:52: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:52:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:57: ❌ Worker error: Error: Command timed out
+2025-05-09T02:57:57:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:57:59: Error: Command timed out
+2025-05-09T02:57:59:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:02: ❌ Worker error: Error: Command timed out
+2025-05-09T02:58:02:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:08: ❌ Worker error: Error: Command timed out
+2025-05-09T02:58:08:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:11: Error: Command timed out
+2025-05-09T02:58:11:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:13: ❌ Worker error: Error: Command timed out
+2025-05-09T02:58:13:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:18: ❌ Worker error: Error: Command timed out
+2025-05-09T02:58:18:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:21: Error: Command timed out
+2025-05-09T02:58:21:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:23: ❌ Worker error: Error: Command timed out
+2025-05-09T02:58:23:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:28: ❌ Worker error: Error: Command timed out
+2025-05-09T02:58:28:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:58:31: Error: Command timed out
+2025-05-09T02:58:31:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-09T02:59:05: ⚠️ Job 1 stalled
+2025-05-10T00:00:40: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-10T00:00:54: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-10T00:01:01: [WARN] Failed to fetch HTML for: https://viaromafashion.com

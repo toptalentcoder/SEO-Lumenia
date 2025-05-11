@@ -54,13 +54,13 @@ export default function Compared({ data }) {
                         {searchResults.slice(0, 10).map((row, index) => (
                             <tr key={index} className="hover:bg-gray-50 odd:bg-gray-50 even:bg-white">
                                 <td className="w-12 px-1 py-4 text-center text-gray-700">{index + 1}</td>
-                                <td className="w-1/6 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
+                                <td className="w-1/2 px-3 py-4 text-lg font-medium text-gray-800 font-sans cursor-pointer">
                                     <div className="space-y-1">
                                         <div className="text-[#4A4291] flex items-center gap-1 text-sm">
                                             {row.title}
                                         </div>
                                         <div className="flex items-center space-x-2 text-sm text-gray-700">
-                                            <a href={row.link} target="_blank" rel="noopener noreferrer">
+                                            <a href={row.link} target="_blank" rel="noopener noreferrer" className="break-all hover:text-[#4A4291]">
                                                 {row.link}
                                             </a>
                                         </div>
@@ -73,17 +73,19 @@ export default function Compared({ data }) {
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-3 py-4 text-center ">
+                                <td className="px-3 py-4 text-center w-1/12">
                                     <div className="bg-[#279AAC] text-white w-16 py-1 rounded-lg">
                                         {Number.isNaN(parseInt(row.soseo, 10)) ? "-" : Math.round(parseFloat(row.soseo))}
                                     </div>
                                 </td>
-                                <td className="px-3 py-4 text-center">
+                                <td className="px-3 py-4 text-center w-1/12">
                                     <div className="bg-[#708090] text-white w-16 py-1 rounded-lg">
                                         {Number.isNaN(parseInt(row.dseo, 10)) ? "-" : Math.round(parseFloat(row.dseo))}
                                     </div>
                                 </td>
-                                <td className="px-3 py-4 text-center text-gray-700">N/A</td>
+                                <td className="px-3 py-4 text-center text-gray-700 w-1/12">
+                                    {Number.isNaN(parseInt(row.presenceCount, 10)) ? "-" : Math.round(parseFloat(row.presenceCount))}
+                                </td>
                                 <td className="px-3 py-4 text-center text-sm text-gray-700">{row.wordCount || "?"}</td>
                             </tr>
                         ))}
