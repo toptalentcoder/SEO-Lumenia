@@ -126,7 +126,7 @@ const getUserInitials = (name) => {
     return (words[0][0] + words[1][0]).toUpperCase();
 };
 
-export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger, language }) {
+export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger, language, progress }) {
 
     const { user } = useUser();
     const [rows, setRows] = useState([]);
@@ -505,7 +505,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                             )}
                                         </div>
                                     </td>
-                                    <td className="text-center text-gray-400">
+                                    {/* <td className="text-center text-gray-400">
                                         <div className="flex justify-center">
                                             <svg className="animate-spin h-5 w-5 text-[#4A4291]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -513,7 +513,18 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                                     d="M4 12a8 8 0 018-8v8z" />
                                             </svg>
                                         </div>
+                                    </td> */}
+
+                                    <td className="text-center text-gray-400">
+                                        <div className="text-lg text-gray-500 mt-1">{progress}%</div>
+                                        <div className="relative w-32 h-2 bg-gray-200 rounded-full mx-auto">
+                                            <div
+                                                className="absolute top-0 left-0 h-2 bg-[#439B38] rounded-full transition-all duration-300"
+                                                style={{ width: `${progress}%` }}
+                                            ></div>
+                                        </div>
                                     </td>
+
                                     <td className="w-12 px-1 py-4 text-center">
                                         <Menu as="div" className="relative inline-block text-left">
                                             <div>

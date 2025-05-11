@@ -401,14 +401,14 @@ export default function SEOQueryDashboard() {
                                 )}
                             </button>
 
-                            {isLoading && (
+                            {/* {isLoading && (
                                 <div className="absolute top-full left-0 mt-2 w-full bg-gray-200 rounded-full h-2">
                                     <div 
                                         className="bg-[#439B38] h-2 rounded-full transition-all duration-300"
                                         style={{ width: `${progress}%` }}
                                     ></div>
                                 </div>
-                            )}
+                            )} */}
 
                             {error && (
                                 <div className="absolute top-full left-0 mt-2 w-full bg-red-100 text-red-700 px-4 py-2 rounded-lg">
@@ -521,6 +521,7 @@ export default function SEOQueryDashboard() {
                     selectedQueryEngine={selectedQueryEngine}
                     refreshTrigger={refreshTrigger}
                     language = {selectedLanguage}
+                    progress={progress}
                 />
             </div>
 
