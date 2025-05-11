@@ -12,9 +12,9 @@ import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculat
 import { categorizeUrls } from "@/services/createSeoGuide/categorizeUrls";
 import { generateSEOKeywords } from "@/services/createSeoGuide/generateSEOKeywords";
 import { checkUrlPresenceAcrossKeywords } from "@/services/createSeoGuide/checkUrlPresenceAcrossKeywords";
+
 import { seoGuideQueue } from "@/lib/seoGuideQueue";
 import { checkRedisConnection } from "@/lib/redis";
-
 interface OrganicResult {
     title: string;
     link: string;
@@ -91,6 +91,7 @@ export const createSeoGuide: Endpoint = {
         const { payload } = req;
         const body = await req.json();
         const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr } = body;
+
 
         if (!query || typeof query !== "string") {
             return new Response(
