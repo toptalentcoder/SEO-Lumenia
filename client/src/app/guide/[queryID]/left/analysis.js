@@ -117,7 +117,7 @@ export default function Analysis({data, setIsDirty }) {
 
             // setGraphLineData(initialGraphLineData);
         }
-    }, [data]); // Run this effect whenever the 'data' changes
+    }, [data]);
 
     useEffect(() => {
         const fetchInitialCategories = async () => {
@@ -385,7 +385,7 @@ export default function Analysis({data, setIsDirty }) {
                             anchor="bottom start"
                             className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50"
                         >
-                            {data?.searchResults?.map((result, index) => {
+                            {data?.searchResults?.slice(0, 10).map((result, index) => {
                                 const isChecked = selectedLinks.includes(result.link);
 
                                 return (
