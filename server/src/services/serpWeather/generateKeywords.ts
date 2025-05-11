@@ -1,7 +1,8 @@
 import { seedKeywordsMap } from '@/globals/seedKeywordsMap';
 import { OpenAI } from 'openai';
+import { OPENAI_API_KEY } from '@/config/apiConfig';
 
-const openai = new OpenAI({ apiKey : process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey : OPENAI_API_KEY });
 
 export async function generateKeywordsForSERPWeatherCategory(category : string) : Promise<string[]> {
 

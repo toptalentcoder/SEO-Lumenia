@@ -1,6 +1,7 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import axios from "axios";
 import { Endpoint, PayloadRequest } from "payload";
+import { SEMRUSH_API_KEY } from "@/config/apiConfig";
 
 export const searchBacklinksEndpoint : Endpoint = {
     path: "/search-backlinks",
@@ -39,7 +40,7 @@ export const searchBacklinksEndpoint : Endpoint = {
                 params: {
                     type: 'backlinks',
                     target: baseUrl,
-                    key: process.env.SEMRUSH_API_KEY,
+                    key: SEMRUSH_API_KEY,
                     target_type: 'domain',
                     database: 'us',
                     export_columns: 'source_url,target_url,anchor,nofollow,page_ascore',

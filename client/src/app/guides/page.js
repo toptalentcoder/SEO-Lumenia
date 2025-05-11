@@ -9,6 +9,7 @@ import { VscNewFile } from "react-icons/vsc";
 import { FaCoins } from "react-icons/fa6";
 import { GoOrganization } from "react-icons/go";
 import LanguageMenu from "./languageMenu";
+import { NEXT_PUBLIC_API_URL } from '../../config/apiConfig'
 
 // Query Media options
 const queryEngineOptions = [
@@ -143,7 +144,7 @@ export default function SEOQueryDashboard() {
 
         try {
             // Initial request to create job
-            const response = await fetch(`https://lumenia.io/api/createSeoGuide`, {
+            const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/createSeoGuide`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -172,7 +173,7 @@ export default function SEOQueryDashboard() {
             // Start polling for job status
             pollInterval = setInterval(async () => {
                 try {
-                    const statusResponse = await fetch(`https://lumenia.io/api/seoGuideStatus/${jobId}`);
+                    const statusResponse = await fetch(`${NEXT_PUBLIC_API_URL}/api/seoGuideStatus/${jobId}`);
                     const statusData = await statusResponse.json();
 
                     if (!statusResponse.ok) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SERPER_API_KEY } from "@/config/apiConfig";
 
 export async function fetchSerpResults(keyword : string, gl : string, hl : string) {
     const response = await axios.post(
@@ -11,7 +12,7 @@ export async function fetchSerpResults(keyword : string, gl : string, hl : strin
         },
         {
             headers: {
-                "X-API-KEY": process.env.SERPER_API_KEY,
+                "X-API-KEY": SERPER_API_KEY,
                 "Content-Type": "application/json",
             },
         }

@@ -1,45 +1,8 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { extractWords } from "@/services/createSeoGuide/extractWords";
-import { fetchPageContent } from "@/services/createSeoGuide/fetchPageContent";
-import { getSemanticKeywords } from "@/services/createSeoGuide/getSemanticKeywords";
-import { processText } from "@/services/createSeoGuide/processText";
-import { Project } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
-import axios from "axios";
-import { calculateDynamicOptimizationRanges } from "@/services/createSeoGuide/assignOptimizationLevel";
-import { generateSeoBrief } from "@/services/createSeoEditor/createSeoBrief";
-import { calculateSoseoDseoForAllDocs } from "@/services/createSeoGuide/calculateSOSEOandDSEO";
-import { categorizeUrls } from "@/services/createSeoGuide/categorizeUrls";
-import { generateSEOKeywords } from "@/services/createSeoGuide/generateSEOKeywords";
-import { checkUrlPresenceAcrossKeywords } from "@/services/createSeoGuide/checkUrlPresenceAcrossKeywords";
 import { seoGuideQueue } from "@/lib/seoGuideQueue";
 import { checkRedisConnection } from "@/lib/redis";
-
-interface OrganicResult {
-    title: string;
-    link: string;
-    soseo?: number; // Optional property for SEO optimization level
-    dseo?: number;  // Optional property for SEO optimization level
-}
-
-const hlToFullLanguageMap: Record<string, string> = {
-    en: 'English',
-    es: 'Spanish',
-    fr: 'French',
-    de: 'German',
-    it: 'Italian',
-    pt: 'Portuguese',
-    pl: 'Polish',
-    ro: 'Romanian',
-    nl: 'Dutch',
-    ar: 'Arabic',
-    hi: 'Hindi',
-    ja: 'Japanese',
-    zh: 'Chinese',
-    ru: 'Russian',
-    tr: 'Turkish'
-    // Add more if needed
-};
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const createSeoGuide: Endpoint = {
     path: "/createSeoGuide",
@@ -48,8 +11,8 @@ export const createSeoGuide: Endpoint = {
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
+            "Access-Control-Allow-Origin": FRONTEND_URL || "",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
             "Access-Control-Allow-Credentials": "true",
             "Access-Control-Max-Age": "86400"

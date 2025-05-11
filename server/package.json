@@ -6,13 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "cross-env PORT=7777 NODE_OPTIONS=--no-deprecation next build",
-    "dev": "cross-env PORT=7777 NODE_OPTIONS=--max-old-space-size=4096 next dev",
+    "dev": "cross-env PORT=7778 NODE_ENV=development NODE_OPTIONS=--max-old-space-size=4096 next dev",
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "start": "cross-env PORT=7777 NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=4096 --no-deprecation\" next start"
+    "start": "cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=4096 --no-deprecation\" next start"
   },
   "dependencies": {
     "@bull-board/api": "^6.9.6",

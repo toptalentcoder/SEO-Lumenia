@@ -1,3 +1,4 @@
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { generateWebpageTitleMeta } from "@/services/createWebPageTitleAndMeta";
 import { ProjectWebpageTitleAndMeta } from "@/types/project";
@@ -15,7 +16,7 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"
@@ -64,7 +65,7 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
                         status: 400,
                         headers: {
                             "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                         },
                     }
                 );

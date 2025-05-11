@@ -1,4 +1,5 @@
 
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { createSubscription } from "@/services/paypal/subscription/CreateSubscription";
 
@@ -15,7 +16,7 @@ export const paypalSubscriptionEndpoint: Endpoint = {
             return new Response(null, {
                 status: 204,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type, Authorization",
                 },
@@ -36,7 +37,7 @@ export const paypalSubscriptionEndpoint: Endpoint = {
                     status: 400,
                     headers: {
                         'Content-Type': 'application/json',
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     },
                 }
             );
@@ -50,7 +51,7 @@ export const paypalSubscriptionEndpoint: Endpoint = {
                 status: 200,
                 headers: {
                     'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                 },
             }
         );

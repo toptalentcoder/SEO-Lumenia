@@ -1,5 +1,6 @@
 import { PayloadRequest } from "payload";
 import { Endpoint } from "payload";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 interface CronEntry {
     date: string;
@@ -32,7 +33,7 @@ export const getCronjobData: Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",

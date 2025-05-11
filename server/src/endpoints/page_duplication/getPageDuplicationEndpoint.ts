@@ -1,6 +1,7 @@
 import { Endpoint } from "payload";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { PayloadRequest } from "payload";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 function formatUrl(url: string): string {
     if (!url) return '';
@@ -64,7 +65,7 @@ export const getPageDuplicationEndpoint: Endpoint = {
                 status: 400,
                 headers: { 
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type"
                 },
@@ -96,7 +97,7 @@ export const getPageDuplicationEndpoint: Endpoint = {
                         status: 200, 
                         headers: { 
                             "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                             "Access-Control-Allow-Methods": "POST, OPTIONS",
                             "Access-Control-Allow-Headers": "Content-Type"
                         } 
@@ -110,7 +111,7 @@ export const getPageDuplicationEndpoint: Endpoint = {
                     status: 200, 
                     headers: { 
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                         "Access-Control-Allow-Methods": "POST, OPTIONS",
                         "Access-Control-Allow-Headers": "Content-Type"
                     } 
@@ -125,7 +126,7 @@ export const getPageDuplicationEndpoint: Endpoint = {
                     status: 500, 
                     headers: { 
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                         "Access-Control-Allow-Methods": "POST, OPTIONS",
                         "Access-Control-Allow-Headers": "Content-Type"
                     } 
