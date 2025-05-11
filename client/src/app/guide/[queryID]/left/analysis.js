@@ -105,17 +105,17 @@ export default function Analysis({data, setIsDirty }) {
 
             setGraphData(newGraphData);
 
-            const initialGraphLineData = [
-                {
-                    name: "Series 1",
-                    data: data.optimizationLevels.map((optimization) => ({
-                        name: optimization.keyword,
-                        value: 0,
-                    })),
-                },
-            ];
+            // const initialGraphLineData = [
+            //     {
+            //         name: "Series 1",
+            //         data: data.optimizationLevels.map((optimization) => ({
+            //             name: optimization.keyword,
+            //             value: 0,
+            //         })),
+            //     },
+            // ];
 
-            setGraphLineData(initialGraphLineData);
+            // setGraphLineData(initialGraphLineData);
         }
     }, [data]); // Run this effect whenever the 'data' changes
 
@@ -421,7 +421,7 @@ export default function Analysis({data, setIsDirty }) {
             <div className="mt-8" style={{ width: '100%', height: 350 }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart
-                        data={graphData} // Use graphData for the AreaChart
+                        data={graphData}
                         margin={{
                             top: 10,
                             right: 30,
@@ -430,7 +430,13 @@ export default function Analysis({data, setIsDirty }) {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} tick={{ fontSize: 13 }} />
+                        <XAxis
+                            dataKey="name"
+                            angle={-45}
+                            textAnchor="end"
+                            interval={0}
+                            tick={{ fontSize: 13 }}
+                        />
                         <YAxis
                             tick={false}
                             label={{
@@ -475,13 +481,13 @@ export default function Analysis({data, setIsDirty }) {
                         {/* Line layers */}
                         {graphLineData.map((s) => (
                             <Line
-                                key={s.name} // Make sure key is unique
-                                data={s.data} // Use the same data structure for the line chart
-                                dataKey="value" // Ensure this matches your data structure
+                                key={s.name}
+                                data={s.data}
+                                dataKey="value"
                                 name={s.name}
-                                stroke="#000000" // Line color (black)
-                                strokeWidth={2}  // Optional: Adjust line thickness
-                                dot={<CustomDot color="#000000" />}  // Dot color (black)
+                                stroke="#000000"
+                                strokeWidth={2}
+                                dot={<CustomDot color="#000000" />}
                             />
                         ))}
                     </ComposedChart>
