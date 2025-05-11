@@ -1,7 +1,8 @@
 import { OpenAI } from "openai";
 import pLimit from "p-limit";
+import { OPENAI_API_KEY } from "@/config/apiConfig";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 interface SeoBrief {
     objective: string[];

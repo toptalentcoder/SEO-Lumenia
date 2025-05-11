@@ -1,5 +1,7 @@
 import { OpenAI } from "openai";
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+import { OPENAI_API_KEY } from "@/config/apiConfig";
+
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 export async function rephraseText(content: string, language: string = "English"): Promise<string> {
     const prompt = `

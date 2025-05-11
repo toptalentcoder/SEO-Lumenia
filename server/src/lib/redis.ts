@@ -1,7 +1,12 @@
 import Redis from 'ioredis';
+import { REDIS_URL } from '@/config/apiConfig';
 
 // Create Redis connection with fallback to localhost
-export const connection = new Redis(process.env.REDIS_URL || 'redis://127.0.0.1:6379', {
+if (!REDIS_URL) {
+    throw new Error('❌ REDIS_URL is not defined in the configuration');
+}
+
+export const connection = new Redis(REDIS_URL, {
     maxRetriesPerRequest: null, // Required by BullMQ for blocking operations
     enableReadyCheck: true,
     connectTimeout: 60000, // 60 seconds

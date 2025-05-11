@@ -1,8 +1,7 @@
 import { Payload } from "payload";
 import axios from "axios";
 import { calculateImprovedSerpVolatility } from "./calculateSerpVolatility";
-
-const SERP_API_KEY = process.env.SERP_API_KEY;
+import { SERP_API_KEY } from "@/config/apiConfig";
 
 interface OrganicResult {
     title: string;

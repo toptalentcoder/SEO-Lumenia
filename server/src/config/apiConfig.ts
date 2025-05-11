@@ -1,6 +1,13 @@
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 export const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
-export const FRONTEND_URL = process.env.FRONTEND_URL || 'https://lumenia.io';
+export const FRONTEND_URL = process.env.FRONTEND_URL;
 export const BASE_URL = `${process.env.BASE_URL}/api`;
-export const API_KEY = process.env.PAYLOAD_SECRET || '';
+export const PAYLOAD_SECRET_API_KEY = process.env.PAYLOAD_SECRET;
+export const SEMRUSH_API_KEY = process.env.SEMRUSH_API_KEY;
+export const REDIS_URL = process.env.REDIS_URL;
+export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+export const SERP_API_KEY = process.env.SERP_API_KEY;
+export const SERPER_API_KEY = process.env.SERPER_API_KEY;
+export const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+export const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;

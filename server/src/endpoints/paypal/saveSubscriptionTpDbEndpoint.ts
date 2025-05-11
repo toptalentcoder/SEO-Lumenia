@@ -1,6 +1,7 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { showSubscription } from "@/services/paypal/subscription/ShowSubscription";
 import { Endpoint, PayloadRequest } from "payload";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const saveSubscriptionToUserCollection: Endpoint = {
     path: "/save-subscription",
@@ -12,7 +13,7 @@ export const saveSubscriptionToUserCollection: Endpoint = {
             return new Response(null, {
                 status: 204,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type, Authorization",
                 },
@@ -36,7 +37,7 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                 JSON.stringify({ error: "Missing required fields: planId, subscriptionId, or userEmail" }),
                 {
                     status: 400,
-                    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+                    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": FRONTEND_URL || "*" },
                 }
             );
         }
@@ -65,7 +66,7 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                     JSON.stringify({ error: "Plan not found in database" }),
                     {
                         status: 404,
-                        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+                        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": FRONTEND_URL || "*" },
                     }
                 );
             }
@@ -78,7 +79,7 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                     JSON.stringify({ error: "Plan features not found in database" }),
                     {
                         status: 404,
-                        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+                        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": FRONTEND_URL || "*" },
                     }
                 );
             }
@@ -117,7 +118,7 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                 JSON.stringify({ success: "Subscription updated successfully!" }),
                 {
                     status: 200,
-                    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+                    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": FRONTEND_URL || "*" },
                 }
             );
         } catch (error) {
@@ -126,7 +127,7 @@ export const saveSubscriptionToUserCollection: Endpoint = {
                 JSON.stringify({ error: "Internal server error" }),
                 {
                     status: 500,
-                    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+                    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": FRONTEND_URL || "*" },
                 }
             );
         }

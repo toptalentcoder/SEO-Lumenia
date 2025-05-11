@@ -1,3 +1,4 @@
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 
@@ -22,7 +23,7 @@ export const addProjectToUser: Endpoint = {
             return new Response(null, {
                 status: 204,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type, Authorization",
                 },
@@ -49,7 +50,7 @@ export const addProjectToUser: Endpoint = {
                     status: 400,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     },
                 }
             );
@@ -62,7 +63,7 @@ export const addProjectToUser: Endpoint = {
                     status: 400,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     },
                 }
             );
@@ -81,7 +82,7 @@ export const addProjectToUser: Endpoint = {
                     status: 400,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin":FRONTEND_URL || "*",
                     },
                 }
             );

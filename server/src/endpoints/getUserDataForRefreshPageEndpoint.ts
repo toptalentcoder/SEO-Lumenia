@@ -1,5 +1,6 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint } from "payload";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const getUserDataForRefreshPageEndpoint : Endpoint = {
 
@@ -13,7 +14,7 @@ export const getUserDataForRefreshPageEndpoint : Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"

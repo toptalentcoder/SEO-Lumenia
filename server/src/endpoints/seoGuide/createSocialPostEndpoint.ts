@@ -1,3 +1,4 @@
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { createSocialPost } from "@/services/createSocialPost/createSocialPost";
 import { ProjectSocialPost } from "@/types/project";
@@ -15,7 +16,7 @@ export const createSocialPostEndpoint : Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"
@@ -66,7 +67,7 @@ export const createSocialPostEndpoint : Endpoint = {
                         status: 400,
                         headers: {
                             "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                         },
                     }
                 );
