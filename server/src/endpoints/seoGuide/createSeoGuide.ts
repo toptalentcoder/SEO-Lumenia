@@ -55,6 +55,7 @@ export const createSeoGuide: Endpoint = {
         const body = await req.json();
         const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr } = body;
 
+
         if (!query || typeof query !== "string") {
             return new Response(
                 JSON.stringify({ error: "Missing query in request body" }),
