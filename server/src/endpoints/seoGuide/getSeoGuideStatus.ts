@@ -2,6 +2,7 @@ import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 import { seoGuideQueue } from "@/lib/seoGuideQueue";
 import { checkRedisConnection } from "@/lib/redis";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const getSeoGuideStatus: Endpoint = {
     path: "/seoGuideStatus/:jobId",
@@ -10,7 +11,7 @@ export const getSeoGuideStatus: Endpoint = {
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
             "Access-Control-Allow-Credentials": "true",

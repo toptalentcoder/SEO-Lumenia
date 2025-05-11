@@ -4,7 +4,7 @@ const nextConfig = {
         return [
             {
                 source: '/api/:path*',
-                destination: 'https://lumenia.io/api/:path*', //backend URL
+                destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`, //backend URL
             },
         ];
     },

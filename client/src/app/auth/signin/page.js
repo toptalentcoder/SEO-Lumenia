@@ -4,9 +4,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUser } from "../../../context/UserContext";
 import Link from "next/link";
-import FormInput from "../../../components/forms/FormInput";
-import GoogleAuthButton from "../../../components/forms/GoogleAuthButton";
-import { BiSearch } from "react-icons/bi";
 import NavbarLandingEn from "../../../components/common/Navbar-landing-En";
 import FooterLandingEn from "../../../components/common/Footer-landing-En";
 

@@ -1,3 +1,4 @@
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { generateSeoCategory } from "@/services/createSeoEditor/generateSeoCategory";
 import { Endpoint, PayloadRequest } from "payload";
@@ -14,7 +15,7 @@ export const generateSeoCategoryEndpoint : Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*", // You can replace '*' with specific domains for security reasons
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"

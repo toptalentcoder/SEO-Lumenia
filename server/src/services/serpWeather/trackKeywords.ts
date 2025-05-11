@@ -1,9 +1,9 @@
 import { Payload } from "payload";
 import axios from "axios";
 import { calculateImprovedSerpVolatility } from "./calculateSerpVolatility";
+import { SERP_API_KEY } from "@/config/apiConfig";
 import mongoose from "mongoose";
 
-const SERP_API_KEY = process.env.SERP_API_KEY;
 
 interface OrganicResult {
     title: string;

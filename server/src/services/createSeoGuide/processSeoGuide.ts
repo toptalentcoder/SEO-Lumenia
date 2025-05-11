@@ -12,6 +12,7 @@ import { generateSEOKeywords } from "./generateSEOKeywords";
 import { checkUrlPresenceAcrossKeywords } from "./checkUrlPresenceAcrossKeywords";
 import { Payload } from "payload";
 import { Job } from "bullmq";
+import { SERP_API_KEY } from "@/config/apiConfig";
 
 interface OrganicResult {
     title: string;
@@ -64,7 +65,7 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     const response = await axios.get('https://serpapi.com/search', {
         params: {
             q: query,
-            api_key: process.env.SERP_API_KEY,
+            api_key: SERP_API_KEY,
             hl: hl || 'en',
             gl: gl || 'us',
             lr: lr || 'lang_en'

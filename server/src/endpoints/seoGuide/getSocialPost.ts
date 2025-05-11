@@ -1,6 +1,7 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 import { ProjectSocialPost } from "@/types/project";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const getSocialPostEndpoint: Endpoint = {
     path: '/get_social_post',  // Endpoint path for retrieving social posts
@@ -12,7 +13,7 @@ export const getSocialPostEndpoint: Endpoint = {
 
         // CORS headers for cross-origin requests
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"

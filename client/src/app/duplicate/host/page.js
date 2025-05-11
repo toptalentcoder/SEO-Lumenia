@@ -17,6 +17,7 @@ import {
     ResponsiveContainer,
     Cell
 } from 'recharts';
+import { NEXT_PUBLIC_API_URL } from '../../../config/apiConfig';
 
 export default function PageDuplication() {
     const searchParams = useSearchParams();
@@ -31,7 +32,7 @@ export default function PageDuplication() {
         if (!host) return;
         setLoading(true);
         try {
-            const res = await fetch(`https://lumenia.io/api/get-page-duplication`, {
+            const res = await fetch(`${NEXT_PUBLIC_API_URL}/api/get-page-duplication`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -75,7 +76,7 @@ export default function PageDuplication() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
-            const res = await fetch("https://lumenia.io/api/page-duplication", {
+            const res = await fetch(`${NEXT_PUBLIC_API_URL}/api/page-duplication`, {
                 method: "POST",
                 body: JSON.stringify({ baseUrl: url }),
                 headers: {

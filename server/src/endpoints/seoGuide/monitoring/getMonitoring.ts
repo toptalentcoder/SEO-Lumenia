@@ -1,3 +1,4 @@
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { Endpoint } from "payload";
 import { PayloadRequest } from "payload";
 
@@ -10,7 +11,7 @@ export const getMonitoringUrl: Endpoint = {
   method: "get",
   handler: async (req: PayloadRequest): Promise<Response> => {
     const corsHeaders = {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": FRONTEND_URL || "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
       "Access-Control-Allow-Credentials": "true",

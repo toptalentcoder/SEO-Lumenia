@@ -1,6 +1,7 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest, CollectionSlug } from "payload";
 import { Project } from "./postProject";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 interface User {
     email: string;
@@ -17,7 +18,7 @@ export const deleteProject: Endpoint = {
             return new Response(null, {
                 status: 204,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type, Authorization",
                 },
@@ -40,7 +41,7 @@ export const deleteProject: Endpoint = {
                     status: 400,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     },
                 }
             );
@@ -59,7 +60,7 @@ export const deleteProject: Endpoint = {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     },
                 }
             );
@@ -77,7 +78,7 @@ export const deleteProject: Endpoint = {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                     },
                 }
             );
@@ -99,7 +100,7 @@ export const deleteProject: Endpoint = {
                 status: 200,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
                 },
             }
         );

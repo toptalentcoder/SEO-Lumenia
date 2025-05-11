@@ -6,6 +6,7 @@ import { ExternalLink } from "lucide-react"; // optional icon
 import Image from 'next/image';
 import { FaLock } from "react-icons/fa";
 import { useSearchParams } from 'next/navigation';
+import { NEXT_PUBLIC_API_URL} from '../../../config/apiConfig';
 
 function isValidDomain(domain) {
     const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
@@ -46,7 +47,7 @@ export default function Linking() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
-            const res = await fetch("https://lumenia.io/api/internal_pagerank", {
+            const res = await fetch(`${NEXT_PUBLIC_API_URL}/api/internal_pagerank`, {
                 method: "POST",
                 body: JSON.stringify({ baseUrl: formattedUrl }),
                 headers: {

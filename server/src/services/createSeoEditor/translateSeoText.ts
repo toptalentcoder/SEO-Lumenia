@@ -1,6 +1,7 @@
 import OpenAI from "openai";
+import { OPENAI_API_KEY } from "@/config/apiConfig";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 export async function translateText(text: string, targetLanguage: string): Promise<string> {
     const prompt = `Translate the following SEO blog content to ${targetLanguage}. Keep formatting and bullet points where possible:\n\n${text}`;

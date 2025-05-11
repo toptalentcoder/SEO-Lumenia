@@ -10,7 +10,6 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { FRONTEND_URL } from './config/apiConfig'
 import { customEndpoints } from './endpoints'
 import { paypalProductID } from './globals/paypalProductID'
 import { BillingPlan } from './collections/paypalPlan'
@@ -51,7 +50,9 @@ export default buildConfig({
     BacklinkSites,
   ],
   globals : [paypalProductID],
-  cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
+  cors: {
+    origins: [process.env.FRONTEND_URL].filter((url): url is string => Boolean(url)),
+  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
