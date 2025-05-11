@@ -1,3 +1,4 @@
+
 import { OpenAI } from 'openai';
 import { OPENAI_API_KEY } from '@/config/apiConfig';
 
@@ -43,3 +44,4 @@ export async function generateSEOKeywords(query: string, country: string, langua
 
   return keywords;
 }
+
