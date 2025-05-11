@@ -46,7 +46,7 @@ export default function Linking() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
-            const res = await fetch("http://localhost:7777/api/internal_pagerank", {
+            const res = await fetch("https://lumenia.io/api/internal_pagerank", {
                 method: "POST",
                 body: JSON.stringify({ baseUrl: formattedUrl }),
                 headers: {

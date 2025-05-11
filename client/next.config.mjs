@@ -4,7 +4,7 @@ const nextConfig = {
         return [
             {
                 source: '/api/:path*',
-                destination: 'http://localhost:7777/api/:path*', //backend URL
+                destination: 'https://lumenia.io/api/:path*', //backend URL
             },
         ];
     },

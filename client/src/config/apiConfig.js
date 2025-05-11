@@ -1,1 +1,1 @@
-export const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:7777'; 
+export const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://lumenia.io'; 
