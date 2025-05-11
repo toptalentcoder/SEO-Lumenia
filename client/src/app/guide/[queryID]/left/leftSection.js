@@ -1,17 +1,15 @@
 "use client";
 
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaMagnifyingGlassChart, FaCodeCompare  } from "react-icons/fa6";
 import { IoReturnUpForwardOutline } from "react-icons/io5";
 import { MdAutoGraph } from "react-icons/md";
-import { FaImage } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import Analysis from './analysis';
 import Compared from './compared';
 import SocialPost from './socialPost';
 import Explore from './explore';
 import Monitoring from './monitoring/monitoring';
-import LexicalSeoEditor from './seoEditor';
 
 export default function LeftSection ({data, setIsDirty }) {
 
