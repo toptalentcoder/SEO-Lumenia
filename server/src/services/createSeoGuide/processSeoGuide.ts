@@ -89,6 +89,10 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
 
     // Limit to top 20 keywords
     const relatedSEOKeywords = keywordList.slice(0, 20);
+    if (relatedSEOKeywords.length === 0) {
+        console.error("No related SEO keywords generated for query:", query);
+        // You can provide default keywords or handle this case accordingly
+    }
     console.log("Related SEO Keywords:", relatedSEOKeywords);
 
     // Check SERP Presence
@@ -189,10 +193,10 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
         gl,
         seoBrief: resolvedSeoBrief,
         PAAs,
-        relatedSEOKeywords,
         cronjob,
         createdAt: Date.now(),
-        createdBy: email
+        createdBy: email,
+        relatedSEOKeywords : relatedSEOKeywords || [],
     };
 
     // Update user's project with new SEO guide
@@ -246,13 +250,19 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
             throw new Error(`Project not found: ${projectId}`);
         }
 
-        await payload.update({
-            collection: "users",
-            id: user.id,
-            data: {
-                projects: updatedProjects,
-            },
-        });
+        try {
+            await payload.update({
+                collection: "users",
+                id: user.id,
+                data: {
+                    projects: updatedProjects,
+                },
+            });
+            console.log("Data saved successfully");
+        } catch (error) {
+            console.error("Error saving data:", error);
+        }
+        
     }
 
     return seoGuide;
