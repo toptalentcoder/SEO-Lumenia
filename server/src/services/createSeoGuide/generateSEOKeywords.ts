@@ -26,7 +26,7 @@ function parseKeywordList(raw: string): string[] {
   return raw
     .split('\n')
     .map(line => line.trim())
-    .filter(line => line.length > 0 && /^[\w\d]/.test(line)); // remove blanks and invalids
+    .filter(line => line.length > 0 && /^[\w\d\-\&\+]+$/.test(line)); // remove blanks and invalids
 }
 
 export async function generateSEOKeywords(query: string, country: string, language: string): Promise<string[]> {
@@ -40,7 +40,9 @@ export async function generateSEOKeywords(query: string, country: string, langua
   });
 
   const raw = response.choices?.[0]?.message?.content || '';
+  console.log("Raw keyword response:", raw);
   const keywords = parseKeywordList(raw);
+  console.log("Parsed keywords:", keywords); 
 
   return keywords;
 }

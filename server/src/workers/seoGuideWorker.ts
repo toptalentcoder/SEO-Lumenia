@@ -79,8 +79,18 @@ worker.on('failed', (job, error) => {
     console.error(`❌ Job ${job?.id} failed:`, error);
 });
 
-worker.on('completed', (job) => {
+worker.on('completed', async (job) => {
     console.log(`✅ Job ${job.id} completed`);
+    // const result = job.returnvalue;
+    // if (result && result.seoGuide) {
+    //     console.log("SEO guide saved:", result.seoGuide);
+    //     // Save the result to the database
+    //     await payload.update({
+    //         collection: 'users',
+    //         id: job.data.userId,
+    //         data: { seoGuides: [...job.data.seoGuides, result.seoGuide] }
+    //     });
+    // }
 });
 
 worker.on('stalled', (jobId) => {
