@@ -69,6 +69,28 @@ const glToFullCountryMap = {
     ad: 'Andorra'
 };
 
+const getRandomColor = () => {
+    let color;
+    do {
+        color = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    } while (
+        color.toLowerCase() === '#000000' || // avoid black
+        color.toLowerCase() === '#ffffff' || // avoid white
+        isColorTooLight(color)               // optional: avoid too-light colors
+    );
+    return color;
+};
+  
+// Optional: filter out very light colors
+const isColorTooLight = (hex) => {
+    const r = parseInt(hex.substring(1, 3), 16);
+    const g = parseInt(hex.substring(3, 5), 16);
+    const b = parseInt(hex.substring(5, 7), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 230;
+};
+
+
 const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     return (
         <svg x={cx - 4} y={cy - 4} width={8} height={8} fill={color} stroke="none">
@@ -90,7 +112,7 @@ export default function Analysis({data, setIsDirty }) {
     const [detectedCategories, setDetectedCategories] = useState([]);
     const [soseoScore, setSoseoScore] = useState(0);
     const [dseoScore, setDseoScore] = useState(0);
-    const [yMax, setYMax] = useState(100); // Default value is 100
+    // const [yMax, setYMax] = useState(100); // Default value is 100
 
     const lineColors = [
         '#FF5733', '#33C1FF', '#9D33FF', '#33FF57', '#FF33B2',
@@ -202,7 +224,7 @@ export default function Analysis({data, setIsDirty }) {
                         name: "Series 1",
                         data: keywordOptimizations.map((optimization) => ({
                             name: optimization.keyword,
-                            value: optimization.value,
+                            value: Math.max(optimization.value, 10)
                         })),
                     },
                 ];
@@ -290,12 +312,12 @@ export default function Analysis({data, setIsDirty }) {
         const isRemoving = graphLineData.some((s) => s.name === url);
         const keywordData = data.optimizationLevels.map((level) => ({
             name: level.keyword,
-            value: level.urlOptimizations?.[url] || 0,
+            value: Math.max(level.urlOptimizations?.[url] || 0, 10),
         }));
 
         setGraphLineData(prev => {
             if (isRemoving) return prev.filter(s => s.name !== url);
-            const color = lineColors[prev.length % lineColors.length];
+            const color = getRandomColor();
             return [...prev, { name: url, color, data: keywordData }];
         });
     };
@@ -336,27 +358,27 @@ export default function Analysis({data, setIsDirty }) {
       }, [graphLineData, data?.optimizationLevels]);
       
 
-    useEffect(() => {
-        const calculateYMax = () => {
-            const allValues = [];
-            graphData.forEach(entry => {
+    // useEffect(() => {
+    //     const calculateYMax = () => {
+    //         const allValues = [];
+    //         graphData.forEach(entry => {
 
-                allValues.push(entry.subOptimized || 0);
-                allValues.push(entry.standardOptimized || 0);
-                allValues.push(entry.strongOptimized || 0);
-                allValues.push(entry.overOptimized || 0);
-                graphLineData.forEach(line => {
-                    const v = entry[line.name];
-                    if (typeof v === 'number') allValues.push(v);
-                });
-            });
+    //             allValues.push(entry.subOptimized || 0);
+    //             allValues.push(entry.standardOptimized || 0);
+    //             allValues.push(entry.strongOptimized || 0);
+    //             allValues.push(entry.overOptimized || 0);
+    //             graphLineData.forEach(line => {
+    //                 const v = entry[line.name];
+    //                 if (typeof v === 'number') allValues.push(v);
+    //             });
+    //         });
 
-            return Math.max(...allValues, 100);
-        };
+    //         return Math.max(...allValues, 100);
+    //     };
 
-        const newYMax = calculateYMax();
-        setYMax(newYMax);
-    }, [graphData, graphLineData]);
+    //     const newYMax = calculateYMax();
+    //     setYMax(newYMax);
+    // }, [graphData, graphLineData]);
 
     return(
         <div className="px-6">
@@ -471,7 +493,6 @@ export default function Analysis({data, setIsDirty }) {
                         />
                         <YAxis
                             tick={false}
-                            domain={[0, yMax]}
                             label={{
                                 value: 'Optimization',
                                 angle: -90,
@@ -511,18 +532,22 @@ export default function Analysis({data, setIsDirty }) {
                             fill="#FF0000"
                         />
                         {/* Line layers */}
-                        {graphLineData.map((s, i) => (
-                            <Line
-                                key={s.name}
+                        {graphLineData.map((s, i) => {
+                            const isMainSeries = s.name === "Series 1";
+                            const strokeColor = isMainSeries ? "#000000" : s.color;
+
+                            return (
+                                <Line
+                                    key={s.name}
                                     type="monotone"
-                                // data={mergedGraphData.map(e => ({ name: e.name, value: s.data?.find(d => d.name === e.name)?.value || 0 }))}
-                                dataKey={s.name}
-                                name={s.name}
-                                stroke={s.color || lineColors[i % lineColors.length]}
-                                strokeWidth={2}
-                                dot={<CustomDot color={s.color || lineColors[i % lineColors.length]} />}
-                            />
-                        ))}
+                                    dataKey={s.name}
+                                    name={isMainSeries ? "Your Content" : s.name}
+                                    stroke={strokeColor}
+                                    strokeWidth={2}
+                                    dot={<CustomDot color={strokeColor} />}
+                                />
+                            );
+                        })}
 
                     </ComposedChart>
                 </ResponsiveContainer>
