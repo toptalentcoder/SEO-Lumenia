@@ -85,6 +85,11 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     // Generate SEO Keywords
     const keywordList: string[] = await generateSEOKeywords(query, gl || "us", fullLanguageName);
     if (!keywordList) throw new Error("Failed to generate keywords");
+    console.log("Generated keywords:", keywordList);
+
+    // Limit to top 20 keywords
+    const relatedSEOKeywords = keywordList.slice(0, 20);
+    console.log("Related SEO Keywords:", relatedSEOKeywords);
 
     // Check SERP Presence
     const serpPresence = await checkUrlPresenceAcrossKeywords(keywordList, links, gl || "us", hl || "en");
@@ -184,6 +189,7 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
         gl,
         seoBrief: resolvedSeoBrief,
         PAAs,
+        relatedSEOKeywords,
         cronjob,
         createdAt: Date.now(),
         createdBy: email
