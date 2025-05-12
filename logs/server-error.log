@@ -1151,3 +1151,10 @@
 2025-05-10T00:00:40: [WARN] Failed to fetch HTML for: https://glassdoor.com
 2025-05-10T00:00:54: [WARN] Failed to fetch HTML for: https://reddit.com
 2025-05-10T00:01:01: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-12T00:00:48: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-12T00:01:07: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-12T00:01:13: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-12T00:02:39: Error: Command timed out
+2025-05-12T00:02:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-12T00:02:39: ❌ Worker error: Error: Command timed out
+2025-05-12T00:02:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
