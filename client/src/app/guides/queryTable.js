@@ -187,8 +187,6 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         creatorProfilePicture: project.createdBy === user?.email ? user?.profilePicture?.url : null
                     }))
 
-                    console.log(formattedProjects)
-
                     setRows(formattedProjects);
                 }
             }catch (error) {
