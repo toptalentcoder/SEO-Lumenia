@@ -113,6 +113,10 @@ export default function Analysis({data, setIsDirty }) {
     const [soseoScore, setSoseoScore] = useState(0);
     const [dseoScore, setDseoScore] = useState(0);
     // const [yMax, setYMax] = useState(100); // Default value is 100
+    const [isSubOptimizedVisible, setIsSubOptimizedVisible] = useState(true);
+    const [isStandardOptimizedVisible, setIsStandardOptimizedVisible] = useState(true);
+    const [isStrongOptimizedVisible, setIsStrongOptimizedVisible] = useState(true);
+    const [isOverOptimizedVisible, setIsOverOptimizedVisible] = useState(true);
 
     const lineColors = [
         '#FF5733', '#33C1FF', '#9D33FF', '#33FF57', '#FF33B2',
@@ -355,30 +359,26 @@ export default function Analysis({data, setIsDirty }) {
         });
       
         setGraphData(mergedGraphData);
-      }, [graphLineData, data?.optimizationLevels]);
-      
+    }, [graphLineData, data?.optimizationLevels]);
 
-    // useEffect(() => {
-    //     const calculateYMax = () => {
-    //         const allValues = [];
-    //         graphData.forEach(entry => {
-
-    //             allValues.push(entry.subOptimized || 0);
-    //             allValues.push(entry.standardOptimized || 0);
-    //             allValues.push(entry.strongOptimized || 0);
-    //             allValues.push(entry.overOptimized || 0);
-    //             graphLineData.forEach(line => {
-    //                 const v = entry[line.name];
-    //                 if (typeof v === 'number') allValues.push(v);
-    //             });
-    //         });
-
-    //         return Math.max(...allValues, 100);
-    //     };
-
-    //     const newYMax = calculateYMax();
-    //     setYMax(newYMax);
-    // }, [graphData, graphLineData]);
+    const handleOptimizationToggle = (optimizationType) => {
+        switch (optimizationType) {
+          case 'subOptimized':
+            setIsSubOptimizedVisible(!isSubOptimizedVisible);
+            break;
+          case 'standardOptimized':
+            setIsStandardOptimizedVisible(!isStandardOptimizedVisible);
+            break;
+          case 'strongOptimized':
+            setIsStrongOptimizedVisible(!isStrongOptimizedVisible);
+            break;
+          case 'overOptimized':
+            setIsOverOptimizedVisible(!isOverOptimizedVisible);
+            break;
+          default:
+            break;
+        }
+    };
 
     return(
         <div className="px-6">
@@ -505,31 +505,31 @@ export default function Analysis({data, setIsDirty }) {
                         {/* Area layers */}
                         <Area
                             type="monotone"
-                            dataKey="subOptimized" 
+                            dataKey="subOptimized"
                             stackId="1"
                             stroke="#7CB5EC"
-                            fill="#7CB5EC"
+                            fill={isSubOptimizedVisible ? "#7CB5EC" : "transparent"} // Transparent when not visible
                         />
                         <Area
                             type="monotone"
-                            dataKey="standardOptimized" 
+                            dataKey="standardOptimized"
                             stackId="1"
                             stroke="#90EE7E"
-                            fill="#90EE7E"
+                            fill={isStandardOptimizedVisible ? "#90EE7E" : "transparent"} // Transparent when not visible
                         />
                         <Area
                             type="monotone"
-                            dataKey="strongOptimized" 
+                            dataKey="strongOptimized"
                             stackId="1"
                             stroke="#FFA500"
-                            fill="#FFA500"
+                            fill={isStrongOptimizedVisible ? "#FFA500" : "transparent"} // Transparent when not visible
                         />
                         <Area
                             type="monotone"
-                            dataKey="overOptimized" 
+                            dataKey="overOptimized"
                             stackId="1"
                             stroke="#FF0000"
-                            fill="#FF0000"
+                            fill={isOverOptimizedVisible ? "#FF0000" : "transparent"} // Transparent when not visible
                         />
                         {/* Line layers */}
                         {graphLineData.map((s, i) => {
@@ -554,19 +554,31 @@ export default function Analysis({data, setIsDirty }) {
             </div>
 
             <div className="flex items-center gap-4 justify-center mt-4">
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('overOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#FF0000]"></div>
                     <span className="text-sm font-semibold text-gray-800">Over-optimiztion</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('strongOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#FFA500]"></div>
                     <span className="text-sm font-semibold text-gray-800">Strong-optimiztion</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('standardOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#90EE7E]"></div>
                     <span className="text-sm font-semibold text-gray-800">Standard-optimiztion</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('subOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#7CB5EC]"></div>
                     <span className="text-sm font-semibold text-gray-800">Sub-optimiztion</span>
                 </div>
