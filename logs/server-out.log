@@ -4489,3 +4489,581 @@
 2025-05-11T20:14:06: failed to fetch : https://www.pcmag.com/picks/the-best-free-vpns
 2025-05-11T20:14:24: ✅ Job 19 completed
 2025-05-11T20:14:24: ✅ Job 19 completed
+2025-05-13T14:30:02: 
+2025-05-13T14:30:02: > seo-yourtext@1.0.0 start:server
+2025-05-13T14:30:02: > cd server && npm start
+2025-05-13T14:30:02: 
+2025-05-13T14:30:02: 
+2025-05-13T14:30:02: > server@1.0.0 start
+2025-05-13T14:30:02: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-13T14:30:02: 
+2025-05-13T14:30:03:    ▲ Next.js 15.2.2
+2025-05-13T14:30:03:    - Local:        http://localhost:7777
+2025-05-13T14:30:03:    - Network:      http://167.235.246.98:7777
+2025-05-13T14:30:03: 
+2025-05-13T14:30:03:  ✓ Starting...
+2025-05-13T14:30:03:  ✓ Ready in 401ms
+2025-05-13T14:30:04: ✅ Connected to Redis
+2025-05-13T14:30:04: ✅ Redis client ready
+2025-05-13T14:39:52: 
+2025-05-13T14:39:52: > seo-yourtext@1.0.0 start:server
+2025-05-13T14:39:52: > cd server && npm start
+2025-05-13T14:39:52: 
+2025-05-13T14:39:53: 
+2025-05-13T14:39:53: > server@1.0.0 start
+2025-05-13T14:39:53: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-13T14:39:53: 
+2025-05-13T14:39:53:    ▲ Next.js 15.2.2
+2025-05-13T14:39:53:    - Local:        http://localhost:7777
+2025-05-13T14:39:53:    - Network:      http://167.235.246.98:7777
+2025-05-13T14:39:53: 
+2025-05-13T14:39:53:  ✓ Starting...
+2025-05-13T14:39:53:  ✓ Ready in 403ms
+2025-05-13T14:39:54: ✅ Connected to Redis
+2025-05-13T14:39:54: ✅ Redis client ready
+2025-05-13T14:40:22: [14:40:22] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-13T14:40:22: Initializing Payload services...
+2025-05-13T14:40:22: Paypal plan check
+2025-05-13T14:40:22: Daily rank tracking finished
+2025-05-13T14:40:22: Setting Payload instance for SEO Guide worker
+2025-05-13T14:40:22: ✅ Payload instance initialized for both workers
+2025-05-13T14:40:22: ✅ Workers started in background
+2025-05-13T14:40:23: Product ID already exists.
+2025-05-13T14:40:27: Database Plan IDs: Set(16) {
+2025-05-13T14:40:27:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T14:40:27:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T14:40:27:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T14:40:27:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T14:40:27:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T14:40:27:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T14:40:27:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T14:40:27:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T14:40:27:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T14:40:27:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T14:40:27:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T14:40:27:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T14:40:27:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T14:40:27:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T14:40:27:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T14:40:27:   'P-490774634X2062924NAHAMPI'
+2025-05-13T14:40:27: }
+2025-05-13T14:40:27: PayPal Plan IDs: Set(96) {
+2025-05-13T14:40:27:   'P-98579045524419020M7M4JXY',
+2025-05-13T14:40:27:   'P-0SA1427012940862YM7M4JYA',
+2025-05-13T14:40:27:   'P-6P231034LS515993XM7M4JYI',
+2025-05-13T14:40:27:   'P-68E81820XB085010WM7M4JYI',
+2025-05-13T14:40:27:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-13T14:40:27:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-13T14:40:27:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-13T14:40:27:   'P-68B108558G040300CM7M4JYY',
+2025-05-13T14:40:27:   'P-62T484147J908714FM7M4JZI',
+2025-05-13T14:40:27:   'P-90V18465AA503062KM7M4JZI',
+2025-05-13T14:40:27:   'P-0N203053T15286811M7M4JZQ',
+2025-05-13T14:40:27:   'P-46533433JY578205HM7M4JZQ',
+2025-05-13T14:40:27:   'P-63R81120GE458362BM7M4JZY',
+2025-05-13T14:40:27:   'P-21A90981M6370210WM7M4JZY',
+2025-05-13T14:40:27:   'P-360406889S1454445M7M4J2I',
+2025-05-13T14:40:27:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-13T14:40:27:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-13T14:40:27:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-13T14:40:27:   'P-39555110YD2915823M7S6OQQ',
+2025-05-13T14:40:27:   'P-9E656446VD230374HM7S6OQY',
+2025-05-13T14:40:27:   'P-45128149BJ354104KM7S6OQY',
+2025-05-13T14:40:27:   'P-9F006862C6340571DM7S6OQY',
+2025-05-13T14:40:27:   'P-1V314479R9099642UM7S6OQY',
+2025-05-13T14:40:27:   'P-79A057673F410951MM7S6OQY',
+2025-05-13T14:40:27:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-13T14:40:27:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-13T14:40:27:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-13T14:40:27:   'P-21X07337A4958732NM7S6ORA',
+2025-05-13T14:40:27:   'P-3FU129497M979342BM7S6ORI',
+2025-05-13T14:40:27:   'P-44G00026CM390584DM7S6ORI',
+2025-05-13T14:40:27:   'P-62J05746CC518271NM7S6ORI',
+2025-05-13T14:40:27:   'P-7H916310NB4776034M7S6ORI',
+2025-05-13T14:40:27:   'P-81H7059024688361BNADFSEQ',
+2025-05-13T14:40:27:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-13T14:40:27:   'P-0AG648210K837334ENADFSEY',
+2025-05-13T14:40:27:   'P-5PJ42060848447527NADFSEY',
+2025-05-13T14:40:27:   'P-7SH44926C2332032LNADFSFA',
+2025-05-13T14:40:27:   'P-5GT16529YX6637536NADFSFA',
+2025-05-13T14:40:27:   'P-9E4467280K919340LNADFSFA',
+2025-05-13T14:40:27:   'P-7F5548422M800415UNADFSFA',
+2025-05-13T14:40:27:   'P-5D1599585G2325124NADFSFI',
+2025-05-13T14:40:27:   'P-8HP47151UE2088357NADFSFI',
+2025-05-13T14:40:27:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-13T14:40:27:   'P-77F59714BA432935BNADFSFQ',
+2025-05-13T14:40:27:   'P-621267267T2568348NADFSFQ',
+2025-05-13T14:40:27:   'P-0VC29477844828614NADFSFQ',
+2025-05-13T14:40:27:   'P-9VK838170M171392XNADFSFY',
+2025-05-13T14:40:27:   'P-5K721906AC486313MNADFSFY',
+2025-05-13T14:40:27:   'P-490774634X2062924NAHAMPI',
+2025-05-13T14:40:27:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T14:40:27:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T14:40:27:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T14:40:27:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T14:40:27:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T14:40:27:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T14:40:27:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T14:40:27:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T14:40:27:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T14:40:27:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T14:40:27:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T14:40:27:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T14:40:27:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T14:40:27:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T14:40:27:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T14:40:27:   'P-8R860064U4651043VNAMP5QA',
+2025-05-13T14:40:27:   'P-60C92000WD254525WNAMP5QI',
+2025-05-13T14:40:27:   'P-0UT00261V94696819NAMP5QI',
+2025-05-13T14:40:27:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-13T14:40:27:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-13T14:40:27:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-13T14:40:27:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-13T14:40:27:   'P-6X911161ML521982BNAMP5QY',
+2025-05-13T14:40:27:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-13T14:40:27:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-13T14:40:27:   'P-3U673165V0901092KNAMP5RA',
+2025-05-13T14:40:27:   'P-8YA2119328867231VNAMP5RA',
+2025-05-13T14:40:27:   'P-8HG183948K421773MNAMP5RI',
+2025-05-13T14:40:27:   'P-5JN159596J440845BNAMP5RI',
+2025-05-13T14:40:27:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-13T14:40:27:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-13T14:40:27:   'P-0F030730RE936621BNAN4HCA',
+2025-05-13T14:40:27:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-13T14:40:27:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-13T14:40:27:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-13T14:40:27:   'P-4D519177D3911424YNAN4HCY',
+2025-05-13T14:40:27:   'P-6BD749029B990871CNAN4HCY',
+2025-05-13T14:40:27:   'P-5BM58021W47885254NAN4HDA',
+2025-05-13T14:40:27:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-13T14:40:27:   'P-49185806R8340904VNAN4HDI',
+2025-05-13T14:40:27:   'P-5W217508C5372952SNAN4HDI',
+2025-05-13T14:40:27:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-13T14:40:27:   'P-0C082804XG969344HNAN4HDY',
+2025-05-13T14:40:27:   'P-509283891X696204TNAN4HEA',
+2025-05-13T14:40:27:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-13T14:40:27:   'P-13J67250CR558593DNAN4HEI',
+2025-05-13T14:40:27:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-13T14:40:27: }
+2025-05-13T14:40:27: All plans processed successfully.
+2025-05-13T14:41:05: Received request body: {
+2025-05-13T14:41:05:   query: 'what is the best famous game',
+2025-05-13T14:41:05:   queryID: '32039693',
+2025-05-13T14:41:05:   queryEngine: 'google',
+2025-05-13T14:41:05:   projectID: '303816',
+2025-05-13T14:41:05:   email: 'healer@gmail.com',
+2025-05-13T14:41:05:   language: 'en',
+2025-05-13T14:41:05:   hl: 'en',
+2025-05-13T14:41:05:   gl: 'us',
+2025-05-13T14:41:05:   lr: 'lang_en'
+2025-05-13T14:41:05: }
+2025-05-13T14:41:05: Adding job to the queue...
+2025-05-13T14:41:05: Job added to queue with ID: 69
+2025-05-13T14:41:05: 🔄 Job 69 started processing
+2025-05-13T14:41:05: 🔄 Worker processing SEO guide creation job 69
+2025-05-13T14:41:05: 📝 Job data: {
+2025-05-13T14:41:05:   "query": "what is the best famous game",
+2025-05-13T14:41:05:   "projectID": "303816",
+2025-05-13T14:41:05:   "email": "healer@gmail.com",
+2025-05-13T14:41:05:   "queryID": "32039693",
+2025-05-13T14:41:05:   "language": "en",
+2025-05-13T14:41:05:   "queryEngine": "google",
+2025-05-13T14:41:05:   "hl": "en",
+2025-05-13T14:41:05:   "gl": "us",
+2025-05-13T14:41:05:   "lr": "lang_en"
+2025-05-13T14:41:05: }
+2025-05-13T14:41:05: 📊 Job 69 progress: 10%
+2025-05-13T14:41:05: ✅ Initial progress update complete
+2025-05-13T14:41:05: 🔑 Getting Payload instance...
+2025-05-13T14:41:05: ✅ Payload instance obtained
+2025-05-13T14:41:05: 📊 Job 69 progress: 30%
+2025-05-13T14:41:05: 🚀 Starting SEO guide processing...
+2025-05-13T14:41:05: processSeoGuide started
+2025-05-13T14:41:05: Processing SEO guide with data: {
+2025-05-13T14:41:05:   query: 'what is the best famous game',
+2025-05-13T14:41:05:   projectID: '303816',
+2025-05-13T14:41:05:   email: 'healer@gmail.com',
+2025-05-13T14:41:05:   queryID: '32039693',
+2025-05-13T14:41:05:   language: 'en',
+2025-05-13T14:41:05:   queryEngine: 'google',
+2025-05-13T14:41:05:   hl: 'en',
+2025-05-13T14:41:05:   gl: 'us',
+2025-05-13T14:41:05:   lr: 'lang_en'
+2025-05-13T14:41:05: }
+2025-05-13T14:41:05: 📊 Job 69 progress: 20%
+2025-05-13T14:41:09: 📊 Job 69 progress: 30%
+2025-05-13T14:41:09: Before generating SEO keywords
+2025-05-13T14:41:09: Sending request to OpenAI with prompt: 
+2025-05-13T14:41:09: You are an SEO keyword research assistant.
+2025-05-13T14:41:09: 
+2025-05-13T14:41:09: Using the input query "what is the best famous game" in English for the us market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-13T14:41:09: 
+2025-05-13T14:41:09: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-13T14:41:09: 
+2025-05-13T14:41:09: Example:
+2025-05-13T14:41:09: keyword 1  
+2025-05-13T14:41:09: keyword 2  
+2025-05-13T14:41:09: keyword 3  
+2025-05-13T14:41:09: ...
+2025-05-13T14:41:09: 
+2025-05-13T14:41:26: Raw keyword response: most popular video games
+2025-05-13T14:41:26: top-rated games of all time
+2025-05-13T14:41:26: best video games ever
+2025-05-13T14:41:26: how to choose the best video game
+2025-05-13T14:41:26: comparison of most famous video games
+2025-05-13T14:41:26: top 10 games in the world
+2025-05-13T14:41:26: buy top rated video games online
+2025-05-13T14:41:26: what is the highest grossing game
+2025-05-13T14:41:26: best selling video games
+2025-05-13T14:41:26: most played game in the world
+2025-05-13T14:41:26: best game franchises
+2025-05-13T14:41:26: game reviews for top-rated games
+2025-05-13T14:41:26: most famous game characters
+2025-05-13T14:41:26: video game ratings and reviews
+2025-05-13T14:41:26: purchase top video games online
+2025-05-13T14:41:26: download best selling video games
+2025-05-13T14:41:26: best video game developers
+2025-05-13T14:41:26: best game series ever
+2025-05-13T14:41:26: where to buy top video games
+2025-05-13T14:41:26: most successful video game franchises
+2025-05-13T14:41:26: how to play the most famous games
+2025-05-13T14:41:26: video game comparison chart
+2025-05-13T14:41:26: highest rated video games on Amazon
+2025-05-13T14:41:26: navigate to top game sites
+2025-05-13T14:41:26: best video game sites
+2025-05-13T14:41:26: video game buying guide
+2025-05-13T14:41:26: most downloaded games of all time
+2025-05-13T14:41:26: best video game stores online
+2025-05-13T14:41:26: where can I find the best video game deals
+2025-05-13T14:41:26: most recommended video games
+2025-05-13T14:41:26: famous game creators and developers
+2025-05-13T14:41:26: best game consoles for popular games
+2025-05-13T14:41:26: top gaming platforms for best games
+2025-05-13T14:41:26: most influential video games in history
+2025-05-13T14:41:26: best game apps for smartphones
+2025-05-13T14:41:26: top free to play games
+2025-05-13T14:41:26: most addictive video games
+2025-05-13T14:41:26: best games on PlayStation
+2025-05-13T14:41:26: best games on Xbox
+2025-05-13T14:41:26: best games on Nintendo Switch
+2025-05-13T14:41:26: best PC games of all time
+2025-05-13T14:41:26: best Mobile games of all time
+2025-05-13T14:41:26: top eSports games
+2025-05-13T14:41:26: most watched games on Twitch
+2025-05-13T14:41:26: best rated games on Steam
+2025-05-13T14:41:26: best multiplayer games
+2025-05-13T14:41:26: best single player games
+2025-05-13T14:41:26: best online games
+2025-05-13T14:41:26: most played games on Steam
+2025-05-13T14:41:26: most played games on mobile
+2025-05-13T14:41:26: best selling games on PlayStation
+2025-05-13T14:41:26: best selling games on Xbox
+2025-05-13T14:41:26: best selling games on Nintendo
+2025-05-13T14:41:26: best selling games on PC
+2025-05-13T14:41:26: best selling games on App store
+2025-05-13T14:41:26: best selling games on Google Play store
+2025-05-13T14:41:26: Parsed keywords: [
+2025-05-13T14:41:26:   'most popular video games',
+2025-05-13T14:41:26:   'top-rated games of all time',
+2025-05-13T14:41:26:   'best video games ever',
+2025-05-13T14:41:26:   'how to choose the best video game',
+2025-05-13T14:41:26:   'comparison of most famous video games',
+2025-05-13T14:41:26:   'top 10 games in the world',
+2025-05-13T14:41:26:   'buy top rated video games online',
+2025-05-13T14:41:26:   'what is the highest grossing game',
+2025-05-13T14:41:26:   'best selling video games',
+2025-05-13T14:41:26:   'most played game in the world',
+2025-05-13T14:41:26:   'best game franchises',
+2025-05-13T14:41:26:   'game reviews for top-rated games',
+2025-05-13T14:41:26:   'most famous game characters',
+2025-05-13T14:41:26:   'video game ratings and reviews',
+2025-05-13T14:41:26:   'purchase top video games online',
+2025-05-13T14:41:26:   'download best selling video games',
+2025-05-13T14:41:26:   'best video game developers',
+2025-05-13T14:41:26:   'best game series ever',
+2025-05-13T14:41:26:   'where to buy top video games',
+2025-05-13T14:41:26:   'most successful video game franchises',
+2025-05-13T14:41:26:   'how to play the most famous games',
+2025-05-13T14:41:26:   'video game comparison chart',
+2025-05-13T14:41:26:   'highest rated video games on Amazon',
+2025-05-13T14:41:26:   'navigate to top game sites',
+2025-05-13T14:41:26:   'best video game sites',
+2025-05-13T14:41:26:   'video game buying guide',
+2025-05-13T14:41:26:   'most downloaded games of all time',
+2025-05-13T14:41:26:   'best video game stores online',
+2025-05-13T14:41:26:   'where can I find the best video game deals',
+2025-05-13T14:41:26:   'most recommended video games',
+2025-05-13T14:41:26:   'famous game creators and developers',
+2025-05-13T14:41:26:   'best game consoles for popular games',
+2025-05-13T14:41:26:   'top gaming platforms for best games',
+2025-05-13T14:41:26:   'most influential video games in history',
+2025-05-13T14:41:26:   'best game apps for smartphones',
+2025-05-13T14:41:26:   'top free to play games',
+2025-05-13T14:41:26:   'most addictive video games',
+2025-05-13T14:41:26:   'best games on PlayStation',
+2025-05-13T14:41:26:   'best games on Xbox',
+2025-05-13T14:41:26:   'best games on Nintendo Switch',
+2025-05-13T14:41:26:   'best PC games of all time',
+2025-05-13T14:41:26:   'best Mobile games of all time',
+2025-05-13T14:41:26:   'top eSports games',
+2025-05-13T14:41:26:   'most watched games on Twitch',
+2025-05-13T14:41:26:   'best rated games on Steam',
+2025-05-13T14:41:26:   'best multiplayer games',
+2025-05-13T14:41:26:   'best single player games',
+2025-05-13T14:41:26:   'best online games',
+2025-05-13T14:41:26:   'most played games on Steam',
+2025-05-13T14:41:26:   'most played games on mobile',
+2025-05-13T14:41:26:   'best selling games on PlayStation',
+2025-05-13T14:41:26:   'best selling games on Xbox',
+2025-05-13T14:41:26:   'best selling games on Nintendo',
+2025-05-13T14:41:26:   'best selling games on PC',
+2025-05-13T14:41:26:   'best selling games on App store',
+2025-05-13T14:41:26:   'best selling games on Google Play store'
+2025-05-13T14:41:26: ]
+2025-05-13T14:41:26: Generated keywords: [
+2025-05-13T14:41:26:   'most popular video games',
+2025-05-13T14:41:26:   'top-rated games of all time',
+2025-05-13T14:41:26:   'best video games ever',
+2025-05-13T14:41:26:   'how to choose the best video game',
+2025-05-13T14:41:26:   'comparison of most famous video games',
+2025-05-13T14:41:26:   'top 10 games in the world',
+2025-05-13T14:41:26:   'buy top rated video games online',
+2025-05-13T14:41:26:   'what is the highest grossing game',
+2025-05-13T14:41:26:   'best selling video games',
+2025-05-13T14:41:26:   'most played game in the world',
+2025-05-13T14:41:26:   'best game franchises',
+2025-05-13T14:41:26:   'game reviews for top-rated games',
+2025-05-13T14:41:26:   'most famous game characters',
+2025-05-13T14:41:26:   'video game ratings and reviews',
+2025-05-13T14:41:26:   'purchase top video games online',
+2025-05-13T14:41:26:   'download best selling video games',
+2025-05-13T14:41:26:   'best video game developers',
+2025-05-13T14:41:26:   'best game series ever',
+2025-05-13T14:41:26:   'where to buy top video games',
+2025-05-13T14:41:26:   'most successful video game franchises',
+2025-05-13T14:41:26:   'how to play the most famous games',
+2025-05-13T14:41:26:   'video game comparison chart',
+2025-05-13T14:41:26:   'highest rated video games on Amazon',
+2025-05-13T14:41:26:   'navigate to top game sites',
+2025-05-13T14:41:26:   'best video game sites',
+2025-05-13T14:41:26:   'video game buying guide',
+2025-05-13T14:41:26:   'most downloaded games of all time',
+2025-05-13T14:41:26:   'best video game stores online',
+2025-05-13T14:41:26:   'where can I find the best video game deals',
+2025-05-13T14:41:26:   'most recommended video games',
+2025-05-13T14:41:26:   'famous game creators and developers',
+2025-05-13T14:41:26:   'best game consoles for popular games',
+2025-05-13T14:41:26:   'top gaming platforms for best games',
+2025-05-13T14:41:26:   'most influential video games in history',
+2025-05-13T14:41:26:   'best game apps for smartphones',
+2025-05-13T14:41:26:   'top free to play games',
+2025-05-13T14:41:26:   'most addictive video games',
+2025-05-13T14:41:26:   'best games on PlayStation',
+2025-05-13T14:41:26:   'best games on Xbox',
+2025-05-13T14:41:26:   'best games on Nintendo Switch',
+2025-05-13T14:41:26:   'best PC games of all time',
+2025-05-13T14:41:26:   'best Mobile games of all time',
+2025-05-13T14:41:26:   'top eSports games',
+2025-05-13T14:41:26:   'most watched games on Twitch',
+2025-05-13T14:41:26:   'best rated games on Steam',
+2025-05-13T14:41:26:   'best multiplayer games',
+2025-05-13T14:41:26:   'best single player games',
+2025-05-13T14:41:26:   'best online games',
+2025-05-13T14:41:26:   'most played games on Steam',
+2025-05-13T14:41:26:   'most played games on mobile',
+2025-05-13T14:41:26:   'best selling games on PlayStation',
+2025-05-13T14:41:26:   'best selling games on Xbox',
+2025-05-13T14:41:26:   'best selling games on Nintendo',
+2025-05-13T14:41:26:   'best selling games on PC',
+2025-05-13T14:41:26:   'best selling games on App store',
+2025-05-13T14:41:26:   'best selling games on Google Play store'
+2025-05-13T14:41:26: ]
+2025-05-13T14:41:26: Related SEO Keywords: [
+2025-05-13T14:41:26:   'most popular video games',
+2025-05-13T14:41:26:   'top-rated games of all time',
+2025-05-13T14:41:26:   'best video games ever',
+2025-05-13T14:41:26:   'how to choose the best video game',
+2025-05-13T14:41:26:   'comparison of most famous video games',
+2025-05-13T14:41:26:   'top 10 games in the world',
+2025-05-13T14:41:26:   'buy top rated video games online',
+2025-05-13T14:41:26:   'what is the highest grossing game',
+2025-05-13T14:41:26:   'best selling video games',
+2025-05-13T14:41:26:   'most played game in the world',
+2025-05-13T14:41:26:   'best game franchises',
+2025-05-13T14:41:26:   'game reviews for top-rated games',
+2025-05-13T14:41:26:   'most famous game characters',
+2025-05-13T14:41:26:   'video game ratings and reviews',
+2025-05-13T14:41:26:   'purchase top video games online',
+2025-05-13T14:41:26:   'download best selling video games',
+2025-05-13T14:41:26:   'best video game developers',
+2025-05-13T14:41:26:   'best game series ever',
+2025-05-13T14:41:26:   'where to buy top video games',
+2025-05-13T14:41:26:   'most successful video game franchises'
+2025-05-13T14:41:26: ]
+2025-05-13T14:41:26: English
+2025-05-13T14:41:26: failed to fetch : https://www.reddit.com/r/IndianGaming/comments/18l2ir1/what_are_your_absolute_top_three_games_of_all/
+2025-05-13T14:41:26: failed to fetch : https://www.pcmag.com/picks/the-best-android-games
+2025-05-13T14:41:41: 📊 Job 69 progress: 50%
+2025-05-13T14:41:41: 📊 Job 69 progress: 60%
+2025-05-13T14:41:46: 📊 Job 69 progress: 70%
+2025-05-13T14:41:46: 📊 Job 69 progress: 80%
+2025-05-13T14:41:51: 📊 Job 69 progress: 90%
+2025-05-13T14:41:51: Data saved successfully
+2025-05-13T14:41:51: ✅ SEO guide processing complete
+2025-05-13T14:41:51: 📊 Job 69 progress: 50%
+2025-05-13T14:41:51: 📊 Job 69 progress: 80%
+2025-05-13T14:41:51: 📊 Job 69 progress: 100%
+2025-05-13T14:41:51: 💾 Saving job results...
+2025-05-13T14:41:51: ✅ Job results saved
+2025-05-13T14:41:51: ✅ Job 69 completed
+2025-05-13T14:41:51: ✅ Job 69 completed
+2025-05-13T14:42:59: 🔄 Job 14 started processing
+2025-05-13T14:42:59: Worker processing SEO brief verification job 14
+2025-05-13T14:42:59: 📊 Job 14 progress: 10%
+2025-05-13T14:42:59: 📊 Job 14 progress: 30%
+2025-05-13T14:43:17: 📊 Job 14 progress: 50%
+2025-05-13T14:43:17: 📊 Job 14 progress: 80%
+2025-05-13T14:43:17: 📊 Job 14 progress: 100%
+2025-05-13T14:43:17: ✅ Job 14 completed
+2025-05-13T14:43:17: ✅ Job 14 completed
+2025-05-13T14:55:23: 
+2025-05-13T14:55:23: > seo-yourtext@1.0.0 start:server
+2025-05-13T14:55:23: > cd server && npm start
+2025-05-13T14:55:23: 
+2025-05-13T14:55:24: 
+2025-05-13T14:55:24: > server@1.0.0 start
+2025-05-13T14:55:24: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-13T14:55:24: 
+2025-05-13T14:55:24:    ▲ Next.js 15.2.2
+2025-05-13T14:55:24:    - Local:        http://localhost:7777
+2025-05-13T14:55:24:    - Network:      http://167.235.246.98:7777
+2025-05-13T14:55:24: 
+2025-05-13T14:55:24:  ✓ Starting...
+2025-05-13T14:55:25:  ✓ Ready in 462ms
+2025-05-13T14:55:26: ✅ Connected to Redis
+2025-05-13T14:55:26: ✅ Redis client ready
+2025-05-13T14:55:45: Initializing Payload services...
+2025-05-13T14:55:45: Paypal plan check
+2025-05-13T14:55:45: [14:55:45] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-13T14:55:45: Daily rank tracking finished
+2025-05-13T14:55:45: Setting Payload instance for SEO Guide worker
+2025-05-13T14:55:45: ✅ Payload instance initialized for both workers
+2025-05-13T14:55:45: ✅ Workers started in background
+2025-05-13T14:55:45: Product ID already exists.
+2025-05-13T14:55:49: Database Plan IDs: Set(16) {
+2025-05-13T14:55:49:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T14:55:49:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T14:55:49:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T14:55:49:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T14:55:49:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T14:55:49:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T14:55:49:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T14:55:49:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T14:55:49:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T14:55:49:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T14:55:49:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T14:55:49:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T14:55:49:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T14:55:49:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T14:55:49:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T14:55:49:   'P-490774634X2062924NAHAMPI'
+2025-05-13T14:55:49: }
+2025-05-13T14:55:49: PayPal Plan IDs: Set(96) {
+2025-05-13T14:55:49:   'P-98579045524419020M7M4JXY',
+2025-05-13T14:55:49:   'P-0SA1427012940862YM7M4JYA',
+2025-05-13T14:55:49:   'P-6P231034LS515993XM7M4JYI',
+2025-05-13T14:55:49:   'P-68E81820XB085010WM7M4JYI',
+2025-05-13T14:55:49:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-13T14:55:49:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-13T14:55:49:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-13T14:55:49:   'P-68B108558G040300CM7M4JYY',
+2025-05-13T14:55:49:   'P-62T484147J908714FM7M4JZI',
+2025-05-13T14:55:49:   'P-90V18465AA503062KM7M4JZI',
+2025-05-13T14:55:49:   'P-0N203053T15286811M7M4JZQ',
+2025-05-13T14:55:49:   'P-46533433JY578205HM7M4JZQ',
+2025-05-13T14:55:49:   'P-63R81120GE458362BM7M4JZY',
+2025-05-13T14:55:49:   'P-21A90981M6370210WM7M4JZY',
+2025-05-13T14:55:49:   'P-360406889S1454445M7M4J2I',
+2025-05-13T14:55:49:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-13T14:55:49:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-13T14:55:49:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-13T14:55:49:   'P-39555110YD2915823M7S6OQQ',
+2025-05-13T14:55:49:   'P-9E656446VD230374HM7S6OQY',
+2025-05-13T14:55:49:   'P-45128149BJ354104KM7S6OQY',
+2025-05-13T14:55:49:   'P-9F006862C6340571DM7S6OQY',
+2025-05-13T14:55:49:   'P-1V314479R9099642UM7S6OQY',
+2025-05-13T14:55:49:   'P-79A057673F410951MM7S6OQY',
+2025-05-13T14:55:49:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-13T14:55:49:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-13T14:55:49:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-13T14:55:49:   'P-21X07337A4958732NM7S6ORA',
+2025-05-13T14:55:49:   'P-3FU129497M979342BM7S6ORI',
+2025-05-13T14:55:49:   'P-44G00026CM390584DM7S6ORI',
+2025-05-13T14:55:49:   'P-62J05746CC518271NM7S6ORI',
+2025-05-13T14:55:49:   'P-7H916310NB4776034M7S6ORI',
+2025-05-13T14:55:49:   'P-81H7059024688361BNADFSEQ',
+2025-05-13T14:55:49:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-13T14:55:49:   'P-0AG648210K837334ENADFSEY',
+2025-05-13T14:55:49:   'P-5PJ42060848447527NADFSEY',
+2025-05-13T14:55:49:   'P-7SH44926C2332032LNADFSFA',
+2025-05-13T14:55:49:   'P-5GT16529YX6637536NADFSFA',
+2025-05-13T14:55:49:   'P-9E4467280K919340LNADFSFA',
+2025-05-13T14:55:49:   'P-7F5548422M800415UNADFSFA',
+2025-05-13T14:55:49:   'P-5D1599585G2325124NADFSFI',
+2025-05-13T14:55:49:   'P-8HP47151UE2088357NADFSFI',
+2025-05-13T14:55:49:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-13T14:55:49:   'P-77F59714BA432935BNADFSFQ',
+2025-05-13T14:55:49:   'P-621267267T2568348NADFSFQ',
+2025-05-13T14:55:49:   'P-0VC29477844828614NADFSFQ',
+2025-05-13T14:55:49:   'P-9VK838170M171392XNADFSFY',
+2025-05-13T14:55:49:   'P-5K721906AC486313MNADFSFY',
+2025-05-13T14:55:49:   'P-490774634X2062924NAHAMPI',
+2025-05-13T14:55:49:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T14:55:49:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T14:55:49:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T14:55:49:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T14:55:49:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T14:55:49:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T14:55:49:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T14:55:49:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T14:55:49:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T14:55:49:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T14:55:49:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T14:55:49:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T14:55:49:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T14:55:49:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T14:55:49:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T14:55:49:   'P-8R860064U4651043VNAMP5QA',
+2025-05-13T14:55:49:   'P-60C92000WD254525WNAMP5QI',
+2025-05-13T14:55:49:   'P-0UT00261V94696819NAMP5QI',
+2025-05-13T14:55:49:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-13T14:55:49:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-13T14:55:49:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-13T14:55:49:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-13T14:55:49:   'P-6X911161ML521982BNAMP5QY',
+2025-05-13T14:55:49:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-13T14:55:49:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-13T14:55:49:   'P-3U673165V0901092KNAMP5RA',
+2025-05-13T14:55:49:   'P-8YA2119328867231VNAMP5RA',
+2025-05-13T14:55:49:   'P-8HG183948K421773MNAMP5RI',
+2025-05-13T14:55:49:   'P-5JN159596J440845BNAMP5RI',
+2025-05-13T14:55:49:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-13T14:55:49:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-13T14:55:49:   'P-0F030730RE936621BNAN4HCA',
+2025-05-13T14:55:49:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-13T14:55:49:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-13T14:55:49:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-13T14:55:49:   'P-4D519177D3911424YNAN4HCY',
+2025-05-13T14:55:49:   'P-6BD749029B990871CNAN4HCY',
+2025-05-13T14:55:49:   'P-5BM58021W47885254NAN4HDA',
+2025-05-13T14:55:49:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-13T14:55:49:   'P-49185806R8340904VNAN4HDI',
+2025-05-13T14:55:49:   'P-5W217508C5372952SNAN4HDI',
+2025-05-13T14:55:49:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-13T14:55:49:   'P-0C082804XG969344HNAN4HDY',
+2025-05-13T14:55:49:   'P-509283891X696204TNAN4HEA',
+2025-05-13T14:55:49:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-13T14:55:49:   'P-13J67250CR558593DNAN4HEI',
+2025-05-13T14:55:49:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-13T14:55:49: }
+2025-05-13T14:55:49: All plans processed successfully.

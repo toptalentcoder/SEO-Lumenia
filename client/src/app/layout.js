@@ -1,6 +1,5 @@
 "use client"
 
-import { Geist, Geist_Mono } from "next/font/google";
 import { Nunito } from "next/font/google";
 import "../styles/globals.css";
 import Navbar from '../components/common/Navbar.js'
@@ -8,16 +7,6 @@ import { ThemeProvider } from '../context/ThemeContext.js'
 import { UserProvider } from '../context/UserContext.js'
 import { PlanProvider } from '../context/UserPlanContext.js'
 import { usePathname } from "next/navigation";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const nunito = Nunito({
   variable: "--font-nunito",

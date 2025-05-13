@@ -1158,3 +1158,59 @@
 2025-05-12T00:02:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
 2025-05-12T00:02:39: ❌ Worker error: Error: Command timed out
 2025-05-12T00:02:39:     at Timeout._onTimeout (.next/server/chunks/702.js:275:7388)
+2025-05-13T14:41:26: Error fetching SERP for: "best game franchises" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "how to choose the best video game" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most popular video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best video games ever" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "buy top rated video games online" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "purchase top video games online" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "what is the highest grossing game" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "how to play the most famous games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "comparison of most famous video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "game reviews for top-rated games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best video game developers" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most played game in the world" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most famous game characters" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "top 10 games in the world" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best video game sites" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best game series ever" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most recommended video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "video game ratings and reviews" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most successful video game franchises" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "famous game creators and developers" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most downloaded games of all time" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "video game buying guide" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "navigate to top game sites" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "video game comparison chart" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "download best selling video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "highest rated video games on Amazon" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best video game stores online" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best game apps for smartphones" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best game consoles for popular games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best Mobile games of all time" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best PC games of all time" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "where can I find the best video game deals" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "top gaming platforms for best games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most influential video games in history" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best games on Xbox" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "top eSports games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best single player games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "top free to play games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most addictive video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best multiplayer games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most watched games on Twitch" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "where to buy top video games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best online games" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most played games on Steam" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "most played games on mobile" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best rated games on Steam" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best games on PlayStation" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best games on Nintendo Switch" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling games on Xbox" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling games on Google Play store" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling games on PC" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling games on PlayStation" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling games on App store" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "top-rated games of all time" Request failed with status code 400
+2025-05-13T14:41:26: Error fetching SERP for: "best selling games on Nintendo" Request failed with status code 400

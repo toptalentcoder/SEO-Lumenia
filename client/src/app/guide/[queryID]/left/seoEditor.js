@@ -340,9 +340,8 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
 
 // SEO-TXL Toolbar
 function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
-
     const [editor] = useLexicalComposerContext();
-
+    const { user } = useUser();
 
     const handleSEO_TXLQuestions = async () => {
         const query = data.query;
