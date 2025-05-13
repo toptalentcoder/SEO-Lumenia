@@ -154,7 +154,7 @@ export default function Linking() {
         return () => {
             mounted = false;
         };
-    }, [searchParams, fetchFromDatabase]);
+    }, [searchParams]);
 
     const exportToCSV = () => {
         if (!result.length) return;
