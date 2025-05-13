@@ -5,6 +5,7 @@ import { BsSend } from "react-icons/bs";
 import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { IoDocument } from "react-icons/io5";
 import { RiPresentationFill } from "react-icons/ri";
+import { FaRobot } from "react-icons/fa6";
 import SeoBrief from './seoBrief';
 import YourWebPageSection from './yourWebPageSection';
 import GenerationSection from './generationSection';
@@ -49,7 +50,9 @@ export default function RightSection ({data}) {
                                 : "bg-[#F8FAFD] text-gray-600 "
                         }`}
                     >
-                        <span role="img" aria-label="robot">🤖</span>
+                        <span role="img" aria-label="robot" className="text-xl text-[#413793]">
+                            <FaRobot/>
+                        </span>
                         Generation
                     </button>
                 )}

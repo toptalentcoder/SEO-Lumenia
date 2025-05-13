@@ -6,31 +6,42 @@ export default function GenerationSection({ webpageTitleMetaData }) {
 
     // Parse each block into title and description
     const parsedRows = flatData.map((block, idx) => {
-        const title = (block.split("\n").find(line => line.startsWith("Title Tag")) || "").replace("Title Tag:", "").trim();
-        const desc = (block.split("\n").find(line => line.startsWith("Meta Description")) || "").replace("Meta Description:", "").trim();
-        return { title: title || "undefined", desc: desc || "undefined", idx };
-    });
+        // Support for multiple title/description pairs in a single block
+        const regex = /Title Tag \d+:\s*"([^"]+)"\s*\nMeta Description \d+:\s*"([^"]+)"/g;
+        let match;
+        const pairs = [];
+        while ((match = regex.exec(block)) !== null) {
+            pairs.push({
+                title: match[1] || "undefined",
+                desc: match[2] || "undefined",
+                idx: idx + '-' + pairs.length
+            });
+        }
+        return pairs;
+    }).flat();
 
     return (
-        <div>
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead>
-                    <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                        <th className="px-6 py-3"></th>
-                    </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                    {parsedRows.map(row => (
-                        <tr key={row.idx}>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{row.title}</td>
-                            <td className="px-6 py-4 whitespace-pre-line text-sm text-gray-700">{row.desc}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-[#413793] font-semibold cursor-pointer">Select</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="w-full p-4">
+            <div className="grid grid-cols-12 font-semibold text-gray-800 mb-2 px-2">
+                <div className="col-span-4 md:col-span-3 lg:col-span-3">Title</div>
+                <div className="col-span-7 md:col-span-8 lg:col-span-8">Description</div>
+                <div className="col-span-1"></div>
+            </div>
+            <div className="space-y-3">
+                {parsedRows.map(row => (
+                    <div key={row.idx} className="grid grid-cols-12 bg-gray-50 rounded-md px-2 py-3 items-center">
+                        <div className="col-span-4 md:col-span-3 lg:col-span-3 font-medium text-gray-900 break-words text-sm">
+                            {row.title}
+                        </div>
+                        <div className="col-span-7 md:col-span-8 lg:col-span-8 text-gray-700 whitespace-pre-line break-words text-sm">
+                            {row.desc}
+                        </div>
+                        <div className="col-span-1 flex justify-end">
+                            <button className="text-[#413793] font-semibold hover:underline cursor-pointer bg-transparent border-none p-0 text-sm">Select</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 } 
