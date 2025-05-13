@@ -7,10 +7,12 @@ import { IoDocument } from "react-icons/io5";
 import { RiPresentationFill } from "react-icons/ri";
 import SeoBrief from './seoBrief';
 import YourWebPageSection from './yourWebPageSection';
+import GenerationSection from './generationSection';
 
 export default function RightSection ({data}) {
 
     const [activeTab, setActiveTab] = useState("seoBrief");
+    const [webpageTitleMetaData, setWebpageTitleMetaData] = useState([]);
 
     return(
         <div>
@@ -38,13 +40,28 @@ export default function RightSection ({data}) {
                     <IoDocument className="text-[#413793]"/>
                     Your webpage
                 </button>
+                {webpageTitleMetaData.length > 0 && (
+                    <button
+                        onClick={() => setActiveTab("generation")}
+                        className={`px-4 py-2 cursor-pointer flex items-center gap-4 text-md ${
+                            activeTab === "generation"
+                                ? " text-[#413793] border-t-4 border-[#413793] bg-white"
+                                : "bg-[#F8FAFD] text-gray-600 "
+                        }`}
+                    >
+                        <span role="img" aria-label="robot">🤖</span>
+                        Generation
+                    </button>
+                )}
             </div>
 
             <div className="h-auto mb-6">
                 {activeTab === 'seoBrief' ? (
                     <div className="bg-white p-4 rounded shadow"><SeoBrief data={data} content/></div>
                 ) : activeTab === 'yourWebpage' ? (
-                    <div className="bg-white p-4 rounded shadow"><YourWebPageSection data={data}/></div>
+                    <div className="bg-white p-4 rounded shadow"><YourWebPageSection data={data} webpageTitleMetaData={webpageTitleMetaData} setWebpageTitleMetaData={setWebpageTitleMetaData}/></div>
+                ) : activeTab === 'generation' ? (
+                    <div className="bg-white p-4 rounded shadow"><GenerationSection webpageTitleMetaData={webpageTitleMetaData}/></div>
                 ) : null}
             </div>
 

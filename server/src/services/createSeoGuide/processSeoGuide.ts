@@ -52,8 +52,16 @@ const hlToFullLanguageMap: Record<string, string> = {
 };
 
 export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, job?: Job) {
+
+    console.log("processSeoGuide started");
+
     const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr } = data;
 
+    if (!payload) {
+        throw new Error("Payload instance is not available");
+    }
+
+    console.log("Processing SEO guide with data:", data);
     // Update progress to 20% - Starting data collection
     if (job) await job.updateProgress(20);
 
@@ -83,9 +91,19 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     if (job) await job.updateProgress(30);
 
     // Generate SEO Keywords
-    const keywordList: string[] = await generateSEOKeywords(query, gl || "us", fullLanguageName);
-    if (!keywordList) throw new Error("Failed to generate keywords");
-    console.log("Generated keywords:", keywordList);
+    console.log("Before generating SEO keywords");
+    let keywordList: string[] = [];
+    try {
+        keywordList = await generateSEOKeywords(query, gl || "us", fullLanguageName);
+        if (!keywordList || keywordList.length === 0) {
+            console.error("No keywords generated for query:", query);
+            throw new Error("Failed to generate keywords");
+        }
+        console.log("Generated keywords:", keywordList);
+    } catch (error) {
+        console.error("Error generating keywords:", error);
+        throw new Error(`Failed to generate keywords: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
 
     // Limit to top 20 keywords
     const relatedSEOKeywords = keywordList.slice(0, 20);
@@ -103,6 +121,14 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
         Promise.all(links.map(fetchPageContent)),
         generateSeoBrief(query, fullLanguageName)
     ]);
+
+    if (pageContentsResult.status === 'rejected') {
+        console.error("Error fetching page contents:", pageContentsResult.reason);
+    }
+    
+    if (seoBriefResult.status === 'rejected') {
+        console.error("Error generating SEO brief:", seoBriefResult.reason);
+    }
 
     // Update progress to 50% - Content fetched
     if (job) await job.updateProgress(50);
