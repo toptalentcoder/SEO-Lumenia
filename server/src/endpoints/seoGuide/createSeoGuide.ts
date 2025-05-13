@@ -55,6 +55,8 @@ export const createSeoGuide: Endpoint = {
         const body = await req.json();
         const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr } = body;
 
+        console.log("Received request body:", body);
+
         if (!query || typeof query !== "string") {
             return new Response(
                 JSON.stringify({ error: "Missing query in request body" }),
@@ -69,6 +71,7 @@ export const createSeoGuide: Endpoint = {
         }
 
         try {
+            console.log("Adding job to the queue...");
             // Add job to queue with retention settings
             const job = await seoGuideQueue.add('createSeoGuide', {
                 query,
@@ -94,6 +97,8 @@ export const createSeoGuide: Endpoint = {
                     age: 24 * 3600 // Keep failed jobs for 24 hours
                 }
             });
+
+            console.log("Job added to queue with ID:", job.id);
 
             return new Response(
                 JSON.stringify({ 

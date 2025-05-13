@@ -1,7 +1,8 @@
 import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { verifyContentWithSeoBrief } from "@/services/createSeoEditor/verifySeoBrief";
 import { Endpoint, PayloadRequest } from "payload";
+import { seoBriefQueue } from "@/lib/seoBriefQueue";
+import { checkRedisConnection } from "@/lib/redis";
 
 interface SeoBrief {
     objective: string[];
@@ -18,16 +19,36 @@ export const verifySeoBriefEndpoint: Endpoint = {
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         const corsHeaders = {
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "86400", // 24 hours
         };
 
+        // Handle preflight requests
         if (req.method === "OPTIONS") {
             return new Response(null, {
                 status: 204,
                 headers: corsHeaders,
             });
+        }
+
+        // Check Redis connection
+        const isRedisConnected = await checkRedisConnection();
+        if (!isRedisConnected) {
+            return new Response(
+                JSON.stringify({ 
+                    error: "Service temporarily unavailable. Please try again in a few moments.",
+                    code: "REDIS_CONNECTION_ERROR"
+                }),
+                { 
+                    status: 503, 
+                    headers: { 
+                        "Content-Type": "application/json", 
+                        ...corsHeaders 
+                    } 
+                }
+            );
         }
 
         if (!req.json) {
@@ -48,72 +69,41 @@ export const verifySeoBriefEndpoint: Endpoint = {
         }
 
         try {
-            const result = await verifyContentWithSeoBrief(content, seoBrief, language);
-
-            // Save verification state
-            const { payload } = req;
-            const users = await payload.find({
-                collection: "users",
-                where: { email: { equals: email } },
-                limit: 1,
+            // Add job to queue
+            const job = await seoBriefQueue.add('verifySeoBrief', {
+                content,
+                seoBrief,
+                language,
+                queryID,
+                email
+            }, {
+                attempts: 3,
+                backoff: {
+                    type: 'exponential',
+                    delay: 1000
+                },
+                removeOnComplete: {
+                    age: 3600, // Keep completed jobs for 1 hour
+                    count: 100 // Keep last 100 completed jobs
+                },
+                removeOnFail: {
+                    age: 24 * 3600 // Keep failed jobs for 24 hours
+                }
             });
-
-            if (users.docs.length > 0) {
-                const user = users.docs[0];
-                const updatedProjects = (Array.isArray(user.projects) ? user.projects : []).map((project) => {
-                    return typeof project === "object" && project !== null
-                        ? {
-                            ...project,
-                            seoGuides: ((project as { seoGuides?: { queryID: string }[] }).seoGuides || []).map((guide) => {
-                                if (guide.queryID === queryID) {
-                                    return {
-                                        ...guide,
-                                        briefVerification: {
-                                            verificationResult: {
-                                                objective: result.objective,
-                                                mainTopics: result.mainTopics,
-                                                importantQuestions: result.importantQuestions,
-                                                writingStyleAndTone: result.writingStyleAndTone,
-                                                recommendedStyle: result.recommendedStyle,
-                                                valueProposition: result.valueProposition,
-                                            },
-                                            improvementText: result.improvementText,
-                                            verifiedAt: new Date().toISOString()
-                                        }
-                                    };
-                                }
-                                return guide;
-                            }),
-                        }
-                        : project;
-                });
-
-                await payload.update({
-                    collection: "users",
-                    where: { email: { equals: email } },
-                    data: { projects: updatedProjects },
-                });
-            }
 
             return new Response(
                 JSON.stringify({
-                success: true,
-                verificationResult: {
-                    objective: result.objective,
-                    mainTopics: result.mainTopics,
-                    importantQuestions: result.importantQuestions,
-                    writingStyleAndTone: result.writingStyleAndTone,
-                    recommendedStyle: result.recommendedStyle,
-                    valueProposition: result.valueProposition,
-                },
-                improvementText: result.improvementText,
+                    success: true,
+                    message: "SEO brief verification started",
+                    jobId: job.id
                 }),
                 {
-                status: 200,
-                headers: { "Content-Type": "application/json", ...corsHeaders },
+                    status: 202,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
                 }
             );
-        } catch (_error) {
+        } catch (error) {
+            console.error("❌ verifySeoBrief error:", error);
             return new Response(JSON.stringify({ error: "Failed to verify content" }), {
                 status: 500,
                 headers: { "Content-Type": "application/json", ...corsHeaders },

@@ -6,12 +6,11 @@ import { FaRobot } from "react-icons/fa6";
 import {useUser} from "../../../../context/UserContext";
 import axios from 'axios';
 
-export default function YourWebPageSection({ data }) {
+export default function YourWebPageSection({ data, webpageTitleMetaData, setWebpageTitleMetaData }) {
 
     const [loading, setLoading] = useState(false);
     const { queryID } = useParams();
     const { user } = useUser();
-    const [webpageTitleMetaData, setWebpageTitleMetaData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const query = data.query;
@@ -20,37 +19,47 @@ export default function YourWebPageSection({ data }) {
     const [titleTag, setTitleTag] = useState("");
     const [metaDescription, setMetaDescription] = useState("");
 
-    useEffect(() => {
-        const fetchWebpageTitleMetaData = async () => {
-            try {
-                setIsLoading(true);
-                const response = await axios.get(
-                    `/api/get_webpage_title_meta?queryID=${queryID}&email=${user.email}`
-                );
+    const fetchWebpageTitleMetaData = async () => {
+        try {
+            setIsLoading(true);
+            const response = await axios.get(
+                `/api/get_webpage_title_meta?queryID=${queryID}&email=${user.email}`
+            );
 
-                if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
-                    setWebpageTitleMetaData(response.data.webpageTitleMeta);
+            if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
+                setWebpageTitleMetaData(response.data.webpageTitleMeta);
 
-                    const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
-                    const title = firstBlock
-                        .split("\n")
-                        .find((line) => line.startsWith("Title Tag")) || "";
-                    const meta = firstBlock
-                        .split("\n")
-                        .find((line) => line.startsWith("Meta Description")) || "";
+                const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
+                const title = (firstBlock
+                    .split("\n")
+                    .find((line) => line.startsWith("Title Tag")) || "")
+                    .replace("Title Tag:", "")
+                    .trim();
+                const meta = (firstBlock
+                    .split("\n")
+                    .find((line) => line.startsWith("Meta Description")) || "")
+                    .replace("Meta Description:", "")
+                    .trim();
 
-                    setTitleTag(title);
-                    setMetaDescription(meta);
-                }
-            } catch (error) {
-                setWebpageTitleMetaData("")
-            } finally {
-                setIsLoading(false);
+                setTitleTag(title);
+                setMetaDescription(meta);
             }
-        };
+        } catch (error) {
+            setWebpageTitleMetaData([])
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchWebpageTitleMetaData();
     }, [queryID, user.email]);
+
+    useEffect(() => {
+        if (titleTag || metaDescription) {
+            console.log("Updated title and meta description:", titleTag, metaDescription);
+        }
+    }, [titleTag, metaDescription]);
 
     const handleCreateTitleTagAndMetaDescription = async () => {
         if (!user?.availableFeatures || parseInt(user.availableFeatures.ai_tokens || "0", 10) < 600) {
@@ -61,7 +70,6 @@ export default function YourWebPageSection({ data }) {
         setLoading(true); // 🔄 Disable the button
 
         try {
-
             const response = await fetch('/api/generate_webpage_title_meta', {
                 method: 'POST',
                 headers: {
@@ -78,17 +86,21 @@ export default function YourWebPageSection({ data }) {
             const result = await response.json();
 
             if (result.success) {
-                console.log("Successfully webpage title tag and meta description saved...")
+                console.log("Successfully webpage title tag and meta description saved...");
+                // Fetch the latest data after successful generation
+                await fetchWebpageTitleMetaData();
             }
         } catch (error) {
             console.error("Failed to create SEO guide:", error);
         } finally {
             setLoading(false); // ✅ Re-enable the button
         }
-    }
+    };
 
     return (
         <div className="px-4">
+
+            {/* Page URL */}
             <div className="relative">
                 <input
                     id="hs-floating-input-email"
@@ -109,6 +121,7 @@ export default function YourWebPageSection({ data }) {
                 </label>
             </div>
 
+            {/* Title Tag */}
             <div className="relative mt-5">
                 <input
                     id="title-tag"
@@ -131,6 +144,7 @@ export default function YourWebPageSection({ data }) {
                 </label>
             </div>
 
+            {/* Meta Description */}
             <div className="relative mt-5">
                 <textarea
                     id="hs-floating-input-meta-description"
@@ -154,6 +168,7 @@ export default function YourWebPageSection({ data }) {
                 </label>
             </div>
 
+            {/* Buttons */}
             <div className='flex justify-end mt-5 items-center space-x-4'>
                 <div className="relative group cursor-pointer">
                     <button

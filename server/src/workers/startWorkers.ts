@@ -1,18 +1,24 @@
 import { Payload } from 'payload';
-import './seoGuideWorker';
-import { setPayloadInstance } from './seoGuideWorker';
+import { setSeoGuidePayloadInstance } from './seoGuideWorker';
+import { setSeoBriefPayloadInstance } from './seoBriefWorker';
+import seoGuideWorker from './seoGuideWorker';
+import seoBriefWorker from './seoBriefWorker';
 
 export async function startWorkers(payload: Payload) {
-    console.log('Initializing worker with Payload instance:', payload);
+    // console.log('Initializing workers with Payload instance:', payload);
     if (!payload) {
         console.error('❌ Payload instance is missing');
         return;
     }
     // Initialize payload instance before starting workers
-    setPayloadInstance(payload);
-    console.log('✅ Payload instance initialized and workers started');
+    setSeoGuidePayloadInstance(payload);
+    setSeoBriefPayloadInstance(payload);
+    console.log('✅ Payload instance initialized for both workers');
 
-    // Import the worker file to start it
-    await import('./seoGuideWorker');
-    console.log('✅ SEO Guide workers started');
+    // Start the workers
+    await Promise.all([
+        seoGuideWorker.run(),
+        seoBriefWorker.run()
+    ]);
+    console.log('✅ SEO Guide and SEO Brief workers started');
 } 

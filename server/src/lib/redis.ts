@@ -11,7 +11,7 @@ export const connection = new Redis(REDIS_URL, {
     enableReadyCheck: true,
     connectTimeout: 60000, // 60 seconds
     disconnectTimeout: 10000, // 10 seconds
-    commandTimeout: 60000, // 60 seconds
+    commandTimeout: 120000, // 120 seconds - increased from 60
     retryStrategy: (times) => {
         if (times > 10) {
             console.error('❌ Redis connection failed after 10 retries');
@@ -53,8 +53,22 @@ process.on('SIGTERM', () => {
     connection.quit();
 });
 
+// Rate limit check
+let requestCount = 0;
+const rateLimit = 100; // Maximum requests per minute
+const rateLimitInterval = 60000; // 1 minute in milliseconds
+
+setInterval(() => {
+    requestCount = 0;
+}, rateLimitInterval);
+
 // Export a function to check Redis connection
 export async function checkRedisConnection(): Promise<boolean> {
+    requestCount++;
+    if (requestCount > rateLimit) {
+        console.warn('Rate limit exceeded for Redis connection');
+        return false;
+    }
     try {
         await connection.ping();
         return true;
