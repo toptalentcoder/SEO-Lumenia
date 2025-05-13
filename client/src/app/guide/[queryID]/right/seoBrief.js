@@ -5,6 +5,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
+import { NEXT_PUBLIC_API_URL } from "../../../../config/apiConfig";
 
 export default function SeoBrief({data}){
     const { seoBrief } = data;
@@ -15,6 +16,7 @@ export default function SeoBrief({data}){
     const [verificationResult, setVerificationResult] = useState(null);
     const [improvementSuggestions, setImprovementSuggestions] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     // Load verification state when component mounts
     useEffect(() => {
@@ -70,9 +72,14 @@ export default function SeoBrief({data}){
     } = seoBrief;
 
     const handleVerifyClick = async () => {
-        try {
-            setIsLoading(true);
+        if (!user?.email) {
+            setImprovementSuggestions("Please log in to verify the brief.");
+            return;
+        }
 
+        setIsLoading(true);
+
+        try {
             // Fetch SEO Editor content
             const responseSeoEditorContent = await axios.get(
                 `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
@@ -80,39 +87,103 @@ export default function SeoBrief({data}){
 
             const content = responseSeoEditorContent.data.seoEditorData;
 
-            // Create a timeout promise
-            const timeoutPromise = new Promise((_, reject) => {
-                setTimeout(() => reject(new Error('Request timeout')), 30000); // 30 seconds timeout
-            });
-
             // Create the request promise
-            const requestPromise = axios.post("/api/verify_seo_brief", { 
-                content, 
-                seoBrief,
-                language: data.language,
-                queryID,
+            const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/verify_seo_brief`, {
+                content: content,
+                seoBrief: seoBrief,
+                queryID: queryID,
                 email: user.email
-            });
+            }, { timeout: 60000 });
 
-            // Race between the request and timeout
-            const response = await Promise.race([requestPromise, timeoutPromise]);
+            if (response.data.jobId) {
+                // Start polling for job status
+                const pollInterval = setInterval(async () => {
+                    try {
+                        const statusResponse = await axios.get(`${NEXT_PUBLIC_API_URL}/api/seoBriefStatus/${response.data.jobId}`);
+                        const statusData = statusResponse.data;
 
-            const { verificationResult, improvementText } = response.data;
+                        // Update progress if available
+                        if (statusData.progress) {
+                            setProgress(statusData.progress);
+                        }
 
-            // Update the verification state
-            setVerificationResult(verificationResult);
-            setImprovementSuggestions(improvementText);
+                        // Handle different job states
+                        switch (statusData.status) {
+                            case 'completed':
+                                clearInterval(pollInterval);
+                                setIsLoading(false);
+                                setProgress(100);
+                                // Update both verification result and improvement suggestions
+                                if (statusData.result) {
+                                    console.log("statusData.result", statusData.result);
+                                    setVerificationResult(statusData.result);
+                                    setImprovementSuggestions(statusData.result.improvementText || "");
+                                }
+                                break;
+                            case 'failed':
+                                clearInterval(pollInterval);
+                                setIsLoading(false);
+                                setProgress(0);
+                                setVerificationResult(null);
+                                setImprovementSuggestions(statusData.failedReason || "Verification failed. Please try again.");
+                                break;
+                            case 'stalled':
+                                clearInterval(pollInterval);
+                                setIsLoading(false);
+                                setProgress(0);
+                                setVerificationResult(null);
+                                setImprovementSuggestions("Verification stalled. Please try again.");
+                                break;
+                            case 'active':
+                            case 'waiting':
+                            case 'delayed':
+                                setIsLoading(true);
+                                break;
+                        }
+                    } catch (error) {
+                        console.error('Polling error:', error);
+                        // Keep loading state active on temporary errors
+                        setIsLoading(true);
+                    }
+                }, 2000); // Poll every 2 seconds
+
+                // Set a timeout to clear the interval after 5 minutes
+                setTimeout(() => {
+                    clearInterval(pollInterval);
+                    if (isLoading) {
+                        setIsLoading(false);
+                        setProgress(0);
+                        setImprovementSuggestions("Verification took too long. Please try again.");
+                    }
+                }, 300000); // 5 minutes timeout
+            }
         } catch (error) {
-            console.error("Error verifying brief:", error);
+            setIsLoading(false);
+            setProgress(0);
+            // Log the raw error for debugging
+            console.error("Raw error in handleVerifyClick:", error);
+
+            if (error && (error.message || error.response)) {
+                console.error("Error in handleVerifyClick:", {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status,
+                    request: {
+                        url: error.config?.url,
+                        method: error.config?.method,
+                        params: error.config?.params
+                    }
+                });
+            } else {
+                console.error("Unknown error in handleVerifyClick:", error);
+            }
             if (error.message === 'Request timeout') {
-                setImprovementSuggestions("The verification process took too long. Please try again.");
-            } else if (error.code === 'ECONNRESET') {
+                setImprovementSuggestions("Request timed out. Please try again.");
+            } else if (error.code === 'ECONNABORTED') {
                 setImprovementSuggestions("Connection was reset. Please try again.");
             } else {
-                setImprovementSuggestions("An error occurred during verification. Please try again.");
+                setImprovementSuggestions(error.response?.data?.error || "An error occurred. Please try again.");
             }
-        } finally {
-            setIsLoading(false);
         }
     };
 
@@ -138,7 +209,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-2 text-gray-900">
                 {objective.map((sentence, index) => (
                     <div key={index} className="flex items-center space-x-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.objective)}
+                        {renderVerificationIcon(verificationResult?.objective === true)}
                         <div className="flex-grow text-sm">
                             {sentence.trim()}.
                         </div>
@@ -204,7 +275,15 @@ export default function SeoBrief({data}){
                 onClick={handleVerifyClick}
                 className="mt-10 flex justify-center items-center space-x-2 text-[#FFFFFF] bg-[#EBB71A] hover:bg-[#C29613] cursor-pointer mx-auto px-5 py-1 rounded-lg">
                 {isLoading ? (
-                    <FaSpinner className="animate-spin text-white" />
+                    <>
+                        <div className="relative w-24 h-6 flex items-center justify-center">
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div className="bg-[#413793] h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                            </div>
+                            <span className="absolute left-1/2 transform -translate-x-1/2 text-xs text-gray-900 font-semibold">{progress}%</span>
+                        </div>
+                        <span className="ml-2">Verifying...</span>
+                    </>
                 ) : (
                     <>
                         <FaRobot />
