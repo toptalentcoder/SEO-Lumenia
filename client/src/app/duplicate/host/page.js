@@ -64,7 +64,7 @@ export default function PageDuplication() {
             setInputUrl(host);
             fetchExistingResults(host);
         }
-    }, [searchParams]);
+    }, [searchParams, fetchExistingResults]);
 
     const handleSearch = async (url = inputUrl) => {
         // Don't handle search if there's a URL parameter
