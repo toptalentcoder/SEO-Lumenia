@@ -128,7 +128,7 @@ export default function TopLinks(){
         return () => {
             mounted = false;
         };
-    }, [url, handleHistorySearch]);
+    }, [url]);
 
     const getBaseGrade = (score) => {
         if (score >= 95) return 'a';
