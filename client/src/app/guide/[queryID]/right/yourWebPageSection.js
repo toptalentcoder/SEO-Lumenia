@@ -53,7 +53,7 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
 
     useEffect(() => {
         fetchWebpageTitleMetaData();
-    }, [queryID, user.email]);
+    }, [queryID, user.email, fetchWebpageTitleMetaData]);
 
     useEffect(() => {
         if (titleTag || metaDescription) {

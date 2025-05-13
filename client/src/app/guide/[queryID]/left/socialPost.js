@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FaRobot } from "react-icons/fa6";
 import axios from "axios";
 import { useUser } from '../../../../context/UserContext';
@@ -195,7 +195,7 @@ export default function SocialPost({data}) {
         }
     };
 
-    const fetchSocialPostData = async () => {
+    const fetchSocialPostData = useCallback(async () => {
         try {
             setIsLoading(true);
             const response = await axios.get(
@@ -212,11 +212,11 @@ export default function SocialPost({data}) {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [queryID, user.email]);
 
     useEffect(() => {
         fetchSocialPostData();
-    }, [queryID, user.email]);
+    }, [fetchSocialPostData]);
 
     // Add a function to get the flag component based on language
     const getFlagComponent = (language) => {
