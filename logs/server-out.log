@@ -5067,3 +5067,1752 @@
 2025-05-13T14:55:49:   'P-4SR27672N6238570SNAN4HEI'
 2025-05-13T14:55:49: }
 2025-05-13T14:55:49: All plans processed successfully.
+2025-05-13T14:59:41: Received request body: {
+2025-05-13T14:59:41:   query: 'what kind of vpns are there in the world?',
+2025-05-13T14:59:41:   queryID: '20928844',
+2025-05-13T14:59:41:   queryEngine: 'google',
+2025-05-13T14:59:41:   projectID: '303816',
+2025-05-13T14:59:41:   email: 'healer@gmail.com',
+2025-05-13T14:59:41:   language: 'en',
+2025-05-13T14:59:41:   hl: 'en',
+2025-05-13T14:59:41:   gl: 'us',
+2025-05-13T14:59:41:   lr: 'lang_en'
+2025-05-13T14:59:41: }
+2025-05-13T14:59:41: Adding job to the queue...
+2025-05-13T14:59:41: Job added to queue with ID: 70
+2025-05-13T14:59:41: 🔄 Job 70 started processing
+2025-05-13T14:59:41: 🔄 Worker processing SEO guide creation job 70
+2025-05-13T14:59:41: 📝 Job data: {
+2025-05-13T14:59:41:   "query": "what kind of vpns are there in the world?",
+2025-05-13T14:59:41:   "projectID": "303816",
+2025-05-13T14:59:41:   "email": "healer@gmail.com",
+2025-05-13T14:59:41:   "queryID": "20928844",
+2025-05-13T14:59:41:   "language": "en",
+2025-05-13T14:59:41:   "queryEngine": "google",
+2025-05-13T14:59:41:   "hl": "en",
+2025-05-13T14:59:41:   "gl": "us",
+2025-05-13T14:59:41:   "lr": "lang_en"
+2025-05-13T14:59:41: }
+2025-05-13T14:59:41: 📊 Job 70 progress: 10%
+2025-05-13T14:59:41: ✅ Initial progress update complete
+2025-05-13T14:59:41: 🔑 Getting Payload instance...
+2025-05-13T14:59:41: ✅ Payload instance obtained
+2025-05-13T14:59:41: 📊 Job 70 progress: 30%
+2025-05-13T14:59:41: 🚀 Starting SEO guide processing...
+2025-05-13T14:59:41: processSeoGuide started
+2025-05-13T14:59:41: Processing SEO guide with data: {
+2025-05-13T14:59:41:   query: 'what kind of vpns are there in the world?',
+2025-05-13T14:59:41:   projectID: '303816',
+2025-05-13T14:59:41:   email: 'healer@gmail.com',
+2025-05-13T14:59:41:   queryID: '20928844',
+2025-05-13T14:59:41:   language: 'en',
+2025-05-13T14:59:41:   queryEngine: 'google',
+2025-05-13T14:59:41:   hl: 'en',
+2025-05-13T14:59:41:   gl: 'us',
+2025-05-13T14:59:41:   lr: 'lang_en'
+2025-05-13T14:59:41: }
+2025-05-13T14:59:41: 📊 Job 70 progress: 20%
+2025-05-13T14:59:46: 📊 Job 70 progress: 30%
+2025-05-13T14:59:46: Before generating SEO keywords
+2025-05-13T14:59:46: Sending request to OpenAI with prompt: 
+2025-05-13T14:59:46: You are an SEO keyword research assistant.
+2025-05-13T14:59:46: 
+2025-05-13T14:59:46: Using the input query "what kind of vpns are there in the world?" in English for the us market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-13T14:59:46: 
+2025-05-13T14:59:46: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-13T14:59:46: 
+2025-05-13T14:59:46: Example:
+2025-05-13T14:59:46: keyword 1  
+2025-05-13T14:59:46: keyword 2  
+2025-05-13T14:59:46: keyword 3  
+2025-05-13T14:59:46: ...
+2025-05-13T14:59:46: 
+2025-05-13T15:00:03: Raw keyword response: Types of VPNs worldwide
+2025-05-13T15:00:03: Best VPN services
+2025-05-13T15:00:03: How to choose a VPN
+2025-05-13T15:00:03: Comparisons of top VPNs
+2025-05-13T15:00:03: Global VPN service providers
+2025-05-13T15:00:03: Buy VPN online
+2025-05-13T15:00:03: Best cheap VPNs
+2025-05-13T15:00:03: Most secure VPNs
+2025-05-13T15:00:03: VPN brands
+2025-05-13T15:00:03: How do VPNs work
+2025-05-13T15:00:03: How to install a VPN
+2025-05-13T15:00:03: Free vs paid VPNs
+2025-05-13T15:00:03: VPN for business
+2025-05-13T15:00:03: VPN for personal use
+2025-05-13T15:00:03: Top-rated VPNs
+2025-05-13T15:00:03: NordVPN vs ExpressVPN
+2025-05-13T15:00:03: How to use a VPN
+2025-05-13T15:00:03: The cost of VPN services
+2025-05-13T15:00:03: Purchase VPN subscription
+2025-05-13T15:00:03: VPN service reviews
+2025-05-13T15:00:03: VPN software download
+2025-05-13T15:00:03: Benefits of using a VPN
+2025-05-13T15:00:03: Understanding VPN protocols
+2025-05-13T15:00:03: List of VPN companies
+2025-05-13T15:00:03: Buy NordVPN
+2025-05-13T15:00:03: VPN setup guide
+2025-05-13T15:00:03: ExpressVPN pricing
+2025-05-13T15:00:03: VPN for different countries
+2025-05-13T15:00:03: Best VPN for privacy
+2025-05-13T15:00:03: VPN specials and discounts
+2025-05-13T15:00:03: Visit NordVPN website
+2025-05-13T15:00:03: Download ExpressVPN app
+2025-05-13T15:00:03: Top VPNs for streaming
+2025-05-13T15:00:03: Best VPNs for gaming
+2025-05-13T15:00:03: VPN deals
+2025-05-13T15:00:03: VPN trial offers
+2025-05-13T15:00:03: Accessing Netflix with a VPN
+2025-05-13T15:00:03: VPNs and internet security
+2025-05-13T15:00:03: VPN customer support
+2025-05-13T15:00:03: Buy VPN with Bitcoin
+2025-05-13T15:00:03: VPN offers for students
+2025-05-13T15:00:03: Most popular VPNs in the US
+2025-05-13T15:00:03: VPN for mobile devices
+2025-05-13T15:00:03: What is a VPN tunnel
+2025-05-13T15:00:03: Top 5 VPNs
+2025-05-13T15:00:03: VPN for Windows
+2025-05-13T15:00:03: VPN for Mac
+2025-05-13T15:00:03: Lifetime VPN subscription
+2025-05-13T15:00:03: VPN for Android
+2025-05-13T15:00:03: VPN for iOS
+2025-05-13T15:00:03: VPN speed test
+2025-05-13T15:00:03: Where to buy a VPN
+2025-05-13T15:00:03: VPN for public WiFi protection
+2025-05-13T15:00:03: ExpressVPN official site
+2025-05-13T15:00:03: VPN for torrenting
+2025-05-13T15:00:03: VPN for traveling
+2025-05-13T15:00:03: Does a VPN hide my IP address
+2025-05-13T15:00:03: VPN service guarantees
+2025-05-13T15:00:03: VPN server locations
+2025-05-13T15:00:03: Refund policy of VPN providers
+2025-05-13T15:00:03: Sign up for VPN service.
+2025-05-13T15:00:03: Parsed keywords: [
+2025-05-13T15:00:03:   'Types of VPNs worldwide',
+2025-05-13T15:00:03:   'Best VPN services',
+2025-05-13T15:00:03:   'How to choose a VPN',
+2025-05-13T15:00:03:   'Comparisons of top VPNs',
+2025-05-13T15:00:03:   'Global VPN service providers',
+2025-05-13T15:00:03:   'Buy VPN online',
+2025-05-13T15:00:03:   'Best cheap VPNs',
+2025-05-13T15:00:03:   'Most secure VPNs',
+2025-05-13T15:00:03:   'VPN brands',
+2025-05-13T15:00:03:   'How do VPNs work',
+2025-05-13T15:00:03:   'How to install a VPN',
+2025-05-13T15:00:03:   'Free vs paid VPNs',
+2025-05-13T15:00:03:   'VPN for business',
+2025-05-13T15:00:03:   'VPN for personal use',
+2025-05-13T15:00:03:   'Top-rated VPNs',
+2025-05-13T15:00:03:   'NordVPN vs ExpressVPN',
+2025-05-13T15:00:03:   'How to use a VPN',
+2025-05-13T15:00:03:   'The cost of VPN services',
+2025-05-13T15:00:03:   'Purchase VPN subscription',
+2025-05-13T15:00:03:   'VPN service reviews',
+2025-05-13T15:00:03:   'VPN software download',
+2025-05-13T15:00:03:   'Benefits of using a VPN',
+2025-05-13T15:00:03:   'Understanding VPN protocols',
+2025-05-13T15:00:03:   'List of VPN companies',
+2025-05-13T15:00:03:   'Buy NordVPN',
+2025-05-13T15:00:03:   'VPN setup guide',
+2025-05-13T15:00:03:   'ExpressVPN pricing',
+2025-05-13T15:00:03:   'VPN for different countries',
+2025-05-13T15:00:03:   'Best VPN for privacy',
+2025-05-13T15:00:03:   'VPN specials and discounts',
+2025-05-13T15:00:03:   'Visit NordVPN website',
+2025-05-13T15:00:03:   'Download ExpressVPN app',
+2025-05-13T15:00:03:   'Top VPNs for streaming',
+2025-05-13T15:00:03:   'Best VPNs for gaming',
+2025-05-13T15:00:03:   'VPN deals',
+2025-05-13T15:00:03:   'VPN trial offers',
+2025-05-13T15:00:03:   'Accessing Netflix with a VPN',
+2025-05-13T15:00:03:   'VPNs and internet security',
+2025-05-13T15:00:03:   'VPN customer support',
+2025-05-13T15:00:03:   'Buy VPN with Bitcoin',
+2025-05-13T15:00:03:   'VPN offers for students',
+2025-05-13T15:00:03:   'Most popular VPNs in the US',
+2025-05-13T15:00:03:   'VPN for mobile devices',
+2025-05-13T15:00:03:   'What is a VPN tunnel',
+2025-05-13T15:00:03:   'Top 5 VPNs',
+2025-05-13T15:00:03:   'VPN for Windows',
+2025-05-13T15:00:03:   'VPN for Mac',
+2025-05-13T15:00:03:   'Lifetime VPN subscription',
+2025-05-13T15:00:03:   'VPN for Android',
+2025-05-13T15:00:03:   'VPN for iOS',
+2025-05-13T15:00:03:   'VPN speed test',
+2025-05-13T15:00:03:   'Where to buy a VPN',
+2025-05-13T15:00:03:   'VPN for public WiFi protection',
+2025-05-13T15:00:03:   'ExpressVPN official site',
+2025-05-13T15:00:03:   'VPN for torrenting',
+2025-05-13T15:00:03:   'VPN for traveling',
+2025-05-13T15:00:03:   'Does a VPN hide my IP address',
+2025-05-13T15:00:03:   'VPN service guarantees',
+2025-05-13T15:00:03:   'VPN server locations',
+2025-05-13T15:00:03:   'Refund policy of VPN providers',
+2025-05-13T15:00:03:   'Sign up for VPN service.'
+2025-05-13T15:00:03: ]
+2025-05-13T15:00:03: Generated keywords: [
+2025-05-13T15:00:03:   'Types of VPNs worldwide',
+2025-05-13T15:00:03:   'Best VPN services',
+2025-05-13T15:00:03:   'How to choose a VPN',
+2025-05-13T15:00:03:   'Comparisons of top VPNs',
+2025-05-13T15:00:03:   'Global VPN service providers',
+2025-05-13T15:00:03:   'Buy VPN online',
+2025-05-13T15:00:03:   'Best cheap VPNs',
+2025-05-13T15:00:03:   'Most secure VPNs',
+2025-05-13T15:00:03:   'VPN brands',
+2025-05-13T15:00:03:   'How do VPNs work',
+2025-05-13T15:00:03:   'How to install a VPN',
+2025-05-13T15:00:03:   'Free vs paid VPNs',
+2025-05-13T15:00:03:   'VPN for business',
+2025-05-13T15:00:03:   'VPN for personal use',
+2025-05-13T15:00:03:   'Top-rated VPNs',
+2025-05-13T15:00:03:   'NordVPN vs ExpressVPN',
+2025-05-13T15:00:03:   'How to use a VPN',
+2025-05-13T15:00:03:   'The cost of VPN services',
+2025-05-13T15:00:03:   'Purchase VPN subscription',
+2025-05-13T15:00:03:   'VPN service reviews',
+2025-05-13T15:00:03:   'VPN software download',
+2025-05-13T15:00:03:   'Benefits of using a VPN',
+2025-05-13T15:00:03:   'Understanding VPN protocols',
+2025-05-13T15:00:03:   'List of VPN companies',
+2025-05-13T15:00:03:   'Buy NordVPN',
+2025-05-13T15:00:03:   'VPN setup guide',
+2025-05-13T15:00:03:   'ExpressVPN pricing',
+2025-05-13T15:00:03:   'VPN for different countries',
+2025-05-13T15:00:03:   'Best VPN for privacy',
+2025-05-13T15:00:03:   'VPN specials and discounts',
+2025-05-13T15:00:03:   'Visit NordVPN website',
+2025-05-13T15:00:03:   'Download ExpressVPN app',
+2025-05-13T15:00:03:   'Top VPNs for streaming',
+2025-05-13T15:00:03:   'Best VPNs for gaming',
+2025-05-13T15:00:03:   'VPN deals',
+2025-05-13T15:00:03:   'VPN trial offers',
+2025-05-13T15:00:03:   'Accessing Netflix with a VPN',
+2025-05-13T15:00:03:   'VPNs and internet security',
+2025-05-13T15:00:03:   'VPN customer support',
+2025-05-13T15:00:03:   'Buy VPN with Bitcoin',
+2025-05-13T15:00:03:   'VPN offers for students',
+2025-05-13T15:00:03:   'Most popular VPNs in the US',
+2025-05-13T15:00:03:   'VPN for mobile devices',
+2025-05-13T15:00:03:   'What is a VPN tunnel',
+2025-05-13T15:00:03:   'Top 5 VPNs',
+2025-05-13T15:00:03:   'VPN for Windows',
+2025-05-13T15:00:03:   'VPN for Mac',
+2025-05-13T15:00:03:   'Lifetime VPN subscription',
+2025-05-13T15:00:03:   'VPN for Android',
+2025-05-13T15:00:03:   'VPN for iOS',
+2025-05-13T15:00:03:   'VPN speed test',
+2025-05-13T15:00:03:   'Where to buy a VPN',
+2025-05-13T15:00:03:   'VPN for public WiFi protection',
+2025-05-13T15:00:03:   'ExpressVPN official site',
+2025-05-13T15:00:03:   'VPN for torrenting',
+2025-05-13T15:00:03:   'VPN for traveling',
+2025-05-13T15:00:03:   'Does a VPN hide my IP address',
+2025-05-13T15:00:03:   'VPN service guarantees',
+2025-05-13T15:00:03:   'VPN server locations',
+2025-05-13T15:00:03:   'Refund policy of VPN providers',
+2025-05-13T15:00:03:   'Sign up for VPN service.'
+2025-05-13T15:00:03: ]
+2025-05-13T15:00:03: Related SEO Keywords: [
+2025-05-13T15:00:03:   'Types of VPNs worldwide',
+2025-05-13T15:00:03:   'Best VPN services',
+2025-05-13T15:00:03:   'How to choose a VPN',
+2025-05-13T15:00:03:   'Comparisons of top VPNs',
+2025-05-13T15:00:03:   'Global VPN service providers',
+2025-05-13T15:00:03:   'Buy VPN online',
+2025-05-13T15:00:03:   'Best cheap VPNs',
+2025-05-13T15:00:03:   'Most secure VPNs',
+2025-05-13T15:00:03:   'VPN brands',
+2025-05-13T15:00:03:   'How do VPNs work',
+2025-05-13T15:00:03:   'How to install a VPN',
+2025-05-13T15:00:03:   'Free vs paid VPNs',
+2025-05-13T15:00:03:   'VPN for business',
+2025-05-13T15:00:03:   'VPN for personal use',
+2025-05-13T15:00:03:   'Top-rated VPNs',
+2025-05-13T15:00:03:   'NordVPN vs ExpressVPN',
+2025-05-13T15:00:03:   'How to use a VPN',
+2025-05-13T15:00:03:   'The cost of VPN services',
+2025-05-13T15:00:03:   'Purchase VPN subscription',
+2025-05-13T15:00:03:   'VPN service reviews'
+2025-05-13T15:00:03: ]
+2025-05-13T15:00:04: English
+2025-05-13T15:00:04: failed to fetch : https://cybernews.com/what-is-vpn/types-of-vpn/
+2025-05-13T15:00:28: 📊 Job 70 progress: 50%
+2025-05-13T15:00:28: 📊 Job 70 progress: 60%
+2025-05-13T15:00:31: 📊 Job 70 progress: 70%
+2025-05-13T15:00:31: 📊 Job 70 progress: 80%
+2025-05-13T15:00:35: 📊 Job 70 progress: 90%
+2025-05-13T15:00:35: Data saved successfully
+2025-05-13T15:00:35: ✅ SEO guide processing complete
+2025-05-13T15:00:35: 📊 Job 70 progress: 50%
+2025-05-13T15:00:35: 📊 Job 70 progress: 80%
+2025-05-13T15:00:35: 📊 Job 70 progress: 100%
+2025-05-13T15:00:35: 💾 Saving job results...
+2025-05-13T15:00:35: ✅ Job results saved
+2025-05-13T15:00:35: ✅ Job 70 completed
+2025-05-13T15:00:35: ✅ Job 70 completed
+2025-05-13T15:02:07: 🔄 Job 15 started processing
+2025-05-13T15:02:07: Worker processing SEO brief verification job 15
+2025-05-13T15:02:07: 📊 Job 15 progress: 10%
+2025-05-13T15:02:07: 📊 Job 15 progress: 30%
+2025-05-13T15:02:38: 📊 Job 15 progress: 50%
+2025-05-13T15:02:38: 📊 Job 15 progress: 80%
+2025-05-13T15:02:39: 📊 Job 15 progress: 100%
+2025-05-13T15:02:39: ✅ Job 15 completed
+2025-05-13T15:02:39: ✅ Job 15 completed
+2025-05-13T15:04:56: [DEBUG] HTML fetched: true https://businessinsider.com
+2025-05-13T15:04:56: [DEBUG] Discovered internal links: 1 [ 'https://businessinsider.com' ]
+2025-05-13T15:04:56: [INFO] Internal URLs saved to DB for: https://businessinsider.com
+2025-05-13T15:05:56: [DEBUG] HTML fetched: true https://paloaltonetworks.com
+2025-05-13T15:05:56: [DEBUG] Discovered internal links: 97 [
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/resources/podcasts/threat-vector-why-security-platformization-is-the-future-of-cyber-resilience',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/resources/podcasts/threat-vector-inside-the-mind-of-state-sponsored-cyberattackers',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/resources/podcasts/threat-vector-is-the-quantum-threat-closer-than-you-think',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/login',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/login?screenToRender=traditionalRegistration',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/company/contact-sales',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/resources',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/get-started',
+2025-05-13T15:05:56:   'https://paloaltonetworks.com/prisma/prisma-ai-runtime-security'
+2025-05-13T15:05:56: ]
+2025-05-13T15:05:56: [INFO] Internal URLs saved to DB for: https://paloaltonetworks.com
+2025-05-13T15:06:06: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:06:06: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:06:12: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:06:12: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:06:38: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-13T15:06:41: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-13T15:06:50: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-13T15:08:22: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-13T15:17:51: 
+2025-05-13T15:17:51: > seo-yourtext@1.0.0 start:server
+2025-05-13T15:17:51: > cd server && npm start
+2025-05-13T15:17:51: 
+2025-05-13T15:17:51: 
+2025-05-13T15:17:51: > server@1.0.0 start
+2025-05-13T15:17:51: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-13T15:17:51: 
+2025-05-13T15:17:52:    ▲ Next.js 15.2.2
+2025-05-13T15:17:52:    - Local:        http://localhost:7777
+2025-05-13T15:17:52:    - Network:      http://167.235.246.98:7777
+2025-05-13T15:17:52: 
+2025-05-13T15:17:52:  ✓ Starting...
+2025-05-13T15:17:52:  ✓ Ready in 457ms
+2025-05-13T15:17:53: ✅ Connected to Redis
+2025-05-13T15:17:53: ✅ Redis client ready
+2025-05-13T15:18:32: [15:18:32] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-13T15:18:32: Initializing Payload services...
+2025-05-13T15:18:32: Paypal plan check
+2025-05-13T15:18:32: Daily rank tracking finished
+2025-05-13T15:18:32: Setting Payload instance for SEO Guide worker
+2025-05-13T15:18:32: ✅ Payload instance initialized for both workers
+2025-05-13T15:18:32: ✅ Workers started in background
+2025-05-13T15:18:32: Product ID already exists.
+2025-05-13T15:18:36: Database Plan IDs: Set(16) {
+2025-05-13T15:18:36:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T15:18:36:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T15:18:36:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T15:18:36:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T15:18:36:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T15:18:36:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T15:18:36:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T15:18:36:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T15:18:36:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T15:18:36:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T15:18:36:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T15:18:36:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T15:18:36:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T15:18:36:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T15:18:36:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T15:18:36:   'P-490774634X2062924NAHAMPI'
+2025-05-13T15:18:36: }
+2025-05-13T15:18:36: PayPal Plan IDs: Set(96) {
+2025-05-13T15:18:36:   'P-98579045524419020M7M4JXY',
+2025-05-13T15:18:36:   'P-0SA1427012940862YM7M4JYA',
+2025-05-13T15:18:36:   'P-6P231034LS515993XM7M4JYI',
+2025-05-13T15:18:36:   'P-68E81820XB085010WM7M4JYI',
+2025-05-13T15:18:36:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-13T15:18:36:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-13T15:18:36:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-13T15:18:36:   'P-68B108558G040300CM7M4JYY',
+2025-05-13T15:18:36:   'P-62T484147J908714FM7M4JZI',
+2025-05-13T15:18:36:   'P-90V18465AA503062KM7M4JZI',
+2025-05-13T15:18:36:   'P-0N203053T15286811M7M4JZQ',
+2025-05-13T15:18:36:   'P-46533433JY578205HM7M4JZQ',
+2025-05-13T15:18:36:   'P-63R81120GE458362BM7M4JZY',
+2025-05-13T15:18:36:   'P-21A90981M6370210WM7M4JZY',
+2025-05-13T15:18:36:   'P-360406889S1454445M7M4J2I',
+2025-05-13T15:18:36:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-13T15:18:36:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-13T15:18:36:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-13T15:18:36:   'P-39555110YD2915823M7S6OQQ',
+2025-05-13T15:18:36:   'P-9E656446VD230374HM7S6OQY',
+2025-05-13T15:18:36:   'P-45128149BJ354104KM7S6OQY',
+2025-05-13T15:18:36:   'P-9F006862C6340571DM7S6OQY',
+2025-05-13T15:18:36:   'P-1V314479R9099642UM7S6OQY',
+2025-05-13T15:18:36:   'P-79A057673F410951MM7S6OQY',
+2025-05-13T15:18:36:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-13T15:18:36:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-13T15:18:36:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-13T15:18:36:   'P-21X07337A4958732NM7S6ORA',
+2025-05-13T15:18:36:   'P-3FU129497M979342BM7S6ORI',
+2025-05-13T15:18:36:   'P-44G00026CM390584DM7S6ORI',
+2025-05-13T15:18:36:   'P-62J05746CC518271NM7S6ORI',
+2025-05-13T15:18:36:   'P-7H916310NB4776034M7S6ORI',
+2025-05-13T15:18:36:   'P-81H7059024688361BNADFSEQ',
+2025-05-13T15:18:36:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-13T15:18:36:   'P-0AG648210K837334ENADFSEY',
+2025-05-13T15:18:36:   'P-5PJ42060848447527NADFSEY',
+2025-05-13T15:18:36:   'P-7SH44926C2332032LNADFSFA',
+2025-05-13T15:18:36:   'P-5GT16529YX6637536NADFSFA',
+2025-05-13T15:18:36:   'P-9E4467280K919340LNADFSFA',
+2025-05-13T15:18:36:   'P-7F5548422M800415UNADFSFA',
+2025-05-13T15:18:36:   'P-5D1599585G2325124NADFSFI',
+2025-05-13T15:18:36:   'P-8HP47151UE2088357NADFSFI',
+2025-05-13T15:18:36:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-13T15:18:36:   'P-77F59714BA432935BNADFSFQ',
+2025-05-13T15:18:36:   'P-621267267T2568348NADFSFQ',
+2025-05-13T15:18:36:   'P-0VC29477844828614NADFSFQ',
+2025-05-13T15:18:36:   'P-9VK838170M171392XNADFSFY',
+2025-05-13T15:18:36:   'P-5K721906AC486313MNADFSFY',
+2025-05-13T15:18:36:   'P-490774634X2062924NAHAMPI',
+2025-05-13T15:18:36:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T15:18:36:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T15:18:36:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T15:18:36:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T15:18:36:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T15:18:36:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T15:18:36:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T15:18:36:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T15:18:36:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T15:18:36:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T15:18:36:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T15:18:36:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T15:18:36:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T15:18:36:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T15:18:36:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T15:18:36:   'P-8R860064U4651043VNAMP5QA',
+2025-05-13T15:18:36:   'P-60C92000WD254525WNAMP5QI',
+2025-05-13T15:18:36:   'P-0UT00261V94696819NAMP5QI',
+2025-05-13T15:18:36:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-13T15:18:36:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-13T15:18:36:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-13T15:18:36:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-13T15:18:36:   'P-6X911161ML521982BNAMP5QY',
+2025-05-13T15:18:36:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-13T15:18:36:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-13T15:18:36:   'P-3U673165V0901092KNAMP5RA',
+2025-05-13T15:18:36:   'P-8YA2119328867231VNAMP5RA',
+2025-05-13T15:18:36:   'P-8HG183948K421773MNAMP5RI',
+2025-05-13T15:18:36:   'P-5JN159596J440845BNAMP5RI',
+2025-05-13T15:18:36:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-13T15:18:36:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-13T15:18:36:   'P-0F030730RE936621BNAN4HCA',
+2025-05-13T15:18:36:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-13T15:18:36:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-13T15:18:36:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-13T15:18:36:   'P-4D519177D3911424YNAN4HCY',
+2025-05-13T15:18:36:   'P-6BD749029B990871CNAN4HCY',
+2025-05-13T15:18:36:   'P-5BM58021W47885254NAN4HDA',
+2025-05-13T15:18:36:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-13T15:18:36:   'P-49185806R8340904VNAN4HDI',
+2025-05-13T15:18:36:   'P-5W217508C5372952SNAN4HDI',
+2025-05-13T15:18:36:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-13T15:18:36:   'P-0C082804XG969344HNAN4HDY',
+2025-05-13T15:18:36:   'P-509283891X696204TNAN4HEA',
+2025-05-13T15:18:36:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-13T15:18:36:   'P-13J67250CR558593DNAN4HEI',
+2025-05-13T15:18:36:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-13T15:18:36: }
+2025-05-13T15:18:36: All plans processed successfully.
+2025-05-13T15:20:13: [INFO] Starting page duplication analysis for: https://cnet.com
+2025-05-13T15:20:13: [INFO] Fetching internal URLs for: https://cnet.com
+2025-05-13T15:20:14: [INFO] Found cached results for: https://cnet.com
+2025-05-13T15:20:14: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:20:42: [INFO] Starting page duplication analysis for: https://paloaltonetworks.com
+2025-05-13T15:20:42: [INFO] Fetching internal URLs for: https://paloaltonetworks.com
+2025-05-13T15:20:42: [INFO] Fetching internal URLs for: https://paloaltonetworks.com
+2025-05-13T15:20:42: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-13T15:20:42: [INFO] Fetching content for 97 URLs
+2025-05-13T15:20:59: [INFO] Comparing page contents
+2025-05-13T15:22:02: [INFO] Saved results to cache for: https://paloaltonetworks.com
+2025-05-13T15:22:02: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:22:02: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:22:02: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:22:02: [INFO] Starting page duplication analysis for: https://paloaltonetworks.com
+2025-05-13T15:22:02: [INFO] Fetching internal URLs for: https://paloaltonetworks.com
+2025-05-13T15:22:02: [INFO] Found cached results for: https://paloaltonetworks.com
+2025-05-13T15:22:02: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:22:08: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:22:08: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:25:35: [INFO] Starting page duplication analysis for: https://paloaltonetworks.com
+2025-05-13T15:25:35: [INFO] Fetching internal URLs for: https://paloaltonetworks.com
+2025-05-13T15:25:35: [INFO] Found cached results for: https://paloaltonetworks.com
+2025-05-13T15:25:35: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:34:14: [INFO] Starting page duplication analysis for: https://cnet.com
+2025-05-13T15:34:14: [INFO] Fetching internal URLs for: https://cnet.com
+2025-05-13T15:34:15: [INFO] Found cached results for: https://cnet.com
+2025-05-13T15:34:15: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:36:07: 
+2025-05-13T15:36:07: > seo-yourtext@1.0.0 start:server
+2025-05-13T15:36:07: > cd server && npm start
+2025-05-13T15:36:07: 
+2025-05-13T15:36:07: 
+2025-05-13T15:36:07: > server@1.0.0 start
+2025-05-13T15:36:07: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-13T15:36:07: 
+2025-05-13T15:36:08:    ▲ Next.js 15.2.2
+2025-05-13T15:36:08:    - Local:        http://localhost:7777
+2025-05-13T15:36:08:    - Network:      http://167.235.246.98:7777
+2025-05-13T15:36:08: 
+2025-05-13T15:36:08:  ✓ Starting...
+2025-05-13T15:36:08:  ✓ Ready in 398ms
+2025-05-13T15:36:09: ✅ Connected to Redis
+2025-05-13T15:36:09: ✅ Redis client ready
+2025-05-13T15:36:21: [15:36:21] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-13T15:36:21: Initializing Payload services...
+2025-05-13T15:36:21: Paypal plan check
+2025-05-13T15:36:21: Daily rank tracking finished
+2025-05-13T15:36:21: Setting Payload instance for SEO Guide worker
+2025-05-13T15:36:21: ✅ Payload instance initialized for both workers
+2025-05-13T15:36:21: ✅ Workers started in background
+2025-05-13T15:36:22: Product ID already exists.
+2025-05-13T15:36:25: Database Plan IDs: Set(16) {
+2025-05-13T15:36:25:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T15:36:25:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T15:36:25:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T15:36:25:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T15:36:25:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T15:36:25:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T15:36:25:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T15:36:25:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T15:36:25:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T15:36:25:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T15:36:25:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T15:36:25:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T15:36:25:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T15:36:25:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T15:36:25:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T15:36:25:   'P-490774634X2062924NAHAMPI'
+2025-05-13T15:36:25: }
+2025-05-13T15:36:25: PayPal Plan IDs: Set(96) {
+2025-05-13T15:36:25:   'P-98579045524419020M7M4JXY',
+2025-05-13T15:36:25:   'P-0SA1427012940862YM7M4JYA',
+2025-05-13T15:36:25:   'P-6P231034LS515993XM7M4JYI',
+2025-05-13T15:36:25:   'P-68E81820XB085010WM7M4JYI',
+2025-05-13T15:36:25:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-13T15:36:25:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-13T15:36:25:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-13T15:36:25:   'P-68B108558G040300CM7M4JYY',
+2025-05-13T15:36:25:   'P-62T484147J908714FM7M4JZI',
+2025-05-13T15:36:25:   'P-90V18465AA503062KM7M4JZI',
+2025-05-13T15:36:25:   'P-0N203053T15286811M7M4JZQ',
+2025-05-13T15:36:25:   'P-46533433JY578205HM7M4JZQ',
+2025-05-13T15:36:25:   'P-63R81120GE458362BM7M4JZY',
+2025-05-13T15:36:25:   'P-21A90981M6370210WM7M4JZY',
+2025-05-13T15:36:25:   'P-360406889S1454445M7M4J2I',
+2025-05-13T15:36:25:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-13T15:36:25:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-13T15:36:25:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-13T15:36:25:   'P-39555110YD2915823M7S6OQQ',
+2025-05-13T15:36:25:   'P-9E656446VD230374HM7S6OQY',
+2025-05-13T15:36:25:   'P-45128149BJ354104KM7S6OQY',
+2025-05-13T15:36:25:   'P-9F006862C6340571DM7S6OQY',
+2025-05-13T15:36:25:   'P-1V314479R9099642UM7S6OQY',
+2025-05-13T15:36:25:   'P-79A057673F410951MM7S6OQY',
+2025-05-13T15:36:25:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-13T15:36:25:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-13T15:36:25:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-13T15:36:25:   'P-21X07337A4958732NM7S6ORA',
+2025-05-13T15:36:25:   'P-3FU129497M979342BM7S6ORI',
+2025-05-13T15:36:25:   'P-44G00026CM390584DM7S6ORI',
+2025-05-13T15:36:25:   'P-62J05746CC518271NM7S6ORI',
+2025-05-13T15:36:25:   'P-7H916310NB4776034M7S6ORI',
+2025-05-13T15:36:25:   'P-81H7059024688361BNADFSEQ',
+2025-05-13T15:36:25:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-13T15:36:25:   'P-0AG648210K837334ENADFSEY',
+2025-05-13T15:36:25:   'P-5PJ42060848447527NADFSEY',
+2025-05-13T15:36:25:   'P-7SH44926C2332032LNADFSFA',
+2025-05-13T15:36:25:   'P-5GT16529YX6637536NADFSFA',
+2025-05-13T15:36:25:   'P-9E4467280K919340LNADFSFA',
+2025-05-13T15:36:25:   'P-7F5548422M800415UNADFSFA',
+2025-05-13T15:36:25:   'P-5D1599585G2325124NADFSFI',
+2025-05-13T15:36:25:   'P-8HP47151UE2088357NADFSFI',
+2025-05-13T15:36:25:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-13T15:36:25:   'P-77F59714BA432935BNADFSFQ',
+2025-05-13T15:36:25:   'P-621267267T2568348NADFSFQ',
+2025-05-13T15:36:25:   'P-0VC29477844828614NADFSFQ',
+2025-05-13T15:36:25:   'P-9VK838170M171392XNADFSFY',
+2025-05-13T15:36:25:   'P-5K721906AC486313MNADFSFY',
+2025-05-13T15:36:25:   'P-490774634X2062924NAHAMPI',
+2025-05-13T15:36:25:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T15:36:25:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T15:36:25:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T15:36:25:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T15:36:25:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T15:36:25:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T15:36:25:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T15:36:25:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T15:36:25:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T15:36:25:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T15:36:25:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T15:36:25:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T15:36:25:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T15:36:25:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T15:36:25:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T15:36:25:   'P-8R860064U4651043VNAMP5QA',
+2025-05-13T15:36:25:   'P-60C92000WD254525WNAMP5QI',
+2025-05-13T15:36:25:   'P-0UT00261V94696819NAMP5QI',
+2025-05-13T15:36:25:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-13T15:36:25:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-13T15:36:25:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-13T15:36:25:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-13T15:36:25:   'P-6X911161ML521982BNAMP5QY',
+2025-05-13T15:36:25:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-13T15:36:25:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-13T15:36:25:   'P-3U673165V0901092KNAMP5RA',
+2025-05-13T15:36:25:   'P-8YA2119328867231VNAMP5RA',
+2025-05-13T15:36:25:   'P-8HG183948K421773MNAMP5RI',
+2025-05-13T15:36:25:   'P-5JN159596J440845BNAMP5RI',
+2025-05-13T15:36:25:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-13T15:36:25:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-13T15:36:25:   'P-0F030730RE936621BNAN4HCA',
+2025-05-13T15:36:25:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-13T15:36:25:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-13T15:36:25:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-13T15:36:25:   'P-4D519177D3911424YNAN4HCY',
+2025-05-13T15:36:25:   'P-6BD749029B990871CNAN4HCY',
+2025-05-13T15:36:25:   'P-5BM58021W47885254NAN4HDA',
+2025-05-13T15:36:25:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-13T15:36:25:   'P-49185806R8340904VNAN4HDI',
+2025-05-13T15:36:25:   'P-5W217508C5372952SNAN4HDI',
+2025-05-13T15:36:25:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-13T15:36:25:   'P-0C082804XG969344HNAN4HDY',
+2025-05-13T15:36:25:   'P-509283891X696204TNAN4HEA',
+2025-05-13T15:36:25:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-13T15:36:25:   'P-13J67250CR558593DNAN4HEI',
+2025-05-13T15:36:25:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-13T15:36:25: }
+2025-05-13T15:36:25: All plans processed successfully.
+2025-05-13T15:37:01: [DEBUG] HTML fetched: false https://cybernews.com
+2025-05-13T15:37:46: [DEBUG] HTML fetched: true https://goodaccess.com
+2025-05-13T15:37:46: [DEBUG] Discovered internal links: 53 [
+2025-05-13T15:37:46:   'https://goodaccess.com',
+2025-05-13T15:37:46:   'https://goodaccess.com/platform',
+2025-05-13T15:37:46:   'https://goodaccess.com/platform/software-defined-perimeter',
+2025-05-13T15:37:46:   'https://goodaccess.com/platform/business-vpn',
+2025-05-13T15:37:46:   'https://goodaccess.com/platform/secure-web-gateway',
+2025-05-13T15:37:46:   'https://goodaccess.com/platform/zero-trust-network-access',
+2025-05-13T15:37:46:   'https://goodaccess.com/platform/remote-access-vpn',
+2025-05-13T15:37:46:   'https://goodaccess.com/security-compliance',
+2025-05-13T15:37:46:   'https://goodaccess.com/whitepapers/practical-guide-implementing-zero-trust-security',
+2025-05-13T15:37:46:   'https://goodaccess.com/nis2'
+2025-05-13T15:37:46: ]
+2025-05-13T15:37:46: [INFO] Internal URLs saved to DB for: https://goodaccess.com
+2025-05-13T15:38:34: [INFO] Starting page duplication analysis for: https://goodaccess.com
+2025-05-13T15:38:34: [INFO] Fetching internal URLs for: https://goodaccess.com
+2025-05-13T15:38:34: [INFO] Fetching internal URLs for: https://goodaccess.com
+2025-05-13T15:38:34: [INFO] Found internal URLs in cache for: https://goodaccess.com
+2025-05-13T15:38:34: [INFO] Fetching content for 53 URLs
+2025-05-13T15:38:38: [INFO] Comparing page contents
+2025-05-13T15:38:53: [INFO] Saved results to cache for: https://goodaccess.com
+2025-05-13T15:38:53: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:38:53: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:38:53: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:38:59: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:38:59: 🔄 Retrying Redis connection in 3000ms...
+2025-05-13T15:41:46: [INFO] Starting page duplication analysis for: https://pcmag.com
+2025-05-13T15:41:46: [INFO] Fetching internal URLs for: https://pcmag.com
+2025-05-13T15:41:46: [INFO] Fetching internal URLs for: https://pcmag.com
+2025-05-13T15:41:46: [DEBUG] HTML fetched: false https://pcmag.com
+2025-05-13T15:41:46: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:41:56: [INFO] Starting page duplication analysis for: https://pcmag.com
+2025-05-13T15:41:56: [INFO] Fetching internal URLs for: https://pcmag.com
+2025-05-13T15:41:56: [INFO] Fetching internal URLs for: https://pcmag.com
+2025-05-13T15:41:56: [DEBUG] HTML fetched: false https://pcmag.com
+2025-05-13T15:41:56: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:42:02: [INFO] Starting page duplication analysis for: https://www.pcmag.com/picks/the-best-android-games
+2025-05-13T15:42:02: [INFO] Fetching internal URLs for: https://www.pcmag.com/picks/the-best-android-games
+2025-05-13T15:42:02: [INFO] Fetching internal URLs for: https://www.pcmag.com/picks/the-best-android-games
+2025-05-13T15:42:02: [DEBUG] HTML fetched: false https://www.pcmag.com/picks/the-best-android-games
+2025-05-13T15:42:02: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:42:35: [INFO] Starting page duplication analysis for: https://pcgamesn.com
+2025-05-13T15:42:35: [INFO] Fetching internal URLs for: https://pcgamesn.com
+2025-05-13T15:42:35: [INFO] Fetching internal URLs for: https://pcgamesn.com
+2025-05-13T15:42:36: [DEBUG] HTML fetched: true https://pcgamesn.com
+2025-05-13T15:42:36: [DEBUG] Discovered internal links: 5 [
+2025-05-13T15:42:36:   'https://pcgamesn.com/news',
+2025-05-13T15:42:36:   'https://pcgamesn.com/gaming-hardware',
+2025-05-13T15:42:36:   'https://pcgamesn.com',
+2025-05-13T15:42:36:   'https://pcgamesn.com/advertising',
+2025-05-13T15:42:36:   'https://pcgamesn.com/100-best-free-pc-games'
+2025-05-13T15:42:36: ]
+2025-05-13T15:42:36: [INFO] Internal URLs saved to DB for: https://pcgamesn.com
+2025-05-13T15:42:36: [INFO] Fetching content for 5 URLs
+2025-05-13T15:42:38: [INFO] Comparing page contents
+2025-05-13T15:42:39: [INFO] Saved results to cache for: https://pcgamesn.com
+2025-05-13T15:42:39: [INFO] Page duplication analysis completed successfully
+2025-05-13T15:42:53: [INFO] Found internal URLs in cache for: https://pcgamesn.com
+2025-05-13T15:46:50: 
+2025-05-13T15:46:50: > seo-yourtext@1.0.0 start:server
+2025-05-13T15:46:50: > cd server && npm start
+2025-05-13T15:46:50: 
+2025-05-13T15:46:50: 
+2025-05-13T15:46:50: > server@1.0.0 start
+2025-05-13T15:46:50: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-13T15:46:50: 
+2025-05-13T15:46:51:    ▲ Next.js 15.2.2
+2025-05-13T15:46:51:    - Local:        http://localhost:7777
+2025-05-13T15:46:51:    - Network:      http://167.235.246.98:7777
+2025-05-13T15:46:51: 
+2025-05-13T15:46:51:  ✓ Starting...
+2025-05-13T15:46:51:  ✓ Ready in 461ms
+2025-05-13T15:46:52: ✅ Connected to Redis
+2025-05-13T15:46:52: ✅ Redis client ready
+2025-05-13T15:47:08: [15:47:08] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-13T15:47:08: Initializing Payload services...
+2025-05-13T15:47:08: Paypal plan check
+2025-05-13T15:47:08: Daily rank tracking finished
+2025-05-13T15:47:08: Setting Payload instance for SEO Guide worker
+2025-05-13T15:47:08: ✅ Payload instance initialized for both workers
+2025-05-13T15:47:08: ✅ Workers started in background
+2025-05-13T15:47:08: Product ID already exists.
+2025-05-13T15:47:12: Database Plan IDs: Set(16) {
+2025-05-13T15:47:12:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T15:47:12:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T15:47:12:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T15:47:12:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T15:47:12:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T15:47:12:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T15:47:12:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T15:47:12:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T15:47:12:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T15:47:12:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T15:47:12:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T15:47:12:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T15:47:12:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T15:47:12:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T15:47:12:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T15:47:12:   'P-490774634X2062924NAHAMPI'
+2025-05-13T15:47:12: }
+2025-05-13T15:47:12: PayPal Plan IDs: Set(96) {
+2025-05-13T15:47:12:   'P-98579045524419020M7M4JXY',
+2025-05-13T15:47:12:   'P-0SA1427012940862YM7M4JYA',
+2025-05-13T15:47:12:   'P-6P231034LS515993XM7M4JYI',
+2025-05-13T15:47:12:   'P-68E81820XB085010WM7M4JYI',
+2025-05-13T15:47:12:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-13T15:47:12:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-13T15:47:12:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-13T15:47:12:   'P-68B108558G040300CM7M4JYY',
+2025-05-13T15:47:12:   'P-62T484147J908714FM7M4JZI',
+2025-05-13T15:47:12:   'P-90V18465AA503062KM7M4JZI',
+2025-05-13T15:47:12:   'P-0N203053T15286811M7M4JZQ',
+2025-05-13T15:47:12:   'P-46533433JY578205HM7M4JZQ',
+2025-05-13T15:47:12:   'P-63R81120GE458362BM7M4JZY',
+2025-05-13T15:47:12:   'P-21A90981M6370210WM7M4JZY',
+2025-05-13T15:47:12:   'P-360406889S1454445M7M4J2I',
+2025-05-13T15:47:12:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-13T15:47:12:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-13T15:47:12:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-13T15:47:12:   'P-39555110YD2915823M7S6OQQ',
+2025-05-13T15:47:12:   'P-9E656446VD230374HM7S6OQY',
+2025-05-13T15:47:12:   'P-45128149BJ354104KM7S6OQY',
+2025-05-13T15:47:12:   'P-9F006862C6340571DM7S6OQY',
+2025-05-13T15:47:12:   'P-1V314479R9099642UM7S6OQY',
+2025-05-13T15:47:12:   'P-79A057673F410951MM7S6OQY',
+2025-05-13T15:47:12:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-13T15:47:12:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-13T15:47:12:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-13T15:47:12:   'P-21X07337A4958732NM7S6ORA',
+2025-05-13T15:47:12:   'P-3FU129497M979342BM7S6ORI',
+2025-05-13T15:47:12:   'P-44G00026CM390584DM7S6ORI',
+2025-05-13T15:47:12:   'P-62J05746CC518271NM7S6ORI',
+2025-05-13T15:47:12:   'P-7H916310NB4776034M7S6ORI',
+2025-05-13T15:47:12:   'P-81H7059024688361BNADFSEQ',
+2025-05-13T15:47:12:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-13T15:47:12:   'P-0AG648210K837334ENADFSEY',
+2025-05-13T15:47:12:   'P-5PJ42060848447527NADFSEY',
+2025-05-13T15:47:12:   'P-7SH44926C2332032LNADFSFA',
+2025-05-13T15:47:12:   'P-5GT16529YX6637536NADFSFA',
+2025-05-13T15:47:12:   'P-9E4467280K919340LNADFSFA',
+2025-05-13T15:47:12:   'P-7F5548422M800415UNADFSFA',
+2025-05-13T15:47:12:   'P-5D1599585G2325124NADFSFI',
+2025-05-13T15:47:12:   'P-8HP47151UE2088357NADFSFI',
+2025-05-13T15:47:12:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-13T15:47:12:   'P-77F59714BA432935BNADFSFQ',
+2025-05-13T15:47:12:   'P-621267267T2568348NADFSFQ',
+2025-05-13T15:47:12:   'P-0VC29477844828614NADFSFQ',
+2025-05-13T15:47:12:   'P-9VK838170M171392XNADFSFY',
+2025-05-13T15:47:12:   'P-5K721906AC486313MNADFSFY',
+2025-05-13T15:47:12:   'P-490774634X2062924NAHAMPI',
+2025-05-13T15:47:12:   'P-8K433323S1042472HNAHAMPI',
+2025-05-13T15:47:12:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-13T15:47:12:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-13T15:47:12:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-13T15:47:12:   'P-202989871N9958414NAHAMPQ',
+2025-05-13T15:47:12:   'P-3KW957430M5325327NAHAMPY',
+2025-05-13T15:47:12:   'P-4L778364NR5921350NAHAMPY',
+2025-05-13T15:47:12:   'P-8M9757836L293264GNAHAMPY',
+2025-05-13T15:47:12:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-13T15:47:12:   'P-27141251BP077373TNAHAMQA',
+2025-05-13T15:47:12:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-13T15:47:12:   'P-9M865456HH770272DNAHAMQA',
+2025-05-13T15:47:12:   'P-20370715PP423392UNAHAMQA',
+2025-05-13T15:47:12:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-13T15:47:12:   'P-53X09845JD375660GNAHAMQI',
+2025-05-13T15:47:12:   'P-8R860064U4651043VNAMP5QA',
+2025-05-13T15:47:12:   'P-60C92000WD254525WNAMP5QI',
+2025-05-13T15:47:12:   'P-0UT00261V94696819NAMP5QI',
+2025-05-13T15:47:12:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-13T15:47:12:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-13T15:47:12:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-13T15:47:12:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-13T15:47:12:   'P-6X911161ML521982BNAMP5QY',
+2025-05-13T15:47:12:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-13T15:47:12:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-13T15:47:12:   'P-3U673165V0901092KNAMP5RA',
+2025-05-13T15:47:12:   'P-8YA2119328867231VNAMP5RA',
+2025-05-13T15:47:12:   'P-8HG183948K421773MNAMP5RI',
+2025-05-13T15:47:12:   'P-5JN159596J440845BNAMP5RI',
+2025-05-13T15:47:12:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-13T15:47:12:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-13T15:47:12:   'P-0F030730RE936621BNAN4HCA',
+2025-05-13T15:47:12:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-13T15:47:12:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-13T15:47:12:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-13T15:47:12:   'P-4D519177D3911424YNAN4HCY',
+2025-05-13T15:47:12:   'P-6BD749029B990871CNAN4HCY',
+2025-05-13T15:47:12:   'P-5BM58021W47885254NAN4HDA',
+2025-05-13T15:47:12:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-13T15:47:12:   'P-49185806R8340904VNAN4HDI',
+2025-05-13T15:47:12:   'P-5W217508C5372952SNAN4HDI',
+2025-05-13T15:47:12:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-13T15:47:12:   'P-0C082804XG969344HNAN4HDY',
+2025-05-13T15:47:12:   'P-509283891X696204TNAN4HEA',
+2025-05-13T15:47:12:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-13T15:47:12:   'P-13J67250CR558593DNAN4HEI',
+2025-05-13T15:47:12:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-13T15:47:12: }
+2025-05-13T15:47:12: All plans processed successfully.
+2025-05-13T15:56:31: Received request body: {
+2025-05-13T15:56:31:   query: 'seo',
+2025-05-13T15:56:31:   queryID: '20049427',
+2025-05-13T15:56:31:   queryEngine: 'google',
+2025-05-13T15:56:31:   projectID: '303816',
+2025-05-13T15:56:31:   email: 'healer@gmail.com',
+2025-05-13T15:56:31:   language: 'en',
+2025-05-13T15:56:31:   hl: 'en',
+2025-05-13T15:56:31:   gl: 'us',
+2025-05-13T15:56:31:   lr: 'lang_en'
+2025-05-13T15:56:31: }
+2025-05-13T15:56:31: Adding job to the queue...
+2025-05-13T15:56:31: Job added to queue with ID: 71
+2025-05-13T15:56:31: 🔄 Job 71 started processing
+2025-05-13T15:56:31: 🔄 Worker processing SEO guide creation job 71
+2025-05-13T15:56:31: 📝 Job data: {
+2025-05-13T15:56:31:   "query": "seo",
+2025-05-13T15:56:31:   "projectID": "303816",
+2025-05-13T15:56:31:   "email": "healer@gmail.com",
+2025-05-13T15:56:31:   "queryID": "20049427",
+2025-05-13T15:56:31:   "language": "en",
+2025-05-13T15:56:31:   "queryEngine": "google",
+2025-05-13T15:56:31:   "hl": "en",
+2025-05-13T15:56:31:   "gl": "us",
+2025-05-13T15:56:31:   "lr": "lang_en"
+2025-05-13T15:56:31: }
+2025-05-13T15:56:31: 📊 Job 71 progress: 10%
+2025-05-13T15:56:31: ✅ Initial progress update complete
+2025-05-13T15:56:31: 🔑 Getting Payload instance...
+2025-05-13T15:56:31: ✅ Payload instance obtained
+2025-05-13T15:56:31: 📊 Job 71 progress: 30%
+2025-05-13T15:56:31: 🚀 Starting SEO guide processing...
+2025-05-13T15:56:31: processSeoGuide started
+2025-05-13T15:56:31: Processing SEO guide with data: {
+2025-05-13T15:56:31:   query: 'seo',
+2025-05-13T15:56:31:   projectID: '303816',
+2025-05-13T15:56:31:   email: 'healer@gmail.com',
+2025-05-13T15:56:31:   queryID: '20049427',
+2025-05-13T15:56:31:   language: 'en',
+2025-05-13T15:56:31:   queryEngine: 'google',
+2025-05-13T15:56:31:   hl: 'en',
+2025-05-13T15:56:31:   gl: 'us',
+2025-05-13T15:56:31:   lr: 'lang_en'
+2025-05-13T15:56:31: }
+2025-05-13T15:56:31: 📊 Job 71 progress: 20%
+2025-05-13T15:56:40: 📊 Job 71 progress: 30%
+2025-05-13T15:56:40: Before generating SEO keywords
+2025-05-13T15:56:40: Sending request to OpenAI with prompt: 
+2025-05-13T15:56:40: You are an SEO keyword research assistant.
+2025-05-13T15:56:40: 
+2025-05-13T15:56:40: Using the input query "seo" in English for the us market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-13T15:56:40: 
+2025-05-13T15:56:40: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-13T15:56:40: 
+2025-05-13T15:56:40: Example:
+2025-05-13T15:56:40: keyword 1  
+2025-05-13T15:56:40: keyword 2  
+2025-05-13T15:56:40: keyword 3  
+2025-05-13T15:56:40: ...
+2025-05-13T15:56:40: 
+2025-05-13T15:58:50: Raw keyword response: seo meaning
+2025-05-13T15:58:50: what is seo
+2025-05-13T15:58:50: how to do seo
+2025-05-13T15:58:50: seo benefits
+2025-05-13T15:58:50: seo services
+2025-05-13T15:58:50: best seo tools
+2025-05-13T15:58:50: seo companies
+2025-05-13T15:58:50: seo pricing
+2025-05-13T15:58:50: seo vs sem
+2025-05-13T15:58:50: seo strategies
+2025-05-13T15:58:50: seo for beginners
+2025-05-13T15:58:50: how does seo work
+2025-05-13T15:58:50: local seo services
+2025-05-13T15:58:50: seo techniques
+2025-05-13T15:58:50: seo tips
+2025-05-13T15:58:50: seo for ecommerce
+2025-05-13T15:58:50: seo packages
+2025-05-13T15:58:50: buy seo services
+2025-05-13T15:58:50: seo consulting
+2025-05-13T15:58:50: seo audit
+2025-05-13T15:58:50: seo training
+2025-05-13T15:58:50: seo certification
+2025-05-13T15:58:50: seo checklist
+2025-05-13T15:58:50: seo tutorial
+2025-05-13T15:58:50: seo agency
+2025-05-13T15:58:50: seo software
+2025-05-13T15:58:50: seo analytics
+2025-05-13T15:58:50: seo keywords
+2025-05-13T15:58:50: seo optimization
+2025-05-13T15:58:50: seo content
+2025-05-13T15:58:50: google seo guide
+2025-05-13T15:58:50: seo ranking factors
+2025-05-13T15:58:50: hire seo expert
+2025-05-13T15:58:50: seo case study
+2025-05-13T15:58:50: seo plugin
+2025-05-13T15:58:50: seo backlinks
+2025-05-13T15:58:50: seo blogs
+2025-05-13T15:58:50: seo tools comparison
+2025-05-13T15:58:50: seo practices
+2025-05-13T15:58:50: seo updates
+2025-05-13T15:58:50: seo vs ppc
+2025-05-13T15:58:50: seo reporting tool
+2025-05-13T15:58:50: seo for wordpress
+2025-05-13T15:58:50: seo for youtube
+2025-05-13T15:58:50: seo and social media
+2025-05-13T15:58:50: seo for small business
+2025-05-13T15:58:50: seo for website
+2025-05-13T15:58:50: learn seo online
+2025-05-13T15:58:50: seo job description
+2025-05-13T15:58:50: seo job opportunities
+2025-05-13T15:58:50: seo and content marketing
+2025-05-13T15:58:50: moz seo
+2025-05-13T15:58:50: semrush seo
+2025-05-13T15:58:50: yoast seo
+2025-05-13T15:58:50: ahrefs seo
+2025-05-13T15:58:50: seo trends 2022
+2025-05-13T15:58:50: seo predictions
+2025-05-13T15:58:50: seo future trends
+2025-05-13T15:58:50: seo statistics
+2025-05-13T15:58:50: seo news updates
+2025-05-13T15:58:50: seo best practices 2022
+2025-05-13T15:58:50: seo conferences
+2025-05-13T15:58:50: seo webinars
+2025-05-13T15:58:50: seo ebooks
+2025-05-13T15:58:50: seo courses online
+2025-05-13T15:58:50: seo podcasts
+2025-05-13T15:58:50: seo videos
+2025-05-13T15:58:50: seo infographics
+2025-05-13T15:58:50: seo forums
+2025-05-13T15:58:50: seo blogs to follow
+2025-05-13T15:58:50: seo influencers
+2025-05-13T15:58:50: seo experts
+2025-05-13T15:58:50: seo thought leaders
+2025-05-13T15:58:50: seo awards
+2025-05-13T15:58:50: seo success stories
+2025-05-13T15:58:50: seo case studies
+2025-05-13T15:58:50: seo web design
+2025-05-13T15:58:50: seo friendly website
+2025-05-13T15:58:50: seo domain name
+2025-05-13T15:58:50: seo url structure
+2025-05-13T15:58:50: seo meta tags
+2025-05-13T15:58:50: seo title tag
+2025-05-13T15:58:50: seo header tags
+2025-05-13T15:58:50: seo image optimization
+2025-05-13T15:58:50: seo page speed
+2025-05-13T15:58:50: seo mobile optimization
+2025-05-13T15:58:50: seo structured data
+2025-05-13T15:58:50: seo schema markup
+2025-05-13T15:58:50: seo duplicate content
+2025-05-13T15:58:50: seo canonical tag
+2025-05-13T15:58:50: seo 404 errors
+2025-05-13T15:58:50: seo 301 redirect
+2025-05-13T15:58:50: seo robots.txt
+2025-05-13T15:58:50: seo sitemap
+2025-05-13T15:58:50: seo google analytics
+2025-05-13T15:58:50: seo google search console
+2025-05-13T15:58:50: seo google ranking
+2025-05-13T15:58:50: seo google update
+2025-05-13T15:58:50: seo google ads
+2025-05-13T15:58:50: seo google my business
+2025-05-13T15:58:50: seo bing
+2025-05-13T15:58:50: seo yahoo
+2025-05-13T15:58:50: seo duckduckgo
+2025-05-13T15:58:50: seo facebook
+2025-05-13T15:58:50: seo instagram
+2025-05-13T15:58:50: seo pinterest
+2025-05-13T15:58:50: seo twitter
+2025-05-13T15:58:50: seo linkedin
+2025-05-13T15:58:50: seo youtube
+2025-05-13T15:58:50: seo amazon
+2025-05-13T15:58:50: seo ebay
+2025-05-13T15:58:50: seo shopify
+2025-05-13T15:58:50: seo wordpress
+2025-05-13T15:58:50: seo wix
+2025-05-13T15:58:50: seo squarespace
+2025-05-13T15:58:50: seo magento
+2025-05-13T15:58:50: seo joomla
+2025-05-13T15:58:50: seo drupal
+2025-05-13T15:58:50: seo hubspot
+2025-05-13T15:58:50: seo salesforce
+2025-05-13T15:58:50: seo zoho
+2025-05-13T15:58:50: seo mailchimp
+2025-05-13T15:58:50: seo constant contact
+2025-05-13T15:58:50: seo sendinblue
+2025-05-13T15:58:50: seo getresponse
+2025-05-13T15:58:50: seo convertkit
+2025-05-13T15:58:50: seo aweber
+2025-05-13T15:58:50: seo activecampaign
+2025-05-13T15:58:50: seo infusionsoft
+2025-05-13T15:58:50: seo benchmark
+2025-05-13T15:58:50: seo campaign monitor
+2025-05-13T15:58:50: seo drip
+2025-05-13T15:58:50: seo mailerlite
+2025-05-13T15:58:50: seo moosend
+2025-05-13T15:58:50: seo sendpulse
+2025-05-13T15:58:50: seo verticalresponse
+2025-05-13T15:58:50: seo icontact
+2025-05-13T15:58:50: seo mad mimi
+2025-05-13T15:58:50: seo ontraport
+2025-05-13T15:58:50: seo agile crm
+2025-05-13T15:58:50: seo bitrix24
+2025-05-13T15:58:50: seo zoho crm
+2025-05-13T15:58:50: seo salesflare
+2025-05-13T15:58:50: seo pipedrive
+2025-05-13T15:58:50: seo copper
+2025-05-13T15:58:50: seo freshsales
+2025-05-13T15:58:50: seo insightly
+2025-05-13T15:58:50: seo hubspot crm
+2025-05-13T15:58:50: seo salesforce crm
+2025-05-13T15:58:50: seo monday.com
+2025-05-13T15:58:50: seo asana
+2025-05-13T15:58:50: seo trello
+2025-05-13T15:58:50: seo slack
+2025-05-13T15:58:50: seo zoom
+2025-05-13T15:58:50: seo google meet
+2025-05-13T15:58:50: seo microsoft teams
+2025-05-13T15:58:50: seo skype
+2025-05-13T15:58:50: seo webex
+2025-05-13T15:58:50: seo gotomeeting
+2025-05-13T15:58:50: seo join.me
+2025-05-13T15:58:50: seo bluejeans
+2025-05-13T15:58:50: seo lifesize
+2025-05-13T15:58:50: seo zoho meeting
+2025-05-13T15:58:50: seo amazon chime
+2025-05-13T15:58:50: seo hangouts meet
+2025-05-13T15:58:50: seo ringcentral
+2025-05-13T15:58:50: seo clickmeeting
+2025-05-13T15:58:50: seo easywebinar
+2025-05-13T15:58:50: seo webinarjam
+2025-05-13T15:58:50: seo everwebinar
+2025-05-13T15:58:50: seo demio
+2025-05-13T15:58:50: seo gotowebinar
+2025-05-13T15:58:50: seo webinarninja
+2025-05-13T15:58:50: seo livestorm
+2025-05-13T15:58:50: seo bigmarker
+2025-05-13T15:58:50: seo meetingburner
+2025-05-13T15:58:50: seo crowdcast
+2025-05-13T15:58:50: seo zoom webinar
+2025-05-13T15:58:50: seo google webinar
+2025-05-13T15:58:50: seo microsoft webinar
+2025-05-13T15:58:50: seo skype webinar
+2025-05-13T15:58:50: seo webex webinar
+2025-05-13T15:58:50: seo gotomeeting webinar
+2025-05-13T15:58:50: seo join.me webinar
+2025-05-13T15:58:50: seo bluejeans webinar
+2025-05-13T15:58:50: seo lifesize webinar
+2025-05-13T15:58:50: seo zoho webinar
+2025-05-13T15:58:50: seo amazon webinar
+2025-05-13T15:58:50: seo hangouts webinar
+2025-05-13T15:58:50: seo ringcentral webinar
+2025-05-13T15:58:50: seo clickmeeting webinar
+2025-05-13T15:58:50: seo easywebinar webinar
+2025-05-13T15:58:50: seo webinarjam webinar
+2025-05-13T15:58:50: seo everwebinar webinar
+2025-05-13T15:58:50: seo demio webinar
+2025-05-13T15:58:50: seo gotowebinar webinar
+2025-05-13T15:58:50: seo webinarninja webinar
+2025-05-13T15:58:50: seo livestorm webinar
+2025-05-13T15:58:50: seo bigmarker webinar
+2025-05-13T15:58:50: seo meetingburner webinar
+2025-05-13T15:58:50: seo crowdcast webinar
+2025-05-13T15:58:50: seo zoom conference
+2025-05-13T15:58:50: seo google conference
+2025-05-13T15:58:50: seo microsoft conference
+2025-05-13T15:58:50: seo skype conference
+2025-05-13T15:58:50: seo webex conference
+2025-05-13T15:58:50: seo gotomeeting conference
+2025-05-13T15:58:50: seo join.me conference
+2025-05-13T15:58:50: seo bluejeans conference
+2025-05-13T15:58:50: seo lifesize conference
+2025-05-13T15:58:50: seo zoho conference
+2025-05-13T15:58:50: seo amazon conference
+2025-05-13T15:58:50: seo hangouts conference
+2025-05-13T15:58:50: seo ringcentral conference
+2025-05-13T15:58:50: seo clickmeeting conference
+2025-05-13T15:58:50: seo easywebinar conference
+2025-05-13T15:58:50: seo webinarjam conference
+2025-05-13T15:58:50: seo everwebinar conference
+2025-05-13T15:58:50: seo demio conference
+2025-05-13T15:58:50: seo gotowebinar conference
+2025-05-13T15:58:50: seo webinarninja conference
+2025-05-13T15:58:50: seo livestorm conference
+2025-05-13T15:58:50: seo bigmarker conference
+2025-05-13T15:58:50: seo meetingburner conference
+2025-05-13T15:58:50: seo crowdcast conference
+2025-05-13T15:58:50: seo hubspot conference
+2025-05-13T15:58:50: seo salesforce conference
+2025-05-13T15:58:50: seo zoho conference
+2025-05-13T15:58:50: seo mailchimp conference
+2025-05-13T15:58:50: seo constant contact conference
+2025-05-13T15:58:50: seo sendinblue conference
+2025-05-13T15:58:50: seo getresponse conference
+2025-05-13T15:58:50: seo convertkit conference
+2025-05-13T15:58:50: seo aweber conference
+2025-05-13T15:58:50: seo activecampaign conference
+2025-05-13T15:58:50: seo infusionsoft conference
+2025-05-13T15:58:50: seo benchmark conference
+2025-05-13T15:58:50: seo campaign monitor conference
+2025-05-13T15:58:50: seo drip conference
+2025-05-13T15:58:50: seo mailerlite conference
+2025-05-13T15:58:50: seo moosend conference
+2025-05-13T15:58:50: seo sendpulse conference
+2025-05-13T15:58:50: seo verticalresponse conference
+2025-05-13T15:58:50: seo icontact conference
+2025-05-13T15:58:50: seo mad mimi conference
+2025-05-13T15:58:50: seo ontraport conference
+2025-05-13T15:58:50: seo agile crm conference
+2025-05-13T15:58:50: seo bitrix24 conference
+2025-05-13T15:58:50: seo zoho crm conference
+2025-05-13T15:58:50: seo salesflare conference
+2025-05-13T15:58:50: seo pipedrive conference
+2025-05-13T15:58:50: seo copper conference
+2025-05-13T15:58:50: seo freshsales conference
+2025-05-13T15:58:50: seo insightly conference
+2025-05-13T15:58:50: seo hubspot crm conference
+2025-05-13T15:58:50: seo salesforce crm conference
+2025-05-13T15:58:50: seo monday.com conference
+2025-05-13T15:58:50: seo asana conference
+2025-05-13T15:58:50: seo trello conference
+2025-05-13T15:58:50: seo slack conference
+2025-05-13T15:58:50: seo zoom event
+2025-05-13T15:58:50: seo google event
+2025-05-13T15:58:50: seo microsoft event
+2025-05-13T15:58:50: seo skype event
+2025-05-13T15:58:50: seo webex event
+2025-05-13T15:58:50: seo gotomeeting event
+2025-05-13T15:58:50: seo join.me event
+2025-05-13T15:58:50: seo bluejeans event
+2025-05-13T15:58:50: seo lifesize event
+2025-05-13T15:58:50: seo zoho event
+2025-05-13T15:58:50: seo amazon event
+2025-05-13T15:58:50: seo hangouts event
+2025-05-13T15:58:50: seo ringcentral event
+2025-05-13T15:58:50: seo clickmeeting event
+2025-05-13T15:58:50: seo easywebinar event
+2025-05-13T15:58:50: seo webinarjam event
+2025-05-13T15:58:50: seo everwebinar event
+2025-05-13T15:58:50: seo demio event
+2025-05-13T15:58:50: seo gotowebinar event
+2025-05-13T15:58:50: seo webinarninja event
+2025-05-13T15:58:50: seo livestorm event
+2025-05-13T15:58:50: seo bigmarker event
+2025-05-13T15:58:50: seo meetingburner event
+2025-05-13T15:58:50: seo crowdcast event
+2025-05-13T15:58:50: seo hubspot event
+2025-05-13T15:58:50: seo salesforce event
+2025-05-13T15:58:50: seo zoho event
+2025-05-13T15:58:50: seo mailchimp event
+2025-05-13T15:58:50: seo constant contact event
+2025-05-13T15:58:50: seo sendinblue event
+2025-05-13T15:58:50: seo getresponse event
+2025-05-13T15:58:50: seo convertkit event
+2025-05-13T15:58:50: seo aweber event
+2025-05-13T15:58:50: seo activecampaign event
+2025-05-13T15:58:50: seo infusionsoft event
+2025-05-13T15:58:50: seo benchmark event
+2025-05-13T15:58:50: seo campaign monitor event
+2025-05-13T15:58:50: seo drip event
+2025-05-13T15:58:50: seo mailerlite event
+2025-05-13T15:58:50: seo moosend event
+2025-05-13T15:58:50: seo sendpulse event
+2025-05-13T15:58:50: seo verticalresponse event
+2025-05-13T15:58:50: seo icontact event
+2025-05-13T15:58:50: seo mad mimi event
+2025-05-13T15:58:50: seo ontraport event
+2025-05-13T15:58:50: seo agile crm event
+2025-05-13T15:58:50: seo bitrix24 event
+2025-05-13T15:58:50: seo zoho crm event
+2025-05-13T15:58:50: seo salesflare event
+2025-05-13T15:58:50: seo pipedrive event
+2025-05-13T15:58:50: seo copper event
+2025-05-13T15:58:50: seo freshsales event
+2025-05-13T15:58:50: seo insightly event
+2025-05-13T15:58:50: seo hubspot crm event
+2025-05-13T15:58:50: seo salesforce crm event
+2025-05-13T15:58:50: seo monday.com event
+2025-05-13T15:58:50: seo asana event
+2025-05-13T15:58:50: seo trello event
+2025-05-13T15:58:50: seo slack event
+2025-05-13T15:58:50: seo zoom meeting
+2025-05-13T15:58:50: seo google meeting
+2025-05-13T15:58:50: seo microsoft meeting
+2025-05-13T15:58:50: seo skype meeting
+2025-05-13T15:58:50: seo webex meeting
+2025-05-13T15:58:50: seo gotomeeting meeting
+2025-05-13T15:58:50: seo join.me meeting
+2025-05-13T15:58:50: seo bluejeans meeting
+2025-05-13T15:58:50: seo lifesize meeting
+2025-05-13T15:58:50: seo zoho meeting
+2025-05-13T15:58:50: seo amazon meeting
+2025-05-13T15:58:50: seo hangouts meeting
+2025-05-13T15:58:50: seo ringcentral meeting
+2025-05-13T15:58:50: seo clickmeeting meeting
+2025-05-13T15:58:50: seo easywebinar meeting
+2025-05-13T15:58:50: seo webinarjam meeting
+2025-05-13T15:58:50: seo everwebinar meeting
+2025-05-13T15:58:50: seo demio meeting
+2025-05-13T15:58:50: seo gotowebinar meeting
+2025-05-13T15:58:50: seo webinarninja meeting
+2025-05-13T15:58:50: seo livestorm meeting
+2025-05-13T15:58:50: seo bigmarker meeting
+2025-05-13T15:58:50: seo meetingburner meeting
+2025-05-13T15:58:50: seo crowdcast meeting
+2025-05-13T15:58:50: seo hubspot meeting
+2025-05-13T15:58:50: seo salesforce meeting
+2025-05-13T15:58:50: seo zoho meeting
+2025-05-13T15:58:50: seo mailchimp meeting
+2025-05-13T15:58:50: seo constant contact meeting
+2025-05-13T15:58:50: seo sendinblue meeting
+2025-05-13T15:58:50: seo getresponse meeting
+2025-05-13T15:58:50: seo convertkit meeting
+2025-05-13T15:58:50: seo aweber meeting
+2025-05-13T15:58:50: seo activecampaign meeting
+2025-05-13T15:58:50: seo infusionsoft meeting
+2025-05-13T15:58:50: seo benchmark meeting
+2025-05-13T15:58:50: seo campaign monitor meeting
+2025-05-13T15:58:50: seo drip meeting
+2025-05-13T15:58:50: seo mailerlite meeting
+2025-05-13T15:58:50: seo moosend meeting
+2025-05-13T15:58:50: seo sendpulse meeting
+2025-05-13T15:58:50: seo verticalresponse meeting
+2025-05-13T15:58:50: seo icontact meeting
+2025-05-13T15:58:50: seo mad mimi meeting
+2025-05-13T15:58:50: seo ontraport meeting
+2025-05-13T15:58:50: seo agile crm meeting
+2025-05-13T15:58:50: seo bitrix24 meeting
+2025-05-13T15:58:50: seo zoho crm meeting
+2025-05-13T15:58:50: seo salesflare meeting
+2025-05-13T15:58:50: seo pipedrive meeting
+2025-05-13T15:58:50: seo copper meeting
+2025-05-13T15:58:50: seo freshsales meeting
+2025-05-13T15:58:50: seo insightly meeting
+2025-05-13T15:58:50: seo hubspot crm meeting
+2025-05-13T15:58:50: seo salesforce crm meeting
+2025-05-13T15:58:50: seo monday.com meeting
+2025-05-13T15:58:50: seo asana meeting
+2025-05-13T15:58:50: seo trello meeting
+2025-05-13T15:58:50: seo slack meeting
+2025-05-13T15:58:50: seo zoom call
+2025-05-13T15:58:50: seo google call
+2025-05-13T15:58:50: seo microsoft call
+2025-05-13T15:58:50: seo skype call
+2025-05-13T15:58:50: seo webex call
+2025-05-13T15:58:50: seo gotomeeting call
+2025-05-13T15:58:50: seo join.me call
+2025-05-13T15:58:50: seo bluejeans call
+2025-05-13T15:58:50: seo lifesize call
+2025-05-13T15:58:50: seo zoho call
+2025-05-13T15:58:50: seo amazon call
+2025-05-13T15:58:50: seo hangouts call
+2025-05-13T15:58:50: seo ringcentral call
+2025-05-13T15:58:50: seo clickmeeting call
+2025-05-13T15:58:50: seo easywebinar call
+2025-05-13T15:58:50: seo webinarjam call
+2025-05-13T15:58:50: seo everwebinar call
+2025-05-13T15:58:50: seo demio call
+2025-05-13T15:58:50: seo gotowebinar call
+2025-05-13T15:58:50: seo webinarninja call
+2025-05-13T15:58:50: seo livestorm call
+2025-05-13T15:58:50: seo bigmarker call
+2025-05-13T15:58:50: seo meetingburner call
+2025-05-13T15:58:50: seo crowdcast call
+2025-05-13T15:58:50: seo hubspot call
+2025-05-13T15:58:50: seo salesforce call
+2025-05-13T15:58:50: seo zoho call
+2025-05-13T15:58:50: seo mailchimp call
+2025-05-13T15:58:50: seo constant contact call
+2025-05-13T15:58:50: seo sendinblue call
+2025-05-13T15:58:50: seo getresponse call
+2025-05-13T15:58:50: seo convertkit call
+2025-05-13T15:58:50: seo aweber call
+2025-05-13T15:58:50: seo activecampaign call
+2025-05-13T15:58:50: seo infusionsoft call
+2025-05-13T15:58:50: seo benchmark call
+2025-05-13T15:58:50: seo campaign monitor call
+2025-05-13T15:58:50: seo drip call
+2025-05-13T15:58:50: seo mailerlite call
+2025-05-13T15:58:50: seo moosend call
+2025-05-13T15:58:50: seo sendpulse call
+2025-05-13T15:58:50: seo verticalresponse call
+2025-05-13T15:58:50: seo icontact call
+2025-05-13T15:58:50: seo mad mimi call
+2025-05-13T15:58:50: seo ontraport call
+2025-05-13T15:58:50: seo agile crm call
+2025-05-13T15:58:50: seo bitrix24 call
+2025-05-13T15:58:50: seo zoho crm call
+2025-05-13T15:58:50: seo salesflare call
+2025-05-13T15:58:50: seo pipedrive call
+2025-05-13T15:58:50: seo copper call
+2025-05-13T15:58:50: seo freshsales call
+2025-05-13T15:58:50: seo insightly call
+2025-05-13T15:58:50: seo hubspot crm call
+2025-05-13T15:58:50: seo salesforce crm call
+2025-05-13T15:58:50: seo monday.com call
+2025-05-13T15:58:50: seo asana call
+2025-05-13T15:58:50: seo trello call
+2025-05-13T15:58:50: seo slack call
+2025-05-13T15:58:50: seo zoom chat
+2025-05-13T15:58:50: seo google chat
+2025-05-13T15:58:50: seo microsoft chat
+2025-05-13T15:58:50: seo skype chat
+2025-05-13T15:58:50: seo webex chat
+2025-05-13T15:58:50: seo gotomeeting chat
+2025-05-13T15:58:50: seo join.me chat
+2025-05-13T15:58:50: seo bluejeans chat
+2025-05-13T15:58:50: seo lifesize chat
+2025-05-13T15:58:50: seo zoho chat
+2025-05-13T15:58:50: seo amazon chat
+2025-05-13T15:58:50: seo hangouts chat
+2025-05-13T15:58:50: seo ringcentral chat
+2025-05-13T15:58:50: seo clickmeeting chat
+2025-05-13T15:58:50: seo easywebinar chat
+2025-05-13T15:58:50: seo webinarjam chat
+2025-05-13T15:58:50: seo everwebinar chat
+2025-05-13T15:58:50: seo demio chat
+2025-05-13T15:58:50: seo gotowebinar chat
+2025-05-13T15:58:50: seo webinarninja chat
+2025-05-13T15:58:50: seo livestorm chat
+2025-05-13T15:58:50: seo bigmarker chat
+2025-05-13T15:58:50: seo meetingburner chat
+2025-05-13T15:58:50: seo crowdcast chat
+2025-05-13T15:58:50: seo hubspot chat
+2025-05-13T15:58:50: seo salesforce chat
+2025-05-13T15:58:50: seo zoho chat
+2025-05-13T15:58:50: seo mailchimp chat
+2025-05-13T15:58:50: seo constant contact chat
+2025-05-13T15:58:50: seo sendinblue chat
+2025-05-13T15:58:50: seo getresponse chat
+2025-05-13T15:58:50: seo convertkit chat
+2025-05-13T15:58:50: seo aweber chat
+2025-05-13T15:58:50: seo activecampaign chat
+2025-05-13T15:58:50: seo infusionsoft chat
+2025-05-13T15:58:50: seo benchmark chat
+2025-05-13T15:58:50: seo campaign monitor chat
+2025-05-13T15:58:50: seo drip chat
+2025-05-13T15:58:50: seo mailerlite chat
+2025-05-13T15:58:50: seo moosend chat
+2025-05-13T15:58:50: seo sendpulse chat
+2025-05-13T15:58:50: seo verticalresponse chat
+2025-05-13T15:58:50: seo icontact chat
+2025-05-13T15:58:50: seo mad mimi chat
+2025-05-13T15:58:50: seo ontraport chat
+2025-05-13T15:58:50: seo agile crm chat
+2025-05-13T15:58:50: seo bitrix24 chat
+2025-05-13T15:58:50: seo zoho crm chat
+2025-05-13T15:58:50: seo salesflare chat
+2025-05-13T15:58:50: seo pipedrive chat
+2025-05-13T15:58:50: seo copper chat
+2025-05-13T15:58:50: seo freshsales chat
+2025-05-13T15:58:50: seo insightly chat
+2025-05-13T15:58:50: seo hubspot crm chat
+2025-05-13T15:58:50: seo salesforce crm chat
+2025-05-13T15:58:50: seo monday.com chat
+2025-05-13T15:58:50: seo asana chat
+2025-05-13T15:58:50: seo trello chat
+2025-05-13T15:58:50: seo slack chat
+2025-05-13T15:58:50: seo zoom support
+2025-05-13T15:58:50: seo google support
+2025-05-13T15:58:50: seo microsoft support
+2025-05-13T15:58:50: seo skype support
+2025-05-13T15:58:50: seo webex support
+2025-05-13T15:58:50: seo gotomeeting support
+2025-05-13T15:58:50: seo join.me support
+2025-05-13T15:58:50: seo bluejeans support
+2025-05-13T15:58:50: seo lifesize support
+2025-05-13T15:58:50: seo zoho support
+2025-05-13T15:58:50: seo amazon support
+2025-05-13T15:58:50: seo hangouts support
+2025-05-13T15:58:50: seo ringcentral support
+2025-05-13T15:58:50: seo clickmeeting support
+2025-05-13T15:58:50: seo easywebinar support
+2025-05-13T15:58:50: seo webinarjam support
+2025-05-13T15:58:50: seo everwebinar support
+2025-05-13T15:58:50: seo demio support
+2025-05-13T15:58:50: seo gotowebinar support
+2025-05-13T15:58:50: seo webinarninja support
+2025-05-13T15:58:50: seo livestorm support
+2025-05-13T15:58:50: seo bigmarker support
+2025-05-13T15:58:50: seo meetingburner support
+2025-05-13T15:58:50: seo crowdcast support
+2025-05-13T15:58:50: seo hubspot support
+2025-05-13T15:58:50: seo salesforce support
+2025-05-13T15:58:50: seo zoho support
+2025-05-13T15:58:50: seo mailchimp support
+2025-05-13T15:58:50: seo constant contact support
+2025-05-13T15:58:50: seo sendinblue support
+2025-05-13T15:58:50: seo getresponse support
+2025-05-13T15:58:50: seo convertkit support
+2025-05-13T15:58:50: seo aweber support
+2025-05-13T15:58:50: seo activecampaign support
+2025-05-13T15:58:50: seo infusionsoft support
+2025-05-13T15:58:50: seo benchmark support
+2025-05-13T15:58:50: seo campaign monitor support
+2025-05-13T15:58:50: seo drip support
+2025-05-13T15:58:50: seo mailerlite support
+2025-05-13T15:58:50: seo moosend support
+2025-05-13T15:58:50: seo sendpulse support
+2025-05-13T15:58:50: seo verticalresponse support
+2025-05-13T15:58:50: seo icontact support
+2025-05-13T15:58:50: seo mad mimi support
+2025-05-13T15:58:50: seo ontraport support
+2025-05-13T15:58:50: seo agile crm support
+2025-05-13T15:58:50: seo bitrix24 support
+2025-05-13T15:58:50: seo zoho crm support
+2025-05-13T15:58:50: seo salesflare support
+2025-05-13T15:58:50: seo pipedrive support
+2025-05-13T15:58:50: seo copper support
+2025-05-13T15:58:50: seo freshsales support
+2025-05-13T15:58:50: seo insightly support
+2025-05-13T15:58:50: seo hubspot crm support
+2025-05-13T15:58:50: seo salesforce crm support
+2025-05-13T15:58:50: seo monday.com support
+2025-05-13T15:58:50: seo asana support
+2025-05-13T15:58:50: seo trello support
+2025-05-13T15:58:50: seo slack support
+2025-05-13T15:58:50: seo zoom help
+2025-05-13T15:58:50: seo google help
+2025-05-13T15:58:50: seo microsoft help
+2025-05-13T15:58:50: seo skype help
+2025-05-13T15:58:50: seo webex help
+2025-05-13T15:58:50: seo gotomeeting help
+2025-05-13T15:58:50: seo join.me help
+2025-05-13T15:58:50: seo bluejeans help
+2025-05-13T15:58:50: seo lifesize help
+2025-05-13T15:58:50: seo zoho help
+2025-05-13T15:58:50: seo amazon help
+2025-05-13T15:58:50: seo hangouts help
+2025-05-13T15:58:50: seo ringcentral help
+2025-05-13T15:58:50: seo clickmeeting help
+2025-05-13T15:58:50: seo easywebinar help
+2025-05-13T15:58:50: seo webinarjam help
+2025-05-13T15:58:50: seo everwebinar help
+2025-05-13T15:58:50: seo demio help
+2025-05-13T15:58:50: seo gotowebinar help
+2025-05-13T15:58:50: seo webinarninja help
+2025-05-13T15:58:50: seo livestorm help
+2025-05-13T15:58:50: seo bigmarker help
+2025-05-13T15:58:50: seo meetingburner help
+2025-05-13T15:58:50: seo crowdcast help
+2025-05-13T15:58:50: seo hubspot help
+2025-05-13T15:58:50: seo salesforce help
+2025-05-13T15:58:50: seo zoho help
+2025-05-13T15:58:50: seo mailchimp help
+2025-05-13T15:58:50: seo constant contact help
+2025-05-13T15:58:50: seo sendinblue help
+2025-05-13T15:58:50: seo getresponse help
+2025-05-13T15:58:50: seo convertkit help
+2025-05-13T15:58:50: seo aweber help
+2025-05-13T15:58:50: seo activecampaign help
+2025-05-13T15:58:50: seo infusionsoft help
+2025-05-13T15:58:50: seo benchmark help
+2025-05-13T15:58:50: seo campaign monitor help
+2025-05-13T15:58:50: seo drip help
+2025-05-13T15:58:50: seo mailerlite help
+2025-05-13T15:58:50: seo moosend help
+2025-05-13T15:58:50: seo sendpulse help
+2025-05-13T15:58:50: seo verticalresponse help
+2025-05-13T15:58:50: seo icontact help
+2025-05-13T15:58:50: seo mad mimi help
+2025-05-13T15:58:50: seo ontraport help
+2025-05-13T15:58:50: seo agile crm help
+2025-05-13T15:58:50: seo bitrix24 help
+2025-05-13T15:58:50: seo zoho crm help
+2025-05-13T15:58:50: seo salesflare help
+2025-05-13T15:58:50: seo pipedrive help
+2025-05-13T15:58:50: seo copper help
+2025-05-13T15:58:50: seo freshsales help
+2025-05-13T15:58:50: seo insightly help
+2025-05-13T15:58:50: seo hubspot crm help
+2025-05-13T15:58:50: seo salesforce crm help
+2025-05-13T15:58:50: seo monday.com help
+2025-05-13T15:58:50: seo asana help
+2025-05-13T15:58:50: seo trello help
+2025-05-13T15:58:50: seo slack help
+2025-05-13T15:58:50: seo zoom guide
+2025-05-13T15:58:50: seo
+2025-05-13T15:58:50: Parsed keywords: [
+2025-05-13T15:58:50:   'seo meaning',
+2025-05-13T15:58:50:   'what is seo',
+2025-05-13T15:58:50:   'how to do seo',
+2025-05-13T15:58:50:   'seo benefits',
+2025-05-13T15:58:50:   'seo services',
+2025-05-13T15:58:50:   'best seo tools',
+2025-05-13T15:58:50:   'seo companies',
+2025-05-13T15:58:50:   'seo pricing',
+2025-05-13T15:58:50:   'seo vs sem',
+2025-05-13T15:58:50:   'seo strategies',
+2025-05-13T15:58:50:   'seo for beginners',
+2025-05-13T15:58:50:   'how does seo work',
+2025-05-13T15:58:50:   'local seo services',
+2025-05-13T15:58:50:   'seo techniques',
+2025-05-13T15:58:50:   'seo tips',
+2025-05-13T15:58:50:   'seo for ecommerce',
+2025-05-13T15:58:50:   'seo packages',
+2025-05-13T15:58:50:   'buy seo services',
+2025-05-13T15:58:50:   'seo consulting',
+2025-05-13T15:58:50:   'seo audit',
+2025-05-13T15:58:50:   'seo training',
+2025-05-13T15:58:50:   'seo certification',
+2025-05-13T15:58:50:   'seo checklist',
+2025-05-13T15:58:50:   'seo tutorial',
+2025-05-13T15:58:50:   'seo agency',
+2025-05-13T15:58:50:   'seo software',
+2025-05-13T15:58:50:   'seo analytics',
+2025-05-13T15:58:50:   'seo keywords',
+2025-05-13T15:58:50:   'seo optimization',
+2025-05-13T15:58:50:   'seo content',
+2025-05-13T15:58:50:   'google seo guide',
+2025-05-13T15:58:50:   'seo ranking factors',
+2025-05-13T15:58:50:   'hire seo expert',
+2025-05-13T15:58:50:   'seo case study',
+2025-05-13T15:58:50:   'seo plugin',
+2025-05-13T15:58:50:   'seo backlinks',
+2025-05-13T15:58:50:   'seo blogs',
+2025-05-13T15:58:50:   'seo tools comparison',
+2025-05-13T15:58:50:   'seo practices',
+2025-05-13T15:58:50:   'seo updates',
+2025-05-13T15:58:50:   'seo vs ppc',
+2025-05-13T15:58:50:   'seo reporting tool',
+2025-05-13T15:58:50:   'seo for wordpress',
+2025-05-13T15:58:50:   'seo for youtube',
+2025-05-13T15:58:50:   'seo and social media',
+2025-05-13T15:58:50:   'seo for small business',
+2025-05-13T15:58:50:   'seo for website',
+2025-05-13T15:58:50:   'learn seo online',
+2025-05-13T15:58:50:   'seo job description',
+2025-05-13T15:58:50:   'seo job opportunities',
+2025-05-13T15:58:50:   'seo and content marketing',
+2025-05-13T15:58:50:   'moz seo',
+2025-05-13T15:58:50:   'semrush seo',
+2025-05-13T15:58:50:   'yoast seo',
+2025-05-13T15:58:50:   'ahrefs seo',
+2025-05-13T15:58:50:   'seo trends 2022',
+2025-05-13T15:58:50:   'seo predictions',
+2025-05-13T15:58:50:   'seo future trends',
+2025-05-13T15:58:50:   'seo statistics',
+2025-05-13T15:58:50:   'seo news updates',
+2025-05-13T15:58:50:   'seo best practices 2022',
+2025-05-13T15:58:50:   'seo conferences',
+2025-05-13T15:58:50:   'seo webinars',
+2025-05-13T15:58:50:   'seo ebooks',
+2025-05-13T15:58:50:   'seo courses online',
+2025-05-13T15:58:50:   'seo podcasts',
+2025-05-13T15:58:50:   'seo videos',
+2025-05-13T15:58:50:   'seo infographics',
+2025-05-13T15:58:50:   'seo forums',
+2025-05-13T15:58:50:   'seo blogs to follow',
+2025-05-13T15:58:50:   'seo influencers',
+2025-05-13T15:58:50:   'seo experts',
+2025-05-13T15:58:50:   'seo thought leaders',
+2025-05-13T15:58:50:   'seo awards',
+2025-05-13T15:58:50:   'seo success stories',
+2025-05-13T15:58:50:   'seo case studies',
+2025-05-13T15:58:50:   'seo web design',
+2025-05-13T15:58:50:   'seo friendly website',
+2025-05-13T15:58:50:   'seo domain name',
+2025-05-13T15:58:50:   'seo url structure',
+2025-05-13T15:58:50:   'seo meta tags',
+2025-05-13T15:58:50:   'seo title tag',
+2025-05-13T15:58:50:   'seo header tags',
+2025-05-13T15:58:50:   'seo image optimization',
+2025-05-13T15:58:50:   'seo page speed',
+2025-05-13T15:58:50:   'seo mobile optimization',
+2025-05-13T15:58:50:   'seo structured data',
+2025-05-13T15:58:50:   'seo schema markup',
+2025-05-13T15:58:50:   'seo duplicate content',
+2025-05-13T15:58:50:   'seo canonical tag',
+2025-05-13T15:58:50:   'seo 404 errors',
+2025-05-13T15:58:50:   'seo 301 redirect',
+2025-05-13T15:58:50:   'seo robots.txt',
+2025-05-13T15:58:50:   'seo sitemap',
+2025-05-13T15:58:50:   'seo google analytics',
+2025-05-13T15:58:50:   'seo google search console',
+2025-05-13T15:58:50:   'seo google ranking',
+2025-05-13T15:58:50:   'seo google update',
+2025-05-13T15:58:50:   'seo google ads',
+2025-05-13T15:58:50:   'seo google my business',
+2025-05-13T15:58:50:   ... 516 more items
+2025-05-13T15:58:50: ]
+2025-05-13T15:58:50: Generated keywords: [
+2025-05-13T15:58:50:   'seo meaning',
+2025-05-13T15:58:50:   'what is seo',
+2025-05-13T15:58:50:   'how to do seo',
+2025-05-13T15:58:50:   'seo benefits',
+2025-05-13T15:58:50:   'seo services',
+2025-05-13T15:58:50:   'best seo tools',
+2025-05-13T15:58:50:   'seo companies',
+2025-05-13T15:58:50:   'seo pricing',
+2025-05-13T15:58:50:   'seo vs sem',
+2025-05-13T15:58:50:   'seo strategies',
+2025-05-13T15:58:50:   'seo for beginners',
+2025-05-13T15:58:50:   'how does seo work',
+2025-05-13T15:58:50:   'local seo services',
+2025-05-13T15:58:50:   'seo techniques',
+2025-05-13T15:58:50:   'seo tips',
+2025-05-13T15:58:50:   'seo for ecommerce',
+2025-05-13T15:58:50:   'seo packages',
+2025-05-13T15:58:50:   'buy seo services',
+2025-05-13T15:58:50:   'seo consulting',
+2025-05-13T15:58:50:   'seo audit',
+2025-05-13T15:58:50:   'seo training',
+2025-05-13T15:58:50:   'seo certification',
+2025-05-13T15:58:50:   'seo checklist',
+2025-05-13T15:58:50:   'seo tutorial',
+2025-05-13T15:58:50:   'seo agency',
+2025-05-13T15:58:50:   'seo software',
+2025-05-13T15:58:50:   'seo analytics',
+2025-05-13T15:58:50:   'seo keywords',
+2025-05-13T15:58:50:   'seo optimization',
+2025-05-13T15:58:50:   'seo content',
+2025-05-13T15:58:50:   'google seo guide',
+2025-05-13T15:58:50:   'seo ranking factors',
+2025-05-13T15:58:50:   'hire seo expert',
+2025-05-13T15:58:50:   'seo case study',
+2025-05-13T15:58:50:   'seo plugin',
+2025-05-13T15:58:50:   'seo backlinks',
+2025-05-13T15:58:50:   'seo blogs',
+2025-05-13T15:58:50:   'seo tools comparison',
+2025-05-13T15:58:50:   'seo practices',
+2025-05-13T15:58:50:   'seo updates',
+2025-05-13T15:58:50:   'seo vs ppc',
+2025-05-13T15:58:50:   'seo reporting tool',
+2025-05-13T15:58:50:   'seo for wordpress',
+2025-05-13T15:58:50:   'seo for youtube',
+2025-05-13T15:58:50:   'seo and social media',
+2025-05-13T15:58:50:   'seo for small business',
+2025-05-13T15:58:50:   'seo for website',
+2025-05-13T15:58:50:   'learn seo online',
+2025-05-13T15:58:50:   'seo job description',
+2025-05-13T15:58:50:   'seo job opportunities',
+2025-05-13T15:58:50:   'seo and content marketing',
+2025-05-13T15:58:50:   'moz seo',
+2025-05-13T15:58:50:   'semrush seo',
+2025-05-13T15:58:50:   'yoast seo',
+2025-05-13T15:58:50:   'ahrefs seo',
+2025-05-13T15:58:50:   'seo trends 2022',
+2025-05-13T15:58:50:   'seo predictions',
+2025-05-13T15:58:50:   'seo future trends',
+2025-05-13T15:58:50:   'seo statistics',
+2025-05-13T15:58:50:   'seo news updates',
+2025-05-13T15:58:50:   'seo best practices 2022',
+2025-05-13T15:58:50:   'seo conferences',
+2025-05-13T15:58:50:   'seo webinars',
+2025-05-13T15:58:50:   'seo ebooks',
+2025-05-13T15:58:50:   'seo courses online',
+2025-05-13T15:58:50:   'seo podcasts',
+2025-05-13T15:58:50:   'seo videos',
+2025-05-13T15:58:50:   'seo infographics',
+2025-05-13T15:58:50:   'seo forums',
+2025-05-13T15:58:50:   'seo blogs to follow',
+2025-05-13T15:58:50:   'seo influencers',
+2025-05-13T15:58:50:   'seo experts',
+2025-05-13T15:58:50:   'seo thought leaders',
+2025-05-13T15:58:50:   'seo awards',
+2025-05-13T15:58:50:   'seo success stories',
+2025-05-13T15:58:50:   'seo case studies',
+2025-05-13T15:58:50:   'seo web design',
+2025-05-13T15:58:50:   'seo friendly website',
+2025-05-13T15:58:50:   'seo domain name',
+2025-05-13T15:58:50:   'seo url structure',
+2025-05-13T15:58:50:   'seo meta tags',
+2025-05-13T15:58:50:   'seo title tag',
+2025-05-13T15:58:50:   'seo header tags',
+2025-05-13T15:58:50:   'seo image optimization',
+2025-05-13T15:58:50:   'seo page speed',
+2025-05-13T15:58:50:   'seo mobile optimization',
+2025-05-13T15:58:50:   'seo structured data',
+2025-05-13T15:58:50:   'seo schema markup',
+2025-05-13T15:58:50:   'seo duplicate content',
+2025-05-13T15:58:50:   'seo canonical tag',
+2025-05-13T15:58:50:   'seo 404 errors',
+2025-05-13T15:58:50:   'seo 301 redirect',
+2025-05-13T15:58:50:   'seo robots.txt',
+2025-05-13T15:58:50:   'seo sitemap',
+2025-05-13T15:58:50:   'seo google analytics',
+2025-05-13T15:58:50:   'seo google search console',
+2025-05-13T15:58:50:   'seo google ranking',
+2025-05-13T15:58:50:   'seo google update',
+2025-05-13T15:58:50:   'seo google ads',
+2025-05-13T15:58:50:   'seo google my business',
+2025-05-13T15:58:50:   ... 516 more items
+2025-05-13T15:58:50: ]
+2025-05-13T15:58:50: Related SEO Keywords: [
+2025-05-13T15:58:50:   'seo meaning',        'what is seo',
+2025-05-13T15:58:50:   'how to do seo',      'seo benefits',
+2025-05-13T15:58:50:   'seo services',       'best seo tools',
+2025-05-13T15:58:50:   'seo companies',      'seo pricing',
+2025-05-13T15:58:50:   'seo vs sem',         'seo strategies',
+2025-05-13T15:58:50:   'seo for beginners',  'how does seo work',
+2025-05-13T15:58:50:   'local seo services', 'seo techniques',
+2025-05-13T15:58:50:   'seo tips',           'seo for ecommerce',
+2025-05-13T15:58:50:   'seo packages',       'buy seo services',
+2025-05-13T15:58:50:   'seo consulting',     'seo audit'
+2025-05-13T15:58:50: ]
+2025-05-13T15:58:54: English
+2025-05-13T15:58:54: failed to fetch : https://searchengineland.com/guide/what-is-seo
+2025-05-13T15:58:55: Empty or missing content from: https://academy.hubspot.com/courses/seo-training
+2025-05-13T15:59:08: 📊 Job 71 progress: 50%
+2025-05-13T15:59:08: 📊 Job 71 progress: 60%
+2025-05-13T15:59:11: 📊 Job 71 progress: 70%
+2025-05-13T15:59:11: 📊 Job 71 progress: 80%
+2025-05-13T15:59:16: 📊 Job 71 progress: 90%
+2025-05-13T15:59:17: Data saved successfully
+2025-05-13T15:59:17: ✅ SEO guide processing complete
+2025-05-13T15:59:17: 📊 Job 71 progress: 50%
+2025-05-13T15:59:17: 📊 Job 71 progress: 80%
+2025-05-13T15:59:17: 📊 Job 71 progress: 100%
+2025-05-13T15:59:17: 💾 Saving job results...
+2025-05-13T15:59:17: ✅ Job results saved
+2025-05-13T15:59:17: ✅ Job 71 completed
+2025-05-13T15:59:17: ✅ Job 71 completed
+2025-05-13T16:01:56: 🔄 Job 16 started processing
+2025-05-13T16:01:56: Worker processing SEO brief verification job 16
+2025-05-13T16:01:56: 📊 Job 16 progress: 10%
+2025-05-13T16:01:56: 📊 Job 16 progress: 30%
+2025-05-13T16:02:23: 📊 Job 16 progress: 50%
+2025-05-13T16:02:23: 📊 Job 16 progress: 80%
+2025-05-13T16:02:23: 📊 Job 16 progress: 100%
+2025-05-13T16:02:23: ✅ Job 16 completed
+2025-05-13T16:02:23: ✅ Job 16 completed
