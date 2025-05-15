@@ -483,20 +483,6 @@ export default function Analysis({data, setIsDirty }) {
                     >
                         <CartesianGrid strokeDasharray="3 3" />
 
-                        {/* Add this below 👇 */}
-                        <ReferenceLine
-                            x={graphData[16]?.name}
-                            stroke="#000"
-                            strokeWidth={2}
-                            strokeDasharray="4 3"
-                        />
-                        <ReferenceArea
-                            x1={graphData[16]?.name}
-                            x2={graphData[graphData.length - 1]?.name}
-                            strokeOpacity={0}
-                            fill="#f2f2f2"
-                            fillOpacity={0.6}
-                        />
                         <XAxis
                             dataKey="name"
                             angle={-45}
@@ -515,6 +501,43 @@ export default function Analysis({data, setIsDirty }) {
                                 style: { textAnchor: 'middle', fontSize: 12 },
                             }}
                         />
+
+                        {/* Add this below 👇 */}
+                        <ReferenceLine
+                            x={graphData[16]?.name}
+                            stroke="#000"
+                            strokeWidth={2}
+                            strokeDasharray="4 4"
+                        />
+                        {/* Background shading - right side */}
+                        <ReferenceArea
+                            x1={graphData[16]?.name}
+                            x2={graphData[graphData.length - 1]?.name}
+                            fill="#e0e0e0"
+
+                            strokeOpacity={0}
+                        />
+
+                        {/* STEP 2: Optional left side white — can skip since white is default */}
+                        <ReferenceArea
+                            x1={graphData[0]?.name}
+                            x2={graphData[16]?.name}
+                            fill="#ffffff"
+ 
+                            strokeOpacity={0}
+                        />
+
+                        {/* STEP 3: Alternating vertical stripes (on top of background) */}
+                        {graphData.map((entry, i) => (
+                        <ReferenceArea
+                            key={`stripe-${i}`}
+                            x1={entry.name}
+                            x2={graphData[i + 1]?.name}
+                            fill={i % 2 === 0 ? "transparent" : "rgba(0,0,0,0.03)"}
+                            strokeOpacity={0}
+                        />
+                        ))}
+
 
                         {/* Area layers */}
                         <Area
