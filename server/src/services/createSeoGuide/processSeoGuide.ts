@@ -13,6 +13,7 @@ import { checkUrlPresenceAcrossKeywords } from "./checkUrlPresenceAcrossKeywords
 import { Payload } from "payload";
 import { Job } from "bullmq";
 import { SERP_API_KEY } from "@/config/apiConfig";
+import { countWordsPerPage } from "./countWordsPerUrlContent";
 
 interface OrganicResult {
     title: string;
@@ -137,10 +138,7 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     const resolvedSeoBrief = seoBriefResult.status === 'fulfilled' ? seoBriefResult.value : null;
 
     // Calculate word counts
-    const wordCounts = resolvedPageContents.map(content => {
-        const words = content ? content.split(/\s+/).filter(Boolean) : [];
-        return words.length;
-    });
+    const wordCounts = countWordsPerPage(resolvedPageContents);
 
     const processedTokens = resolvedPageContents
         .filter((text): text is string => !!text)
@@ -159,9 +157,8 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     const { soseoScores, dseoScores } = calculateSoseoDseoForAllDocs(keywords, processedTokens);
 
     // Calculate optimization levels
-    const optimizationLevels = calculateDynamicOptimizationRanges(
+    const optimizationLevels = await calculateDynamicOptimizationRanges(
         links,
-        processedTokens,
         semanticKeywords,
     );
 
