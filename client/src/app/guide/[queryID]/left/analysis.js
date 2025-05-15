@@ -3,7 +3,7 @@
 import { ImCross } from "react-icons/im";
 import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, DotProps, ComposedChart  } from 'recharts';
+import { AreaChart, ReferenceLine, ReferenceArea, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, DotProps, ComposedChart  } from 'recharts';
 import LexicalSeoEditor from './seoEditor';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
@@ -46,7 +46,6 @@ const glToFullCountryMap = {
     ru: 'Russia',
     jp: 'Japan',
     cn: 'China',
-    kr: 'South Korea',
     in: 'India',
     au: 'Australia',
     ca: 'Canada',
@@ -228,7 +227,7 @@ export default function Analysis({data, setIsDirty }) {
                         name: "Series 1",
                         data: keywordOptimizations.map((optimization) => ({
                             name: optimization.keyword,
-                            value: Math.max(optimization.value, 10)
+                            value: optimization.value,
                         })),
                     },
                 ];
@@ -316,7 +315,7 @@ export default function Analysis({data, setIsDirty }) {
         const isRemoving = graphLineData.some((s) => s.name === url);
         const keywordData = data.optimizationLevels.map((level) => ({
             name: level.keyword,
-            value: Math.max(level.urlOptimizations?.[url] || 0, 10),
+            value: level.urlOptimizations?.[url],
         }));
 
         setGraphLineData(prev => {
@@ -471,7 +470,7 @@ export default function Analysis({data, setIsDirty }) {
                 </div>
             </div>
 
-            <div className="mt-8" style={{ width: '100%', height: 350 }}>
+            <div className="mt-8 relative" style={{ width: '100%', height: 350 }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart
                         data={graphData}
@@ -483,6 +482,7 @@ export default function Analysis({data, setIsDirty }) {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
+
                         <XAxis
                             dataKey="name"
                             angle={-45}
@@ -501,6 +501,43 @@ export default function Analysis({data, setIsDirty }) {
                                 style: { textAnchor: 'middle', fontSize: 12 },
                             }}
                         />
+
+                        {/* Add this below 👇 */}
+                        <ReferenceLine
+                            x={graphData[16]?.name}
+                            stroke="#000"
+                            strokeWidth={2}
+                            strokeDasharray="4 4"
+                        />
+                        {/* Background shading - right side */}
+                        <ReferenceArea
+                            x1={graphData[16]?.name}
+                            x2={graphData[graphData.length - 1]?.name}
+                            fill="#e0e0e0"
+
+                            strokeOpacity={0}
+                        />
+
+                        {/* STEP 2: Optional left side white — can skip since white is default */}
+                        <ReferenceArea
+                            x1={graphData[0]?.name}
+                            x2={graphData[16]?.name}
+                            fill="#ffffff"
+ 
+                            strokeOpacity={0}
+                        />
+
+                        {/* STEP 3: Alternating vertical stripes (on top of background) */}
+                        {graphData.map((entry, i) => (
+                        <ReferenceArea
+                            key={`stripe-${i}`}
+                            x1={entry.name}
+                            x2={graphData[i + 1]?.name}
+                            fill={i % 2 === 0 ? "transparent" : "rgba(0,0,0,0.03)"}
+                            strokeOpacity={0}
+                        />
+                        ))}
+
 
                         {/* Area layers */}
                         <Area
@@ -551,6 +588,13 @@ export default function Analysis({data, setIsDirty }) {
 
                     </ComposedChart>
                 </ResponsiveContainer>
+
+                  {/* Top-right overlay text/image */}
+                <div className="absolute top-7 text-black right-24 opacity-30 text-5xl font-bold pointer-events-none select-none z-10">
+                    Lumenia
+                    {/* OR use an image instead: */}
+                    {/* <img src="/yourtextguru-logo.png" className="w-32 opacity-30" alt="Watermark" /> */}
+                </div>
             </div>
 
             <div className="flex items-center gap-4 justify-center mt-4">
