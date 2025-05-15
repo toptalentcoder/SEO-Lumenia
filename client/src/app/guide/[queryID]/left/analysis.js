@@ -46,7 +46,6 @@ const glToFullCountryMap = {
     ru: 'Russia',
     jp: 'Japan',
     cn: 'China',
-    kr: 'South Korea',
     in: 'India',
     au: 'Australia',
     ca: 'Canada',
@@ -228,7 +227,7 @@ export default function Analysis({data, setIsDirty }) {
                         name: "Series 1",
                         data: keywordOptimizations.map((optimization) => ({
                             name: optimization.keyword,
-                            value: Math.max(optimization.value, 10)
+                            value: optimization.value,
                         })),
                     },
                 ];
@@ -316,7 +315,7 @@ export default function Analysis({data, setIsDirty }) {
         const isRemoving = graphLineData.some((s) => s.name === url);
         const keywordData = data.optimizationLevels.map((level) => ({
             name: level.keyword,
-            value: Math.max(level.urlOptimizations?.[url] || 0, 10),
+            value: level.urlOptimizations?.[url],
         }));
 
         setGraphLineData(prev => {
