@@ -11,9 +11,7 @@ export async function calculateDynamicOptimizationRanges(
   const rawSubs: number[] = [];
   const rawGaps: number[] = [];
   const urlOptMap: Record<string, number>[] = [];
-  const keywordLogFreqs: number[][] = [];
 
-  // Step 1: collect subs and gaps
   for (const keyword of semanticKeywords) {
     const urlOptimizations: Record<string, number> = {};
     const logFreqs: number[] = [];
@@ -28,28 +26,35 @@ export async function calculateDynamicOptimizationRanges(
       if (rounded > 0) logFreqs.push(rounded);
     }
 
-    const subRaw = get10thPercentile(logFreqs);
-    const max = Math.max(...logFreqs, subRaw);
-    const gapRaw = Math.max(max - subRaw, 0.5); // fallback gap
+    const sub = get10thPercentile(logFreqs);
+    const max = Math.max(...logFreqs, sub);
+    const gap = Math.max(max - sub, 1); // ensure enough range for graph bands
 
-    rawSubs.push(subRaw);
-    rawGaps.push(gapRaw);
+    rawSubs.push(sub);
+    rawGaps.push(gap);
     urlOptMap.push(urlOptimizations);
-    keywordLogFreqs.push(logFreqs);
   }
 
-  // Step 2: smooth subs and gaps globally
   const smoothedSubs = smoothMovingAvg(rawSubs, 5);
   const smoothedGaps = smoothMovingAvg(rawGaps, 5);
 
-  // Step 3: generate final thresholds per keyword
   const optimizationLevels = semanticKeywords.map((keyword, i) => {
     const sub = smoothedSubs[i];
     const gap = smoothedGaps[i];
+    const raw = urlOptMap[i];
+
+    const normalizedOpt: Record<string, number> = {};
+    for (const url in raw) {
+      const value = raw[url] ?? 0;
+      // Normalize so 0 = subOptimized, 0.2 = standard, 0.4 = strong, 0.6 = over
+      const norm = Math.max(0, (value - sub) / gap);
+
+      normalizedOpt[url] = parseFloat(norm.toFixed(4));
+    }
 
     return {
       keyword,
-      urlOptimizations: urlOptMap[i],
+      urlOptimizations: normalizedOpt,
       optimizationRanges: {
         name: keyword,
         subOptimized: parseFloat(sub.toFixed(4)),
@@ -63,7 +68,7 @@ export async function calculateDynamicOptimizationRanges(
   return optimizationLevels;
 }
 
-// Helper: Get 10th percentile (fallback to min)
+// Percentile fallback
 function get10thPercentile(values: number[]): number {
   const sorted = values.filter(v => v > 0).sort((a, b) => a - b);
   if (sorted.length === 0) return 0.3;
@@ -71,11 +76,10 @@ function get10thPercentile(values: number[]): number {
   return sorted[Math.min(idx, sorted.length - 1)];
 }
 
-// Helper: Moving average smoother
-function smoothMovingAvg(arr: number[], windowSize: number = 5): number[] {
+// Smooth transitions for graph thresholds
+function smoothMovingAvg(arr: number[], windowSize = 5): number[] {
   const smoothed: number[] = [];
   const half = Math.floor(windowSize / 2);
-
   for (let i = 0; i < arr.length; i++) {
     const start = Math.max(0, i - half);
     const end = Math.min(arr.length, i + half + 1);
@@ -83,6 +87,5 @@ function smoothMovingAvg(arr: number[], windowSize: number = 5): number[] {
     const avg = slice.reduce((a, b) => a + b, 0) / slice.length;
     smoothed.push(parseFloat(avg.toFixed(4)));
   }
-
   return smoothed;
 }
