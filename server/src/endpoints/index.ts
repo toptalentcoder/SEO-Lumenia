@@ -114,5 +114,6 @@ export const customEndpoints = [
     getNumberOf25TopKeywordsEndpoint,
     getNumberOfBacklinksEndpoint,
     getSeoGuideStatus,
-    getSeoBriefStatus
+    getSeoBriefStatus,
+    getUserDataForRefreshPageEndpoint
 ]

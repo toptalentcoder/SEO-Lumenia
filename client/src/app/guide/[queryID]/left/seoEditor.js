@@ -39,6 +39,30 @@ import { useUser } from '../../../../context/UserContext';
 import { useParams } from "next/navigation";
 import axios from 'axios';
 import LottieLoader from '../../../../components/ui/LottieLoader';
+import { $generateNodesFromDOM } from '@lexical/html';
+
+
+class CustomHeadingNode extends HeadingNode {
+    static getType() {
+      return 'heading';
+    }
+  
+    static clone(node) {
+      return new CustomHeadingNode(node.__tag, node.__key);
+    }
+  
+    static importJSON(serializedNode) {
+      const node = super.importJSON(serializedNode);
+      return new CustomHeadingNode(node.tag);
+    }
+  
+    createDOM(config) {
+      const dom = super.createDOM(config);
+      const tag = this.getTag();
+      dom.className = config.theme.heading?.[tag] ?? '';
+      return dom;
+    }
+}
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -56,12 +80,12 @@ const editorConfig = {
             superscript: 'align-super text-xs',
         },
         heading: {
-            h1: 'text-3xl font-bold mb-4',
-            h2: 'text-2xl font-semibold mb-3',
-            h3: 'text-xl font-semibold mb-2',
-            h4: 'text-lg font-semibold mb-1',
-            h5: 'text-md font-semibold',
-            h6: 'text-sm font-semibold',
+            h1: 'text-3xl font-bold mb-4 text-black',
+            h2: 'text-2xl font-semibold mb-3 text-black',
+            h3: 'text-xl font-semibold mb-2 text-black',
+            h4: 'text-lg font-semibold mb-1 text-black',
+            h5: 'text-md font-semibold text-black',
+            h6: 'text-sm font-semibold text-black',
         },
         list: {
             ul: 'list-disc list-inside',
@@ -76,7 +100,7 @@ const editorConfig = {
         },
     },
     nodes: [
-        HeadingNode,
+        CustomHeadingNode,
         ListNode,
         ListItemNode,
         LinkNode,
@@ -383,37 +407,69 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
         const query = data.query;
         const keywords = data?.optimizationLevels?.map(item => item.keyword);
         const language = data.language || "English";
-        setIsLoading(true); // Optional loading state
-
+        setIsLoading(true);
+    
         try {
             const response = await fetch("/api/generate_seo_outline", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query, keywords, language, queryID: queryID, email: email }),
+                body: JSON.stringify({ query, keywords, language, queryID, email }),
             });
-
+    
             const result = await response.json();
-
+    
             if (!result.success || !Array.isArray(result.outline)) {
                 console.error("Failed to generate outline", result);
                 return;
             }
-
+    
             const outline = result.outline;
-
+            console.log("outline", outline);
+    
             editor.update(() => {
-                const nodes = outline.map((line) =>
-                    $createParagraphNode().append($createTextNode(line))
-                );
-
+                const nodes = outline.map((line) => {
+                    const trimmed = line.trim();
+                    console.log("trimmed", trimmed);
+                    const match = trimmed.match(/^(\d+(\.\d+)*)(\s*-?\s*)?(.*)$/);
+                    console.log("match", match);
+                    let depth = 1;
+                    let text = trimmed;
+    
+                    if (match) {
+                        const levelStr = match[1];
+                        const title = match[4];
+                        depth = Math.min(levelStr.split('.').length, 6);
+                        console.log("depth", depth);
+                        text = `${levelStr} ${title}`;
+                        console.log("text", text);
+                    }
+    
+                    const headingNode = new CustomHeadingNode(`h${depth}`);
+                    console.log("headingNode", headingNode);
+                    const textNode = $createTextNode(text);
+                    console.log("textNode", textNode);
+                    textNode.setFormat('bold');
+                    console.log("textNode", textNode);
+                    headingNode.append(textNode);
+                    console.log("headingNode", headingNode);
+                    return headingNode;
+                });
+                console.log("nodes", nodes);
                 $insertNodes(nodes);
             });
+    
+            setTimeout(() => {
+                const event = new CustomEvent("seo-editor-reset-dirty");
+                window.dispatchEvent(event);
+                onDirtyChange(true);
+            }, 100);
         } catch (err) {
             console.error("Error generating SEO-TXL Outline:", err);
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     const handleSeoTxlAuto = async () => {
         const root = editor.getRootElement();
@@ -653,20 +709,20 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef  }) {
     // Load the initial content only once
     useEffect(() => {
         if (seoEditorData && editor) {
-            skipNextChange.current = true; // prevent flag on programmatic insert
-
+            skipNextChange.current = true;
+    
             editor.update(() => {
+                const parser = new DOMParser();
+                const dom = parser.parseFromString(seoEditorData, 'text/html');
+                const nodes = $generateNodesFromDOM(editor, dom);
                 const root = $getRoot();
-                root.clear(); // ✅ This clears all child nodes safely
-                const textNode = $createTextNode(seoEditorData);
-                const paragraphNode = $createParagraphNode().append(textNode);
-                $insertNodes([paragraphNode]);
-
-                // Save initial HTML once it's inserted
+                root.clear();
+                root.append(...nodes);
+    
                 setTimeout(() => {
                     initialHTMLRef.current = editor.getRootElement().innerHTML;
                     skipNextChange.current = false;
-                }, 50); // wait for DOM update
+                }, 50);
             });
         }
     }, [seoEditorData, editor]);
