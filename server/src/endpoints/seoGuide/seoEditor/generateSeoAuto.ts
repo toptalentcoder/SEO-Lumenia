@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { autoExpandSeoText } from "@/services/createSeoEditor/generateSeoAuto";
+import { autoExpandSeoText } from "@/services/createSeoGuide/createSeoEditor/generateSeoAuto";
 import { Endpoint, PayloadRequest } from "payload";
 
 export const generateSeoAutoEndpoint: Endpoint = {

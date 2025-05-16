@@ -1,6 +1,6 @@
 import { Worker, Job } from 'bullmq';
 import { connection } from '../lib/redis';
-import { verifyContentWithSeoBrief } from '../services/createSeoEditor/verifySeoBrief';
+import { verifyContentWithSeoBrief } from '../services/createSeoGuide/createSeoEditor/verifySeoBrief';
 import { Payload, getPayload } from 'payload';
 import configPromise from '@payload-config';
 

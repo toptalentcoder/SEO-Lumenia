@@ -1,6 +1,6 @@
 import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoCategory } from "@/services/createSeoEditor/generateSeoCategory";
+import { generateSeoCategory } from "@/services/createSeoGuide/createSeoEditor/generateSeoCategory";
 import { Endpoint, PayloadRequest } from "payload";
 
 export const generateSeoCategoryEndpoint : Endpoint = {

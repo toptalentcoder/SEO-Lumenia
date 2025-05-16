@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { translateText } from "@/services/createSeoEditor/translateSeoText";
+import { translateText } from "@/services/createSeoGuide/createSeoEditor/translateSeoText";
 import { Endpoint, PayloadRequest } from "payload";
 
 export const translateSeoEditorEndpoint: Endpoint = {

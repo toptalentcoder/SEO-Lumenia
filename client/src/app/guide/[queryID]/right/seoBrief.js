@@ -92,7 +92,8 @@ export default function SeoBrief({data}){
                 content: content,
                 seoBrief: seoBrief,
                 queryID: queryID,
-                email: user.email
+                email: user.email,
+                language: data.language
             }, { timeout: 60000 });
 
             if (response.data.jobId) {
@@ -190,9 +191,9 @@ export default function SeoBrief({data}){
     // Function to render the circle or checkmark based on verification status
     const renderVerificationIcon = (isVerified) => {
         return isVerified ? (
-            <div className="h-4 w-4 bg-green-500 rounded-full border border-gray-600 flex-shrink-0" />
+            <div className="h-4 w-4 flex-shrink-0" >✅</div>
         ) : (
-            <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600 flex-shrink-0" />
+            <div className="h-4 w-4 flex-shrink-0" >⚪</div>
         );
     };
 
@@ -234,7 +235,7 @@ export default function SeoBrief({data}){
                     <div key={index} className="flex items-center gap-2">
                         {renderVerificationIcon(verificationResult?.importantQuestions?.includes(question))}
                         <div className="leading-tight">
-                        {question}
+                            {question}
                         </div>
                     </div>
                 ))}

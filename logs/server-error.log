@@ -149,3 +149,31 @@
 2025-05-14T15:46:13:     at async (.next/server/chunks/5951.js:183:30593)
 2025-05-14T15:46:13:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
 2025-05-14T15:46:13: ❌ Job 88 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-15T09:10:01: Received undefined or empty text for processing
+2025-05-15T09:10:01: Received undefined or empty text for processing
+2025-05-15T09:10:01: Received undefined or empty text for processing
+2025-05-15T17:21:44: Received undefined or empty text for processing
+2025-05-15T17:29:23: Error: {
+2025-05-15T17:29:23:   "message": "An error occurred.",
+2025-05-15T17:29:23:   "context": "API Request Error",
+2025-05-15T17:29:23:   "type": "Error",
+2025-05-15T17:29:23:   "causes": [
+2025-05-15T17:29:23:     "An unknown error occurred."
+2025-05-15T17:29:23:   ],
+2025-05-15T17:29:23:   "timestamp": "2025-05-15T17:29:23.430Z",
+2025-05-15T17:29:23:   "stack": "Error: Invalid response from SEMrush API\n    at tb (/root/Lumenia/SEO-YourText/server/.next/server/chunks/6521.js:127:31853)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/6521.js:127:32240\n    at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/6521.js:1:5559\n    at async td (/root/Lumenia/SEO-YourText/server/.next/server/chunks/3137.js:1:65977)\n    at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/3137.js:1:68686\n    at async to.do (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:18:18605)\n    at async to.handle (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:18:23632)\n    at async doRender (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/server/base-server.js:1513:42)\n    at async NextNodeServer.renderToResponseWithComponentsImpl (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/server/base-server.js:1915:28)"
+2025-05-15T17:29:23: }
+2025-05-15T17:29:23: Error: {
+2025-05-15T17:29:23:   "message": "An error occurred.",
+2025-05-15T17:29:23:   "context": "API Request Error",
+2025-05-15T17:29:23:   "type": "Error",
+2025-05-15T17:29:23:   "causes": [
+2025-05-15T17:29:23:     "An unknown error occurred."
+2025-05-15T17:29:23:   ],
+2025-05-15T17:29:23:   "timestamp": "2025-05-15T17:29:23.583Z",
+2025-05-15T17:29:23:   "stack": "Error: Invalid response from SEMrush API\n    at tb (/root/Lumenia/SEO-YourText/server/.next/server/chunks/6521.js:127:31853)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/6521.js:127:32240\n    at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/6521.js:1:5559\n    at async td (/root/Lumenia/SEO-YourText/server/.next/server/chunks/3137.js:1:65977)\n    at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/3137.js:1:68686\n    at async to.do (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:18:18605)\n    at async to.handle (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js:18:23632)\n    at async doRender (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/server/base-server.js:1513:42)\n    at async NextNodeServer.renderToResponseWithComponentsImpl (/root/Lumenia/SEO-YourText/server/node_modules/next/dist/server/base-server.js:1915:28)"
+2025-05-15T17:29:23: }
+2025-05-16T00:00:27: [WARN] Failed to fetch HTML for: https://cybernews.com
+2025-05-16T00:01:07: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-16T00:01:21: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-16T00:01:27: [WARN] Failed to fetch HTML for: https://viaromafashion.com
