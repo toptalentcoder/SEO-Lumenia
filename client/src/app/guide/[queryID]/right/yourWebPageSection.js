@@ -6,7 +6,7 @@ import { FaRobot } from "react-icons/fa6";
 import {useUser} from "../../../../context/UserContext";
 import axios from 'axios';
 
-export default function YourWebPageSection({ data, webpageTitleMetaData, setWebpageTitleMetaData }) {
+export default function YourWebPageSection({ data, webpageTitleMetaData, setWebpageTitleMetaData, titleTag, setTitleTag, metaDescription, setMetaDescription }) {
 
     const [loading, setLoading] = useState(false);
     const { queryID } = useParams();
@@ -15,9 +15,6 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
 
     const query = data.query;
     const keywords = data?.optimizationLevels?.map(item => item.keyword);
-
-    const [titleTag, setTitleTag] = useState("");
-    const [metaDescription, setMetaDescription] = useState("");
 
     useEffect(() => {
         const fetchMeta = async () => {
@@ -29,21 +26,6 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
 
                 if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
                     setWebpageTitleMetaData(response.data.webpageTitleMeta);
-
-                    const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
-                    const title = (firstBlock
-                        .split("\n")
-                        .find((line) => line.startsWith("Title Tag")) || "")
-                        .replace("Title Tag:", "")
-                        .trim();
-                    const meta = (firstBlock
-                        .split("\n")
-                        .find((line) => line.startsWith("Meta Description")) || "")
-                        .replace("Meta Description:", "")
-                        .trim();
-
-                    setTitleTag(title);
-                    setMetaDescription(meta);
                 }
             } catch (error) {
                 setWebpageTitleMetaData([]);
@@ -57,11 +39,20 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
         }
     }, [queryID, user?.email, setWebpageTitleMetaData]);
 
+    // Set default values from first metadata block if none selected
     useEffect(() => {
-        if (titleTag || metaDescription) {
-            console.log("Updated title and meta description:", titleTag, metaDescription);
+        if (webpageTitleMetaData.length > 0 && !titleTag && !metaDescription) {
+            const firstBlock = webpageTitleMetaData?.[0]?.[0] || "";
+            const titleLine = firstBlock.split("\n").find(line => line.startsWith("Title Tag")) || "";
+            const metaLine = firstBlock.split("\n").find(line => line.startsWith("Meta Description")) || "";
+
+            const title = titleLine.replace(/^Title Tag\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+            const meta = metaLine.replace(/^Meta Description\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+
+            setTitleTag(title);
+            setMetaDescription(meta);
         }
-    }, [titleTag, metaDescription]);
+    }, [webpageTitleMetaData, titleTag, metaDescription, setTitleTag, setMetaDescription]);
 
     const handleCreateTitleTagAndMetaDescription = async () => {
         if (!user?.availableFeatures || parseInt(user.availableFeatures.ai_tokens || "0", 10) < 600) {
