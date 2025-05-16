@@ -39,30 +39,6 @@ import { useUser } from '../../../../context/UserContext';
 import { useParams } from "next/navigation";
 import axios from 'axios';
 import LottieLoader from '../../../../components/ui/LottieLoader';
-import { $generateNodesFromDOM } from '@lexical/html';
-
-
-class CustomHeadingNode extends HeadingNode {
-    static getType() {
-      return 'heading';
-    }
-  
-    static clone(node) {
-      return new CustomHeadingNode(node.__tag, node.__key);
-    }
-  
-    static importJSON(serializedNode) {
-      const node = super.importJSON(serializedNode);
-      return new CustomHeadingNode(node.tag);
-    }
-  
-    createDOM(config) {
-      const dom = super.createDOM(config);
-      const tag = this.getTag();
-      dom.className = config.theme.heading?.[tag] ?? '';
-      return dom;
-    }
-}
 
 const editorConfig = {
     namespace: 'SEO-TXL',
@@ -100,7 +76,7 @@ const editorConfig = {
         },
     },
     nodes: [
-        CustomHeadingNode,
+        HeadingNode,
         ListNode,
         ListItemNode,
         LinkNode,
@@ -119,6 +95,7 @@ function LexicalEditorInner({
     setSourceMode,
     htmlContent,
     setHtmlContent,
+    onEditorJSONUpdate
 }) {
     const { user } = useUser();
     const { queryID } = useParams();
@@ -147,7 +124,7 @@ function LexicalEditorInner({
                 email={user.email}
             />
             <SeoTranslateDropdown setIsLoading={setIsLoading} />
-            <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange}  editorRef={editorRef} />
+            <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange}  editorRef={editorRef}   onEditorJSONUpdate={onEditorJSONUpdate}/>
 
             {sourceMode && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -173,7 +150,7 @@ function LexicalEditorInner({
     );
 }
 
-export default function LexicalSeoEditor({data, onDirtyChange, editorRef }) {
+export default function LexicalSeoEditor({data, onDirtyChange, editorRef, onEditorJSONUpdate }) {
 
     const [seoEditorData, setSeoEditorData] = useState("");
     const [ sourceMode, setSourceMode ] = useState(false);
@@ -181,7 +158,16 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef }) {
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useUser();
     const { queryID } = useParams();
-    const [hasUserEdited, setHasUserEdited] = useState(false);
+
+    const initialEditorState = () => {
+        try {
+            if (seoEditorData && JSON.parse(seoEditorData)) {
+                return JSON.parse(seoEditorData);
+            }
+        } catch (_) {}
+        return null;
+    };
+      
 
 
     useEffect(() => {
@@ -206,7 +192,51 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef }) {
     }, [queryID, user.email]);
 
     return (
-        <LexicalComposer initialConfig={editorConfig}>
+
+        <LexicalComposer
+            initialConfig={{
+                ...editorConfig,
+                editorState: (editor) => {
+                    try {
+                        if (seoEditorData) {
+                            // If seoEditorData is a string (not JSON), create a paragraph node
+                            if (typeof seoEditorData === 'string' && !seoEditorData.startsWith('{')) {
+                                const root = editor.getRootElement();
+                                const lines = seoEditorData.split('\n').filter(line => line.trim());
+                                const nodes = lines.map(line => {
+                                    // Check if line matches heading pattern (e.g., "1.1 Introduction")
+                                    const headingMatch = line.match(/^(\d+(\.\d+)*)\s+(.+)$/);
+                                    if (headingMatch) {
+                                        const depth = headingMatch[1].split('.').length;
+                                        const content = headingMatch[3];
+                                        const headingNode = $createHeadingNode(depth === 1 ? 'h1' : depth === 2 ? 'h2' : 'h3');
+                                        headingNode.append($createTextNode(line));
+                                        return headingNode;
+                                    }
+                                    // Regular paragraph
+                                    const paragraphNode = $createParagraphNode();
+                                    paragraphNode.append($createTextNode(line));
+                                    return paragraphNode;
+                                });
+                                editor.update(() => {
+                                    const root = $getRoot();
+                                    root.clear();
+                                    $insertNodes(nodes);
+                                });
+                            } else {
+                                // Handle JSON format
+                                const parsed = JSON.parse(seoEditorData);
+                                const editorState = editor.parseEditorState(parsed);
+                                editor.setEditorState(editorState);
+                            }
+                        }
+                    } catch (err) {
+                        console.error("Error setting editor state:", err);
+                    }
+                },
+            }}
+        >
+
         <LexicalEditorInner
             data={data}
             onDirtyChange={onDirtyChange}
@@ -218,6 +248,7 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef }) {
             setSourceMode={setSourceMode}
             htmlContent={htmlContent}
             setHtmlContent={setHtmlContent}
+            onEditorJSONUpdate={onEditorJSONUpdate}
         />
         </LexicalComposer>
     );
@@ -424,51 +455,40 @@ function SeoTxlToolbar({ data, setIsLoading, queryID, email }) {
             }
     
             const outline = result.outline;
-            console.log("outline", outline);
     
             editor.update(() => {
                 const nodes = outline.map((line) => {
                     const trimmed = line.trim();
-                    console.log("trimmed", trimmed);
                     const match = trimmed.match(/^(\d+(\.\d+)*)(\s*-?\s*)?(.*)$/);
-                    console.log("match", match);
-                    let depth = 1;
-                    let text = trimmed;
     
-                    if (match) {
-                        const levelStr = match[1];
-                        const title = match[4];
-                        depth = Math.min(levelStr.split('.').length, 6);
-                        console.log("depth", depth);
-                        text = `${levelStr} ${title}`;
-                        console.log("text", text);
+                    if (!match) {
+                        return $createParagraphNode().append($createTextNode(trimmed)); 
                     }
     
-                    const headingNode = new CustomHeadingNode(`h${depth}`);
-                    console.log("headingNode", headingNode);
-                    const textNode = $createTextNode(text);
-                    console.log("textNode", textNode);
-                    textNode.setFormat('bold');
-                    console.log("textNode", textNode);
-                    headingNode.append(textNode);
-                    console.log("headingNode", headingNode);
-                    return headingNode;
+                    const levelStr = match[1];       // e.g., "1.1"
+                    const content = match[4] || "";  // e.g., "Introduction"
+                    const depth = levelStr.split(".").length;
+    
+                    const fullText = `${levelStr} ${content}`;
+    
+                    if (depth === 2) {
+                        return $createHeadingNode("h3").append($createTextNode(fullText));
+                      } else if (depth === 3) {
+                        return $createHeadingNode("h4").append($createTextNode(fullText));
+                      } else {
+                        return $createParagraphNode().append($createTextNode(fullText));
+                      }
                 });
-                console.log("nodes", nodes);
+    
                 $insertNodes(nodes);
             });
-    
-            setTimeout(() => {
-                const event = new CustomEvent("seo-editor-reset-dirty");
-                window.dispatchEvent(event);
-                onDirtyChange(true);
-            }, 100);
         } catch (err) {
             console.error("Error generating SEO-TXL Outline:", err);
         } finally {
             setIsLoading(false);
         }
     };
+    
     
 
     const handleSeoTxlAuto = async () => {
@@ -679,22 +699,61 @@ function SeoTranslateDropdown({setIsLoading}) {
 
 
 // Rich Text Editor Area
-function EditorArea({seoEditorData, onDirtyChange, editorRef  }) {
+function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate }) {
 
     const [editor] = useLexicalComposerContext();
     const initialHTMLRef = useRef(""); // Store initial HTML
     const skipNextChange = useRef(false); // Track programmatic changes
 
-    // Only update the editor with the content when it's ready and the data is available
+    const isProbablyJson = (str) => {
+        try {
+            const obj = JSON.parse(str);
+            return typeof obj === "object" && obj !== null;
+        } catch (e) {
+            return false;
+        }
+    };
+
     useEffect(() => {
         if (seoEditorData && editor) {
+            skipNextChange.current = true;
+    
             editor.update(() => {
-                const textNode = $createTextNode(seoEditorData);
-                const paragraphNode = $createParagraphNode().append(textNode);
-                $insertNodes([paragraphNode]);
+                const root = $getRoot();
+                root.clear();
+    
+                if (isProbablyJson(seoEditorData)) {
+                    const newEditorState = editor.parseEditorState(JSON.parse(seoEditorData));
+                    editor.setEditorState(newEditorState);
+                } else {
+                    // Handle plain text format
+                    const lines = seoEditorData.split('\n').filter(line => line.trim());
+                    const nodes = lines.map(line => {
+                        // Check if line matches heading pattern (e.g., "1.1 Introduction")
+                        const headingMatch = line.match(/^(\d+(\.\d+)*)\s+(.+)$/);
+                        if (headingMatch) {
+                            const depth = headingMatch[1].split('.').length;
+                            const content = headingMatch[3];
+                            const headingNode = $createHeadingNode(depth === 1 ? 'h1' : depth === 2 ? 'h2' : 'h3');
+                            headingNode.append($createTextNode(line));
+                            return headingNode;
+                        }
+                        // Regular paragraph
+                        const paragraphNode = $createParagraphNode();
+                        paragraphNode.append($createTextNode(line));
+                        return paragraphNode;
+                    });
+                    $insertNodes(nodes);
+                }
+    
+                setTimeout(() => {
+                    initialHTMLRef.current = editor.getRootElement().innerHTML;
+                    skipNextChange.current = false;
+                }, 50);
             });
         }
     }, [seoEditorData, editor]);
+    
 
     useEffect(() => {
         const handleResetDirty = () => {
@@ -705,27 +764,6 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef  }) {
         window.addEventListener("seo-editor-reset-dirty", handleResetDirty);
         return () => window.removeEventListener("seo-editor-reset-dirty", handleResetDirty);
     }, [editor, onDirtyChange]);
-
-    // Load the initial content only once
-    useEffect(() => {
-        if (seoEditorData && editor) {
-            skipNextChange.current = true;
-    
-            editor.update(() => {
-                const parser = new DOMParser();
-                const dom = parser.parseFromString(seoEditorData, 'text/html');
-                const nodes = $generateNodesFromDOM(editor, dom);
-                const root = $getRoot();
-                root.clear();
-                root.append(...nodes);
-    
-                setTimeout(() => {
-                    initialHTMLRef.current = editor.getRootElement().innerHTML;
-                    skipNextChange.current = false;
-                }, 50);
-            });
-        }
-    }, [seoEditorData, editor]);
 
     return (
         <>
@@ -743,7 +781,7 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef  }) {
             <LinkPlugin />
             <ListPlugin />
             <OnChangePlugin
-                onChange={() => {
+                onChange={(editorState) => {
                     if (skipNextChange.current) return;
 
                     const currentHTML = editor.getRootElement().innerHTML;
@@ -751,6 +789,11 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef  }) {
                     // Only fire dirty if it's different from initial
                     if (currentHTML !== initialHTMLRef.current) {
                         onDirtyChange(true);
+                    }
+
+                        // ✅ Send JSON up
+                    if (onEditorJSONUpdate) {
+                        onEditorJSONUpdate(editorState.toJSON());
                     }
                 }}
             />
