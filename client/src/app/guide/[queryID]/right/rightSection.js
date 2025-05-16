@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState } from "react";
 import { BsSend } from "react-icons/bs";
 import { HiChatBubbleLeftRight } from "react-icons/hi2";
 import { IoDocument } from "react-icons/io5";
@@ -14,6 +14,10 @@ export default function RightSection ({data}) {
 
     const [activeTab, setActiveTab] = useState("seoBrief");
     const [webpageTitleMetaData, setWebpageTitleMetaData] = useState([]);
+
+    // Lifted states
+    const [titleTag, setTitleTag] = useState("");
+    const [metaDescription, setMetaDescription] = useState("");
 
     return(
         <div>
@@ -60,14 +64,34 @@ export default function RightSection ({data}) {
 
             <div className="h-auto mb-6">
                 {activeTab === 'seoBrief' ? (
-                    <div className="bg-white p-4 rounded shadow"><SeoBrief data={data} content/></div>
+                    <div className="bg-white p-4 rounded shadow">
+                        <SeoBrief data={data} content />
+                    </div>
                 ) : activeTab === 'yourWebpage' ? (
-                    <div className="bg-white p-4 rounded shadow"><YourWebPageSection data={data} webpageTitleMetaData={webpageTitleMetaData} setWebpageTitleMetaData={setWebpageTitleMetaData}/></div>
+                    <div className="bg-white p-4 rounded shadow">
+                        <YourWebPageSection
+                            data={data}
+                            webpageTitleMetaData={webpageTitleMetaData}
+                            setWebpageTitleMetaData={setWebpageTitleMetaData}
+                            titleTag={titleTag}
+                            setTitleTag={setTitleTag}
+                            metaDescription={metaDescription}
+                            setMetaDescription={setMetaDescription}
+                        />
+                    </div>
                 ) : activeTab === 'generation' ? (
-                    <div className="bg-white p-4 rounded shadow"><GenerationSection webpageTitleMetaData={webpageTitleMetaData}/></div>
+                    <div className="bg-white p-4 rounded shadow">
+                        <GenerationSection
+                            webpageTitleMetaData={webpageTitleMetaData}
+                            setTitleTag={setTitleTag}
+                            setMetaDescription={setMetaDescription}
+                            setActiveTab={setActiveTab} // Optional: auto-switch tab
+                        />
+                    </div>
                 ) : null}
             </div>
 
+            {/* Comments Section */}
             <div className="bg-white rounded-2xl p-4 shadow">
                 <div className="flex items-center gap-3 border-b border-gray-200 pb-5">
                     <HiChatBubbleLeftRight className="text-blue-400 text-2xl"/>
