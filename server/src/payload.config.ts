@@ -26,6 +26,7 @@ import { internalPageRankEndpoint } from './endpoints/internal_page_rank/interna
 import { startWorkers } from './workers/startWorkers';
 import { setSeoGuidePayloadInstance } from './workers/seoGuideWorker';
 import { setSeoBriefPayloadInstance } from './workers/seoBriefWorker';
+import { intercomSettings } from './globals/intercomSettings';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -54,7 +55,7 @@ export default buildConfig({
     PageDuplicates,
     BacklinkSites,
   ],
-  globals : [paypalProductID],
+  globals : [paypalProductID, intercomSettings],
   cors: {
     origins: [
       process.env.FRONTEND_URL,
@@ -109,11 +110,6 @@ export default buildConfig({
     createPlansAndGetID(payload);
     startDailyRankTracking(payload);
     console.log('Daily rank tracking finished');
-    
-    // Set payload instance for worker
-    // setSeoGuidePayloadInstance(payload);
-    // setSeoBriefPayloadInstance(payload);
-    // console.log('✅ Payload instance set for worker');
     
     // Start workers in the background without awaiting
     startWorkers(payload).catch(err => {

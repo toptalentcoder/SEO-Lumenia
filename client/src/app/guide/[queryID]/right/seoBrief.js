@@ -7,6 +7,12 @@ import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
 import { NEXT_PUBLIC_API_URL } from "../../../../config/apiConfig";
 
+const CustomTooltip = ({ text }) => (
+    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-black text-white text-sm rounded py-3 px-4 z-10 whitespace-nowrap">
+        {text}
+    </div>
+);
+
 export default function SeoBrief({data}){
     const { seoBrief } = data;
     const { user } = useUser();
@@ -191,9 +197,19 @@ export default function SeoBrief({data}){
     // Function to render the circle or checkmark based on verification status
     const renderVerificationIcon = (isVerified) => {
         return isVerified ? (
-            <div className="h-4 w-4 flex-shrink-0" >✅</div>
+            <div className="relative h-4 w-4 flex-shrink-0 cursor-pointer group">
+                ✅
+                <div className="hidden group-hover:block">
+                    <CustomTooltip text="Nice! You've covered this point." />
+                </div>
+            </div>
         ) : (
-            <div className="h-4 w-4 flex-shrink-0" >⚪</div>
+            <div className="relative h-4 w-4 flex-shrink-0 cursor-pointer group">
+                ⚪
+                <div className="hidden group-hover:block">
+                    <CustomTooltip text="This still needs to be worked on." />
+                </div>
+            </div>
         );
     };
 
@@ -298,7 +314,6 @@ export default function SeoBrief({data}){
             {/* Display improvement suggestions at the bottom */}
             {improvementSuggestions && (
                 <div className="mt-5 text-gray-900 text-sm">
-                    <h3 className="font-semibold">Improvement Suggestions:</h3>
                     <p>{improvementSuggestions}</p>
                 </div>
             )}

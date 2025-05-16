@@ -19,41 +19,43 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
     const [titleTag, setTitleTag] = useState("");
     const [metaDescription, setMetaDescription] = useState("");
 
-    const fetchWebpageTitleMetaData = async () => {
-        try {
-            setIsLoading(true);
-            const response = await axios.get(
-                `/api/get_webpage_title_meta?queryID=${queryID}&email=${user.email}`
-            );
-
-            if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
-                setWebpageTitleMetaData(response.data.webpageTitleMeta);
-
-                const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
-                const title = (firstBlock
-                    .split("\n")
-                    .find((line) => line.startsWith("Title Tag")) || "")
-                    .replace("Title Tag:", "")
-                    .trim();
-                const meta = (firstBlock
-                    .split("\n")
-                    .find((line) => line.startsWith("Meta Description")) || "")
-                    .replace("Meta Description:", "")
-                    .trim();
-
-                setTitleTag(title);
-                setMetaDescription(meta);
-            }
-        } catch (error) {
-            setWebpageTitleMetaData([])
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     useEffect(() => {
-        fetchWebpageTitleMetaData();
-    }, [queryID, user.email, fetchWebpageTitleMetaData]);
+        const fetchMeta = async () => {
+            try {
+                setIsLoading(true);
+                const response = await axios.get(
+                    `/api/get_webpage_title_meta?queryID=${queryID}&email=${user.email}`
+                );
+
+                if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
+                    setWebpageTitleMetaData(response.data.webpageTitleMeta);
+
+                    const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
+                    const title = (firstBlock
+                        .split("\n")
+                        .find((line) => line.startsWith("Title Tag")) || "")
+                        .replace("Title Tag:", "")
+                        .trim();
+                    const meta = (firstBlock
+                        .split("\n")
+                        .find((line) => line.startsWith("Meta Description")) || "")
+                        .replace("Meta Description:", "")
+                        .trim();
+
+                    setTitleTag(title);
+                    setMetaDescription(meta);
+                }
+            } catch (error) {
+                setWebpageTitleMetaData([]);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        if (queryID && user?.email) {
+            fetchMeta();
+        }
+    }, [queryID, user?.email, setWebpageTitleMetaData]);
 
     useEffect(() => {
         if (titleTag || metaDescription) {
