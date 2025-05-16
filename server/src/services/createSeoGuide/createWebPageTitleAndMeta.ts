@@ -6,9 +6,11 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 export async function generateWebpageTitleMeta({
     query,
     keywords,
+    language,
 }: {
     query: string;
     keywords: string[];
+    language: string;
 }): Promise<string[]> {
     const prompt = `
         Generate a title tag and a meta description for the query: "${query}" based on the following keywords:
@@ -17,7 +19,7 @@ export async function generateWebpageTitleMeta({
         The title should be catchy, concise (under 60 characters), and directly related to the user's query. It should include the most relevant keywords and make it appealing for search engines. 
         The meta description should summarize the content, highlight the key benefits of the topic, and encourage users to click. It should also include some of the relevant keywords and be under 160 characters.
 
-        Provide three variations of title tags and meta descriptions.
+        Provide three variations of title tags and meta descriptions in ${language}, except for the labels "Title Tag 1", "Title Tag 2", "Title Tag 3", "Meta Description 1", "Meta Description 2", "Meta Description 3" which should remain in English.
 
         Example output format:
         Title Tag 1: "Top VPN Choices: Best for Speed and Security"
