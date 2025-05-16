@@ -121,7 +121,7 @@ function LexicalEditorInner({
                 data={data}
                 setIsLoading={setIsLoading}
                 queryID={queryID}
-                email={user.email}
+                email={user?.email}
             />
             <SeoTranslateDropdown setIsLoading={setIsLoading} />
             <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange}  editorRef={editorRef}   onEditorJSONUpdate={onEditorJSONUpdate}/>
@@ -175,7 +175,7 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef, onEdit
             try {
                 setIsLoading(true);
                 const response = await axios.get(
-                    `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
+                    `/api/get_seo_editor_data?queryID=${queryID}&email=${user?.email}`
                 );
 
                 if (response.data.success) {
@@ -189,7 +189,7 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef, onEdit
         };
 
         fetchSeoEditorData();
-    }, [queryID, user.email]);
+    }, [queryID, user?.email]);
 
     return (
 
