@@ -13,11 +13,13 @@ interface SeoBrief {
     valueProposition: string[];
 }
 
+type VerificationStatus = "fully" | "partially" | "missing";
+
 async function verifyItemPresence(
     content: string,
     type: string,
     item: string
-): Promise<boolean> {
+): Promise<VerificationStatus> {
     try {
         const prompt = `
             You are an SEO verifier. Your job is to check whether the following ${type} is clearly present in the content below.
@@ -29,10 +31,11 @@ async function verifyItemPresence(
             ${content}
 
             Respond with only:
-            true — if the item is explicitly covered in the content.
-            false — if it is not.
+            - "fully" — if the item is **clearly and explicitly** addressed.
+            - "partially" — if the item is **weakly mentioned, implied, or vaguely present**.
+            - "missing" — if the item is **not covered at all**.
 
-            Return only true or false, nothing else.
+            Return only: fully, partially, or missing.
         `;
 
         const response = await openai.chat.completions.create({
@@ -40,12 +43,17 @@ async function verifyItemPresence(
             messages: [{ role: "user", content: prompt }],
             temperature: 0,
         });
-
-        const result = response.choices[0].message.content?.trim().toLowerCase();
-        return result === "true";
+        const result = response.choices[0].message.content;
+        if (!result) return "missing";
+        
+        const trimmedResult = result.trim().toLowerCase();
+        if (["fully", "partially", "missing"].includes(trimmedResult)) {
+            return trimmedResult as VerificationStatus;
+        }
+        return "missing";
     } catch (error) {
         console.error(`❌ Error verifying \"${item}\" (${type}):`, error);
-        return false; // fail-safe fallback
+        return 'missing'; // fail-safe fallback
     }
 }
 
@@ -54,13 +62,13 @@ export async function verifyContentWithSeoBrief(
     seoBrief: SeoBrief,
     language?: string
 ) {
-    const verificationResult: Record<keyof SeoBrief, string[] | boolean> = {
-        objective: false,
-        mainTopics: [],
-        importantQuestions: [],
-        writingStyleAndTone: [],
-        recommendedStyle: [],
-        valueProposition: [],
+    const verificationResult: Record<keyof SeoBrief, any> = {
+        objective: 'missing',
+        mainTopics: '[]',
+        importantQuestions: '[]',
+        writingStyleAndTone: '[]',
+        recommendedStyle: '[]',
+        valueProposition: '[]',
     };
 
     // Limit concurrency to avoid OpenAI rate limit
@@ -83,12 +91,16 @@ export async function verifyContentWithSeoBrief(
         const results = await Promise.all(
             items.map((item) =>
                 limit(async () => {
-                    const isPresent = await verifyItemPresence(content, label, item);
-                    return isPresent ? item : null;
+                    const status = await verifyItemPresence(content, label, item);
+                    return status;
                 })
             )
         );
-        verificationResult[key] = results.filter(Boolean) as string[];
+        verificationResult[key] = items.map((item, idx) => ({
+            item,
+            status: results[idx],
+        }));
+        
     };
 
     await checkItems("mainTopics", "main topic", seoBrief.mainTopics);
