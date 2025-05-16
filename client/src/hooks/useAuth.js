@@ -44,7 +44,7 @@ export function useAuth() {
                 return;
             }
 
-            const response = await fetch("/api/usrInfo", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/usrInfo`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
