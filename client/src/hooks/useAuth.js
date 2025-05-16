@@ -17,22 +17,37 @@ export function useAuth() {
         const token = localStorage.getItem("authToken");
         const storedUser = localStorage.getItem("user");
 
-        if (token && storedUser) {
-            try {
-                const userData = JSON.parse(storedUser);
-                setUser(userData);
-            } catch (error) {
-                console.error("Invalid user data in localStorage", error);
+        if (!token || !storedUser) {
+            const publicPaths = ["/", "/auth/signup", "/auth/signin", "/privacy-policy", "/terms-of-service"];
+            if (pathname && !publicPaths.includes(pathname) && isHydrated) {
+                console.warn("No auth token found, redirecting to signin...");
+                localStorage.removeItem("authToken");
                 localStorage.removeItem("user");
                 setUser(null);
-            }
-        } else {
-            const publicPaths = ["/", "/auth/signup", "/auth/signin", "/privacy-policy", "/terms-of-service"];
-
-            if (pathname && !publicPaths.includes(pathname) && isHydrated) {
-                console.warn("Redirecting to signin...");
                 router.push("/auth/signin");
             }
+            return;
+        }
+
+        try {
+            const userData = JSON.parse(storedUser);
+            // Check if the token is expired
+            const tokenExpiry = userData.tokenExpiry;
+            if (tokenExpiry && new Date(tokenExpiry) < new Date()) {
+                console.warn("Token expired, redirecting to signin...");
+                localStorage.removeItem("authToken");
+                localStorage.removeItem("user");
+                setUser(null);
+                router.push("/auth/signin");
+                return;
+            }
+            setUser(userData);
+        } catch (error) {
+            console.error("Invalid user data in localStorage", error);
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("user");
+            setUser(null);
+            router.push("/auth/signin");
         }
     }, [pathname, isHydrated, router]);
 

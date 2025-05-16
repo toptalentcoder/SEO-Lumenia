@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useAuth } from "../hooks/useAuth"; // ✅ Import custom hook
+import { useRouter } from "next/navigation";
 
 const UserContext = createContext(undefined);
 
@@ -10,12 +11,13 @@ export function UserProvider({ children } ) {
   const [location, setLocation] = useState("United States"); // Default location
   const [isRefreshing, setIsRefreshing] = useState(false);
   const lastRefreshTime = useRef(0);
+  const router = useRouter();
 
   const refreshUserData = async () => {
     // Prevent multiple simultaneous refreshes
     if (isRefreshing) return;
     
-    // Rate limit refreshes to once every 5 seconds instead of 30
+    // Rate limit refreshes to once every 5 seconds
     const now = Date.now();
     if (now - lastRefreshTime.current < 5000) return;
     
@@ -23,35 +25,53 @@ export function UserProvider({ children } ) {
     lastRefreshTime.current = now;
 
     try {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        console.warn("No auth token found during refresh");
+        localStorage.removeItem("user");
+        setUser(null);
+        router.push("/auth/signin");
+        return;
+      }
+
       const res = await fetch("/api/users/me", {
         method: "GET",
         credentials: "include",
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           'Pragma': 'no-cache',
-          'Expires': '0'
+          'Expires': '0',
+          'Authorization': `Bearer ${token}`
         }
       });
 
       if (!res.ok) {
-        console.warn("Session expired, logging out.");
+        console.warn("Session expired or invalid, logging out.");
         localStorage.removeItem("user");
         localStorage.removeItem("authToken");
         setUser(null);
+        router.push("/auth/signin");
         return;
       }
 
       const data = await res.json();
       
-      // Update both context and localStorage atomically
-      setUser(data.user);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // Add token expiry to user data
+      const userData = {
+        ...data.user,
+        tokenExpiry: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours from now
+      };
       
-      // Force a small delay to ensure state updates are processed
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Update both context and localStorage atomically
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
       
     } catch (err) {
       console.error("Error refreshing session", err);
+      localStorage.removeItem("user");
+      localStorage.removeItem("authToken");
+      setUser(null);
+      router.push("/auth/signin");
     } finally {
       setIsRefreshing(false);
     }
