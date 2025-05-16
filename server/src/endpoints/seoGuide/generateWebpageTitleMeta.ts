@@ -36,7 +36,7 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
         }
 
         const body = await req.json();
-        const { query, keywords, queryID, email  } = body;
+        const { query, keywords, queryID, email, language  } = body;
 
         if(!query || typeof query !== "string" || !Array.isArray(keywords)) {
             return new Response(JSON.stringify({ error: "Missing or invalid query/keywords" }), {
@@ -49,7 +49,7 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
         }
 
         try{
-            const webpageTitleMeta = await generateWebpageTitleMeta({ query, keywords });
+            const webpageTitleMeta = await generateWebpageTitleMeta({ query, keywords, language });
             const newWebpageTitleMeta = [webpageTitleMeta];
 
             const users = await payload.find({
