@@ -5,7 +5,7 @@ import { processText } from "./processText";
 import { Project } from "@/types/project";
 import axios from "axios";
 import { calculateDynamicOptimizationRanges } from "./assignOptimizationLevel";
-import { generateSeoBrief } from "../createSeoEditor/createSeoBrief";
+import { generateSeoBrief } from "./createSeoEditor/createSeoBrief";
 import { calculateSoseoDseoForAllDocs } from "./calculateSOSEOandDSEO";
 import { categorizeUrls } from "./categorizeUrls";
 import { generateSEOKeywords } from "./generateSEOKeywords";

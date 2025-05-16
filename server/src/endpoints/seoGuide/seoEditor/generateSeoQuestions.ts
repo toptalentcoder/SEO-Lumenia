@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoQuestions } from "@/services/createSeoEditor/generateSeoQuestionss";
+import { generateSeoQuestions } from "@/services/createSeoGuide/createSeoEditor/generateSeoQuestionss";
 import { ProjectSeoGuide } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 
