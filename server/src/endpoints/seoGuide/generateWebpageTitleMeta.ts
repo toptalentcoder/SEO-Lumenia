@@ -1,6 +1,6 @@
 import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateWebpageTitleMeta } from "@/services/createWebPageTitleAndMeta";
+import { generateWebpageTitleMeta } from "@/services/createSeoGuide/createWebPageTitleAndMeta";
 import { ProjectWebpageTitleAndMeta } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 

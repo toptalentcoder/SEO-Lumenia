@@ -1,5 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { rephraseText } from "@/services/createSeoEditor/generateSeoRephrase";
+import { rephraseText } from "@/services/createSeoGuide/createSeoEditor/generateSeoRephrase";
 import { Endpoint, PayloadRequest } from "payload";
 
 export const generateSeoRephraseEndpoint: Endpoint = {
