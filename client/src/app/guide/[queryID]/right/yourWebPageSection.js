@@ -73,6 +73,7 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
                     keywords: keywords,
                     queryID: queryID,
                     email : user.email,
+                    language : data.language
                 }),
             });
 
@@ -81,7 +82,20 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
             if (result.success) {
                 console.log("Successfully webpage title tag and meta description saved...");
                 // Fetch the latest data after successful generation
-                await fetchWebpageTitleMetaData();
+                setWebpageTitleMetaData(prev => [...prev, result.webpageTitleMeta]);
+
+                // Optional auto-select logic
+                if (!titleTag && !metaDescription) {
+                    const latest = result.webpageTitleMeta?.[0] || "";
+                    const titleLine = latest.split("\n").find(line => line.startsWith("Title Tag")) || "";
+                    const metaLine = latest.split("\n").find(line => line.startsWith("Meta Description")) || "";
+
+                    const title = titleLine.replace(/^Title Tag\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+                    const meta = metaLine.replace(/^Meta Description\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+
+                    setTitleTag(title);
+                    setMetaDescription(meta);
+                }
             }
         } catch (error) {
             console.error("Failed to create SEO guide:", error);
