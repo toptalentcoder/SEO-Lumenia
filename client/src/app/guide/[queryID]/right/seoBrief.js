@@ -102,12 +102,16 @@ export default function SeoBrief({data}){
                 language: data.language
             }, { timeout: 60000 });
 
+            console.log("API response:", response.data);
+
             if (response.data.jobId) {
                 // Start polling for job status
                 const pollInterval = setInterval(async () => {
                     try {
                         const statusResponse = await axios.get(`${NEXT_PUBLIC_API_URL}/api/seoBriefStatus/${response.data.jobId}`);
                         const statusData = statusResponse.data;
+
+                        console.log("Polling status data:", statusData);
 
                         // Update progress if available
                         if (statusData.progress) {
@@ -194,28 +198,39 @@ export default function SeoBrief({data}){
         }
     };
 
-    // Function to render the circle or checkmark based on verification status
-    const renderVerificationIcon = (isVerified) => {
-        return isVerified ? (
+    // Function to render the circle, checkmark, or partial icon based on verification status
+    const renderVerificationIcon = (status) => {
+        const tooltipMap = {
+            fully: "Nice! You've covered this point.",
+            partially: "You've started this, but keep going!",
+            missing: "This still needs to be worked on.",
+        };
+    
+        const iconMap = {
+            fully: "✅",
+            partially: "🔍",
+            missing: "⚪",
+        };
+    
+        return (
             <div className="relative h-4 w-4 flex-shrink-0 cursor-pointer group">
-                ✅
+                {iconMap[status] || "⚪"}
                 <div className="hidden group-hover:block">
-                    <CustomTooltip text="Nice! You've covered this point." />
-                </div>
-            </div>
-        ) : (
-            <div className="relative h-4 w-4 flex-shrink-0 cursor-pointer group">
-                ⚪
-                <div className="hidden group-hover:block">
-                    <CustomTooltip text="This still needs to be worked on." />
+                    <CustomTooltip text={tooltipMap[status] || "Status unknown"} />
                 </div>
             </div>
         );
     };
+    
 
-    const isItemVerified = (section, item) => {
-        return verificationResult?.[section]?.includes(item);
+    const getItemStatus = (section, item) => {
+        const sectionData = verificationResult?.[section];
+        if (!Array.isArray(sectionData)) return "missing";
+    
+        const found = sectionData.find(entry => entry.item === item);
+        return found?.status || "missing";
     };
+    
 
     return(
         <div>
@@ -226,7 +241,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-2 text-gray-900">
                 {objective.map((sentence, index) => (
                     <div key={index} className="flex items-center space-x-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.objective === true)}
+                        {renderVerificationIcon(verificationResult?.objective)}
                         <div className="flex-grow text-sm">
                             {sentence.trim()}.
                         </div>
@@ -238,7 +253,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {mainTopics.map((topic, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(isItemVerified("mainTopics", topic))}
+                        {renderVerificationIcon(getItemStatus("mainTopics", topic))}
                         <div className="leading-tight">
                             {topic}
                         </div>
@@ -249,7 +264,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {importantQuestions.map((question, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.importantQuestions?.includes(question))}
+                        {renderVerificationIcon(getItemStatus("importantQuestions", question))}
                         <div className="leading-tight">
                             {question}
                         </div>
@@ -262,7 +277,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {writingStyleAndTone.map((tone, index) => (
                     <div key={index} className="flex items-center gap-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.writingStyleAndTone?.includes(tone))}
+                        {renderVerificationIcon(getItemStatus("writingStyleAndTone", tone))}
                         <div>{tone}</div>
                     </div>
                 ))}
@@ -272,7 +287,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {recommendedStyle.map((style, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.recommendedStyle?.includes(style))}
+                        {renderVerificationIcon(getItemStatus("recommendedStyle", style))}
                         <div className="leading-tight">{style}</div>
                     </div>
                 ))}
@@ -281,7 +296,7 @@ export default function SeoBrief({data}){
             <div className="ml-10 mt-3 text-gray-900 text-sm">
                 {valueProposition.map((prop, index) => (
                     <div key={index} className="inline-flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.valueProposition?.includes(prop))}
+                        {renderVerificationIcon(getItemStatus("valueProposition", prop))}
                         <div>{prop}</div>
                     </div>
                 ))}
