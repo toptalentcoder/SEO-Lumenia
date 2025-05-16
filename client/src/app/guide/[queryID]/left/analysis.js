@@ -116,6 +116,8 @@ export default function Analysis({data, setIsDirty }) {
     const [isStandardOptimizedVisible, setIsStandardOptimizedVisible] = useState(true);
     const [isStrongOptimizedVisible, setIsStrongOptimizedVisible] = useState(true);
     const [isOverOptimizedVisible, setIsOverOptimizedVisible] = useState(true);
+    const [editorJson, setEditorJson] = useState(null);
+
 
     const lineColors = [
         '#FF5733', '#33C1FF', '#9D33FF', '#33FF57', '#FF33B2',
@@ -201,7 +203,11 @@ export default function Analysis({data, setIsDirty }) {
 
     const handleAnalyse = async () => {
         try {
-            const content = editorRef.current?.innerText?.trim() || "";
+            if (!editorJson) return;
+
+            const content = editorRef.current?.innerText?.trim() || ""; // Still used for `innerText`-based analysis
+            const serializedEditorJson = JSON.stringify(editorJson);
+            
             setLoading(true);
 
             const keywords = data?.optimizationLevels?.map(item => item.keyword) || [];
@@ -296,7 +302,7 @@ export default function Analysis({data, setIsDirty }) {
                     body: JSON.stringify({
                         email: user.email,
                         queryID: queryID,
-                        content: content,
+                        content: serializedEditorJson,
                     }),
                 });
             } else {
@@ -638,7 +644,7 @@ export default function Analysis({data, setIsDirty }) {
             </div>
 
             <div className="p-6 mt-10">
-                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} editorRef={editorRef} />
+                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} editorRef={editorRef} onEditorJSONUpdate={setEditorJson} />
             </div>
 
             <div className="flex justify-between mr-6 items-center">

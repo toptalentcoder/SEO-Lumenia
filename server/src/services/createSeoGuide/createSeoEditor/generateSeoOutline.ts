@@ -44,5 +44,9 @@ export async function generateSeoOutline({
     });
 
     const text = response.choices[0].message.content;
-    return text?.split(/\n\d+\.\s+/).filter(q => q.trim() !== "") ?? [];
+  // Split on each line and keep only numbered ones
+  return text
+    ?.split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => /^\d+(\.\d+)*\s/.test(line)) ?? [];
 }
