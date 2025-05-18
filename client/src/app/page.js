@@ -29,6 +29,55 @@ const manrope = Manrope({ subsets: ['latin'] });
 export default function Home() {
 
   const [activeTab, setActiveTab] = useState(1);
+  
+  const [intercomSettings, setIntercomSettings] = useState(null);
+
+  const token = process.env.PAYLOAD_SECRET;
+
+  useEffect(() => {
+    // Fetch the settings when the component is mounted
+    const fetchIntercomSettings = async () => {
+      try {
+        const response = await fetch('/api/globals/intercom-settings', {
+          headers : {
+            Authorization : `Bearer ${token}`
+          }
+        }); // Adjust to your API route
+        const data = await response.json();
+
+        if (response.ok && data) {
+          // Store the settings in localStorage or localStorage
+          localStorage.setItem('intercomSettings', JSON.stringify(data));
+          setIntercomSettings(data);
+        }
+      } catch (error) {
+        console.error('Error fetching Intercom settings:', error);
+      }
+    };
+
+    // Check if settings are already stored in localStorage
+    const savedSettings = localStorage.getItem('intercomSettings');
+    if (savedSettings) {
+      setIntercomSettings(JSON.parse(savedSettings));
+    } else {
+      fetchIntercomSettings();
+    }
+  }, [token]);
+
+  // Only initialize Intercom when settings are available
+  useEffect(() => {
+    if (intercomSettings && typeof intercomSettings === 'object' && 'intercomSecretKey' in intercomSettings) {
+      const { intercomID, intercomSecretKey } = intercomSettings;
+      const userIdentifier = user?.email || '';
+      const hash = crypto.createHmac('sha256', intercomSecretKey).update(userIdentifier).digest('hex');
+
+      Intercom({
+        app_id: intercomID,
+        email: user?.email,
+        user_hash: hash,
+      });
+    }
+  }, [intercomSettings, user]); // Re-run this effect only when intercomSettings or user changes
 
   return (
     <div className="min-h-screen bg-white">

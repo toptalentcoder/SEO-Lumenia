@@ -8926,3 +8926,858 @@
 2025-05-16T20:39:54:   'P-4SR27672N6238570SNAN4HEI'
 2025-05-16T20:39:54: }
 2025-05-16T20:39:54: All plans processed successfully.
+2025-05-16T23:42:20: 
+2025-05-16T23:42:20: > seo-yourtext@1.0.0 start:server
+2025-05-16T23:42:20: > cd server && npm start
+2025-05-16T23:42:20: 
+2025-05-16T23:42:21: 
+2025-05-16T23:42:21: > server@1.0.0 start
+2025-05-16T23:42:21: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-16T23:42:21: 
+2025-05-16T23:42:21:    ▲ Next.js 15.2.2
+2025-05-16T23:42:21:    - Local:        http://localhost:7777
+2025-05-16T23:42:21:    - Network:      http://167.235.246.98:7777
+2025-05-16T23:42:21: 
+2025-05-16T23:42:21:  ✓ Starting...
+2025-05-16T23:42:21:  ✓ Ready in 451ms
+2025-05-16T23:42:23: ✅ Connected to Redis
+2025-05-16T23:42:23: ✅ Redis client ready
+2025-05-16T23:42:49: Initializing Payload services...
+2025-05-16T23:42:49: Paypal plan check
+2025-05-16T23:42:49: [23:42:49] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-16T23:42:49: Daily rank tracking finished
+2025-05-16T23:42:49: Setting Payload instance for SEO Guide worker
+2025-05-16T23:42:49: ✅ Payload instance initialized for both workers
+2025-05-16T23:42:49: ✅ Workers started in background
+2025-05-16T23:42:50: Product ID already exists.
+2025-05-16T23:42:53: Database Plan IDs: Set(16) {
+2025-05-16T23:42:53:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-16T23:42:53:   'P-53X09845JD375660GNAHAMQI',
+2025-05-16T23:42:53:   'P-20370715PP423392UNAHAMQA',
+2025-05-16T23:42:53:   'P-27141251BP077373TNAHAMQA',
+2025-05-16T23:42:53:   'P-9M865456HH770272DNAHAMQA',
+2025-05-16T23:42:53:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-16T23:42:53:   'P-3KW957430M5325327NAHAMPY',
+2025-05-16T23:42:53:   'P-4L778364NR5921350NAHAMPY',
+2025-05-16T23:42:53:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-16T23:42:53:   'P-8M9757836L293264GNAHAMPY',
+2025-05-16T23:42:53:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-16T23:42:53:   'P-202989871N9958414NAHAMPQ',
+2025-05-16T23:42:53:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-16T23:42:53:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-16T23:42:53:   'P-8K433323S1042472HNAHAMPI',
+2025-05-16T23:42:53:   'P-490774634X2062924NAHAMPI'
+2025-05-16T23:42:53: }
+2025-05-16T23:42:53: PayPal Plan IDs: Set(96) {
+2025-05-16T23:42:53:   'P-98579045524419020M7M4JXY',
+2025-05-16T23:42:53:   'P-0SA1427012940862YM7M4JYA',
+2025-05-16T23:42:53:   'P-6P231034LS515993XM7M4JYI',
+2025-05-16T23:42:53:   'P-68E81820XB085010WM7M4JYI',
+2025-05-16T23:42:53:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-16T23:42:53:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-16T23:42:53:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-16T23:42:53:   'P-68B108558G040300CM7M4JYY',
+2025-05-16T23:42:53:   'P-62T484147J908714FM7M4JZI',
+2025-05-16T23:42:53:   'P-90V18465AA503062KM7M4JZI',
+2025-05-16T23:42:53:   'P-0N203053T15286811M7M4JZQ',
+2025-05-16T23:42:53:   'P-46533433JY578205HM7M4JZQ',
+2025-05-16T23:42:53:   'P-63R81120GE458362BM7M4JZY',
+2025-05-16T23:42:53:   'P-21A90981M6370210WM7M4JZY',
+2025-05-16T23:42:53:   'P-360406889S1454445M7M4J2I',
+2025-05-16T23:42:53:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-16T23:42:53:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-16T23:42:53:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-16T23:42:53:   'P-39555110YD2915823M7S6OQQ',
+2025-05-16T23:42:53:   'P-9E656446VD230374HM7S6OQY',
+2025-05-16T23:42:53:   'P-45128149BJ354104KM7S6OQY',
+2025-05-16T23:42:53:   'P-9F006862C6340571DM7S6OQY',
+2025-05-16T23:42:53:   'P-1V314479R9099642UM7S6OQY',
+2025-05-16T23:42:53:   'P-79A057673F410951MM7S6OQY',
+2025-05-16T23:42:53:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-16T23:42:53:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-16T23:42:53:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-16T23:42:53:   'P-21X07337A4958732NM7S6ORA',
+2025-05-16T23:42:53:   'P-3FU129497M979342BM7S6ORI',
+2025-05-16T23:42:53:   'P-44G00026CM390584DM7S6ORI',
+2025-05-16T23:42:53:   'P-62J05746CC518271NM7S6ORI',
+2025-05-16T23:42:53:   'P-7H916310NB4776034M7S6ORI',
+2025-05-16T23:42:53:   'P-81H7059024688361BNADFSEQ',
+2025-05-16T23:42:53:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-16T23:42:53:   'P-0AG648210K837334ENADFSEY',
+2025-05-16T23:42:53:   'P-5PJ42060848447527NADFSEY',
+2025-05-16T23:42:53:   'P-7SH44926C2332032LNADFSFA',
+2025-05-16T23:42:53:   'P-5GT16529YX6637536NADFSFA',
+2025-05-16T23:42:53:   'P-9E4467280K919340LNADFSFA',
+2025-05-16T23:42:53:   'P-7F5548422M800415UNADFSFA',
+2025-05-16T23:42:53:   'P-5D1599585G2325124NADFSFI',
+2025-05-16T23:42:53:   'P-8HP47151UE2088357NADFSFI',
+2025-05-16T23:42:53:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-16T23:42:53:   'P-77F59714BA432935BNADFSFQ',
+2025-05-16T23:42:53:   'P-621267267T2568348NADFSFQ',
+2025-05-16T23:42:53:   'P-0VC29477844828614NADFSFQ',
+2025-05-16T23:42:53:   'P-9VK838170M171392XNADFSFY',
+2025-05-16T23:42:53:   'P-5K721906AC486313MNADFSFY',
+2025-05-16T23:42:53:   'P-490774634X2062924NAHAMPI',
+2025-05-16T23:42:53:   'P-8K433323S1042472HNAHAMPI',
+2025-05-16T23:42:53:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-16T23:42:53:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-16T23:42:53:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-16T23:42:53:   'P-202989871N9958414NAHAMPQ',
+2025-05-16T23:42:53:   'P-3KW957430M5325327NAHAMPY',
+2025-05-16T23:42:53:   'P-4L778364NR5921350NAHAMPY',
+2025-05-16T23:42:53:   'P-8M9757836L293264GNAHAMPY',
+2025-05-16T23:42:53:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-16T23:42:53:   'P-27141251BP077373TNAHAMQA',
+2025-05-16T23:42:53:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-16T23:42:53:   'P-9M865456HH770272DNAHAMQA',
+2025-05-16T23:42:53:   'P-20370715PP423392UNAHAMQA',
+2025-05-16T23:42:53:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-16T23:42:53:   'P-53X09845JD375660GNAHAMQI',
+2025-05-16T23:42:53:   'P-8R860064U4651043VNAMP5QA',
+2025-05-16T23:42:53:   'P-60C92000WD254525WNAMP5QI',
+2025-05-16T23:42:53:   'P-0UT00261V94696819NAMP5QI',
+2025-05-16T23:42:53:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-16T23:42:53:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-16T23:42:53:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-16T23:42:53:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-16T23:42:53:   'P-6X911161ML521982BNAMP5QY',
+2025-05-16T23:42:53:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-16T23:42:53:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-16T23:42:53:   'P-3U673165V0901092KNAMP5RA',
+2025-05-16T23:42:53:   'P-8YA2119328867231VNAMP5RA',
+2025-05-16T23:42:53:   'P-8HG183948K421773MNAMP5RI',
+2025-05-16T23:42:53:   'P-5JN159596J440845BNAMP5RI',
+2025-05-16T23:42:53:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-16T23:42:53:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-16T23:42:53:   'P-0F030730RE936621BNAN4HCA',
+2025-05-16T23:42:53:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-16T23:42:53:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-16T23:42:53:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-16T23:42:53:   'P-4D519177D3911424YNAN4HCY',
+2025-05-16T23:42:53:   'P-6BD749029B990871CNAN4HCY',
+2025-05-16T23:42:53:   'P-5BM58021W47885254NAN4HDA',
+2025-05-16T23:42:53:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-16T23:42:53:   'P-49185806R8340904VNAN4HDI',
+2025-05-16T23:42:53:   'P-5W217508C5372952SNAN4HDI',
+2025-05-16T23:42:53:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-16T23:42:53:   'P-0C082804XG969344HNAN4HDY',
+2025-05-16T23:42:53:   'P-509283891X696204TNAN4HEA',
+2025-05-16T23:42:53:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-16T23:42:53:   'P-13J67250CR558593DNAN4HEI',
+2025-05-16T23:42:53:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-16T23:42:53: }
+2025-05-16T23:42:53: All plans processed successfully.
+2025-05-16T23:43:18: Received request body: {
+2025-05-16T23:43:18:   query: 'how can I make the resume professional',
+2025-05-16T23:43:18:   queryID: '23795104',
+2025-05-16T23:43:18:   queryEngine: 'google',
+2025-05-16T23:43:18:   projectID: '303816',
+2025-05-16T23:43:18:   email: 'healer@gmail.com',
+2025-05-16T23:43:18:   language: 'fr',
+2025-05-16T23:43:18:   hl: 'fr',
+2025-05-16T23:43:18:   gl: 'fr',
+2025-05-16T23:43:18:   lr: 'lang_fr'
+2025-05-16T23:43:18: }
+2025-05-16T23:43:18: Adding job to the queue...
+2025-05-16T23:43:18: Job added to queue with ID: 146
+2025-05-16T23:43:18: 🔄 Job 146 started processing
+2025-05-16T23:43:18: 🔄 Worker processing SEO guide creation job 146
+2025-05-16T23:43:18: 📝 Job data: {
+2025-05-16T23:43:18:   "query": "how can I make the resume professional",
+2025-05-16T23:43:18:   "projectID": "303816",
+2025-05-16T23:43:18:   "email": "healer@gmail.com",
+2025-05-16T23:43:18:   "queryID": "23795104",
+2025-05-16T23:43:18:   "language": "fr",
+2025-05-16T23:43:18:   "queryEngine": "google",
+2025-05-16T23:43:18:   "hl": "fr",
+2025-05-16T23:43:18:   "gl": "fr",
+2025-05-16T23:43:18:   "lr": "lang_fr"
+2025-05-16T23:43:18: }
+2025-05-16T23:43:18: 📊 Job 146 progress: 10%
+2025-05-16T23:43:18: ✅ Initial progress update complete
+2025-05-16T23:43:18: 🔑 Getting Payload instance...
+2025-05-16T23:43:18: ✅ Payload instance obtained
+2025-05-16T23:43:18: 📊 Job 146 progress: 30%
+2025-05-16T23:43:18: 🚀 Starting SEO guide processing...
+2025-05-16T23:43:18: processSeoGuide started
+2025-05-16T23:43:18: Processing SEO guide with data: {
+2025-05-16T23:43:18:   query: 'how can I make the resume professional',
+2025-05-16T23:43:18:   projectID: '303816',
+2025-05-16T23:43:18:   email: 'healer@gmail.com',
+2025-05-16T23:43:18:   queryID: '23795104',
+2025-05-16T23:43:18:   language: 'fr',
+2025-05-16T23:43:18:   queryEngine: 'google',
+2025-05-16T23:43:18:   hl: 'fr',
+2025-05-16T23:43:18:   gl: 'fr',
+2025-05-16T23:43:18:   lr: 'lang_fr'
+2025-05-16T23:43:18: }
+2025-05-16T23:43:18: 📊 Job 146 progress: 20%
+2025-05-16T23:43:20: 📊 Job 146 progress: 30%
+2025-05-16T23:43:20: Before generating SEO keywords
+2025-05-16T23:43:20: Sending request to OpenAI with prompt: 
+2025-05-16T23:43:20: You are an SEO keyword research assistant.
+2025-05-16T23:43:20: 
+2025-05-16T23:43:20: Using the input query "how can I make the resume professional" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-16T23:43:20: 
+2025-05-16T23:43:20: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-16T23:43:20: 
+2025-05-16T23:43:20: Example:
+2025-05-16T23:43:20: keyword 1  
+2025-05-16T23:43:20: keyword 2  
+2025-05-16T23:43:20: keyword 3  
+2025-05-16T23:43:20: ...
+2025-05-16T23:43:20: 
+2025-05-16T23:43:30: Raw keyword response: comment faire un CV professionnel
+2025-05-16T23:43:30: comment rédiger un CV efficace
+2025-05-16T23:43:30: faire un CV attrayant
+2025-05-16T23:43:30: meilleur format pour un CV professionnel
+2025-05-16T23:43:30: conseils pour un CV professionnel
+2025-05-16T23:43:30: comment améliorer mon CV
+2025-05-16T23:43:30: améliorer la présentation du CV
+2025-05-16T23:43:30: où obtenir de l'aide pour la rédaction de CV
+2025-05-16T23:43:30: meilleurs services de rédaction de CV
+2025-05-16T23:43:30: rédaction de CV en ligne
+2025-05-16T23:43:30: modèles de CV professionnels
+2025-05-16T23:43:30: exemples de CV professionnels
+2025-05-16T23:43:30: comment faire un CV pour un emploi spécifique
+2025-05-16T23:43:30: faire un CV pour le marché français
+2025-05-16T23:43:30: CV professionnel pour postuler à des emplois en France
+2025-05-16T23:43:30: comment adapter mon CV pour le marché français
+2025-05-16T23:43:30: formation sur la rédaction de CV
+2025-05-16T23:43:30: cours sur la rédaction de CV
+2025-05-16T23:43:30: logiciel de création de CV professionnel
+2025-05-16T23:43:30: outil en ligne de création de CV
+2025-05-16T23:43:30: comment rendre mon CV plus attractif
+2025-05-16T23:43:30: comment faire ressortir mon CV
+2025-05-16T23:43:30: servies de relecture de CV
+2025-05-16T23:43:30: correction grammaticale de CV
+2025-05-16T23:43:30: traduction de CV professionnel en français
+2025-05-16T23:43:30: rédaction de CV en français
+2025-05-16T23:43:30: conseils pour un CV en français
+2025-05-16T23:43:30: services de rédaction de CV en français
+2025-05-16T23:43:30: meilleur logiciel de création de CV
+2025-05-16T23:43:30: achat de modèles de CV professionnels en ligne
+2025-05-16T23:43:30: Parsed keywords: [
+2025-05-16T23:43:30:   'comment faire un CV professionnel',
+2025-05-16T23:43:30:   'comment rédiger un CV efficace',
+2025-05-16T23:43:30:   'faire un CV attrayant',
+2025-05-16T23:43:30:   'meilleur format pour un CV professionnel',
+2025-05-16T23:43:30:   'conseils pour un CV professionnel',
+2025-05-16T23:43:30:   'comment améliorer mon CV',
+2025-05-16T23:43:30:   'améliorer la présentation du CV',
+2025-05-16T23:43:30:   "où obtenir de l'aide pour la rédaction de CV",
+2025-05-16T23:43:30:   'meilleurs services de rédaction de CV',
+2025-05-16T23:43:30:   'rédaction de CV en ligne',
+2025-05-16T23:43:30:   'modèles de CV professionnels',
+2025-05-16T23:43:30:   'exemples de CV professionnels',
+2025-05-16T23:43:30:   'comment faire un CV pour un emploi spécifique',
+2025-05-16T23:43:30:   'faire un CV pour le marché français',
+2025-05-16T23:43:30:   'CV professionnel pour postuler à des emplois en France',
+2025-05-16T23:43:30:   'comment adapter mon CV pour le marché français',
+2025-05-16T23:43:30:   'formation sur la rédaction de CV',
+2025-05-16T23:43:30:   'cours sur la rédaction de CV',
+2025-05-16T23:43:30:   'logiciel de création de CV professionnel',
+2025-05-16T23:43:30:   'outil en ligne de création de CV',
+2025-05-16T23:43:30:   'comment rendre mon CV plus attractif',
+2025-05-16T23:43:30:   'comment faire ressortir mon CV',
+2025-05-16T23:43:30:   'servies de relecture de CV',
+2025-05-16T23:43:30:   'correction grammaticale de CV',
+2025-05-16T23:43:30:   'traduction de CV professionnel en français',
+2025-05-16T23:43:30:   'rédaction de CV en français',
+2025-05-16T23:43:30:   'conseils pour un CV en français',
+2025-05-16T23:43:30:   'services de rédaction de CV en français',
+2025-05-16T23:43:30:   'meilleur logiciel de création de CV',
+2025-05-16T23:43:30:   'achat de modèles de CV professionnels en ligne'
+2025-05-16T23:43:30: ]
+2025-05-16T23:43:30: Generated keywords: [
+2025-05-16T23:43:30:   'comment faire un CV professionnel',
+2025-05-16T23:43:30:   'comment rédiger un CV efficace',
+2025-05-16T23:43:30:   'faire un CV attrayant',
+2025-05-16T23:43:30:   'meilleur format pour un CV professionnel',
+2025-05-16T23:43:30:   'conseils pour un CV professionnel',
+2025-05-16T23:43:30:   'comment améliorer mon CV',
+2025-05-16T23:43:30:   'améliorer la présentation du CV',
+2025-05-16T23:43:30:   "où obtenir de l'aide pour la rédaction de CV",
+2025-05-16T23:43:30:   'meilleurs services de rédaction de CV',
+2025-05-16T23:43:30:   'rédaction de CV en ligne',
+2025-05-16T23:43:30:   'modèles de CV professionnels',
+2025-05-16T23:43:30:   'exemples de CV professionnels',
+2025-05-16T23:43:30:   'comment faire un CV pour un emploi spécifique',
+2025-05-16T23:43:30:   'faire un CV pour le marché français',
+2025-05-16T23:43:30:   'CV professionnel pour postuler à des emplois en France',
+2025-05-16T23:43:30:   'comment adapter mon CV pour le marché français',
+2025-05-16T23:43:30:   'formation sur la rédaction de CV',
+2025-05-16T23:43:30:   'cours sur la rédaction de CV',
+2025-05-16T23:43:30:   'logiciel de création de CV professionnel',
+2025-05-16T23:43:30:   'outil en ligne de création de CV',
+2025-05-16T23:43:30:   'comment rendre mon CV plus attractif',
+2025-05-16T23:43:30:   'comment faire ressortir mon CV',
+2025-05-16T23:43:30:   'servies de relecture de CV',
+2025-05-16T23:43:30:   'correction grammaticale de CV',
+2025-05-16T23:43:30:   'traduction de CV professionnel en français',
+2025-05-16T23:43:30:   'rédaction de CV en français',
+2025-05-16T23:43:30:   'conseils pour un CV en français',
+2025-05-16T23:43:30:   'services de rédaction de CV en français',
+2025-05-16T23:43:30:   'meilleur logiciel de création de CV',
+2025-05-16T23:43:30:   'achat de modèles de CV professionnels en ligne'
+2025-05-16T23:43:30: ]
+2025-05-16T23:43:30: Related SEO Keywords: [
+2025-05-16T23:43:30:   'comment faire un CV professionnel',
+2025-05-16T23:43:30:   'comment rédiger un CV efficace',
+2025-05-16T23:43:30:   'faire un CV attrayant',
+2025-05-16T23:43:30:   'meilleur format pour un CV professionnel',
+2025-05-16T23:43:30:   'conseils pour un CV professionnel',
+2025-05-16T23:43:30:   'comment améliorer mon CV',
+2025-05-16T23:43:30:   'améliorer la présentation du CV',
+2025-05-16T23:43:30:   "où obtenir de l'aide pour la rédaction de CV",
+2025-05-16T23:43:30:   'meilleurs services de rédaction de CV',
+2025-05-16T23:43:30:   'rédaction de CV en ligne',
+2025-05-16T23:43:30:   'modèles de CV professionnels',
+2025-05-16T23:43:30:   'exemples de CV professionnels',
+2025-05-16T23:43:30:   'comment faire un CV pour un emploi spécifique',
+2025-05-16T23:43:30:   'faire un CV pour le marché français',
+2025-05-16T23:43:30:   'CV professionnel pour postuler à des emplois en France',
+2025-05-16T23:43:30:   'comment adapter mon CV pour le marché français',
+2025-05-16T23:43:30:   'formation sur la rédaction de CV',
+2025-05-16T23:43:30:   'cours sur la rédaction de CV',
+2025-05-16T23:43:30:   'logiciel de création de CV professionnel',
+2025-05-16T23:43:30:   'outil en ligne de création de CV'
+2025-05-16T23:43:30: ]
+2025-05-16T23:43:32: French
+2025-05-16T23:43:32: failed to fetch : https://fr.fiverr.com/syedahmadullah/do-my-best-and-delivered-resume-in-1-hour
+2025-05-16T23:43:32: failed to fetch : https://fr.fiverr.com/adilbond/create-a-professional-resume-cv-extra-fast
+2025-05-16T23:43:46: 📊 Job 146 progress: 50%
+2025-05-16T23:43:46: 📊 Job 146 progress: 60%
+2025-05-16T23:43:48: 📊 Job 146 progress: 70%
+2025-05-16T23:43:49: failed to fetch : https://fr.fiverr.com/syedahmadullah/do-my-best-and-delivered-resume-in-1-hour
+2025-05-16T23:43:49: failed to fetch : https://fr.fiverr.com/adilbond/create-a-professional-resume-cv-extra-fast
+2025-05-16T23:43:50: 📊 Job 146 progress: 80%
+2025-05-16T23:43:55: 📊 Job 146 progress: 90%
+2025-05-16T23:43:55: Data saved successfully
+2025-05-16T23:43:55: ✅ SEO guide processing complete
+2025-05-16T23:43:55: 📊 Job 146 progress: 50%
+2025-05-16T23:43:55: 📊 Job 146 progress: 80%
+2025-05-16T23:43:55: 📊 Job 146 progress: 100%
+2025-05-16T23:43:55: 💾 Saving job results...
+2025-05-16T23:43:55: ✅ Job results saved
+2025-05-16T23:43:55: ✅ Job 146 completed
+2025-05-16T23:43:55: ✅ Job 146 completed
+2025-05-16T23:44:50: 🔄 Job 33 started processing
+2025-05-16T23:44:50: Worker processing SEO brief verification job 33
+2025-05-16T23:44:50: 📊 Job 33 progress: 10%
+2025-05-16T23:44:50: 📊 Job 33 progress: 30%
+2025-05-16T23:45:09: 📊 Job 33 progress: 50%
+2025-05-16T23:45:09: 📊 Job 33 progress: 80%
+2025-05-16T23:45:09: 📊 Job 33 progress: 100%
+2025-05-16T23:45:09: ✅ Job 33 completed
+2025-05-16T23:45:09: ✅ Job 33 completed
+2025-05-17T00:00:00: 🔁 Running daily SERP rank tracking...
+2025-05-17T00:00:07: ✅ Updated user: apuchasca@gmail.com
+2025-05-17T00:00:07: ✅ Updated user: josshada12@gmail.com
+2025-05-17T00:00:09: ✅ Updated user: deanpetre672@gmail.com
+2025-05-17T00:00:11: ✅ Updated user: healer@gmail.com
+2025-05-17T00:00:11: ✅ All users' rank tracking complete.
+2025-05-17T00:00:11: [INFO] Found internal URLs in cache for: https://pcgamesn.com
+2025-05-17T00:00:12: 🔄 Refreshed PageRank for https://pcgamesn.com
+2025-05-17T00:00:12: [INFO] Found internal URLs in cache for: https://goodaccess.com
+2025-05-17T00:00:15: 🔄 Refreshed PageRank for https://goodaccess.com
+2025-05-17T00:00:15: [DEBUG] HTML fetched: false https://cybernews.com
+2025-05-17T00:00:15: 🔄 Refreshed PageRank for https://cybernews.com
+2025-05-17T00:00:15: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-17T00:00:25: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:00:25: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:00:25: 🔄 Refreshed PageRank for https://paloaltonetworks.com
+2025-05-17T00:00:25: [INFO] Found internal URLs in cache for: https://businessinsider.com
+2025-05-17T00:00:26: 🔄 Refreshed PageRank for https://businessinsider.com
+2025-05-17T00:00:26: [INFO] Found internal URLs in cache for: https://producthunt.com
+2025-05-17T00:00:31: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:00:31: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:00:41: 🔄 Refreshed PageRank for https://producthunt.com
+2025-05-17T00:00:41: [INFO] Found internal URLs in cache for: https://artisansface.com
+2025-05-17T00:00:43: 🔄 Refreshed PageRank for https://artisansface.com
+2025-05-17T00:00:43: [INFO] Found internal URLs in cache for: https://startupjobs.com
+2025-05-17T00:00:51: 🔄 Refreshed PageRank for https://startupjobs.com
+2025-05-17T00:00:51: [DEBUG] HTML fetched: false https://glassdoor.com
+2025-05-17T00:00:51: 🔄 Refreshed PageRank for https://glassdoor.com
+2025-05-17T00:00:51: [INFO] Found internal URLs in cache for: https://themewagon.com
+2025-05-17T00:00:59: 🔄 Refreshed PageRank for https://themewagon.com
+2025-05-17T00:00:59: [INFO] Found internal URLs in cache for: https://rcrwireless.com
+2025-05-17T00:01:04: 🔄 Refreshed PageRank for https://rcrwireless.com
+2025-05-17T00:01:04: [DEBUG] HTML fetched: false https://reddit.com
+2025-05-17T00:01:04: 🔄 Refreshed PageRank for https://reddit.com
+2025-05-17T00:01:04: [INFO] Found internal URLs in cache for: https://fastestvpn.com
+2025-05-17T00:01:09: 🔄 Refreshed PageRank for https://fastestvpn.com
+2025-05-17T00:01:09: [INFO] Found internal URLs in cache for: https://linkedin.com
+2025-05-17T00:01:10: 🔄 Refreshed PageRank for https://linkedin.com
+2025-05-17T00:01:10: [INFO] Found internal URLs in cache for: https://techradar.com
+2025-05-17T00:01:10: 🔄 Refreshed PageRank for https://techradar.com
+2025-05-17T00:01:11: [DEBUG] HTML fetched: false https://viaromafashion.com
+2025-05-17T00:01:11: 🔄 Refreshed PageRank for https://viaromafashion.com
+2025-05-17T00:01:11: [INFO] Found internal URLs in cache for: https://island23tech.com
+2025-05-17T00:01:11: 🔄 Refreshed PageRank for https://island23tech.com
+2025-05-17T00:01:11: [INFO] Found internal URLs in cache for: https://cnet.com
+2025-05-17T00:02:53: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:02:53: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:02:53: 🔄 Refreshed PageRank for https://cnet.com
+2025-05-17T00:02:53: ✅ Monthly global internal PageRank refresh complete.
+2025-05-17T00:02:59: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T00:02:59: 🔄 Retrying Redis connection in 3000ms...
+2025-05-17T17:38:57: 🔄 Job 34 started processing
+2025-05-17T17:38:57: Worker processing SEO brief verification job 34
+2025-05-17T17:38:57: 📊 Job 34 progress: 10%
+2025-05-17T17:38:57: 📊 Job 34 progress: 30%
+2025-05-17T17:39:19: 📊 Job 34 progress: 50%
+2025-05-17T17:39:19: 📊 Job 34 progress: 80%
+2025-05-17T17:39:19: 📊 Job 34 progress: 100%
+2025-05-17T17:39:19: ✅ Job 34 completed
+2025-05-17T17:39:19: ✅ Job 34 completed
+2025-05-17T17:39:23: Received request body: {
+2025-05-17T17:39:23:   query: 'maintenance data center',
+2025-05-17T17:39:23:   queryID: '45806796',
+2025-05-17T17:39:23:   queryEngine: 'google',
+2025-05-17T17:39:23:   projectID: '200665',
+2025-05-17T17:39:23:   email: 'apuchasca@gmail.com',
+2025-05-17T17:39:23:   language: 'fr',
+2025-05-17T17:39:23:   hl: 'fr',
+2025-05-17T17:39:23:   gl: 'fr',
+2025-05-17T17:39:23:   lr: 'lang_fr'
+2025-05-17T17:39:23: }
+2025-05-17T17:39:23: Adding job to the queue...
+2025-05-17T17:39:23: Job added to queue with ID: 147
+2025-05-17T17:39:23: 🔄 Job 147 started processing
+2025-05-17T17:39:23: 🔄 Worker processing SEO guide creation job 147
+2025-05-17T17:39:23: 📝 Job data: {
+2025-05-17T17:39:23:   "query": "maintenance data center",
+2025-05-17T17:39:23:   "projectID": "200665",
+2025-05-17T17:39:23:   "email": "apuchasca@gmail.com",
+2025-05-17T17:39:23:   "queryID": "45806796",
+2025-05-17T17:39:23:   "language": "fr",
+2025-05-17T17:39:23:   "queryEngine": "google",
+2025-05-17T17:39:23:   "hl": "fr",
+2025-05-17T17:39:23:   "gl": "fr",
+2025-05-17T17:39:23:   "lr": "lang_fr"
+2025-05-17T17:39:23: }
+2025-05-17T17:39:23: 📊 Job 147 progress: 10%
+2025-05-17T17:39:23: ✅ Initial progress update complete
+2025-05-17T17:39:23: 🔑 Getting Payload instance...
+2025-05-17T17:39:23: ✅ Payload instance obtained
+2025-05-17T17:39:23: 📊 Job 147 progress: 30%
+2025-05-17T17:39:23: 🚀 Starting SEO guide processing...
+2025-05-17T17:39:23: processSeoGuide started
+2025-05-17T17:39:23: Processing SEO guide with data: {
+2025-05-17T17:39:23:   query: 'maintenance data center',
+2025-05-17T17:39:23:   projectID: '200665',
+2025-05-17T17:39:23:   email: 'apuchasca@gmail.com',
+2025-05-17T17:39:23:   queryID: '45806796',
+2025-05-17T17:39:23:   language: 'fr',
+2025-05-17T17:39:23:   queryEngine: 'google',
+2025-05-17T17:39:23:   hl: 'fr',
+2025-05-17T17:39:23:   gl: 'fr',
+2025-05-17T17:39:23:   lr: 'lang_fr'
+2025-05-17T17:39:23: }
+2025-05-17T17:39:23: 📊 Job 147 progress: 20%
+2025-05-17T17:39:25: 📊 Job 147 progress: 30%
+2025-05-17T17:39:25: Before generating SEO keywords
+2025-05-17T17:39:25: Sending request to OpenAI with prompt: 
+2025-05-17T17:39:25: You are an SEO keyword research assistant.
+2025-05-17T17:39:25: 
+2025-05-17T17:39:25: Using the input query "maintenance data center" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-17T17:39:25: 
+2025-05-17T17:39:25: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-17T17:39:25: 
+2025-05-17T17:39:25: Example:
+2025-05-17T17:39:25: keyword 1  
+2025-05-17T17:39:25: keyword 2  
+2025-05-17T17:39:25: keyword 3  
+2025-05-17T17:39:25: ...
+2025-05-17T17:39:25: 
+2025-05-17T17:39:32: Raw keyword response: maintenance de centre de données
+2025-05-17T17:39:32: comment maintenir un centre de données
+2025-05-17T17:39:32: meilleures pratiques de maintenance de centre de données
+2025-05-17T17:39:32: services de maintenance de centre de données
+2025-05-17T17:39:32: entreprise de maintenance de centre de données
+2025-05-17T17:39:32: prix de la maintenance de centre de données
+2025-05-17T17:39:32: comparaison de services de maintenance de centre de données
+2025-05-17T17:39:32: formation en maintenance de centre de données
+2025-05-17T17:39:32: guide de maintenance de centre de données
+2025-05-17T17:39:32: maintenance préventive de centre de données
+2025-05-17T17:39:32: normes de maintenance de centre de données
+2025-05-17T17:39:32: logiciel de maintenance de centre de données
+2025-05-17T17:39:32: achat de services de maintenance de centre de données
+2025-05-17T17:39:32: plan de maintenance de centre de données
+2025-05-17T17:39:32: société de maintenance de centre de données en France
+2025-05-17T17:39:32: contrat de maintenance de centre de données
+2025-05-17T17:39:32: maintenance de centre de données en ligne
+2025-05-17T17:39:32: coût de la maintenance de centre de données
+2025-05-17T17:39:32: offres de maintenance de centre de données
+2025-05-17T17:39:32: maintenance de centre de données près de chez moi
+2025-05-17T17:39:32: entreprise de maintenance de centre de données de haute qualité
+2025-05-17T17:39:32: recherche de fournisseurs de maintenance de centre de données
+2025-05-17T17:39:32: avis sur les services de maintenance de centre de données
+2025-05-17T17:39:32: maintenance de centre de données et sécurité
+2025-05-17T17:39:32: maintenance de centre de données et efficacité énergétique
+2025-05-17T17:39:32: solutions de maintenance de centre de données
+2025-05-17T17:39:32: embauche de technicien de maintenance de centre de données
+2025-05-17T17:39:32: équipement de maintenance de centre de données
+2025-05-17T17:39:32: maintenance de centre de données professionnelle
+2025-05-17T17:39:32: maintenance de centre de données certifiée.
+2025-05-17T17:39:32: 
+2025-05-17T17:39:32: Parsed keywords: [
+2025-05-17T17:39:32:   'maintenance de centre de données',
+2025-05-17T17:39:32:   'comment maintenir un centre de données',
+2025-05-17T17:39:32:   'meilleures pratiques de maintenance de centre de données',
+2025-05-17T17:39:32:   'services de maintenance de centre de données',
+2025-05-17T17:39:32:   'entreprise de maintenance de centre de données',
+2025-05-17T17:39:32:   'prix de la maintenance de centre de données',
+2025-05-17T17:39:32:   'comparaison de services de maintenance de centre de données',
+2025-05-17T17:39:32:   'formation en maintenance de centre de données',
+2025-05-17T17:39:32:   'guide de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance préventive de centre de données',
+2025-05-17T17:39:32:   'normes de maintenance de centre de données',
+2025-05-17T17:39:32:   'logiciel de maintenance de centre de données',
+2025-05-17T17:39:32:   'achat de services de maintenance de centre de données',
+2025-05-17T17:39:32:   'plan de maintenance de centre de données',
+2025-05-17T17:39:32:   'société de maintenance de centre de données en France',
+2025-05-17T17:39:32:   'contrat de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données en ligne',
+2025-05-17T17:39:32:   'coût de la maintenance de centre de données',
+2025-05-17T17:39:32:   'offres de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données près de chez moi',
+2025-05-17T17:39:32:   'entreprise de maintenance de centre de données de haute qualité',
+2025-05-17T17:39:32:   'recherche de fournisseurs de maintenance de centre de données',
+2025-05-17T17:39:32:   'avis sur les services de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données et sécurité',
+2025-05-17T17:39:32:   'maintenance de centre de données et efficacité énergétique',
+2025-05-17T17:39:32:   'solutions de maintenance de centre de données',
+2025-05-17T17:39:32:   'embauche de technicien de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données professionnelle',
+2025-05-17T17:39:32:   'maintenance de centre de données certifiée.'
+2025-05-17T17:39:32: ]
+2025-05-17T17:39:32: Generated keywords: [
+2025-05-17T17:39:32:   'maintenance de centre de données',
+2025-05-17T17:39:32:   'comment maintenir un centre de données',
+2025-05-17T17:39:32:   'meilleures pratiques de maintenance de centre de données',
+2025-05-17T17:39:32:   'services de maintenance de centre de données',
+2025-05-17T17:39:32:   'entreprise de maintenance de centre de données',
+2025-05-17T17:39:32:   'prix de la maintenance de centre de données',
+2025-05-17T17:39:32:   'comparaison de services de maintenance de centre de données',
+2025-05-17T17:39:32:   'formation en maintenance de centre de données',
+2025-05-17T17:39:32:   'guide de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance préventive de centre de données',
+2025-05-17T17:39:32:   'normes de maintenance de centre de données',
+2025-05-17T17:39:32:   'logiciel de maintenance de centre de données',
+2025-05-17T17:39:32:   'achat de services de maintenance de centre de données',
+2025-05-17T17:39:32:   'plan de maintenance de centre de données',
+2025-05-17T17:39:32:   'société de maintenance de centre de données en France',
+2025-05-17T17:39:32:   'contrat de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données en ligne',
+2025-05-17T17:39:32:   'coût de la maintenance de centre de données',
+2025-05-17T17:39:32:   'offres de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données près de chez moi',
+2025-05-17T17:39:32:   'entreprise de maintenance de centre de données de haute qualité',
+2025-05-17T17:39:32:   'recherche de fournisseurs de maintenance de centre de données',
+2025-05-17T17:39:32:   'avis sur les services de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données et sécurité',
+2025-05-17T17:39:32:   'maintenance de centre de données et efficacité énergétique',
+2025-05-17T17:39:32:   'solutions de maintenance de centre de données',
+2025-05-17T17:39:32:   'embauche de technicien de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données professionnelle',
+2025-05-17T17:39:32:   'maintenance de centre de données certifiée.'
+2025-05-17T17:39:32: ]
+2025-05-17T17:39:32: Related SEO Keywords: [
+2025-05-17T17:39:32:   'maintenance de centre de données',
+2025-05-17T17:39:32:   'comment maintenir un centre de données',
+2025-05-17T17:39:32:   'meilleures pratiques de maintenance de centre de données',
+2025-05-17T17:39:32:   'services de maintenance de centre de données',
+2025-05-17T17:39:32:   'entreprise de maintenance de centre de données',
+2025-05-17T17:39:32:   'prix de la maintenance de centre de données',
+2025-05-17T17:39:32:   'comparaison de services de maintenance de centre de données',
+2025-05-17T17:39:32:   'formation en maintenance de centre de données',
+2025-05-17T17:39:32:   'guide de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance préventive de centre de données',
+2025-05-17T17:39:32:   'normes de maintenance de centre de données',
+2025-05-17T17:39:32:   'logiciel de maintenance de centre de données',
+2025-05-17T17:39:32:   'achat de services de maintenance de centre de données',
+2025-05-17T17:39:32:   'plan de maintenance de centre de données',
+2025-05-17T17:39:32:   'société de maintenance de centre de données en France',
+2025-05-17T17:39:32:   'contrat de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données en ligne',
+2025-05-17T17:39:32:   'coût de la maintenance de centre de données',
+2025-05-17T17:39:32:   'offres de maintenance de centre de données',
+2025-05-17T17:39:32:   'maintenance de centre de données près de chez moi'
+2025-05-17T17:39:32: ]
+2025-05-17T17:39:35: French
+2025-05-17T17:39:50: 📊 Job 147 progress: 50%
+2025-05-17T17:39:50: 📊 Job 147 progress: 60%
+2025-05-17T17:39:53: 📊 Job 147 progress: 70%
+2025-05-17T17:39:54: 📊 Job 147 progress: 80%
+2025-05-17T17:40:00: 📊 Job 147 progress: 90%
+2025-05-17T17:40:00: Data saved successfully
+2025-05-17T17:40:00: ✅ SEO guide processing complete
+2025-05-17T17:40:00: 📊 Job 147 progress: 50%
+2025-05-17T17:40:00: 📊 Job 147 progress: 80%
+2025-05-17T17:40:00: 📊 Job 147 progress: 100%
+2025-05-17T17:40:00: 💾 Saving job results...
+2025-05-17T17:40:00: ✅ Job results saved
+2025-05-17T17:40:00: ✅ Job 147 completed
+2025-05-17T17:40:00: ✅ Job 147 completed
+2025-05-17T17:48:15: Received request body: {
+2025-05-17T17:48:15:   query: 'Fournisseur E-Commerce : Les Critères Techniques à Considérer pour une Intégration Optimale',
+2025-05-17T17:48:15:   queryID: '93897875',
+2025-05-17T17:48:15:   queryEngine: 'google',
+2025-05-17T17:48:15:   projectID: '200665',
+2025-05-17T17:48:15:   email: 'apuchasca@gmail.com',
+2025-05-17T17:48:15:   language: 'fr',
+2025-05-17T17:48:15:   hl: 'fr',
+2025-05-17T17:48:15:   gl: 'fr',
+2025-05-17T17:48:15:   lr: 'lang_fr'
+2025-05-17T17:48:15: }
+2025-05-17T17:48:15: Adding job to the queue...
+2025-05-17T17:48:15: Job added to queue with ID: 148
+2025-05-17T17:48:15: 🔄 Job 148 started processing
+2025-05-17T17:48:15: 🔄 Worker processing SEO guide creation job 148
+2025-05-17T17:48:15: 📝 Job data: {
+2025-05-17T17:48:15:   "query": "Fournisseur E-Commerce : Les Critères Techniques à Considérer pour une Intégration Optimale",
+2025-05-17T17:48:15:   "projectID": "200665",
+2025-05-17T17:48:15:   "email": "apuchasca@gmail.com",
+2025-05-17T17:48:15:   "queryID": "93897875",
+2025-05-17T17:48:15:   "language": "fr",
+2025-05-17T17:48:15:   "queryEngine": "google",
+2025-05-17T17:48:15:   "hl": "fr",
+2025-05-17T17:48:15:   "gl": "fr",
+2025-05-17T17:48:15:   "lr": "lang_fr"
+2025-05-17T17:48:15: }
+2025-05-17T17:48:15: 📊 Job 148 progress: 10%
+2025-05-17T17:48:15: ✅ Initial progress update complete
+2025-05-17T17:48:15: 🔑 Getting Payload instance...
+2025-05-17T17:48:15: ✅ Payload instance obtained
+2025-05-17T17:48:15: 📊 Job 148 progress: 30%
+2025-05-17T17:48:15: 🚀 Starting SEO guide processing...
+2025-05-17T17:48:15: processSeoGuide started
+2025-05-17T17:48:15: Processing SEO guide with data: {
+2025-05-17T17:48:15:   query: 'Fournisseur E-Commerce : Les Critères Techniques à Considérer pour une Intégration Optimale',
+2025-05-17T17:48:15:   projectID: '200665',
+2025-05-17T17:48:15:   email: 'apuchasca@gmail.com',
+2025-05-17T17:48:15:   queryID: '93897875',
+2025-05-17T17:48:15:   language: 'fr',
+2025-05-17T17:48:15:   queryEngine: 'google',
+2025-05-17T17:48:15:   hl: 'fr',
+2025-05-17T17:48:15:   gl: 'fr',
+2025-05-17T17:48:15:   lr: 'lang_fr'
+2025-05-17T17:48:15: }
+2025-05-17T17:48:15: 📊 Job 148 progress: 20%
+2025-05-17T17:48:23: 📊 Job 148 progress: 30%
+2025-05-17T17:48:23: Before generating SEO keywords
+2025-05-17T17:48:23: Sending request to OpenAI with prompt: 
+2025-05-17T17:48:23: You are an SEO keyword research assistant.
+2025-05-17T17:48:23: 
+2025-05-17T17:48:23: Using the input query "Fournisseur E-Commerce : Les Critères Techniques à Considérer pour une Intégration Optimale" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-17T17:48:23: 
+2025-05-17T17:48:23: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-17T17:48:23: 
+2025-05-17T17:48:23: Example:
+2025-05-17T17:48:23: keyword 1  
+2025-05-17T17:48:23: keyword 2  
+2025-05-17T17:48:23: keyword 3  
+2025-05-17T17:48:23: ...
+2025-05-17T17:48:23: 
+2025-05-17T17:48:35: Raw keyword response: Fournisseur E-Commerce
+2025-05-17T17:48:35: Choisir un fournisseur E-Commerce
+2025-05-17T17:48:35: Critères pour choisir un fournisseur E-Commerce
+2025-05-17T17:48:35: Intégration optimale avec un fournisseur E-Commerce
+2025-05-17T17:48:35: Comment optimiser l'intégration avec un fournisseur E-Commerce
+2025-05-17T17:48:35: Les critères techniques pour l'intégration E-Commerce
+2025-05-17T17:48:35: Comparer des fournisseurs E-Commerce
+2025-05-17T17:48:35: Meilleur fournisseur E-Commerce
+2025-05-17T17:48:35: Achat de solutions E-Commerce
+2025-05-17T17:48:35: Fournisseur E-Commerce de confiance
+2025-05-17T17:48:35: Critères essentiels pour un fournisseur E-Commerce
+2025-05-17T17:48:35: Guide pour choisir un fournisseur E-Commerce
+2025-05-17T17:48:35: Les étapes pour intégrer un fournisseur E-Commerce
+2025-05-17T17:48:35: Tarifs des fournisseurs E-Commerce
+2025-05-17T17:48:35: Fournisseur E-Commerce pour petites entreprises
+2025-05-17T17:48:35: Fournisseur E-Commerce pour grandes entreprises
+2025-05-17T17:48:35: Critiques de fournisseurs E-Commerce
+2025-05-17T17:48:35: Fournisseurs E-Commerce en France
+2025-05-17T17:48:35: Bénéfices d'une intégration optimale avec un fournisseur E-Commerce
+2025-05-17T17:48:35: Services proposés par les fournisseurs E-Commerce
+2025-05-17T17:48:35: Comment négocier avec un fournisseur E-Commerce
+2025-05-17T17:48:35: Quel fournisseur E-Commerce pour mon entreprise
+2025-05-17T17:48:35: Stratégies d'intégration avec un fournisseur E-Commerce
+2025-05-17T17:48:35: Erreurs à éviter lors du choix d'un fournisseur E-Commerce
+2025-05-17T17:48:35: Fournisseurs E-Commerce avec le meilleur service client
+2025-05-17T17:48:35: Sécurité des fournisseurs E-Commerce
+2025-05-17T17:48:35: Procédure d'intégration d'un fournisseur E-Commerce
+2025-05-17T17:48:35: Avis sur les fournisseurs E-Commerce
+2025-05-17T17:48:35: Recherche de fournisseurs E-Commerce
+2025-05-17T17:48:35: Où trouver un fournisseur E-Commerce
+2025-05-17T17:48:35: Fournisseur E-Commerce avec livraison rapide
+2025-05-17T17:48:35: Plateformes de fournisseurs E-Commerce
+2025-05-17T17:48:35: Support technique des fournisseurs E-Commerce
+2025-05-17T17:48:35: Parsed keywords: [
+2025-05-17T17:48:35:   'Fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Critères pour choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Intégration optimale avec un fournisseur E-Commerce',
+2025-05-17T17:48:35:   "Comment optimiser l'intégration avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   "Les critères techniques pour l'intégration E-Commerce",
+2025-05-17T17:48:35:   'Comparer des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Meilleur fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Achat de solutions E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce de confiance',
+2025-05-17T17:48:35:   'Critères essentiels pour un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Guide pour choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Les étapes pour intégrer un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Tarifs des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce pour petites entreprises',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce pour grandes entreprises',
+2025-05-17T17:48:35:   'Critiques de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Fournisseurs E-Commerce en France',
+2025-05-17T17:48:35:   "Bénéfices d'une intégration optimale avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Services proposés par les fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Comment négocier avec un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Quel fournisseur E-Commerce pour mon entreprise',
+2025-05-17T17:48:35:   "Stratégies d'intégration avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   "Erreurs à éviter lors du choix d'un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Fournisseurs E-Commerce avec le meilleur service client',
+2025-05-17T17:48:35:   'Sécurité des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   "Procédure d'intégration d'un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Avis sur les fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Recherche de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Où trouver un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce avec livraison rapide',
+2025-05-17T17:48:35:   'Plateformes de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Support technique des fournisseurs E-Commerce'
+2025-05-17T17:48:35: ]
+2025-05-17T17:48:35: Generated keywords: [
+2025-05-17T17:48:35:   'Fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Critères pour choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Intégration optimale avec un fournisseur E-Commerce',
+2025-05-17T17:48:35:   "Comment optimiser l'intégration avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   "Les critères techniques pour l'intégration E-Commerce",
+2025-05-17T17:48:35:   'Comparer des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Meilleur fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Achat de solutions E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce de confiance',
+2025-05-17T17:48:35:   'Critères essentiels pour un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Guide pour choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Les étapes pour intégrer un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Tarifs des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce pour petites entreprises',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce pour grandes entreprises',
+2025-05-17T17:48:35:   'Critiques de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Fournisseurs E-Commerce en France',
+2025-05-17T17:48:35:   "Bénéfices d'une intégration optimale avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Services proposés par les fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Comment négocier avec un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Quel fournisseur E-Commerce pour mon entreprise',
+2025-05-17T17:48:35:   "Stratégies d'intégration avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   "Erreurs à éviter lors du choix d'un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Fournisseurs E-Commerce avec le meilleur service client',
+2025-05-17T17:48:35:   'Sécurité des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   "Procédure d'intégration d'un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Avis sur les fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Recherche de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Où trouver un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce avec livraison rapide',
+2025-05-17T17:48:35:   'Plateformes de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Support technique des fournisseurs E-Commerce'
+2025-05-17T17:48:35: ]
+2025-05-17T17:48:35: Related SEO Keywords: [
+2025-05-17T17:48:35:   'Fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Critères pour choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Intégration optimale avec un fournisseur E-Commerce',
+2025-05-17T17:48:35:   "Comment optimiser l'intégration avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   "Les critères techniques pour l'intégration E-Commerce",
+2025-05-17T17:48:35:   'Comparer des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Meilleur fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Achat de solutions E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce de confiance',
+2025-05-17T17:48:35:   'Critères essentiels pour un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Guide pour choisir un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Les étapes pour intégrer un fournisseur E-Commerce',
+2025-05-17T17:48:35:   'Tarifs des fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce pour petites entreprises',
+2025-05-17T17:48:35:   'Fournisseur E-Commerce pour grandes entreprises',
+2025-05-17T17:48:35:   'Critiques de fournisseurs E-Commerce',
+2025-05-17T17:48:35:   'Fournisseurs E-Commerce en France',
+2025-05-17T17:48:35:   "Bénéfices d'une intégration optimale avec un fournisseur E-Commerce",
+2025-05-17T17:48:35:   'Services proposés par les fournisseurs E-Commerce'
+2025-05-17T17:48:35: ]
+2025-05-17T17:48:37: French
+2025-05-17T17:48:54: 📊 Job 148 progress: 50%
+2025-05-17T17:48:55: 📊 Job 148 progress: 60%
+2025-05-17T17:48:58: 📊 Job 148 progress: 70%
+2025-05-17T17:49:02: 📊 Job 148 progress: 80%
+2025-05-17T17:49:09: 📊 Job 148 progress: 90%
+2025-05-17T17:49:09: Data saved successfully
+2025-05-17T17:49:09: ✅ SEO guide processing complete
+2025-05-17T17:49:09: 📊 Job 148 progress: 50%
+2025-05-17T17:49:09: 📊 Job 148 progress: 80%
+2025-05-17T17:49:09: 📊 Job 148 progress: 100%
+2025-05-17T17:49:09: 💾 Saving job results...
+2025-05-17T17:49:09: ✅ Job results saved
+2025-05-17T17:49:09: ✅ Job 148 completed
+2025-05-17T17:49:09: ✅ Job 148 completed
+2025-05-17T17:51:14: 🔄 Job 35 started processing
+2025-05-17T17:51:14: Worker processing SEO brief verification job 35
+2025-05-17T17:51:14: 📊 Job 35 progress: 10%
+2025-05-17T17:51:14: 📊 Job 35 progress: 30%
+2025-05-17T17:51:37: 📊 Job 35 progress: 50%
+2025-05-17T17:51:37: 📊 Job 35 progress: 80%
+2025-05-17T17:51:37: 📊 Job 35 progress: 100%
+2025-05-17T17:51:37: ✅ Job 35 completed
+2025-05-17T17:51:37: ✅ Job 35 completed
+2025-05-18T00:00:00: 🔁 Running daily SERP rank tracking...
+2025-05-18T00:00:05: ✅ Updated user: apuchasca@gmail.com
+2025-05-18T00:00:05: ✅ Updated user: josshada12@gmail.com
+2025-05-18T00:00:08: ✅ Updated user: deanpetre672@gmail.com
+2025-05-18T00:00:23: ✅ Updated user: healer@gmail.com
+2025-05-18T00:00:23: ✅ All users' rank tracking complete.
+2025-05-18T00:00:23: [INFO] Found internal URLs in cache for: https://pcgamesn.com
+2025-05-18T00:00:24: 🔄 Refreshed PageRank for https://pcgamesn.com
+2025-05-18T00:00:24: [INFO] Found internal URLs in cache for: https://goodaccess.com
+2025-05-18T00:00:26: 🔄 Refreshed PageRank for https://goodaccess.com
+2025-05-18T00:00:26: [DEBUG] HTML fetched: false https://cybernews.com
+2025-05-18T00:00:26: 🔄 Refreshed PageRank for https://cybernews.com
+2025-05-18T00:00:26: [INFO] Found internal URLs in cache for: https://paloaltonetworks.com
+2025-05-18T00:00:38: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:00:38: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:00:38: 🔄 Refreshed PageRank for https://paloaltonetworks.com
+2025-05-18T00:00:38: [INFO] Found internal URLs in cache for: https://businessinsider.com
+2025-05-18T00:00:38: 🔄 Refreshed PageRank for https://businessinsider.com
+2025-05-18T00:00:38: [INFO] Found internal URLs in cache for: https://producthunt.com
+2025-05-18T00:00:44: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:00:44: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:00:55: 🔄 Refreshed PageRank for https://producthunt.com
+2025-05-18T00:00:55: [INFO] Found internal URLs in cache for: https://artisansface.com
+2025-05-18T00:00:56: 🔄 Refreshed PageRank for https://artisansface.com
+2025-05-18T00:00:57: [INFO] Found internal URLs in cache for: https://startupjobs.com
+2025-05-18T00:01:04: 🔄 Refreshed PageRank for https://startupjobs.com
+2025-05-18T00:01:04: [DEBUG] HTML fetched: false https://glassdoor.com
+2025-05-18T00:01:04: 🔄 Refreshed PageRank for https://glassdoor.com
+2025-05-18T00:01:04: [INFO] Found internal URLs in cache for: https://themewagon.com
+2025-05-18T00:01:13: 🔄 Refreshed PageRank for https://themewagon.com
+2025-05-18T00:01:13: [INFO] Found internal URLs in cache for: https://rcrwireless.com
+2025-05-18T00:01:18: 🔄 Refreshed PageRank for https://rcrwireless.com
+2025-05-18T00:01:18: [DEBUG] HTML fetched: false https://reddit.com
+2025-05-18T00:01:18: 🔄 Refreshed PageRank for https://reddit.com
+2025-05-18T00:01:18: [INFO] Found internal URLs in cache for: https://fastestvpn.com
+2025-05-18T00:01:23: 🔄 Refreshed PageRank for https://fastestvpn.com
+2025-05-18T00:01:23: [INFO] Found internal URLs in cache for: https://linkedin.com
+2025-05-18T00:01:25: 🔄 Refreshed PageRank for https://linkedin.com
+2025-05-18T00:01:25: [INFO] Found internal URLs in cache for: https://techradar.com
+2025-05-18T00:01:25: 🔄 Refreshed PageRank for https://techradar.com
+2025-05-18T00:01:25: [DEBUG] HTML fetched: false https://viaromafashion.com
+2025-05-18T00:01:25: 🔄 Refreshed PageRank for https://viaromafashion.com
+2025-05-18T00:01:25: [INFO] Found internal URLs in cache for: https://island23tech.com
+2025-05-18T00:01:26: 🔄 Refreshed PageRank for https://island23tech.com
+2025-05-18T00:01:26: [INFO] Found internal URLs in cache for: https://cnet.com
+2025-05-18T00:03:13: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:03:13: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:03:13: 🔄 Refreshed PageRank for https://cnet.com
+2025-05-18T00:03:13: ✅ Monthly global internal PageRank refresh complete.
+2025-05-18T00:03:19: 🔄 Retrying Redis connection in 3000ms...
+2025-05-18T00:03:19: 🔄 Retrying Redis connection in 3000ms...
