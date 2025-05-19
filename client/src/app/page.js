@@ -23,20 +23,23 @@ import { BsQuestionCircleFill } from "react-icons/bs";
 import { FaTools, FaPen, FaRegEye } from "react-icons/fa";
 import NavbarLandingEn from '../components/common/Navbar-landing-En';
 import FooterLandingEn from '../components/common/Footer-landing-En';
+import { useUser } from '../context/UserContext.js';
+import Intercom from '@intercom/messenger-js-sdk';
 
 const manrope = Manrope({ subsets: ['latin'] });
 
 export default function Home() {
 
   const [activeTab, setActiveTab] = useState(1);
+
+  const {user} = useUser();
   
   const [intercomSettings, setIntercomSettings] = useState(null);
 
   const token = process.env.PAYLOAD_SECRET;
 
   useEffect(() => {
-    // Fetch the settings when the component is mounted
-    const fetchIntercomSettings = async () => {
+    const bootIntercom = async () => {
       try {
         const response = await fetch('/api/globals/intercom-settings', {
           headers : {
@@ -45,39 +48,23 @@ export default function Home() {
         }); // Adjust to your API route
         const data = await response.json();
 
-        if (response.ok && data) {
-          // Store the settings in localStorage or localStorage
-          localStorage.setItem('intercomSettings', JSON.stringify(data));
-          setIntercomSettings(data);
+        console.log("data", data);
+
+        if (data.intercomID) {
+          Intercom({
+            app_id: data.intercomID,
+            //email: user.email,
+            // user_hash: data.userHash,
+          });
         }
       } catch (error) {
-        console.error('Error fetching Intercom settings:', error);
+        console.error('Intercom init failed:', error);
       }
     };
-
-    // Check if settings are already stored in localStorage
-    const savedSettings = localStorage.getItem('intercomSettings');
-    if (savedSettings) {
-      setIntercomSettings(JSON.parse(savedSettings));
-    } else {
-      fetchIntercomSettings();
-    }
-  }, [token]);
-
-  // Only initialize Intercom when settings are available
-  useEffect(() => {
-    if (intercomSettings && typeof intercomSettings === 'object' && 'intercomSecretKey' in intercomSettings) {
-      const { intercomID, intercomSecretKey } = intercomSettings;
-      const userIdentifier = user?.email || '';
-      const hash = crypto.createHmac('sha256', intercomSecretKey).update(userIdentifier).digest('hex');
-
-      Intercom({
-        app_id: intercomID,
-        email: user?.email,
-        user_hash: hash,
-      });
-    }
-  }, [intercomSettings, user]); // Re-run this effect only when intercomSettings or user changes
+  
+    bootIntercom();
+  }, [intercomSettings, user]);
+  
 
   return (
     <div className="min-h-screen bg-white">

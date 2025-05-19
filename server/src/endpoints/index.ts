@@ -55,6 +55,8 @@ import { getNumberOf25TopKeywordsEndpoint } from "./getNumberOf25TopKeywordsEndp
 import { getNumberOfBacklinksEndpoint } from "./getNumberOfBacklinksEndpoint";
 import { getSeoGuideStatus } from './seoGuide/getSeoGuideStatus';
 import { getSeoBriefStatus } from './seoGuide/getSeoBriefStatus';
+import { intercomSign } from "./intercom-sign";
+import { generateBrainstormerIdeasEndpoint } from "./contentStrategy/generateIdes/generateBrainstormerIdeas";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -115,5 +117,7 @@ export const customEndpoints = [
     getNumberOfBacklinksEndpoint,
     getSeoGuideStatus,
     getSeoBriefStatus,
-    getUserDataForRefreshPageEndpoint
+    getUserDataForRefreshPageEndpoint,
+    intercomSign,
+    generateBrainstormerIdeasEndpoint
 ]

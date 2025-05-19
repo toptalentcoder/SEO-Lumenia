@@ -18,7 +18,7 @@ export const intercomSettings: GlobalConfig = {
             required: true,
         },
         {
-            name: 'intercomeSecretKey',
+            name: 'intercomSecretKey',
             type: 'text',
             label: 'Intercom Secret Key',
             required: true,

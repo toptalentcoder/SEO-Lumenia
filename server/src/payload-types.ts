@@ -766,7 +766,7 @@ export interface PaypalProductId {
 export interface IntercomSetting {
   id: string;
   intercomID: string;
-  intercomeSecretKey: string;
+  intercomSecretKey: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -786,7 +786,7 @@ export interface PaypalProductIdSelect<T extends boolean = true> {
  */
 export interface IntercomSettingsSelect<T extends boolean = true> {
   intercomID?: T;
-  intercomeSecretKey?: T;
+  intercomSecretKey?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
