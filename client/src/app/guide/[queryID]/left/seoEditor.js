@@ -48,31 +48,31 @@ const editorConfig = {
     theme: {
         paragraph: 'mb-2 text-gray-800',
         text: {
-            bold: 'font-bold',
-            italic: 'italic',
-            underline: 'underline',
-            strikethrough: 'line-through',
-            subscript: 'align-sub text-xs',
-            superscript: 'align-super text-xs',
+            bold: 'font-bold text-gray-800',
+            italic: 'italic text-gray-800',
+            underline: 'underline text-gray-800',
+            strikethrough: 'line-through text-gray-800',
+            subscript: 'align-sub text-xs text-gray-800',
+            superscript: 'align-super text-xs text-gray-800',
         },
         heading: {
-            h1: 'text-3xl font-bold mb-4 text-black',
-            h2: 'text-2xl font-semibold mb-3 text-black',
-            h3: 'text-xl font-semibold mb-2 text-black',
-            h4: 'text-lg font-semibold mb-1 text-black',
-            h5: 'text-md font-semibold text-black',
-            h6: 'text-sm font-semibold text-black',
+            h1: 'text-3xl font-bold mb-4 text-gray-800',
+            h2: 'text-2xl font-semibold mb-3 text-gray-800',
+            h3: 'text-xl font-semibold mb-2 text-gray-800',
+            h4: 'text-lg font-semibold mb-1 text-gray-800',
+            h5: 'text-md font-semibold text-gray-800',
+            h6: 'text-sm font-semibold text-gray-800',
         },
         list: {
-            ul: 'list-disc list-inside',
-            ol: 'list-decimal list-inside',
+            ul: 'list-disc list-inside text-gray-800',
+            ol: 'list-decimal list-inside text-gray-800',
             listitem: 'mb-1',
         },
         align: {
-            left: 'text-left',
-            center: 'text-center',
-            right: 'text-right',
-            justify: 'text-justify',
+            left: 'text-left text-gray-800',
+            center: 'text-center text-gray-800',
+            right: 'text-right text-gray-800',
+            justify: 'text-justify text-gray-800',
         },
     },
     nodes: [
@@ -127,7 +127,7 @@ function LexicalEditorInner({
             <EditorArea seoEditorData={seoEditorData} onDirtyChange={onDirtyChange}  editorRef={editorRef}   onEditorJSONUpdate={onEditorJSONUpdate}/>
 
             {sourceMode && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-black/50 text-gray-800">
                     <div className="bg-white p-4 rounded shadow-lg w-full max-w-3xl">
                         <h2 className="text-lg font-semibold mb-2">🧾 Source Code</h2>
                         <textarea
@@ -255,13 +255,64 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef, onEdit
 }
 
 // Formatting Toolbar
-function FormatToolbar( { setSourceMode, setHtmlContent } ) {
+function FormatToolbar({ setSourceMode, setHtmlContent }) {
     const [editor] = useLexicalComposerContext();
+    const [activeFormats, setActiveFormats] = useState({
+        bold: false,
+        italic: false,
+        underline: false,
+        strikethrough: false,
+        subscript: false,
+        superscript: false,
+        alignment: 'left',
+        list: null
+    });
+
+    // Update active formats based on current selection
+    useEffect(() => {
+        const removeUpdateListener = editor.registerUpdateListener(({ editorState }) => {
+            editorState.read(() => {
+                const selection = $getSelection();
+                if ($isRangeSelection(selection)) {
+                    const format = selection.format;
+                    const node = selection.anchor.getNode();
+                    const parent = node.getParent();
+                    
+                    // Check if parent is a list item and determine list type
+                    let listType = null;
+                    if (parent && parent.getType() === 'listitem') {
+                        const listParent = parent.getParent();
+                        if (listParent) {
+                            listType = listParent.getType() === 'list' ? 
+                                (listParent.getListType() === 'number' ? 'ol' : 'ul') : null;
+                        }
+                    }
+
+                    setActiveFormats({
+                        bold: format & 1,
+                        italic: format & 2,
+                        underline: format & 4,
+                        strikethrough: format & 8,
+                        subscript: format & 16,
+                        superscript: format & 32,
+                        alignment: parent?.getFormatType() || 'left',
+                        list: listType
+                    });
+                }
+            });
+        });
+
+        return () => {
+            removeUpdateListener();
+        };
+    }, [editor]);
 
     const format = (style) => {
         editor.update(() => {
             const selection = $getSelection();
-            if ($isRangeSelection(selection)) selection.formatText(style);
+            if ($isRangeSelection(selection)) {
+                selection.formatText(style);
+            }
         });
     };
 
@@ -283,14 +334,12 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                         ? $createParagraphNode()
                         : $createHeadingNode(tag);
 
-                // Move children from old block to new block
                 const children = block.getChildren();
                 block.replace(newNode);
                 for (const child of children) {
                     newNode.append(child);
                 }
 
-                // Move selection into new node
                 newNode.selectEnd();
             }
         });
@@ -300,11 +349,20 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
         const url = prompt("Enter the URL:");
 
         if (url) {
-            // Call Lexical's API to insert the URL as a link
             editor.update(() => {
                 editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
             });
         }
+    };
+
+    const handleAlignment = (alignment) => {
+        editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, alignment);
+    };
+
+    const handleList = (type) => {
+        editor.update(() => {
+            editor.dispatchCommand(type === 'ul' ? INSERT_UNORDERED_LIST_COMMAND : INSERT_ORDERED_LIST_COMMAND);
+        });
     };
 
     return (
@@ -321,12 +379,42 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                 <option value="h5" className="text-md font-semibold hover:bg-blue-100">h5</option>
                 <option value="h6" className="text-sm font-semibold hover:bg-blue-100">h6</option>
             </select>
-            <button onClick={() => format('bold')} className="font-boldn px-3 py-1 font-semibold hover:bg-blue-100 ml-6 text-gray-800">B</button>
-            <button onClick={() => format('italic')} className="italic px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">I</button>
-            <button onClick={() => format('underline')} className="underline px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">U</button>
-            <button onClick={() => format('strikethrough')} className="line-through px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">S</button>
-            <button onClick={() => format('subscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800">X₂</button>
-            <button onClick={() => format('superscript')} className="text-xs px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800">X²</button>
+            <button 
+                onClick={() => format('bold')} 
+                className={`px-3 py-1 font-semibold hover:bg-blue-100 ml-6 text-gray-800 ${activeFormats.bold ? 'bg-blue-500 text-white' : ''}`}
+            >
+                B
+            </button>
+            <button 
+                onClick={() => format('italic')} 
+                className={`italic px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800 ${activeFormats.italic ? 'bg-blue-500 text-white' : ''}`}
+            >
+                I
+            </button>
+            <button 
+                onClick={() => format('underline')} 
+                className={`underline px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800 ${activeFormats.underline ? 'bg-blue-500 text-white' : ''}`}
+            >
+                U
+            </button>
+            <button 
+                onClick={() => format('strikethrough')} 
+                className={`line-through px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800 ${activeFormats.strikethrough ? 'bg-blue-500 text-white' : ''}`}
+            >
+                S
+            </button>
+            <button 
+                onClick={() => format('subscript')} 
+                className={`text-xs px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800 ${activeFormats.subscript ? 'bg-blue-500 text-white' : ''}`}
+            >
+                X₂
+            </button>
+            <button 
+                onClick={() => format('superscript')} 
+                className={`text-xs px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800 ${activeFormats.superscript ? 'bg-blue-500 text-white' : ''}`}
+            >
+                X²
+            </button>
             <button
                 onClick={handleInsertUrl}
                 className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800"
@@ -334,46 +422,38 @@ function FormatToolbar( { setSourceMode, setHtmlContent } ) {
                 <GoLink />
             </button>
             <button
-                onClick={() => {
-                    editor.update(() => {
-                        editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
-                    });
-                }}
-                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800"
+                onClick={() => handleList('ul')}
+                className={`text-lg px-3 py-1 font-semibold hover:bg-blue-100 ml-4 text-gray-800 ${activeFormats.list === 'ul' ? 'bg-blue-500 text-white' : ''}`}
             >
                 <FaListUl />
             </button>
             <button
-                onClick={() => {
-                    editor.update(() => {
-                        editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND);
-                    });
-                }}
-                className="text-lg px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800"
+                onClick={() => handleList('ol')}
+                className={`text-lg px-3 py-1 font-semibold hover:bg-blue-100 text-gray-800 ${activeFormats.list === 'ol' ? 'bg-blue-500 text-white' : ''}`}
             >
                 <FaListOl />
             </button>
             <button
-                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
-                className="text-lg px-2 py-1 hover:bg-blue-100 ml-4 text-gray-800"
+                onClick={() => handleAlignment('left')}
+                className={`text-lg px-2 py-1 hover:bg-blue-100 ml-4 text-gray-800 ${activeFormats.alignment === 'left' ? 'bg-blue-500 text-white' : ''}`}
             >
                 <RiAlignLeft />
             </button>
             <button
-                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
-                className="text-lg px-2 py-1 hover:bg-blue-100 text-gray-800"
+                onClick={() => handleAlignment('center')}
+                className={`text-lg px-2 py-1 hover:bg-blue-100 text-gray-800 ${activeFormats.alignment === 'center' ? 'bg-blue-500 text-white' : ''}`}
             >
                 <RiAlignCenter />
             </button>
             <button
-                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
-                className="text-lg px-2 py-1 hover:bg-blue-100 text-gray-800"
+                onClick={() => handleAlignment('right')}
+                className={`text-lg px-2 py-1 hover:bg-blue-100 text-gray-800 ${activeFormats.alignment === 'right' ? 'bg-blue-500 text-white' : ''}`}
             >
                 <RiAlignRight />
             </button>
             <button
-                onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
-                className="text-lg px-2 py-1 hover:bg-blue-100 text-gray-800"
+                onClick={() => handleAlignment('justify')}
+                className={`text-lg px-2 py-1 hover:bg-blue-100 text-gray-800 ${activeFormats.alignment === 'justify' ? 'bg-blue-500 text-white' : ''}`}
             >
                 <RiAlignJustify />
             </button>
@@ -700,7 +780,6 @@ function SeoTranslateDropdown({setIsLoading}) {
 
 // Rich Text Editor Area
 function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate }) {
-
     const [editor] = useLexicalComposerContext();
     const initialHTMLRef = useRef(""); // Store initial HTML
     const skipNextChange = useRef(false); // Track programmatic changes
@@ -713,6 +792,25 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
             return false;
         }
     };
+
+    // Load saved content on mount
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const savedContent = localStorage.getItem('seoEditorContent');
+            if (savedContent && !seoEditorData) {
+                try {
+                    const parsedContent = JSON.parse(savedContent);
+                    editor.update(() => {
+                        const newEditorState = editor.parseEditorState(parsedContent);
+                        editor.setEditorState(newEditorState);
+                        initialHTMLRef.current = editor.getRootElement().innerHTML;
+                    });
+                } catch (e) {
+                    console.error('Error loading saved content:', e);
+                }
+            }
+        }
+    }, [editor, seoEditorData]);
 
     useEffect(() => {
         if (seoEditorData && editor) {
@@ -753,7 +851,6 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
             });
         }
     }, [seoEditorData, editor]);
-    
 
     useEffect(() => {
         const handleResetDirty = () => {
@@ -764,6 +861,19 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
         window.addEventListener("seo-editor-reset-dirty", handleResetDirty);
         return () => window.removeEventListener("seo-editor-reset-dirty", handleResetDirty);
     }, [editor, onDirtyChange]);
+
+    // Save editor state periodically
+    useEffect(() => {
+        const saveInterval = setInterval(() => {
+            if (editor) {
+                const editorState = editor.getEditorState();
+                const editorStateJSON = editorState.toJSON();
+                localStorage.setItem('seoEditorContent', JSON.stringify(editorStateJSON));
+            }
+        }, 1000); // Save every second
+
+        return () => clearInterval(saveInterval);
+    }, [editor]);
 
     return (
         <>
@@ -791,7 +901,13 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
                         onDirtyChange(true);
                     }
 
-                        // ✅ Send JSON up
+                    // Save content to localStorage
+                    if (typeof window !== 'undefined') {
+                        const editorStateJSON = editorState.toJSON();
+                        localStorage.setItem('seoEditorContent', JSON.stringify(editorStateJSON));
+                    }
+
+                    // Send JSON up
                     if (onEditorJSONUpdate) {
                         onEditorJSONUpdate(editorState.toJSON());
                     }
