@@ -62,7 +62,7 @@ export async function generateBrainstormerIdeas(query, lang) {
         Given the query: "${query}" and language code: "${lang}", generate exactly 10 high-quality article ideas with a modern SEO style.
 
         Use the following format for each idea:
-        - title: Engaging, specific, and SEO-optimized. Use phrases like “Top X”, “Best of {year}”, “How to…”, “The Ultimate Guide to…”, etc. Include the current year when relevant.
+        - title: Engaging, specific, and SEO-optimized. Use phrases like “Top X for Y”, “Best X in {2025}”, “How to…”, “The Ultimate Guide to…”, etc. Include the current year when relevant.
         - description: 1 sentence, persuasive, click-worthy, and direct. Mention benefit or goal.
         - keywords: A mix of short and long-tail SEO keywords. Always 4–5 per entry.
         - persona: Highly specific target group. Example: “Privacy-conscious internet users facing government restrictions”.
@@ -74,15 +74,15 @@ export async function generateBrainstormerIdeas(query, lang) {
         Avoid vague phrases or overly academic language. The tone must match these real examples:
 
         Example 1
-        - title: The Ultimate Guide to Choosing the Best VPN in 2023
-        - description: Discover the top VPNs of 2023 and learn how to choose the best one for your needs.
+        - title: The Ultimate Guide to Choosing the Best VPN in 2025
+        - description: Discover the top VPNs of 2025 and learn how to choose the best one for your needs.
         - keywords: ["VPN", "online privacy", "security", "internet freedom", "best vpn 2023"]
         - persona: Tech-savvy individuals looking to enhance their online security and privacy.
         - outline: 1. Introduction to VPNs, 2. Benefits of using a VPN, 3. Top VPNs of 2023, 4. How to choose the best VPN, 5. Conclusion and recommendations
         - level: expert
 
         Example 2
-        - title: Comparison: Free vs Paid VPNs in 2023
+        - title: Comparison: Free vs Paid VPNs in 2025
         - description: Explore the differences between free and paid VPNs. Find the best value for your privacy needs.
         - keywords: ["free VPN", "paid VPN", "cost-benefit", "VPN features", "best value"]
         - persona: Budget-conscious individuals weighing the benefits of free versus paid VPN services.
