@@ -153,7 +153,7 @@ export default function Analysis({data, setIsDirty }) {
                     setDetectedCategories(categories);
                 }
             } catch (err) {
-                console.error("❌ Failed to fetch initial categories:", err);
+                console.error("❌ Failed to fetch SEO Editor Data:", err?.response?.data || err);
             }
         };
 

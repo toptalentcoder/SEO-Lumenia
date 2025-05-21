@@ -241,7 +241,7 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-2 text-gray-900">
                 {objective.map((sentence, index) => (
                     <div key={index} className="flex items-center space-x-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.objective)}
+                        {renderVerificationIcon(getItemStatus("objective", sentence))}
                         <div className="flex-grow text-sm">
                             {sentence.trim()}.
                         </div>
