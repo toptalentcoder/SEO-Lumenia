@@ -49,7 +49,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
                 return new Response(
                     JSON.stringify({ error: `User not found for email: ${email}` }),
                     {
-                        status: 400,
+                        status: 404,
                         headers: {
                             "Content-Type": "application/json",
                             ...corsHeaders
@@ -70,7 +70,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
                 return new Response(
                     JSON.stringify({ error: `Project not found for queryID: ${queryID}` }),
                     {
-                        status: 400,
+                        status: 404,
                         headers: {
                             "Content-Type": "application/json",
                             ...corsHeaders

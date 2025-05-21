@@ -168,7 +168,9 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef, onEdit
         return null;
     };
       
-
+    useEffect(() => {
+        setSeoEditorData(""); // Clear existing data on queryID change
+    }, [queryID]);
 
     useEffect(() => {
         const fetchSeoEditorData = async () => {
@@ -182,7 +184,7 @@ export default function LexicalSeoEditor({data, onDirtyChange, editorRef, onEdit
                     setSeoEditorData(response.data.seoEditorData);
                 }
             } catch (error) {
-                setSeoEditorData("")
+                console.error("❌ Failed to fetch SEO Editor Data:", err?.response?.data || err);
             } finally {
                 setIsLoading(false);
             }
@@ -793,25 +795,6 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
         }
     };
 
-    // Load saved content on mount
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const savedContent = localStorage.getItem('seoEditorContent');
-            if (savedContent && !seoEditorData) {
-                try {
-                    const parsedContent = JSON.parse(savedContent);
-                    editor.update(() => {
-                        const newEditorState = editor.parseEditorState(parsedContent);
-                        editor.setEditorState(newEditorState);
-                        initialHTMLRef.current = editor.getRootElement().innerHTML;
-                    });
-                } catch (e) {
-                    console.error('Error loading saved content:', e);
-                }
-            }
-        }
-    }, [editor, seoEditorData]);
-
     useEffect(() => {
         if (seoEditorData && editor) {
             skipNextChange.current = true;
@@ -862,19 +845,6 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
         return () => window.removeEventListener("seo-editor-reset-dirty", handleResetDirty);
     }, [editor, onDirtyChange]);
 
-    // Save editor state periodically
-    useEffect(() => {
-        const saveInterval = setInterval(() => {
-            if (editor) {
-                const editorState = editor.getEditorState();
-                const editorStateJSON = editorState.toJSON();
-                localStorage.setItem('seoEditorContent', JSON.stringify(editorStateJSON));
-            }
-        }, 1000); // Save every second
-
-        return () => clearInterval(saveInterval);
-    }, [editor]);
-
     return (
         <>
             <RichTextPlugin
@@ -902,10 +872,10 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
                     }
 
                     // Save content to localStorage
-                    if (typeof window !== 'undefined') {
-                        const editorStateJSON = editorState.toJSON();
-                        localStorage.setItem('seoEditorContent', JSON.stringify(editorStateJSON));
-                    }
+                    // if (typeof window !== 'undefined') {
+                    //     const editorStateJSON = editorState.toJSON();
+                    //     localStorage.setItem('seoEditorContent', JSON.stringify(editorStateJSON));
+                    // }
 
                     // Send JSON up
                     if (onEditorJSONUpdate) {

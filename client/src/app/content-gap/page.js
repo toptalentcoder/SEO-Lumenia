@@ -17,7 +17,6 @@ export default function ContentGapPage() {
         label: 'google.com'
     });
 
-
     const toneOptions = [
         { label: "Friendly", emoji: "😊" },
         { label: "Professional", emoji: "💼" },
