@@ -126,6 +126,24 @@ export const Users: CollectionConfig = {
         return data;
       },
     ],
+    afterLogin: [
+      async ({ user }) => {
+        // Return only selected fields for the login response
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          username : user.username,
+          profilePicture: user.profilePicture,
+          profileImageURL: user.profileImageURL,
+          role: user.role,
+          subscriptionPlan: user.subscriptionPlan,
+          apiPlan: user.apiPlan,
+          availableFeatures: user.availableFeatures,
+          // Add only safe fields here
+        };
+      }
+    ]
   },
 
 }

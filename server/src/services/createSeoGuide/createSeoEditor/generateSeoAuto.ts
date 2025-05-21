@@ -5,8 +5,6 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 export async function autoExpandSeoText(rawContent: string, language: string = "English"): Promise<string> {
     const prompt = `
-        You are an SEO expert and writer.
-
         Take the following content and enhance it to be more semantically complete, natural-sounding, and optimized for SEO. Expand the points with helpful, specific, and engaging phrasing. Don't remove the structure — just enrich each part with meaningful detail.
         The content should be written in ${language} language.
 
@@ -18,8 +16,11 @@ export async function autoExpandSeoText(rawContent: string, language: string = "
     `;
 
     const response = await openai.chat.completions.create({
-        model: "gpt-4",
-        messages: [{ role: "user", content: prompt }],
+        model: "gpt-4-turbo",
+        messages: [
+            { role: "user", content: prompt },
+            { role: "system", content: "You are an expert SEO content writer." }
+        ],
         temperature: 0.7,
     });
 
