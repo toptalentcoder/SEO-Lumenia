@@ -22,7 +22,7 @@ async function verifyItemPresence(
 ): Promise<VerificationStatus> {
     try {
         const prompt = `
-            You are an SEO verifier. Your job is to check whether the following ${type} is clearly present in the content below.
+            Your job is to check whether the following ${type} is clearly present in the content below.
 
             Item:
             "${item}"
@@ -39,8 +39,11 @@ async function verifyItemPresence(
         `;
 
         const response = await openai.chat.completions.create({
-            model: "gpt-4",
-            messages: [{ role: "user", content: prompt }],
+            model: "gpt-4-turbo",
+            messages: [
+                { role: "user", content: prompt },
+                { role: "system", content: "You are an expert SEO content verifier." }
+            ],
             temperature: 0,
         });
         const result = response.choices[0].message.content;
@@ -113,7 +116,7 @@ export async function verifyContentWithSeoBrief(
     let improvementText = "";
     try {
         const suggestionPrompt = `
-            You are an SEO assistant. Given the following SEO brief and article content, suggest what could be improved or added.
+            Given the following SEO brief and article content, suggest what could be improved or added.
             ${language ? `Please provide your response in ${language} language.` : ''}
 
             SEO Brief:
@@ -131,9 +134,12 @@ export async function verifyContentWithSeoBrief(
         `;
 
         const suggestionResponse = await openai.chat.completions.create({
-            model: "gpt-4",
-            messages: [{ role: "user", content: suggestionPrompt }],
-            temperature: 0.5,
+            model: "gpt-4-turbo",
+            messages: [
+                { role: "user", content: suggestionPrompt },
+                { role: "system", content: "You are an expert SEO content reviewer." }
+            ],
+            temperature: 0.3,
         });
 
         improvementText = suggestionResponse.choices[0].message.content?.trim() ?? "";

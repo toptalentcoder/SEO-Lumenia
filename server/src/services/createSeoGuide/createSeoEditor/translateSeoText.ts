@@ -7,7 +7,7 @@ export async function translateText(text: string, targetLanguage: string): Promi
     const prompt = `Translate the following SEO blog content to ${targetLanguage}. Keep formatting and bullet points where possible:\n\n${text}`;
 
     const chat = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-4-turbo",
         messages: [{ role: "user", content: prompt }],
     });
 

@@ -1,5 +1,5 @@
 import { OpenAI } from 'openai';
-import { OPENAI_API_KEY } from '@/config/apiConfig';
+import { AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from '@/config/apiConfig';
 
 if (!OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is not configured');
@@ -9,20 +9,30 @@ const openai = new OpenAI({
     apiKey: OPENAI_API_KEY,
 });
 
+// Azure OpenAI client configuration
+// const openai = new OpenAI({
+//     apiKey: AZURE_OPENAI_API_KEY,
+//     baseURL: `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT_GPT_4}`,
+//     defaultHeaders: {
+//         'api-key': AZURE_OPENAI_API_KEY
+//     },
+//     defaultQuery: {
+//         'api-version': '2025-01-01-preview'
+//     }
+// });
+
 function buildSeoPrompt(query: string, language: string, country: string): string {
   return `
-You are an SEO keyword research assistant.
+        Using the input query "${query}" in ${language} for the ${country} market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
 
-Using the input query "${query}" in ${language} for the ${country} market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+        Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
 
-Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
-
-Example:
-keyword 1  
-keyword 2  
-keyword 3  
-...
-`;
+        Example:
+        keyword 1  
+        keyword 2  
+        keyword 3  
+        ...
+    `;
 }
 
 function parseKeywordList(raw: string): string[] {
@@ -38,10 +48,13 @@ export async function generateSEOKeywords(query: string, country: string, langua
         console.log('Sending request to OpenAI with prompt:', prompt);
 
         const response = await openai.chat.completions.create({
-            model: 'gpt-4',
-            messages: [{ role: 'user', content: prompt }],
-            temperature: 0.7,
-            max_tokens: 3000,
+            model: 'gpt-4-turbo',
+            messages: [
+                { role: 'system', content: 'You are an SEO keyword research assistant.' },
+                { role: 'user', content: prompt }
+            ],
+            temperature: 0.3,
+            max_tokens: 2800,
         });
 
         if (!response.choices?.[0]?.message?.content) {

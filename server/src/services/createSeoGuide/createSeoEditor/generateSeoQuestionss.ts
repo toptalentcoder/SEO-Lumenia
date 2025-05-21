@@ -13,7 +13,6 @@ export async function generateSeoQuestions({
     language?: string;
 }): Promise<string[]> {
     const prompt = `
-        You are an expert SEO content strategist.
 
         Based on the topic: "${query}" and the following keywords:
         ${keywords.join(', ')}
@@ -33,9 +32,12 @@ export async function generateSeoQuestions({
     `;
 
     const response = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.7,
+        model: 'gpt-4-turbo',
+        messages: [
+            { role: 'user', content: prompt },
+            { role: 'system', content: 'You are an expert SEO content strategist.' }
+        ],
+        temperature: 0.3,
     });
 
     const text = response.choices[0].message.content;

@@ -61552,3 +61552,1104 @@
 2025-05-20T23:23:32:       "status": 401,
 2025-05-20T23:23:32:       "name": "b"
 2025-05-20T23:23:32:     }
+2025-05-20T23:45:22: 
+2025-05-20T23:45:22: > seo-yourtext@1.0.0 start:server
+2025-05-20T23:45:22: > cd server && npm start
+2025-05-20T23:45:22: 
+2025-05-20T23:45:22: 
+2025-05-20T23:45:22: > server@1.0.0 start
+2025-05-20T23:45:22: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-20T23:45:22: 
+2025-05-20T23:45:23:    ▲ Next.js 15.2.2
+2025-05-20T23:45:23:    - Local:        http://localhost:7777
+2025-05-20T23:45:23:    - Network:      http://167.235.246.98:7777
+2025-05-20T23:45:23: 
+2025-05-20T23:45:23:  ✓ Starting...
+2025-05-20T23:45:23:  ✓ Ready in 402ms
+2025-05-20T23:45:24: ✅ Connected to Redis
+2025-05-20T23:45:24: ✅ Redis client ready
+2025-05-20T23:45:38: [23:45:38] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-20T23:45:38: Initializing Payload services...
+2025-05-20T23:45:38: Paypal plan check
+2025-05-20T23:45:38: Daily rank tracking finished
+2025-05-20T23:45:38: Setting Payload instance for SEO Guide worker
+2025-05-20T23:45:38: ✅ Payload instance initialized for both workers
+2025-05-20T23:45:38: ✅ Workers started in background
+2025-05-20T23:45:39: Product ID already exists.
+2025-05-20T23:45:42: Database Plan IDs: Set(16) {
+2025-05-20T23:45:42:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-20T23:45:42:   'P-53X09845JD375660GNAHAMQI',
+2025-05-20T23:45:42:   'P-20370715PP423392UNAHAMQA',
+2025-05-20T23:45:42:   'P-27141251BP077373TNAHAMQA',
+2025-05-20T23:45:42:   'P-9M865456HH770272DNAHAMQA',
+2025-05-20T23:45:42:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-20T23:45:42:   'P-3KW957430M5325327NAHAMPY',
+2025-05-20T23:45:42:   'P-4L778364NR5921350NAHAMPY',
+2025-05-20T23:45:42:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-20T23:45:42:   'P-8M9757836L293264GNAHAMPY',
+2025-05-20T23:45:42:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-20T23:45:42:   'P-202989871N9958414NAHAMPQ',
+2025-05-20T23:45:42:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-20T23:45:42:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-20T23:45:42:   'P-8K433323S1042472HNAHAMPI',
+2025-05-20T23:45:42:   'P-490774634X2062924NAHAMPI'
+2025-05-20T23:45:42: }
+2025-05-20T23:45:42: PayPal Plan IDs: Set(96) {
+2025-05-20T23:45:42:   'P-98579045524419020M7M4JXY',
+2025-05-20T23:45:42:   'P-0SA1427012940862YM7M4JYA',
+2025-05-20T23:45:42:   'P-6P231034LS515993XM7M4JYI',
+2025-05-20T23:45:42:   'P-68E81820XB085010WM7M4JYI',
+2025-05-20T23:45:42:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-20T23:45:42:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-20T23:45:42:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-20T23:45:42:   'P-68B108558G040300CM7M4JYY',
+2025-05-20T23:45:42:   'P-62T484147J908714FM7M4JZI',
+2025-05-20T23:45:42:   'P-90V18465AA503062KM7M4JZI',
+2025-05-20T23:45:42:   'P-0N203053T15286811M7M4JZQ',
+2025-05-20T23:45:42:   'P-46533433JY578205HM7M4JZQ',
+2025-05-20T23:45:42:   'P-63R81120GE458362BM7M4JZY',
+2025-05-20T23:45:42:   'P-21A90981M6370210WM7M4JZY',
+2025-05-20T23:45:42:   'P-360406889S1454445M7M4J2I',
+2025-05-20T23:45:42:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-20T23:45:42:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-20T23:45:42:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-20T23:45:42:   'P-39555110YD2915823M7S6OQQ',
+2025-05-20T23:45:42:   'P-9E656446VD230374HM7S6OQY',
+2025-05-20T23:45:42:   'P-45128149BJ354104KM7S6OQY',
+2025-05-20T23:45:42:   'P-9F006862C6340571DM7S6OQY',
+2025-05-20T23:45:42:   'P-1V314479R9099642UM7S6OQY',
+2025-05-20T23:45:42:   'P-79A057673F410951MM7S6OQY',
+2025-05-20T23:45:42:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-20T23:45:42:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-20T23:45:42:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-20T23:45:42:   'P-21X07337A4958732NM7S6ORA',
+2025-05-20T23:45:42:   'P-3FU129497M979342BM7S6ORI',
+2025-05-20T23:45:42:   'P-44G00026CM390584DM7S6ORI',
+2025-05-20T23:45:42:   'P-62J05746CC518271NM7S6ORI',
+2025-05-20T23:45:42:   'P-7H916310NB4776034M7S6ORI',
+2025-05-20T23:45:42:   'P-81H7059024688361BNADFSEQ',
+2025-05-20T23:45:42:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-20T23:45:42:   'P-0AG648210K837334ENADFSEY',
+2025-05-20T23:45:42:   'P-5PJ42060848447527NADFSEY',
+2025-05-20T23:45:42:   'P-7SH44926C2332032LNADFSFA',
+2025-05-20T23:45:42:   'P-5GT16529YX6637536NADFSFA',
+2025-05-20T23:45:42:   'P-9E4467280K919340LNADFSFA',
+2025-05-20T23:45:42:   'P-7F5548422M800415UNADFSFA',
+2025-05-20T23:45:42:   'P-5D1599585G2325124NADFSFI',
+2025-05-20T23:45:42:   'P-8HP47151UE2088357NADFSFI',
+2025-05-20T23:45:42:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-20T23:45:42:   'P-77F59714BA432935BNADFSFQ',
+2025-05-20T23:45:42:   'P-621267267T2568348NADFSFQ',
+2025-05-20T23:45:42:   'P-0VC29477844828614NADFSFQ',
+2025-05-20T23:45:42:   'P-9VK838170M171392XNADFSFY',
+2025-05-20T23:45:42:   'P-5K721906AC486313MNADFSFY',
+2025-05-20T23:45:42:   'P-490774634X2062924NAHAMPI',
+2025-05-20T23:45:42:   'P-8K433323S1042472HNAHAMPI',
+2025-05-20T23:45:42:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-20T23:45:42:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-20T23:45:42:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-20T23:45:42:   'P-202989871N9958414NAHAMPQ',
+2025-05-20T23:45:42:   'P-3KW957430M5325327NAHAMPY',
+2025-05-20T23:45:42:   'P-4L778364NR5921350NAHAMPY',
+2025-05-20T23:45:42:   'P-8M9757836L293264GNAHAMPY',
+2025-05-20T23:45:42:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-20T23:45:42:   'P-27141251BP077373TNAHAMQA',
+2025-05-20T23:45:42:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-20T23:45:42:   'P-9M865456HH770272DNAHAMQA',
+2025-05-20T23:45:42:   'P-20370715PP423392UNAHAMQA',
+2025-05-20T23:45:42:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-20T23:45:42:   'P-53X09845JD375660GNAHAMQI',
+2025-05-20T23:45:42:   'P-8R860064U4651043VNAMP5QA',
+2025-05-20T23:45:42:   'P-60C92000WD254525WNAMP5QI',
+2025-05-20T23:45:42:   'P-0UT00261V94696819NAMP5QI',
+2025-05-20T23:45:42:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-20T23:45:42:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-20T23:45:42:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-20T23:45:42:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-20T23:45:42:   'P-6X911161ML521982BNAMP5QY',
+2025-05-20T23:45:42:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-20T23:45:42:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-20T23:45:42:   'P-3U673165V0901092KNAMP5RA',
+2025-05-20T23:45:42:   'P-8YA2119328867231VNAMP5RA',
+2025-05-20T23:45:42:   'P-8HG183948K421773MNAMP5RI',
+2025-05-20T23:45:42:   'P-5JN159596J440845BNAMP5RI',
+2025-05-20T23:45:42:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-20T23:45:42:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-20T23:45:42:   'P-0F030730RE936621BNAN4HCA',
+2025-05-20T23:45:42:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-20T23:45:42:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-20T23:45:42:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-20T23:45:42:   'P-4D519177D3911424YNAN4HCY',
+2025-05-20T23:45:42:   'P-6BD749029B990871CNAN4HCY',
+2025-05-20T23:45:42:   'P-5BM58021W47885254NAN4HDA',
+2025-05-20T23:45:42:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-20T23:45:42:   'P-49185806R8340904VNAN4HDI',
+2025-05-20T23:45:42:   'P-5W217508C5372952SNAN4HDI',
+2025-05-20T23:45:42:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-20T23:45:42:   'P-0C082804XG969344HNAN4HDY',
+2025-05-20T23:45:42:   'P-509283891X696204TNAN4HEA',
+2025-05-20T23:45:42:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-20T23:45:42:   'P-13J67250CR558593DNAN4HEI',
+2025-05-20T23:45:42:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-20T23:45:42: }
+2025-05-20T23:45:42: All plans processed successfully.
+2025-05-20T23:55:17: 
+2025-05-20T23:55:17: > seo-yourtext@1.0.0 start:server
+2025-05-20T23:55:17: > cd server && npm start
+2025-05-20T23:55:17: 
+2025-05-20T23:55:18: 
+2025-05-20T23:55:18: > server@1.0.0 start
+2025-05-20T23:55:18: > cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS="--max-old-space-size=4096 --no-deprecation" next start
+2025-05-20T23:55:18: 
+2025-05-20T23:55:18:    ▲ Next.js 15.2.2
+2025-05-20T23:55:18:    - Local:        http://localhost:7777
+2025-05-20T23:55:18:    - Network:      http://167.235.246.98:7777
+2025-05-20T23:55:18: 
+2025-05-20T23:55:18:  ✓ Starting...
+2025-05-20T23:55:19:  ✓ Ready in 454ms
+2025-05-20T23:55:20: ✅ Connected to Redis
+2025-05-20T23:55:20: ✅ Redis client ready
+2025-05-20T23:56:09: Initializing Payload services...
+2025-05-20T23:56:09: Paypal plan check
+2025-05-20T23:56:09: [23:56:09] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+2025-05-20T23:56:09: Daily rank tracking finished
+2025-05-20T23:56:09: Setting Payload instance for SEO Guide worker
+2025-05-20T23:56:09: ✅ Payload instance initialized for both workers
+2025-05-20T23:56:09: ✅ Workers started in background
+2025-05-20T23:56:10: Product ID already exists.
+2025-05-20T23:56:13: Database Plan IDs: Set(16) {
+2025-05-20T23:56:13:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-20T23:56:13:   'P-53X09845JD375660GNAHAMQI',
+2025-05-20T23:56:13:   'P-20370715PP423392UNAHAMQA',
+2025-05-20T23:56:13:   'P-27141251BP077373TNAHAMQA',
+2025-05-20T23:56:13:   'P-9M865456HH770272DNAHAMQA',
+2025-05-20T23:56:13:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-20T23:56:13:   'P-3KW957430M5325327NAHAMPY',
+2025-05-20T23:56:13:   'P-4L778364NR5921350NAHAMPY',
+2025-05-20T23:56:13:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-20T23:56:13:   'P-8M9757836L293264GNAHAMPY',
+2025-05-20T23:56:13:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-20T23:56:13:   'P-202989871N9958414NAHAMPQ',
+2025-05-20T23:56:13:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-20T23:56:13:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-20T23:56:13:   'P-8K433323S1042472HNAHAMPI',
+2025-05-20T23:56:13:   'P-490774634X2062924NAHAMPI'
+2025-05-20T23:56:13: }
+2025-05-20T23:56:13: PayPal Plan IDs: Set(96) {
+2025-05-20T23:56:13:   'P-98579045524419020M7M4JXY',
+2025-05-20T23:56:13:   'P-0SA1427012940862YM7M4JYA',
+2025-05-20T23:56:13:   'P-6P231034LS515993XM7M4JYI',
+2025-05-20T23:56:13:   'P-68E81820XB085010WM7M4JYI',
+2025-05-20T23:56:13:   'P-6RD24119BV377764EM7M4JYQ',
+2025-05-20T23:56:13:   'P-1SM02925C20949531M7M4JYQ',
+2025-05-20T23:56:13:   'P-1RN17010LC326950HM7M4JYY',
+2025-05-20T23:56:13:   'P-68B108558G040300CM7M4JYY',
+2025-05-20T23:56:13:   'P-62T484147J908714FM7M4JZI',
+2025-05-20T23:56:13:   'P-90V18465AA503062KM7M4JZI',
+2025-05-20T23:56:13:   'P-0N203053T15286811M7M4JZQ',
+2025-05-20T23:56:13:   'P-46533433JY578205HM7M4JZQ',
+2025-05-20T23:56:13:   'P-63R81120GE458362BM7M4JZY',
+2025-05-20T23:56:13:   'P-21A90981M6370210WM7M4JZY',
+2025-05-20T23:56:13:   'P-360406889S1454445M7M4J2I',
+2025-05-20T23:56:13:   'P-7PD43448YJ192872KM7M4J2I',
+2025-05-20T23:56:13:   'P-6PE22911B3847034EM7S6OQQ',
+2025-05-20T23:56:13:   'P-12N41904HH734551CM7S6OQQ',
+2025-05-20T23:56:13:   'P-39555110YD2915823M7S6OQQ',
+2025-05-20T23:56:13:   'P-9E656446VD230374HM7S6OQY',
+2025-05-20T23:56:13:   'P-45128149BJ354104KM7S6OQY',
+2025-05-20T23:56:13:   'P-9F006862C6340571DM7S6OQY',
+2025-05-20T23:56:13:   'P-1V314479R9099642UM7S6OQY',
+2025-05-20T23:56:13:   'P-79A057673F410951MM7S6OQY',
+2025-05-20T23:56:13:   'P-9VP26005MD089671AM7S6ORA',
+2025-05-20T23:56:13:   'P-2Y310598M3835925CM7S6ORA',
+2025-05-20T23:56:13:   'P-1FW28679PM3391124M7S6ORA',
+2025-05-20T23:56:13:   'P-21X07337A4958732NM7S6ORA',
+2025-05-20T23:56:13:   'P-3FU129497M979342BM7S6ORI',
+2025-05-20T23:56:13:   'P-44G00026CM390584DM7S6ORI',
+2025-05-20T23:56:13:   'P-62J05746CC518271NM7S6ORI',
+2025-05-20T23:56:13:   'P-7H916310NB4776034M7S6ORI',
+2025-05-20T23:56:13:   'P-81H7059024688361BNADFSEQ',
+2025-05-20T23:56:13:   'P-6HV07007S0770754MNADFSEQ',
+2025-05-20T23:56:13:   'P-0AG648210K837334ENADFSEY',
+2025-05-20T23:56:13:   'P-5PJ42060848447527NADFSEY',
+2025-05-20T23:56:13:   'P-7SH44926C2332032LNADFSFA',
+2025-05-20T23:56:13:   'P-5GT16529YX6637536NADFSFA',
+2025-05-20T23:56:13:   'P-9E4467280K919340LNADFSFA',
+2025-05-20T23:56:13:   'P-7F5548422M800415UNADFSFA',
+2025-05-20T23:56:13:   'P-5D1599585G2325124NADFSFI',
+2025-05-20T23:56:13:   'P-8HP47151UE2088357NADFSFI',
+2025-05-20T23:56:13:   'P-7LK61326E3483851XNADFSFQ',
+2025-05-20T23:56:13:   'P-77F59714BA432935BNADFSFQ',
+2025-05-20T23:56:13:   'P-621267267T2568348NADFSFQ',
+2025-05-20T23:56:13:   'P-0VC29477844828614NADFSFQ',
+2025-05-20T23:56:13:   'P-9VK838170M171392XNADFSFY',
+2025-05-20T23:56:13:   'P-5K721906AC486313MNADFSFY',
+2025-05-20T23:56:13:   'P-490774634X2062924NAHAMPI',
+2025-05-20T23:56:13:   'P-8K433323S1042472HNAHAMPI',
+2025-05-20T23:56:13:   'P-9GE85154R28961403NAHAMPQ',
+2025-05-20T23:56:13:   'P-5V190771CT747310YNAHAMPQ',
+2025-05-20T23:56:13:   'P-5LB92844GT915194LNAHAMPQ',
+2025-05-20T23:56:13:   'P-202989871N9958414NAHAMPQ',
+2025-05-20T23:56:13:   'P-3KW957430M5325327NAHAMPY',
+2025-05-20T23:56:13:   'P-4L778364NR5921350NAHAMPY',
+2025-05-20T23:56:13:   'P-8M9757836L293264GNAHAMPY',
+2025-05-20T23:56:13:   'P-8CR59522PX213181TNAHAMPY',
+2025-05-20T23:56:13:   'P-27141251BP077373TNAHAMQA',
+2025-05-20T23:56:13:   'P-0CK52281C6125770VNAHAMQA',
+2025-05-20T23:56:13:   'P-9M865456HH770272DNAHAMQA',
+2025-05-20T23:56:13:   'P-20370715PP423392UNAHAMQA',
+2025-05-20T23:56:13:   'P-2PE38273K8579783RNAHAMQI',
+2025-05-20T23:56:13:   'P-53X09845JD375660GNAHAMQI',
+2025-05-20T23:56:13:   'P-8R860064U4651043VNAMP5QA',
+2025-05-20T23:56:13:   'P-60C92000WD254525WNAMP5QI',
+2025-05-20T23:56:13:   'P-0UT00261V94696819NAMP5QI',
+2025-05-20T23:56:13:   'P-4GH61557D4921180WNAMP5QQ',
+2025-05-20T23:56:13:   'P-5GU69698NF531922MNAMP5QQ',
+2025-05-20T23:56:13:   'P-3KW983534R7515025NAMP5QQ',
+2025-05-20T23:56:13:   'P-5NM02054H0822524RNAMP5QY',
+2025-05-20T23:56:13:   'P-6X911161ML521982BNAMP5QY',
+2025-05-20T23:56:13:   'P-1BU41980J2810980BNAMP5QY',
+2025-05-20T23:56:13:   'P-9EJ57683T5356621NNAMP5QY',
+2025-05-20T23:56:13:   'P-3U673165V0901092KNAMP5RA',
+2025-05-20T23:56:13:   'P-8YA2119328867231VNAMP5RA',
+2025-05-20T23:56:13:   'P-8HG183948K421773MNAMP5RI',
+2025-05-20T23:56:13:   'P-5JN159596J440845BNAMP5RI',
+2025-05-20T23:56:13:   'P-2FT74353NP860483CNAMP5RI',
+2025-05-20T23:56:13:   'P-61B14503KY8901738NAMP5RQ',
+2025-05-20T23:56:13:   'P-0F030730RE936621BNAN4HCA',
+2025-05-20T23:56:13:   'P-0CS62558UF2802716NAN4HCI',
+2025-05-20T23:56:13:   'P-2FU528817K921404NNAN4HCQ',
+2025-05-20T23:56:13:   'P-9TR64532LU323525YNAN4HCQ',
+2025-05-20T23:56:13:   'P-4D519177D3911424YNAN4HCY',
+2025-05-20T23:56:13:   'P-6BD749029B990871CNAN4HCY',
+2025-05-20T23:56:13:   'P-5BM58021W47885254NAN4HDA',
+2025-05-20T23:56:13:   'P-0NP99514NE3132914NAN4HDA',
+2025-05-20T23:56:13:   'P-49185806R8340904VNAN4HDI',
+2025-05-20T23:56:13:   'P-5W217508C5372952SNAN4HDI',
+2025-05-20T23:56:13:   'P-6YX784000P201053ANAN4HDQ',
+2025-05-20T23:56:13:   'P-0C082804XG969344HNAN4HDY',
+2025-05-20T23:56:13:   'P-509283891X696204TNAN4HEA',
+2025-05-20T23:56:13:   'P-0MB24817RL517304UNAN4HEA',
+2025-05-20T23:56:13:   'P-13J67250CR558593DNAN4HEI',
+2025-05-20T23:56:13:   'P-4SR27672N6238570SNAN4HEI'
+2025-05-20T23:56:13: }
+2025-05-20T23:56:13: All plans processed successfully.
+2025-05-21T07:56:00: Received request body: {
+2025-05-21T07:56:00:   query: 'mini téléphone',
+2025-05-21T07:56:00:   queryID: '23701070',
+2025-05-21T07:56:00:   queryEngine: 'google',
+2025-05-21T07:56:00:   projectID: '459262',
+2025-05-21T07:56:00:   email: 'robertkmiller47@gmail.com',
+2025-05-21T07:56:00:   language: 'fr',
+2025-05-21T07:56:00:   hl: 'fr',
+2025-05-21T07:56:00:   gl: 'fr',
+2025-05-21T07:56:00:   lr: 'lang_fr'
+2025-05-21T07:56:00: }
+2025-05-21T07:56:00: Adding job to the queue...
+2025-05-21T07:56:00: Job added to queue with ID: 435
+2025-05-21T07:56:00: 🔄 Job 435 started processing
+2025-05-21T07:56:00: 🔄 Worker processing SEO guide creation job 435
+2025-05-21T07:56:00: 📝 Job data: {
+2025-05-21T07:56:00:   "query": "mini téléphone",
+2025-05-21T07:56:00:   "projectID": "459262",
+2025-05-21T07:56:00:   "email": "robertkmiller47@gmail.com",
+2025-05-21T07:56:00:   "queryID": "23701070",
+2025-05-21T07:56:00:   "language": "fr",
+2025-05-21T07:56:00:   "queryEngine": "google",
+2025-05-21T07:56:00:   "hl": "fr",
+2025-05-21T07:56:00:   "gl": "fr",
+2025-05-21T07:56:00:   "lr": "lang_fr"
+2025-05-21T07:56:00: }
+2025-05-21T07:56:00: 📊 Job 435 progress: 10%
+2025-05-21T07:56:00: ✅ Initial progress update complete
+2025-05-21T07:56:00: 🔑 Getting Payload instance...
+2025-05-21T07:56:00: ✅ Payload instance obtained
+2025-05-21T07:56:00: 📊 Job 435 progress: 30%
+2025-05-21T07:56:00: 🚀 Starting SEO guide processing...
+2025-05-21T07:56:00: processSeoGuide started
+2025-05-21T07:56:00: Processing SEO guide with data: {
+2025-05-21T07:56:00:   query: 'mini téléphone',
+2025-05-21T07:56:00:   projectID: '459262',
+2025-05-21T07:56:00:   email: 'robertkmiller47@gmail.com',
+2025-05-21T07:56:00:   queryID: '23701070',
+2025-05-21T07:56:00:   language: 'fr',
+2025-05-21T07:56:00:   queryEngine: 'google',
+2025-05-21T07:56:00:   hl: 'fr',
+2025-05-21T07:56:00:   gl: 'fr',
+2025-05-21T07:56:00:   lr: 'lang_fr'
+2025-05-21T07:56:00: }
+2025-05-21T07:56:00: 📊 Job 435 progress: 20%
+2025-05-21T07:56:05: 📊 Job 435 progress: 30%
+2025-05-21T07:56:05: Before generating SEO keywords
+2025-05-21T07:56:05: Sending request to OpenAI with prompt: 
+2025-05-21T07:56:05: You are an SEO keyword research assistant.
+2025-05-21T07:56:05: 
+2025-05-21T07:56:05: Using the input query "mini téléphone" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T07:56:05: 
+2025-05-21T07:56:05: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T07:56:05: 
+2025-05-21T07:56:05: Example:
+2025-05-21T07:56:05: keyword 1  
+2025-05-21T07:56:05: keyword 2  
+2025-05-21T07:56:05: keyword 3  
+2025-05-21T07:56:05: ...
+2025-05-21T07:56:05: 
+2025-05-21T07:56:08: 🔄 Job 435 started processing
+2025-05-21T07:56:08: 🔄 Worker processing SEO guide creation job 435
+2025-05-21T07:56:08: 📝 Job data: {
+2025-05-21T07:56:08:   "query": "mini téléphone",
+2025-05-21T07:56:08:   "projectID": "459262",
+2025-05-21T07:56:08:   "email": "robertkmiller47@gmail.com",
+2025-05-21T07:56:08:   "queryID": "23701070",
+2025-05-21T07:56:08:   "language": "fr",
+2025-05-21T07:56:08:   "queryEngine": "google",
+2025-05-21T07:56:08:   "hl": "fr",
+2025-05-21T07:56:08:   "gl": "fr",
+2025-05-21T07:56:08:   "lr": "lang_fr",
+2025-05-21T07:56:08:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T07:56:08:   "failed": true,
+2025-05-21T07:56:08:   "failedAt": "2025-05-21T07:56:07.448Z"
+2025-05-21T07:56:08: }
+2025-05-21T07:56:08: 📊 Job 435 progress: 10%
+2025-05-21T07:56:08: ✅ Initial progress update complete
+2025-05-21T07:56:08: 🔑 Getting Payload instance...
+2025-05-21T07:56:08: ✅ Payload instance obtained
+2025-05-21T07:56:08: 📊 Job 435 progress: 30%
+2025-05-21T07:56:08: 🚀 Starting SEO guide processing...
+2025-05-21T07:56:08: processSeoGuide started
+2025-05-21T07:56:08: Processing SEO guide with data: {
+2025-05-21T07:56:08:   query: 'mini téléphone',
+2025-05-21T07:56:08:   projectID: '459262',
+2025-05-21T07:56:08:   email: 'robertkmiller47@gmail.com',
+2025-05-21T07:56:08:   queryID: '23701070',
+2025-05-21T07:56:08:   language: 'fr',
+2025-05-21T07:56:08:   queryEngine: 'google',
+2025-05-21T07:56:08:   hl: 'fr',
+2025-05-21T07:56:08:   gl: 'fr',
+2025-05-21T07:56:08:   lr: 'lang_fr',
+2025-05-21T07:56:08:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T07:56:08:   failed: true,
+2025-05-21T07:56:08:   failedAt: '2025-05-21T07:56:07.448Z'
+2025-05-21T07:56:08: }
+2025-05-21T07:56:08: 📊 Job 435 progress: 20%
+2025-05-21T07:56:08: 📊 Job 435 progress: 30%
+2025-05-21T07:56:08: Before generating SEO keywords
+2025-05-21T07:56:08: Sending request to OpenAI with prompt: 
+2025-05-21T07:56:08: You are an SEO keyword research assistant.
+2025-05-21T07:56:08: 
+2025-05-21T07:56:08: Using the input query "mini téléphone" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T07:56:08: 
+2025-05-21T07:56:08: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T07:56:08: 
+2025-05-21T07:56:08: Example:
+2025-05-21T07:56:08: keyword 1  
+2025-05-21T07:56:08: keyword 2  
+2025-05-21T07:56:08: keyword 3  
+2025-05-21T07:56:08: ...
+2025-05-21T07:56:08: 
+2025-05-21T07:56:12: 🔄 Job 435 started processing
+2025-05-21T07:56:12: 🔄 Worker processing SEO guide creation job 435
+2025-05-21T07:56:12: 📝 Job data: {
+2025-05-21T07:56:12:   "query": "mini téléphone",
+2025-05-21T07:56:12:   "projectID": "459262",
+2025-05-21T07:56:12:   "email": "robertkmiller47@gmail.com",
+2025-05-21T07:56:12:   "queryID": "23701070",
+2025-05-21T07:56:12:   "language": "fr",
+2025-05-21T07:56:12:   "queryEngine": "google",
+2025-05-21T07:56:12:   "hl": "fr",
+2025-05-21T07:56:12:   "gl": "fr",
+2025-05-21T07:56:12:   "lr": "lang_fr",
+2025-05-21T07:56:12:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T07:56:12:   "failed": true,
+2025-05-21T07:56:12:   "failedAt": "2025-05-21T07:56:10.630Z"
+2025-05-21T07:56:12: }
+2025-05-21T07:56:12: 📊 Job 435 progress: 10%
+2025-05-21T07:56:12: ✅ Initial progress update complete
+2025-05-21T07:56:12: 🔑 Getting Payload instance...
+2025-05-21T07:56:12: ✅ Payload instance obtained
+2025-05-21T07:56:12: 📊 Job 435 progress: 30%
+2025-05-21T07:56:12: 🚀 Starting SEO guide processing...
+2025-05-21T07:56:12: processSeoGuide started
+2025-05-21T07:56:12: Processing SEO guide with data: {
+2025-05-21T07:56:12:   query: 'mini téléphone',
+2025-05-21T07:56:12:   projectID: '459262',
+2025-05-21T07:56:12:   email: 'robertkmiller47@gmail.com',
+2025-05-21T07:56:12:   queryID: '23701070',
+2025-05-21T07:56:12:   language: 'fr',
+2025-05-21T07:56:12:   queryEngine: 'google',
+2025-05-21T07:56:12:   hl: 'fr',
+2025-05-21T07:56:12:   gl: 'fr',
+2025-05-21T07:56:12:   lr: 'lang_fr',
+2025-05-21T07:56:12:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T07:56:12:   failed: true,
+2025-05-21T07:56:12:   failedAt: '2025-05-21T07:56:10.630Z'
+2025-05-21T07:56:12: }
+2025-05-21T07:56:12: 📊 Job 435 progress: 20%
+2025-05-21T07:56:12: 📊 Job 435 progress: 30%
+2025-05-21T07:56:12: Before generating SEO keywords
+2025-05-21T07:56:12: Sending request to OpenAI with prompt: 
+2025-05-21T07:56:12: You are an SEO keyword research assistant.
+2025-05-21T07:56:12: 
+2025-05-21T07:56:12: Using the input query "mini téléphone" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T07:56:12: 
+2025-05-21T07:56:12: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T07:56:12: 
+2025-05-21T07:56:12: Example:
+2025-05-21T07:56:12: keyword 1  
+2025-05-21T07:56:12: keyword 2  
+2025-05-21T07:56:12: keyword 3  
+2025-05-21T07:56:12: ...
+2025-05-21T07:56:12: 
+2025-05-21T10:14:09: Received request body: {
+2025-05-21T10:14:09:   query: 'chirurgie esthétique tunisie',
+2025-05-21T10:14:09:   queryID: '91281342',
+2025-05-21T10:14:09:   queryEngine: 'google',
+2025-05-21T10:14:09:   projectID: '459262',
+2025-05-21T10:14:09:   email: 'robertkmiller47@gmail.com',
+2025-05-21T10:14:09:   language: 'fr',
+2025-05-21T10:14:09:   hl: 'fr',
+2025-05-21T10:14:09:   gl: 'fr',
+2025-05-21T10:14:09:   lr: 'lang_fr'
+2025-05-21T10:14:09: }
+2025-05-21T10:14:09: Adding job to the queue...
+2025-05-21T10:14:09: Job added to queue with ID: 436
+2025-05-21T10:14:09: 🔄 Job 436 started processing
+2025-05-21T10:14:09: 🔄 Worker processing SEO guide creation job 436
+2025-05-21T10:14:09: 📝 Job data: {
+2025-05-21T10:14:09:   "query": "chirurgie esthétique tunisie",
+2025-05-21T10:14:09:   "projectID": "459262",
+2025-05-21T10:14:09:   "email": "robertkmiller47@gmail.com",
+2025-05-21T10:14:09:   "queryID": "91281342",
+2025-05-21T10:14:09:   "language": "fr",
+2025-05-21T10:14:09:   "queryEngine": "google",
+2025-05-21T10:14:09:   "hl": "fr",
+2025-05-21T10:14:09:   "gl": "fr",
+2025-05-21T10:14:09:   "lr": "lang_fr"
+2025-05-21T10:14:09: }
+2025-05-21T10:14:09: 📊 Job 436 progress: 10%
+2025-05-21T10:14:09: ✅ Initial progress update complete
+2025-05-21T10:14:09: 🔑 Getting Payload instance...
+2025-05-21T10:14:09: ✅ Payload instance obtained
+2025-05-21T10:14:09: 📊 Job 436 progress: 30%
+2025-05-21T10:14:09: 🚀 Starting SEO guide processing...
+2025-05-21T10:14:09: processSeoGuide started
+2025-05-21T10:14:09: Processing SEO guide with data: {
+2025-05-21T10:14:09:   query: 'chirurgie esthétique tunisie',
+2025-05-21T10:14:09:   projectID: '459262',
+2025-05-21T10:14:09:   email: 'robertkmiller47@gmail.com',
+2025-05-21T10:14:09:   queryID: '91281342',
+2025-05-21T10:14:09:   language: 'fr',
+2025-05-21T10:14:09:   queryEngine: 'google',
+2025-05-21T10:14:09:   hl: 'fr',
+2025-05-21T10:14:09:   gl: 'fr',
+2025-05-21T10:14:09:   lr: 'lang_fr'
+2025-05-21T10:14:09: }
+2025-05-21T10:14:09: 📊 Job 436 progress: 20%
+2025-05-21T10:14:10: 📊 Job 436 progress: 30%
+2025-05-21T10:14:10: Before generating SEO keywords
+2025-05-21T10:14:10: Sending request to OpenAI with prompt: 
+2025-05-21T10:14:10: You are an SEO keyword research assistant.
+2025-05-21T10:14:10: 
+2025-05-21T10:14:10: Using the input query "chirurgie esthétique tunisie" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T10:14:10: 
+2025-05-21T10:14:10: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T10:14:10: 
+2025-05-21T10:14:10: Example:
+2025-05-21T10:14:10: keyword 1  
+2025-05-21T10:14:10: keyword 2  
+2025-05-21T10:14:10: keyword 3  
+2025-05-21T10:14:10: ...
+2025-05-21T10:14:10: 
+2025-05-21T10:14:13: 🔄 Job 436 started processing
+2025-05-21T10:14:13: 🔄 Worker processing SEO guide creation job 436
+2025-05-21T10:14:13: 📝 Job data: {
+2025-05-21T10:14:13:   "query": "chirurgie esthétique tunisie",
+2025-05-21T10:14:13:   "projectID": "459262",
+2025-05-21T10:14:13:   "email": "robertkmiller47@gmail.com",
+2025-05-21T10:14:13:   "queryID": "91281342",
+2025-05-21T10:14:13:   "language": "fr",
+2025-05-21T10:14:13:   "queryEngine": "google",
+2025-05-21T10:14:13:   "hl": "fr",
+2025-05-21T10:14:13:   "gl": "fr",
+2025-05-21T10:14:13:   "lr": "lang_fr",
+2025-05-21T10:14:13:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T10:14:13:   "failed": true,
+2025-05-21T10:14:13:   "failedAt": "2025-05-21T10:14:12.313Z"
+2025-05-21T10:14:13: }
+2025-05-21T10:14:13: 📊 Job 436 progress: 10%
+2025-05-21T10:14:13: ✅ Initial progress update complete
+2025-05-21T10:14:13: 🔑 Getting Payload instance...
+2025-05-21T10:14:13: ✅ Payload instance obtained
+2025-05-21T10:14:13: 📊 Job 436 progress: 30%
+2025-05-21T10:14:13: 🚀 Starting SEO guide processing...
+2025-05-21T10:14:13: processSeoGuide started
+2025-05-21T10:14:13: Processing SEO guide with data: {
+2025-05-21T10:14:13:   query: 'chirurgie esthétique tunisie',
+2025-05-21T10:14:13:   projectID: '459262',
+2025-05-21T10:14:13:   email: 'robertkmiller47@gmail.com',
+2025-05-21T10:14:13:   queryID: '91281342',
+2025-05-21T10:14:13:   language: 'fr',
+2025-05-21T10:14:13:   queryEngine: 'google',
+2025-05-21T10:14:13:   hl: 'fr',
+2025-05-21T10:14:13:   gl: 'fr',
+2025-05-21T10:14:13:   lr: 'lang_fr',
+2025-05-21T10:14:13:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T10:14:13:   failed: true,
+2025-05-21T10:14:13:   failedAt: '2025-05-21T10:14:12.313Z'
+2025-05-21T10:14:13: }
+2025-05-21T10:14:13: 📊 Job 436 progress: 20%
+2025-05-21T10:14:13: 📊 Job 436 progress: 30%
+2025-05-21T10:14:13: Before generating SEO keywords
+2025-05-21T10:14:13: Sending request to OpenAI with prompt: 
+2025-05-21T10:14:13: You are an SEO keyword research assistant.
+2025-05-21T10:14:13: 
+2025-05-21T10:14:13: Using the input query "chirurgie esthétique tunisie" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T10:14:13: 
+2025-05-21T10:14:13: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T10:14:13: 
+2025-05-21T10:14:13: Example:
+2025-05-21T10:14:13: keyword 1  
+2025-05-21T10:14:13: keyword 2  
+2025-05-21T10:14:13: keyword 3  
+2025-05-21T10:14:13: ...
+2025-05-21T10:14:13: 
+2025-05-21T10:14:17: 🔄 Job 436 started processing
+2025-05-21T10:14:17: 🔄 Worker processing SEO guide creation job 436
+2025-05-21T10:14:17: 📝 Job data: {
+2025-05-21T10:14:17:   "query": "chirurgie esthétique tunisie",
+2025-05-21T10:14:17:   "projectID": "459262",
+2025-05-21T10:14:17:   "email": "robertkmiller47@gmail.com",
+2025-05-21T10:14:17:   "queryID": "91281342",
+2025-05-21T10:14:17:   "language": "fr",
+2025-05-21T10:14:17:   "queryEngine": "google",
+2025-05-21T10:14:17:   "hl": "fr",
+2025-05-21T10:14:17:   "gl": "fr",
+2025-05-21T10:14:17:   "lr": "lang_fr",
+2025-05-21T10:14:17:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T10:14:17:   "failed": true,
+2025-05-21T10:14:17:   "failedAt": "2025-05-21T10:14:15.118Z"
+2025-05-21T10:14:17: }
+2025-05-21T10:14:17: 📊 Job 436 progress: 10%
+2025-05-21T10:14:17: ✅ Initial progress update complete
+2025-05-21T10:14:17: 🔑 Getting Payload instance...
+2025-05-21T10:14:17: ✅ Payload instance obtained
+2025-05-21T10:14:17: 📊 Job 436 progress: 30%
+2025-05-21T10:14:17: 🚀 Starting SEO guide processing...
+2025-05-21T10:14:17: processSeoGuide started
+2025-05-21T10:14:17: Processing SEO guide with data: {
+2025-05-21T10:14:17:   query: 'chirurgie esthétique tunisie',
+2025-05-21T10:14:17:   projectID: '459262',
+2025-05-21T10:14:17:   email: 'robertkmiller47@gmail.com',
+2025-05-21T10:14:17:   queryID: '91281342',
+2025-05-21T10:14:17:   language: 'fr',
+2025-05-21T10:14:17:   queryEngine: 'google',
+2025-05-21T10:14:17:   hl: 'fr',
+2025-05-21T10:14:17:   gl: 'fr',
+2025-05-21T10:14:17:   lr: 'lang_fr',
+2025-05-21T10:14:17:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T10:14:17:   failed: true,
+2025-05-21T10:14:17:   failedAt: '2025-05-21T10:14:15.118Z'
+2025-05-21T10:14:17: }
+2025-05-21T10:14:17: 📊 Job 436 progress: 20%
+2025-05-21T10:14:17: 📊 Job 436 progress: 30%
+2025-05-21T10:14:17: Before generating SEO keywords
+2025-05-21T10:14:17: Sending request to OpenAI with prompt: 
+2025-05-21T10:14:17: You are an SEO keyword research assistant.
+2025-05-21T10:14:17: 
+2025-05-21T10:14:17: Using the input query "chirurgie esthétique tunisie" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T10:14:17: 
+2025-05-21T10:14:17: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T10:14:17: 
+2025-05-21T10:14:17: Example:
+2025-05-21T10:14:17: keyword 1  
+2025-05-21T10:14:17: keyword 2  
+2025-05-21T10:14:17: keyword 3  
+2025-05-21T10:14:17: ...
+2025-05-21T10:14:17: 
+2025-05-21T12:11:19: Received request body: {
+2025-05-21T12:11:19:   query: ' Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:11:19:   queryID: '85935053',
+2025-05-21T12:11:19:   queryEngine: 'google',
+2025-05-21T12:11:19:   projectID: '718242',
+2025-05-21T12:11:19:   email: 'robertsconnor290@gmail.com',
+2025-05-21T12:11:19:   language: 'fr',
+2025-05-21T12:11:19:   hl: 'fr',
+2025-05-21T12:11:19:   gl: 'fr',
+2025-05-21T12:11:19:   lr: 'lang_fr'
+2025-05-21T12:11:19: }
+2025-05-21T12:11:19: Adding job to the queue...
+2025-05-21T12:11:19: Job added to queue with ID: 437
+2025-05-21T12:11:19: 🔄 Job 437 started processing
+2025-05-21T12:11:19: 🔄 Worker processing SEO guide creation job 437
+2025-05-21T12:11:19: 📝 Job data: {
+2025-05-21T12:11:19:   "query": " Vêtements vintage recyclés fabriqués en France pour femme",
+2025-05-21T12:11:19:   "projectID": "718242",
+2025-05-21T12:11:19:   "email": "robertsconnor290@gmail.com",
+2025-05-21T12:11:19:   "queryID": "85935053",
+2025-05-21T12:11:19:   "language": "fr",
+2025-05-21T12:11:19:   "queryEngine": "google",
+2025-05-21T12:11:19:   "hl": "fr",
+2025-05-21T12:11:19:   "gl": "fr",
+2025-05-21T12:11:19:   "lr": "lang_fr"
+2025-05-21T12:11:19: }
+2025-05-21T12:11:19: 📊 Job 437 progress: 10%
+2025-05-21T12:11:19: ✅ Initial progress update complete
+2025-05-21T12:11:19: 🔑 Getting Payload instance...
+2025-05-21T12:11:19: ✅ Payload instance obtained
+2025-05-21T12:11:19: 📊 Job 437 progress: 30%
+2025-05-21T12:11:19: 🚀 Starting SEO guide processing...
+2025-05-21T12:11:19: processSeoGuide started
+2025-05-21T12:11:19: Processing SEO guide with data: {
+2025-05-21T12:11:19:   query: ' Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:11:19:   projectID: '718242',
+2025-05-21T12:11:19:   email: 'robertsconnor290@gmail.com',
+2025-05-21T12:11:19:   queryID: '85935053',
+2025-05-21T12:11:19:   language: 'fr',
+2025-05-21T12:11:19:   queryEngine: 'google',
+2025-05-21T12:11:19:   hl: 'fr',
+2025-05-21T12:11:19:   gl: 'fr',
+2025-05-21T12:11:19:   lr: 'lang_fr'
+2025-05-21T12:11:19: }
+2025-05-21T12:11:19: 📊 Job 437 progress: 20%
+2025-05-21T12:11:21: 📊 Job 437 progress: 30%
+2025-05-21T12:11:21: Before generating SEO keywords
+2025-05-21T12:11:21: Sending request to OpenAI with prompt: 
+2025-05-21T12:11:21: You are an SEO keyword research assistant.
+2025-05-21T12:11:21: 
+2025-05-21T12:11:21: Using the input query " Vêtements vintage recyclés fabriqués en France pour femme" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T12:11:21: 
+2025-05-21T12:11:21: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T12:11:21: 
+2025-05-21T12:11:21: Example:
+2025-05-21T12:11:21: keyword 1  
+2025-05-21T12:11:21: keyword 2  
+2025-05-21T12:11:21: keyword 3  
+2025-05-21T12:11:21: ...
+2025-05-21T12:11:21: 
+2025-05-21T12:11:26: 🔄 Job 437 started processing
+2025-05-21T12:11:26: 🔄 Worker processing SEO guide creation job 437
+2025-05-21T12:11:26: 📝 Job data: {
+2025-05-21T12:11:26:   "query": " Vêtements vintage recyclés fabriqués en France pour femme",
+2025-05-21T12:11:26:   "projectID": "718242",
+2025-05-21T12:11:26:   "email": "robertsconnor290@gmail.com",
+2025-05-21T12:11:26:   "queryID": "85935053",
+2025-05-21T12:11:26:   "language": "fr",
+2025-05-21T12:11:26:   "queryEngine": "google",
+2025-05-21T12:11:26:   "hl": "fr",
+2025-05-21T12:11:26:   "gl": "fr",
+2025-05-21T12:11:26:   "lr": "lang_fr",
+2025-05-21T12:11:26:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T12:11:26:   "failed": true,
+2025-05-21T12:11:26:   "failedAt": "2025-05-21T12:11:25.832Z"
+2025-05-21T12:11:26: }
+2025-05-21T12:11:26: 📊 Job 437 progress: 10%
+2025-05-21T12:11:26: ✅ Initial progress update complete
+2025-05-21T12:11:26: 🔑 Getting Payload instance...
+2025-05-21T12:11:26: ✅ Payload instance obtained
+2025-05-21T12:11:26: 📊 Job 437 progress: 30%
+2025-05-21T12:11:26: 🚀 Starting SEO guide processing...
+2025-05-21T12:11:26: processSeoGuide started
+2025-05-21T12:11:26: Processing SEO guide with data: {
+2025-05-21T12:11:26:   query: ' Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:11:26:   projectID: '718242',
+2025-05-21T12:11:26:   email: 'robertsconnor290@gmail.com',
+2025-05-21T12:11:26:   queryID: '85935053',
+2025-05-21T12:11:26:   language: 'fr',
+2025-05-21T12:11:26:   queryEngine: 'google',
+2025-05-21T12:11:26:   hl: 'fr',
+2025-05-21T12:11:26:   gl: 'fr',
+2025-05-21T12:11:26:   lr: 'lang_fr',
+2025-05-21T12:11:26:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T12:11:26:   failed: true,
+2025-05-21T12:11:26:   failedAt: '2025-05-21T12:11:25.832Z'
+2025-05-21T12:11:26: }
+2025-05-21T12:11:26: 📊 Job 437 progress: 20%
+2025-05-21T12:11:26: 📊 Job 437 progress: 30%
+2025-05-21T12:11:26: Before generating SEO keywords
+2025-05-21T12:11:26: Sending request to OpenAI with prompt: 
+2025-05-21T12:11:26: You are an SEO keyword research assistant.
+2025-05-21T12:11:26: 
+2025-05-21T12:11:26: Using the input query " Vêtements vintage recyclés fabriqués en France pour femme" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T12:11:26: 
+2025-05-21T12:11:26: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T12:11:26: 
+2025-05-21T12:11:26: Example:
+2025-05-21T12:11:26: keyword 1  
+2025-05-21T12:11:26: keyword 2  
+2025-05-21T12:11:26: keyword 3  
+2025-05-21T12:11:26: ...
+2025-05-21T12:11:26: 
+2025-05-21T12:11:30: 🔄 Job 437 started processing
+2025-05-21T12:11:30: 🔄 Worker processing SEO guide creation job 437
+2025-05-21T12:11:30: 📝 Job data: {
+2025-05-21T12:11:30:   "query": " Vêtements vintage recyclés fabriqués en France pour femme",
+2025-05-21T12:11:30:   "projectID": "718242",
+2025-05-21T12:11:30:   "email": "robertsconnor290@gmail.com",
+2025-05-21T12:11:30:   "queryID": "85935053",
+2025-05-21T12:11:30:   "language": "fr",
+2025-05-21T12:11:30:   "queryEngine": "google",
+2025-05-21T12:11:30:   "hl": "fr",
+2025-05-21T12:11:30:   "gl": "fr",
+2025-05-21T12:11:30:   "lr": "lang_fr",
+2025-05-21T12:11:30:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T12:11:30:   "failed": true,
+2025-05-21T12:11:30:   "failedAt": "2025-05-21T12:11:28.726Z"
+2025-05-21T12:11:30: }
+2025-05-21T12:11:30: 📊 Job 437 progress: 10%
+2025-05-21T12:11:30: ✅ Initial progress update complete
+2025-05-21T12:11:30: 🔑 Getting Payload instance...
+2025-05-21T12:11:30: ✅ Payload instance obtained
+2025-05-21T12:11:30: 📊 Job 437 progress: 30%
+2025-05-21T12:11:30: 🚀 Starting SEO guide processing...
+2025-05-21T12:11:30: processSeoGuide started
+2025-05-21T12:11:30: Processing SEO guide with data: {
+2025-05-21T12:11:30:   query: ' Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:11:30:   projectID: '718242',
+2025-05-21T12:11:30:   email: 'robertsconnor290@gmail.com',
+2025-05-21T12:11:30:   queryID: '85935053',
+2025-05-21T12:11:30:   language: 'fr',
+2025-05-21T12:11:30:   queryEngine: 'google',
+2025-05-21T12:11:30:   hl: 'fr',
+2025-05-21T12:11:30:   gl: 'fr',
+2025-05-21T12:11:30:   lr: 'lang_fr',
+2025-05-21T12:11:30:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T12:11:30:   failed: true,
+2025-05-21T12:11:30:   failedAt: '2025-05-21T12:11:28.726Z'
+2025-05-21T12:11:30: }
+2025-05-21T12:11:30: 📊 Job 437 progress: 20%
+2025-05-21T12:11:30: 📊 Job 437 progress: 30%
+2025-05-21T12:11:30: Before generating SEO keywords
+2025-05-21T12:11:30: Sending request to OpenAI with prompt: 
+2025-05-21T12:11:30: You are an SEO keyword research assistant.
+2025-05-21T12:11:30: 
+2025-05-21T12:11:30: Using the input query " Vêtements vintage recyclés fabriqués en France pour femme" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T12:11:30: 
+2025-05-21T12:11:30: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T12:11:30: 
+2025-05-21T12:11:30: Example:
+2025-05-21T12:11:30: keyword 1  
+2025-05-21T12:11:30: keyword 2  
+2025-05-21T12:11:30: keyword 3  
+2025-05-21T12:11:30: ...
+2025-05-21T12:11:30: 
+2025-05-21T12:12:54: Received request body: {
+2025-05-21T12:12:54:   query: 'Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:12:54:   queryID: '15512252',
+2025-05-21T12:12:54:   queryEngine: 'google',
+2025-05-21T12:12:54:   projectID: '459262',
+2025-05-21T12:12:54:   email: 'robertkmiller47@gmail.com',
+2025-05-21T12:12:54:   language: 'fr',
+2025-05-21T12:12:54:   hl: 'fr',
+2025-05-21T12:12:54:   gl: 'fr',
+2025-05-21T12:12:54:   lr: 'lang_fr'
+2025-05-21T12:12:54: }
+2025-05-21T12:12:54: Adding job to the queue...
+2025-05-21T12:12:54: Job added to queue with ID: 438
+2025-05-21T12:12:54: 🔄 Job 438 started processing
+2025-05-21T12:12:54: 🔄 Worker processing SEO guide creation job 438
+2025-05-21T12:12:54: 📝 Job data: {
+2025-05-21T12:12:54:   "query": "Vêtements vintage recyclés fabriqués en France pour femme",
+2025-05-21T12:12:54:   "projectID": "459262",
+2025-05-21T12:12:54:   "email": "robertkmiller47@gmail.com",
+2025-05-21T12:12:54:   "queryID": "15512252",
+2025-05-21T12:12:54:   "language": "fr",
+2025-05-21T12:12:54:   "queryEngine": "google",
+2025-05-21T12:12:54:   "hl": "fr",
+2025-05-21T12:12:54:   "gl": "fr",
+2025-05-21T12:12:54:   "lr": "lang_fr"
+2025-05-21T12:12:54: }
+2025-05-21T12:12:54: 📊 Job 438 progress: 10%
+2025-05-21T12:12:54: ✅ Initial progress update complete
+2025-05-21T12:12:54: 🔑 Getting Payload instance...
+2025-05-21T12:12:54: ✅ Payload instance obtained
+2025-05-21T12:12:54: 📊 Job 438 progress: 30%
+2025-05-21T12:12:54: 🚀 Starting SEO guide processing...
+2025-05-21T12:12:54: processSeoGuide started
+2025-05-21T12:12:54: Processing SEO guide with data: {
+2025-05-21T12:12:54:   query: 'Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:12:54:   projectID: '459262',
+2025-05-21T12:12:54:   email: 'robertkmiller47@gmail.com',
+2025-05-21T12:12:54:   queryID: '15512252',
+2025-05-21T12:12:54:   language: 'fr',
+2025-05-21T12:12:54:   queryEngine: 'google',
+2025-05-21T12:12:54:   hl: 'fr',
+2025-05-21T12:12:54:   gl: 'fr',
+2025-05-21T12:12:54:   lr: 'lang_fr'
+2025-05-21T12:12:54: }
+2025-05-21T12:12:54: 📊 Job 438 progress: 20%
+2025-05-21T12:12:57: 📊 Job 438 progress: 30%
+2025-05-21T12:12:57: Before generating SEO keywords
+2025-05-21T12:12:57: Sending request to OpenAI with prompt: 
+2025-05-21T12:12:57: You are an SEO keyword research assistant.
+2025-05-21T12:12:57: 
+2025-05-21T12:12:57: Using the input query "Vêtements vintage recyclés fabriqués en France pour femme" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T12:12:57: 
+2025-05-21T12:12:57: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T12:12:57: 
+2025-05-21T12:12:57: Example:
+2025-05-21T12:12:57: keyword 1  
+2025-05-21T12:12:57: keyword 2  
+2025-05-21T12:12:57: keyword 3  
+2025-05-21T12:12:57: ...
+2025-05-21T12:12:57: 
+2025-05-21T12:13:00: 🔄 Job 438 started processing
+2025-05-21T12:13:00: 🔄 Worker processing SEO guide creation job 438
+2025-05-21T12:13:00: 📝 Job data: {
+2025-05-21T12:13:00:   "query": "Vêtements vintage recyclés fabriqués en France pour femme",
+2025-05-21T12:13:00:   "projectID": "459262",
+2025-05-21T12:13:00:   "email": "robertkmiller47@gmail.com",
+2025-05-21T12:13:00:   "queryID": "15512252",
+2025-05-21T12:13:00:   "language": "fr",
+2025-05-21T12:13:00:   "queryEngine": "google",
+2025-05-21T12:13:00:   "hl": "fr",
+2025-05-21T12:13:00:   "gl": "fr",
+2025-05-21T12:13:00:   "lr": "lang_fr",
+2025-05-21T12:13:00:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T12:13:00:   "failed": true,
+2025-05-21T12:13:00:   "failedAt": "2025-05-21T12:12:59.886Z"
+2025-05-21T12:13:00: }
+2025-05-21T12:13:00: 📊 Job 438 progress: 10%
+2025-05-21T12:13:00: ✅ Initial progress update complete
+2025-05-21T12:13:00: 🔑 Getting Payload instance...
+2025-05-21T12:13:00: ✅ Payload instance obtained
+2025-05-21T12:13:00: 📊 Job 438 progress: 30%
+2025-05-21T12:13:00: 🚀 Starting SEO guide processing...
+2025-05-21T12:13:00: processSeoGuide started
+2025-05-21T12:13:00: Processing SEO guide with data: {
+2025-05-21T12:13:00:   query: 'Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:13:00:   projectID: '459262',
+2025-05-21T12:13:00:   email: 'robertkmiller47@gmail.com',
+2025-05-21T12:13:00:   queryID: '15512252',
+2025-05-21T12:13:00:   language: 'fr',
+2025-05-21T12:13:00:   queryEngine: 'google',
+2025-05-21T12:13:00:   hl: 'fr',
+2025-05-21T12:13:00:   gl: 'fr',
+2025-05-21T12:13:00:   lr: 'lang_fr',
+2025-05-21T12:13:00:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T12:13:00:   failed: true,
+2025-05-21T12:13:00:   failedAt: '2025-05-21T12:12:59.886Z'
+2025-05-21T12:13:00: }
+2025-05-21T12:13:00: 📊 Job 438 progress: 20%
+2025-05-21T12:13:00: 📊 Job 438 progress: 30%
+2025-05-21T12:13:00: Before generating SEO keywords
+2025-05-21T12:13:00: Sending request to OpenAI with prompt: 
+2025-05-21T12:13:00: You are an SEO keyword research assistant.
+2025-05-21T12:13:00: 
+2025-05-21T12:13:00: Using the input query "Vêtements vintage recyclés fabriqués en France pour femme" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T12:13:00: 
+2025-05-21T12:13:00: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T12:13:00: 
+2025-05-21T12:13:00: Example:
+2025-05-21T12:13:00: keyword 1  
+2025-05-21T12:13:00: keyword 2  
+2025-05-21T12:13:00: keyword 3  
+2025-05-21T12:13:00: ...
+2025-05-21T12:13:00: 
+2025-05-21T12:13:04: 🔄 Job 438 started processing
+2025-05-21T12:13:04: 🔄 Worker processing SEO guide creation job 438
+2025-05-21T12:13:04: 📝 Job data: {
+2025-05-21T12:13:04:   "query": "Vêtements vintage recyclés fabriqués en France pour femme",
+2025-05-21T12:13:04:   "projectID": "459262",
+2025-05-21T12:13:04:   "email": "robertkmiller47@gmail.com",
+2025-05-21T12:13:04:   "queryID": "15512252",
+2025-05-21T12:13:04:   "language": "fr",
+2025-05-21T12:13:04:   "queryEngine": "google",
+2025-05-21T12:13:04:   "hl": "fr",
+2025-05-21T12:13:04:   "gl": "fr",
+2025-05-21T12:13:04:   "lr": "lang_fr",
+2025-05-21T12:13:04:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T12:13:04:   "failed": true,
+2025-05-21T12:13:04:   "failedAt": "2025-05-21T12:13:02.764Z"
+2025-05-21T12:13:04: }
+2025-05-21T12:13:04: 📊 Job 438 progress: 10%
+2025-05-21T12:13:04: ✅ Initial progress update complete
+2025-05-21T12:13:04: 🔑 Getting Payload instance...
+2025-05-21T12:13:04: ✅ Payload instance obtained
+2025-05-21T12:13:04: 📊 Job 438 progress: 30%
+2025-05-21T12:13:04: 🚀 Starting SEO guide processing...
+2025-05-21T12:13:04: processSeoGuide started
+2025-05-21T12:13:04: Processing SEO guide with data: {
+2025-05-21T12:13:04:   query: 'Vêtements vintage recyclés fabriqués en France pour femme',
+2025-05-21T12:13:04:   projectID: '459262',
+2025-05-21T12:13:04:   email: 'robertkmiller47@gmail.com',
+2025-05-21T12:13:04:   queryID: '15512252',
+2025-05-21T12:13:04:   language: 'fr',
+2025-05-21T12:13:04:   queryEngine: 'google',
+2025-05-21T12:13:04:   hl: 'fr',
+2025-05-21T12:13:04:   gl: 'fr',
+2025-05-21T12:13:04:   lr: 'lang_fr',
+2025-05-21T12:13:04:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T12:13:04:   failed: true,
+2025-05-21T12:13:04:   failedAt: '2025-05-21T12:13:02.764Z'
+2025-05-21T12:13:04: }
+2025-05-21T12:13:04: 📊 Job 438 progress: 20%
+2025-05-21T12:13:04: 📊 Job 438 progress: 30%
+2025-05-21T12:13:04: Before generating SEO keywords
+2025-05-21T12:13:04: Sending request to OpenAI with prompt: 
+2025-05-21T12:13:04: You are an SEO keyword research assistant.
+2025-05-21T12:13:04: 
+2025-05-21T12:13:04: Using the input query "Vêtements vintage recyclés fabriqués en France pour femme" in French for the fr market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T12:13:04: 
+2025-05-21T12:13:04: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T12:13:04: 
+2025-05-21T12:13:04: Example:
+2025-05-21T12:13:04: keyword 1  
+2025-05-21T12:13:04: keyword 2  
+2025-05-21T12:13:04: keyword 3  
+2025-05-21T12:13:04: ...
+2025-05-21T12:13:04: 
+2025-05-21T16:28:43: 🔄 Job 439 started processing
+2025-05-21T16:28:43: 🔄 Worker processing SEO guide creation job 439
+2025-05-21T16:28:43: 📝 Job data: {
+2025-05-21T16:28:43:   "query": "best vpn",
+2025-05-21T16:28:43:   "projectID": "303816",
+2025-05-21T16:28:43:   "email": "healer@gmail.com",
+2025-05-21T16:28:43:   "queryID": "45106060",
+2025-05-21T16:28:43:   "language": "en",
+2025-05-21T16:28:43:   "queryEngine": "google",
+2025-05-21T16:28:43:   "hl": "en",
+2025-05-21T16:28:43:   "gl": "us",
+2025-05-21T16:28:43:   "lr": "lang_en"
+2025-05-21T16:28:43: }
+2025-05-21T16:28:43: 📊 Job 439 progress: 10%
+2025-05-21T16:28:43: ✅ Initial progress update complete
+2025-05-21T16:28:43: 🔑 Getting Payload instance...
+2025-05-21T16:28:43: ✅ Payload instance obtained
+2025-05-21T16:28:43: 📊 Job 439 progress: 30%
+2025-05-21T16:28:43: 🚀 Starting SEO guide processing...
+2025-05-21T16:28:43: processSeoGuide started
+2025-05-21T16:28:43: Processing SEO guide with data: {
+2025-05-21T16:28:43:   query: 'best vpn',
+2025-05-21T16:28:43:   projectID: '303816',
+2025-05-21T16:28:43:   email: 'healer@gmail.com',
+2025-05-21T16:28:43:   queryID: '45106060',
+2025-05-21T16:28:43:   language: 'en',
+2025-05-21T16:28:43:   queryEngine: 'google',
+2025-05-21T16:28:43:   hl: 'en',
+2025-05-21T16:28:43:   gl: 'us',
+2025-05-21T16:28:43:   lr: 'lang_en'
+2025-05-21T16:28:43: }
+2025-05-21T16:28:43: 📊 Job 439 progress: 20%
+2025-05-21T16:28:47: 📊 Job 439 progress: 30%
+2025-05-21T16:28:47: Before generating SEO keywords
+2025-05-21T16:28:47: Sending request to OpenAI with prompt: 
+2025-05-21T16:28:47: You are an SEO keyword research assistant.
+2025-05-21T16:28:47: 
+2025-05-21T16:28:47: Using the input query "best vpn" in English for the us market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T16:28:47: 
+2025-05-21T16:28:47: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T16:28:47: 
+2025-05-21T16:28:47: Example:
+2025-05-21T16:28:47: keyword 1  
+2025-05-21T16:28:47: keyword 2  
+2025-05-21T16:28:47: keyword 3  
+2025-05-21T16:28:47: ...
+2025-05-21T16:28:47: 
+2025-05-21T16:28:50: 🔄 Job 439 started processing
+2025-05-21T16:28:50: 🔄 Worker processing SEO guide creation job 439
+2025-05-21T16:28:50: 📝 Job data: {
+2025-05-21T16:28:50:   "query": "best vpn",
+2025-05-21T16:28:50:   "projectID": "303816",
+2025-05-21T16:28:50:   "email": "healer@gmail.com",
+2025-05-21T16:28:50:   "queryID": "45106060",
+2025-05-21T16:28:50:   "language": "en",
+2025-05-21T16:28:50:   "queryEngine": "google",
+2025-05-21T16:28:50:   "hl": "en",
+2025-05-21T16:28:50:   "gl": "us",
+2025-05-21T16:28:50:   "lr": "lang_en",
+2025-05-21T16:28:50:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T16:28:50:   "failed": true,
+2025-05-21T16:28:50:   "failedAt": "2025-05-21T16:28:49.209Z"
+2025-05-21T16:28:50: }
+2025-05-21T16:28:50: 📊 Job 439 progress: 10%
+2025-05-21T16:28:50: ✅ Initial progress update complete
+2025-05-21T16:28:50: 🔑 Getting Payload instance...
+2025-05-21T16:28:50: ✅ Payload instance obtained
+2025-05-21T16:28:50: 📊 Job 439 progress: 30%
+2025-05-21T16:28:50: 🚀 Starting SEO guide processing...
+2025-05-21T16:28:50: processSeoGuide started
+2025-05-21T16:28:50: Processing SEO guide with data: {
+2025-05-21T16:28:50:   query: 'best vpn',
+2025-05-21T16:28:50:   projectID: '303816',
+2025-05-21T16:28:50:   email: 'healer@gmail.com',
+2025-05-21T16:28:50:   queryID: '45106060',
+2025-05-21T16:28:50:   language: 'en',
+2025-05-21T16:28:50:   queryEngine: 'google',
+2025-05-21T16:28:50:   hl: 'en',
+2025-05-21T16:28:50:   gl: 'us',
+2025-05-21T16:28:50:   lr: 'lang_en',
+2025-05-21T16:28:50:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T16:28:50:   failed: true,
+2025-05-21T16:28:50:   failedAt: '2025-05-21T16:28:49.209Z'
+2025-05-21T16:28:50: }
+2025-05-21T16:28:50: 📊 Job 439 progress: 20%
+2025-05-21T16:28:50: 📊 Job 439 progress: 30%
+2025-05-21T16:28:50: Before generating SEO keywords
+2025-05-21T16:28:50: Sending request to OpenAI with prompt: 
+2025-05-21T16:28:50: You are an SEO keyword research assistant.
+2025-05-21T16:28:50: 
+2025-05-21T16:28:50: Using the input query "best vpn" in English for the us market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T16:28:50: 
+2025-05-21T16:28:50: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T16:28:50: 
+2025-05-21T16:28:50: Example:
+2025-05-21T16:28:50: keyword 1  
+2025-05-21T16:28:50: keyword 2  
+2025-05-21T16:28:50: keyword 3  
+2025-05-21T16:28:50: ...
+2025-05-21T16:28:50: 
+2025-05-21T16:28:54: 🔄 Job 439 started processing
+2025-05-21T16:28:54: 🔄 Worker processing SEO guide creation job 439
+2025-05-21T16:28:54: 📝 Job data: {
+2025-05-21T16:28:54:   "query": "best vpn",
+2025-05-21T16:28:54:   "projectID": "303816",
+2025-05-21T16:28:54:   "email": "healer@gmail.com",
+2025-05-21T16:28:54:   "queryID": "45106060",
+2025-05-21T16:28:54:   "language": "en",
+2025-05-21T16:28:54:   "queryEngine": "google",
+2025-05-21T16:28:54:   "hl": "en",
+2025-05-21T16:28:54:   "gl": "us",
+2025-05-21T16:28:54:   "lr": "lang_en",
+2025-05-21T16:28:54:   "error": "Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+2025-05-21T16:28:54:   "failed": true,
+2025-05-21T16:28:54:   "failedAt": "2025-05-21T16:28:52.127Z"
+2025-05-21T16:28:54: }
+2025-05-21T16:28:54: 📊 Job 439 progress: 10%
+2025-05-21T16:28:54: ✅ Initial progress update complete
+2025-05-21T16:28:54: 🔑 Getting Payload instance...
+2025-05-21T16:28:54: ✅ Payload instance obtained
+2025-05-21T16:28:54: 📊 Job 439 progress: 30%
+2025-05-21T16:28:54: 🚀 Starting SEO guide processing...
+2025-05-21T16:28:54: processSeoGuide started
+2025-05-21T16:28:54: Processing SEO guide with data: {
+2025-05-21T16:28:54:   query: 'best vpn',
+2025-05-21T16:28:54:   projectID: '303816',
+2025-05-21T16:28:54:   email: 'healer@gmail.com',
+2025-05-21T16:28:54:   queryID: '45106060',
+2025-05-21T16:28:54:   language: 'en',
+2025-05-21T16:28:54:   queryEngine: 'google',
+2025-05-21T16:28:54:   hl: 'en',
+2025-05-21T16:28:54:   gl: 'us',
+2025-05-21T16:28:54:   lr: 'lang_en',
+2025-05-21T16:28:54:   error: 'Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.',
+2025-05-21T16:28:54:   failed: true,
+2025-05-21T16:28:54:   failedAt: '2025-05-21T16:28:52.127Z'
+2025-05-21T16:28:54: }
+2025-05-21T16:28:54: 📊 Job 439 progress: 20%
+2025-05-21T16:28:54: 📊 Job 439 progress: 30%
+2025-05-21T16:28:54: Before generating SEO keywords
+2025-05-21T16:28:54: Sending request to OpenAI with prompt: 
+2025-05-21T16:28:54: You are an SEO keyword research assistant.
+2025-05-21T16:28:54: 
+2025-05-21T16:28:54: Using the input query "best vpn" in English for the us market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T16:28:54: 
+2025-05-21T16:28:54: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T16:28:54: 
+2025-05-21T16:28:54: Example:
+2025-05-21T16:28:54: keyword 1  
+2025-05-21T16:28:54: keyword 2  
+2025-05-21T16:28:54: keyword 3  
+2025-05-21T16:28:54: ...
+2025-05-21T16:28:54: 
+2025-05-21T17:41:43: ✅ Job 440 completed
+2025-05-21T17:48:07: ✅ Job 74 completed

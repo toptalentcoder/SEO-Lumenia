@@ -1,7 +1,20 @@
 import { OpenAI } from 'openai';
-import { OPENAI_API_KEY } from '@/config/apiConfig';
+import { AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from '@/config/apiConfig';
 
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+const openai = new OpenAI({
+    apiKey: OPENAI_API_KEY,
+});
+
+// const openai = new OpenAI({
+//     apiKey: AZURE_OPENAI_API_KEY,
+//     baseURL: `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT_GPT_4}`,
+//     defaultHeaders: {
+//         'api-key': AZURE_OPENAI_API_KEY
+//     },
+//     defaultQuery: {
+//         'api-version': '2025-01-01-preview'
+//     }
+// });
 
 // Define categories for classification
 const categories = [
@@ -46,7 +59,6 @@ export async function categorizeUrl(
         : `${title} ${url}`;
 
     const prompt = `
-        You are an expert SEO category classifier.
         Based on the following URL, title, content snippet, and search query, classify this page into categories from these options:
         ${categories.join(', ')}.
         
@@ -68,7 +80,8 @@ export async function categorizeUrl(
         const response = await openai.chat.completions.create({
             model: 'gpt-4-turbo',
             messages: [
-                { role: "system", content: prompt }
+                { role: "system", content: 'You are an expert SEO category classifier.' },
+                { role: "user", content: prompt }
             ],
             temperature: 0.2,
         });

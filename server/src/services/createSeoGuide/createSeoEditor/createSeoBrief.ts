@@ -1,7 +1,17 @@
 import { OpenAI } from "openai";
-import { OPENAI_API_KEY } from "@/config/apiConfig";
+import { AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from "@/config/apiConfig";
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+// const openai = new OpenAI({
+//     apiKey: AZURE_OPENAI_API_KEY,
+//     baseURL: `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT_GPT_4}`,
+//     defaultHeaders: {
+//         'api-key': AZURE_OPENAI_API_KEY
+//     },
+//     defaultQuery: {
+//         'api-version': '2025-01-01-preview'
+//     }
+// });
 
 export async function generateSeoBrief(query: string, language: string) {
     console.log(language)
@@ -42,9 +52,9 @@ export async function generateSeoBrief(query: string, language: string) {
 
     // OpenAI GPT-4 API call to generate the SEO brief
     const response = await openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-4-turbo",
         messages: [{ role: "user", content: prompt }],
-        temperature: 0.7,
+        temperature: 0.3,
     });
 
     // Log the raw response for debugging
