@@ -20793,3 +20793,758 @@
 2025-05-20T22:05:40:     at async (.next/server/chunks/5951.js:183:30593)
 2025-05-20T22:05:40:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
 2025-05-20T22:05:40: ❌ Job 434 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:07: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:07:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T07:56:07:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T07:56:07:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T07:56:07:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T07:56:07:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T07:56:07:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:07:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:07:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T07:56:07:   status: 429,
+2025-05-21T07:56:07:   headers: [Object],
+2025-05-21T07:56:07:   request_id: 'req_dd279ada811662d14149bdb56891274a',
+2025-05-21T07:56:07:   error: [Object],
+2025-05-21T07:56:07:   code: 'insufficient_quota',
+2025-05-21T07:56:07:   param: null,
+2025-05-21T07:56:07:   type: 'insufficient_quota'
+2025-05-21T07:56:07: }
+2025-05-21T07:56:07: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:07:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T07:56:07:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T07:56:07:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T07:56:07:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T07:56:07:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T07:56:07:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:07:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:07:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T07:56:07:   status: 429,
+2025-05-21T07:56:07:   headers: [Object],
+2025-05-21T07:56:07:   request_id: 'req_dd279ada811662d14149bdb56891274a',
+2025-05-21T07:56:07:   error: [Object],
+2025-05-21T07:56:07:   code: 'insufficient_quota',
+2025-05-21T07:56:07:   param: null,
+2025-05-21T07:56:07:   type: 'insufficient_quota'
+2025-05-21T07:56:07: }
+2025-05-21T07:56:07: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:07:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:07:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:07:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:07:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:07: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:07:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:07:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T07:56:07:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:07:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T07:56:07:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:07: ❌ Job 435 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:07:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:07:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:07:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:07:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:10: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:10:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T07:56:10:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T07:56:10:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T07:56:10:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T07:56:10:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T07:56:10:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:10:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:10:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T07:56:10:   status: 429,
+2025-05-21T07:56:10:   headers: [Object],
+2025-05-21T07:56:10:   request_id: 'req_b9718916776a35df89648dfaefa5351b',
+2025-05-21T07:56:10:   error: [Object],
+2025-05-21T07:56:10:   code: 'insufficient_quota',
+2025-05-21T07:56:10:   param: null,
+2025-05-21T07:56:10:   type: 'insufficient_quota'
+2025-05-21T07:56:10: }
+2025-05-21T07:56:10: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:10:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T07:56:10:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T07:56:10:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T07:56:10:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T07:56:10:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T07:56:10:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:10:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:10:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T07:56:10:   status: 429,
+2025-05-21T07:56:10:   headers: [Object],
+2025-05-21T07:56:10:   request_id: 'req_b9718916776a35df89648dfaefa5351b',
+2025-05-21T07:56:10:   error: [Object],
+2025-05-21T07:56:10:   code: 'insufficient_quota',
+2025-05-21T07:56:10:   param: null,
+2025-05-21T07:56:10:   type: 'insufficient_quota'
+2025-05-21T07:56:10: }
+2025-05-21T07:56:10: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:10:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:10:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:10:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:10:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:10: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:10:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:10:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T07:56:10:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:10:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T07:56:10:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:10: ❌ Job 435 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:10:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:10:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:10:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:10:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:14: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:14:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T07:56:14:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T07:56:14:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T07:56:14:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T07:56:14:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T07:56:14:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:14:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:14:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T07:56:14:   status: 429,
+2025-05-21T07:56:14:   headers: [Object],
+2025-05-21T07:56:14:   request_id: 'req_c7f89f619f9235d07936f2b392917c0f',
+2025-05-21T07:56:14:   error: [Object],
+2025-05-21T07:56:14:   code: 'insufficient_quota',
+2025-05-21T07:56:14:   param: null,
+2025-05-21T07:56:14:   type: 'insufficient_quota'
+2025-05-21T07:56:14: }
+2025-05-21T07:56:14: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:14:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T07:56:14:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T07:56:14:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T07:56:14:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T07:56:14:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T07:56:14:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:14:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:14:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T07:56:14:   status: 429,
+2025-05-21T07:56:14:   headers: [Object],
+2025-05-21T07:56:14:   request_id: 'req_c7f89f619f9235d07936f2b392917c0f',
+2025-05-21T07:56:14:   error: [Object],
+2025-05-21T07:56:14:   code: 'insufficient_quota',
+2025-05-21T07:56:14:   param: null,
+2025-05-21T07:56:14:   type: 'insufficient_quota'
+2025-05-21T07:56:14: }
+2025-05-21T07:56:14: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:14:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:14:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:14:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:14:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:14: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:14:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:14:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T07:56:14:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:14:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T07:56:14:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:14: ❌ Job 435 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T07:56:14:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T07:56:14:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T07:56:14:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T07:56:14:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T07:56:14: ❌ Job 435 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:12: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:12:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T10:14:12:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T10:14:12:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T10:14:12:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T10:14:12:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T10:14:12:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:12:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:12:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T10:14:12:   status: 429,
+2025-05-21T10:14:12:   headers: [Object],
+2025-05-21T10:14:12:   request_id: 'req_2d566942b3ea75a671d9fc24a2819b07',
+2025-05-21T10:14:12:   error: [Object],
+2025-05-21T10:14:12:   code: 'insufficient_quota',
+2025-05-21T10:14:12:   param: null,
+2025-05-21T10:14:12:   type: 'insufficient_quota'
+2025-05-21T10:14:12: }
+2025-05-21T10:14:12: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:12:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T10:14:12:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T10:14:12:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T10:14:12:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T10:14:12:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T10:14:12:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:12:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:12:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T10:14:12:   status: 429,
+2025-05-21T10:14:12:   headers: [Object],
+2025-05-21T10:14:12:   request_id: 'req_2d566942b3ea75a671d9fc24a2819b07',
+2025-05-21T10:14:12:   error: [Object],
+2025-05-21T10:14:12:   code: 'insufficient_quota',
+2025-05-21T10:14:12:   param: null,
+2025-05-21T10:14:12:   type: 'insufficient_quota'
+2025-05-21T10:14:12: }
+2025-05-21T10:14:12: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:12:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:12:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:12:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:12:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:12: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:12:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:12:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T10:14:12:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:12:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T10:14:12:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:12: ❌ Job 436 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:12:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:12:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:12:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:12:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:15: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:15:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T10:14:15:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T10:14:15:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T10:14:15:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T10:14:15:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T10:14:15:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:15:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:15:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T10:14:15:   status: 429,
+2025-05-21T10:14:15:   headers: [Object],
+2025-05-21T10:14:15:   request_id: 'req_8972f78d1303766b226fd274ac1c1d2c',
+2025-05-21T10:14:15:   error: [Object],
+2025-05-21T10:14:15:   code: 'insufficient_quota',
+2025-05-21T10:14:15:   param: null,
+2025-05-21T10:14:15:   type: 'insufficient_quota'
+2025-05-21T10:14:15: }
+2025-05-21T10:14:15: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:15:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T10:14:15:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T10:14:15:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T10:14:15:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T10:14:15:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T10:14:15:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:15:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:15:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T10:14:15:   status: 429,
+2025-05-21T10:14:15:   headers: [Object],
+2025-05-21T10:14:15:   request_id: 'req_8972f78d1303766b226fd274ac1c1d2c',
+2025-05-21T10:14:15:   error: [Object],
+2025-05-21T10:14:15:   code: 'insufficient_quota',
+2025-05-21T10:14:15:   param: null,
+2025-05-21T10:14:15:   type: 'insufficient_quota'
+2025-05-21T10:14:15: }
+2025-05-21T10:14:15: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:15:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:15:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:15:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:15:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:15: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:15:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:15:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T10:14:15:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:15:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T10:14:15:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:15: ❌ Job 436 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:15:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:15:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:15:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:15:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:18: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:18:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T10:14:18:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T10:14:18:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T10:14:18:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T10:14:18:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T10:14:18:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:18:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:18:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T10:14:18:   status: 429,
+2025-05-21T10:14:18:   headers: [Object],
+2025-05-21T10:14:18:   request_id: 'req_94cea8df41dfba0b2b35f539918db7a6',
+2025-05-21T10:14:18:   error: [Object],
+2025-05-21T10:14:18:   code: 'insufficient_quota',
+2025-05-21T10:14:18:   param: null,
+2025-05-21T10:14:18:   type: 'insufficient_quota'
+2025-05-21T10:14:18: }
+2025-05-21T10:14:18: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:18:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T10:14:18:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T10:14:18:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T10:14:18:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T10:14:18:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T10:14:18:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:18:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:18:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T10:14:18:   status: 429,
+2025-05-21T10:14:18:   headers: [Object],
+2025-05-21T10:14:18:   request_id: 'req_94cea8df41dfba0b2b35f539918db7a6',
+2025-05-21T10:14:18:   error: [Object],
+2025-05-21T10:14:18:   code: 'insufficient_quota',
+2025-05-21T10:14:18:   param: null,
+2025-05-21T10:14:18:   type: 'insufficient_quota'
+2025-05-21T10:14:18: }
+2025-05-21T10:14:18: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:18:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:18:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:18:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:18:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:18: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:18:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:18:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T10:14:18:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:18:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T10:14:18:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T10:14:18: ❌ Job 436 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:18: ❌ Job 436 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T10:14:18:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T10:14:18:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T10:14:18:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T10:14:18:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:25: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:25:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:11:25:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:11:25:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:11:25:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:11:25:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:11:25:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:25:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:25:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:11:25:   status: 429,
+2025-05-21T12:11:25:   headers: [Object],
+2025-05-21T12:11:25:   request_id: 'req_16728ea15fea4e52fcdacc21e9dc6d4a',
+2025-05-21T12:11:25:   error: [Object],
+2025-05-21T12:11:25:   code: 'insufficient_quota',
+2025-05-21T12:11:25:   param: null,
+2025-05-21T12:11:25:   type: 'insufficient_quota'
+2025-05-21T12:11:25: }
+2025-05-21T12:11:25: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:25:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:11:25:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:11:25:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:11:25:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:11:25:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:11:25:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:25:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:25:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:11:25:   status: 429,
+2025-05-21T12:11:25:   headers: [Object],
+2025-05-21T12:11:25:   request_id: 'req_16728ea15fea4e52fcdacc21e9dc6d4a',
+2025-05-21T12:11:25:   error: [Object],
+2025-05-21T12:11:25:   code: 'insufficient_quota',
+2025-05-21T12:11:25:   param: null,
+2025-05-21T12:11:25:   type: 'insufficient_quota'
+2025-05-21T12:11:25: }
+2025-05-21T12:11:25: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:25:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:25:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:25:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:25:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:25: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:25:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:25:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T12:11:25:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:25:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T12:11:25:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:25: ❌ Job 437 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:25:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:25:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:25:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:25:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:28: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:28:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:11:28:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:11:28:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:11:28:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:11:28:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:11:28:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:28:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:28:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:11:28:   status: 429,
+2025-05-21T12:11:28:   headers: [Object],
+2025-05-21T12:11:28:   request_id: 'req_d0cd726de02532adcefab45cc6b6633d',
+2025-05-21T12:11:28:   error: [Object],
+2025-05-21T12:11:28:   code: 'insufficient_quota',
+2025-05-21T12:11:28:   param: null,
+2025-05-21T12:11:28:   type: 'insufficient_quota'
+2025-05-21T12:11:28: }
+2025-05-21T12:11:28: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:28:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:11:28:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:11:28:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:11:28:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:11:28:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:11:28:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:28:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:28:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:11:28:   status: 429,
+2025-05-21T12:11:28:   headers: [Object],
+2025-05-21T12:11:28:   request_id: 'req_d0cd726de02532adcefab45cc6b6633d',
+2025-05-21T12:11:28:   error: [Object],
+2025-05-21T12:11:28:   code: 'insufficient_quota',
+2025-05-21T12:11:28:   param: null,
+2025-05-21T12:11:28:   type: 'insufficient_quota'
+2025-05-21T12:11:28: }
+2025-05-21T12:11:28: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:28:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:28:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:28:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:28:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:28: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:28:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:28:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T12:11:28:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:28:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T12:11:28:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:28: ❌ Job 437 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:28:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:28:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:28:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:28:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:32: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:32:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:11:32:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:11:32:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:11:32:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:11:32:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:11:32:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:32:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:32:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:11:32:   status: 429,
+2025-05-21T12:11:32:   headers: [Object],
+2025-05-21T12:11:32:   request_id: 'req_28b506502e7ff151e65f317034b1530b',
+2025-05-21T12:11:32:   error: [Object],
+2025-05-21T12:11:32:   code: 'insufficient_quota',
+2025-05-21T12:11:32:   param: null,
+2025-05-21T12:11:32:   type: 'insufficient_quota'
+2025-05-21T12:11:32: }
+2025-05-21T12:11:32: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:32:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:11:32:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:11:32:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:11:32:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:11:32:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:11:32:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:32:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:32:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:11:32:   status: 429,
+2025-05-21T12:11:32:   headers: [Object],
+2025-05-21T12:11:32:   request_id: 'req_28b506502e7ff151e65f317034b1530b',
+2025-05-21T12:11:32:   error: [Object],
+2025-05-21T12:11:32:   code: 'insufficient_quota',
+2025-05-21T12:11:32:   param: null,
+2025-05-21T12:11:32:   type: 'insufficient_quota'
+2025-05-21T12:11:32: }
+2025-05-21T12:11:32: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:32:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:32:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:32:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:32:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:32: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:32:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:32:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T12:11:32:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:32:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T12:11:32:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:11:32: ❌ Job 437 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:32: ❌ Job 437 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:11:32:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:11:32:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:11:32:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:11:32:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:12:59: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:12:59:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:12:59:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:12:59:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:12:59:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:12:59:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:12:59:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:12:59:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:12:59:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:12:59:   status: 429,
+2025-05-21T12:12:59:   headers: [Object],
+2025-05-21T12:12:59:   request_id: 'req_5bddf18990ffb08afe8dbdf1fecb8382',
+2025-05-21T12:12:59:   error: [Object],
+2025-05-21T12:12:59:   code: 'insufficient_quota',
+2025-05-21T12:12:59:   param: null,
+2025-05-21T12:12:59:   type: 'insufficient_quota'
+2025-05-21T12:12:59: }
+2025-05-21T12:12:59: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:12:59:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:12:59:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:12:59:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:12:59:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:12:59:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:12:59:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:12:59:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:12:59:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:12:59:   status: 429,
+2025-05-21T12:12:59:   headers: [Object],
+2025-05-21T12:12:59:   request_id: 'req_5bddf18990ffb08afe8dbdf1fecb8382',
+2025-05-21T12:12:59:   error: [Object],
+2025-05-21T12:12:59:   code: 'insufficient_quota',
+2025-05-21T12:12:59:   param: null,
+2025-05-21T12:12:59:   type: 'insufficient_quota'
+2025-05-21T12:12:59: }
+2025-05-21T12:12:59: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:12:59:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:12:59:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:12:59:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:12:59:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:12:59: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:12:59:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:12:59:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T12:12:59:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:12:59:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T12:12:59:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:12:59: ❌ Job 438 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:12:59:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:12:59:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:12:59:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:12:59:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:13:02: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:02:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:13:02:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:13:02:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:13:02:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:13:02:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:13:02:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:02:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:02:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:13:02:   status: 429,
+2025-05-21T12:13:02:   headers: [Object],
+2025-05-21T12:13:02:   request_id: 'req_5895a31a5c6dc3a2cee6518985fb6194',
+2025-05-21T12:13:02:   error: [Object],
+2025-05-21T12:13:02:   code: 'insufficient_quota',
+2025-05-21T12:13:02:   param: null,
+2025-05-21T12:13:02:   type: 'insufficient_quota'
+2025-05-21T12:13:02: }
+2025-05-21T12:13:02: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:02:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:13:02:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:13:02:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:13:02:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:13:02:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:13:02:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:02:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:02:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:13:02:   status: 429,
+2025-05-21T12:13:02:   headers: [Object],
+2025-05-21T12:13:02:   request_id: 'req_5895a31a5c6dc3a2cee6518985fb6194',
+2025-05-21T12:13:02:   error: [Object],
+2025-05-21T12:13:02:   code: 'insufficient_quota',
+2025-05-21T12:13:02:   param: null,
+2025-05-21T12:13:02:   type: 'insufficient_quota'
+2025-05-21T12:13:02: }
+2025-05-21T12:13:02: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:02:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:13:02:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:02:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:02:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:13:02: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:02:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:13:02:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T12:13:02:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:02:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T12:13:02:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:13:02: ❌ Job 438 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:02:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:13:02:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:02:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:02:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:13:06: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:06:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:13:06:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:13:06:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:13:06:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:13:06:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:13:06:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:06:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:06:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:13:06:   status: 429,
+2025-05-21T12:13:06:   headers: [Object],
+2025-05-21T12:13:06:   request_id: 'req_e6caba3baa9c14f8d4752f455a181b43',
+2025-05-21T12:13:06:   error: [Object],
+2025-05-21T12:13:06:   code: 'insufficient_quota',
+2025-05-21T12:13:06:   param: null,
+2025-05-21T12:13:06:   type: 'insufficient_quota'
+2025-05-21T12:13:06: }
+2025-05-21T12:13:06: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:06:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T12:13:06:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T12:13:06:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T12:13:06:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T12:13:06:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T12:13:06:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:06:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:06:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T12:13:06:   status: 429,
+2025-05-21T12:13:06:   headers: [Object],
+2025-05-21T12:13:06:   request_id: 'req_e6caba3baa9c14f8d4752f455a181b43',
+2025-05-21T12:13:06:   error: [Object],
+2025-05-21T12:13:06:   code: 'insufficient_quota',
+2025-05-21T12:13:06:   param: null,
+2025-05-21T12:13:06:   type: 'insufficient_quota'
+2025-05-21T12:13:06: }
+2025-05-21T12:13:06: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:06:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:13:06:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:06:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:06:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:13:06: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:06:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:13:06:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T12:13:06:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:06:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T12:13:06:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T12:13:06: ❌ Job 438 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:06: ❌ Job 438 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T12:13:06:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T12:13:06:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T12:13:06:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T12:13:06:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:49: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:49:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T16:28:49:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T16:28:49:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T16:28:49:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T16:28:49:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T16:28:49:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:49:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:49:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T16:28:49:   status: 429,
+2025-05-21T16:28:49:   headers: [Object],
+2025-05-21T16:28:49:   request_id: 'req_2c9e1bbc6c6f39f801ec63bebccb5a1e',
+2025-05-21T16:28:49:   error: [Object],
+2025-05-21T16:28:49:   code: 'insufficient_quota',
+2025-05-21T16:28:49:   param: null,
+2025-05-21T16:28:49:   type: 'insufficient_quota'
+2025-05-21T16:28:49: }
+2025-05-21T16:28:49: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:49:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T16:28:49:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T16:28:49:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T16:28:49:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T16:28:49:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T16:28:49:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:49:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:49:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T16:28:49:   status: 429,
+2025-05-21T16:28:49:   headers: [Object],
+2025-05-21T16:28:49:   request_id: 'req_2c9e1bbc6c6f39f801ec63bebccb5a1e',
+2025-05-21T16:28:49:   error: [Object],
+2025-05-21T16:28:49:   code: 'insufficient_quota',
+2025-05-21T16:28:49:   param: null,
+2025-05-21T16:28:49:   type: 'insufficient_quota'
+2025-05-21T16:28:49: }
+2025-05-21T16:28:49: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:49:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:49:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:49:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:49:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:49: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:49:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:49:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T16:28:49:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:49:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T16:28:49:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:49: ❌ Job 439 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:49:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:49:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:49:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:49:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:52: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:52:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T16:28:52:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T16:28:52:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T16:28:52:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T16:28:52:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T16:28:52:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:52:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:52:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T16:28:52:   status: 429,
+2025-05-21T16:28:52:   headers: [Object],
+2025-05-21T16:28:52:   request_id: 'req_6ec5d41959dea48cff6d390e2136bd75',
+2025-05-21T16:28:52:   error: [Object],
+2025-05-21T16:28:52:   code: 'insufficient_quota',
+2025-05-21T16:28:52:   param: null,
+2025-05-21T16:28:52:   type: 'insufficient_quota'
+2025-05-21T16:28:52: }
+2025-05-21T16:28:52: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:52:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T16:28:52:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T16:28:52:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T16:28:52:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T16:28:52:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T16:28:52:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:52:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:52:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T16:28:52:   status: 429,
+2025-05-21T16:28:52:   headers: [Object],
+2025-05-21T16:28:52:   request_id: 'req_6ec5d41959dea48cff6d390e2136bd75',
+2025-05-21T16:28:52:   error: [Object],
+2025-05-21T16:28:52:   code: 'insufficient_quota',
+2025-05-21T16:28:52:   param: null,
+2025-05-21T16:28:52:   type: 'insufficient_quota'
+2025-05-21T16:28:52: }
+2025-05-21T16:28:52: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:52:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:52:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:52:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:52:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:52: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:52:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:52:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T16:28:52:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:52:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T16:28:52:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:52: ❌ Job 439 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:52:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:52:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:52:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:52:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:56: Error in generateSEOKeywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:56:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T16:28:56:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T16:28:56:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T16:28:56:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T16:28:56:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T16:28:56:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:56:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:56:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T16:28:56:   status: 429,
+2025-05-21T16:28:56:   headers: [Object],
+2025-05-21T16:28:56:   request_id: 'req_d42c9c7e63d03c22456c287c17fa3d08',
+2025-05-21T16:28:56:   error: [Object],
+2025-05-21T16:28:56:   code: 'insufficient_quota',
+2025-05-21T16:28:56:   param: null,
+2025-05-21T16:28:56:   type: 'insufficient_quota'
+2025-05-21T16:28:56: }
+2025-05-21T16:28:56: Error generating keywords: Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:56:     at tY.generate (.next/server/chunks/5951.js:187:253882)
+2025-05-21T16:28:56:     at nL.makeStatusError (.next/server/chunks/5951.js:187:268234)
+2025-05-21T16:28:56:     at nL.makeRequest (.next/server/chunks/5951.js:187:269178)
+2025-05-21T16:28:56:     at async nn (.next/server/chunks/8769.js:223:65)
+2025-05-21T16:28:56:     at async na (.next/server/chunks/8769.js:223:1991)
+2025-05-21T16:28:56:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:56:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:56:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385) {
+2025-05-21T16:28:56:   status: 429,
+2025-05-21T16:28:56:   headers: [Object],
+2025-05-21T16:28:56:   request_id: 'req_d42c9c7e63d03c22456c287c17fa3d08',
+2025-05-21T16:28:56:   error: [Object],
+2025-05-21T16:28:56:   code: 'insufficient_quota',
+2025-05-21T16:28:56:   param: null,
+2025-05-21T16:28:56:   type: 'insufficient_quota'
+2025-05-21T16:28:56: }
+2025-05-21T16:28:56: ❌ SEO Guide worker error: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:56:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:56:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:56:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:56:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:56: Error details: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:56:     at na (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:56:     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2025-05-21T16:28:56:     at async eA.TK.connection [as processFn] (/root/Lumenia/SEO-YourText/server/.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:56:     at async /root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:30593
+2025-05-21T16:28:56:     at async F.retryIfFailed (/root/Lumenia/SEO-YourText/server/.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:56: ❌ Job 439 failed: Error: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T16:28:56:     at na (.next/server/chunks/8769.js:223:2221)
+2025-05-21T16:28:56:     at async eA.TK.connection [as processFn] (.next/server/chunks/8769.js:223:5114)
+2025-05-21T16:28:56:     at async (.next/server/chunks/5951.js:183:30593)
+2025-05-21T16:28:56:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
+2025-05-21T16:28:56: ❌ Job 439 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.

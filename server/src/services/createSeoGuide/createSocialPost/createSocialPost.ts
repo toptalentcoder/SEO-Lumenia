@@ -84,9 +84,12 @@ export async function createSocialPost({
 
     // Call the OpenAI API with chat completions
     const response = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.7,
+        model: 'gpt-4-turbo',
+        messages: [
+            { role: 'user', content: prompt },
+            { role: 'system', content: 'You are an expert social media strategist.' }
+        ],
+        temperature: 0.3,
     });
 
     // Get the content of the generated response

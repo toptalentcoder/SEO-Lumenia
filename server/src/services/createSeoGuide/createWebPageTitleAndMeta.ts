@@ -31,9 +31,9 @@ export async function generateWebpageTitleMeta({
     `;
 
     const response = await openai.chat.completions.create({
-        model: 'gpt-4',
+        model: 'gpt-4-turbo',
         messages: [{ role: 'user', content: prompt }],
-        temperature: 0.7,
+        temperature: 0.3,
     });
 
     const text = response.choices[0].message.content;

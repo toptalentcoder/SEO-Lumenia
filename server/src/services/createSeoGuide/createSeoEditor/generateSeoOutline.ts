@@ -13,7 +13,6 @@ export async function generateSeoOutline({
     language?: string;
 }): Promise<string[]> {
     const prompt = `
-        You are an SEO strategist.
 
         Generate a detailed, hierarchical outline for an SEO article based on the query: "${query}".
         The outline should be in ${language} language.
@@ -38,9 +37,12 @@ export async function generateSeoOutline({
     `;
 
     const response = await openai.chat.completions.create({
-        model: 'gpt-4',
-        messages: [{ role: 'user', content: prompt }],
-        temperature: 0.6,
+        model: 'gpt-4-turbo',
+        messages: [
+            { role: 'user', content: prompt },
+            { role: 'system', content: 'You are an expert SEO content strategist.' }
+        ],
+        temperature: 0.3,
     });
 
     const text = response.choices[0].message.content;
