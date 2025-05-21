@@ -62653,3 +62653,214 @@
 2025-05-21T16:28:54: 
 2025-05-21T17:41:43: ✅ Job 440 completed
 2025-05-21T17:48:07: ✅ Job 74 completed
+2025-05-21T18:00:07: ✅ Job 441 completed
+2025-05-21T18:36:52: ✅ Job 442 completed
+2025-05-21T18:49:56: ✅ Job 443 completed
+2025-05-21T18:59:43: Received request body: {
+2025-05-21T18:59:43:   query: 'corporate training',
+2025-05-21T18:59:43:   queryID: '45912134',
+2025-05-21T18:59:43:   queryEngine: 'google',
+2025-05-21T18:59:43:   projectID: '596507',
+2025-05-21T18:59:43:   email: 'robertkmiller47@gmail.com',
+2025-05-21T18:59:43:   language: 'en',
+2025-05-21T18:59:43:   hl: 'en',
+2025-05-21T18:59:43:   gl: 'ca',
+2025-05-21T18:59:43:   lr: 'lang_en'
+2025-05-21T18:59:43: }
+2025-05-21T18:59:43: Adding job to the queue...
+2025-05-21T18:59:43: Job added to queue with ID: 444
+2025-05-21T18:59:43: 🔄 Job 444 started processing
+2025-05-21T18:59:43: 🔄 Worker processing SEO guide creation job 444
+2025-05-21T18:59:43: 📝 Job data: {
+2025-05-21T18:59:43:   "query": "corporate training",
+2025-05-21T18:59:43:   "projectID": "596507",
+2025-05-21T18:59:43:   "email": "robertkmiller47@gmail.com",
+2025-05-21T18:59:43:   "queryID": "45912134",
+2025-05-21T18:59:43:   "language": "en",
+2025-05-21T18:59:43:   "queryEngine": "google",
+2025-05-21T18:59:43:   "hl": "en",
+2025-05-21T18:59:43:   "gl": "ca",
+2025-05-21T18:59:43:   "lr": "lang_en"
+2025-05-21T18:59:43: }
+2025-05-21T18:59:43: 📊 Job 444 progress: 10%
+2025-05-21T18:59:43: ✅ Initial progress update complete
+2025-05-21T18:59:43: 🔑 Getting Payload instance...
+2025-05-21T18:59:43: ✅ Payload instance obtained
+2025-05-21T18:59:43: 📊 Job 444 progress: 30%
+2025-05-21T18:59:43: 🚀 Starting SEO guide processing...
+2025-05-21T18:59:43: processSeoGuide started
+2025-05-21T18:59:43: Processing SEO guide with data: {
+2025-05-21T18:59:43:   query: 'corporate training',
+2025-05-21T18:59:43:   projectID: '596507',
+2025-05-21T18:59:43:   email: 'robertkmiller47@gmail.com',
+2025-05-21T18:59:43:   queryID: '45912134',
+2025-05-21T18:59:43:   language: 'en',
+2025-05-21T18:59:43:   queryEngine: 'google',
+2025-05-21T18:59:43:   hl: 'en',
+2025-05-21T18:59:43:   gl: 'ca',
+2025-05-21T18:59:43:   lr: 'lang_en'
+2025-05-21T18:59:43: }
+2025-05-21T18:59:43: 📊 Job 444 progress: 20%
+2025-05-21T18:59:49: 📊 Job 444 progress: 30%
+2025-05-21T18:59:49: Before generating SEO keywords
+2025-05-21T18:59:49: Sending request to OpenAI with prompt: 
+2025-05-21T18:59:49: You are an SEO keyword research assistant.
+2025-05-21T18:59:49: 
+2025-05-21T18:59:49: Using the input query "corporate training" in English for the ca market, generate a list of semantically related keyword phrases. Include a diverse mix of search intents: informational (e.g., questions, how-tos), commercial (comparisons, intent to investigate), transactional (ready to buy), and navigational (brand/site queries).
+2025-05-21T18:59:49: 
+2025-05-21T18:59:49: Return only the keywords in plain text format, **one per line**, with no JSON, no quotes, no markdown, and no explanations.
+2025-05-21T18:59:49: 
+2025-05-21T18:59:49: Example:
+2025-05-21T18:59:49: keyword 1  
+2025-05-21T18:59:49: keyword 2  
+2025-05-21T18:59:49: keyword 3  
+2025-05-21T18:59:49: ...
+2025-05-21T18:59:49: 
+2025-05-21T18:59:59: Raw keyword response: corporate training programs
+2025-05-21T18:59:59: best corporate training programs
+2025-05-21T18:59:59: how to implement corporate training
+2025-05-21T18:59:59: corporate training companies in Canada
+2025-05-21T18:59:59: leadership corporate training
+2025-05-21T18:59:59: corporate training software
+2025-05-21T18:59:59: corporate training solutions
+2025-05-21T18:59:59: corporate training certification
+2025-05-21T18:59:59: corporate training courses online
+2025-05-21T18:59:59: cost of corporate training programs
+2025-05-21T18:59:59: corporate training workshops near me
+2025-05-21T18:59:59: corporate training tools
+2025-05-21T18:59:59: benefits of corporate training
+2025-05-21T18:59:59: corporate training programs for employees
+2025-05-21T18:59:59: corporate training trends
+2025-05-21T18:59:59: corporate training management system
+2025-05-21T18:59:59: buy corporate training programs
+2025-05-21T18:59:59: corporate training materials
+2025-05-21T18:59:59: corporate training programs comparison
+2025-05-21T18:59:59: corporate training and development
+2025-05-21T18:59:59: reviews of corporate training programs
+2025-05-21T18:59:59: corporate training for small businesses
+2025-05-21T18:59:59: virtual corporate training
+2025-05-21T18:59:59: corporate training for HR professionals
+2025-05-21T18:59:59: corporate training providers Canada
+2025-05-21T18:59:59: corporate training online vs in-person
+2025-05-21T18:59:59: corporate training industry growth Canada
+2025-05-21T18:59:59: corporate training return on investment
+2025-05-21T18:59:59: corporate training programs in Toronto
+2025-05-21T18:59:59: corporate training strategies
+2025-05-21T18:59:59: corporate training companies reviews
+2025-05-21T18:59:59: corporate training for beginners
+2025-05-21T18:59:59: corporate training consultancy services
+2025-05-21T18:59:59: corporate training best practices
+2025-05-21T18:59:59: book corporate training session online.
+2025-05-21T18:59:59: Parsed keywords: [
+2025-05-21T18:59:59:   'corporate training programs',
+2025-05-21T18:59:59:   'best corporate training programs',
+2025-05-21T18:59:59:   'how to implement corporate training',
+2025-05-21T18:59:59:   'corporate training companies in Canada',
+2025-05-21T18:59:59:   'leadership corporate training',
+2025-05-21T18:59:59:   'corporate training software',
+2025-05-21T18:59:59:   'corporate training solutions',
+2025-05-21T18:59:59:   'corporate training certification',
+2025-05-21T18:59:59:   'corporate training courses online',
+2025-05-21T18:59:59:   'cost of corporate training programs',
+2025-05-21T18:59:59:   'corporate training workshops near me',
+2025-05-21T18:59:59:   'corporate training tools',
+2025-05-21T18:59:59:   'benefits of corporate training',
+2025-05-21T18:59:59:   'corporate training programs for employees',
+2025-05-21T18:59:59:   'corporate training trends',
+2025-05-21T18:59:59:   'corporate training management system',
+2025-05-21T18:59:59:   'buy corporate training programs',
+2025-05-21T18:59:59:   'corporate training materials',
+2025-05-21T18:59:59:   'corporate training programs comparison',
+2025-05-21T18:59:59:   'corporate training and development',
+2025-05-21T18:59:59:   'reviews of corporate training programs',
+2025-05-21T18:59:59:   'corporate training for small businesses',
+2025-05-21T18:59:59:   'virtual corporate training',
+2025-05-21T18:59:59:   'corporate training for HR professionals',
+2025-05-21T18:59:59:   'corporate training providers Canada',
+2025-05-21T18:59:59:   'corporate training online vs in-person',
+2025-05-21T18:59:59:   'corporate training industry growth Canada',
+2025-05-21T18:59:59:   'corporate training return on investment',
+2025-05-21T18:59:59:   'corporate training programs in Toronto',
+2025-05-21T18:59:59:   'corporate training strategies',
+2025-05-21T18:59:59:   'corporate training companies reviews',
+2025-05-21T18:59:59:   'corporate training for beginners',
+2025-05-21T18:59:59:   'corporate training consultancy services',
+2025-05-21T18:59:59:   'corporate training best practices',
+2025-05-21T18:59:59:   'book corporate training session online.'
+2025-05-21T18:59:59: ]
+2025-05-21T18:59:59: Generated keywords: [
+2025-05-21T18:59:59:   'corporate training programs',
+2025-05-21T18:59:59:   'best corporate training programs',
+2025-05-21T18:59:59:   'how to implement corporate training',
+2025-05-21T18:59:59:   'corporate training companies in Canada',
+2025-05-21T18:59:59:   'leadership corporate training',
+2025-05-21T18:59:59:   'corporate training software',
+2025-05-21T18:59:59:   'corporate training solutions',
+2025-05-21T18:59:59:   'corporate training certification',
+2025-05-21T18:59:59:   'corporate training courses online',
+2025-05-21T18:59:59:   'cost of corporate training programs',
+2025-05-21T18:59:59:   'corporate training workshops near me',
+2025-05-21T18:59:59:   'corporate training tools',
+2025-05-21T18:59:59:   'benefits of corporate training',
+2025-05-21T18:59:59:   'corporate training programs for employees',
+2025-05-21T18:59:59:   'corporate training trends',
+2025-05-21T18:59:59:   'corporate training management system',
+2025-05-21T18:59:59:   'buy corporate training programs',
+2025-05-21T18:59:59:   'corporate training materials',
+2025-05-21T18:59:59:   'corporate training programs comparison',
+2025-05-21T18:59:59:   'corporate training and development',
+2025-05-21T18:59:59:   'reviews of corporate training programs',
+2025-05-21T18:59:59:   'corporate training for small businesses',
+2025-05-21T18:59:59:   'virtual corporate training',
+2025-05-21T18:59:59:   'corporate training for HR professionals',
+2025-05-21T18:59:59:   'corporate training providers Canada',
+2025-05-21T18:59:59:   'corporate training online vs in-person',
+2025-05-21T18:59:59:   'corporate training industry growth Canada',
+2025-05-21T18:59:59:   'corporate training return on investment',
+2025-05-21T18:59:59:   'corporate training programs in Toronto',
+2025-05-21T18:59:59:   'corporate training strategies',
+2025-05-21T18:59:59:   'corporate training companies reviews',
+2025-05-21T18:59:59:   'corporate training for beginners',
+2025-05-21T18:59:59:   'corporate training consultancy services',
+2025-05-21T18:59:59:   'corporate training best practices',
+2025-05-21T18:59:59:   'book corporate training session online.'
+2025-05-21T18:59:59: ]
+2025-05-21T18:59:59: Related SEO Keywords: [
+2025-05-21T18:59:59:   'corporate training programs',
+2025-05-21T18:59:59:   'best corporate training programs',
+2025-05-21T18:59:59:   'how to implement corporate training',
+2025-05-21T18:59:59:   'corporate training companies in Canada',
+2025-05-21T18:59:59:   'leadership corporate training',
+2025-05-21T18:59:59:   'corporate training software',
+2025-05-21T18:59:59:   'corporate training solutions',
+2025-05-21T18:59:59:   'corporate training certification',
+2025-05-21T18:59:59:   'corporate training courses online',
+2025-05-21T18:59:59:   'cost of corporate training programs',
+2025-05-21T18:59:59:   'corporate training workshops near me',
+2025-05-21T18:59:59:   'corporate training tools',
+2025-05-21T18:59:59:   'benefits of corporate training',
+2025-05-21T18:59:59:   'corporate training programs for employees',
+2025-05-21T18:59:59:   'corporate training trends',
+2025-05-21T18:59:59:   'corporate training management system',
+2025-05-21T18:59:59:   'buy corporate training programs',
+2025-05-21T18:59:59:   'corporate training materials',
+2025-05-21T18:59:59:   'corporate training programs comparison',
+2025-05-21T18:59:59:   'corporate training and development'
+2025-05-21T18:59:59: ]
+2025-05-21T18:59:59: English
+2025-05-21T19:00:01: false : https://www.nait.ca/nait/continuing-education/corporate-training
+2025-05-21T19:00:11: 📊 Job 444 progress: 50%
+2025-05-21T19:00:11: 📊 Job 444 progress: 60%
+2025-05-21T19:00:15: 📊 Job 444 progress: 70%
+2025-05-21T19:00:16: false : https://www.nait.ca/nait/continuing-education/corporate-training
+2025-05-21T19:00:16: 📊 Job 444 progress: 80%
+2025-05-21T19:00:21: 📊 Job 444 progress: 90%
+2025-05-21T19:00:21: Data saved successfully
+2025-05-21T19:00:21: ✅ SEO guide processing complete
+2025-05-21T19:00:21: 📊 Job 444 progress: 50%
+2025-05-21T19:00:21: 📊 Job 444 progress: 80%
+2025-05-21T19:00:21: 📊 Job 444 progress: 100%
+2025-05-21T19:00:21: 💾 Saving job results...
+2025-05-21T19:00:21: ✅ Job results saved
+2025-05-21T19:00:21: ✅ Job 444 completed
+2025-05-21T19:00:21: ✅ Job 444 completed

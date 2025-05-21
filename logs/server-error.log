@@ -21548,3 +21548,39 @@
 2025-05-21T16:28:56:     at async (.next/server/chunks/5951.js:183:30593)
 2025-05-21T16:28:56:     at async F.retryIfFailed (.next/server/chunks/5951.js:183:33385)
 2025-05-21T16:28:56: ❌ Job 439 failed: Failed to generate keywords: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training software" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training companies in Canada" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "best corporate training programs" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "cost of corporate training programs" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training certification" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "leadership corporate training" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training courses online" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "how to implement corporate training" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "reviews of corporate training programs" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "benefits of corporate training" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training solutions" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "buy corporate training programs" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training management system" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training materials" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training programs comparison" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training workshops near me" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training trends" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training programs for employees" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training programs in Toronto" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training programs" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training for small businesses" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training return on investment" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training tools" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "virtual corporate training" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training for beginners" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training best practices" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training companies reviews" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training and development" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training strategies" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training industry growth Canada" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training providers Canada" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training online vs in-person" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "book corporate training session online." Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training consultancy services" Request failed with status code 400
+2025-05-21T18:59:59: Error fetching SERP for: "corporate training for HR professionals" Request failed with status code 400
+2025-05-21T19:00:16: Received undefined or empty text for processing
