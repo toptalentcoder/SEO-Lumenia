@@ -92,7 +92,6 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     if (job) await job.updateProgress(30);
 
     // Generate SEO Keywords
-    console.log("Before generating SEO keywords");
     let keywordList: string[] = [];
     try {
         keywordList = await generateSEOKeywords(query, gl || "us", fullLanguageName);
@@ -100,7 +99,6 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
             console.error("No keywords generated for query:", query);
             throw new Error("Failed to generate keywords");
         }
-        console.log("Generated keywords:", keywordList);
     } catch (error) {
         console.error("Error generating keywords:", error);
         throw new Error(`Failed to generate keywords: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -112,7 +110,6 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
         console.error("No related SEO keywords generated for query:", query);
         // You can provide default keywords or handle this case accordingly
     }
-    console.log("Related SEO Keywords:", relatedSEOKeywords);
 
     // Check SERP Presence
     const serpPresence = await checkUrlPresenceAcrossKeywords(keywordList, links, gl || "us", hl || "en");

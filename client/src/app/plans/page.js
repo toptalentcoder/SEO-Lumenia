@@ -106,8 +106,6 @@ export default function PricingTable() {
     const saveSubscription = useCallback(
         async (subscriptionId, planId, planName, email) => {
             try {
-                console.log("🔵 Saving subscription:", { subscriptionId, planId, planName, email });
-
                 const response = await fetch("/api/save-subscription", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -119,8 +117,6 @@ export default function PricingTable() {
                 if (!response.ok) {
                     throw new Error(data.error || "Failed to save subscription");
                 }
-
-                console.log("✅ Subscription saved successfully!");
                 return data.features || null;
             } catch (error) {
                 console.error("❌ Failed to save subscription:", error);
@@ -160,7 +156,6 @@ export default function PricingTable() {
                     return;
                 }
 
-                console.log("🔵 Checking subscription status for:", subscriptionId);
                 const response = await fetch(`/api/show-subscription?subscriptionId=${encodeURIComponent(subscriptionId)}`);
 
                 if (!response.ok) {
@@ -169,8 +164,6 @@ export default function PricingTable() {
 
                 const data = await response.json();
                 const subscriptionStatus = data.subscriptionStatus;
-
-                console.log("🔵 Subscription Status:", subscriptionStatus);
 
                 if (subscriptionStatus === "ACTIVE") {
                     await saveSubscription(subscriptionId, planId, planName, email);

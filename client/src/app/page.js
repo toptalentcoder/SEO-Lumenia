@@ -48,8 +48,6 @@ export default function Home() {
         }); // Adjust to your API route
         const data = await response.json();
 
-        console.log("data", data);
-
         if (data.intercomID) {
           Intercom({
             app_id: data.intercomID,

@@ -142,7 +142,6 @@ const SearchBar = () => {
     const [showModal, setShowModal] = useState(false);
 
     const handleSearch = (e) => {
-        console.log("aaaa")
         e.preventDefault(); // prevent form submit
         if (!url.trim()) return;
         setShowModal(true);
