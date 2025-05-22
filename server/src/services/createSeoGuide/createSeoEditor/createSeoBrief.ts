@@ -1,20 +1,18 @@
-import { OpenAI } from "openai";
-import { AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from "@/config/apiConfig";
+import { OpenAI, AzureOpenAI } from "openai";
+import { AZURE_OPENAI_API_GPT_4_1_MODELNAME, AZURE_OPENAI_API_GPT_4_1_VERSION, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4_1, AZURE_OPENAI_ENDPOINT } from "@/config/apiConfig";
 
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
-// const openai = new OpenAI({
-//     apiKey: AZURE_OPENAI_API_KEY,
-//     baseURL: `${AZURE_OPENAI_ENDPOINT}/openai/deployments/${AZURE_OPENAI_DEPLOYMENT_GPT_4}`,
-//     defaultHeaders: {
-//         'api-key': AZURE_OPENAI_API_KEY
-//     },
-//     defaultQuery: {
-//         'api-version': '2025-01-01-preview'
-//     }
-// });
+// const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+
+const options = {
+    endpoint: AZURE_OPENAI_ENDPOINT,
+    apiKey: AZURE_OPENAI_API_KEY,
+    deploymentName: AZURE_OPENAI_DEPLOYMENT_GPT_4_1,
+    apiVersion: AZURE_OPENAI_API_GPT_4_1_VERSION
+};
+
+const openai = new AzureOpenAI(options);
 
 export async function generateSeoBrief(query: string, language: string) {
-    console.log(language)
     const prompt = `
         Generate a comprehensive SEO brief for the query: ${query}.
 
@@ -52,9 +50,12 @@ export async function generateSeoBrief(query: string, language: string) {
 
     // OpenAI GPT-4 API call to generate the SEO brief
     const response = await openai.chat.completions.create({
-        model: "gpt-4-turbo",
         messages: [{ role: "user", content: prompt }],
-        temperature: 0.3,
+        temperature: 0.2,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        model : AZURE_OPENAI_API_GPT_4_1_MODELNAME,
     });
 
     // Log the raw response for debugging
@@ -79,7 +80,9 @@ export async function generateSeoBrief(query: string, language: string) {
     };
 
     // Updated regex to capture multi-line lists
-    const sectionRegex = /(\d+)\.\s*\*\*(.*?)\*\*:\s*-\s*([\s\S]*?)(?=\d+\.\s|\n{2,}|$)/gs;
+    // const sectionRegex = /(\d+)\.\s*\*\*(.*?)\*\*:\s*-\s*([\s\S]*?)(?=\d+\.\s|\n{2,}|$)/gs;
+    const sectionRegex = /(\d+)\.\s*\*\*(.*?)\*\*:\s*(?:-?\s*)?\n?([\s\S]*?)(?=\n\d+\.\s\*\*|$)/g;
+
     let match;
     while ((match = sectionRegex.exec(seoBriefRaw)) !== null) {
         const sectionKey = match[2].trim();  // Exact section key (no normalization)
@@ -99,8 +102,11 @@ export async function generateSeoBrief(query: string, language: string) {
             case 'Important Questions to Address':
                 seoBrief.importantQuestions = sectionValue.split('\n').map(question => question.trim().replace(/^-?\s*/, '')).filter(question => question);
                 break;
+            // case 'Writing Style and Tone':
+            //     seoBrief.writingStyleAndTone = sectionValue.split(',').map(style => style.trim());
+            //     break;
             case 'Writing Style and Tone':
-                seoBrief.writingStyleAndTone = sectionValue.split(',').map(style => style.trim());
+                seoBrief.writingStyleAndTone = sectionValue.split('\n').map(style => style.trim()).filter(Boolean);
                 break;
             case 'Recommended Style':
                 seoBrief.recommendedStyle = sectionValue.split('.').map(sentence => sentence.trim()).filter(sentence => sentence);

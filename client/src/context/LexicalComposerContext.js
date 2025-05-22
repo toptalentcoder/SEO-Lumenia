@@ -24,8 +24,6 @@ export const LexicalProvider = ({ children }) => {
                 return editorState.getEditorState().getText();
             });
 
-            console.log('Content from Lexical:', content);
-
             // Call your API or trigger further analysis here
             const response = await fetch('/api/calculate_optimization_levels', {
                 method: 'POST',
@@ -37,11 +35,6 @@ export const LexicalProvider = ({ children }) => {
             });
 
             const result = await response.json();
-            if (result.success) {
-                console.log('Analysis result:', result);
-            } else {
-                console.error('Error in optimization response');
-            }
         } catch (error) {
             console.error('Error during analysis:', error);
         }

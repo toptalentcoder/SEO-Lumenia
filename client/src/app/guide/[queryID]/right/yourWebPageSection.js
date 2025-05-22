@@ -80,7 +80,6 @@ export default function YourWebPageSection({ data, webpageTitleMetaData, setWebp
             const result = await response.json();
 
             if (result.success) {
-                console.log("Successfully webpage title tag and meta description saved...");
                 // Fetch the latest data after successful generation
                 setWebpageTitleMetaData(prev => [...prev, result.webpageTitleMeta]);
 

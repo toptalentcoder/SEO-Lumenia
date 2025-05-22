@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
 import { NEXT_PUBLIC_API_URL } from "../../../../config/apiConfig";
+import ReactMarkdown from "react-markdown";
 
 const CustomTooltip = ({ text }) => (
     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-black text-white text-sm rounded py-3 px-4 z-10 whitespace-nowrap">
@@ -102,16 +103,12 @@ export default function SeoBrief({data}){
                 language: data.language
             }, { timeout: 60000 });
 
-            console.log("API response:", response.data);
-
             if (response.data.jobId) {
                 // Start polling for job status
                 const pollInterval = setInterval(async () => {
                     try {
                         const statusResponse = await axios.get(`${NEXT_PUBLIC_API_URL}/api/seoBriefStatus/${response.data.jobId}`);
                         const statusData = statusResponse.data;
-
-                        console.log("Polling status data:", statusData);
 
                         // Update progress if available
                         if (statusData.progress) {
@@ -126,7 +123,6 @@ export default function SeoBrief({data}){
                                 setProgress(100);
                                 // Update both verification result and improvement suggestions
                                 if (statusData.result) {
-                                    console.log("statusData.result", statusData.result);
                                     setVerificationResult(statusData.result);
                                     setImprovementSuggestions(statusData.result.improvementText || "");
                                 }
@@ -329,7 +325,7 @@ export default function SeoBrief({data}){
             {/* Display improvement suggestions at the bottom */}
             {improvementSuggestions && (
                 <div className="mt-5 text-gray-900 text-sm">
-                    <p>{improvementSuggestions}</p>
+                    <ReactMarkdown>{improvementSuggestions}</ReactMarkdown>
                 </div>
             )}
 

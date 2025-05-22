@@ -19,7 +19,6 @@ export default function TopLinks(){
     const url = searchParams.get('url');
 
     async function handleSearch(domain) {
-        console.log('Starting search with domain:', domain);
         if (!domain) {
             console.log('No domain provided');
             return;
@@ -33,13 +32,12 @@ export default function TopLinks(){
         
         // Remove trailing slash if present
         formattedUrl = formattedUrl.replace(/\/$/, '');
-        
-        console.log('Formatted URL:', formattedUrl);
+
         setLoading(true);
         setResult([]); // Clear previous results
 
         try {
-            console.log('Making API request...');
+
             const res = await fetch("/api/search-backlinks", {
                 method: "POST",
                 body: JSON.stringify({ 
@@ -56,7 +54,7 @@ export default function TopLinks(){
             }
 
             const data = await res.json();
-            console.log('API response:', data);
+
             
             if (data && Array.isArray(data) && data.length > 0) {
                 setResult(data);
@@ -323,7 +321,6 @@ export default function TopLinks(){
                     <button
                         className="bg-[#41388C] hover:bg-[#352d73] transition-colors duration-200 text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
                         onClick={() => {
-                            console.log('OK button clicked, inputUrl:', inputUrl);
                             handleSearch(inputUrl);
                         }}
                     >
