@@ -1,7 +1,7 @@
-import { OpenAI } from 'openai';
-import { OPENAI_API_KEY } from '@/config/apiConfig';
+import { OpenAI, AzureOpenAI } from 'openai';
+import { AZURE_OPENAI_API_GPT_4_1_MODELNAME, AZURE_OPENAI_API_GPT_4_1_VERSION, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4_1, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from '@/config/apiConfig';
 
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+// const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 export async function generateWebpageTitleMeta({
     query,
@@ -30,10 +30,28 @@ export async function generateWebpageTitleMeta({
         Meta Description 3: "Find out how to select the best VPN. Ensure top security and privacy online. Act now to safeguard your data!"
     `;
 
+    const options = {
+        endpoint: AZURE_OPENAI_ENDPOINT,
+        apiKey: AZURE_OPENAI_API_KEY,
+        deploymentName: AZURE_OPENAI_DEPLOYMENT_GPT_4_1,
+        apiVersion: AZURE_OPENAI_API_GPT_4_1_VERSION
+    };
+
+    const openai = new AzureOpenAI(options)
+
+    // const response = await openai.chat.completions.create({
+    //     model: 'gpt-4-turbo',
+    //     messages: [{ role: 'user', content: prompt }],
+    //     temperature: 0.3,
+    // });
+
     const response = await openai.chat.completions.create({
-        model: 'gpt-4-turbo',
         messages: [{ role: 'user', content: prompt }],
-        temperature: 0.3,
+        temperature: 0.2,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        model : AZURE_OPENAI_API_GPT_4_1_MODELNAME,
     });
 
     const text = response.choices[0].message.content;

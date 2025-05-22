@@ -12,6 +12,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 import { useRouter } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 // Tone options
 const toneOptions = [
@@ -440,7 +441,10 @@ export default function SocialPost({data}) {
 
                                     <div className="ml-7">
                                         {openIndex === index && faq.text && (
-                                            <p className="mt-2 text-gray-600 text-left">{faq.text}</p>
+                                            // <p className="mt-2 text-gray-600 text-left">{faq.text}</p>
+                                            <div className='text-left text-gray-600'>
+                                                <ReactMarkdown>{faq.text}</ReactMarkdown>
+                                            </div>
                                         )}
                                     </div>
                                 </div>

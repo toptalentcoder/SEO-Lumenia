@@ -65,7 +65,6 @@ export const googleAuthHandler = async (req: PayloadRequest) : Promise<Response>
         });
 
         const userData = (await userResponse.json()) as GoogleUserResponse;
-        console.log(userData);
 
         if (!userData.email) {
             return new Response(

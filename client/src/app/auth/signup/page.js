@@ -32,8 +32,6 @@ export default function SignupPage() {
             if (userDataString) {
                 const userData = JSON.parse(userDataString);
 
-                console.log(userData);
-
                 sessionStorage.setItem("authToken", JSON.stringify(userData.token));
                 sessionStorage.setItem("user", JSON.stringify(userData.user));
                 setUser(userData);
@@ -95,7 +93,6 @@ export default function SignupPage() {
             }
 
             setSuccess("Account created successfully! Redirecting to login page...");
-            console.log("Signup successful:", data);
 
             setTimeout(() => router.push("/auth/signin"), 2000);
         } catch (err) {
