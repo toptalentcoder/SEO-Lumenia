@@ -759,3 +759,499 @@
 2025-05-23T13:35:51: 📊 Job 90 progress: 100%
 2025-05-23T13:35:51: ✅ Job 90 completed
 2025-05-23T13:35:51: ✅ Job 90 completed
+2025-05-23T13:47:17: Received request body: {
+2025-05-23T13:47:17:   query: 'consulat du mali​',
+2025-05-23T13:47:17:   queryID: '74946106',
+2025-05-23T13:47:17:   queryEngine: 'google',
+2025-05-23T13:47:17:   projectID: '718242',
+2025-05-23T13:47:17:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:47:17:   language: 'fr',
+2025-05-23T13:47:17:   hl: 'fr',
+2025-05-23T13:47:17:   gl: 'fr',
+2025-05-23T13:47:17:   lr: 'lang_fr'
+2025-05-23T13:47:17: }
+2025-05-23T13:47:17: Adding job to the queue...
+2025-05-23T13:47:17: Job added to queue with ID: 578
+2025-05-23T13:47:33: Received request body: {
+2025-05-23T13:47:33:   query: 'four a pizza\n',
+2025-05-23T13:47:33:   queryID: '69297617',
+2025-05-23T13:47:33:   queryEngine: 'google',
+2025-05-23T13:47:33:   projectID: '718242',
+2025-05-23T13:47:33:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:47:33:   language: 'fr',
+2025-05-23T13:47:33:   hl: 'fr',
+2025-05-23T13:47:33:   gl: 'fr',
+2025-05-23T13:47:33:   lr: 'lang_fr'
+2025-05-23T13:47:33: }
+2025-05-23T13:47:33: Adding job to the queue...
+2025-05-23T13:47:33: Job added to queue with ID: 579
+2025-05-23T13:47:33: 🔄 Job 579 started processing
+2025-05-23T13:47:33: 🔄 Worker processing SEO guide creation job 579
+2025-05-23T13:47:33: 📝 Job data: {
+2025-05-23T13:47:33:   "query": "four a pizza\n",
+2025-05-23T13:47:33:   "projectID": "718242",
+2025-05-23T13:47:33:   "email": "robertsconnor290@gmail.com",
+2025-05-23T13:47:33:   "queryID": "69297617",
+2025-05-23T13:47:33:   "language": "fr",
+2025-05-23T13:47:33:   "queryEngine": "google",
+2025-05-23T13:47:33:   "hl": "fr",
+2025-05-23T13:47:33:   "gl": "fr",
+2025-05-23T13:47:33:   "lr": "lang_fr"
+2025-05-23T13:47:33: }
+2025-05-23T13:47:33: 📊 Job 579 progress: 10%
+2025-05-23T13:47:33: ✅ Initial progress update complete
+2025-05-23T13:47:33: 🔑 Getting Payload instance...
+2025-05-23T13:47:33: ✅ Payload instance obtained
+2025-05-23T13:47:33: 📊 Job 579 progress: 30%
+2025-05-23T13:47:33: 🚀 Starting SEO guide processing...
+2025-05-23T13:47:33: processSeoGuide started
+2025-05-23T13:47:33: Processing SEO guide with data: {
+2025-05-23T13:47:33:   query: 'four a pizza\n',
+2025-05-23T13:47:33:   projectID: '718242',
+2025-05-23T13:47:33:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:47:33:   queryID: '69297617',
+2025-05-23T13:47:33:   language: 'fr',
+2025-05-23T13:47:33:   queryEngine: 'google',
+2025-05-23T13:47:33:   hl: 'fr',
+2025-05-23T13:47:33:   gl: 'fr',
+2025-05-23T13:47:33:   lr: 'lang_fr'
+2025-05-23T13:47:33: }
+2025-05-23T13:47:33: 📊 Job 579 progress: 20%
+2025-05-23T13:47:37: 📊 Job 579 progress: 30%
+2025-05-23T13:47:44: Empty or missing content from: https://www.my-barbecue.com/fr/four-pizza-et-pain-a-bois-avec-cheminee?srsltid=AfmBOoqro-hysFWII2NYqnnIvpymqVkuNSN0MqH-M_femqX3y3GJEz0V
+2025-05-23T13:47:48: ✅ Job 578 completed
+2025-05-23T13:47:57: false : https://www.boulanger.com/c/four-a-pizza
+2025-05-23T13:47:57: 📊 Job 579 progress: 50%
+2025-05-23T13:47:57: 📊 Job 579 progress: 60%
+2025-05-23T13:48:00: 📊 Job 579 progress: 70%
+2025-05-23T13:48:01: Empty or missing content from: https://www.my-barbecue.com/fr/four-pizza-et-pain-a-bois-avec-cheminee?srsltid=AfmBOoqro-hysFWII2NYqnnIvpymqVkuNSN0MqH-M_femqX3y3GJEz0V
+2025-05-23T13:48:16: false : https://www.boulanger.com/c/four-a-pizza
+2025-05-23T13:48:16: 📊 Job 579 progress: 80%
+2025-05-23T13:48:20: 📊 Job 579 progress: 90%
+2025-05-23T13:48:22: Data saved successfully
+2025-05-23T13:48:22: ✅ SEO guide processing complete
+2025-05-23T13:48:22: 📊 Job 579 progress: 50%
+2025-05-23T13:48:22: 📊 Job 579 progress: 80%
+2025-05-23T13:48:22: 📊 Job 579 progress: 100%
+2025-05-23T13:48:22: 💾 Saving job results...
+2025-05-23T13:48:22: ✅ Job results saved
+2025-05-23T13:48:22: ✅ Job 579 completed
+2025-05-23T13:48:22: ✅ Job 579 completed
+2025-05-23T13:49:59: Received request body: {
+2025-05-23T13:49:59:   query: 'Odoo 19',
+2025-05-23T13:49:59:   queryID: '70152962',
+2025-05-23T13:49:59:   queryEngine: 'google',
+2025-05-23T13:49:59:   projectID: '718242',
+2025-05-23T13:49:59:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:49:59:   language: 'fr',
+2025-05-23T13:49:59:   hl: 'fr',
+2025-05-23T13:49:59:   gl: 'fr',
+2025-05-23T13:49:59:   lr: 'lang_fr'
+2025-05-23T13:49:59: }
+2025-05-23T13:49:59: Adding job to the queue...
+2025-05-23T13:49:59: Job added to queue with ID: 580
+2025-05-23T13:50:22: ✅ Job 580 completed
+2025-05-23T13:59:28: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T13:59:34: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T14:07:19: Received request body: {
+2025-05-23T14:07:19:   query: 'kimono jujitsu bresilien',
+2025-05-23T14:07:19:   queryID: '43465664',
+2025-05-23T14:07:19:   queryEngine: 'google',
+2025-05-23T14:07:19:   projectID: '921811',
+2025-05-23T14:07:19:   email: 'robertsconnor290@gmail.com',
+2025-05-23T14:07:19:   language: 'fr',
+2025-05-23T14:07:19:   hl: 'fr',
+2025-05-23T14:07:19:   gl: 'fr',
+2025-05-23T14:07:19:   lr: 'lang_fr'
+2025-05-23T14:07:19: }
+2025-05-23T14:07:19: Adding job to the queue...
+2025-05-23T14:07:19: Job added to queue with ID: 581
+2025-05-23T14:07:52: ✅ Job 581 completed
+2025-05-23T14:20:37: Received request body: {
+2025-05-23T14:20:37:   query: 'prix femme de ménage 2h par semaine​',
+2025-05-23T14:20:37:   queryID: '58673203',
+2025-05-23T14:20:37:   queryEngine: 'google',
+2025-05-23T14:20:37:   projectID: '718242',
+2025-05-23T14:20:37:   email: 'robertsconnor290@gmail.com',
+2025-05-23T14:20:37:   language: 'fr',
+2025-05-23T14:20:37:   hl: 'fr',
+2025-05-23T14:20:37:   gl: 'fr',
+2025-05-23T14:20:37:   lr: 'lang_fr'
+2025-05-23T14:20:37: }
+2025-05-23T14:20:37: Adding job to the queue...
+2025-05-23T14:20:37: Job added to queue with ID: 582
+2025-05-23T14:20:37: 🔄 Job 582 started processing
+2025-05-23T14:20:37: 🔄 Worker processing SEO guide creation job 582
+2025-05-23T14:20:37: 📝 Job data: {
+2025-05-23T14:20:37:   "query": "prix femme de ménage 2h par semaine​",
+2025-05-23T14:20:37:   "projectID": "718242",
+2025-05-23T14:20:37:   "email": "robertsconnor290@gmail.com",
+2025-05-23T14:20:37:   "queryID": "58673203",
+2025-05-23T14:20:37:   "language": "fr",
+2025-05-23T14:20:37:   "queryEngine": "google",
+2025-05-23T14:20:37:   "hl": "fr",
+2025-05-23T14:20:37:   "gl": "fr",
+2025-05-23T14:20:37:   "lr": "lang_fr"
+2025-05-23T14:20:37: }
+2025-05-23T14:20:37: 📊 Job 582 progress: 10%
+2025-05-23T14:20:37: ✅ Initial progress update complete
+2025-05-23T14:20:37: 🔑 Getting Payload instance...
+2025-05-23T14:20:37: ✅ Payload instance obtained
+2025-05-23T14:20:37: 📊 Job 582 progress: 30%
+2025-05-23T14:20:37: 🚀 Starting SEO guide processing...
+2025-05-23T14:20:37: processSeoGuide started
+2025-05-23T14:20:37: Processing SEO guide with data: {
+2025-05-23T14:20:37:   query: 'prix femme de ménage 2h par semaine​',
+2025-05-23T14:20:37:   projectID: '718242',
+2025-05-23T14:20:37:   email: 'robertsconnor290@gmail.com',
+2025-05-23T14:20:37:   queryID: '58673203',
+2025-05-23T14:20:37:   language: 'fr',
+2025-05-23T14:20:37:   queryEngine: 'google',
+2025-05-23T14:20:37:   hl: 'fr',
+2025-05-23T14:20:37:   gl: 'fr',
+2025-05-23T14:20:37:   lr: 'lang_fr'
+2025-05-23T14:20:37: }
+2025-05-23T14:20:37: 📊 Job 582 progress: 20%
+2025-05-23T14:20:38: 📊 Job 582 progress: 30%
+2025-05-23T14:20:52: 📊 Job 582 progress: 50%
+2025-05-23T14:20:52: 📊 Job 582 progress: 60%
+2025-05-23T14:20:55: 📊 Job 582 progress: 70%
+2025-05-23T14:20:56: 📊 Job 582 progress: 80%
+2025-05-23T14:20:59: 📊 Job 582 progress: 90%
+2025-05-23T14:21:01: Data saved successfully
+2025-05-23T14:21:01: ✅ SEO guide processing complete
+2025-05-23T14:21:01: 📊 Job 582 progress: 50%
+2025-05-23T14:21:01: 📊 Job 582 progress: 80%
+2025-05-23T14:21:01: 📊 Job 582 progress: 100%
+2025-05-23T14:21:01: 💾 Saving job results...
+2025-05-23T14:21:01: ✅ Job results saved
+2025-05-23T14:21:01: ✅ Job 582 completed
+2025-05-23T14:21:01: ✅ Job 582 completed
+2025-05-23T14:38:01: Received request body: {
+2025-05-23T14:38:01:   query: 'accessoire gaming',
+2025-05-23T14:38:01:   queryID: '35914742',
+2025-05-23T14:38:01:   queryEngine: 'google',
+2025-05-23T14:38:01:   projectID: '459262',
+2025-05-23T14:38:01:   email: 'robertkmiller47@gmail.com',
+2025-05-23T14:38:01:   language: 'fr',
+2025-05-23T14:38:01:   hl: 'fr',
+2025-05-23T14:38:01:   gl: 'fr',
+2025-05-23T14:38:01:   lr: 'lang_fr'
+2025-05-23T14:38:01: }
+2025-05-23T14:38:01: Adding job to the queue...
+2025-05-23T14:38:01: Job added to queue with ID: 583
+2025-05-23T14:38:23: ✅ Job 583 completed
+2025-05-23T14:48:14: Received request body: {
+2025-05-23T14:48:14:   query: 'roue de la chance​',
+2025-05-23T14:48:14:   queryID: '73441013',
+2025-05-23T14:48:14:   queryEngine: 'google',
+2025-05-23T14:48:14:   projectID: '718242',
+2025-05-23T14:48:14:   email: 'robertsconnor290@gmail.com',
+2025-05-23T14:48:14:   language: 'fr',
+2025-05-23T14:48:14:   hl: 'fr',
+2025-05-23T14:48:14:   gl: 'fr',
+2025-05-23T14:48:14:   lr: 'lang_fr'
+2025-05-23T14:48:14: }
+2025-05-23T14:48:14: Adding job to the queue...
+2025-05-23T14:48:14: Job added to queue with ID: 584
+2025-05-23T14:48:38: ✅ Job 584 completed
+2025-05-23T14:55:17: Received request body: {
+2025-05-23T14:55:17:   query: 'location martinique\n',
+2025-05-23T14:55:17:   queryID: '39923889',
+2025-05-23T14:55:17:   queryEngine: 'google',
+2025-05-23T14:55:17:   projectID: '459262',
+2025-05-23T14:55:17:   email: 'robertkmiller47@gmail.com',
+2025-05-23T14:55:17:   language: 'fr',
+2025-05-23T14:55:17:   hl: 'fr',
+2025-05-23T14:55:17:   gl: 'fr',
+2025-05-23T14:55:17:   lr: 'lang_fr'
+2025-05-23T14:55:17: }
+2025-05-23T14:55:17: Adding job to the queue...
+2025-05-23T14:55:17: Job added to queue with ID: 585
+2025-05-23T14:55:39: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T14:55:42: ✅ Job 585 completed
+2025-05-23T14:55:45: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T14:58:48: Received request body: {
+2025-05-23T14:58:48:   query: 'locationhttps://www.locations-vue-turquoise.com/fr/location/bungalow/martinique\n' +
+2025-05-23T14:58:48:     ' martinique\n',
+2025-05-23T14:58:48:   queryID: '56766359',
+2025-05-23T14:58:48:   queryEngine: 'google',
+2025-05-23T14:58:48:   projectID: '459262',
+2025-05-23T14:58:48:   email: 'robertkmiller47@gmail.com',
+2025-05-23T14:58:48:   language: 'fr',
+2025-05-23T14:58:48:   hl: 'fr',
+2025-05-23T14:58:48:   gl: 'fr',
+2025-05-23T14:58:48:   lr: 'lang_fr'
+2025-05-23T14:58:48: }
+2025-05-23T14:58:48: Adding job to the queue...
+2025-05-23T14:58:48: Job added to queue with ID: 586
+2025-05-23T14:59:15: ✅ Job 586 completed
+2025-05-23T15:00:37: Received request body: {
+2025-05-23T15:00:37:   query: 'recherche de fuite',
+2025-05-23T15:00:37:   queryID: '45531081',
+2025-05-23T15:00:37:   queryEngine: 'google',
+2025-05-23T15:00:37:   projectID: '459262',
+2025-05-23T15:00:37:   email: 'robertkmiller47@gmail.com',
+2025-05-23T15:00:37:   language: 'fr',
+2025-05-23T15:00:37:   hl: 'fr',
+2025-05-23T15:00:37:   gl: 'fr',
+2025-05-23T15:00:37:   lr: 'lang_fr'
+2025-05-23T15:00:37: }
+2025-05-23T15:00:37: Adding job to the queue...
+2025-05-23T15:00:37: Job added to queue with ID: 587
+2025-05-23T15:00:37: 🔄 Job 587 started processing
+2025-05-23T15:00:37: 🔄 Worker processing SEO guide creation job 587
+2025-05-23T15:00:37: 📝 Job data: {
+2025-05-23T15:00:37:   "query": "recherche de fuite",
+2025-05-23T15:00:37:   "projectID": "459262",
+2025-05-23T15:00:37:   "email": "robertkmiller47@gmail.com",
+2025-05-23T15:00:37:   "queryID": "45531081",
+2025-05-23T15:00:37:   "language": "fr",
+2025-05-23T15:00:37:   "queryEngine": "google",
+2025-05-23T15:00:37:   "hl": "fr",
+2025-05-23T15:00:37:   "gl": "fr",
+2025-05-23T15:00:37:   "lr": "lang_fr"
+2025-05-23T15:00:37: }
+2025-05-23T15:00:37: 📊 Job 587 progress: 10%
+2025-05-23T15:00:37: ✅ Initial progress update complete
+2025-05-23T15:00:37: 🔑 Getting Payload instance...
+2025-05-23T15:00:37: ✅ Payload instance obtained
+2025-05-23T15:00:37: 📊 Job 587 progress: 30%
+2025-05-23T15:00:37: 🚀 Starting SEO guide processing...
+2025-05-23T15:00:37: processSeoGuide started
+2025-05-23T15:00:37: Processing SEO guide with data: {
+2025-05-23T15:00:37:   query: 'recherche de fuite',
+2025-05-23T15:00:37:   projectID: '459262',
+2025-05-23T15:00:37:   email: 'robertkmiller47@gmail.com',
+2025-05-23T15:00:37:   queryID: '45531081',
+2025-05-23T15:00:37:   language: 'fr',
+2025-05-23T15:00:37:   queryEngine: 'google',
+2025-05-23T15:00:37:   hl: 'fr',
+2025-05-23T15:00:37:   gl: 'fr',
+2025-05-23T15:00:37:   lr: 'lang_fr'
+2025-05-23T15:00:37: }
+2025-05-23T15:00:37: 📊 Job 587 progress: 20%
+2025-05-23T15:00:40: 📊 Job 587 progress: 30%
+2025-05-23T15:00:47: failed to fetch : https://www.fuiterecherche.com/
+2025-05-23T15:00:52: 📊 Job 587 progress: 50%
+2025-05-23T15:00:52: 📊 Job 587 progress: 60%
+2025-05-23T15:00:54: 📊 Job 587 progress: 70%
+2025-05-23T15:00:54: failed to fetch : https://www.fuiterecherche.com/
+2025-05-23T15:00:55: 📊 Job 587 progress: 80%
+2025-05-23T15:00:59: 📊 Job 587 progress: 90%
+2025-05-23T15:01:00: Data saved successfully
+2025-05-23T15:01:00: ✅ SEO guide processing complete
+2025-05-23T15:01:00: 📊 Job 587 progress: 50%
+2025-05-23T15:01:00: 📊 Job 587 progress: 80%
+2025-05-23T15:01:00: 📊 Job 587 progress: 100%
+2025-05-23T15:01:00: 💾 Saving job results...
+2025-05-23T15:01:00: ✅ Job results saved
+2025-05-23T15:01:00: ✅ Job 587 completed
+2025-05-23T15:01:00: ✅ Job 587 completed
+2025-05-23T15:14:51: Received request body: {
+2025-05-23T15:14:51:   query: 'machine a glacon',
+2025-05-23T15:14:51:   queryID: '67907623',
+2025-05-23T15:14:51:   queryEngine: 'google',
+2025-05-23T15:14:51:   projectID: '718242',
+2025-05-23T15:14:51:   email: 'robertsconnor290@gmail.com',
+2025-05-23T15:14:51:   language: 'fr',
+2025-05-23T15:14:51:   hl: 'fr',
+2025-05-23T15:14:51:   gl: 'fr',
+2025-05-23T15:14:51:   lr: 'lang_fr'
+2025-05-23T15:14:51: }
+2025-05-23T15:14:51: Adding job to the queue...
+2025-05-23T15:14:51: Job added to queue with ID: 588
+2025-05-23T15:14:51: 🔄 Job 588 started processing
+2025-05-23T15:14:51: 🔄 Worker processing SEO guide creation job 588
+2025-05-23T15:14:51: 📝 Job data: {
+2025-05-23T15:14:51:   "query": "machine a glacon",
+2025-05-23T15:14:51:   "projectID": "718242",
+2025-05-23T15:14:51:   "email": "robertsconnor290@gmail.com",
+2025-05-23T15:14:51:   "queryID": "67907623",
+2025-05-23T15:14:51:   "language": "fr",
+2025-05-23T15:14:51:   "queryEngine": "google",
+2025-05-23T15:14:51:   "hl": "fr",
+2025-05-23T15:14:51:   "gl": "fr",
+2025-05-23T15:14:51:   "lr": "lang_fr"
+2025-05-23T15:14:51: }
+2025-05-23T15:14:51: 📊 Job 588 progress: 10%
+2025-05-23T15:14:51: ✅ Initial progress update complete
+2025-05-23T15:14:51: 🔑 Getting Payload instance...
+2025-05-23T15:14:51: ✅ Payload instance obtained
+2025-05-23T15:14:51: 📊 Job 588 progress: 30%
+2025-05-23T15:14:51: 🚀 Starting SEO guide processing...
+2025-05-23T15:14:51: processSeoGuide started
+2025-05-23T15:14:51: Processing SEO guide with data: {
+2025-05-23T15:14:51:   query: 'machine a glacon',
+2025-05-23T15:14:51:   projectID: '718242',
+2025-05-23T15:14:51:   email: 'robertsconnor290@gmail.com',
+2025-05-23T15:14:51:   queryID: '67907623',
+2025-05-23T15:14:51:   language: 'fr',
+2025-05-23T15:14:51:   queryEngine: 'google',
+2025-05-23T15:14:51:   hl: 'fr',
+2025-05-23T15:14:51:   gl: 'fr',
+2025-05-23T15:14:51:   lr: 'lang_fr'
+2025-05-23T15:14:51: }
+2025-05-23T15:14:51: 📊 Job 588 progress: 20%
+2025-05-23T15:15:00: 📊 Job 588 progress: 30%
+2025-05-23T15:15:06: Empty or missing content from: https://www.e.leclerc/cat/machine-a-glacons?srsltid=AfmBOoqB-MsTpDiu4spcqg7lvJrmpfZAE_M4kz9V73s5QjRVClwanqjV
+2025-05-23T15:15:06: failed to fetch : https://www.darty.com/nav/achat/petit_electromenager/eau_boisson_glacon/fabrique_glacons/index.html
+2025-05-23T15:15:21: false : https://www.boulanger.com/c/machine-a-glacons
+2025-05-23T15:15:21: 📊 Job 588 progress: 50%
+2025-05-23T15:15:21: 📊 Job 588 progress: 60%
+2025-05-23T15:15:23: 📊 Job 588 progress: 70%
+2025-05-23T15:15:24: Empty or missing content from: https://www.e.leclerc/cat/machine-a-glacons?srsltid=AfmBOoqB-MsTpDiu4spcqg7lvJrmpfZAE_M4kz9V73s5QjRVClwanqjV
+2025-05-23T15:15:24: failed to fetch : https://www.darty.com/nav/achat/petit_electromenager/eau_boisson_glacon/fabrique_glacons/index.html
+2025-05-23T15:15:39: false : https://www.boulanger.com/c/machine-a-glacons
+2025-05-23T15:15:39: 📊 Job 588 progress: 80%
+2025-05-23T15:15:42: 📊 Job 588 progress: 90%
+2025-05-23T15:15:44: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T15:15:44: Data saved successfully
+2025-05-23T15:15:44: ✅ SEO guide processing complete
+2025-05-23T15:15:44: 📊 Job 588 progress: 50%
+2025-05-23T15:15:44: 📊 Job 588 progress: 80%
+2025-05-23T15:15:44: 📊 Job 588 progress: 100%
+2025-05-23T15:15:44: 💾 Saving job results...
+2025-05-23T15:15:44: ✅ Job results saved
+2025-05-23T15:15:44: ✅ Job 588 completed
+2025-05-23T15:15:44: ✅ Job 588 completed
+2025-05-23T15:15:50: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T15:18:04: Received request body: {
+2025-05-23T15:18:04:   query: 'https://www.locations-vue-turquoise.com/fr/location/bungalow/martinique\n' +
+2025-05-23T15:18:04:     ' martinique\n',
+2025-05-23T15:18:04:   queryID: '94534131',
+2025-05-23T15:18:04:   queryEngine: 'google',
+2025-05-23T15:18:04:   projectID: '459262',
+2025-05-23T15:18:04:   email: 'robertkmiller47@gmail.com',
+2025-05-23T15:18:04:   language: 'fr',
+2025-05-23T15:18:04:   hl: 'fr',
+2025-05-23T15:18:04:   gl: 'fr',
+2025-05-23T15:18:04:   lr: 'lang_fr'
+2025-05-23T15:18:04: }
+2025-05-23T15:18:04: Adding job to the queue...
+2025-05-23T15:18:04: Job added to queue with ID: 589
+2025-05-23T15:18:04: 🔄 Job 589 started processing
+2025-05-23T15:18:04: 🔄 Worker processing SEO guide creation job 589
+2025-05-23T15:18:04: 📝 Job data: {
+2025-05-23T15:18:04:   "query": "https://www.locations-vue-turquoise.com/fr/location/bungalow/martinique\n martinique\n",
+2025-05-23T15:18:04:   "projectID": "459262",
+2025-05-23T15:18:04:   "email": "robertkmiller47@gmail.com",
+2025-05-23T15:18:04:   "queryID": "94534131",
+2025-05-23T15:18:04:   "language": "fr",
+2025-05-23T15:18:04:   "queryEngine": "google",
+2025-05-23T15:18:04:   "hl": "fr",
+2025-05-23T15:18:04:   "gl": "fr",
+2025-05-23T15:18:04:   "lr": "lang_fr"
+2025-05-23T15:18:04: }
+2025-05-23T15:18:04: 📊 Job 589 progress: 10%
+2025-05-23T15:18:04: ✅ Initial progress update complete
+2025-05-23T15:18:04: 🔑 Getting Payload instance...
+2025-05-23T15:18:04: ✅ Payload instance obtained
+2025-05-23T15:18:04: 📊 Job 589 progress: 30%
+2025-05-23T15:18:04: 🚀 Starting SEO guide processing...
+2025-05-23T15:18:04: processSeoGuide started
+2025-05-23T15:18:04: Processing SEO guide with data: {
+2025-05-23T15:18:04:   query: 'https://www.locations-vue-turquoise.com/fr/location/bungalow/martinique\n' +
+2025-05-23T15:18:04:     ' martinique\n',
+2025-05-23T15:18:04:   projectID: '459262',
+2025-05-23T15:18:04:   email: 'robertkmiller47@gmail.com',
+2025-05-23T15:18:04:   queryID: '94534131',
+2025-05-23T15:18:04:   language: 'fr',
+2025-05-23T15:18:04:   queryEngine: 'google',
+2025-05-23T15:18:04:   hl: 'fr',
+2025-05-23T15:18:04:   gl: 'fr',
+2025-05-23T15:18:04:   lr: 'lang_fr'
+2025-05-23T15:18:04: }
+2025-05-23T15:18:04: 📊 Job 589 progress: 20%
+2025-05-23T15:18:12: 📊 Job 589 progress: 30%
+2025-05-23T15:18:20: failed to fetch : https://m.facebook.com/story.php?story_fbid=122116612328297049&id=61558911494312
+2025-05-23T15:18:24: 📊 Job 589 progress: 50%
+2025-05-23T15:18:24: 📊 Job 589 progress: 60%
+2025-05-23T15:18:27: 📊 Job 589 progress: 70%
+2025-05-23T15:18:27: failed to fetch : https://m.facebook.com/story.php?story_fbid=122116612328297049&id=61558911494312
+2025-05-23T15:18:28: 📊 Job 589 progress: 80%
+2025-05-23T15:18:32: 📊 Job 589 progress: 90%
+2025-05-23T15:18:32: Data saved successfully
+2025-05-23T15:18:32: ✅ SEO guide processing complete
+2025-05-23T15:18:32: 📊 Job 589 progress: 50%
+2025-05-23T15:18:32: 📊 Job 589 progress: 80%
+2025-05-23T15:18:32: 📊 Job 589 progress: 100%
+2025-05-23T15:18:32: 💾 Saving job results...
+2025-05-23T15:18:32: ✅ Job results saved
+2025-05-23T15:18:33: ✅ Job 589 completed
+2025-05-23T15:18:33: ✅ Job 589 completed
+2025-05-23T15:29:19: Received request body: {
+2025-05-23T15:29:19:   query: 'Location villa de luxe Martinique',
+2025-05-23T15:29:19:   queryID: '51599792',
+2025-05-23T15:29:19:   queryEngine: 'google',
+2025-05-23T15:29:19:   projectID: '459262',
+2025-05-23T15:29:19:   email: 'robertkmiller47@gmail.com',
+2025-05-23T15:29:19:   language: 'fr',
+2025-05-23T15:29:19:   hl: 'fr',
+2025-05-23T15:29:19:   gl: 'fr',
+2025-05-23T15:29:19:   lr: 'lang_fr'
+2025-05-23T15:29:19: }
+2025-05-23T15:29:19: Adding job to the queue...
+2025-05-23T15:29:19: Job added to queue with ID: 590
+2025-05-23T15:29:41: ✅ Job 590 completed
+2025-05-23T15:38:38: ✅ Job 91 completed
+2025-05-23T15:43:02: Received request body: {
+2025-05-23T15:43:02:   query: 'alexandre reant piege a moustique',
+2025-05-23T15:43:02:   queryID: '31503793',
+2025-05-23T15:43:02:   queryEngine: 'google',
+2025-05-23T15:43:02:   projectID: '718242',
+2025-05-23T15:43:02:   email: 'robertsconnor290@gmail.com',
+2025-05-23T15:43:02:   language: 'fr',
+2025-05-23T15:43:02:   hl: 'fr',
+2025-05-23T15:43:02:   gl: 'fr',
+2025-05-23T15:43:02:   lr: 'lang_fr'
+2025-05-23T15:43:02: }
+2025-05-23T15:43:02: Adding job to the queue...
+2025-05-23T15:43:02: Job added to queue with ID: 591
+2025-05-23T15:43:02: 🔄 Job 591 started processing
+2025-05-23T15:43:02: 🔄 Worker processing SEO guide creation job 591
+2025-05-23T15:43:02: 📝 Job data: {
+2025-05-23T15:43:02:   "query": "alexandre reant piege a moustique",
+2025-05-23T15:43:02:   "projectID": "718242",
+2025-05-23T15:43:02:   "email": "robertsconnor290@gmail.com",
+2025-05-23T15:43:02:   "queryID": "31503793",
+2025-05-23T15:43:02:   "language": "fr",
+2025-05-23T15:43:02:   "queryEngine": "google",
+2025-05-23T15:43:02:   "hl": "fr",
+2025-05-23T15:43:02:   "gl": "fr",
+2025-05-23T15:43:02:   "lr": "lang_fr"
+2025-05-23T15:43:02: }
+2025-05-23T15:43:02: 📊 Job 591 progress: 10%
+2025-05-23T15:43:02: ✅ Initial progress update complete
+2025-05-23T15:43:02: 🔑 Getting Payload instance...
+2025-05-23T15:43:02: ✅ Payload instance obtained
+2025-05-23T15:43:02: 📊 Job 591 progress: 30%
+2025-05-23T15:43:02: 🚀 Starting SEO guide processing...
+2025-05-23T15:43:02: processSeoGuide started
+2025-05-23T15:43:02: Processing SEO guide with data: {
+2025-05-23T15:43:02:   query: 'alexandre reant piege a moustique',
+2025-05-23T15:43:02:   projectID: '718242',
+2025-05-23T15:43:02:   email: 'robertsconnor290@gmail.com',
+2025-05-23T15:43:02:   queryID: '31503793',
+2025-05-23T15:43:02:   language: 'fr',
+2025-05-23T15:43:02:   queryEngine: 'google',
+2025-05-23T15:43:02:   hl: 'fr',
+2025-05-23T15:43:02:   gl: 'fr',
+2025-05-23T15:43:02:   lr: 'lang_fr'
+2025-05-23T15:43:02: }
+2025-05-23T15:43:02: 📊 Job 591 progress: 20%
+2025-05-23T15:43:06: 📊 Job 591 progress: 30%
+2025-05-23T15:43:17: 📊 Job 591 progress: 50%
+2025-05-23T15:43:17: 📊 Job 591 progress: 60%
+2025-05-23T15:43:21: 📊 Job 591 progress: 70%
+2025-05-23T15:43:24: 📊 Job 591 progress: 80%
+2025-05-23T15:43:28: 📊 Job 591 progress: 90%
+2025-05-23T15:43:30: Data saved successfully
+2025-05-23T15:43:30: ✅ SEO guide processing complete
+2025-05-23T15:43:30: 📊 Job 591 progress: 50%
+2025-05-23T15:43:30: 📊 Job 591 progress: 80%
+2025-05-23T15:43:30: 📊 Job 591 progress: 100%
+2025-05-23T15:43:30: 💾 Saving job results...
+2025-05-23T15:43:30: ✅ Job results saved
+2025-05-23T15:43:30: ✅ Job 591 completed
+2025-05-23T15:43:30: ✅ Job 591 completed
