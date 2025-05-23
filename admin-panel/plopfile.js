@@ -15,11 +15,11 @@ module.exports = function (plop) {
                 path: 'src/resources/{{lowerCase name}}/Form.tsx',
                 templateFile: 'plop-templates/Form.hbs',
             },
-            {
-                type: 'add',
-                path: 'src/resources/{{lowerCase name}}/useApi.ts',
-                templateFile: 'plop-templates/useApi.hbs',
-            },
+            // {
+            //     type: 'add',
+            //     path: 'src/resources/{{lowerCase name}}/useApi.ts',
+            //     templateFile: 'plop-templates/useApi.hbs',
+            // },
             {
                 type: 'add',
                 path: 'src/types/{{lowerCase name}}.ts',
