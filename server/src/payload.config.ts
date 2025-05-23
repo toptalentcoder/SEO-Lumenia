@@ -60,7 +60,9 @@ export default buildConfig({
     origins: [
       process.env.FRONTEND_URL,
       'http://167.235.246.98:7778',
-      'http://localhost:7778'
+      'http://localhost:7778',
+      'http://167.235.246.98:4001',
+      'http://localhost:4001'
     ].filter((url): url is string => Boolean(url)),
   },
   editor: lexicalEditor(),

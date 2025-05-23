@@ -1,0 +1,18 @@
+export type {{pascalCase name}} = {
+    id: string
+    email: string
+    username?: string
+    role: 'admin' | 'user'
+    profilePicture?: string
+    profileImageURL?: string
+    subscriptionPlan?: string
+    apiPlan?: string
+    availableFeatures?: {
+        tokens?: number
+        ai_tokens?: number
+        seats?: number
+        guests?: number
+        monitoring?: number
+    }
+    projects?: any
+}
