@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
-import { AbilityContext } from '@/lib/AbilityProvider'
+import { AbilityContext } from '@/context/AbilityProvider'
 import { subscriptionApi } from './useApi'
 import type { Subscription } from '@/types/subscription'
 
