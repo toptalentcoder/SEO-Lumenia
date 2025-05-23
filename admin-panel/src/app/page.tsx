@@ -1,101 +1,159 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+
+export default function HomePage() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+    setSuccess(null)
+    setIsLoading(true)
+    try {
+      const response = await fetch(`http://localhost:7778/api/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Sign-in failed.')
+      }
+
+      let data = await response.json()
+      if (!data.user) {
+        data = {
+          user: {
+            name: data.name,
+            email: data.email,
+            role: data.role,
+          },
+          token: data.token,
+        }
+      }
+
+      localStorage.setItem('authToken', data.token)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      setSuccess('Sign-in successful! Redirecting...')
+      router.push('/dashboard')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unexpected error occurred.')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-white">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <section
+        className="py-24 bg-blue-50"
+        style={{
+          backgroundImage: "url('/images/welcome/section-bg2.png')",
+          backgroundSize: 'auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center top',
+        }}
+      >
+        <div className="container mx-auto px-4 mt-28">
+          <div className="w-3/4 mx-auto mb-24">
+            <h2 className="text-[37.328px] font-bold text-gray-900">Log in!</h2>
+            <div className="w-24 h-1 bg-green-400 mt-4 ml-4"></div>
+          </div>
+
+          <div className="w-3/4 mx-auto bg-white p-8">
+            <div className="space-y-6 text-left">
+              <h4 className="text-[21.328px] font-bold text-gray-900">Log in!</h4>
+
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                {error && (
+                  <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4 text-sm text-red-700">
+                    {error}
+                  </div>
+                )}
+                {success && (
+                  <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-4 text-sm text-green-700">
+                    {success}
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="email" className="block text-[16px] font-semibold text-gray-900">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900"
+                  />
+                </div>
+
+                <div className="mt-6">
+                  <label htmlFor="password" className="block text-[16px] font-semibold text-gray-900">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900"
+                  />
+                </div>
+
+                <div className="flex items-center mt-8">
+                  <input
+                    type="checkbox"
+                    id="cgu"
+                    checked={false}
+                    onChange={() => {}}
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="cgu" className="ml-2 text-[16px] font-semibold text-[#001F3F]">
+                    Remember me
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="mt-6 w-full py-3.5 px-10 text-white bg-[#001F3F] hover:bg-[#4517AD] text-[16px] font-medium rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? 'Logging in...' : 'Submit'}
+                </button>
+
+                <div className="mt-6 text-center">
+                  <Link href="/auth/forgot-password" className="text-blue-600 font-medium hover:underline">
+                    Forgot your password?
+                  </Link>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
     </div>
-  );
+  )
 }
