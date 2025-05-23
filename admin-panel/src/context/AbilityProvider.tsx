@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { createContext, useMemo } from 'react'
-import { defineAbilitiesFor } from './rbac'
+import { defineAbilitiesFor } from '../lib/rbac'
 
 export const AbilityContext = createContext<any>(null)
 
