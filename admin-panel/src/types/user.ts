@@ -5,7 +5,10 @@ export type User = {
     role: 'admin' | 'user'
     profilePicture?: string
     profileImageURL?: string
-    subscriptionPlan?: string
+    subscriptionPlan?: {
+        value: 'Pro' | 'Plus' | 'Prime' | string
+        relationTo: string
+    }
     apiPlan?: string
     availableFeatures?: {
         tokens?: number

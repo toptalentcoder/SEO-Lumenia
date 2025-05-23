@@ -6,6 +6,15 @@ import { AbilityContext } from '@/lib/AbilityProvider'
 import { {{camelCase name}}Api } from './useApi'
 import type { {{pascalCase name}} } from '@/types/{{lowerCase name}}'
 
+const badgeColor = (planName: string) => {
+  switch (planName) {
+    case 'Pro': return 'bg-green-100 text-green-800';
+    case 'Plus': return 'bg-yellow-100 text-yellow-800';
+    case 'Prime': return 'bg-purple-100 text-purple-800';
+    default: return 'bg-gray-100 text-gray-800';
+  }
+}
+
 export default function {{pascalCase name}}List() {
   const ability = useContext(AbilityContext)
 
@@ -18,12 +27,43 @@ export default function {{pascalCase name}}List() {
   if (isLoading) return <p>Loading...</p>
 
   return (
-    <ul>
-      {data?.docs?.map((item) => (
-        <li key={item.id}>
-          <strong>{item.email}</strong> – {item.role}
-        </li>
-      ))}
-    </ul>
+    <div className="overflow-x-auto border rounded-lg">
+      <table className="min-w-full divide-y divide-gray-200 text-sm">
+        <thead className="bg-gray-50">
+          <tr className="text-left">
+            <th className="px-4 py-2 font-semibold">Avatar</th>
+            <th className="px-4 py-2 font-semibold">Username</th>
+            <th className="px-4 py-2 font-semibold">Email</th>
+            <th className="px-4 py-2 font-semibold">Role</th>
+            <th className="px-4 py-2 font-semibold">Subscription</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-100">
+          {data?.docs?.map((user) => (
+            <tr key={user.id}>
+              <td className="px-4 py-2">
+                <img
+                  src={user.profileImageURL || '/avatar-placeholder.png'}
+                  alt="avatar"
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              </td>
+              <td className="px-4 py-2">{user.username || '—'}</td>
+              <td className="px-4 py-2">{user.email}</td>
+              <td className="px-4 py-2 capitalize">{user.role}</td>
+              <td className="px-4 py-2">
+                {user.subscriptionPlan?.plan_name ? (
+                  <span className={`inline-block text-xs px-2 py-1 rounded-full ${badgeColor(user.subscriptionPlan.plan_name)}`}>
+                    {user.subscriptionPlan.plan_name}
+                  </span>
+                ) : (
+                  <span className="text-gray-400 text-xs">None</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

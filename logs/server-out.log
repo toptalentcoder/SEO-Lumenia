@@ -634,3 +634,128 @@
 2025-05-23T12:09:50: 🔄 Retrying Redis connection in 3000ms...
 2025-05-23T12:09:57: 🔄 Retrying Redis connection in 3000ms...
 2025-05-23T12:09:57: 🔄 Retrying Redis connection in 3000ms...
+2025-05-23T12:57:46: Received request body: {
+2025-05-23T12:57:46:   query: 'agence automatisation ia',
+2025-05-23T12:57:46:   queryID: '54897732',
+2025-05-23T12:57:46:   queryEngine: 'google',
+2025-05-23T12:57:46:   projectID: '718242',
+2025-05-23T12:57:46:   email: 'robertsconnor290@gmail.com',
+2025-05-23T12:57:46:   language: 'fr',
+2025-05-23T12:57:46:   hl: 'fr',
+2025-05-23T12:57:46:   gl: 'fr',
+2025-05-23T12:57:46:   lr: 'lang_fr'
+2025-05-23T12:57:46: }
+2025-05-23T12:57:46: Adding job to the queue...
+2025-05-23T12:57:46: Job added to queue with ID: 573
+2025-05-23T12:58:15: ✅ Job 573 completed
+2025-05-23T12:58:59: Received request body: {
+2025-05-23T12:58:59:   query: 'formation irve',
+2025-05-23T12:58:59:   queryID: '16087247',
+2025-05-23T12:58:59:   queryEngine: 'google',
+2025-05-23T12:58:59:   projectID: '289558',
+2025-05-23T12:58:59:   email: 'robertkmiller47@gmail.com',
+2025-05-23T12:58:59:   language: 'fr',
+2025-05-23T12:58:59:   hl: 'fr',
+2025-05-23T12:58:59:   gl: 'fr',
+2025-05-23T12:58:59:   lr: 'lang_fr'
+2025-05-23T12:58:59: }
+2025-05-23T12:58:59: Adding job to the queue...
+2025-05-23T12:58:59: Job added to queue with ID: 574
+2025-05-23T12:59:43: ✅ Job 574 completed
+2025-05-23T13:04:13: Received request body: {
+2025-05-23T13:04:13:   query: 'Affiliation',
+2025-05-23T13:04:13:   queryID: '22023163',
+2025-05-23T13:04:13:   queryEngine: 'google',
+2025-05-23T13:04:13:   projectID: '718242',
+2025-05-23T13:04:13:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:04:13:   language: 'fr',
+2025-05-23T13:04:13:   hl: 'fr',
+2025-05-23T13:04:13:   gl: 'fr',
+2025-05-23T13:04:13:   lr: 'lang_fr'
+2025-05-23T13:04:13: }
+2025-05-23T13:04:13: Adding job to the queue...
+2025-05-23T13:04:13: Job added to queue with ID: 575
+2025-05-23T13:04:13: 🔄 Job 575 started processing
+2025-05-23T13:04:13: 🔄 Worker processing SEO guide creation job 575
+2025-05-23T13:04:13: 📝 Job data: {
+2025-05-23T13:04:13:   "query": "Affiliation",
+2025-05-23T13:04:13:   "projectID": "718242",
+2025-05-23T13:04:13:   "email": "robertsconnor290@gmail.com",
+2025-05-23T13:04:13:   "queryID": "22023163",
+2025-05-23T13:04:13:   "language": "fr",
+2025-05-23T13:04:13:   "queryEngine": "google",
+2025-05-23T13:04:13:   "hl": "fr",
+2025-05-23T13:04:13:   "gl": "fr",
+2025-05-23T13:04:13:   "lr": "lang_fr"
+2025-05-23T13:04:13: }
+2025-05-23T13:04:13: 📊 Job 575 progress: 10%
+2025-05-23T13:04:13: ✅ Initial progress update complete
+2025-05-23T13:04:13: 🔑 Getting Payload instance...
+2025-05-23T13:04:13: ✅ Payload instance obtained
+2025-05-23T13:04:13: 📊 Job 575 progress: 30%
+2025-05-23T13:04:13: 🚀 Starting SEO guide processing...
+2025-05-23T13:04:13: processSeoGuide started
+2025-05-23T13:04:13: Processing SEO guide with data: {
+2025-05-23T13:04:13:   query: 'Affiliation',
+2025-05-23T13:04:13:   projectID: '718242',
+2025-05-23T13:04:13:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:04:13:   queryID: '22023163',
+2025-05-23T13:04:13:   language: 'fr',
+2025-05-23T13:04:13:   queryEngine: 'google',
+2025-05-23T13:04:13:   hl: 'fr',
+2025-05-23T13:04:13:   gl: 'fr',
+2025-05-23T13:04:13:   lr: 'lang_fr'
+2025-05-23T13:04:13: }
+2025-05-23T13:04:13: 📊 Job 575 progress: 20%
+2025-05-23T13:04:20: 📊 Job 575 progress: 30%
+2025-05-23T13:04:31: 📊 Job 575 progress: 50%
+2025-05-23T13:04:31: 📊 Job 575 progress: 60%
+2025-05-23T13:04:34: 📊 Job 575 progress: 70%
+2025-05-23T13:04:35: 📊 Job 575 progress: 80%
+2025-05-23T13:04:38: 📊 Job 575 progress: 90%
+2025-05-23T13:04:40: Data saved successfully
+2025-05-23T13:04:40: ✅ SEO guide processing complete
+2025-05-23T13:04:40: 📊 Job 575 progress: 50%
+2025-05-23T13:04:40: 📊 Job 575 progress: 80%
+2025-05-23T13:04:40: 📊 Job 575 progress: 100%
+2025-05-23T13:04:40: 💾 Saving job results...
+2025-05-23T13:04:40: ✅ Job results saved
+2025-05-23T13:04:40: ✅ Job 575 completed
+2025-05-23T13:04:40: ✅ Job 575 completed
+2025-05-23T13:16:50: Received request body: {
+2025-05-23T13:16:50:   query: 'meditation',
+2025-05-23T13:16:50:   queryID: '70123941',
+2025-05-23T13:16:50:   queryEngine: 'google',
+2025-05-23T13:16:50:   projectID: '718242',
+2025-05-23T13:16:50:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:16:50:   language: 'fr',
+2025-05-23T13:16:50:   hl: 'fr',
+2025-05-23T13:16:50:   gl: 'fr',
+2025-05-23T13:16:50:   lr: 'lang_fr'
+2025-05-23T13:16:50: }
+2025-05-23T13:16:50: Adding job to the queue...
+2025-05-23T13:16:50: Job added to queue with ID: 576
+2025-05-23T13:17:14: ✅ Job 576 completed
+2025-05-23T13:27:11: Received request body: {
+2025-05-23T13:27:11:   query: 'jjb nantes',
+2025-05-23T13:27:11:   queryID: '97826204',
+2025-05-23T13:27:11:   queryEngine: 'google',
+2025-05-23T13:27:11:   projectID: '921811',
+2025-05-23T13:27:11:   email: 'robertsconnor290@gmail.com',
+2025-05-23T13:27:11:   language: 'fr',
+2025-05-23T13:27:11:   hl: 'fr',
+2025-05-23T13:27:11:   gl: 'fr',
+2025-05-23T13:27:11:   lr: 'lang_fr'
+2025-05-23T13:27:11: }
+2025-05-23T13:27:11: Adding job to the queue...
+2025-05-23T13:27:11: Job added to queue with ID: 577
+2025-05-23T13:27:36: ✅ Job 577 completed
+2025-05-23T13:34:37: 🔄 Job 90 started processing
+2025-05-23T13:34:37: Worker processing SEO brief verification job 90
+2025-05-23T13:34:37: 📊 Job 90 progress: 10%
+2025-05-23T13:34:37: 📊 Job 90 progress: 30%
+2025-05-23T13:35:49: 📊 Job 90 progress: 50%
+2025-05-23T13:35:49: 📊 Job 90 progress: 80%
+2025-05-23T13:35:51: 📊 Job 90 progress: 100%
+2025-05-23T13:35:51: ✅ Job 90 completed
+2025-05-23T13:35:51: ✅ Job 90 completed
