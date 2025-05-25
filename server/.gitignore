@@ -16,6 +16,9 @@
 /.next/
 /out/
 
+.env.example
+/.env.example
+
 # production
 /build
 
