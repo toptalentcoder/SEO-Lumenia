@@ -17,6 +17,21 @@ export default function GuidePage() {
     const [loading, setLoading] = useState(true);
 
     const [isDirty, setIsDirty] = useState(false);
+    const [isContentNull, setIsContentNull] = useState(false);
+    const [showNotification, setShowNotification] = useState(false);
+
+    useEffect(() => {
+        if (isContentNull) {
+            setShowNotification(true);
+            const timer = setTimeout(() => {
+                setShowNotification(false);
+                setTimeout(() => {
+                    setIsContentNull(false);
+                }, 300); // Wait for fade out animation to complete
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [isContentNull]);
 
     const handleSave = async () => {
         const text = document.querySelector('[contenteditable="true"]')?.innerText;
@@ -77,7 +92,7 @@ export default function GuidePage() {
                     <LeftSection data={data} setIsDirty={setIsDirty}/>
                 </div>
                 <div className="w-full lg:w-1/3 lg:order-1 order-1 lg:ml-3 mt-10">
-                    <RightSection data={data}/>
+                    <RightSection data={data} setIsContentNull={setIsContentNull}/>
                 </div>
             </div>
 
@@ -91,6 +106,16 @@ export default function GuidePage() {
                     </div>
                 </div>
             )}
+
+            {isContentNull && (
+                <div className={`fixed w-1/4 bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${showNotification ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+                    <div className="bg-[#CF2637] text-white px-6 py-3.5 rounded-xl shadow-lg text-sm transform transition-all duration-300 ease-in-out">
+                        <div className="font-bold">It looks like there's a small issue.</div>
+                        <div className="text-lg font-bold">Guide text too short</div>
+                    </div>
+                </div>
+            )}
+            
 
         </div>
     )

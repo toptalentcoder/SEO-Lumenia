@@ -14,7 +14,7 @@ const CustomTooltip = ({ text }) => (
     </div>
 );
 
-export default function SeoBrief({data}){
+export default function SeoBrief({data, setIsContentNull}){
     const { seoBrief } = data;
     const { user } = useUser();
     const { queryID } = useParams();
@@ -80,19 +80,27 @@ export default function SeoBrief({data}){
 
     const handleVerifyClick = async () => {
         if (!user?.email) {
-            setImprovementSuggestions("Please log in to verify the brief.");
+            setImprovementSuggestions("");
             return;
         }
+
+        const content = document.querySelector('[contenteditable="true"]')?.innerText || "";
+        setIsLoading(true);
+        setImprovementSuggestions("");
+        setProgress(0);
 
         setIsLoading(true);
 
         try {
-            // Fetch SEO Editor content
-            const responseSeoEditorContent = await axios.get(
-                `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
-            );
 
-            const content = responseSeoEditorContent.data.seoEditorData;
+            if (!content.trim()) {
+                setIsContentNull(true);
+                setImprovementSuggestions("");
+                setProgress(0);
+                setIsLoading(false);
+                // await analysePromise; // still await the analysis
+                return;
+            }
 
             // Create the request promise
             const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/verify_seo_brief`, {
