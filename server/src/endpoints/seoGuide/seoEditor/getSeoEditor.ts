@@ -85,18 +85,18 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             const category = seoGuide?.category || null;
             const briefVerification = seoGuide?.briefVerification || null;
 
-            if (!seoEditorData) {
-                return new Response(
-                    JSON.stringify({ error: `seoEditor data not found for queryID: ${queryID}` }),
-                    {
-                        status: 400,
-                        headers: {
-                            "Content-Type": "application/json",
-                            ...corsHeaders
-                        },
-                    }
-                );
-            }
+            // if (!seoEditorData) {
+            //     return new Response(
+            //         JSON.stringify({ error: `seoEditor data not found for queryID: ${queryID}` }),
+            //         {
+            //             status: 400,
+            //             headers: {
+            //                 "Content-Type": "application/json",
+            //                 ...corsHeaders
+            //             },
+            //         }
+            //     );
+            // }
 
             // Return the seoEditor data as a response
             return new Response(

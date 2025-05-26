@@ -7,8 +7,9 @@ export type User = {
     profileImageURL?: string
     subscriptionPlan?: {
         value: 'Lite Plan' | 'Lite Plan Plus' | 'Essential Plan' | 'Enterprise Plan' | 'Agency Plan' | string
-        relationTo: string
+        relationTo: string;
         plan_name?: string;
+        [key: string]: any
     }
     apiPlan?: string
     availableFeatures?: {
