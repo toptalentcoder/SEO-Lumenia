@@ -10,7 +10,7 @@ import SeoBrief from './seoBrief';
 import YourWebPageSection from './yourWebPageSection';
 import GenerationSection from './generationSection';
 
-export default function RightSection ({data}) {
+export default function RightSection ({data, setIsContentNull}) {
 
     const [activeTab, setActiveTab] = useState("seoBrief");
     const [webpageTitleMetaData, setWebpageTitleMetaData] = useState([]);
@@ -65,7 +65,7 @@ export default function RightSection ({data}) {
             <div className="h-auto mb-6">
                 {activeTab === 'seoBrief' ? (
                     <div className="bg-white p-4 rounded shadow">
-                        <SeoBrief data={data} content />
+                        <SeoBrief data={data} setIsContentNull={setIsContentNull} />
                     </div>
                 ) : activeTab === 'yourWebpage' ? (
                     <div className="bg-white p-4 rounded shadow">
