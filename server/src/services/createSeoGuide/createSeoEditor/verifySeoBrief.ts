@@ -87,6 +87,19 @@ export async function verifyContentWithSeoBrief(
     seoBrief: SeoBrief,
     language?: string
 ) {
+    // If content is empty, return empty results without making any API calls
+    if (!content.trim()) {
+        return {
+            objective: [],
+            mainTopics: [],
+            importantQuestions: [],
+            writingStyleAndTone: [],
+            recommendedStyle: [],
+            valueProposition: [],
+            improvementText: ""
+        };
+    }
+
     const verificationResult: Record<keyof SeoBrief, any> = {
         objective: 'missing',
         mainTopics: '[]',
@@ -138,7 +151,7 @@ export async function verifyContentWithSeoBrief(
     let improvementText = "";
     try {
         const suggestionPrompt = `
-            Given the following SEO brief and article content, suggest what could be improved or added.
+            Given the following SEO brief and article content, provide concise improvement suggestions.
             ${language ? `Please provide your response in ${language} language.` : ''}
 
             SEO Brief:
@@ -152,24 +165,21 @@ export async function verifyContentWithSeoBrief(
             Content:
                 ${content}
 
-            Give a thoughtful review of the content based on the SEO brief. Always suggest improvements, refinements, or enhancements, even if the content already includes all required elements. Focus on depth, clarity, structure, style, tone, keyword use, and overall alignment with the brief. Avoid saying everything is perfect.
-        `;
+            Provide 3-4 focused improvement suggestions. Each suggestion should be 1-2 sentences long and address a specific aspect:
+            - Content coverage and depth
+            - Structure and organization
+            - Writing style and tone
+            - Missing elements or gaps
 
-        // const suggestionResponse = await openai.chat.completions.create({
-        //     model: "gpt-4-turbo",
-        //     messages: [
-        //         { role: "user", content: suggestionPrompt },
-        //         { role: "system", content: "You are an expert SEO content reviewer." }
-        //     ],
-        //     temperature: 0.3,
-        // });
+            Keep the response concise and actionable. Focus on the most important improvements needed.
+        `;
 
         const suggestionResponse = await openai.chat.completions.create({
             messages: [
                 { role: "user", content: suggestionPrompt },
-                { role: "system", content: "You are an expert SEO content reviewer." }
+                { role: "system", content: "You are an expert SEO content reviewer. Provide concise, actionable feedback." }
             ],
-            max_tokens: 500,
+            max_tokens: 500,  // Reduced back to 500 since we want concise responses
             temperature: 0.2,
             top_p: 1,
             frequency_penalty: 0,
