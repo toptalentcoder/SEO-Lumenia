@@ -14,7 +14,7 @@ const CustomTooltip = ({ text }) => (
     </div>
 );
 
-export default function SeoBrief({data, setIsContentNull}){
+export default function SeoBrief({data, setIsContentNull, setIsVerifyBriefButtonClicked}){
     const { seoBrief } = data;
     const { user } = useUser();
     const { queryID } = useParams();
@@ -84,6 +84,7 @@ export default function SeoBrief({data, setIsContentNull}){
             return;
         }
 
+
         const content = document.querySelector('[contenteditable="true"]')?.innerText || "";
         setIsLoading(true);
         setImprovementSuggestions("");
@@ -92,6 +93,8 @@ export default function SeoBrief({data, setIsContentNull}){
         setIsLoading(true);
 
         try {
+            setIsVerifyBriefButtonClicked(true);
+
             if (!content.trim()) {
                 setIsContentNull(true);
                 setImprovementSuggestions("");
@@ -172,6 +175,7 @@ export default function SeoBrief({data, setIsContentNull}){
         } catch (error) {
             setIsLoading(false);
             setProgress(0);
+            setIsVerifyBriefButtonClicked(false);
             // Log the raw error for debugging
             console.error("Raw error in handleVerifyClick:", error);
 
@@ -196,6 +200,8 @@ export default function SeoBrief({data, setIsContentNull}){
             } else {
                 setImprovementSuggestions("");
             }
+        } finally {
+            setIsVerifyBriefButtonClicked(false);
         }
     };
 

@@ -804,27 +804,47 @@ function EditorArea({seoEditorData, onDirtyChange, editorRef, onEditorJSONUpdate
                 root.clear();
     
                 if (isProbablyJson(seoEditorData)) {
-                    const newEditorState = editor.parseEditorState(JSON.parse(seoEditorData));
-                    editor.setEditorState(newEditorState);
+                    try {
+                        const parsedData = JSON.parse(seoEditorData);
+                        if (parsedData && parsedData.root && parsedData.root.children && parsedData.root.children.length > 0) {
+                            const newEditorState = editor.parseEditorState(parsedData);
+                            editor.setEditorState(newEditorState);
+                        } else {
+                            // If JSON is empty or invalid, create a default paragraph
+                            const paragraphNode = $createParagraphNode();
+                            paragraphNode.append($createTextNode(''));
+                            root.append(paragraphNode);
+                        }
+                    } catch (e) {
+                        // If JSON parsing fails, create a default paragraph
+                        const paragraphNode = $createParagraphNode();
+                        paragraphNode.append($createTextNode(''));
+                        root.append(paragraphNode);
+                    }
                 } else {
                     // Handle plain text format
                     const lines = seoEditorData.split('\n').filter(line => line.trim());
-                    const nodes = lines.map(line => {
-                        // Check if line matches heading pattern (e.g., "1.1 Introduction")
-                        const headingMatch = line.match(/^(\d+(\.\d+)*)\s+(.+)$/);
-                        if (headingMatch) {
-                            const depth = headingMatch[1].split('.').length;
-                            const content = headingMatch[3];
-                            const headingNode = $createHeadingNode(depth === 1 ? 'h1' : depth === 2 ? 'h2' : 'h3');
-                            headingNode.append($createTextNode(line));
-                            return headingNode;
-                        }
-                        // Regular paragraph
+                    if (lines.length > 0) {
+                        const nodes = lines.map(line => {
+                            const headingMatch = line.match(/^(\d+(\.\d+)*)\s+(.+)$/);
+                            if (headingMatch) {
+                                const depth = headingMatch[1].split('.').length;
+                                const content = headingMatch[3];
+                                const headingNode = $createHeadingNode(depth === 1 ? 'h1' : depth === 2 ? 'h2' : 'h3');
+                                headingNode.append($createTextNode(line));
+                                return headingNode;
+                            }
+                            const paragraphNode = $createParagraphNode();
+                            paragraphNode.append($createTextNode(line));
+                            return paragraphNode;
+                        });
+                        $insertNodes(nodes);
+                    } else {
+                        // If no content, create a default paragraph
                         const paragraphNode = $createParagraphNode();
-                        paragraphNode.append($createTextNode(line));
-                        return paragraphNode;
-                    });
-                    $insertNodes(nodes);
+                        paragraphNode.append($createTextNode(''));
+                        root.append(paragraphNode);
+                    }
                 }
     
                 setTimeout(() => {
