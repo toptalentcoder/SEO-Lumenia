@@ -1,5 +1,9 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
+<<<<<<< HEAD
 import { generateSeoOutline } from "@/services/createSeoEditor/generateSeoOutline";
+=======
+import { generateSeoOutline } from "@/services/createSeoGuide/createSeoEditor/generateSeoOutline";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { ProjectSeoGuide } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 

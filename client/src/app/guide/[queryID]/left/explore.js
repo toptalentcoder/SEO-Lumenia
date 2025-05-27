@@ -23,6 +23,20 @@ export default function Explore ({data}) {
                     <div className="text-gray-700 font-semibold text-sm mb-3">
                         Related SEO keywords
                     </div>
+<<<<<<< HEAD
+=======
+                    <div className="space-y-2">
+                        {data.relatedSEOKeywords && data.relatedSEOKeywords.length > 0 ? (
+                            data.relatedSEOKeywords.map((keyword, index) => (
+                                <div key={index} className="even:bg-gray-100 odd:bg-white p-2 text-sm cursor-pointer text-[#4A4291]">
+                                    {keyword}
+                                </div>
+                            ))
+                        ) : (
+                            <div className="p-2 text-sm text-gray-500">No related keywords available.</div>
+                        )}
+                    </div>
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 </div>
             </div>
         </div>

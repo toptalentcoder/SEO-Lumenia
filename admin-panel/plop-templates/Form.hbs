@@ -1,0 +1,63 @@
+'use client'
+
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import type { {{pascalCase name}} } from '@/types/{{lowerCase name}}'
+
+const schema = z.object({
+  name: z.string().min(1, 'Name is required'),
+})
+
+type FormData = z.infer<typeof schema>
+
+export default function {{pascalCase name}}Form() {
+    const router = useRouter()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<FormData>({
+        resolver: zodResolver(schema),
+    })
+
+    const onSubmit = async (data: FormData) => {
+        try {
+        const res = await fetch('/api/{{lowerCase name}}s', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        })
+        if (!res.ok) throw new Error('Failed to submit')
+        router.push('/admin/{{lowerCase name}}s')
+        } catch (err) {
+        console.error(err)
+        }
+    }
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div>
+            <label htmlFor="name" className="block text-sm font-medium">
+            Name
+            </label>
+            <input
+            {...register('name')}
+            id="name"
+            className="mt-1 block w-full border px-3 py-2 rounded-md"
+            />
+            {errors.name && (
+            <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>
+            )}
+        </div>
+
+        <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded-md"
+        >
+            Submit
+        </button>
+        </form>
+    )
+}

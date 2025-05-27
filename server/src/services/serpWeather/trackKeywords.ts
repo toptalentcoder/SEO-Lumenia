@@ -1,8 +1,14 @@
 import { Payload } from "payload";
 import axios from "axios";
 import { calculateImprovedSerpVolatility } from "./calculateSerpVolatility";
+<<<<<<< HEAD
 
 const SERP_API_KEY = process.env.SERP_API_KEY;
+=======
+import { SERP_API_KEY } from "@/config/apiConfig";
+import mongoose from "mongoose";
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 interface OrganicResult {
     title: string;
@@ -49,6 +55,7 @@ export async function saveDailyVolatilityScores(payload: Payload) {
             }));
 
             const normalizedKeyword = keyword.toLowerCase().trim();
+<<<<<<< HEAD
             
             // Log the search criteria for debugging
             console.log(`Searching for snapshot with keyword: "${normalizedKeyword}" and category: "${category}"`);
@@ -56,6 +63,15 @@ export async function saveDailyVolatilityScores(payload: Payload) {
             const existing = await payload.find({
                 collection: "serpSnapshots",
                 where: { 
+=======
+
+            // Log the search criteria for debugging
+            console.log(`Searching for snapshot with keyword: "${normalizedKeyword}" and category: "${category}"`);
+
+            const existing = await payload.find({
+                collection: "serpSnapshots",
+                where: {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     keyword: { equals: normalizedKeyword },
                     category: { equals: category }
                 },
@@ -72,7 +88,11 @@ export async function saveDailyVolatilityScores(payload: Payload) {
             if (existing.totalDocs > 0) {
                 const doc = existing.docs[0];
                 console.log(`Updating existing snapshot with ID: ${doc.id}`);
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 const prevTracking: { date: string }[] = doc.tracking || [];
 
                 // Remove today's entry if it already exists
@@ -100,18 +120,30 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                     },
                     limit: 1,
                 });
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 if (caseInsensitiveCheck.totalDocs > 0) {
                     // Found a record with the same keyword but different case
                     const doc = caseInsensitiveCheck.docs[0];
                     console.log(`Found a record with the same keyword but different case. Updating ID: ${doc.id}`);
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     const prevTracking: { date: string }[] = doc.tracking || [];
                     const filteredTracking = prevTracking.filter(t => t.date !== today);
                     const prunedTracking = [...filteredTracking, newEntry]
                         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                         .slice(0, 30);
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     await payload.update({
                         collection: "serpSnapshots",
                         id: doc.id,
@@ -121,16 +153,39 @@ export async function saveDailyVolatilityScores(payload: Payload) {
                         },
                     });
                 } else {
+<<<<<<< HEAD
                     // Create new record only if one doesn't exist for this exact keyword and category
                     console.log(`Creating new snapshot for keyword: "${normalizedKeyword}" and category: "${category}"`);
                     await payload.create({
                         collection: "serpSnapshots",
+=======
+
+                    // Create new record only if one doesn't exist for this exact keyword and category
+                    console.log(`Creating new snapshot for keyword: "${normalizedKeyword}" and category: "${category}"`);
+
+                    const mongoose = payload.db.connection;
+                    const model = await mongoose.model('serpSnapshots')
+                    await model.create({
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         data: {
                             keyword: normalizedKeyword,
                             category,
                             tracking: [newEntry],
                         },
+<<<<<<< HEAD
                     });
+=======
+                    })
+
+                    // await payload.create({
+                    //     collection: "serpSnapshots",
+                    //     data: {
+                    //         keyword: normalizedKeyword,
+                    //         category,
+                    //         tracking: [newEntry],
+                    //     },
+                    // });
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 }
             }
 

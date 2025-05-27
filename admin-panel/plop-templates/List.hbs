@@ -1,0 +1,75 @@
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
+import { useContext } from 'react'
+import { AbilityContext } from '@/context/AbilityProvider'
+import type { {{pascalCase name}} } from '@/types/{{lowerCase name}}'
+import Image from 'next/image'
+
+const badgeColor = (planName: string) => {
+  switch (planName) {
+    case 'Lite Plan': return 'bg-green-100 text-green-800'
+    case 'Lite Plan Plus': return 'bg-yellow-100 text-yellow-800'
+    case 'Essential Plan': return 'bg-purple-100 text-purple-800'
+    default: return 'bg-gray-100 text-gray-800'
+  }
+}
+
+export default function {{pascalCase name}}List() {
+    const ability = useContext(AbilityContext)
+
+    const { data, isLoading } = useQuery<{ docs: {{pascalCase name}}[] }>({
+        queryKey: ['{{lowerCase name}}s'],
+        queryFn: async () => {
+        const res = await fetch('/api/{{lowerCase name}}s')
+        if (!res.ok) throw new Error('Failed to fetch')
+        return res.json()
+        },
+    })
+
+    if (!ability.can('read', '{{pascalCase name}}')) return <p>Access denied</p>
+    if (isLoading) return <p>Loading...</p>
+
+    return (
+        <div className="overflow-x-auto border rounded-lg">
+        <table className="min-w-full divide-y divide-gray-200 text-sm">
+            <thead className="bg-gray-50">
+            <tr className="text-left">
+                <th className="px-4 py-2 font-semibold">Avatar</th>
+                <th className="px-4 py-2 font-semibold">Username</th>
+                <th className="px-4 py-2 font-semibold">Email</th>
+                <th className="px-4 py-2 font-semibold">Role</th>
+                <th className="px-4 py-2 font-semibold">Subscription</th>
+            </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+            {data?.docs?.map((item) => (
+                <tr key={item.id}>
+                <td className="px-4 py-2">
+                    <Image
+                    src={item.profileImageURL || '/avatar-placeholder.png'}
+                    alt="avatar"
+                    width={32}
+                    height={32}
+                    className="rounded-full object-cover"
+                    />
+                </td>
+                <td className="px-4 py-2">{item.username || '—'}</td>
+                <td className="px-4 py-2">{item.email}</td>
+                <td className="px-4 py-2 capitalize">{item.role}</td>
+                <td className="px-4 py-2">
+                    {item.subscriptionPlan?.plan_name ? (
+                    <span className={`inline-block text-xs px-2 py-1 rounded-full ${badgeColor(item.subscriptionPlan.plan_name)}`}>
+                        {item.subscriptionPlan.plan_name}
+                    </span>
+                    ) : (
+                    <span className="text-gray-400 text-xs">None</span>
+                    )}
+                </td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
+    </div>
+  )
+}

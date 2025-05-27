@@ -142,7 +142,10 @@ const SearchBar = () => {
     const [showModal, setShowModal] = useState(false);
 
     const handleSearch = (e) => {
+<<<<<<< HEAD
         console.log("aaaa")
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         e.preventDefault(); // prevent form submit
         if (!url.trim()) return;
         setShowModal(true);
@@ -294,6 +297,7 @@ const RecentKeywordsList = () => (
     </div>
 );
 
+<<<<<<< HEAD
 const Card = ({ title, description, buttonText, reactIcons, iconColor, routerUrl }) => {
 
     const router = useRouter();
@@ -310,6 +314,38 @@ const Card = ({ title, description, buttonText, reactIcons, iconColor, routerUrl
                 {buttonText}
             </button>
         </div>
+=======
+const Card = ({ title, description, buttonText, reactIcons, iconColor, routerUrl, showModalInProd = false }) => {
+
+    const router = useRouter();
+    const [showComingSoon, setShowComingSoon] = useState(false);
+
+    const handleClick = () => {
+        if (showModalInProd && process.env.NODE_ENV === "production") {
+            setShowComingSoon(true);
+        } else if (routerUrl) {
+            router.push(routerUrl);
+        }
+    };
+
+    return(
+        <>
+            <div className="bg-white p-4 rounded-2xl shadow-md flex flex-col">
+                <div className={`flex text-[7rem] mb-2 justify-center ${iconColor}`}>{reactIcons}</div>
+                <p className="font-semibold text-lg mb-2 justify-center items-center flex text-gray-600 md:h-10 xl:h-16 2xl:h-14">{title}</p>
+                <p className="text-sm text-gray-600 mb-4 flex justify-center items-center text-center md:h-20 xl:h-24 2xl:h-14">{description}</p>
+                <button
+                    className="flex bg-[#41388A] text-white px-4 py-2 rounded-xl text-sm justify-center cursor-pointer"
+                    onClick={handleClick}
+                >
+                    {buttonText}
+                </button>
+            </div>
+
+            <ComingSoonModal isOpen={showComingSoon} onClose={() => setShowComingSoon(false)} />
+        </>
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     )
 }
 
@@ -319,12 +355,21 @@ const ContentStrategyCards = () => {
         <section className="mt-6">
             <h2 className="text-xl font-bold mb-4">Content Strategy</h2>
             <div className="grid md:grid-cols-4 xl:grid-cols-6 gap-4">
+<<<<<<< HEAD
                 <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" reactIcons={<FaCheckCircle />} iconColor="text-[#279AAC]" routerUrl={"/positioning/explorer"}/>
                 <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" reactIcons={<GoGraph />} iconColor="text-[#EBB71A]" routerUrl={"/content-gap"}/>
                 <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" reactIcons={<FaScissors/>} iconColor="text-[#279AAC]" routerUrl={"/keyword-cannibalization"}/>
                 <Card title="Analyze Competitors" description="Compare rankings to find opportunities for growth." buttonText="Analyze Now" reactIcons={<IoPeople />} iconColor="text-[#EBB71A]" routerUrl={"/positioning/host"}/>
                 <Card title="Generate Ideas" description="Use our Digital Brainstormer to inspire new content ideas." buttonText="Start Brainstorming" reactIcons={<FaLightbulb/>} iconColor="text-[#279AAC]" routerUrl={"/digital_brainstormer"}/>
                 <Card title="SEO Writing" description="Write effortlessly while following our SEO optimization guide." buttonText="Start Writing Now" reactIcons={<FaPencil/>} iconColor="text-[#EBB71A]" routerUrl={"/guides"}/>
+=======
+                <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" reactIcons={<FaCheckCircle />} iconColor="text-[#279AAC]" routerUrl={"/positioning/explorer"} showModalInProd={true} />
+                <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" reactIcons={<GoGraph />} iconColor="text-[#EBB71A]" routerUrl={"/content-gap"} showModalInProd={true} />
+                <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" reactIcons={<FaScissors/>} iconColor="text-[#279AAC]" routerUrl={"/keyword-cannibalization"} showModalInProd={true} />
+                <Card title="Analyze Competitors" description="Compare rankings to find opportunities for growth." buttonText="Analyze Now" reactIcons={<IoPeople />} iconColor="text-[#EBB71A]" routerUrl={"/positioning/host"} showModalInProd={true} />
+                <Card title="Generate Ideas" description="Use our Digital Brainstormer to inspire new content ideas." buttonText="Start Brainstorming" reactIcons={<FaLightbulb/>} iconColor="text-[#279AAC]" routerUrl={"/digital_brainstormer"} showModalInProd={true} />
+                <Card title="SEO Writing" description="Write effortlessly while following our SEO optimization guide." buttonText="Start Writing Now" reactIcons={<FaPencil/>} iconColor="text-[#EBB71A]" routerUrl={"/guides"} showModalInProd={true} />
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             </div>
         </section>
     );
@@ -379,3 +424,24 @@ export default function DashboardPage() {
         </div>
     );
 }
+<<<<<<< HEAD
+=======
+
+const ComingSoonModal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+                <p className="text-xl font-semibold text-gray-700 mb-4">🚧 Coming Soon</p>
+                <p className="text-sm text-gray-600 mb-6">This feature will be available soon. Stay tuned!</p>
+                <button
+                    onClick={onClose}
+                    className="bg-[#41388A] text-white px-4 py-2 rounded-lg text-sm"
+                >
+                    Close
+                </button>
+            </div>
+        </div>
+    );
+};
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c

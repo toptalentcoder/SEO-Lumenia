@@ -48,12 +48,22 @@ import { deleteQueryEndpoint } from "./seoGuide/deleteQuery";
 import { backlinksOverviewEndpoint } from "./backlinks_overview/backlinksOverview";
 import { userBacklinkHistoryEndpoint } from "./backlinks_overview/userBacklinkHistory";
 import { searchBacklinksEndpoint } from "./backlinks_overview/searchBacklinks";
+<<<<<<< HEAD
 import { saveKeywordsForSERPWeatherCategoryEndpoint } from "./saveKeywordsForSerpWeatherEndpoint";
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { getProgressEndpoint } from "./seoGuide/getProgress";
 import { createSeoGuide } from "./seoGuide/createSeoGuide";
 import { getPageDuplicationEndpoint } from "./page_duplication/getPageDuplicationEndpoint";
 import { getNumberOf25TopKeywordsEndpoint } from "./getNumberOf25TopKeywordsEndpoint";
 import { getNumberOfBacklinksEndpoint } from "./getNumberOfBacklinksEndpoint";
+<<<<<<< HEAD
+=======
+import { getSeoGuideStatus } from './seoGuide/getSeoGuideStatus';
+import { getSeoBriefStatus } from './seoGuide/getSeoBriefStatus';
+import { intercomSign } from "./intercom-sign";
+import { generateBrainstormerIdeasEndpoint } from "./contentStrategy/generateIdes/generateBrainstormerIdeas";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -98,7 +108,10 @@ export const customEndpoints = [
     getMonitoringData,
     internalPageRankEndpoint,
     getInternalPageRankEndpoint,
+<<<<<<< HEAD
     saveKeywordsForSERPWeatherCategoryEndpoint,
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     pageDuplicationEndpoint,
     getSerpWeatherDataEndpoint,
     trackKeywordsEndpoint,
@@ -112,5 +125,14 @@ export const customEndpoints = [
     getInternalPageRankEndpoint,
     getPageDuplicationEndpoint,
     getNumberOf25TopKeywordsEndpoint,
+<<<<<<< HEAD
     getNumberOfBacklinksEndpoint
+=======
+    getNumberOfBacklinksEndpoint,
+    getSeoGuideStatus,
+    getSeoBriefStatus,
+    getUserDataForRefreshPageEndpoint,
+    intercomSign,
+    generateBrainstormerIdeasEndpoint
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 ]

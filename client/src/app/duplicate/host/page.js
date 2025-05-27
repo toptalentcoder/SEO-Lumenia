@@ -17,6 +17,10 @@ import {
     ResponsiveContainer,
     Cell
 } from 'recharts';
+<<<<<<< HEAD
+=======
+import { NEXT_PUBLIC_API_URL } from '../../../config/apiConfig';
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 export default function PageDuplication() {
     const searchParams = useSearchParams();
@@ -27,6 +31,7 @@ export default function PageDuplication() {
     const [summary, setSummary] = useState(null);
     const [histogram, setHistogram] = useState([]);
 
+<<<<<<< HEAD
 
 
     const fetchExistingResults = async (host) => {
@@ -59,13 +64,51 @@ export default function PageDuplication() {
         }
     };
 
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     useEffect(() => {
         const host = searchParams.get('host');
         if (host) {
             setInputUrl(host);
+<<<<<<< HEAD
             fetchExistingResults(host);
         }
     }, [searchParams]);
+=======
+            
+            const fetchExistingResults = async () => {
+                setLoading(true);
+                try {
+                    const res = await fetch(`${NEXT_PUBLIC_API_URL}/api/get-page-duplication`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ baseUrl: host }),
+                    });
+
+                    if (!res.ok) {
+                        throw new Error(`HTTP error! status: ${res.status}`);
+                    }
+
+                    const data = await res.json();
+                    if (data?.data?.length) {
+                        setResult(data.data);
+                        setSummary(data.summary);
+                        setHistogram(data.histogram);
+                        switchToResults(data.data);
+                    }
+                } catch (error) {
+                    console.error("Failed to fetch existing results:", error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchExistingResults();
+        }
+    }, [searchParams, switchToResults]);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     const handleSearch = async (url = inputUrl) => {
         // Don't handle search if there's a URL parameter
@@ -77,7 +120,11 @@ export default function PageDuplication() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
+<<<<<<< HEAD
             const res = await fetch("http://localhost:7777/api/page-duplication", {
+=======
+            const res = await fetch(`${NEXT_PUBLIC_API_URL}/api/page-duplication`, {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 method: "POST",
                 body: JSON.stringify({ baseUrl: url }),
                 headers: {

@@ -3,6 +3,10 @@ import { Payload } from 'payload';
 import axios from 'axios';
 import { saveKeywordsForSERPWeatherCategory } from '../serpWeather/saveKeywordsToDB';
 import { internalPageRank } from '../UrlPageServie/internalPageRank';
+<<<<<<< HEAD
+=======
+import { SERP_API_KEY } from '@/config/apiConfig';
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 // --------- TYPES ---------
 
@@ -52,7 +56,10 @@ export function startDailyRankTracking(payload: Payload) {
     cron.schedule('0 0 * * *', async () => {
         console.log("🔁 Running daily SERP rank tracking...");
 
+<<<<<<< HEAD
         const SERP_API_KEY = process.env.SERP_API_KEY;
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         const today = new Date().toISOString().split("T")[0];
 
         // For the test mode

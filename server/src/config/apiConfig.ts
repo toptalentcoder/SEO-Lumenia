@@ -1,6 +1,28 @@
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 export const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
+<<<<<<< HEAD
 export const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 export const BASE_URL = `${process.env.BASE_URL}/api`;
 export const API_KEY = process.env.PAYLOAD_SECRET || '';
+=======
+export const FRONTEND_URL = process.env.FRONTEND_URL;
+export const BASE_URL = `${process.env.BASE_URL}/api`;
+export const PAYLOAD_SECRET_API_KEY = process.env.PAYLOAD_SECRET;
+export const SEMRUSH_API_KEY = process.env.SEMRUSH_API_KEY;
+export const REDIS_URL = process.env.REDIS_URL;
+export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+export const SERP_API_KEY = process.env.SERP_API_KEY;
+export const SERPER_API_KEY = process.env.SERPER_API_KEY;
+export const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
+export const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
+export const AZURE_OPENAI_ENDPOINT = "https://ample-mazn2sw6-eastus2.cognitiveservices.azure.com";
+// export const AZURE_OPENAI_DEPLOYMENT_GPT_4 = 'gpt-4'; // this must match your deployed model name
+export const AZURE_OPENAI_DEPLOYMENT_TEXT_EMBEDDING_ADA_002 = 'text-embedding-ada-002';
+export const AZURE_OPENAI_API_TEXT_EMBEDDING_ADA_002_MODELNAME = "text-embedding-ada-002";
+export const AZURE_OPENAI_API_TEXT_EMBEDDING_ADA_002_VERSION = "2023-05-15";
+export const AZURE_OPENAI_DEPLOYMENT_GPT_4_1 = "gpt-4.1";
+export const AZURE_OPENAI_API_KEY=process.env.AZURE_OPENAI_API_KEY;
+export const AZURE_OPENAI_API_GPT_4_1_MODELNAME = "gpt-4.1";
+export const AZURE_OPENAI_API_GPT_4_1_VERSION = "2025-01-01-preview";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c

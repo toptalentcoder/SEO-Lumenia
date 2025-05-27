@@ -1,5 +1,9 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
+<<<<<<< HEAD
 import { translateText } from "@/services/createSeoEditor/translateSeoText";
+=======
+import { translateText } from "@/services/createSeoGuide/createSeoEditor/translateSeoText";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { Endpoint, PayloadRequest } from "payload";
 
 export const translateSeoEditorEndpoint: Endpoint = {

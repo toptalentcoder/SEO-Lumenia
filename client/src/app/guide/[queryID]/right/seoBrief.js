@@ -6,26 +6,27 @@ import axios from 'axios';
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
 
-export default function SeoBrief({data}){
+import { NEXT_PUBLIC_API_URL } from "../../../../config/apiConfig";
+import ReactMarkdown from "react-markdown";
+
+const CustomTooltip = ({ text }) => (
+    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 bg-black text-white text-sm rounded py-3 px-4 z-10 whitespace-nowrap">
+        {text}
+    </div>
+);
+
+export default function SeoBrief({data, setIsContentNull}){
 
     const { seoBrief } = data;
     const { user } = useUser();
     const { queryID } = useParams();
 
-    const {
-        primaryIntent,
-        objective,
-        mainTopics,
-        importantQuestions,
-        writingStyleAndTone,
-        recommendedStyle,
-        valueProposition,
-    } = seoBrief;
-
     // State for verification results and improvement suggestions
     const [verificationResult, setVerificationResult] = useState(null);
     const [improvementSuggestions, setImprovementSuggestions] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    const [progress, setProgress] = useState(0);
 
     // Load verification state when component mounts
     useEffect(() => {
@@ -65,65 +66,173 @@ export default function SeoBrief({data}){
 
         loadVerificationState();
     }, [queryID, user]);
+    // Add null check for seoBrief
+    if (!seoBrief) {
+        return <div>Loading SEO brief...</div>;
+    }
+
+    const {
+        primaryIntent,
+        objective,
+        mainTopics,
+        importantQuestions,
+        writingStyleAndTone,
+        recommendedStyle,
+        valueProposition,
+    } = seoBrief;
 
     const handleVerifyClick = async () => {
+        if (!user?.email) {
+            setImprovementSuggestions("");
+            return;
+        }
+
+        const content = document.querySelector('[contenteditable="true"]')?.innerText || "";
+        setIsLoading(true);
+        setImprovementSuggestions("");
+        setProgress(0);
+
+        setIsLoading(true);
+
         try {
-            setIsLoading(true);
-
-            // Fetch SEO Editor content
-            const responseSeoEditorContent = await axios.get(
-                `/api/get_seo_editor_data?queryID=${queryID}&email=${user.email}`
-            );
-
-            const content = responseSeoEditorContent.data.seoEditorData;
-
-            // Create a timeout promise
-            const timeoutPromise = new Promise((_, reject) => {
-                setTimeout(() => reject(new Error('Request timeout')), 30000); // 30 seconds timeout
-            });
+            if (!content.trim()) {
+                setIsContentNull(true);
+                setImprovementSuggestions("");
+                setProgress(0);
+                setIsLoading(false);
+            }
 
             // Create the request promise
-            const requestPromise = axios.post("/api/verify_seo_brief", { 
-                content, 
-                seoBrief,
-                language: data.language,
-                queryID,
-                email: user.email
-            });
+            const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/verify_seo_brief`, {
+                content: content.trim() || "",
+                seoBrief: seoBrief,
+                queryID: queryID,
+                email: user.email,
+                language: data.language
+            }, { timeout: 60000 });
 
-            // Race between the request and timeout
-            const response = await Promise.race([requestPromise, timeoutPromise]);
+            if (response.data.jobId) {
+                // Start polling for job status
+                const pollInterval = setInterval(async () => {
+                    try {
+                        const statusResponse = await axios.get(`${NEXT_PUBLIC_API_URL}/api/seoBriefStatus/${response.data.jobId}`);
+                        const statusData = statusResponse.data;
 
-            const { verificationResult, improvementText } = response.data;
+                        // Update progress if available
+                        if (statusData.progress) {
+                            setProgress(statusData.progress);
+                        }
 
-            // Update the verification state
-            setVerificationResult(verificationResult);
-            setImprovementSuggestions(improvementText);
+                        // Handle different job states
+                        switch (statusData.status) {
+                            case 'completed':
+                                clearInterval(pollInterval);
+                                setIsLoading(false);
+                                setProgress(100);
+                                // Update both verification result and improvement suggestions
+                                if (statusData.result) {
+                                    setVerificationResult(statusData.result);
+                                    setImprovementSuggestions(statusData.result.improvementText || "");
+                                }
+                                break;
+                            case 'failed':
+                                clearInterval(pollInterval);
+                                setIsLoading(false);
+                                setProgress(0);
+                                setVerificationResult(null);
+                                setImprovementSuggestions(statusData.failedReason || "Verification failed. Please try again.");
+                                break;
+                            case 'stalled':
+                                clearInterval(pollInterval);
+                                setIsLoading(false);
+                                setProgress(0);
+                                setVerificationResult(null);
+                                setImprovementSuggestions("Verification stalled. Please try again.");
+                                break;
+                            case 'active':
+                            case 'waiting':
+                            case 'delayed':
+                                setIsLoading(true);
+                                break;
+                        }
+                    } catch (error) {
+                        console.error('Polling error:', error);
+                        // Keep loading state active on temporary errors
+                        setIsLoading(true);
+                    }
+                }, 2000); // Poll every 2 seconds
+
+                // Set a timeout to clear the interval after 5 minutes
+                setTimeout(() => {
+                    clearInterval(pollInterval);
+                    if (isLoading) {
+                        setIsLoading(false);
+                        setProgress(0);
+                        setImprovementSuggestions("Verification took too long. Please try again.");
+                    }
+                }, 300000); // 5 minutes timeout
+            }
         } catch (error) {
-            console.error("Error verifying brief:", error);
+            setIsLoading(false);
+            setProgress(0);
+            // Log the raw error for debugging
+            console.error("Raw error in handleVerifyClick:", error);
+
+            if (error && (error.message || error.response)) {
+                console.error("Error in handleVerifyClick:", {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status,
+                    request: {
+                        url: error.config?.url,
+                        method: error.config?.method,
+                        params: error.config?.params
+                    }
+                });
+            } else {
+                console.error("Unknown error in handleVerifyClick:", error);
+            }
             if (error.message === 'Request timeout') {
-                setImprovementSuggestions("The verification process took too long. Please try again.");
-            } else if (error.code === 'ECONNRESET') {
+                setImprovementSuggestions("Request timed out. Please try again.");
+            } else if (error.code === 'ECONNABORTED') {
                 setImprovementSuggestions("Connection was reset. Please try again.");
             } else {
-                setImprovementSuggestions("An error occurred during verification. Please try again.");
+                setImprovementSuggestions(error.response?.data?.error || "An error occurred. Please try again.");
             }
-        } finally {
-            setIsLoading(false);
         }
     };
 
-    // Function to render the circle or checkmark based on verification status
-    const renderVerificationIcon = (isVerified) => {
-        return isVerified ? (
-            <div className="h-4 w-4 bg-green-500 rounded-full border border-gray-600 flex-shrink-0" />
-        ) : (
-            <div className="h-4 w-4 bg-gray-200 rounded-full border border-gray-600 flex-shrink-0" />
+    // Function to render the circle, checkmark, or partial icon based on verification status
+    const renderVerificationIcon = (status) => {
+        const tooltipMap = {
+            fully: "Nice! You've covered this point.",
+            partially: "You've started this, but keep going!",
+            missing: "This still needs to be worked on.",
+        };
+    
+        const iconMap = {
+            fully: "✅",
+            partially: "🔍",
+            missing: "⚪",
+        };
+    
+        return (
+            <div className="relative h-4 w-4 flex-shrink-0 cursor-pointer group">
+                {iconMap[status] || "⚪"}
+                <div className="hidden group-hover:block">
+                    <CustomTooltip text={tooltipMap[status] || "Status unknown"} />
+                </div>
+            </div>
         );
     };
+    
 
-    const isItemVerified = (section, item) => {
-        return verificationResult?.[section]?.includes(item);
+    const getItemStatus = (section, item) => {
+        const sectionData = verificationResult?.[section];
+        if (!Array.isArray(sectionData)) return "missing";
+    
+        const found = sectionData.find(entry => entry.item === item);
+        return found?.status || "missing";
     };
 
     return(
@@ -135,7 +244,9 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-2 text-gray-900">
                 {objective.map((sentence, index) => (
                     <div key={index} className="flex items-center space-x-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.objective)}
+
+                        {renderVerificationIcon(getItemStatus("objective", sentence))}
+
                         <div className="flex-grow text-sm">
                             {sentence.trim()}.
                         </div>
@@ -147,7 +258,9 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {mainTopics.map((topic, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(isItemVerified("mainTopics", topic))}
+
+                        {renderVerificationIcon(getItemStatus("mainTopics", topic))}
+
                         <div className="leading-tight">
                             {topic}
                         </div>
@@ -158,9 +271,11 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {importantQuestions.map((question, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.importantQuestions?.includes(question))}
+
+                        {renderVerificationIcon(getItemStatus("importantQuestions", question))}
                         <div className="leading-tight">
-                        {question}
+                            {question}
+
                         </div>
                     </div>
                 ))}
@@ -171,7 +286,9 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {writingStyleAndTone.map((tone, index) => (
                     <div key={index} className="flex items-center gap-2 mt-1">
-                        {renderVerificationIcon(verificationResult?.writingStyleAndTone?.includes(tone))}
+
+                        {renderVerificationIcon(getItemStatus("writingStyleAndTone", tone))}
+
                         <div>{tone}</div>
                     </div>
                 ))}
@@ -181,7 +298,9 @@ export default function SeoBrief({data}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {recommendedStyle.map((style, index) => (
                     <div key={index} className="flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.recommendedStyle?.includes(style))}
+
+                        {renderVerificationIcon(getItemStatus("recommendedStyle", style))}
+
                         <div className="leading-tight">{style}</div>
                     </div>
                 ))}
@@ -190,7 +309,9 @@ export default function SeoBrief({data}){
             <div className="ml-10 mt-3 text-gray-900 text-sm">
                 {valueProposition.map((prop, index) => (
                     <div key={index} className="inline-flex items-center gap-2">
-                        {renderVerificationIcon(verificationResult?.valueProposition?.includes(prop))}
+
+                        {renderVerificationIcon(getItemStatus("valueProposition", prop))}
+
                         <div>{prop}</div>
                     </div>
                 ))}
@@ -201,7 +322,17 @@ export default function SeoBrief({data}){
                 onClick={handleVerifyClick}
                 className="mt-10 flex justify-center items-center space-x-2 text-[#FFFFFF] bg-[#EBB71A] hover:bg-[#C29613] cursor-pointer mx-auto px-5 py-1 rounded-lg">
                 {isLoading ? (
-                    <FaSpinner className="animate-spin text-white" />
+
+                    <>
+                        <div className="relative w-24 h-6 flex items-center justify-center">
+                            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div className="bg-[#413793] h-2.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                            </div>
+                            <span className="absolute left-1/2 transform -translate-x-1/2 text-xs text-gray-900 font-semibold">{progress}%</span>
+                        </div>
+                        <span className="ml-2">Verifying...</span>
+                    </>
+
                 ) : (
                     <>
                         <FaRobot />
@@ -215,8 +346,9 @@ export default function SeoBrief({data}){
             {/* Display improvement suggestions at the bottom */}
             {improvementSuggestions && (
                 <div className="mt-5 text-gray-900 text-sm">
-                    <h3 className="font-semibold">Improvement Suggestions:</h3>
-                    <p>{improvementSuggestions}</p>
+
+                    <ReactMarkdown>{improvementSuggestions}</ReactMarkdown>
+
                 </div>
             )}
 

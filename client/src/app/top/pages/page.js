@@ -6,6 +6,10 @@ import { ExternalLink } from "lucide-react"; // optional icon
 import Image from 'next/image';
 import { FaLock } from "react-icons/fa";
 import { useSearchParams } from 'next/navigation';
+<<<<<<< HEAD
+=======
+import { NEXT_PUBLIC_API_URL} from '../../../config/apiConfig';
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 function isValidDomain(domain) {
     const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
@@ -28,6 +32,7 @@ export default function Linking() {
     const [inputError, setInputError] = useState("");
     const searchParams = useSearchParams();
 
+<<<<<<< HEAD
     useEffect(() => {
         const host = searchParams.get('host');
         if (host) {
@@ -72,6 +77,14 @@ export default function Linking() {
         }
 
         if (!isValidDomain(inputUrl)) {
+=======
+    async function handleSearch(domain) {
+        if (!domain || loading) {
+            return;
+        }
+
+        if (!isValidDomain(domain)) {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             setInputError("Please enter a valid domain name (e.g., example.com)");
             return;
         }
@@ -80,11 +93,19 @@ export default function Linking() {
         setLoading(true);
 
         try {
+<<<<<<< HEAD
             const formattedUrl = formatUrl(inputUrl);
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
 
             const res = await fetch("http://localhost:7777/api/internal_pagerank", {
+=======
+            const formattedUrl = formatUrl(domain);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
+
+            const res = await fetch(`${NEXT_PUBLIC_API_URL}/api/internal_pagerank`, {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 method: "POST",
                 body: JSON.stringify({ baseUrl: formattedUrl }),
                 headers: {
@@ -104,17 +125,107 @@ export default function Linking() {
             if (data?.data?.length) {
                 setResult(data.data);
                 switchToResults(data.data);
+<<<<<<< HEAD
             }
         } catch (error) {
             if (error.name === 'AbortError') {
                 console.error("Request timed out");
             } else {
                 console.error("Search failed:", error);
+=======
+            } else {
+                setInputError("No data found for this domain");
+                switchToInput();
+            }
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                setInputError("Request timed out. Please try again.");
+            } else {
+                setInputError("Failed to fetch data. Please try again.");
+            }
+            switchToInput();
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function fetchFromDatabase(host) {
+        if (!host || loading) {
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
+
+            const res = await fetch(`/api/get-internal-pagerank`, {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: host }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const data = await res.json();
+            if (data?.data?.length) {
+                setResult(data.data);
+                switchToResults(data.data);
+            } else {
+                // If no data found, try the external API
+                await handleSearch(host);
+            }
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                setInputError("Request timed out. Please try again.");
+            } else {
+                // If database fetch fails, try the external API
+                await handleSearch(host);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             }
         } finally {
             setLoading(false);
         }
+<<<<<<< HEAD
     };
+=======
+    }
+
+    // Handle URL parameter
+    useEffect(() => {
+        const host = searchParams.get('host');
+        let mounted = true;
+
+        if (host && !loading) {
+            setInputUrl(host);
+            if (isValidDomain(host)) {
+                (async () => {
+                    try {
+                        await fetchFromDatabase(host);
+                    } catch (error) {
+                        if (mounted) {
+                            setInputError("Failed to fetch data");
+                        }
+                    }
+                })();
+            } else {
+                setInputError("Invalid domain name format");
+            }
+        }
+
+        return () => {
+            mounted = false;
+        };
+    }, [searchParams]);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     const exportToCSV = () => {
         if (!result.length) return;
@@ -211,7 +322,11 @@ export default function Linking() {
                         )}
                     </div>
                     <button
+<<<<<<< HEAD
                         onClick={handleSearch}
+=======
+                        onClick={() => fetchFromDatabase(inputUrl)}
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         className="bg-[#41388C] text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
                     >
                         OK

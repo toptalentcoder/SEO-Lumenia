@@ -4,7 +4,11 @@ const nextConfig = {
         return [
             {
                 source: '/api/:path*',
+<<<<<<< HEAD
                 destination: 'http://localhost:7777/api/:path*', //backend URL
+=======
+                destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`, //backend URL
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             },
         ];
     },

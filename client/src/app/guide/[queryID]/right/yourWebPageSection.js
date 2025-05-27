@@ -6,22 +6,34 @@ import { FaRobot } from "react-icons/fa6";
 import {useUser} from "../../../../context/UserContext";
 import axios from 'axios';
 
+<<<<<<< HEAD
 export default function YourWebPageSection({ data }) {
+=======
+export default function YourWebPageSection({ data, webpageTitleMetaData, setWebpageTitleMetaData, titleTag, setTitleTag, metaDescription, setMetaDescription }) {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     const [loading, setLoading] = useState(false);
     const { queryID } = useParams();
     const { user } = useUser();
+<<<<<<< HEAD
     const [webpageTitleMetaData, setWebpageTitleMetaData] = useState([]);
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     const [isLoading, setIsLoading] = useState(false);
 
     const query = data.query;
     const keywords = data?.optimizationLevels?.map(item => item.keyword);
 
+<<<<<<< HEAD
     const [titleTag, setTitleTag] = useState("");
     const [metaDescription, setMetaDescription] = useState("");
 
     useEffect(() => {
         const fetchWebpageTitleMetaData = async () => {
+=======
+    useEffect(() => {
+        const fetchMeta = async () => {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             try {
                 setIsLoading(true);
                 const response = await axios.get(
@@ -30,6 +42,7 @@ export default function YourWebPageSection({ data }) {
 
                 if (response.data.success && Array.isArray(response.data.webpageTitleMeta)) {
                     setWebpageTitleMetaData(response.data.webpageTitleMeta);
+<<<<<<< HEAD
 
                     const firstBlock = response.data.webpageTitleMeta?.[0]?.[0] || "";
                     const title = firstBlock
@@ -44,13 +57,40 @@ export default function YourWebPageSection({ data }) {
                 }
             } catch (error) {
                 setWebpageTitleMetaData("")
+=======
+                }
+            } catch (error) {
+                setWebpageTitleMetaData([]);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             } finally {
                 setIsLoading(false);
             }
         };
 
+<<<<<<< HEAD
         fetchWebpageTitleMetaData();
     }, [queryID, user.email]);
+=======
+        if (queryID && user?.email) {
+            fetchMeta();
+        }
+    }, [queryID, user?.email, setWebpageTitleMetaData]);
+
+    // Set default values from first metadata block if none selected
+    useEffect(() => {
+        if (webpageTitleMetaData.length > 0 && !titleTag && !metaDescription) {
+            const firstBlock = webpageTitleMetaData?.[0]?.[0] || "";
+            const titleLine = firstBlock.split("\n").find(line => line.startsWith("Title Tag")) || "";
+            const metaLine = firstBlock.split("\n").find(line => line.startsWith("Meta Description")) || "";
+
+            const title = titleLine.replace(/^Title Tag\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+            const meta = metaLine.replace(/^Meta Description\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+
+            setTitleTag(title);
+            setMetaDescription(meta);
+        }
+    }, [webpageTitleMetaData, titleTag, metaDescription, setTitleTag, setMetaDescription]);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     const handleCreateTitleTagAndMetaDescription = async () => {
         if (!user?.availableFeatures || parseInt(user.availableFeatures.ai_tokens || "0", 10) < 600) {
@@ -61,7 +101,10 @@ export default function YourWebPageSection({ data }) {
         setLoading(true); // 🔄 Disable the button
 
         try {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             const response = await fetch('/api/generate_webpage_title_meta', {
                 method: 'POST',
                 headers: {
@@ -72,23 +115,54 @@ export default function YourWebPageSection({ data }) {
                     keywords: keywords,
                     queryID: queryID,
                     email : user.email,
+<<<<<<< HEAD
+=======
+                    language : data.language
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 }),
             });
 
             const result = await response.json();
 
             if (result.success) {
+<<<<<<< HEAD
                 console.log("Successfully webpage title tag and meta description saved...")
+=======
+                // Fetch the latest data after successful generation
+                setWebpageTitleMetaData(prev => [...prev, result.webpageTitleMeta]);
+
+                // Optional auto-select logic
+                if (!titleTag && !metaDescription) {
+                    const latest = result.webpageTitleMeta?.[0] || "";
+                    const titleLine = latest.split("\n").find(line => line.startsWith("Title Tag")) || "";
+                    const metaLine = latest.split("\n").find(line => line.startsWith("Meta Description")) || "";
+
+                    const title = titleLine.replace(/^Title Tag\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+                    const meta = metaLine.replace(/^Meta Description\s*\d*:\s*/, "").replace(/^"|"$/g, "").trim();
+
+                    setTitleTag(title);
+                    setMetaDescription(meta);
+                }
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             }
         } catch (error) {
             console.error("Failed to create SEO guide:", error);
         } finally {
             setLoading(false); // ✅ Re-enable the button
         }
+<<<<<<< HEAD
     }
 
     return (
         <div className="px-4">
+=======
+    };
+
+    return (
+        <div className="px-4">
+
+            {/* Page URL */}
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             <div className="relative">
                 <input
                     id="hs-floating-input-email"
@@ -109,6 +183,10 @@ export default function YourWebPageSection({ data }) {
                 </label>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* Title Tag */}
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             <div className="relative mt-5">
                 <input
                     id="title-tag"
@@ -131,6 +209,10 @@ export default function YourWebPageSection({ data }) {
                 </label>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* Meta Description */}
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             <div className="relative mt-5">
                 <textarea
                     id="hs-floating-input-meta-description"
@@ -154,6 +236,10 @@ export default function YourWebPageSection({ data }) {
                 </label>
             </div>
 
+<<<<<<< HEAD
+=======
+            {/* Buttons */}
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             <div className='flex justify-end mt-5 items-center space-x-4'>
                 <div className="relative group cursor-pointer">
                     <button

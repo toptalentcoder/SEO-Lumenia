@@ -9,7 +9,10 @@ import { US } from 'country-flag-icons/react/3x2';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function TopLinks(){
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     const {currentView, responseData, switchToResults, switchToInput } = useSearchView();
     const { user } = useUser();
     const [inputUrl, setInputUrl] = useState("");
@@ -19,11 +22,122 @@ export default function TopLinks(){
     const searchParams = useSearchParams();
     const url = searchParams.get('url');
 
+<<<<<<< HEAD
     useEffect(() => {
         if (url) {
             setInputUrl(url);
             handleHistorySearch(url);
         }
+=======
+    async function handleSearch(domain) {
+        if (!domain) {
+            console.log('No domain provided');
+            return;
+        }
+
+        // Format the URL properly
+        let formattedUrl = domain.trim();
+        if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+            formattedUrl = 'https://' + formattedUrl;
+        }
+        
+        // Remove trailing slash if present
+        formattedUrl = formattedUrl.replace(/\/$/, '');
+
+        setLoading(true);
+        setResult([]); // Clear previous results
+
+        try {
+
+            const res = await fetch("/api/search-backlinks", {
+                method: "POST",
+                body: JSON.stringify({ 
+                    baseUrl: formattedUrl, 
+                    email: user?.email 
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const data = await res.json();
+
+            
+            if (data && Array.isArray(data) && data.length > 0) {
+                setResult(data);
+                switchToResults(data);
+            } else {
+                console.log('No valid data received');
+                setResult([]);
+            }
+        } catch (error) {
+            console.error("Search failed:", error);
+            setResult([]);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function handleHistorySearch(domain) {
+        if (!user?.email || !domain) return;
+        
+        if (loading) {
+            console.log('Already loading, skipping search');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const res = await fetch("/api/backlinks-overview", {
+                method: "POST",
+                body: JSON.stringify({ baseUrl: domain, email: user.email }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await res.json();
+            if (data && !data.error && Array.isArray(data)) {
+                setResult(data);
+                switchToResults(data);
+            } else if (data.error) {
+                // If no history found, fall back to Semrush search
+                await handleSearch(domain);
+            }
+        } catch (error) {
+            console.error("Error fetching backlink history:", error);
+            // Fall back to Semrush search on error
+            await handleSearch(domain);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        let mounted = true;
+
+        if (url && !loading) {
+            setInputUrl(url);
+            (async () => {
+                try {
+                    await handleHistorySearch(url);
+                } catch (error) {
+                    if (mounted) {
+                        console.error("Failed to fetch history:", error);
+                    }
+                }
+            })();
+        }
+
+        return () => {
+            mounted = false;
+        };
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     }, [url]);
 
     const getBaseGrade = (score) => {
@@ -89,6 +203,7 @@ export default function TopLinks(){
         document.body.removeChild(link);
     };
 
+<<<<<<< HEAD
     const handleHistorySearch = async (domain) => {
         if (!user?.email) return;
         setLoading(true);
@@ -174,6 +289,8 @@ export default function TopLinks(){
         }
     };
 
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     const renderTable = () => (
         <div >
             <div className="flex items-center gap-4 mb-6">
@@ -304,7 +421,10 @@ export default function TopLinks(){
                     <button
                         className="bg-[#41388C] hover:bg-[#352d73] transition-colors duration-200 text-white px-5 py-2.5 rounded-xl cursor-pointer text-sm"
                         onClick={() => {
+<<<<<<< HEAD
                             console.log('OK button clicked, inputUrl:', inputUrl);
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                             handleSearch(inputUrl);
                         }}
                     >

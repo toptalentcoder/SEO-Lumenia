@@ -3,7 +3,7 @@
 import { ImCross } from "react-icons/im";
 import { FaCheck } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, DotProps, ComposedChart  } from 'recharts';
+import { AreaChart, ReferenceLine, ReferenceArea, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, Legend, DotProps, ComposedChart  } from 'recharts';
 import LexicalSeoEditor from './seoEditor';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { IoIosArrowDown } from "react-icons/io";
@@ -46,7 +46,6 @@ const glToFullCountryMap = {
     ru: 'Russia',
     jp: 'Japan',
     cn: 'China',
-    kr: 'South Korea',
     in: 'India',
     au: 'Australia',
     ca: 'Canada',
@@ -69,6 +68,28 @@ const glToFullCountryMap = {
     ad: 'Andorra'
 };
 
+const getRandomColor = () => {
+    let color;
+    do {
+        color = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    } while (
+        color.toLowerCase() === '#000000' || // avoid black
+        color.toLowerCase() === '#ffffff' || // avoid white
+        isColorTooLight(color)               // optional: avoid too-light colors
+    );
+    return color;
+};
+  
+// Optional: filter out very light colors
+const isColorTooLight = (hex) => {
+    const r = parseInt(hex.substring(1, 3), 16);
+    const g = parseInt(hex.substring(3, 5), 16);
+    const b = parseInt(hex.substring(5, 7), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 230;
+};
+
+
 const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     return (
         <svg x={cx - 4} y={cy - 4} width={8} height={8} fill={color} stroke="none">
@@ -90,35 +111,37 @@ export default function Analysis({data, setIsDirty }) {
     const [detectedCategories, setDetectedCategories] = useState([]);
     const [soseoScore, setSoseoScore] = useState(0);
     const [dseoScore, setDseoScore] = useState(0);
+    // const [yMax, setYMax] = useState(100); // Default value is 100
+    const [isSubOptimizedVisible, setIsSubOptimizedVisible] = useState(true);
+    const [isStandardOptimizedVisible, setIsStandardOptimizedVisible] = useState(true);
+    const [isStrongOptimizedVisible, setIsStrongOptimizedVisible] = useState(true);
+    const [isOverOptimizedVisible, setIsOverOptimizedVisible] = useState(true);
+    const [editorJson, setEditorJson] = useState(null);
 
+
+    const lineColors = [
+        '#FF5733', '#33C1FF', '#9D33FF', '#33FF57', '#FF33B2',
+        '#FFD733', '#33FFF2', '#8DFF33', '#FF8D33', '#3399FF',
+    ];
 
     useEffect(() => {
-        // Only set graph data when data is available
-        if (data?.optimizationLevels) {
-            const newGraphData = data.optimizationLevels.map((keywordData) => ({
-                name: keywordData.keyword,
-                subOptimized: parseInt(keywordData.optimizationRanges.subOptimized, 10),
-                standardOptimized: parseInt(keywordData.optimizationRanges.standardOptimized, 10),
-                strongOptimized: parseInt(keywordData.optimizationRanges.strongOptimized, 10),
-                overOptimized: parseInt(keywordData.optimizationRanges.overOptimized, 10),
-            }));
-
-            setGraphData(newGraphData);
-
-            const initialGraphLineData = [
-                {
-                    name: "Series 1",
-                    data: data.optimizationLevels.map((optimization) => ({
-                        name: optimization.keyword,
-                        value: 0,
-                    })),
-                },
-            ];
-
-            setGraphLineData(initialGraphLineData);
+        if (data?.optimizationLevels && graphLineData.length > 0) {
+            // Combine the graphLineData with graphData (optimizationLevels)
+            const combinedData = data.optimizationLevels.map((keywordData) => {
+                const graphLine = graphLineData[0].data.find((line) => line.name === keywordData.keyword);
+                return {
+                    name: keywordData.keyword,
+                    subOptimized: keywordData.optimizationRanges?.subOptimized || 0,
+                    standardOptimized: keywordData.optimizationRanges?.standardOptimized || 0,
+                    strongOptimized: keywordData.optimizationRanges?.strongOptimized || 0,
+                    overOptimized: keywordData.optimizationRanges?.overOptimized || 0,
+                    series1Value: graphLine ? graphLine.value : 0, // Adding value from graphLineData
+                };
+            });
+            setGraphData(combinedData);
         }
-    }, [data]); // Run this effect whenever the 'data' changes
-
+    }, [data?.optimizationLevels, graphLineData]); // Dependencies
+    
     useEffect(() => {
         const fetchInitialCategories = async () => {
             try {
@@ -130,7 +153,7 @@ export default function Analysis({data, setIsDirty }) {
                     setDetectedCategories(categories);
                 }
             } catch (err) {
-                console.error("❌ Failed to fetch initial categories:", err);
+                console.error("❌ Failed to fetch SEO Editor Data:", err?.response?.data || err);
             }
         };
 
@@ -144,15 +167,16 @@ export default function Analysis({data, setIsDirty }) {
             try {
                 const res = await fetch(`/api/get_optimization_graph_data?queryID=${queryID}&email=${user.email}`);
                 const result = await res.json();
-
+    
                 if (result.success && Array.isArray(result.graphLineData)) {
                     setGraphLineData(result.graphLineData);
+                    
                 }
             } catch (err) {
                 console.error("Error fetching saved graph data", err);
             }
         };
-
+    
         if (user?.email && queryID) {
             fetchSavedGraphData();
         }
@@ -177,27 +201,24 @@ export default function Analysis({data, setIsDirty }) {
         }
     }, [user?.email, queryID]);
 
-    // Handle the analysis trigger
     const handleAnalyse = async () => {
-
         try {
+            if (!editorJson) return;
 
-            const content = editorRef.current?.innerText?.trim() || "";
-
+            const content = editorRef.current?.innerText?.trim() || ""; // Still used for `innerText`-based analysis
+            const serializedEditorJson = JSON.stringify(editorJson);
+            
             setLoading(true);
 
-            // Get the list of keywords (you should pass the actual list of keywords)
-            // Correct way to extract keywords from data
             const keywords = data?.optimizationLevels?.map(item => item.keyword) || [];
 
-            // Send request to backend API with the content and keywords
             const response = await fetch("/api/calculate_optimization_levels", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    currentText: [content], // Send content as an array
+                    currentText: [content],
                     keywords: keywords,
                 }),
             });
@@ -236,18 +257,17 @@ export default function Analysis({data, setIsDirty }) {
                     },
                     body: JSON.stringify({
                         content: content,
-                        email : user.email,
+                        email: user.email,
                         queryID: queryID,
                     }),
-                })
+                });
 
-                const categories  = await categoryResponse.json();
+                const categories = await categoryResponse.json();
 
                 if (categories?.category) {
                     setDetectedCategories(categories.category.split(',').map(c => c.trim()));
                 }
 
-                // After setGraphLineData(newGraphLineData);
                 const soseoDseoRes = await fetch("/api/calculate_soseo_dseo", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -259,20 +279,22 @@ export default function Analysis({data, setIsDirty }) {
 
                 const soseoDseoResult = await soseoDseoRes.json();
                 if (soseoDseoResult.success) {
-                    setSoseoScore(Math.round(soseoDseoResult.soseo.reduce((a, b) => a + b, 0)));
-                    setDseoScore(Math.round(soseoDseoResult.dseo.reduce((a, b) => a + b, 0)));
-                }
+                    const soseoSum = Math.round(soseoDseoResult.soseo.reduce((a, b) => a + b, 0));
+                    const dseoSum = Math.round(soseoDseoResult.dseo.reduce((a, b) => a + b, 0));
+                    setSoseoScore(soseoSum);
+                    setDseoScore(dseoSum);
 
-                await fetch("/api/save_soseo_dseo", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        email: user.email,
-                        queryID,
-                        soseo: Math.round(soseoDseoResult.soseo.reduce((a, b) => a + b, 0)),
-                        dseo: Math.round(soseoDseoResult.dseo.reduce((a, b) => a + b, 0)),
-                    }),
-                });
+                    await fetch("/api/save_soseo_dseo", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            email: user.email,
+                            queryID,
+                            soseo: soseoSum,
+                            dseo: dseoSum,
+                        }),
+                    });
+                }
 
                 await fetch("/api/save_seo_editor_data", {
                     method: "POST",
@@ -280,7 +302,7 @@ export default function Analysis({data, setIsDirty }) {
                     body: JSON.stringify({
                         email: user.email,
                         queryID: queryID,
-                        content: content,
+                        content: serializedEditorJson,
                     }),
                 });
             } else {
@@ -294,37 +316,73 @@ export default function Analysis({data, setIsDirty }) {
     };
 
     const analyseUrlGraph = async (url) => {
-        // Check if data and seoGuides are available
-        if (!data?.optimizationLevels) {
-            console.error("Optimization data not available.");
-            return; // Exit if data is not available
-        }
+        if (!data?.optimizationLevels) return;
 
-        // Find the optimization data for the specific URL
-        const selectedKeywordData = data.optimizationLevels.map((level) => {
-            const optimizationValue = level.urlOptimizations[url];
+        const isRemoving = graphLineData.some((s) => s.name === url);
+        const keywordData = data.optimizationLevels.map((level) => ({
+            name: level.keyword,
+            value: level.urlOptimizations?.[url],
+        }));
 
-            return {
-                name: level.keyword,  // Keyword name
-                value: optimizationValue || 0, // Use the value for this specific URL or 0 if not available
-            };
+        setGraphLineData(prev => {
+            if (isRemoving) return prev.filter(s => s.name !== url);
+            const color = getRandomColor();
+            return [...prev, { name: url, color, data: keywordData }];
         });
+    };
 
-        if (!selectedKeywordData || selectedKeywordData.length === 0) {
-            console.error("No optimization data available for the URL.");
-            return; // Exit if no optimization data is available for the URL
+    useEffect(() => {
+        const allKeywordNames = new Set([
+          ...(data?.optimizationLevels?.map((d) => d.keyword) || []),
+          ...graphLineData.flatMap((line) => line.data?.map((d) => d.name) || []),
+        ]);
+      
+        const mergedGraphData = Array.from(allKeywordNames).map((keyword) => {
+          const level = data?.optimizationLevels?.find(d => d.keyword === keyword);
+          const base = {
+            name: keyword,
+            subOptimized: level?.optimizationRanges?.subOptimized || 0,
+            standardOptimized: level?.optimizationRanges?.standardOptimized || 0,
+            strongOptimized: level?.optimizationRanges?.strongOptimized || 0,
+            overOptimized: level?.optimizationRanges?.overOptimized || 0,
+          };
+      
+          const series1 = graphLineData.find((line) => line.name === "Series 1");
+          if (series1) {
+            const point = series1.data?.find((d) => d.name === keyword);
+            base["Series 1"] = point?.value || 0;
+          }
+      
+          graphLineData
+            .filter((line) => line.name !== "Series 1")
+            .forEach((line) => {
+              const point = line.data?.find((d) => d.name === keyword);
+              base[line.name] = point?.value || 0;
+            });
+      
+          return base;
+        });
+      
+        setGraphData(mergedGraphData);
+    }, [graphLineData, data?.optimizationLevels]);
+
+    const handleOptimizationToggle = (optimizationType) => {
+        switch (optimizationType) {
+          case 'subOptimized':
+            setIsSubOptimizedVisible(!isSubOptimizedVisible);
+            break;
+          case 'standardOptimized':
+            setIsStandardOptimizedVisible(!isStandardOptimizedVisible);
+            break;
+          case 'strongOptimized':
+            setIsStrongOptimizedVisible(!isStrongOptimizedVisible);
+            break;
+          case 'overOptimized':
+            setIsOverOptimizedVisible(!isOverOptimizedVisible);
+            break;
+          default:
+            break;
         }
-
-        // Map data to the format expected by graphLineData
-        const updatedGraphLineData = [
-            {
-                name: "URL Optimizations",
-                data: selectedKeywordData, // Use the data from the map
-            },
-        ];
-
-        // Update graphLineData with the new data
-        setGraphLineData(updatedGraphLineData);
     };
 
     return(
@@ -385,7 +443,7 @@ export default function Analysis({data, setIsDirty }) {
                             anchor="bottom start"
                             className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl z-50"
                         >
-                            {data?.searchResults?.map((result, index) => {
+                            {data?.searchResults?.slice(0, 10).map((result, index) => {
                                 const isChecked = selectedLinks.includes(result.link);
 
                                 return (
@@ -418,10 +476,10 @@ export default function Analysis({data, setIsDirty }) {
                 </div>
             </div>
 
-            <div className="mt-8" style={{ width: '100%', height: 350 }}>
+            <div className="mt-8 relative" style={{ width: '100%', height: 350 }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <ComposedChart
-                        data={graphData} // Use graphData for the AreaChart
+                        data={graphData}
                         margin={{
                             top: 10,
                             right: 30,
@@ -430,7 +488,15 @@ export default function Analysis({data, setIsDirty }) {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" angle={-45} textAnchor="end" interval={0} tick={{ fontSize: 13 }} />
+
+                        <XAxis
+                            dataKey="name"
+                            angle={-45}
+                            textAnchor="end"
+                            interval={0}
+                            minTickGap={10} // ⬅️ Add this
+                            tick={{ fontSize: 13 }}
+                        />
                         <YAxis
                             tick={false}
                             label={{
@@ -442,66 +508,127 @@ export default function Analysis({data, setIsDirty }) {
                             }}
                         />
 
+                        {/* Add this below 👇 */}
+                        <ReferenceLine
+                            x={graphData[16]?.name}
+                            stroke="#000"
+                            strokeWidth={2}
+                            strokeDasharray="4 4"
+                        />
+                        {/* Background shading - right side */}
+                        <ReferenceArea
+                            x1={graphData[16]?.name}
+                            x2={graphData[graphData.length - 1]?.name}
+                            fill="#e0e0e0"
+
+                            strokeOpacity={0}
+                        />
+
+                        {/* STEP 2: Optional left side white — can skip since white is default */}
+                        <ReferenceArea
+                            x1={graphData[0]?.name}
+                            x2={graphData[16]?.name}
+                            fill="#ffffff"
+ 
+                            strokeOpacity={0}
+                        />
+
+                        {/* STEP 3: Alternating vertical stripes (on top of background) */}
+                        {graphData.map((entry, i) => (
+                        <ReferenceArea
+                            key={`stripe-${i}`}
+                            x1={entry.name}
+                            x2={graphData[i + 1]?.name}
+                            fill={i % 2 === 0 ? "transparent" : "rgba(0,0,0,0.03)"}
+                            strokeOpacity={0}
+                        />
+                        ))}
+
+
                         {/* Area layers */}
                         <Area
                             type="monotone"
                             dataKey="subOptimized"
                             stackId="1"
                             stroke="#7CB5EC"
-                            fill="#7CB5EC"
+                            fill={isSubOptimizedVisible ? "#7CB5EC" : "transparent"} // Transparent when not visible
                         />
                         <Area
                             type="monotone"
                             dataKey="standardOptimized"
                             stackId="1"
                             stroke="#90EE7E"
-                            fill="#90EE7E"
+                            fill={isStandardOptimizedVisible ? "#90EE7E" : "transparent"} // Transparent when not visible
                         />
                         <Area
                             type="monotone"
                             dataKey="strongOptimized"
                             stackId="1"
                             stroke="#FFA500"
-                            fill="#FFA500"
+                            fill={isStrongOptimizedVisible ? "#FFA500" : "transparent"} // Transparent when not visible
                         />
                         <Area
                             type="monotone"
                             dataKey="overOptimized"
                             stackId="1"
                             stroke="#FF0000"
-                            fill="#FF0000"
+                            fill={isOverOptimizedVisible ? "#FF0000" : "transparent"} // Transparent when not visible
                         />
-
                         {/* Line layers */}
-                        {graphLineData.map((s) => (
-                            <Line
-                                key={s.name} // Make sure key is unique
-                                data={s.data} // Use the same data structure for the line chart
-                                dataKey="value" // Ensure this matches your data structure
-                                name={s.name}
-                                stroke="#000000" // Line color (black)
-                                strokeWidth={2}  // Optional: Adjust line thickness
-                                dot={<CustomDot color="#000000" />}  // Dot color (black)
-                            />
-                        ))}
+                        {graphLineData.map((s, i) => {
+                            const isMainSeries = s.name === "Series 1";
+                            const strokeColor = isMainSeries ? "#000000" : s.color;
+
+                            return (
+                                <Line
+                                    key={s.name}
+                                    type="monotone"
+                                    dataKey={s.name}
+                                    name={isMainSeries ? "Your Content" : s.name}
+                                    stroke={strokeColor}
+                                    strokeWidth={2}
+                                    dot={<CustomDot color={strokeColor} />}
+                                />
+                            );
+                        })}
+
                     </ComposedChart>
                 </ResponsiveContainer>
+
+                  {/* Top-right overlay text/image */}
+                <div className="absolute top-7 text-black right-24 opacity-30 text-5xl font-bold pointer-events-none select-none z-10">
+                    Lumenia
+                    {/* OR use an image instead: */}
+                    {/* <img src="/yourtextguru-logo.png" className="w-32 opacity-30" alt="Watermark" /> */}
+                </div>
             </div>
 
             <div className="flex items-center gap-4 justify-center mt-4">
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('overOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#FF0000]"></div>
                     <span className="text-sm font-semibold text-gray-800">Over-optimiztion</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('strongOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#FFA500]"></div>
                     <span className="text-sm font-semibold text-gray-800">Strong-optimiztion</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('standardOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#90EE7E]"></div>
                     <span className="text-sm font-semibold text-gray-800">Standard-optimiztion</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div
+                    className="flex items-center gap-2 cursor-pointer"
+                    onClick={() => handleOptimizationToggle('subOptimized')}
+                >
                     <div className="w-3 h-3 rounded-full bg-[#7CB5EC]"></div>
                     <span className="text-sm font-semibold text-gray-800">Sub-optimiztion</span>
                 </div>
@@ -517,7 +644,7 @@ export default function Analysis({data, setIsDirty }) {
             </div>
 
             <div className="p-6 mt-10">
-                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} editorRef={editorRef} />
+                <LexicalSeoEditor data={data} onDirtyChange={setIsDirty} editorRef={editorRef} onEditorJSONUpdate={setEditorJson} />
             </div>
 
             <div className="flex justify-between mr-6 items-center">

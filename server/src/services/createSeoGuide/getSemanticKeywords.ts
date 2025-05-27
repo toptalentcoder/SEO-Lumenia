@@ -1,6 +1,21 @@
+<<<<<<< HEAD
 import { OpenAI } from 'openai';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+=======
+import { OpenAI, AzureOpenAI } from 'openai';
+import { AZURE_OPENAI_API_KEY, AZURE_OPENAI_API_TEXT_EMBEDDING_ADA_002_VERSION, AZURE_OPENAI_DEPLOYMENT_TEXT_EMBEDDING_ADA_002, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from '@/config/apiConfig';
+
+// const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+const options = {
+    endpoint: AZURE_OPENAI_ENDPOINT,
+    apiKey: AZURE_OPENAI_API_KEY,
+    deploymentName: AZURE_OPENAI_DEPLOYMENT_TEXT_EMBEDDING_ADA_002,
+    apiVersion: AZURE_OPENAI_API_TEXT_EMBEDDING_ADA_002_VERSION
+};
+
+const openai = new AzureOpenAI(options)
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 /**
  * Compute cosine similarity between two vectors

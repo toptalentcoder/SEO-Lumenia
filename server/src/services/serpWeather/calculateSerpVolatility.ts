@@ -40,8 +40,11 @@ export async function calculateImprovedSerpVolatility(
 
         const flux = calculateFlux(todayEntry.results, yesterdayEntry.results);
 
+<<<<<<< HEAD
         console.log(flux)
 
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         if (!categoryFlux[doc.category]) {
             categoryFlux[doc.category] = { totalChange: 0, count: 0 };
         }

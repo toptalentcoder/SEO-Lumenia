@@ -10,7 +10,10 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+<<<<<<< HEAD
 import { FRONTEND_URL } from './config/apiConfig'
+=======
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { customEndpoints } from './endpoints'
 import { paypalProductID } from './globals/paypalProductID'
 import { BillingPlan } from './collections/paypalPlan'
@@ -24,6 +27,13 @@ import { InternalUrls } from './collections/internalUrlsCollection';
 import { PageDuplicates } from './collections/pageDuplicates';
 import { BacklinkSites } from './collections/backlinkSites';
 import { internalPageRankEndpoint } from './endpoints/internal_page_rank/internalPageRankEndpoint';
+<<<<<<< HEAD
+=======
+import { startWorkers } from './workers/startWorkers';
+import { setSeoGuidePayloadInstance } from './workers/seoGuideWorker';
+import { setSeoBriefPayloadInstance } from './workers/seoBriefWorker';
+import { intercomSettings } from './globals/intercomSettings';
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +45,15 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+<<<<<<< HEAD
   },
+=======
+    meta: {
+      titleSuffix: '- Admin',
+    },
+  },
+  debug: true,
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   collections: [
     Users,
     Media,
@@ -48,8 +66,21 @@ export default buildConfig({
     PageDuplicates,
     BacklinkSites,
   ],
+<<<<<<< HEAD
   globals : [paypalProductID],
   cors: {origins : [FRONTEND_URL]}, // Allow requests from your frontend
+=======
+  globals : [paypalProductID, intercomSettings],
+  cors: {
+    origins: [
+      process.env.FRONTEND_URL,
+      'http://167.235.246.98:7778',
+      'http://localhost:7778',
+      'http://167.235.246.98:4001',
+      'http://localhost:4001'
+    ].filter((url): url is string => Boolean(url)),
+  },
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -67,8 +98,12 @@ export default buildConfig({
     ...(customEndpoints || []), // Ensure customEndpoints is defined
     internalPageRankEndpoint,
   ],
+<<<<<<< HEAD
   onInit : async(payload) => {
 
+=======
+  onInit: async(payload) => {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     const server = (payload as any).server;
 
     if (server) {
@@ -77,11 +112,41 @@ export default buildConfig({
     }
 
     const conn = mongoose.connection
+<<<<<<< HEAD
 
     conn.set('socketTimeoutMS', 300000)
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
     startDailyRankTracking(payload);
     console.log('Daily rank tracking finsihed');
+=======
+    conn.set('socketTimeoutMS', 300000)
+    
+    // Add connection status logging
+    mongoose.connection.on('connected', () => {
+      console.log('✅ MongoDB connected successfully');
+    });
+
+    mongoose.connection.on('error', (err) => {
+      console.error('❌ MongoDB connection error:', err);
+    });
+
+    mongoose.connection.on('disconnected', () => {
+      console.log('⚠️ MongoDB disconnected');
+    });
+    
+    console.log('Initializing Payload services...');
+
+    console.log('Paypal plan check');
+    createPlansAndGetID(payload);
+    startDailyRankTracking(payload);
+    console.log('Daily rank tracking finished');
+    
+    // Start workers in the background without awaiting
+    startWorkers(payload).catch(err => {
+      console.error('Error starting workers:', err);
+    });
+    console.log('✅ Workers started in background');
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   }
 })

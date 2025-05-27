@@ -102,9 +102,17 @@ export interface Config {
   };
   globals: {
     paypal_product_id: PaypalProductId;
+<<<<<<< HEAD
   };
   globalsSelect: {
     paypal_product_id: PaypalProductIdSelect<false> | PaypalProductIdSelect<true>;
+=======
+    'intercom-settings': IntercomSetting;
+  };
+  globalsSelect: {
+    paypal_product_id: PaypalProductIdSelect<false> | PaypalProductIdSelect<true>;
+    'intercom-settings': IntercomSettingsSelect<false> | IntercomSettingsSelect<true>;
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   };
   locale: null;
   user: User & {
@@ -759,6 +767,20 @@ export interface PaypalProductId {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+<<<<<<< HEAD
+=======
+ * via the `definition` "intercom-settings".
+ */
+export interface IntercomSetting {
+  id: string;
+  intercomID: string;
+  intercomSecretKey: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
  * via the `definition` "paypal_product_id_select".
  */
 export interface PaypalProductIdSelect<T extends boolean = true> {
@@ -769,6 +791,20 @@ export interface PaypalProductIdSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+<<<<<<< HEAD
+=======
+ * via the `definition` "intercom-settings_select".
+ */
+export interface IntercomSettingsSelect<T extends boolean = true> {
+  intercomID?: T;
+  intercomSecretKey?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
  * via the `definition` "auth".
  */
 export interface Auth {

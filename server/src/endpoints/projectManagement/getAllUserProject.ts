@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { FRONTEND_URL } from "@/config/apiConfig";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 
@@ -16,7 +20,11 @@ export const getAllUserProjects: Endpoint = {
         const { payload } = req;
 
         const corsHeaders = {
+<<<<<<< HEAD
             "Access-Control-Allow-Origin": "*",
+=======
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",
@@ -49,7 +57,11 @@ export const getAllUserProjects: Endpoint = {
         }
 
         const user = users.docs[0];
+<<<<<<< HEAD
         const rawProjects = user.projects;
+=======
+        const rawProjects = user.projects as Project[];
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
         if (!Array.isArray(rawProjects)) {
             return new Response(

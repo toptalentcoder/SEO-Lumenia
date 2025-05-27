@@ -2,6 +2,10 @@ import { Endpoint } from "payload";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { PayloadRequest } from "payload";
 import { internalPageRank } from "@/services/UrlPageServie/internalPageRank";
+<<<<<<< HEAD
+=======
+import { FRONTEND_URL } from "@/config/apiConfig";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 function formatUrl(url: string): string {
     if (!url) return '';
@@ -24,7 +28,11 @@ export const internalPageRankEndpoint: Endpoint = {
                 status: 400,
                 headers: { 
                     "Content-Type": "application/json",
+<<<<<<< HEAD
                     "Access-Control-Allow-Origin": "*",
+=======
+                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type"
                 },
@@ -54,7 +62,11 @@ export const internalPageRankEndpoint: Endpoint = {
                             status: 200, 
                             headers: { 
                                 "Content-Type": "application/json",
+<<<<<<< HEAD
                                 "Access-Control-Allow-Origin": "*",
+=======
+                                "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                                 "Access-Control-Allow-Methods": "POST, OPTIONS",
                                 "Access-Control-Allow-Headers": "Content-Type"
                             } 
@@ -82,7 +94,11 @@ export const internalPageRankEndpoint: Endpoint = {
                         status: 200, 
                         headers: { 
                             "Content-Type": "application/json",
+<<<<<<< HEAD
                             "Access-Control-Allow-Origin": "*",
+=======
+                            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                             "Access-Control-Allow-Methods": "POST, OPTIONS",
                             "Access-Control-Allow-Headers": "Content-Type"
                         } 
@@ -101,7 +117,11 @@ export const internalPageRankEndpoint: Endpoint = {
                     status: 500, 
                     headers: { 
                         "Content-Type": "application/json",
+<<<<<<< HEAD
                         "Access-Control-Allow-Origin": "*",
+=======
+                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         "Access-Control-Allow-Methods": "POST, OPTIONS",
                         "Access-Control-Allow-Headers": "Content-Type"
                     } 

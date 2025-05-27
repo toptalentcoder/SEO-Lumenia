@@ -1,6 +1,10 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import axios from "axios";
 import { Endpoint, PayloadRequest } from "payload";
+<<<<<<< HEAD
+=======
+import { SEMRUSH_API_KEY } from "@/config/apiConfig";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 export const searchBacklinksEndpoint : Endpoint = {
     path: "/search-backlinks",
@@ -39,7 +43,11 @@ export const searchBacklinksEndpoint : Endpoint = {
                 params: {
                     type: 'backlinks',
                     target: baseUrl,
+<<<<<<< HEAD
                     key: process.env.SEMRUSH_API_KEY,
+=======
+                    key: SEMRUSH_API_KEY,
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     target_type: 'domain',
                     database: 'us',
                     export_columns: 'source_url,target_url,anchor,nofollow,page_ascore',
@@ -47,8 +55,27 @@ export const searchBacklinksEndpoint : Endpoint = {
                 },
             });
 
+<<<<<<< HEAD
             const backlinks = response.data
                 .split('\n')
+=======
+            if (!response.data || typeof response.data !== 'string') {
+                return new Response(JSON.stringify({ error: "Invalid response from Semrush API" }), {
+                    status: 500,
+                    headers: { "Content-Type": "application/json" },
+                });
+            }
+
+            const lines = response.data.split('\n');
+            if (lines.length < 2) {
+                return new Response(JSON.stringify({ error: "No backlinks found for this domain" }), {
+                    status: 404,
+                    headers: { "Content-Type": "application/json" },
+                });
+            }
+
+            const backlinks = lines
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 .slice(1)
                 .map((line: string) => {
                     const [sourceUrl, targetUrl, anchor, nofollow, pageAscore] = line.split(';');
@@ -58,10 +85,23 @@ export const searchBacklinksEndpoint : Endpoint = {
                     const cleanTargetUrl = targetUrl?.trim() || '';
                     const cleanAnchor = anchor?.replace(/^"+|"+$/g, "").trim() || "No anchor text";
                     const authorityScore = pageAscore?.replace("\r", "").trim() || "0";
+<<<<<<< HEAD
                     const followType = nofollow === "true" ? "nofollow" : "dofollow";
 
                     const anchorBoost = cleanAnchor && cleanAnchor.length > 2 ? 1.2 : 0.8;
                     const linkStrength = Math.round(parseInt(authorityScore) * (followType === "dofollow" ? 1 : 0.5) * anchorBoost);
+=======
+                    const followType = nofollow === "true" ? "nofollow" : "dofollow" as const;
+
+                    // Validate authorityScore is a valid number
+                    const parsedAuthorityScore = parseFloat(authorityScore);
+                    if (isNaN(parsedAuthorityScore)) {
+                        return null;
+                    }
+
+                    const anchorBoost = cleanAnchor && cleanAnchor.length > 2 ? 1.2 : 0.8;
+                    const linkStrength = Math.round(parsedAuthorityScore * (followType === "dofollow" ? 1 : 0.5) * anchorBoost);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
                     // Only include backlinks that have valid required fields
                     if (!cleanSourceUrl || !cleanTargetUrl || !cleanAnchor) {
@@ -74,17 +114,28 @@ export const searchBacklinksEndpoint : Endpoint = {
                         anchorText: cleanAnchor,
                         followType,
                         authorityScore,
+<<<<<<< HEAD
                         linkStrength
                     };
                 })
                 .filter((backlink: {
+=======
+                        linkStrength: Number(linkStrength)
+                    };
+                })
+                .filter((backlink): backlink is {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     sourceUrl: string;
                     targetUrl: string;
                     anchorText: string;
                     followType: 'dofollow' | 'nofollow';
                     authorityScore: string;
                     linkStrength: number;
+<<<<<<< HEAD
                 } | null): backlink is NonNullable<typeof backlink> => backlink !== null);
+=======
+                } => backlink !== null);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
             // Save the backlinks data to the user's history
             const existingSite = await req.payload.find({
@@ -106,7 +157,11 @@ export const searchBacklinksEndpoint : Endpoint = {
                         sourceUrl: string;
                         targetUrl: string;
                         anchorText: string;
+<<<<<<< HEAD
                         followType: string;
+=======
+                        followType: 'dofollow' | 'nofollow';
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         authorityScore: string;
                         linkStrength: number;
                     }>;
@@ -128,6 +183,7 @@ export const searchBacklinksEndpoint : Endpoint = {
                     collection: 'backlink-sites',
                     id: siteId,
                     data: {
+<<<<<<< HEAD
                         searchHistory: filteredHistory.map(history => ({
                             ...history,
                             backlinks: history.backlinks.map(backlink => ({
@@ -135,6 +191,9 @@ export const searchBacklinksEndpoint : Endpoint = {
                                 followType: backlink.followType as "dofollow" | "nofollow"
                             }))
                         })),
+=======
+                        searchHistory: filteredHistory
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     },
                 });
             } else {

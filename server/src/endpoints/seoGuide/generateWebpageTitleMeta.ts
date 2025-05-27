@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { generateWebpageTitleMeta } from "@/services/createWebPageTitleAndMeta";
+=======
+import { FRONTEND_URL } from "@/config/apiConfig";
+import { withErrorHandling } from "@/middleware/errorMiddleware";
+import { generateWebpageTitleMeta } from "@/services/createSeoGuide/createWebPageTitleAndMeta";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { ProjectWebpageTitleAndMeta } from "@/types/project";
 import { Endpoint, PayloadRequest } from "payload";
 
@@ -15,7 +21,11 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
 
         // CORS headers
         const corsHeaders = {
+<<<<<<< HEAD
             "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
+=======
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"
@@ -35,7 +45,11 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
         }
 
         const body = await req.json();
+<<<<<<< HEAD
         const { query, keywords, queryID, email  } = body;
+=======
+        const { query, keywords, queryID, email, language  } = body;
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
         if(!query || typeof query !== "string" || !Array.isArray(keywords)) {
             return new Response(JSON.stringify({ error: "Missing or invalid query/keywords" }), {
@@ -48,7 +62,11 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
         }
 
         try{
+<<<<<<< HEAD
             const webpageTitleMeta = await generateWebpageTitleMeta({ query, keywords });
+=======
+            const webpageTitleMeta = await generateWebpageTitleMeta({ query, keywords, language });
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             const newWebpageTitleMeta = [webpageTitleMeta];
 
             const users = await payload.find({
@@ -64,7 +82,11 @@ export const generateWebpageTitleMetaEndpoint : Endpoint = {
                         status: 400,
                         headers: {
                             "Content-Type": "application/json",
+<<<<<<< HEAD
                             "Access-Control-Allow-Origin": "*",
+=======
+                            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         },
                     }
                 );

@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { verifyContentWithSeoBrief } from "@/services/createSeoEditor/verifySeoBrief";
 import { Endpoint, PayloadRequest } from "payload";
+=======
+import { FRONTEND_URL } from "@/config/apiConfig";
+import { withErrorHandling } from "@/middleware/errorMiddleware";
+import { Endpoint, PayloadRequest } from "payload";
+import { seoBriefQueue } from "@/lib/seoBriefQueue";
+import { checkRedisConnection } from "@/lib/redis";
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 interface SeoBrief {
     objective: string[];
@@ -16,12 +24,23 @@ export const verifySeoBriefEndpoint: Endpoint = {
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         const corsHeaders = {
+<<<<<<< HEAD
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",
         };
 
+=======
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "86400", // 24 hours
+        };
+
+        // Handle preflight requests
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         if (req.method === "OPTIONS") {
             return new Response(null, {
                 status: 204,
@@ -29,6 +48,27 @@ export const verifySeoBriefEndpoint: Endpoint = {
             });
         }
 
+<<<<<<< HEAD
+=======
+        // Check Redis connection
+        const isRedisConnected = await checkRedisConnection();
+        if (!isRedisConnected) {
+            return new Response(
+                JSON.stringify({ 
+                    error: "Service temporarily unavailable. Please try again in a few moments.",
+                    code: "REDIS_CONNECTION_ERROR"
+                }),
+                { 
+                    status: 503, 
+                    headers: { 
+                        "Content-Type": "application/json", 
+                        ...corsHeaders 
+                    } 
+                }
+            );
+        }
+
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         if (!req.json) {
             return new Response(JSON.stringify({ error: "Missing JSON body" }), {
                 status: 400,
@@ -39,7 +79,11 @@ export const verifySeoBriefEndpoint: Endpoint = {
         const body = await req.json();
         const { content, seoBrief, language, queryID, email }: { content: string; seoBrief: SeoBrief; language?: string; queryID: string; email: string } = body;
 
+<<<<<<< HEAD
         if (!content || !seoBrief || !queryID || !email) {
+=======
+        if (content === undefined || !seoBrief || !queryID || !email) {
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             return new Response(JSON.stringify({ error: "Missing content, brief, queryID, or email" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json", ...corsHeaders },
@@ -47,6 +91,7 @@ export const verifySeoBriefEndpoint: Endpoint = {
         }
 
         try {
+<<<<<<< HEAD
             const result = await verifyContentWithSeoBrief(content, seoBrief, language);
 
             // Save verification state
@@ -113,6 +158,43 @@ export const verifySeoBriefEndpoint: Endpoint = {
                 }
             );
         } catch (_error) {
+=======
+            // Add job to queue
+            const job = await seoBriefQueue.add('verifySeoBrief', {
+                content,
+                seoBrief,
+                language,
+                queryID,
+                email
+            }, {
+                attempts: 3,
+                backoff: {
+                    type: 'exponential',
+                    delay: 1000
+                },
+                removeOnComplete: {
+                    age: 3600, // Keep completed jobs for 1 hour
+                    count: 100 // Keep last 100 completed jobs
+                },
+                removeOnFail: {
+                    age: 24 * 3600 // Keep failed jobs for 24 hours
+                }
+            });
+
+            return new Response(
+                JSON.stringify({
+                    success: true,
+                    message: "SEO brief verification started",
+                    jobId: job.id
+                }),
+                {
+                    status: 202,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                }
+            );
+        } catch (error) {
+            console.error("❌ verifySeoBrief error:", error);
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             return new Response(JSON.stringify({ error: "Failed to verify content" }), {
                 status: 500,
                 headers: { "Content-Type": "application/json", ...corsHeaders },

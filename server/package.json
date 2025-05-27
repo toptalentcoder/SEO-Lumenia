@@ -5,13 +5,19 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
+<<<<<<< HEAD
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 --no-deprecation next build",
     "dev": "cross-env PORT=7777 NODE_OPTIONS=--max-old-space-size=4096 next dev",
+=======
+    "build": "cross-env PORT=7777 NODE_OPTIONS=--no-deprecation next build",
+    "dev": "cross-env PORT=7778 NODE_ENV=development NODE_OPTIONS=--max-old-space-size=4096 next dev",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+<<<<<<< HEAD
     "start": "cross-env PORT=7777 NODE_OPTIONS=--max-old-space-size=4096 --no-deprecation next start"
   },
   "dependencies": {
@@ -20,17 +26,39 @@
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/richtext-lexical": "latest",
     "axios": "^1.8.4",
+=======
+    "start": "cross-env PORT=7777 NODE_ENV=production NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=4096 --no-deprecation\" next start"
+  },
+  "dependencies": {
+    "@bull-board/api": "^6.9.6",
+    "@bull-board/express": "^6.9.6",
+    "@payloadcms/db-mongodb": "^3.37.0",
+    "@payloadcms/graphql": "^3.37.0",
+    "@payloadcms/next": "^3.37.0",
+    "@payloadcms/payload-cloud": "^3.37.0",
+    "@payloadcms/richtext-lexical": "^3.37.0",
+    "axios": "^1.8.4",
+    "bullmq": "^5.52.2",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     "cheerio": "^1.0.0",
     "cross-env": "^7.0.3",
     "google-search-results-nodejs": "^2.1.0",
     "graphql": "^16.8.1",
+<<<<<<< HEAD
+=======
+    "ioredis": "^5.6.1",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     "mongoose": "^8.12.2",
     "natural": "^8.0.1",
     "next": "15.2.2",
     "node-cron": "^3.0.3",
     "openai": "^4.89.0",
     "p-limit": "^6.2.0",
+<<<<<<< HEAD
     "payload": "latest",
+=======
+    "payload": "^3.37.0",
+>>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "serpapi": "^2.1.0",
