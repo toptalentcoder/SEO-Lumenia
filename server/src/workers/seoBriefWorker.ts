@@ -49,8 +49,22 @@ const seoBriefWorker = new Worker<SeoBriefJobData>(
             // Update progress to 30% - Payload instance ready
             await job.updateProgress(30);
 
-            // Verify content with SEO brief
-            const result = await verifyContentWithSeoBrief(content, seoBrief, language);
+            // If content is empty, create empty verification result
+            let result;
+            if (!content.trim()) {
+                result = {
+                    objective: [],
+                    mainTopics: [],
+                    importantQuestions: [],
+                    writingStyleAndTone: [],
+                    recommendedStyle: [],
+                    valueProposition: [],
+                    improvementText: ""
+                };
+            } else {
+                // Verify content with SEO brief
+                result = await verifyContentWithSeoBrief(content, seoBrief, language);
+            }
 
             // Update progress to 50% - Verification complete
             await job.updateProgress(50);

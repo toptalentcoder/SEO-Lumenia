@@ -92,19 +92,16 @@ export default function SeoBrief({data, setIsContentNull}){
         setIsLoading(true);
 
         try {
-
             if (!content.trim()) {
                 setIsContentNull(true);
                 setImprovementSuggestions("");
                 setProgress(0);
                 setIsLoading(false);
-                // await analysePromise; // still await the analysis
-                return;
             }
 
             // Create the request promise
             const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/verify_seo_brief`, {
-                content: content,
+                content: content.trim() || "",
                 seoBrief: seoBrief,
                 queryID: queryID,
                 email: user.email,
