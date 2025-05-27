@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { API_KEY, BASE_URL } from "@/config/apiConfig";
-=======
 import { PAYLOAD_SECRET_API_KEY, BASE_URL } from "@/config/apiConfig";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import axios from "axios";
 import { Payload } from "payload";
 
@@ -39,13 +35,8 @@ export const getPlansForSubscription = async (
     payload: Payload,
     order: "asc" | "desc" = "asc"
 ): Promise<{ subscriptionPlans: Plan[], apiPlans: Plan[] }> => {
-<<<<<<< HEAD
-    if (!API_KEY || !BASE_URL) {
-        throw new Error("API_KEY or BASE_URL is missing in environment variables.");
-=======
     if (!PAYLOAD_SECRET_API_KEY || !BASE_URL) {
         throw new Error("PAYLOAD_SECRET_API_KEY or BASE_URL is missing in environment variables.");
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     }
 
     try {

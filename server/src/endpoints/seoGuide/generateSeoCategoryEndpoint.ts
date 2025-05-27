@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { generateSeoCategory } from "@/services/createSeoEditor/generateSeoCategory";
-=======
 import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { generateSeoCategory } from "@/services/createSeoGuide/createSeoEditor/generateSeoCategory";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { Endpoint, PayloadRequest } from "payload";
 
 export const generateSeoCategoryEndpoint : Endpoint = {
@@ -20,11 +15,7 @@ export const generateSeoCategoryEndpoint : Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-<<<<<<< HEAD
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
-=======
             "Access-Control-Allow-Origin": FRONTEND_URL || "*", // You can replace '*' with specific domains for security reasons
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"

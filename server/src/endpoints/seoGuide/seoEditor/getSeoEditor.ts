@@ -2,10 +2,7 @@ import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { PayloadRequest } from "payload";
 import { Endpoint } from "payload";
 import { ProjectSeoGuide } from "@/types/project";
-<<<<<<< HEAD
-=======
 import { FRONTEND_URL } from "@/config/apiConfig";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 export const getSeoEditorDataEndpoint: Endpoint = {
 
@@ -20,11 +17,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-<<<<<<< HEAD
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
-=======
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"
@@ -56,11 +49,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
                 return new Response(
                     JSON.stringify({ error: `User not found for email: ${email}` }),
                     {
-<<<<<<< HEAD
-                        status: 400,
-=======
                         status: 404,
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         headers: {
                             "Content-Type": "application/json",
                             ...corsHeaders
@@ -81,11 +70,7 @@ export const getSeoEditorDataEndpoint: Endpoint = {
                 return new Response(
                     JSON.stringify({ error: `Project not found for queryID: ${queryID}` }),
                     {
-<<<<<<< HEAD
-                        status: 400,
-=======
                         status: 404,
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         headers: {
                             "Content-Type": "application/json",
                             ...corsHeaders
@@ -100,20 +85,6 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             const category = seoGuide?.category || null;
             const briefVerification = seoGuide?.briefVerification || null;
 
-<<<<<<< HEAD
-            if (!seoEditorData) {
-                return new Response(
-                    JSON.stringify({ error: `seoEditor data not found for queryID: ${queryID}` }),
-                    {
-                        status: 400,
-                        headers: {
-                            "Content-Type": "application/json",
-                            ...corsHeaders
-                        },
-                    }
-                );
-            }
-=======
             // if (!seoEditorData) {
             //     return new Response(
             //         JSON.stringify({ error: `seoEditor data not found for queryID: ${queryID}` }),
@@ -126,7 +97,6 @@ export const getSeoEditorDataEndpoint: Endpoint = {
             //         }
             //     );
             // }
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
             // Return the seoEditor data as a response
             return new Response(

@@ -5,7 +5,6 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from "next/navigation";
 import { useUser } from '../../../../context/UserContext';
-
 import { NEXT_PUBLIC_API_URL } from "../../../../config/apiConfig";
 import ReactMarkdown from "react-markdown";
 
@@ -15,8 +14,7 @@ const CustomTooltip = ({ text }) => (
     </div>
 );
 
-export default function SeoBrief({data, setIsContentNull}){
-
+export default function SeoBrief({data, setIsContentNull, setIsVerifyBriefButtonClicked}){
     const { seoBrief } = data;
     const { user } = useUser();
     const { queryID } = useParams();
@@ -25,12 +23,10 @@ export default function SeoBrief({data, setIsContentNull}){
     const [verificationResult, setVerificationResult] = useState(null);
     const [improvementSuggestions, setImprovementSuggestions] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
     const [progress, setProgress] = useState(0);
 
     // Load verification state when component mounts
     useEffect(() => {
-
         if (!user?.email) return; 
 
         const loadVerificationState = async () => {
@@ -66,6 +62,7 @@ export default function SeoBrief({data, setIsContentNull}){
 
         loadVerificationState();
     }, [queryID, user]);
+
     // Add null check for seoBrief
     if (!seoBrief) {
         return <div>Loading SEO brief...</div>;
@@ -87,6 +84,7 @@ export default function SeoBrief({data, setIsContentNull}){
             return;
         }
 
+
         const content = document.querySelector('[contenteditable="true"]')?.innerText || "";
         setIsLoading(true);
         setImprovementSuggestions("");
@@ -95,6 +93,8 @@ export default function SeoBrief({data, setIsContentNull}){
         setIsLoading(true);
 
         try {
+            setIsVerifyBriefButtonClicked(true);
+
             if (!content.trim()) {
                 setIsContentNull(true);
                 setImprovementSuggestions("");
@@ -140,14 +140,14 @@ export default function SeoBrief({data, setIsContentNull}){
                                 setIsLoading(false);
                                 setProgress(0);
                                 setVerificationResult(null);
-                                setImprovementSuggestions(statusData.failedReason || "Verification failed. Please try again.");
+                                setImprovementSuggestions("");
                                 break;
                             case 'stalled':
                                 clearInterval(pollInterval);
                                 setIsLoading(false);
                                 setProgress(0);
                                 setVerificationResult(null);
-                                setImprovementSuggestions("Verification stalled. Please try again.");
+                                setImprovementSuggestions("");
                                 break;
                             case 'active':
                             case 'waiting':
@@ -168,13 +168,14 @@ export default function SeoBrief({data, setIsContentNull}){
                     if (isLoading) {
                         setIsLoading(false);
                         setProgress(0);
-                        setImprovementSuggestions("Verification took too long. Please try again.");
+                        setImprovementSuggestions("");
                     }
                 }, 300000); // 5 minutes timeout
             }
         } catch (error) {
             setIsLoading(false);
             setProgress(0);
+            setIsVerifyBriefButtonClicked(false);
             // Log the raw error for debugging
             console.error("Raw error in handleVerifyClick:", error);
 
@@ -193,12 +194,14 @@ export default function SeoBrief({data, setIsContentNull}){
                 console.error("Unknown error in handleVerifyClick:", error);
             }
             if (error.message === 'Request timeout') {
-                setImprovementSuggestions("Request timed out. Please try again.");
+                setImprovementSuggestions("");
             } else if (error.code === 'ECONNABORTED') {
-                setImprovementSuggestions("Connection was reset. Please try again.");
+                setImprovementSuggestions("");
             } else {
-                setImprovementSuggestions(error.response?.data?.error || "An error occurred. Please try again.");
+                setImprovementSuggestions("");
             }
+        } finally {
+            setIsVerifyBriefButtonClicked(false);
         }
     };
 
@@ -234,6 +237,7 @@ export default function SeoBrief({data, setIsContentNull}){
         const found = sectionData.find(entry => entry.item === item);
         return found?.status || "missing";
     };
+    
 
     return(
         <div>
@@ -244,9 +248,7 @@ export default function SeoBrief({data, setIsContentNull}){
             <div className="ml-20 mt-2 text-gray-900">
                 {objective.map((sentence, index) => (
                     <div key={index} className="flex items-center space-x-2 mt-1">
-
                         {renderVerificationIcon(getItemStatus("objective", sentence))}
-
                         <div className="flex-grow text-sm">
                             {sentence.trim()}.
                         </div>
@@ -258,9 +260,7 @@ export default function SeoBrief({data, setIsContentNull}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {mainTopics.map((topic, index) => (
                     <div key={index} className="flex items-center gap-2">
-
                         {renderVerificationIcon(getItemStatus("mainTopics", topic))}
-
                         <div className="leading-tight">
                             {topic}
                         </div>
@@ -271,11 +271,9 @@ export default function SeoBrief({data, setIsContentNull}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {importantQuestions.map((question, index) => (
                     <div key={index} className="flex items-center gap-2">
-
                         {renderVerificationIcon(getItemStatus("importantQuestions", question))}
                         <div className="leading-tight">
                             {question}
-
                         </div>
                     </div>
                 ))}
@@ -286,9 +284,7 @@ export default function SeoBrief({data, setIsContentNull}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {writingStyleAndTone.map((tone, index) => (
                     <div key={index} className="flex items-center gap-2 mt-1">
-
                         {renderVerificationIcon(getItemStatus("writingStyleAndTone", tone))}
-
                         <div>{tone}</div>
                     </div>
                 ))}
@@ -298,9 +294,7 @@ export default function SeoBrief({data, setIsContentNull}){
             <div className="ml-20 mt-3 text-gray-900 text-sm">
                 {recommendedStyle.map((style, index) => (
                     <div key={index} className="flex items-center gap-2">
-
                         {renderVerificationIcon(getItemStatus("recommendedStyle", style))}
-
                         <div className="leading-tight">{style}</div>
                     </div>
                 ))}
@@ -309,9 +303,7 @@ export default function SeoBrief({data, setIsContentNull}){
             <div className="ml-10 mt-3 text-gray-900 text-sm">
                 {valueProposition.map((prop, index) => (
                     <div key={index} className="inline-flex items-center gap-2">
-
                         {renderVerificationIcon(getItemStatus("valueProposition", prop))}
-
                         <div>{prop}</div>
                     </div>
                 ))}
@@ -322,7 +314,6 @@ export default function SeoBrief({data, setIsContentNull}){
                 onClick={handleVerifyClick}
                 className="mt-10 flex justify-center items-center space-x-2 text-[#FFFFFF] bg-[#EBB71A] hover:bg-[#C29613] cursor-pointer mx-auto px-5 py-1 rounded-lg">
                 {isLoading ? (
-
                     <>
                         <div className="relative w-24 h-6 flex items-center justify-center">
                             <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
@@ -332,7 +323,6 @@ export default function SeoBrief({data, setIsContentNull}){
                         </div>
                         <span className="ml-2">Verifying...</span>
                     </>
-
                 ) : (
                     <>
                         <FaRobot />
@@ -346,9 +336,7 @@ export default function SeoBrief({data, setIsContentNull}){
             {/* Display improvement suggestions at the bottom */}
             {improvementSuggestions && (
                 <div className="mt-5 text-gray-900 text-sm">
-
                     <ReactMarkdown>{improvementSuggestions}</ReactMarkdown>
-
                 </div>
             )}
 

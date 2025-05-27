@@ -1,10 +1,7 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 import { ProjectSeoGuide } from "@/types/project";
-<<<<<<< HEAD
-=======
 import { FRONTEND_URL } from "@/config/apiConfig";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 export const saveSeoEditorDataEndpoint: Endpoint = {
     path: "/save_seo_editor_data",
@@ -14,11 +11,7 @@ export const saveSeoEditorDataEndpoint: Endpoint = {
         const { payload } = req;
 
         const corsHeaders = {
-<<<<<<< HEAD
-            "Access-Control-Allow-Origin": "*",
-=======
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",

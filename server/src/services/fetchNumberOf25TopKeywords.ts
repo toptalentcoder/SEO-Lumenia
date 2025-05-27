@@ -1,22 +1,12 @@
-<<<<<<< HEAD
-export async function fetchSemrushKeywords(domain: string) {
-
-    const apiKey = process.env.SEMRUSH_API_KEY;
-=======
 import { SEMRUSH_API_KEY } from "@/config/apiConfig";
 
 export async function fetchSemrushKeywords(domain: string) {
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     // Ensure domain has trailing slash before encoding
     const domainWithSlash = domain.endsWith('/') ? domain : `${domain}/`;
     const encodedDomain = encodeURIComponent(domainWithSlash);
   
-<<<<<<< HEAD
-    const url = `https://api.semrush.com/analytics/?key=${apiKey}&type=url_organic&url=${encodedDomain}&database=us&display_sort=po_asc&display_limit=100&export_columns=Ph,Po`;
-=======
     const url = `https://api.semrush.com/analytics/?key=${SEMRUSH_API_KEY}&type=url_organic&url=${encodedDomain}&database=us&display_sort=po_asc&display_limit=100&export_columns=Ph,Po`;
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   
     const response = await fetch(url);
     const text = await response.text();

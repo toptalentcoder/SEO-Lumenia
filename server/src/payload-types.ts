@@ -761,8 +761,6 @@ export interface PaypalProductId {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
-<<<<<<< HEAD
-=======
  * via the `definition` "intercom-settings".
  */
 export interface IntercomSetting {
@@ -774,7 +772,6 @@ export interface IntercomSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
  * via the `definition` "paypal_product_id_select".
  */
 export interface PaypalProductIdSelect<T extends boolean = true> {
@@ -785,8 +782,6 @@ export interface PaypalProductIdSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
-<<<<<<< HEAD
-=======
  * via the `definition` "intercom-settings_select".
  */
 export interface IntercomSettingsSelect<T extends boolean = true> {
@@ -798,7 +793,6 @@ export interface IntercomSettingsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
  * via the `definition` "auth".
  */
 export interface Auth {
