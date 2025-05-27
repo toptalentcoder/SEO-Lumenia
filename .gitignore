@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /logs
+logs/
 /.pnp
 .pnp.*
 .yarn/*

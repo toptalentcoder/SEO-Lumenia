@@ -137,14 +137,14 @@ export default function SeoBrief({data, setIsContentNull}){
                                 setIsLoading(false);
                                 setProgress(0);
                                 setVerificationResult(null);
-                                setImprovementSuggestions(statusData.failedReason || "Verification failed. Please try again.");
+                                setImprovementSuggestions("");
                                 break;
                             case 'stalled':
                                 clearInterval(pollInterval);
                                 setIsLoading(false);
                                 setProgress(0);
                                 setVerificationResult(null);
-                                setImprovementSuggestions("Verification stalled. Please try again.");
+                                setImprovementSuggestions("");
                                 break;
                             case 'active':
                             case 'waiting':
@@ -165,7 +165,7 @@ export default function SeoBrief({data, setIsContentNull}){
                     if (isLoading) {
                         setIsLoading(false);
                         setProgress(0);
-                        setImprovementSuggestions("Verification took too long. Please try again.");
+                        setImprovementSuggestions("");
                     }
                 }, 300000); // 5 minutes timeout
             }
@@ -190,11 +190,11 @@ export default function SeoBrief({data, setIsContentNull}){
                 console.error("Unknown error in handleVerifyClick:", error);
             }
             if (error.message === 'Request timeout') {
-                setImprovementSuggestions("Request timed out. Please try again.");
+                setImprovementSuggestions("");
             } else if (error.code === 'ECONNABORTED') {
-                setImprovementSuggestions("Connection was reset. Please try again.");
+                setImprovementSuggestions("");
             } else {
-                setImprovementSuggestions(error.response?.data?.error || "An error occurred. Please try again.");
+                setImprovementSuggestions("");
             }
         }
     };
