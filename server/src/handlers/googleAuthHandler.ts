@@ -65,10 +65,6 @@ export const googleAuthHandler = async (req: PayloadRequest) : Promise<Response>
         });
 
         const userData = (await userResponse.json()) as GoogleUserResponse;
-<<<<<<< HEAD
-        console.log(userData);
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
         if (!userData.email) {
             return new Response(
@@ -113,11 +109,7 @@ export const googleAuthHandler = async (req: PayloadRequest) : Promise<Response>
         if (loggedInUser) {
 
             // Step 5: Redirect to the frontend with the token
-<<<<<<< HEAD
-            const frontendUrl = `http://localhost:3000/auth/google/callback?userData=${encodeURIComponent(JSON.stringify(loggedInUser))}`;
-=======
             const frontendUrl = `https://lumenia.io/auth/google/callback?userData=${encodeURIComponent(JSON.stringify(loggedInUser))}`;
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
             // Return a 302 redirect to the frontend with the token
             return Response.redirect(frontendUrl, 302);

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// /endpoints/get_optimization_graph_data.ts
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { Endpoint } from "payload";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { PayloadRequest } from "payload";

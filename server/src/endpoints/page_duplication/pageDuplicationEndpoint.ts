@@ -1,10 +1,7 @@
 import { pageDuplicationAnalysis } from '@/services/UrlPageServie/pageDuplicationAnalysis';
 import { Endpoint, PayloadRequest } from 'payload';
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-<<<<<<< HEAD
-=======
 import { FRONTEND_URL } from "@/config/apiConfig";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 function formatUrl(url: string): string {
     if (!url) return '';
@@ -27,11 +24,7 @@ export const pageDuplicationEndpoint: Endpoint = {
                 status: 400,
                 headers: { 
                     "Content-Type": "application/json",
-<<<<<<< HEAD
-                    "Access-Control-Allow-Origin": "*",
-=======
                     "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type"
                 },
@@ -39,39 +32,16 @@ export const pageDuplicationEndpoint: Endpoint = {
         }
 
         const formattedUrl = formatUrl(baseUrl);
-<<<<<<< HEAD
-
-        // Set a timeout for the entire operation
-        const timeoutPromise = new Promise<Response>((_, reject) => {
-            setTimeout(() => reject(new Error("Operation timed out")), 300000); // 5 minutes timeout
-=======
         console.log('[INFO] Starting page duplication analysis for:', formattedUrl);
 
         // Set a timeout for the entire operation
         const timeoutPromise = new Promise<Response>((_, reject) => {
             setTimeout(() => reject(new Error("Operation timed out after 5 minutes")), 300000); // 5 minutes timeout
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         });
 
         try {
             // Create a promise for the actual operation
             const operationPromise = (async (): Promise<Response> => {
-<<<<<<< HEAD
-                const result = await pageDuplicationAnalysis(formattedUrl, payload);
-
-                return new Response(
-                    JSON.stringify(result),
-                    { 
-                        status: 200, 
-                        headers: { 
-                            "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Methods": "POST, OPTIONS",
-                            "Access-Control-Allow-Headers": "Content-Type"
-                        } 
-                    }
-                );
-=======
                 try {
                     console.log('[INFO] Fetching internal URLs for:', formattedUrl);
                     const result = await pageDuplicationAnalysis(formattedUrl, payload);
@@ -93,18 +63,11 @@ export const pageDuplicationEndpoint: Endpoint = {
                     console.error('[ERROR] Error in page duplication analysis:', error);
                     throw error; // Re-throw to be caught by outer try-catch
                 }
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             })();
 
             // Race between the operation and the timeout
             return await Promise.race([operationPromise, timeoutPromise]);
         } catch (error: unknown) {
-<<<<<<< HEAD
-            console.error('Error in page duplication endpoint:', error);
-            const errorMessage = error instanceof Error ? error.message : "Internal server error";
-            return new Response(
-                JSON.stringify({ error: errorMessage }),
-=======
             console.error('[ERROR] Error in page duplication endpoint:', error);
             const errorMessage = error instanceof Error ? error.message : "Internal server error";
             return new Response(
@@ -112,16 +75,11 @@ export const pageDuplicationEndpoint: Endpoint = {
                     error: errorMessage,
                     details: error instanceof Error ? error.stack : undefined
                 }),
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 { 
                     status: 500, 
                     headers: { 
                         "Content-Type": "application/json",
-<<<<<<< HEAD
-                        "Access-Control-Allow-Origin": "*",
-=======
                         "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                         "Access-Control-Allow-Methods": "POST, OPTIONS",
                         "Access-Control-Allow-Headers": "Content-Type"
                     } 

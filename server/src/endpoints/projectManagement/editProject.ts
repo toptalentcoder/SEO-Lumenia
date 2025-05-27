@@ -1,10 +1,7 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest, CollectionSlug } from "payload";
 import { Project } from "./postProject";
-<<<<<<< HEAD
-=======
 import { FRONTEND_URL } from "@/config/apiConfig";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 interface User {
     email: string;
@@ -21,11 +18,7 @@ export const editProject: Endpoint = {
             return new Response(null, {
                 status: 204,
                 headers: {
-<<<<<<< HEAD
-                    "Access-Control-Allow-Origin": "*",
-=======
                     "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     "Access-Control-Allow-Methods": "POST, OPTIONS",
                     "Access-Control-Allow-Headers": "Content-Type, Authorization",
                 },
@@ -52,11 +45,7 @@ export const editProject: Endpoint = {
                     status: 400,
                     headers: {
                         "Content-Type": "application/json",
-<<<<<<< HEAD
-                        "Access-Control-Allow-Origin": "*",
-=======
                         "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     },
                 }
             );
@@ -75,11 +64,7 @@ export const editProject: Endpoint = {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",
-<<<<<<< HEAD
-                        "Access-Control-Allow-Origin": "*",
-=======
                         "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     },
                 }
             );
@@ -97,11 +82,7 @@ export const editProject: Endpoint = {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",
-<<<<<<< HEAD
-                        "Access-Control-Allow-Origin": "*",
-=======
                         "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     },
                 }
             );
@@ -129,11 +110,7 @@ export const editProject: Endpoint = {
                 status: 200,
                 headers: {
                     "Content-Type": "application/json",
-<<<<<<< HEAD
-                    "Access-Control-Allow-Origin": "*",
-=======
                     "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 },
             }
         );

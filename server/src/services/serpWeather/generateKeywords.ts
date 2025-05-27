@@ -1,14 +1,8 @@
 import { seedKeywordsMap } from '@/globals/seedKeywordsMap';
-<<<<<<< HEAD
-import { OpenAI } from 'openai';
-
-const openai = new OpenAI({ apiKey : process.env.OPENAI_API_KEY });
-=======
 import { OpenAI, AzureOpenAI } from 'openai';
 import { AZURE_OPENAI_API_GPT_4_1_MODELNAME, AZURE_OPENAI_API_GPT_4_1_VERSION, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4_1, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from '@/config/apiConfig';
 
 // const openai = new OpenAI({ apiKey : OPENAI_API_KEY });
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 export async function generateKeywordsForSERPWeatherCategory(category : string) : Promise<string[]> {
 
@@ -29,12 +23,6 @@ export async function generateKeywordsForSERPWeatherCategory(category : string) 
         ${seedText}
     `
 
-<<<<<<< HEAD
-    const response = await openai.chat.completions.create({
-        model : 'gpt-4',
-        messages : [{ role : 'user', content : prompt }],
-        temperature : 0.7,
-=======
     const options = {
         endpoint: AZURE_OPENAI_ENDPOINT,
         apiKey: AZURE_OPENAI_API_KEY,
@@ -63,7 +51,6 @@ export async function generateKeywordsForSERPWeatherCategory(category : string) 
         frequency_penalty: 0,
         presence_penalty: 0,
         model : AZURE_OPENAI_API_GPT_4_1_MODELNAME,
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     });
 
     const text = response.choices[0].message?.content ?? "";

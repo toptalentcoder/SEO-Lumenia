@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import { FRONTEND_URL } from "@/config/apiConfig";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 
@@ -24,11 +21,7 @@ export const getUserProjectInfo: Endpoint = {
 
         // CORS headers
         const corsHeaders = {
-<<<<<<< HEAD
-            "Access-Control-Allow-Origin": "*", // You can replace '*' with specific domains for security reasons
-=======
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true"

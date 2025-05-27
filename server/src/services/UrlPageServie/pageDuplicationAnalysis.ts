@@ -2,10 +2,7 @@ import axios from 'axios';
 import { Payload } from 'payload';
 import { getOrFetchInternalUrls } from './getOrFetchInternalPageUrls';
 import { cleanContent } from './cleanContent';
-<<<<<<< HEAD
-=======
 import pLimit from 'p-limit';
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 function cosineSimilarity(a: string, b: string): number {
     const wordsA = a.split(/\W+/);
@@ -41,10 +38,6 @@ function buildHistogram(pairs: any[]) {
     return histogram;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 function stratifiedSample(pairs: any[], count: number) {
     const danger = pairs.filter(d => d.status === 'Danger');
     const ok = pairs.filter(d => d.status === 'OK');
@@ -69,23 +62,6 @@ function stratifiedSample(pairs: any[], count: number) {
 export async function pageDuplicationAnalysis(
     baseUrl: string,
     payload: Payload
-<<<<<<< HEAD
-): Promise<{ fromCache: boolean; data: any[]; summary: any; histogram : any }> {
-    // 1. Check cache
-    const existing = await payload.find({
-        collection: 'page-duplicates',
-        where: { baseUrl: { equals: baseUrl } },
-        limit: 1,
-    });
-
-    if (existing.docs.length) {
-        const cached = existing.docs[0].duplicates;
-        const { sample, summary } = stratifiedSample(cached, 100);
-        const histogram = buildHistogram(cached);
-
-        return {
-            fromCache: true,
-=======
 ): Promise<{ fromCache: boolean; data: any[]; summary: any; histogram: any }> {
     try {
         // 1. Check cache
@@ -192,79 +168,12 @@ export async function pageDuplicationAnalysis(
 
         return {
             fromCache: false,
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             data: sample,
             summary,
             histogram,
         };
-<<<<<<< HEAD
-    }
-
-
-    // 2. Fetch internal URLs and contents
-    const { urls } = await getOrFetchInternalUrls(baseUrl, payload);
-
-    const pages = await Promise.all(
-        urls.map(async (url) => {
-        try {
-            const res = await axios.get(url, { timeout: 10000 });
-            return { url, content: cleanContent(res.data) };
-        } catch {
-            return { url, content: '' };
-        }
-        })
-    );
-
-    // 3. Compare every pair
-    const duplicates: {
-        urlA: string;
-        urlB: string;
-        score: number;
-        status: 'Perfect' | 'OK' | 'Danger';
-    }[] = [];
-
-    for (let i = 0; i < pages.length; i++) {
-        for (let j = i + 1; j < pages.length; j++) {
-            const a = pages[i];
-            const b = pages[j];
-            if (!a.content || !b.content) continue;
-
-            const score = Math.round(cosineSimilarity(a.content, b.content));
-            const status = score >= 85 ? 'Danger' : score >= 50 ? 'OK' : 'Perfect';
-
-            duplicates.push({
-                urlA: a.url,
-                urlB: b.url,
-                score,
-                status,
-            });
-        }
-    }
-
-    const { sample, summary } = stratifiedSample(duplicates, 100);
-
-    // 4. Save all results, return only the sample
-    await payload.create({
-        collection: 'page-duplicates',
-        data: {
-        baseUrl,
-        duplicates,
-        analyzedAt: new Date().toISOString(),
-        },
-    });
-
-    const histogram = buildHistogram(duplicates);
-
-    return {
-        fromCache: false,
-        data: sample,
-        summary,
-        histogram,
-    };
-=======
     } catch (error) {
         console.error('[ERROR] Page duplication analysis failed:', error instanceof Error ? error.message : 'Unknown error');
         throw error;
     }
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 }

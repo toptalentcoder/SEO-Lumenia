@@ -98,7 +98,7 @@ const CustomDot = ({ cx, cy, payload, value, index, color }) => {
     );
 };
 
-export default function Analysis({data, setIsDirty }) {
+export default function Analysis({data, setIsDirty, setIsAnalysisCalled, isAnalysisCalled  }) {
 
     const [selectedLinks, setSelectedLinks] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -117,12 +117,6 @@ export default function Analysis({data, setIsDirty }) {
     const [isStrongOptimizedVisible, setIsStrongOptimizedVisible] = useState(true);
     const [isOverOptimizedVisible, setIsOverOptimizedVisible] = useState(true);
     const [editorJson, setEditorJson] = useState(null);
-
-
-    const lineColors = [
-        '#FF5733', '#33C1FF', '#9D33FF', '#33FF57', '#FF33B2',
-        '#FFD733', '#33FFF2', '#8DFF33', '#FF8D33', '#3399FF',
-    ];
 
     useEffect(() => {
         if (data?.optimizationLevels && graphLineData.length > 0) {
@@ -200,6 +194,22 @@ export default function Analysis({data, setIsDirty }) {
             fetchSavedScores();
         }
     }, [user?.email, queryID]);
+
+    useEffect(() => {
+        const runAnalysis = async () => {
+            if (isAnalysisCalled) {
+                try {
+                    await handleAnalyse();
+                } catch (error) {
+                    console.error("Error during analysis:", error);
+                } finally {
+                    setLoading(false);
+                    setIsAnalysisCalled(false);
+                }
+            }
+        };
+        runAnalysis();
+    }, [isAnalysisCalled]);    
 
     const handleAnalyse = async () => {
         try {

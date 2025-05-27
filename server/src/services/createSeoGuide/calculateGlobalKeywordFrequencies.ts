@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-// Function to calculate global keyword frequencies
-export const calculateGlobalKeywordFrequencies = (keywords: string[], processedDocs: string[][]): Record<string, number> => {
-    const keywordFrequencies: Record<string, number> = {};
-
-    // Loop over each processed document and count keyword occurrences
-    processedDocs.forEach(doc => {
-        doc.forEach(word => {
-            if (keywords.includes(word)) {
-                keywordFrequencies[word] = (keywordFrequencies[word] || 0) + 1;
-            }
-        });
-    });
-
-    return keywordFrequencies;
-};
-=======
 export function calculateGlobalKeywordFrequencies(
     k_i: number,
     keyword: string,
@@ -37,4 +20,3 @@ export function calculateGlobalKeywordFrequencies(
     const value = Math.log2(1 + k_i) + Math.log2(1 + ratio);
     return parseFloat(value.toFixed(4));
 }
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
