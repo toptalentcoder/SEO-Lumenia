@@ -17,24 +17,6 @@ export function useAuth() {
         const token = localStorage.getItem("authToken");
         const storedUser = localStorage.getItem("user");
 
-<<<<<<< HEAD
-        if (token && storedUser) {
-            try {
-                const userData = JSON.parse(storedUser);
-                setUser(userData);
-            } catch (error) {
-                console.error("Invalid user data in localStorage", error);
-                localStorage.removeItem("user");
-                setUser(null);
-            }
-        } else {
-            const publicPaths = ["/", "/auth/signup", "/auth/signin", "/privacy-policy", "/terms-of-service"];
-
-            if (pathname && !publicPaths.includes(pathname) && isHydrated) {
-                console.warn("Redirecting to signin...");
-                router.push("/auth/signin");
-            }
-=======
         if (!token || !storedUser) {
             const publicPaths = ["/", "/auth/signup", "/auth/signin", "/privacy-policy", "/terms-of-service"];
             if (pathname && !publicPaths.includes(pathname) && isHydrated) {
@@ -66,7 +48,6 @@ export function useAuth() {
             localStorage.removeItem("user");
             setUser(null);
             router.push("/auth/signin");
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         }
     }, [pathname, isHydrated, router]);
 
@@ -78,11 +59,7 @@ export function useAuth() {
                 return;
             }
 
-<<<<<<< HEAD
-            const response = await fetch("/api/usrInfo", {
-=======
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/usrInfo`, {
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

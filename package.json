@@ -3,24 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "start:server": "cd server && npm start",
-    "start:client": "cd client && npm start",
-    "install": "npm run install:server && npm run install:client",
-    "install:server": "cd server && npm install",
-    "install:client": "cd client && npm install",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run dev",
-    "test": "npm run test:server && npm run test:client",
-    "test:server": "cd server && npm test",
-    "test:client": "cd client && npm test",
-    "build": "npm run build:server && npm run build:client",
-    "build:server": "cd server && npm run build",
-    "build:client": "cd client && npm run build",
-    "clean": "npm run clean:server && npm run clean:client",
-=======
     "start": "concurrently \"npm run start:server\" \"npm run start:client\" \"npm run start:admin-panel\"",
     "start:admin-panel": "cd admin-panel && npm start",
     "start:server": "cd server && npm start",
@@ -43,7 +25,6 @@
     "build:client": "cd client && npm run build",
     "clean": "npm run clean:server && npm run clean:client && npm run clean:admin-panel",
     "clean:admin-panel": "cd admin-panel && rm -rf node_modules .next",
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     "clean:server": "cd server && rm -rf node_modules dist",
     "clean:client": "cd client && rm -rf node_modules .next"
   },

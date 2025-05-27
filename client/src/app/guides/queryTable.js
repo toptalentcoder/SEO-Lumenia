@@ -126,11 +126,7 @@ const getUserInitials = (name) => {
     return (words[0][0] + words[1][0]).toUpperCase();
 };
 
-<<<<<<< HEAD
-export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger, language }) {
-=======
 export default function QueryTable({ projectID, pendingQueryID, pendingQueryText, selectedQueryEngine, refreshTrigger, language, progress }) {
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     const { user } = useUser();
     const [rows, setRows] = useState([]);
@@ -191,11 +187,6 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                         creatorProfilePicture: project.createdBy === user?.email ? user?.profilePicture?.url : null
                     }))
 
-<<<<<<< HEAD
-                    console.log(formattedProjects)
-
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     setRows(formattedProjects);
                 }
             }catch (error) {
@@ -512,11 +503,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                             )}
                                         </div>
                                     </td>
-<<<<<<< HEAD
-                                    <td className="text-center text-gray-400">
-=======
                                     {/* <td className="text-center text-gray-400">
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                                         <div className="flex justify-center">
                                             <svg className="animate-spin h-5 w-5 text-[#4A4291]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -524,9 +511,6 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                                     d="M4 12a8 8 0 018-8v8z" />
                                             </svg>
                                         </div>
-<<<<<<< HEAD
-                                    </td>
-=======
                                     </td> */}
 
                                     <td className="text-center text-gray-400">
@@ -539,7 +523,6 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                                         </div>
                                     </td>
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                                     <td className="w-12 px-1 py-4 text-center">
                                         <Menu as="div" className="relative inline-block text-left">
                                             <div>

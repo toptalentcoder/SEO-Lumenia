@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 @import url('https://cdn.mobirise.com/mobirise-icons/mobirise-icons.css');
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 @import "tailwindcss";
 
 :root {
@@ -9,16 +6,6 @@
   --foreground: #F8FAFD;
 }
 
-<<<<<<< HEAD
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #F8FAFD;
@@ -36,8 +23,6 @@ body {
 .text-[amber-50] {
   color: var(--color-amber-50);
 }
-<<<<<<< HEAD
-=======
 
 /* Animation for floating effect */
 @keyframes float {
@@ -82,4 +67,3 @@ body {
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c

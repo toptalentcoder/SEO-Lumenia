@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-export const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:7777'; 
-=======
 export const PAYLOAD_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'https://lumenia.io'; 
 export const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -44,4 +41,3 @@ export const ERROR_MESSAGES = {
 
 export const LOADING_TIMEOUT = 300000; // 5 minutes
 export const POLLING_INTERVAL = 2000; // 2 seconds
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c

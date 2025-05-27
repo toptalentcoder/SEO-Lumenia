@@ -1,11 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-<<<<<<< HEAD
-import { useState, useEffect } from "react";
-=======
 import { useState, useEffect, useCallback } from "react";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 import { FaRobot } from "react-icons/fa6";
 import axios from "axios";
 import { useUser } from '../../../../context/UserContext';
@@ -16,14 +12,8 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
 import { useRouter } from "next/navigation";
-<<<<<<< HEAD
-=======
 import ReactMarkdown from "react-markdown";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
-
-// Tone options
 const toneOptions = [
-    { label: "Friendly", emoji: "😊" },
     { label: "Professional", emoji: "💼" },
     { label: "Cheerful", emoji: "❤️" },
     { label: "Informative", emoji: "📘" },
@@ -203,11 +193,7 @@ export default function SocialPost({data}) {
         }
     };
 
-<<<<<<< HEAD
-    const fetchSocialPostData = async () => {
-=======
     const fetchSocialPostData = useCallback(async () => {
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         try {
             setIsLoading(true);
             const response = await axios.get(
@@ -224,19 +210,11 @@ export default function SocialPost({data}) {
         } finally {
             setIsLoading(false);
         }
-<<<<<<< HEAD
-    };
-
-    useEffect(() => {
-        fetchSocialPostData();
-    }, [queryID, user.email]);
-=======
     }, [queryID, user.email]);
 
     useEffect(() => {
         fetchSocialPostData();
     }, [fetchSocialPostData]);
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     // Add a function to get the flag component based on language
     const getFlagComponent = (language) => {
@@ -460,14 +438,10 @@ export default function SocialPost({data}) {
 
                                     <div className="ml-7">
                                         {openIndex === index && faq.text && (
-<<<<<<< HEAD
-                                            <p className="mt-2 text-gray-600 text-left">{faq.text}</p>
-=======
                                             // <p className="mt-2 text-gray-600 text-left">{faq.text}</p>
                                             <div className='text-left text-gray-600'>
                                                 <ReactMarkdown>{faq.text}</ReactMarkdown>
                                             </div>
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                                         )}
                                     </div>
                                 </div>

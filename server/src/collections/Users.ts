@@ -126,8 +126,6 @@ export const Users: CollectionConfig = {
         return data;
       },
     ],
-<<<<<<< HEAD
-=======
     afterLogin: [
       async ({ user }) => {
         // Return only selected fields for the login response
@@ -146,7 +144,6 @@ export const Users: CollectionConfig = {
         };
       }
     ]
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   },
 
 }

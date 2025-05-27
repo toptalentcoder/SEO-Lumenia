@@ -9,10 +9,7 @@ import { VscNewFile } from "react-icons/vsc";
 import { FaCoins } from "react-icons/fa6";
 import { GoOrganization } from "react-icons/go";
 import LanguageMenu from "./languageMenu";
-<<<<<<< HEAD
-=======
 import { NEXT_PUBLIC_API_URL } from '../../config/apiConfig'
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
 // Query Media options
 const queryEngineOptions = [
@@ -55,14 +52,11 @@ export default function SEOQueryDashboard() {
         label: 'English (USA)'
     });
 
-<<<<<<< HEAD
-=======
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [progress, setProgress] = useState(0);
     const [isAborted, setIsAborted] = useState(false);
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
     const generateQueryId = () => {
         const randomID = Math.floor(10000000 + Math.random() * 90000000);
         return new String(randomID);
@@ -133,14 +127,6 @@ export default function SEOQueryDashboard() {
             return;
         }
 
-<<<<<<< HEAD
-        setLoading(true); // 🔄 Disable the button
-
-        const queryID = generateQueryId();
-        setPendingQueryID(queryID); // <-- Set pending ID
-
-        // 🔁 Smart projectID resolution
-=======
         setIsLoading(true);
         setError(null);
         setProgress(0);
@@ -149,29 +135,11 @@ export default function SEOQueryDashboard() {
         const queryID = generateQueryId();
         setPendingQueryID(queryID);
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
         const resolvedProjectID =
             selectedProjectItem?.projectID ||
             projectID ||
             'Default';
 
-<<<<<<< HEAD
-        try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 minutes timeout
-
-            const response = await fetch('http://localhost:7777/api/createSeoGuide', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    query: search,
-                    queryID : queryID,
-                    queryEngine : selectedQueryEngine.label.toLowerCase(),
-                    projectID : resolvedProjectID,
-                    email : user.email,
-=======
         let pollInterval;
 
         try {
@@ -189,48 +157,17 @@ export default function SEOQueryDashboard() {
                     queryEngine: selectedQueryEngine.label.toLowerCase(),
                     projectID: resolvedProjectID,
                     email: user.email,
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                     language: selectedLanguage.hl,
                     hl: selectedLanguage.hl,
                     gl: selectedLanguage.gl,
                     lr: selectedLanguage.lr
-<<<<<<< HEAD
-                }),
-                signal: controller.signal,
-                keepalive: true,
-            });
-
-            clearTimeout(timeoutId);
-
-=======
                 })
             });
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-<<<<<<< HEAD
-            const result = await response.json();
-
-            if (result.success) {
-                setRefreshTrigger(prev => prev + 1); // 👈 trigger refresh manually
-            }
-        } catch (error) {
-            if (error.name === 'AbortError') {
-                console.error("Request timed out");
-                alert("The request took too long. Please try again.");
-            } else {
-                console.error("Failed to create SEO guide:", error);
-                alert("Failed to create SEO guide. Please try again.");
-            }
-        } finally {
-            setLoading(false); // ✅ Re-enable the button
-            setPendingQueryID(null);
-        }
-    }
-=======
             const { jobId } = await response.json();
             
             // Start polling for job status
@@ -299,7 +236,6 @@ export default function SEOQueryDashboard() {
             }
         };
     };
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 
     const handleQueryEngineToggleDropdown = () => setIsQueryEngineOpen(!isQueryEngineOpen);
     const handleQueryEngineSearchChange = (e) => setSearchQueryTerm(e.target.value);
@@ -449,19 +385,6 @@ export default function SEOQueryDashboard() {
 
                         <div className="relative inline-block">
                             <button
-<<<<<<< HEAD
-                                disabled={loading}
-                                className={`ml-2 py-2 px-4 rounded-xl text-white ${
-                                    loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#439B38] hover:bg-green-700 cursor-pointer'
-                                }`}
-                                onClick={handleCreateSEOGuide}
-                            >
-                                Create a SEO Guide
-                            </button>
-
-                            {/* Tooltip - Only visible when search is typed */}
-                            {search.trim().length > 0 && (
-=======
                                 disabled={isLoading}
                                 className={`ml-2 py-2 px-4 rounded-xl text-white ${
                                     isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#439B38] hover:bg-green-700 cursor-pointer'
@@ -503,7 +426,6 @@ export default function SEOQueryDashboard() {
 
                             {/* Tooltip - Only visible when search is typed */}
                             {search.trim().length > 0 && !isLoading && (
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                                 <div className="absolute top-1/2 left-full ml-3 transform -translate-y-1/2 bg-[#4A4291] text-white text-xs px-3 py-1 rounded-lg shadow-lg flex items-center space-x-1">
                                     {/* Triangle Pointer */}
                                     <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-6 border-t-transparent border-b-6 border-b-transparent border-r-6 border-r-[#4A4291]"></div>
@@ -599,10 +521,7 @@ export default function SEOQueryDashboard() {
                     selectedQueryEngine={selectedQueryEngine}
                     refreshTrigger={refreshTrigger}
                     language = {selectedLanguage}
-<<<<<<< HEAD
-=======
                     progress={progress}
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 />
             </div>
 

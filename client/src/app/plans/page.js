@@ -106,11 +106,6 @@ export default function PricingTable() {
     const saveSubscription = useCallback(
         async (subscriptionId, planId, planName, email) => {
             try {
-<<<<<<< HEAD
-                console.log("🔵 Saving subscription:", { subscriptionId, planId, planName, email });
-
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 const response = await fetch("/api/save-subscription", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -122,11 +117,6 @@ export default function PricingTable() {
                 if (!response.ok) {
                     throw new Error(data.error || "Failed to save subscription");
                 }
-<<<<<<< HEAD
-
-                console.log("✅ Subscription saved successfully!");
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 return data.features || null;
             } catch (error) {
                 console.error("❌ Failed to save subscription:", error);
@@ -166,10 +156,6 @@ export default function PricingTable() {
                     return;
                 }
 
-<<<<<<< HEAD
-                console.log("🔵 Checking subscription status for:", subscriptionId);
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 const response = await fetch(`/api/show-subscription?subscriptionId=${encodeURIComponent(subscriptionId)}`);
 
                 if (!response.ok) {
@@ -179,11 +165,6 @@ export default function PricingTable() {
                 const data = await response.json();
                 const subscriptionStatus = data.subscriptionStatus;
 
-<<<<<<< HEAD
-                console.log("🔵 Subscription Status:", subscriptionStatus);
-
-=======
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
                 if (subscriptionStatus === "ACTIVE") {
                     await saveSubscription(subscriptionId, planId, planName, email);
                     await refreshUser();

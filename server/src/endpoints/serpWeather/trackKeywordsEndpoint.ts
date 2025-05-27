@@ -2,25 +2,14 @@ import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { saveDailyVolatilityScores } from "@/services/serpWeather/trackKeywords";
 import { Endpoint, PayloadRequest } from "payload";
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
 export const trackKeywordsEndpoint: Endpoint = {
     path: "/trackKeywords",
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         const { payload } = req;
-<<<<<<< HEAD
-        
-        try {
-            await saveDailyVolatilityScores(payload);
-            
-=======
         try {
             await saveDailyVolatilityScores(payload);
 
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             return new Response(
                 JSON.stringify({
                     success: true,
@@ -35,11 +24,6 @@ export const trackKeywordsEndpoint: Endpoint = {
             );
         } catch (error) {
             console.error("Error tracking keywords:", error);
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
             return new Response(
                 JSON.stringify({
                     success: false,

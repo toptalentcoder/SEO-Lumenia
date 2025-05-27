@@ -102,17 +102,11 @@ export interface Config {
   };
   globals: {
     paypal_product_id: PaypalProductId;
-<<<<<<< HEAD
-  };
-  globalsSelect: {
-    paypal_product_id: PaypalProductIdSelect<false> | PaypalProductIdSelect<true>;
-=======
     'intercom-settings': IntercomSetting;
   };
   globalsSelect: {
     paypal_product_id: PaypalProductIdSelect<false> | PaypalProductIdSelect<true>;
     'intercom-settings': IntercomSettingsSelect<false> | IntercomSettingsSelect<true>;
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
   };
   locale: null;
   user: User & {

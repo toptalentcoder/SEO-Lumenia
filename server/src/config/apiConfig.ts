@@ -1,11 +1,6 @@
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 export const GOOGLE_REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI;
-<<<<<<< HEAD
-export const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
-export const BASE_URL = `${process.env.BASE_URL}/api`;
-export const API_KEY = process.env.PAYLOAD_SECRET || '';
-=======
 export const FRONTEND_URL = process.env.FRONTEND_URL;
 export const BASE_URL = `${process.env.BASE_URL}/api`;
 export const PAYLOAD_SECRET_API_KEY = process.env.PAYLOAD_SECRET;
@@ -25,4 +20,3 @@ export const AZURE_OPENAI_DEPLOYMENT_GPT_4_1 = "gpt-4.1";
 export const AZURE_OPENAI_API_KEY=process.env.AZURE_OPENAI_API_KEY;
 export const AZURE_OPENAI_API_GPT_4_1_MODELNAME = "gpt-4.1";
 export const AZURE_OPENAI_API_GPT_4_1_VERSION = "2025-01-01-preview";
->>>>>>> 5d3cd160f40f1342a61686711004e9c33c78384c
