@@ -61,7 +61,7 @@ export const verifySeoBriefEndpoint: Endpoint = {
         const body = await req.json();
         const { content, seoBrief, language, queryID, email }: { content: string; seoBrief: SeoBrief; language?: string; queryID: string; email: string } = body;
 
-        if (!content || !seoBrief || !queryID || !email) {
+        if (content === undefined || !seoBrief || !queryID || !email) {
             return new Response(JSON.stringify({ error: "Missing content, brief, queryID, or email" }), {
                 status: 400,
                 headers: { "Content-Type": "application/json", ...corsHeaders },

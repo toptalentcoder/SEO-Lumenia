@@ -612,3 +612,20 @@
 2025-05-26T21:34:22: Received undefined or empty text for processing
 2025-05-26T22:30:21: Received undefined or empty text for processing
 2025-05-26T22:30:21: Received undefined or empty text for processing
+2025-05-27T00:00:44: [WARN] Failed to fetch HTML for: https://vetementpro.com
+2025-05-27T00:01:13: [WARN] Failed to fetch HTML for: https://cnfce.com
+2025-05-27T00:01:22: [WARN] Failed to fetch HTML for: https://lepetitfumeur.fr
+2025-05-27T00:02:05: [WARN] Failed to fetch HTML for: https://cybernews.com
+2025-05-27T00:02:15: [WARN] Failed to fetch HTML for: https://glassdoor.com
+2025-05-27T00:02:29: [WARN] Failed to fetch HTML for: https://reddit.com
+2025-05-27T00:02:35: [WARN] Failed to fetch HTML for: https://viaromafashion.com
+2025-05-27T00:06:29: Error: Command timed out
+2025-05-27T00:06:29:     at Timeout._onTimeout (.next/server/chunks/5951.js:275:7388)
+2025-05-27T00:06:29: Error: Command timed out
+2025-05-27T00:06:29:     at Timeout._onTimeout (.next/server/chunks/5951.js:275:7388)
+2025-05-27T00:06:29: ❌ Worker error: Error: Command timed out
+2025-05-27T00:06:29:     at Timeout._onTimeout (.next/server/chunks/5951.js:275:7388)
+2025-05-27T00:06:29: ❌ Worker error: Error: Command timed out
+2025-05-27T00:06:29:     at Timeout._onTimeout (.next/server/chunks/5951.js:275:7388)
+2025-05-27T01:00:29: Received undefined or empty text for processing
+2025-05-27T01:00:29: Received undefined or empty text for processing
