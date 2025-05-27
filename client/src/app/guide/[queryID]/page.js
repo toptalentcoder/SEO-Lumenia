@@ -110,7 +110,7 @@ export default function GuidePage() {
             {isContentNull && (
                 <div className={`fixed w-1/4 bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${showNotification ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
                     <div className="bg-[#CF2637] text-white px-6 py-3.5 rounded-xl shadow-lg text-sm transform transition-all duration-300 ease-in-out">
-                        <div className="font-bold">It looks like there's a small issue.</div>
+                        <div className="font-bold">It looks like there&apos;s a small issue.</div>
                         <div className="text-lg font-bold">Guide text too short</div>
                     </div>
                 </div>
