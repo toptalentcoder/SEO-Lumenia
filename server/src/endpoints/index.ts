@@ -57,6 +57,7 @@ import { getSeoGuideStatus } from './seoGuide/getSeoGuideStatus';
 import { getSeoBriefStatus } from './seoGuide/getSeoBriefStatus';
 import { intercomSign } from "./intercom-sign";
 import { generateBrainstormerIdeasEndpoint } from "./contentStrategy/generateIdes/generateBrainstormerIdeas";
+import { testEndpoint } from "./test";
 
 export const customEndpoints = [
     googleAuthEndpoint,
@@ -119,5 +120,6 @@ export const customEndpoints = [
     getSeoBriefStatus,
     getUserDataForRefreshPageEndpoint,
     intercomSign,
-    generateBrainstormerIdeasEndpoint
+    generateBrainstormerIdeasEndpoint,
+    testEndpoint
 ]
