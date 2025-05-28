@@ -27,6 +27,7 @@ import { startWorkers } from './workers/startWorkers';
 import { setSeoGuidePayloadInstance } from './workers/seoGuideWorker';
 import { setSeoBriefPayloadInstance } from './workers/seoBriefWorker';
 import { intercomSettings } from './globals/intercomSettings';
+import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -111,6 +112,7 @@ export default buildConfig({
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
     startDailyRankTracking(payload);
+    startAPIMetricsTracking();
     console.log('Daily rank tracking finished');
     
     // Start workers in the background without awaiting

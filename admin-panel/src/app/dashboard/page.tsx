@@ -1,3 +1,4 @@
+import AzureCard from '@/components/dashboard/AzureCard'
 import SemrushCard from '@/components/dashboard/SemrushCard'
 import SerpApiCard from '@/components/dashboard/SerpApiCard'
 import SerperCard from '@/components/dashboard/SerperCard'
@@ -12,7 +13,7 @@ export default function Dashboard() {
           <SerpApiCard />
           <SemrushCard />
           <SerperCard />
-          <div className="bg-white p-4 rounded shadow">📊 2,986 Active Users</div>
+          <AzureCard />
         </div>
       </main>
     </div>
