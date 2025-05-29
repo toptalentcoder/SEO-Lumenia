@@ -24,5 +24,3 @@ export const SERPER_EMAIL = process.env.SERPER_EMAIL;
 export const SERPER_PASSWORD = process.env.SERPER_PASSWORD;
 export const AZURE_OPENAI_EMAIL = process.env.AZURE_OPENAI_EMAIL || '';
 export const AZURE_OPENAI_PASSWORD = process.env.AZURE_OPENAI_PASSWORD || '';
-export const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN || '';
-export const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID || '8186477011'; // Default chat ID, can be overridden

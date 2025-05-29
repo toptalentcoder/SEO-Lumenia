@@ -1,8 +1,13 @@
 import { Telegraf } from 'telegraf';
 import { Payload } from 'payload';
-import { TELEGRAM_TOKEN } from '@/config/apiConfig';
 
-export const createTelegramBot = (payload: Payload) => {
+export const createTelegramBot = async(payload: Payload) => {
+
+    const telegramTokenFromDB = await payload.findGlobal({
+      slug: "telegram-token-settings",
+    })
+
+    const TELEGRAM_TOKEN = telegramTokenFromDB?.telegramToken;
     
     console.log('🔑 Telegram Token starts with:', TELEGRAM_TOKEN?.slice(0, 10));
     if (!TELEGRAM_TOKEN || !/^(\d+):[A-Za-z0-9_-]+$/.test(TELEGRAM_TOKEN)) {

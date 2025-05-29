@@ -24,24 +24,27 @@ import { PageDuplicates } from './collections/pageDuplicates';
 import { BacklinkSites } from './collections/backlinkSites';
 import { internalPageRankEndpoint } from './endpoints/internal_page_rank/internalPageRankEndpoint';
 import { startWorkers } from './workers/startWorkers';
-import { setSeoGuidePayloadInstance } from './workers/seoGuideWorker';
-import { setSeoBriefPayloadInstance } from './workers/seoBriefWorker';
 import { intercomSettings } from './globals/intercomSettings';
 import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
 import { ApiThresholds } from './collections/apiThresolds';
 import { TelegramUsers } from './collections/telegramUsers';
 import { createTelegramBot } from './services/telegrambot/bot';
-import axios from 'axios';
+import { telegramTokenSettings } from './globals/telegramToken';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-import { TELEGRAM_TOKEN } from './config/apiConfig';
-
 const startBot = async (payload: Payload) => {
   try {
+
+    const telegramTokenFromDB = await payload.findGlobal({
+      slug: "telegram-token-settings",
+    })
+
+    const TELEGRAM_TOKEN = telegramTokenFromDB?.telegramToken;
+
     console.log('⚙️ Creating bot instance...');
-    const bot = createTelegramBot(payload);
+    const bot =await createTelegramBot(payload);
 
     console.log('🔑 Telegram Token starts with:', TELEGRAM_TOKEN?.slice(0, 10));
 
@@ -97,7 +100,7 @@ export default buildConfig({
     ApiThresholds,
     TelegramUsers
   ],
-  globals : [paypalProductID, intercomSettings],
+  globals : [paypalProductID, intercomSettings, telegramTokenSettings],
   cors: {
     origins: [
       process.env.FRONTEND_URL,
