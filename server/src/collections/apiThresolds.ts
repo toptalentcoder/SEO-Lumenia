@@ -15,8 +15,6 @@ export const ApiThresholds: CollectionConfig = {
             name: 'threshold',
             type: 'number',
             required: true,
-            min: 0,
-            max: 100,
         },
         {
             name: 'type',
