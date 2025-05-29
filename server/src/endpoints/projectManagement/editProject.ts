@@ -70,7 +70,7 @@ export const editProject: Endpoint = {
             );
         }
 
-        const user = users.docs[0] as User;
+        const user = users.docs[0] as unknown as User;
         const existingProjects: Project[] = Array.isArray(user.projects) ? user.projects : [];
 
         // Find the project to update

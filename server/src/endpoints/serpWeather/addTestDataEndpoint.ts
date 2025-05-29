@@ -28,14 +28,14 @@ export const addTestDataEndpoint: Endpoint = {
       // Create yesterday's data based on today's data
       for (const snapshot of todaySnapshots.docs) {
         // Find today's tracking entry
-        const todayTracking = snapshot.tracking?.find(t => t.date === todayStr);
+        const todayTracking = snapshot.tracking?.find((t: any) => t.date === todayStr);
         if (!todayTracking) continue;
         
         // Create a slightly modified version of today's data for yesterday
         const yesterdayTracking = {
           ...todayTracking,
           date: yesterdayStr,
-          results: todayTracking.results?.map(result => ({
+          results: todayTracking.results?.map((result: any) => ({
             ...result,
             rank: Math.max(1, result.rank + Math.floor(Math.random() * 3) - 1), // Slightly vary the rank
           })),
@@ -44,7 +44,7 @@ export const addTestDataEndpoint: Endpoint = {
         // Create or update the snapshot with yesterday's data
         if (snapshot.tracking) {
           // Remove yesterday's entry if it exists
-          const filteredTracking = snapshot.tracking.filter(t => t.date !== yesterdayStr);
+          const filteredTracking = snapshot.tracking.filter((t : any) => t.date !== yesterdayStr);
           
           // Add yesterday's entry
           const updatedTracking = [...filteredTracking, yesterdayTracking];

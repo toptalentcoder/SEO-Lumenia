@@ -11,10 +11,24 @@ export const sendTelegramReport = async (payload : Payload) => {
         return;
     }
 
-    await axios.post(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
-        chat_id: TELEGRAM_CHAT_ID,
-        text: message,
+    
+    const { docs: users } = await payload.find({
+        collection: 'telegram-users',
+        limit: 0, // fetch all users
     });
 
-    console.log('✅ Telegram alert sent!');
+    for (const user of users) {
+        try {
+            await axios.post(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+                chat_id: user.chatId,
+                text: message,
+            });
+        } catch (err: any) {
+            console.error(`❌ Failed to send to ${user.chatId}:`, err?.response?.data || err.message);
+        }
+        // throttle messages to avoid rate limits
+        await new Promise((res) => setTimeout(res, 50));
+    }
+
+    console.log('✅ Telegram alerts sent to all users!');
 };

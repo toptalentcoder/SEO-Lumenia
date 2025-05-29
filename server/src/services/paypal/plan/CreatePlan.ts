@@ -106,9 +106,6 @@ export const createPlansAndGetID = async (payload: Payload): Promise<void> => {
         );
         const payPalPlanIDs = new Set(activePayPalPlans.map(plan => plan.plan_id));
 
-        console.log("Database Plan IDs:", databasePlanIDs);
-        console.log("PayPal Plan IDs:", payPalPlanIDs);
-
         const plans: PlanPayload[] = [
             {
                 name: "Lite Plan",
