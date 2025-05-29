@@ -1,5 +1,4 @@
-import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { getAzureOPenAIUsage } from "@/services/api-metrics/azure_open_ai";
+import { semrushApiMetrics } from "@/services/api-metrics/semrush";
 import { Endpoint } from "payload";
 
 export const testEndpoint: Endpoint = {
@@ -8,9 +7,7 @@ export const testEndpoint: Endpoint = {
     handler: async (): Promise<Response> => {
 
 
-        const result = await getAzureOPenAIUsage();
-
-        console.log('Result from getAzureOPenAIUsage:', result);
+        const result = await semrushApiMetrics();
 
         return new Response(JSON.stringify(result), {
             status: 200,

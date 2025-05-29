@@ -16,7 +16,7 @@ export const serperApiMetrics = async () : Promise<Response> => {
         { status: 500, headers: { 'Content-Type': 'application/json' } }
     )
 
-const loginData = await loginRes.json()
+    const loginData = await loginRes.json()
 
     const setCookie = loginRes.headers.get('set-cookie')
     if (!setCookie || !loginRes.ok) {

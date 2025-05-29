@@ -28,6 +28,7 @@ import { setSeoGuidePayloadInstance } from './workers/seoGuideWorker';
 import { setSeoBriefPayloadInstance } from './workers/seoBriefWorker';
 import { intercomSettings } from './globals/intercomSettings';
 import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
+import { ApiThresholds } from './collections/apiThresolds';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,6 +56,7 @@ export default buildConfig({
     InternalUrls,
     PageDuplicates,
     BacklinkSites,
+    ApiThresholds
   ],
   globals : [paypalProductID, intercomSettings],
   cors: {
@@ -112,7 +114,7 @@ export default buildConfig({
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
     startDailyRankTracking(payload);
-    startAPIMetricsTracking();
+    startAPIMetricsTracking(payload);
     console.log('Daily rank tracking finished');
     
     // Start workers in the background without awaiting
