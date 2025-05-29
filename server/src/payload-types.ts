@@ -107,10 +107,12 @@ export interface Config {
   globals: {
     paypal_product_id: PaypalProductId;
     'intercom-settings': IntercomSetting;
+    'telegram-token-settings': TelegramTokenSetting;
   };
   globalsSelect: {
     paypal_product_id: PaypalProductIdSelect<false> | PaypalProductIdSelect<true>;
     'intercom-settings': IntercomSettingsSelect<false> | IntercomSettingsSelect<true>;
+    'telegram-token-settings': TelegramTokenSettingsSelect<false> | TelegramTokenSettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -832,6 +834,16 @@ export interface IntercomSetting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "telegram-token-settings".
+ */
+export interface TelegramTokenSetting {
+  id: string;
+  telegramToken: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "paypal_product_id_select".
  */
 export interface PaypalProductIdSelect<T extends boolean = true> {
@@ -847,6 +859,16 @@ export interface PaypalProductIdSelect<T extends boolean = true> {
 export interface IntercomSettingsSelect<T extends boolean = true> {
   intercomID?: T;
   intercomSecretKey?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "telegram-token-settings_select".
+ */
+export interface TelegramTokenSettingsSelect<T extends boolean = true> {
+  telegramToken?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { collectAllMetrics } from './getAllAPIUsageSummary';
-import { TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from '@/config/apiConfig';
 import { Payload } from 'payload';
 
 export const sendTelegramReport = async (payload : Payload) => {
@@ -11,7 +10,12 @@ export const sendTelegramReport = async (payload : Payload) => {
         return;
     }
 
-    
+    const telegramTokenFromDB = await payload.findGlobal({
+        slug: "telegram-token-settings",
+    })
+
+    const TELEGRAM_TOKEN = telegramTokenFromDB?.telegramToken;
+
     const { docs: users } = await payload.find({
         collection: 'telegram-users',
         limit: 0, // fetch all users
