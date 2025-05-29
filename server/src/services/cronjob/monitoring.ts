@@ -48,7 +48,7 @@ interface OrganicResult {
 
 // --------- CRONJOB ---------
 
-export function startDailyRankTracking(payload: Payload) {
+export const startDailyRankTracking = async(payload: Payload) => {
     // 🔁 Every 5 minutes for testing (use '0 2 * * *' for daily at 2am)
     cron.schedule('0 0 * * *', async () => {
         console.log("🔁 Running daily SERP rank tracking...");

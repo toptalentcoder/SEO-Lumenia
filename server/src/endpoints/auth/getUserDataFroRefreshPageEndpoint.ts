@@ -1,6 +1,5 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint } from "payload";
-import { User } from "../../payload-types";
 
 export const getUserDataForRefreshPageEndpoint : Endpoint = {
 

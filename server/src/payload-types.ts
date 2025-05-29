@@ -78,6 +78,7 @@ export interface Config {
     'page-duplicates': PageDuplicate;
     'backlink-sites': BacklinkSite;
     'api-thresholds': ApiThreshold;
+    'telegram-users': TelegramUser;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -95,6 +96,7 @@ export interface Config {
     'page-duplicates': PageDuplicatesSelect<false> | PageDuplicatesSelect<true>;
     'backlink-sites': BacklinkSitesSelect<false> | BacklinkSitesSelect<true>;
     'api-thresholds': ApiThresholdsSelect<false> | ApiThresholdsSelect<true>;
+    'telegram-users': TelegramUsersSelect<false> | TelegramUsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -414,6 +416,19 @@ export interface ApiThreshold {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "telegram-users".
+ */
+export interface TelegramUser {
+  id: string;
+  chatId: string;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -462,6 +477,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'api-thresholds';
         value: string | ApiThreshold;
+      } | null)
+    | ({
+        relationTo: 'telegram-users';
+        value: string | TelegramUser;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -743,6 +762,18 @@ export interface ApiThresholdsSelect<T extends boolean = true> {
   provider?: T;
   threshold?: T;
   type?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "telegram-users_select".
+ */
+export interface TelegramUsersSelect<T extends boolean = true> {
+  chatId?: T;
+  username?: T;
+  firstName?: T;
+  lastName?: T;
   updatedAt?: T;
   createdAt?: T;
 }

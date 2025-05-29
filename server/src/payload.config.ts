@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
+import { buildConfig, Payload } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
@@ -29,9 +29,47 @@ import { setSeoBriefPayloadInstance } from './workers/seoBriefWorker';
 import { intercomSettings } from './globals/intercomSettings';
 import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
 import { ApiThresholds } from './collections/apiThresolds';
+import { TelegramUsers } from './collections/telegramUsers';
+import { createTelegramBot } from './services/telegrambot/bot';
+import axios from 'axios';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+import { TELEGRAM_TOKEN } from './config/apiConfig';
+
+const startBot = async (payload: Payload) => {
+  try {
+    console.log('⚙️ Creating bot instance...');
+    const bot = createTelegramBot(payload);
+
+    console.log('🔑 Telegram Token starts with:', TELEGRAM_TOKEN?.slice(0, 10));
+
+    // Step 1: Delete webhook before launching (to avoid silent hang)
+    console.log('🔧 Deleting any existing webhook...');
+    await bot.telegram.deleteWebhook({ drop_pending_updates: true });
+
+    bot.catch((err) => {
+      console.error('❌ Telegraf error:', err);
+    });
+
+    console.log('🚀 Launching bot ...');
+
+    try {
+      const me = await bot.telegram.getMe();
+      console.log(`Bot @${me.username} is reachable`);
+    } catch (err) {
+      console.error("Failed to reach Telegram API:", err);
+    }
+
+    await bot.launch({ dropPendingUpdates: true });
+
+  } catch (error) {
+    console.error('❌ Failed to launch bot:', error);
+  }
+};
+
+
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
@@ -56,7 +94,8 @@ export default buildConfig({
     InternalUrls,
     PageDuplicates,
     BacklinkSites,
-    ApiThresholds
+    ApiThresholds,
+    TelegramUsers
   ],
   globals : [paypalProductID, intercomSettings],
   cors: {
@@ -113,14 +152,20 @@ export default buildConfig({
 
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
-    startDailyRankTracking(payload);
-    startAPIMetricsTracking(payload);
-    console.log('Daily rank tracking finished');
-    
-    // Start workers in the background without awaiting
-    startWorkers(payload).catch(err => {
-      console.error('Error starting workers:', err);
-    });
-    console.log('✅ Workers started in background');
+
+    startBot(payload)
+    // Run these async in background
+    startDailyRankTracking(payload)
+      .then(() => console.log('✅ Daily rank tracking started'))
+      .catch(console.error);
+
+    startAPIMetricsTracking(payload)
+      .then(() => console.log('✅ API metrics tracking started'))
+      .catch(console.error);
+
+    startWorkers(payload)
+      .then(() => console.log('✅ Workers started in background'))
+      .catch((err) => console.error('Error starting workers:', err));
   }
 })
+
