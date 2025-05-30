@@ -6,7 +6,7 @@ import { Payload } from 'payload';
 
 export const startAPIMetricsTracking = async(payload : Payload) => {
 
-    cron.schedule('25 * * * *', async () => {
+    cron.schedule('0 * * * *', async () => {
         console.log('⏰ Running API metrics check...');
         await sendTelegramReport(payload);
     });

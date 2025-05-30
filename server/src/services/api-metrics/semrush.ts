@@ -11,14 +11,11 @@ export const semrushApiMetrics = async () => {
     const remainingUnits = parseInt(text.trim(), 10)
 
     // Assume plan has 2 million units/month (adjust as needed)
-    const maxUnits = 2_000_000
+    const maxUnits = 2000000
     const usedUnits = maxUnits - remainingUnits
 
-    const percentUsed = Math.min((usedUnits / maxUnits) * 100, 100)
-
     return {
-        remaining: remainingUnits,
+        remaining: Number(remainingUnits),
         used: usedUnits,
-        percentUsed: percentUsed.toFixed(1),
     }
 }
