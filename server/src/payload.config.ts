@@ -26,53 +26,13 @@ import { internalPageRankEndpoint } from './endpoints/internal_page_rank/interna
 import { startWorkers } from './workers/startWorkers';
 import { intercomSettings } from './globals/intercomSettings';
 import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
-import { ApiThresholds } from './collections/apiThresolds';
+// import { ApiThresholds } from './collections/apiThresolds';
 import { TelegramUsers } from './collections/telegramUsers';
-import { createTelegramBot } from './services/telegrambot/bot';
 import { telegramTokenSettings } from './globals/telegramToken';
+import { startOrRestartTelegramBot } from './services/telegrambot/bot';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
-const startBot = async (payload: Payload) => {
-  try {
-
-    const telegramTokenFromDB = await payload.findGlobal({
-      slug: "telegram-token-settings",
-    })
-
-    const TELEGRAM_TOKEN = telegramTokenFromDB?.telegramToken;
-
-    console.log('⚙️ Creating bot instance...');
-    const bot =await createTelegramBot(payload);
-
-    console.log('🔑 Telegram Token starts with:', TELEGRAM_TOKEN?.slice(0, 10));
-
-    // Step 1: Delete webhook before launching (to avoid silent hang)
-    console.log('🔧 Deleting any existing webhook...');
-    await bot.telegram.deleteWebhook({ drop_pending_updates: true });
-
-    bot.catch((err) => {
-      console.error('❌ Telegraf error:', err);
-    });
-
-    console.log('🚀 Launching bot ...');
-
-    try {
-      const me = await bot.telegram.getMe();
-      console.log(`Bot @${me.username} is reachable`);
-    } catch (err) {
-      console.error("Failed to reach Telegram API:", err);
-    }
-
-    await bot.launch({ dropPendingUpdates: true });
-
-  } catch (error) {
-    console.error('❌ Failed to launch bot:', error);
-  }
-};
-
-
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
@@ -97,7 +57,7 @@ export default buildConfig({
     InternalUrls,
     PageDuplicates,
     BacklinkSites,
-    ApiThresholds,
+    // ApiThresholds,
     TelegramUsers
   ],
   globals : [paypalProductID, intercomSettings, telegramTokenSettings],
@@ -156,7 +116,6 @@ export default buildConfig({
     console.log('Paypal plan check');
     createPlansAndGetID(payload);
 
-    startBot(payload)
     // Run these async in background
     startDailyRankTracking(payload)
       .then(() => console.log('✅ Daily rank tracking started'))
@@ -169,6 +128,9 @@ export default buildConfig({
     startWorkers(payload)
       .then(() => console.log('✅ Workers started in background'))
       .catch((err) => console.error('Error starting workers:', err));
+
+    startOrRestartTelegramBot(payload)
+      .catch((err) => console.error('Error starting Telegram bot:', err));
   }
 })
 
