@@ -77,7 +77,6 @@ export interface Config {
     'internal-url': InternalUrl;
     'page-duplicates': PageDuplicate;
     'backlink-sites': BacklinkSite;
-    'api-thresholds': ApiThreshold;
     'telegram-users': TelegramUser;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -95,7 +94,6 @@ export interface Config {
     'internal-url': InternalUrlSelect<false> | InternalUrlSelect<true>;
     'page-duplicates': PageDuplicatesSelect<false> | PageDuplicatesSelect<true>;
     'backlink-sites': BacklinkSitesSelect<false> | BacklinkSitesSelect<true>;
-    'api-thresholds': ApiThresholdsSelect<false> | ApiThresholdsSelect<true>;
     'telegram-users': TelegramUsersSelect<false> | TelegramUsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -406,18 +404,6 @@ export interface BacklinkSite {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "api-thresholds".
- */
-export interface ApiThreshold {
-  id: string;
-  provider: 'azure' | 'semrush' | 'serpapi' | 'serper';
-  threshold: number;
-  type: 'percent' | 'absolute';
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "telegram-users".
  */
 export interface TelegramUser {
@@ -475,10 +461,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'backlink-sites';
         value: string | BacklinkSite;
-      } | null)
-    | ({
-        relationTo: 'api-thresholds';
-        value: string | ApiThreshold;
       } | null)
     | ({
         relationTo: 'telegram-users';
@@ -758,17 +740,6 @@ export interface BacklinkSitesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "api-thresholds_select".
- */
-export interface ApiThresholdsSelect<T extends boolean = true> {
-  provider?: T;
-  threshold?: T;
-  type?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "telegram-users_select".
  */
 export interface TelegramUsersSelect<T extends boolean = true> {
@@ -839,6 +810,10 @@ export interface IntercomSetting {
 export interface TelegramTokenSetting {
   id: string;
   telegramToken: string;
+  azureThreshold: number;
+  semrushThreshold: number;
+  serpapiThreshold: number;
+  serperThreshold: number;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -869,6 +844,10 @@ export interface IntercomSettingsSelect<T extends boolean = true> {
  */
 export interface TelegramTokenSettingsSelect<T extends boolean = true> {
   telegramToken?: T;
+  azureThreshold?: T;
+  semrushThreshold?: T;
+  serpapiThreshold?: T;
+  serperThreshold?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
