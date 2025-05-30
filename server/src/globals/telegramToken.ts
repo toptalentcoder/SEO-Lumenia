@@ -51,8 +51,9 @@ export const telegramTokenSettings: GlobalConfig = {
     ],
     hooks: {
         afterChange: [
-            async ({ previousDoc, req }) => {
-                if (previousDoc) {
+            async ({ previousDoc, doc, req }) => {
+                // Check if the telegramToken has been modified
+                if (previousDoc && previousDoc.telegramToken !== doc.telegramToken) {
                     console.log('🔄 Telegram token updated, restarting bot...');
                     // Don't await — restart in background
                     startOrRestartTelegramBot(req.payload).catch(err => {
@@ -61,6 +62,5 @@ export const telegramTokenSettings: GlobalConfig = {
                 }
             }
         ]
-
     }
 };
