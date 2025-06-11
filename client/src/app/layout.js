@@ -7,6 +7,8 @@ import { ThemeProvider } from '../context/ThemeContext.js'
 import { UserProvider } from '../context/UserContext.js'
 import { PlanProvider } from '../context/UserPlanContext.js'
 import { usePathname } from "next/navigation";
+import GATracker from "../components/common/GATracker.js";
+import RouteChangeTracker from "../components/common/RouteChangeTracker.js";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -31,6 +33,8 @@ export default function RootLayout({ children }) {
       <body
         className={`${nunito.variable} antialiased`}
       >
+        <GATracker /> {/* 👈 Inject GA */}
+        <RouteChangeTracker />  {/* Tracks route changes */}
         <ThemeProvider>
           <UserProvider>
             <PlanProvider>
