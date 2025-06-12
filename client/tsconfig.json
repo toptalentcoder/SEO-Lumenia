@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/linking/page.js", "src/app/keyword-cannibalization/page.js"  ],
+, "src/app/linking/page.js", "src/app/keyword-cannibalization/page.js", "src/app/positioning/explorer/page.js"  ],
   "exclude": [
     "node_modules"
   ]
