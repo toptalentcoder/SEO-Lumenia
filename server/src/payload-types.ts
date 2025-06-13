@@ -78,6 +78,7 @@ export interface Config {
     'page-duplicates': PageDuplicate;
     'backlink-sites': BacklinkSite;
     'telegram-users': TelegramUser;
+    brainstormIdeas: BrainstormIdea;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -95,6 +96,7 @@ export interface Config {
     'page-duplicates': PageDuplicatesSelect<false> | PageDuplicatesSelect<true>;
     'backlink-sites': BacklinkSitesSelect<false> | BacklinkSitesSelect<true>;
     'telegram-users': TelegramUsersSelect<false> | TelegramUsersSelect<true>;
+    brainstormIdeas: BrainstormIdeasSelect<false> | BrainstormIdeasSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -417,6 +419,35 @@ export interface TelegramUser {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brainstormIdeas".
+ */
+export interface BrainstormIdea {
+  id: string;
+  user: string | User;
+  query: string;
+  language: string;
+  ideas?:
+    | {
+        title: string;
+        description: string;
+        keywords: {
+          keyword?: string | null;
+          id?: string | null;
+        }[];
+        persona: string;
+        outline: {
+          step?: string | null;
+          id?: string | null;
+        }[];
+        level: 'basique' | 'avancé' | 'expert';
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -465,6 +496,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'telegram-users';
         value: string | TelegramUser;
+      } | null)
+    | ({
+        relationTo: 'brainstormIdeas';
+        value: string | BrainstormIdea;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -747,6 +782,38 @@ export interface TelegramUsersSelect<T extends boolean = true> {
   username?: T;
   firstName?: T;
   lastName?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brainstormIdeas_select".
+ */
+export interface BrainstormIdeasSelect<T extends boolean = true> {
+  user?: T;
+  query?: T;
+  language?: T;
+  ideas?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?:
+          | T
+          | {
+              keyword?: T;
+              id?: T;
+            };
+        persona?: T;
+        outline?:
+          | T
+          | {
+              step?: T;
+              id?: T;
+            };
+        level?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
