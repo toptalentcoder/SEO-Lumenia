@@ -30,6 +30,7 @@ import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
 import { TelegramUsers } from './collections/telegramUsers';
 import { telegramTokenSettings } from './globals/telegramToken';
 import { startOrRestartTelegramBot } from './services/telegrambot/bot';
+import BrainstormIdeas from './collections/brainstormIdeas';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -58,7 +59,8 @@ export default buildConfig({
     PageDuplicates,
     BacklinkSites,
     // ApiThresholds,
-    TelegramUsers
+    TelegramUsers,
+    BrainstormIdeas
   ],
   globals : [paypalProductID, intercomSettings, telegramTokenSettings],
   cors: {
@@ -97,7 +99,7 @@ export default buildConfig({
 
     const conn = mongoose.connection
     conn.set('socketTimeoutMS', 300000)
-    
+
     // Add connection status logging
     mongoose.connection.on('connected', () => {
       console.log('✅ MongoDB connected successfully');
@@ -110,7 +112,7 @@ export default buildConfig({
     mongoose.connection.on('disconnected', () => {
       console.log('⚠️ MongoDB disconnected');
     });
-    
+
     console.log('Initializing Payload services...');
 
     console.log('Paypal plan check');

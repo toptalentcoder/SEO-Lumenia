@@ -10,7 +10,7 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 import { FaTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
-import { US, FR, DE, ZA, CH, AR, BE, CL, LU, AT, CO, MA, AE, AU, ES, IT, CA, MX, NL, EG, PE, PL, GB, AD, BR, IN, PT, RO } from 'country-flag-icons/react/3x2';
+import { US, FR, DE, ES, IT,NL, GB, PT, RO } from 'country-flag-icons/react/3x2';
 import { useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 const toneOptions = [
@@ -72,16 +72,16 @@ export default function SocialPost({data}) {
             const matchingLanguage = languageOptions.find(
                 option => option.label.toLowerCase() === data.language.toLowerCase()
             );
-            
+
             if (matchingLanguage) {
                 setSelectedLanguageOption(matchingLanguage);
             } else {
                 // If no exact match is found, try to find a partial match
                 const partialMatch = languageOptions.find(
                     option => data.language.toLowerCase().includes(option.label.toLowerCase()) || 
-                              option.label.toLowerCase().includes(data.language.toLowerCase())
+                    option.label.toLowerCase().includes(data.language.toLowerCase())
                 );
-                
+
                 if (partialMatch) {
                     setSelectedLanguageOption(partialMatch);
                 }
@@ -221,7 +221,7 @@ export default function SocialPost({data}) {
         const languageOption = languageOptions.find(
             option => option.label.toLowerCase() === language.toLowerCase()
         );
-        
+
         if (languageOption) {
             switch (languageOption.flag) {
                 case "GB": return <GB className='w-4 h-4'/>;

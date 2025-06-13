@@ -29,7 +29,7 @@ const getBaseGrade = (score) => {
     if (score >= 40) return 'd';
     return 'e';
 };
-  
+
 const getFullGradeLabel = (score) => {
     if (score >= 95) return 'A';
     if (score >= 90) return 'B+';

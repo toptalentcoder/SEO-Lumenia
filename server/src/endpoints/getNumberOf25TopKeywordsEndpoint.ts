@@ -18,9 +18,9 @@ export const getNumberOf25TopKeywordsEndpoint : Endpoint = {
 
         const { top25Count, firstThreeKeywords } = await fetchSemrushKeywords(url);
 
-        return new Response(JSON.stringify({ 
+        return new Response(JSON.stringify({
             numberOf25TopKeywords: top25Count,
-            firstThreeKeywords 
+            firstThreeKeywords
         }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     })
 }
