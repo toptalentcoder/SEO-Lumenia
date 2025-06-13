@@ -1,8 +1,6 @@
 import { seedKeywordsMap } from '@/globals/seedKeywordsMap';
-import { OpenAI, AzureOpenAI } from 'openai';
-import { AZURE_OPENAI_API_GPT_4_1_MODELNAME, AZURE_OPENAI_API_GPT_4_1_VERSION, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4_1, AZURE_OPENAI_ENDPOINT, OPENAI_API_KEY } from '@/config/apiConfig';
-
-// const openai = new OpenAI({ apiKey : OPENAI_API_KEY });
+import { AzureOpenAI } from 'openai';
+import { AZURE_OPENAI_API_GPT_4_1_MODELNAME, AZURE_OPENAI_API_GPT_4_1_VERSION, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT_GPT_4_1, AZURE_OPENAI_ENDPOINT } from '@/config/apiConfig';
 
 export async function generateKeywordsForSERPWeatherCategory(category : string) : Promise<string[]> {
 
@@ -31,15 +29,6 @@ export async function generateKeywordsForSERPWeatherCategory(category : string) 
     };
 
     const openai = new AzureOpenAI(options);
-
-    // const response = await openai.chat.completions.create({
-    //     model : 'gpt-4-turbo',
-    //     messages : [
-    //         { role : 'user', content : prompt },
-    //         { role : 'system', content : 'You are an expert SEO keyword generation assistant.' }
-    //     ],
-    //     temperature : 0.1,
-    // });
 
     const response = await openai.chat.completions.create({
         messages : [
