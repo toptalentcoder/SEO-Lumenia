@@ -332,10 +332,10 @@ const ContentStrategyCards = () => {
         <section className="mt-6">
             <h2 className="text-xl font-bold mb-4">Content Strategy</h2>
             <div className="grid md:grid-cols-4 xl:grid-cols-5 gap-4">
-                <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" reactIcons={<FaCheckCircle />} iconColor="text-[#279AAC]" routerUrl={"/positioning/explorer"} showModalInProd={true} />
-                <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" reactIcons={<GoGraph />} iconColor="text-[#EBB71A]" routerUrl={"/content-gap"} showModalInProd={true} />
-                <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" reactIcons={<FaScissors/>} iconColor="text-[#279AAC]" routerUrl={"/keyword-cannibalization"} showModalInProd={true} />
-                <Card title="Generate Ideas" description="Use our Digital Brainstormer to inspire new content ideas." buttonText="Start Brainstorming" reactIcons={<FaLightbulb/>} iconColor="text-[#279AAC]" routerUrl={"/digital_brainstormer"} showModalInProd={true} />
+                <Card title="Discover Keywords" description="Use our Keyword Explorer to find the most relevant keywords for your site." buttonText="Find Keywords Now" reactIcons={<FaCheckCircle />} iconColor="text-[#279AAC]" routerUrl={"/positioning/explorer"}/>
+                <Card title="Content Gap" description="Identify the keywords your competitors rank for that you're missing." buttonText="Close the Gap" reactIcons={<GoGraph />} iconColor="text-[#EBB71A]" routerUrl={"/content-gap"}/>
+                <Card title="Keyword Cannibalization" description="Determine whether you need multiple content pieces or just one to target several keywords." buttonText="Solve It Now" reactIcons={<FaScissors/>} iconColor="text-[#279AAC]" routerUrl={"/keyword-cannibalization"}/>
+                <Card title="Generate Ideas" description="Use our Digital Brainstormer to inspire new content ideas." buttonText="Start Brainstorming" reactIcons={<FaLightbulb/>} iconColor="text-[#279AAC]" routerUrl={"/digital_brainstormer"}/>
                 <Card title="SEO Writing" description="Write effortlessly while following our SEO optimization guide." buttonText="Start Writing Now" reactIcons={<FaPencil/>} iconColor="text-[#EBB71A]" routerUrl={"/guides"} />
             </div>
         </section>

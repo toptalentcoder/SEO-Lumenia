@@ -4,8 +4,6 @@ import { IoMdClose } from "react-icons/io";
 
 const websiteLinks = [
     { title: "Overview", url: "/overview", description: "Explore Key Metrics" },
-    { title: "Websites Rankings", url: "/rankings", description: "Website Ranking on Google" },
-    { title: "Content Gap", url: "/content-gap", description: "Analyze missed keyword opportunities." },
     { title: "Internal Pagerank", url: "/top/pages", description: "Review top internal pages by influence." },
     { title: "Best Backlinks", url: "/top/links", description: "Most valuable backlinks contributing to authority." },
     { title: "Page Duplication", url: "/duplicate/host", description: "Identify duplicate content issues." },
