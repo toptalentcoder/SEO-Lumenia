@@ -13,14 +13,12 @@ import { IoIosArrowDown } from "react-icons/io";
 import { LuLink2 } from "react-icons/lu";
 import { MdAutoGraph } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { FaFolder } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
-import { FaUsers } from "react-icons/fa";
-import { FaListCheck, FaRobot } from "react-icons/fa6";
-import { BiWallet } from "react-icons/bi";
+import { FaRobot } from "react-icons/fa6";
 import { CiViewList, CiLogout, CiSearch  } from "react-icons/ci";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { FaCoins } from "react-icons/fa6";
+import ModalWebsiteDetailsFromNavbar from "./ModalWebsiteDetailsFromNavbar.js";
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -46,11 +44,16 @@ const getUserInitials = (name) => {
 export default function Navbar() {
 
     const { user, setUser } = useUser();
-    const router = useRouter();  // ✅ Importing router from next/router
-
+    const router = useRouter();
+    const [showModal, setShowModal] = useState(false);
     // ✅ State to store profile data
     const [profileImage, setProfileImage] = useState(null);
     const [initials, setInitials] = useState("");
+
+    const handleSearchButtonClicked = (e) => {
+        e.preventDefault(); // prevent form submit
+        setShowModal(true);
+    };
 
     useEffect(() => {
         if (user) {
@@ -110,13 +113,9 @@ export default function Navbar() {
                                     <MenuButton className="text-white cursor-pointer">
                                         <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
                                             <PiCrownSimpleBold />
-                                            <a
-                                                key={'write_for_seo'}
-                                                href='#'
-                                                className=''
-                                            >
+                                            <span>
                                                 Content Strategy
-                                            </a>
+                                            </span>
                                             <IoIosArrowDown/>
                                         </div>
                                     </MenuButton>
@@ -285,13 +284,9 @@ export default function Navbar() {
                                     <MenuButton className="text-white cursor-pointer">
                                         <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
                                             <LuLink2 />
-                                            <a
-                                                key={'write_for_seo'}
-                                                href='#'
-                                                className=''
-                                            >
+                                            <span>
                                                 Linking
-                                            </a>
+                                            </span>
                                             <IoIosArrowDown/>
                                         </div>
                                     </MenuButton>
@@ -349,13 +344,9 @@ export default function Navbar() {
                                     <MenuButton className="text-white cursor-pointer">
                                         <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
                                             <MdAutoGraph />
-                                            <a
-                                                key={'write_for_seo'}
-                                                href='#'
-                                                className=''
-                                            >
+                                            <span>
                                                 Monitoring & Tech
-                                            </a>
+                                            </span>
                                             <IoIosArrowDown/>
                                         </div>
                                     </MenuButton>
@@ -477,14 +468,18 @@ export default function Navbar() {
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
 
-                        <button
-                            type="button"
-                            className="relative rounded-full p-1 text-white hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                        <div className="hover:bg-[#4A4291]">
+                            <button
+                                type="button"
+                                className="relative rounded-full p-1 text-white hover:text-white cursor-pointer"
                             >
-                            <span className="absolute -inset-1.5" />
-                            <span className="sr-only">View notifications</span>
-                            <CiSearch aria-hidden="true" className="size-6" />
-                        </button>
+                                <CiSearch
+                                    aria-hidden="true"
+                                    className="size-6"
+                                    onClick={handleSearchButtonClicked}
+                                />
+                            </button>
+                        </div>
 
                         <div className='flex items-center space-x-2'>
 
@@ -516,13 +511,9 @@ export default function Navbar() {
                             <MenuButton className="text-white cursor-pointer">
                                 <div className='flex items-center space-x-2 text-white hover:bg-[#4A4291] hover:text-white rounded-md px-3 py-2 text-md font-medium'>
                                     <GoOrganization />
-                                    <a
-                                        key={'write_for_seo'}
-                                        href='#'
-                                        className=''
-                                    >
+                                    <span>
                                         {user?.username}
-                                    </a>
+                                    </span>
                                     <IoIosArrowDown/>
                                 </div>
                             </MenuButton>
@@ -531,12 +522,9 @@ export default function Navbar() {
                                 className="[--anchor-gap:8px] [--anchor-padding:8px] rounded-md bg-white shadow-2xl mt-4"
                             >
                                 <MenuItem>
-                                    <a
-                                        href="#"
-                                        className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                                    >
+                                    <span>
                                         {user?.username} Org
-                                    </a>
+                                    </span>
                                 </MenuItem>
                             </MenuItems>
                         </Menu>
@@ -714,6 +702,8 @@ export default function Navbar() {
                 ))}
                 </div>
             </DisclosurePanel>
+
+            {showModal && <ModalWebsiteDetailsFromNavbar onClose={() => setShowModal(false)} />}
         </Disclosure>
     )
 }
