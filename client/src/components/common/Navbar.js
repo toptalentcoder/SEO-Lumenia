@@ -147,14 +147,14 @@ export default function Navbar() {
                                                 Keyword Cannibalization
                                             </Link>
                                         </MenuItem>
-                                        <MenuItem>
+                                        {/* <MenuItem>
                                             <Link
                                                 href="/content-gap"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Content Gap
                                             </Link>
-                                        </MenuItem>
+                                        </MenuItem> */}
 
                                         <div className='px-4 text-gray-300'>
                                             <hr />
@@ -168,14 +168,14 @@ export default function Navbar() {
                                                 ANALYZE COMPETITORS
                                             </span>
                                         </MenuItem>
-                                        <MenuItem>
+                                        {/* <MenuItem>
                                             <Link
                                                 href="/positioning/host"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Website Rankings
                                             </Link>
-                                        </MenuItem>
+                                        </MenuItem> */}
                                         <MenuItem>
                                             <Link
                                                 href="/positioning/kw_by_url"
@@ -184,14 +184,14 @@ export default function Navbar() {
                                                 SEO Keywords by URL
                                             </Link>
                                         </MenuItem>
-                                        <MenuItem>
+                                        {/* <MenuItem>
                                             <Link
                                                 href="/positioning/url"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 URLs Rankings
                                             </Link>
-                                        </MenuItem>
+                                        </MenuItem> */}
 
                                         <div className='px-4 text-gray-300'>
                                             <hr />
@@ -207,7 +207,7 @@ export default function Navbar() {
                                         </MenuItem>
                                         <MenuItem>
                                             <Link
-                                                href="/tools/digital_brainstormer"
+                                                href="/digital_brainstormer"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Digital Brainstormer
@@ -263,7 +263,7 @@ export default function Navbar() {
                                         </div>
 
 
-                                        <MenuItem>
+                                        {/* <MenuItem>
                                             <span
                                                 className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
                                             >
@@ -277,7 +277,7 @@ export default function Navbar() {
                                             >
                                                 Get Images
                                             </Link>
-                                        </MenuItem>
+                                        </MenuItem> */}
                                     </MenuItems>
                                 </Menu>
 
@@ -308,7 +308,7 @@ export default function Navbar() {
                                         </MenuItem>
                                         <MenuItem>
                                             <Link
-                                                href="linking"
+                                                href="/linking"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Evaluate Links
@@ -446,14 +446,14 @@ export default function Navbar() {
                                                 HISTORY
                                             </span>
                                         </MenuItem>
-                                        <MenuItem>
+                                        {/* <MenuItem>
                                             <Link
                                                 href="/organization/hosts"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Unlocked Websites
                                             </Link>
-                                        </MenuItem>
+                                        </MenuItem> */}
                                         <MenuItem>
                                             <Link
                                                 href="/organization/exports"
@@ -462,14 +462,14 @@ export default function Navbar() {
                                                 My Rankings Exports
                                             </Link>
                                         </MenuItem>
-                                        <MenuItem>
+                                        {/* <MenuItem>
                                             <Link
                                                 href="/gallery/own"
                                                 className="block px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 My Images
                                             </Link>
-                                        </MenuItem>
+                                        </MenuItem> */}
                                     </MenuItems>
                                 </Menu>
                             </div>
@@ -568,20 +568,18 @@ export default function Navbar() {
                                     <span
                                         className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
                                     >
-                                        ACCOUNT-Paige Hintz Org
+                                        ACCOUNT-{user?.username} Org
                                     </span>
                                 </MenuItem>
                                 <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <CgProfile />
-                                        <a
-                                            href="#"
-                                        >
+                                        <Link href="/mydata">
                                             Profile
-                                        </a>
+                                        </Link>
                                     </div>
                                 </MenuItem>
-                                <MenuItem>
+                                {/* <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <FaFolder />
                                         <a
@@ -590,7 +588,7 @@ export default function Navbar() {
                                             My guest guides
                                         </a>
                                     </div>
-                                </MenuItem>
+                                </MenuItem> */}
 
                                 <div className='px-4 text-gray-300'>
                                     <hr />
@@ -600,10 +598,10 @@ export default function Navbar() {
                                     <span
                                         className="block px-7 pt-4 text-[0.65rem] text-blue-500 data-focus:outline-hidden"
                                     >
-                                        PAIGE HINTZ ORG
+                                        {user?.username} Org
                                     </span>
                                 </MenuItem>
-                                <MenuItem>
+                                {/* <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <GoOrganization />
                                         <a
@@ -612,8 +610,8 @@ export default function Navbar() {
                                             Organization
                                         </a>
                                     </div>
-                                </MenuItem>
-                                <MenuItem>
+                                </MenuItem> */}
+                                {/* <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <FaUsers />
                                         <a
@@ -622,8 +620,8 @@ export default function Navbar() {
                                             Users
                                         </a>
                                     </div>
-                                </MenuItem>
-                                <MenuItem>
+                                </MenuItem> */}
+                                {/* <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <FaListCheck />
                                         <a
@@ -632,7 +630,7 @@ export default function Navbar() {
                                             Logs
                                         </a>
                                     </div>
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem>
                                     <Link href="/plans">
                                         <button className="flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full cursor-pointer">
@@ -641,7 +639,7 @@ export default function Navbar() {
                                         </button>
                                     </Link>
                                 </MenuItem>
-                                <MenuItem>
+                                {/* <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <BiWallet  />
                                         <a
@@ -650,7 +648,7 @@ export default function Navbar() {
                                             Billing
                                         </a>
                                     </div>
-                                </MenuItem>
+                                </MenuItem> */}
                                 <MenuItem>
                                     <div className='flex items-center space-x-2 px-7 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden'>
                                         <CiViewList  />

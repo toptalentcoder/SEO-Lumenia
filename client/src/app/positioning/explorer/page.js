@@ -119,6 +119,7 @@ export default function DiscoverKeywords() {
                                 Export
                             </button>
                         </div>
+
                         <table className="min-w-full text-sm">
                             <thead>
                                 <tr className="bg-gray-100 text-left">

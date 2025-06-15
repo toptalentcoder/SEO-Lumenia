@@ -105,7 +105,7 @@ export default function DigitalBrainstormer(){
 
     const exportCSV = (id, query) => {
         const ideas = results[id] || [];
-    
+
         const rows = [["Query", "Title", "Description", "Keywords", "Persona", "Outline", "Level"]];
         ideas.forEach((idea) => {
             rows.push([
@@ -118,22 +118,19 @@ export default function DigitalBrainstormer(){
                 idea.level,
             ]);
         });
-    
         const csvContent = rows.map(row =>
             row.map(field => `"${(field || "").replace(/"/g, '""')}"`).join(",")
         ).join("\n");
-    
+
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
-    
+
         const a = document.createElement("a");
         a.href = url;
         a.download = `brainstorm_${query.replace(/\s+/g, "_")}_${new Date().toISOString()}.csv`;
         a.click();
         URL.revokeObjectURL(url);
     };
-    
-
 
     const renderIdeasTable = (ideas) => (
         <table className="table-auto w-full text-sm mt-4 border-t">

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, PayloadRequest } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -8,10 +8,12 @@ export const Users: CollectionConfig = {
   },
   access : {
     create : () => true,
-    read : () => true
+    read : () => true,
+    update: ({ req }) => {
+      return !!req.user;
+    },
   },
   auth: true,
-  endpoints : [],
   fields: [
     {
       name: 'role',
@@ -145,5 +147,85 @@ export const Users: CollectionConfig = {
       }
     ]
   },
+  endpoints: [
+    {
+      path: '/me',
+      method: 'get',
+      handler: async (req: PayloadRequest): Promise<Response> => {
+        if (!req.user) {
+          return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+        const fullUser = await req.payload.findByID({
+          collection: 'users',
+          id: req.user.id,
+          depth: 1,
+        });
+
+        return new Response(JSON.stringify(fullUser), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      },
+    },
+    {
+      path: '/:id/change-password',
+      method: 'post',
+      handler: async (req: PayloadRequest): Promise<Response> => {
+        const pathParts = req.url?.split('/') || []
+        const id = pathParts[pathParts.length - 1]
+
+        const body = typeof req.json === 'function' ? await req.json() : {};
+        const newPassword = body.newPassword;
+
+        if (!newPassword || !req.user || req.user.id !== id) {
+          return new Response(JSON.stringify({ error: 'Forbidden' }), {
+            status: 403,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+        try {
+          await req.payload.update({
+            collection: 'users',
+            id,
+            data: { password: newPassword },
+          });
+
+          return new Response(JSON.stringify({ message: 'Password changed' }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        } catch (err) {
+          return new Response(JSON.stringify({ error: 'Failed to update password' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+      },
+    },
+    {
+      path: '/:id/enable-2fa',
+      method: 'post',
+      handler: async (req: PayloadRequest): Promise<Response> => {
+        const pathParts = req.url?.split('/') || []
+        const id = pathParts[pathParts.length - 1]
+        if (!req.user || req.user.id !== id) {
+          return new Response(JSON.stringify({ error: 'Forbidden' }), {
+            status: 403,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+        return new Response(JSON.stringify({ message: '2FA enabled (stub)' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      },
+    },
+  ],
 
 }
