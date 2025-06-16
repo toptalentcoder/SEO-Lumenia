@@ -9,7 +9,6 @@ import { GoGraph } from "react-icons/go";
 import { FaScissors, FaPencil, FaLink, FaListCheck } from "react-icons/fa6";
 import { PiNetworkFill } from "react-icons/pi";
 import { TiWeatherPartlySunny } from "react-icons/ti";
-import { IoPeople } from "react-icons/io5";
 import { FaCircleExclamation } from "react-icons/fa6";
 import ModalWebsiteDetails from "./modalWebsiteDetails";
 import ModalSerpWeather from "./modalSerpWeather";
@@ -211,6 +210,7 @@ const BacklinkHistoryPanel = () => {
     const [history, setHistory] = useState([]);
     const [showAll, setShowAll] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -218,20 +218,32 @@ const BacklinkHistoryPanel = () => {
             if (!user?.email) return;
             
             try {
+                setLoading(true);
+                setError(null);
+                
                 const res = await fetch("/api/user-backlink-history", {
                     method: "POST",
                     body: JSON.stringify({ email: user.email }),
                     headers: {
                         "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("authToken")}`
                     },
+                    credentials: "include"
                 });
+                
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch history: ${res.statusText}`);
+                }
                 
                 const data = await res.json();
                 if (data && !data.error) {
                     setHistory(data);
+                } else {
+                    throw new Error(data.error || "Failed to fetch history");
                 }
             } catch (error) {
                 console.error("Error fetching backlink history:", error);
+                setError(error.message || "Failed to load backlink history");
             } finally {
                 setLoading(false);
             }
@@ -261,6 +273,8 @@ const BacklinkHistoryPanel = () => {
             </div>
             {loading ? (
                 <div className="text-gray-500">Loading history...</div>
+            ) : error ? (
+                <div className="text-red-500">{error}</div>
             ) : history.length === 0 ? (
                 <div className="text-gray-500">No backlink search history yet.</div>
             ) : (

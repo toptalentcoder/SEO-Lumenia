@@ -36,32 +36,29 @@ export default function Home() {
   
   const [intercomSettings, setIntercomSettings] = useState(null);
 
-  const token = process.env.PAYLOAD_SECRET;
+  // useEffect(() => {
+  //   const bootIntercom = async () => {
+  //     try {
+  //       const response = await fetch('/api/globals/intercom-settings');
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       const data = await response.json();
 
-  useEffect(() => {
-    const bootIntercom = async () => {
-      try {
-        const response = await fetch('/api/globals/intercom-settings', {
-          headers : {
-            Authorization : `Bearer ${token}`
-          }
-        }); // Adjust to your API route
-        const data = await response.json();
-
-        if (data.intercomID) {
-          Intercom({
-            app_id: data.intercomID,
-            //email: user.email,
-            // user_hash: data.userHash,
-          });
-        }
-      } catch (error) {
-        console.error('Intercom init failed:', error);
-      }
-    };
+  //       if (data.intercomID) {
+  //         Intercom({
+  //           app_id: data.intercomID,
+  //           // Only add user data if user is logged in
+  //           ...(user?.email && { email: user.email }),
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error('Intercom initialization failed:', error);
+  //     }
+  //   };
   
-    bootIntercom();
-  }, [intercomSettings, user]);
+  //   bootIntercom();
+  // }, [user]);
   
 
   return (

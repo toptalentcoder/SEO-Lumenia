@@ -34,6 +34,24 @@ export function UserProvider({ children } ) {
         return;
       }
 
+      // Check token expiry
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const userData = JSON.parse(storedUser);
+          if (userData.tokenExpiry && new Date(userData.tokenExpiry) < new Date()) {
+            console.warn("Token expired, logging out...");
+            localStorage.removeItem("user");
+            localStorage.removeItem("authToken");
+            setUser(null);
+            router.push("/auth/signin");
+            return;
+          }
+        } catch (error) {
+          console.error("Error parsing stored user data:", error);
+        }
+      }
+
       const res = await fetch("/api/users/me", {
         method: "GET",
         credentials: "include",
@@ -55,6 +73,9 @@ export function UserProvider({ children } ) {
       }
 
       const data = await res.json();
+      if (!data.user) {
+        throw new Error("Invalid user data received");
+      }
       
       // Add token expiry to user data
       const userData = {

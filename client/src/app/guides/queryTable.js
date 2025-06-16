@@ -167,7 +167,7 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
                 if (projectID) {
                     response = await fetch(`/api/get-project-guides?email=${user.email}&projectID=${projectID}`);
                 } else {
-                    response = await fetch(`/api/get-projects?email=${user.email}`);
+                    response = await fetch(`/api/get-all-projects?email=${user.email}`);
                 }
                 const data = await response.json();
 

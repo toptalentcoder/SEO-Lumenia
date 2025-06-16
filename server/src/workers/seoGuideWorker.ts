@@ -44,7 +44,7 @@ const seoGuideWorker = new Worker<SeoGuideJobData>(
             // Get or create payload instance
             console.log("🔑 Getting Payload instance...");
             let payload = seoGuidePayloadInstance;
-            
+
             if (!payload) {
                 console.log("Payload instance not found, creating new instance...");
                 payload = await getPayload({
@@ -52,11 +52,11 @@ const seoGuideWorker = new Worker<SeoGuideJobData>(
                 });
                 seoGuidePayloadInstance = payload;
             }
-            
+
             if (!payload) {
                 throw new Error("Failed to get or create Payload instance");
             }
-            
+
             console.log("✅ Payload instance obtained");
 
             // Update progress to 30% - Payload instance ready

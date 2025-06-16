@@ -4,27 +4,14 @@ import { Endpoint, PayloadRequest } from "payload";
 
 interface FlattenedProjectInfo {
     projectName: string;
-    projectID : string;
+    projectID: string;
     query: string;
     queryID: string;
     queryEngine: string;
     language: string;
     gl: string;
     createdAt: string;
-}
-
-interface Project {
-    projectName?: string;
-    projectID ? : string;
-    seoGuides?: {
-        query?: string;
-        queryID?: string;
-        queryEngine?: string;
-        language?: string;
-        gl? : string;
-        createdAt?: number | string;
-        createdBy?: string;
-    }[];
+    createdBy: string;
 }
 
 export const getUserProjects: Endpoint = {
@@ -42,29 +29,18 @@ export const getUserProjects: Endpoint = {
         };
 
         if (req.method === "OPTIONS") {
-            return new Response(null, {
-                status: 204,
-                headers: {
-                ...corsHeaders,
-                },
+            return new Response(null, { status: 204, headers: corsHeaders });
+        }
+
+        const email = req.query?.email;
+        if (!email || typeof email !== "string") {
+            return new Response(JSON.stringify({ error: "Email is required" }), {
+                status: 400,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
             });
         }
 
-        const { email } = req.query;
-
-        if (!email || typeof email !== "string") {
-            return new Response(
-                JSON.stringify({ error: "Email is required" }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders,
-                    },
-                }
-            );
-        }
-
+        // 1. Find user by email
         const users = await payload.find({
             collection: "users",
             where: { email: { equals: email } },
@@ -75,66 +51,73 @@ export const getUserProjects: Endpoint = {
             return new Response(
                 JSON.stringify({ error: `❌ User not found for email: ${email}` }),
                 {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders,
-                    },
+                status: 404,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
                 }
             );
         }
 
         const user = users.docs[0];
-        const projectData = user.projects;
 
-        if (!Array.isArray(projectData)) {
-            return new Response(
-                JSON.stringify({ error: "User projects are not in expected format" }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders,
-                    },
-                }
-            );
-        }
-
-        const typedProjectData = projectData as Project[];
-
-        const flattenedProjects: FlattenedProjectInfo[] = typedProjectData
-            .flatMap((project) => {
-                if (!Array.isArray(project.seoGuides)) return [];
-
-                return project.seoGuides.map((guide) => ({
-                    projectName: project.projectName || '',
-                    projectID: project.projectID || '',
-                    query: guide.query || '',
-                    queryID: guide.queryID || '',
-                    queryEngine: guide.queryEngine || '',
-                    language: guide.language || 'unknown',
-                    gl : guide.language || 'unknown',
-                    createdAt:
-                        typeof guide.createdAt === 'number'
-                        ? new Date(guide.createdAt).toISOString()
-                        : 'unknown',
-                    createdBy: guide.createdBy || 'unknown',
-                }));
-            })
-            .sort((a, b) => {
-                // Push 'unknown' dates to the end
-                if (a.createdAt === 'unknown') return 1;
-                if (b.createdAt === 'unknown') return -1;
-
-                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        // 2. Get all projects owned by this user
+        const projectsRes = await payload.find({
+            collection: "projects",
+            where: { user: { equals: user.id } },
+            limit: 100,
+            depth: 0,
         });
 
-        return new Response(JSON.stringify(flattenedProjects), {
-            status: 200,
-            headers: {
-                "Content-Type": "application/json",
-                ...corsHeaders,
-            },
+        const allProjects = projectsRes.docs;
+        if (!allProjects.length) {
+            return new Response(JSON.stringify([]), {
+                status: 200,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
+        }
+
+        const projectIDs = allProjects.map((p) => p.id);
+
+        // 3. Get all SEO guides linked to any of those projects
+        const seoGuidesRes = await payload.find({
+        collection: "seo-guides",
+        where: {
+            project: { in: projectIDs },
+        },
+        limit: 1000,
+        depth: 0,
+        });
+
+        const allSeoGuides = seoGuidesRes.docs;
+
+        // 4. Flatten result
+        const flattened: FlattenedProjectInfo[] = allSeoGuides.map((guide) => {
+        const project = allProjects.find((p) => p.id === guide.project);
+
+        return {
+            projectName: project?.projectName ?? "Unknown",
+            projectID: String(project?.projectID ?? "Unknown"),
+            query: guide.query ?? "",
+            queryID: guide.queryID ?? "",
+            queryEngine: guide.queryEngine ?? "",
+            language: guide.language ?? "unknown",
+            gl: guide.gl ?? "unknown",
+            createdAt: typeof guide.createdAt === "number"
+            ? new Date(guide.createdAt).toISOString()
+            : "unknown",
+            createdBy: guide.createdBy ?? "unknown",
+        };
+        });
+
+        // 5. Sort newest to oldest
+        flattened.sort((a, b) => {
+        if (a.createdAt === "unknown") return 1;
+        if (b.createdAt === "unknown") return -1;
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+
+        return new Response(JSON.stringify(flattened), {
+        status: 200,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
         });
     }),
 };

@@ -7,8 +7,8 @@ export const intercomSettings: GlobalConfig = {
         hideAPIURL : true
     },
     access: {
-        read: () => true,  // Adjust this to your needs
-        update: () => true,  // Adjust this to your needs
+        read: () => true,  // Public read access for Intercom initialization
+        update: ({ req }) => req.user?.role === 'admin',  // Only admins can update
     },
     fields: [
         {
@@ -22,6 +22,9 @@ export const intercomSettings: GlobalConfig = {
             type: 'text',
             label: 'Intercom Secret Key',
             required: true,
+            admin: {
+                position: 'sidebar',
+            },
         },
     ],
 };

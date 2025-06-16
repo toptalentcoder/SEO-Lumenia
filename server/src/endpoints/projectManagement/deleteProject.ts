@@ -1,108 +1,113 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { Endpoint, PayloadRequest, CollectionSlug } from "payload";
-import { Project } from "./postProject";
+import { Endpoint, PayloadRequest } from "payload";
 import { FRONTEND_URL } from "@/config/apiConfig";
-
-interface User {
-    email: string;
-    projects: Project[];
-}
 
 export const deleteProject: Endpoint = {
     path: "/delete-project",
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-        const { payload } = req;
+        const corsHeaders = {
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true",
+        };
 
         if (req.method === "OPTIONS") {
             return new Response(null, {
                 status: 204,
+                headers: corsHeaders,
+            });
+        }
+
+        if (!req.user) {
+            return new Response(JSON.stringify({ error: "Unauthorized" }), {
+                status: 401,
                 headers: {
-                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-                    "Access-Control-Allow-Methods": "POST, OPTIONS",
-                    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
                 },
             });
         }
 
-        let email: string | undefined;
-        let projectID: string | undefined;
+        const body = typeof req.json === "function" ? await req.json() : {};
+        const { projectID } = body;
 
-        if (req.json) {
-            const body = await req.json();
-            email = body?.email;
-            projectID = body?.projectID;
+        if (!projectID) {
+            return new Response(JSON.stringify({ error: "ProjectID is required" }), {
+                status: 400,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
         }
 
-        if (!email || !projectID) {
-            return new Response(
-                JSON.stringify({ error: "Missing required fields" }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+        // Validate projectID is a number
+        if (isNaN(Number(projectID))) {
+            return new Response(JSON.stringify({ error: "ProjectID must be a number" }), {
+                status: 400,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
+        }
+
+        const { payload } = req;
+
+        try {
+            // Find the project by projectID and user
+            const projects = await payload.find({
+                collection: "projects",
+                where: {
+                    projectID: {
+                        equals: Number(projectID),
                     },
-                }
-            );
-        }
+                    user: {
+                        equals: req.user.id,
+                    },
+                },
+                limit: 1,
+            });
 
-        const users = await payload.find({
-            collection: "users" as CollectionSlug,
-            where: { email: { equals: email } },
-            limit: 1,
-        });
-
-        if (!users.docs.length) {
-            return new Response(
-                JSON.stringify({ error: "User not found" }),
-                {
+            if (!projects.docs.length) {
+                return new Response(JSON.stringify({ error: "Project not found or not owned by user" }), {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+                        ...corsHeaders,
                     },
-                }
-            );
-        }
+                });
+            }
 
-        const user = users.docs[0] as unknown as User;
-        const existingProjects: Project[] = Array.isArray(user.projects) ? user.projects : [];
+            const project = projects.docs[0];
 
-        // Find the project to delete
-        const projectIndex = existingProjects.findIndex(project => project.projectID === projectID);
-        if (projectIndex === -1) {
-            return new Response(
-                JSON.stringify({ error: "Project not found" }),
-                {
-                    status: 404,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-                    },
-                }
-            );
-        }
+            // Delete the project document
+            await payload.delete({
+                collection: "projects",
+                id: project.id,
+            });
 
-        // Remove the project
-        existingProjects.splice(projectIndex, 1);
-
-        // Update user's projects
-        await payload.update({
-            collection: "users" as CollectionSlug,
-            where: { email: { equals: email } },
-            data: { projects: existingProjects },
-        });
-
-        return new Response(
-            JSON.stringify({ success: true }),
-            {
+            return new Response(JSON.stringify({ 
+                success: true,
+                message: "Project deleted successfully" 
+            }), {
                 status: 200,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+                    ...corsHeaders,
                 },
-            }
-        );
+            });
+        } catch (error) {
+            console.error("Error deleting project:", error);
+            return new Response(JSON.stringify({ error: "Failed to delete project" }), {
+                status: 500,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
+        }
     }),
-}; 
+};

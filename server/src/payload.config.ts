@@ -22,15 +22,15 @@ import { InternalPageRanks } from './collections/internalPageRank';
 import { InternalUrls } from './collections/internalUrlsCollection';
 import { PageDuplicates } from './collections/pageDuplicates';
 import { BacklinkSites } from './collections/backlinkSites';
-import { internalPageRankEndpoint } from './endpoints/internal_page_rank/internalPageRankEndpoint';
 import { startWorkers } from './workers/startWorkers';
 import { intercomSettings } from './globals/intercomSettings';
 import { startAPIMetricsTracking } from './services/cronjob/telegramBot';
-// import { ApiThresholds } from './collections/apiThresolds';
 import { TelegramUsers } from './collections/telegramUsers';
 import { telegramTokenSettings } from './globals/telegramToken';
 import { startOrRestartTelegramBot } from './services/telegrambot/bot';
 import BrainstormIdeas from './collections/brainstormIdeas';
+import { Projects } from './collections/projects';
+import { SeoGuides } from './collections/seo-guides';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -58,20 +58,21 @@ export default buildConfig({
     InternalUrls,
     PageDuplicates,
     BacklinkSites,
-    // ApiThresholds,
     TelegramUsers,
-    BrainstormIdeas
+    BrainstormIdeas,
+    Projects,
+    SeoGuides
   ],
   globals : [paypalProductID, intercomSettings, telegramTokenSettings],
-  cors: {
-    origins: [
-      process.env.FRONTEND_URL,
-      'http://167.235.246.98:7778',
-      'http://localhost:7778',
-      'http://167.235.246.98:4001',
-      'http://localhost:4001'
-    ].filter((url): url is string => Boolean(url)),
-  },
+  cors: [
+    process.env.FRONTEND_URL,
+    'http://167.235.246.98:7778',
+    'http://localhost:7778',
+    'http://167.235.246.98:4001',
+    'http://localhost:4001',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+  ].filter((url): url is string => Boolean(url)),
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -87,15 +88,8 @@ export default buildConfig({
   ],
   endpoints: [
     ...(customEndpoints || []), // Ensure customEndpoints is defined
-    internalPageRankEndpoint,
   ],
   onInit: async(payload) => {
-    const server = (payload as any).server;
-
-    if (server) {
-      server.setTimeout(600000) // 60 seconds
-      console.log('⏱️ Payload server timeout set to 60 seconds')
-    }
 
     const conn = mongoose.connection
     conn.set('socketTimeoutMS', 300000)

@@ -21,4 +21,4 @@ export async function startWorkers(payload: Payload) {
         seoBriefWorker.run()
     ]);
     console.log('✅ SEO Guide and SEO Brief workers started');
-} 
+}

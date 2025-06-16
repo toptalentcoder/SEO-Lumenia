@@ -1,17 +1,38 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
+import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const userBacklinkHistoryEndpoint: Endpoint = {
     path: "/user-backlink-history",
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
+        // CORS headers
+        const corsHeaders = {
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "86400"
+        };
+
+        // Handle preflight OPTIONS request
+        if (req.method === "OPTIONS") {
+            return new Response(null, {
+                status: 204,
+                headers: corsHeaders
+            });
+        }
+
         const body = req.json ? await req.json() : {};
         const { email } = body;
 
         if (!email) {
             return new Response(JSON.stringify({ error: "Missing email" }), {
                 status: 400,
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    ...corsHeaders
+                },
             });
         }
 
@@ -48,13 +69,19 @@ export const userBacklinkHistoryEndpoint: Endpoint = {
 
             return new Response(JSON.stringify(userHistory), {
                 status: 200,
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    ...corsHeaders
+                },
             });
         } catch (error) {
             console.error("Error fetching user backlink history:", error);
             return new Response(JSON.stringify({ error: "Failed to fetch user backlink history" }), {
                 status: 500,
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json",
+                    ...corsHeaders
+                },
             });
         }
     })

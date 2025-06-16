@@ -2,120 +2,85 @@ import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 
-// Define the Project interface
-interface Project {
-    projectID : string;
-    projectName: string;
-    domainName: string;
-    favourites?: string[]; // Favourites is optional, as it may not always be provided
-}
-
 export const getUserProjectInfo: Endpoint = {
     path: "/getProjectItemInfo",
-
-    method: 'get',
+    method: "get",
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-
         const { payload } = req;
 
-        // CORS headers
         const corsHeaders = {
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
             "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Allow-Credentials": "true"
+            "Access-Control-Allow-Credentials": "true",
         };
 
         if (req.method === "OPTIONS") {
-            // Handle preflight requests
             return new Response(null, {
                 status: 204,
-                headers: {
-                    ...corsHeaders
-                },
+                headers: corsHeaders,
             });
         }
 
         const { email, projectID } = req.query;
 
-        if (!email || !projectID) {
-            return new Response(
-                JSON.stringify({ error: "Both email and projectID are required" }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
+        if (!email || !projectID || typeof email !== "string" || typeof projectID !== "string") {
+            return new Response(JSON.stringify({ error: "Both email and projectID are required" }), {
+                status: 400,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
         }
 
-        // Fetch the user by email
+        // // Step 1: Find the user by email
         const users = await payload.find({
-            collection: "users",
-            where: { email: { equals: email } },
-            limit: 1,
+          collection: "users",
+          where: { email: { equals: email } },
+          limit: 1,
         });
 
         if (!users.docs.length) {
-            return new Response(
-                JSON.stringify(`❌ Error: User not found for email: ${email}`),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
+          return new Response(JSON.stringify({ error: `❌ User not found for email: ${email}` }), {
+            status: 404,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+          });
         }
 
-        // Extract the user's projects and ensure it's an array of Project
-        const user = users.docs[0];
+        const usera = users.docs[0];
 
-        // If projects exist, narrow down the type to Project[]
-        let projects: Project[] = [];
+        console.log(usera.id);
+        console.log(req?.user?.id);
 
-        if (Array.isArray(user.projects)) {
-            projects = user.projects as Project[]; // Type assertion to Project[] if it's an array
-        } else {
-            // Handle case where projects might not be an array or may be undefined
-            return new Response(
-                JSON.stringify({ error: "User projects are not available or not in the expected format" }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
+        if (!req.user || !req.user.id) {
+            return new Response(JSON.stringify({ error: "Unauthorized: user not logged in" }), {
+            status: 401,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
         }
 
-        // Find the project that matches the provided projectName
-        const matchingProject = projects.find((project) => project.projectID === projectID);
+        // Step 2: Find project by user ID and projectID
+        const projectRes = await payload.find({
+        collection: "projects",
+        where: {
+            user: { equals: req?.user?.id },
+            projectID: { equals: parseInt(projectID, 10) },
+        },
+        limit: 1,
+        });
 
-        if (!matchingProject) {
-            return new Response(
-                JSON.stringify({ error: `Project not found for projectID: ${projectID}` }),
-                {
-                    status: 404,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
+        if (!projectRes.docs.length) {
+        return new Response(JSON.stringify({ error: `Project not found for projectID: ${projectID}` }), {
+            status: 404,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
         }
 
-        // Respond with the processed data
+        const project = projectRes.docs[0];
+
+        // Step 3: Return project
         return new Response(
-            JSON.stringify({
-                matchingProject
-            }),
-            { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
+        JSON.stringify({ project }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
         );
-    })
+    }),
 };

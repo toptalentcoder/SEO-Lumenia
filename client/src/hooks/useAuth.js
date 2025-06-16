@@ -59,12 +59,16 @@ export function useAuth() {
                 return;
             }
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/usrInfo`, {
+            const response = await fetch("/api/users/me", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    "Authorization": `Bearer ${token}`,
+                    "Cache-Control": "no-cache, no-store, must-revalidate",
+                    "Pragma": "no-cache",
+                    "Expires": "0"
                 },
+                credentials: "include"
             });
 
             if (!response.ok) {
@@ -79,12 +83,24 @@ export function useAuth() {
             }
 
             const data = await response.json();
-            localStorage.setItem("user", JSON.stringify(data.user));
-            setUser(data.user);
+            if (!data.user) {
+                throw new Error("Invalid user data received");
+            }
+
+            // Add token expiry to user data
+            const userData = {
+                ...data.user,
+                tokenExpiry: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours from now
+            };
+
+            localStorage.setItem("user", JSON.stringify(userData));
+            setUser(userData);
         } catch (error) {
             console.error("Error refreshing user data:", error);
             localStorage.removeItem("user");
+            localStorage.removeItem("authToken");
             setUser(null);
+            router.push("/auth/signin");
         }
     };
 

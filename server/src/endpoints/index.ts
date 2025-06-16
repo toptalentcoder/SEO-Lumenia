@@ -1,5 +1,4 @@
 import { googleAuthEndpoint } from "./auth/googleAuthEndpoint";
-import { getUserDataForRefreshPageEndpoint } from "./getUserDataForRefreshPageEndpoint";
 import { paypalSubscriptionEndpoint } from "./paypal/createSubscriptionEndpoint";
 import { getPlansFromDbEndpoint } from "./paypal/getPlansFromDbEndpoint";
 import { saveSubscriptionToUserCollection } from "./paypal/saveSubscriptionTpDbEndpoint";
@@ -66,7 +65,6 @@ export const customEndpoints = [
     paypalSubscriptionEndpoint,
     showSubscriptionEndpoint,
     saveSubscriptionToUserCollection,
-    getUserDataForRefreshPageEndpoint,
     addProjectToUser,
     editProject,
     deleteProject,
@@ -119,7 +117,6 @@ export const customEndpoints = [
     getNumberOfBacklinksEndpoint,
     getSeoGuideStatus,
     getSeoBriefStatus,
-    getUserDataForRefreshPageEndpoint,
     intercomSign,
     generateBrainstormerIdeasEndpoint,
     keywordExplorerEndpoint

@@ -1,118 +1,118 @@
 import { withErrorHandling } from "@/middleware/errorMiddleware";
-import { Endpoint, PayloadRequest, CollectionSlug } from "payload";
-import { Project } from "./postProject";
+import { Endpoint, PayloadRequest } from "payload";
 import { FRONTEND_URL } from "@/config/apiConfig";
-
-interface User {
-    email: string;
-    projects: Project[];
-}
 
 export const editProject: Endpoint = {
     path: "/edit-project",
     method: "post",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-        const { payload } = req;
+        const corsHeaders = {
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true",
+        };
 
         if (req.method === "OPTIONS") {
             return new Response(null, {
                 status: 204,
+                headers: corsHeaders,
+            });
+        }
+
+        if (!req.user) {
+            return new Response(JSON.stringify({ error: "Unauthorized" }), {
+                status: 401,
                 headers: {
-                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-                    "Access-Control-Allow-Methods": "POST, OPTIONS",
-                    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
                 },
             });
         }
 
-        let projectName: string | undefined;
-        let domainName: string | undefined;
-        let email: string | undefined;
-        let projectID: string | undefined;
+        const body = typeof req.json === "function" ? await req.json() : {};
+        const { projectID, projectName, domainName } = body;
 
-        if (req.json) {
-            const body = await req.json();
-            email = body?.email;
-            projectName = body?.projectName;
-            domainName = body?.domainName;
-            projectID = body?.projectID;
+        if (!projectID || !projectName || !domainName) {
+            return new Response(JSON.stringify({ error: "Missing required fields" }), {
+                status: 400,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
         }
 
-        if (!email || !projectID || !projectName || !domainName) {
-            return new Response(
-                JSON.stringify({ error: "Missing required fields" }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-                    },
-                }
-            );
+        // Validate projectID is a number
+        if (isNaN(Number(projectID))) {
+            return new Response(JSON.stringify({ error: "ProjectID must be a number" }), {
+                status: 400,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
         }
 
-        const users = await payload.find({
-            collection: "users" as CollectionSlug,
-            where: { email: { equals: email } },
-            limit: 1,
-        });
+        const { payload } = req;
 
-        if (!users.docs.length) {
-            return new Response(
-                JSON.stringify({ error: "User not found" }),
-                {
+        try {
+            // Look up project by projectID and ensure it belongs to current user
+            const projects = await payload.find({
+                collection: "projects",
+                where: {
+                    projectID: { equals: Number(projectID) },
+                    user: { equals: req.user.id },
+                },
+                limit: 1,
+            });
+
+            if (!projects.docs.length) {
+                return new Response(JSON.stringify({ error: "Project not found or unauthorized" }), {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+                        ...corsHeaders,
                     },
-                }
-            );
-        }
+                });
+            }
 
-        const user = users.docs[0] as unknown as User;
-        const existingProjects: Project[] = Array.isArray(user.projects) ? user.projects : [];
+            const project = projects.docs[0];
 
-        // Find the project to update
-        const projectIndex = existingProjects.findIndex(project => project.projectID === projectID);
-        if (projectIndex === -1) {
-            return new Response(
-                JSON.stringify({ error: "Project not found" }),
-                {
-                    status: 404,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-                    },
-                }
-            );
-        }
+            // Update the project
+            const updated = await payload.update({
+                collection: "projects",
+                id: project.id,
+                data: {
+                    projectName,
+                    domainName,
+                },
+            });
 
-        // Update the project
-        existingProjects[projectIndex] = {
-            ...existingProjects[projectIndex],
-            projectName,
-            domainName,
-        };
-
-        await payload.update({
-            collection: "users" as CollectionSlug,
-            where: { email: { equals: email } },
-            data: { projects: existingProjects },
-        });
-
-        return new Response(
-            JSON.stringify({ 
+            return new Response(JSON.stringify({ 
                 success: true, 
-                project: existingProjects[projectIndex] 
-            }),
-            {
+                project: {
+                    projectName: updated.projectName,
+                    projectID: updated.projectID,
+                    domainName: updated.domainName,
+                    createdAt: updated.createdAt,
+                }
+            }), {
                 status: 200,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+                    ...corsHeaders,
                 },
-            }
-        );
+            });
+        } catch (error) {
+            console.error("Error updating project:", error);
+            return new Response(JSON.stringify({ error: "Failed to update project" }), {
+                status: 500,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
+        }
     }),
-}; 
+};

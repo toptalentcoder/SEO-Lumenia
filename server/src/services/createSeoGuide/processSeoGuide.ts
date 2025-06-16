@@ -123,7 +123,7 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     if (pageContentsResult.status === 'rejected') {
         console.error("Error fetching page contents:", pageContentsResult.reason);
     }
-    
+
     if (seoBriefResult.status === 'rejected') {
         console.error("Error generating SEO brief:", seoBriefResult.reason);
     }
@@ -132,7 +132,27 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     if (job) await job.updateProgress(50);
 
     const resolvedPageContents = pageContentsResult.status === 'fulfilled' ? pageContentsResult.value : [];
-    const resolvedSeoBrief = seoBriefResult.status === 'fulfilled' ? seoBriefResult.value : null;
+    const resolvedSeoBriefRaw = seoBriefResult.status === 'fulfilled'
+        ? seoBriefResult.value
+        : {
+            primaryIntent: '',
+            objective: [],
+            mainTopics: [],
+            importantQuestions: [],
+            writingStyleAndTone: [],
+            recommendedStyle: [],
+            valueProposition: [],
+        };
+
+    const mappedSeoBrief = {
+        primaryIntent: resolvedSeoBriefRaw.primaryIntent,
+        objective: resolvedSeoBriefRaw.objective.map((o: string) => ({ value: o })),
+        mainTopics: resolvedSeoBriefRaw.mainTopics.map((t: string) => ({ value: t })),
+        importantQuestions: resolvedSeoBriefRaw.importantQuestions.map((q: string) => ({ value: q })),
+        writingStyleAndTone: resolvedSeoBriefRaw.writingStyleAndTone.map((s: string) => ({ value: s })),
+        recommendedStyle: resolvedSeoBriefRaw.recommendedStyle.map((s: string) => ({ value: s })),
+        valueProposition: resolvedSeoBriefRaw.valueProposition.map((v: string) => ({ value: v })),
+    };
 
     // Calculate word counts
     const wordCounts = countWordsPerPage(resolvedPageContents);
@@ -188,7 +208,7 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
         wordCount: wordCounts[index],
         soseo: soseoScores[index],
         dseo: dseoScores[index],
-        categories: urlCategories[index] || ["Uncategorized"],
+        categories: (urlCategories[index] || ["Uncategorized"]).map((value) => ({ value })),
         presenceCount: serpPresence[result.link] || 0
     }));
 
@@ -203,24 +223,11 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
     });
 
     // Prepare final SEO guide
-    const seoGuide = {
-        query,
-        queryID,
-        queryEngine,
-        optimizationLevels,
-        searchResults,
-        language,
-        gl,
-        seoBrief: resolvedSeoBrief,
-        PAAs,
-        cronjob,
-        createdAt: Date.now(),
-        createdBy: email,
-        relatedSEOKeywords : relatedSEOKeywords || [],
-    };
+
 
     // Update user's project with new SEO guide
     if (payload) {
+        // Step 1: Find the user
         const users = await payload.find({
             collection: "users",
             where: { email: { equals: email } },
@@ -232,58 +239,60 @@ export async function processSeoGuide(data: SeoGuideJobData, payload?: Payload, 
         }
 
         const user = users.docs[0];
-        let projectId: string;
 
-        if (projectID === "Default") {
-            const defaultProject = Array.isArray(user.projects)
-                ? (user.projects as Project[]).find(
-                    (project) => project.projectName === "Default"
-                )
-                : undefined;
-
-            if (defaultProject) {
-                projectId = defaultProject.projectID;
-            } else {
-                throw new Error("Default project not found");
-            }
-        } else {
-            projectId = projectID;
-        }
-
-        const existingProjects: Project[] = Array.isArray(user.projects)
-            ? (user.projects as Project[])
-            : [];
-
-        let projectUpdated = false;
-        const updatedProjects = existingProjects.map((project) => {
-            if (project.projectID === projectId) {
-                projectUpdated = true;
-                return {
-                    ...project,
-                    seoGuides: [...(project.seoGuides || []), seoGuide],
-                };
-            }
-            return project;
+        // Step 2: Resolve the project
+        const projectRes = await payload.find({
+            collection: 'projects',
+            where: {
+                user: {
+                    equals: user.id,
+                },
+                    projectName: {
+                    equals: projectID === "Default" ? "Default" : projectID,
+                },
+            },
+            limit: 1,
         });
 
-        if (!projectUpdated) {
-            throw new Error(`Project not found: ${projectId}`);
+        if (!projectRes.docs.length) {
+            throw new Error(`Project not found for user: ${user.email} and projectID: ${projectID}`);
         }
 
+        const project = projectRes.docs[0];
+
+        const seoGuide = {
+            project: project.id,
+            query,
+            queryID,
+            queryEngine,
+            optimizationLevels,
+            searchResults,
+            language,
+            gl,
+            seoBrief: mappedSeoBrief,
+            PAAs: PAAs.map((q: string) => ({ question: q })),
+            cronjob: Object.entries(cronjob).map(([url, positions]) => ({
+                url,
+                positions
+            })),
+            createdAt: Date.now(),
+            createdBy: email,
+            relatedSEOKeywords: relatedSEOKeywords.map(k => ({ keyword: k })),
+        };
+
+        // Step 3: Create new SEO Guide linked to the project
         try {
-            await payload.update({
-                collection: "users",
-                id: user.id,
-                data: {
-                    projects: updatedProjects,
-                },
+            await payload.create({
+                collection: 'seo-guides',
+                data : seoGuide
             });
-            console.log("Data saved successfully");
+
+            console.log("SEO guide created successfully.");
         } catch (error) {
-            console.error("Error saving data:", error);
+            console.error("Error creating SEO guide:", error);
+            throw new Error("Failed to save SEO guide to database.");
         }
-        
     }
 
-    return seoGuide;
-} 
+    return true;
+}

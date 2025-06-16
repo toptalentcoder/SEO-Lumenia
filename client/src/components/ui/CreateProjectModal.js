@@ -1,11 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
 
-const generateProjectId = () => {
-    const randomID = Math.floor(100000 + Math.random() * 900000);
-    return new String(randomID);
-};
-
 export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, userEmail }) {
     const [projectName, setProjectName] = useState("");
     const [domainName, setDomainName] = useState("");
@@ -21,17 +16,18 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
 
         setIsLoading(true);
 
-        const projectID = generateProjectId();
-
         try {
-            const response = await fetch("/api/post-project", {
+            const response = await fetch("/api/project", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+                },
+                credentials: "include",
                 body: JSON.stringify({
                     email: userEmail,
                     projectName,
-                    domainName,
-                    projectID
+                    domainName
                 }),
             });
 
@@ -39,7 +35,13 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
 
             if (response.ok) {
                 setSuccessMessage("Project successfully created!"); // Show success message
-                onProjectCreated({ id: projectID, name: projectName, domain: domainName, favourites: 0 });
+                // Use the project ID from the server response
+                onProjectCreated({ 
+                    id: data.project.projectID, 
+                    name: projectName, 
+                    domain: domainName, 
+                    favourites: 0 
+                });
                 setProjectName("");
                 setDomainName("");
                 onClose();
