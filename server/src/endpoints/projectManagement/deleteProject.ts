@@ -3,12 +3,13 @@ import { Endpoint, PayloadRequest } from "payload";
 import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const deleteProject: Endpoint = {
-    path: "/delete-project",
-    method: "post",
+    path: "/project/:projectID",
+    method: "delete",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
+        const { payload } = req;
         const corsHeaders = {
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Methods": "DELETE, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",
         };
@@ -20,18 +21,42 @@ export const deleteProject: Endpoint = {
             });
         }
 
-        if (!req.user) {
-            return new Response(JSON.stringify({ error: "Unauthorized" }), {
-                status: 401,
-                headers: {
-                    "Content-Type": "application/json",
-                    ...corsHeaders,
-                },
+        let userId: string;
+
+        // Check if user is logged in
+        if (req.user) {
+            userId = String(req.user.id);
+        } else {
+            // For non-logged-in users, check API key
+            const authHeader = req.headers.get('Authorization');
+            const apiKey = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+
+            if (!apiKey) {
+                return new Response(JSON.stringify({ error: "API key is required for non-logged-in users" }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            // Find user by API key
+            const users = await payload.find({
+                collection: "users",
+                where: { apiKey: { equals: apiKey } },
+                limit: 1,
             });
+
+            if (!users.docs.length) {
+                return new Response(JSON.stringify({ error: "Invalid API key" }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            userId = String(users.docs[0].id);
         }
 
-        const body = typeof req.json === "function" ? await req.json() : {};
-        const { projectID } = body;
+        // Get projectID from the URL path
+        const projectID = req.url ? new URL(req.url).pathname.split('/').pop() : null;
 
         if (!projectID) {
             return new Response(JSON.stringify({ error: "ProjectID is required" }), {
@@ -54,8 +79,6 @@ export const deleteProject: Endpoint = {
             });
         }
 
-        const { payload } = req;
-
         try {
             // Find the project by projectID and user
             const projects = await payload.find({
@@ -65,7 +88,7 @@ export const deleteProject: Endpoint = {
                         equals: Number(projectID),
                     },
                     user: {
-                        equals: req.user.id,
+                        equals: userId,
                     },
                 },
                 limit: 1,

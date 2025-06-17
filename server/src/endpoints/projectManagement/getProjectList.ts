@@ -13,82 +13,54 @@ export const getUserProjectList: Endpoint = {
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
         const { payload } = req;
+        const email = req.query.email;
 
-        const corsHeaders = {
-            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS, PUT, POST, DELETE",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-            "Access-Control-Allow-Credentials": "true",
-        };
+        if (!email) {
+            return new Response(
+                JSON.stringify({ error: 'Email is required' }),
+                { status: 400, headers: { 'Content-Type': 'application/json' } }
+            );
+        }
 
-        if (req.method === "OPTIONS") {
-            return new Response(null, {
-                status: 204,
-                headers: {
-                ...corsHeaders,
+        try {
+            // First get the user
+            const user = await payload.find({
+                collection: 'users',
+                where: {
+                    email: {
+                        equals: email,
+                    },
                 },
             });
-        }
 
-        const { email } = req.query;
+            if (!user.docs.length) {
+                return new Response(
+                    JSON.stringify({ error: 'User not found' }),
+                    { status: 404, headers: { 'Content-Type': 'application/json' } }
+                );
+            }
 
-        if (!email || typeof email !== "string") {
-            return new Response(
-                JSON.stringify({ error: "Email is required" }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders,
+            // Then get all projects for this user
+            const projects = await payload.find({
+                collection: 'projects',
+                where: {
+                    user: {
+                        equals: user.docs[0].id,
                     },
-                }
+                },
+                sort: '-createdAt',
+            });
+
+            return new Response(
+                JSON.stringify(projects.docs),
+                { status: 200, headers: { 'Content-Type': 'application/json' } }
+            );
+        } catch (error) {
+            console.error('Error fetching projects:', error);
+            return new Response(
+                JSON.stringify({ error: 'Failed to fetch projects' }),
+                { status: 500, headers: { 'Content-Type': 'application/json' } }
             );
         }
-
-        const users = await payload.find({
-            collection: "users",
-            where: { email: { equals: email } },
-            limit: 1,
-        });
-
-        if (!users.docs.length) {
-            return new Response(
-                JSON.stringify({ error: `❌ User not found for email: ${email}` }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders,
-                    },
-                }
-            );
-        }
-
-        const user = users.docs[0];
-        if (!Array.isArray(user.projects)) {
-            return new Response(
-                JSON.stringify({ error: "User projects are not in expected format" }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders,
-                    },
-                }
-            );
-        }
-
-        const projectSummaries: ProjectSummary[] = (user.projects as { projectName?: string; projectID?: string }[]).map((project) => ({
-            projectName: project.projectName || '',
-            projectID: project.projectID || '',
-        }));
-
-        return new Response(JSON.stringify(projectSummaries), {
-            status: 200,
-            headers: {
-                "Content-Type": "application/json",
-                ...corsHeaders,
-            },
-        });
     }),
 };

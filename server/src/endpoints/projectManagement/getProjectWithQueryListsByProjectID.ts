@@ -2,8 +2,18 @@ import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
 
-export const getProjectByProjectID: Endpoint = {
-    path: "/project/:projectID",
+interface Project {
+    id: string;
+    projectID: number;
+    projectName: string;
+    user: {
+        id: string;
+        username: string;
+    };
+}
+
+export const getProjectWithQueryListsByProjectID: Endpoint = {
+    path: "/all-project-with-query-list/:projectID",
     method: "get",
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
@@ -31,7 +41,7 @@ export const getProjectByProjectID: Endpoint = {
             const apiKey = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
 
             if (!apiKey) {
-                return new Response(JSON.stringify({ error: "API key is required for non-logged-in users" }), {
+                return new Response(JSON.stringify({ error: "Authentication required" }), {
                     status: 401,
                     headers: { "Content-Type": "application/json", ...corsHeaders },
                 });
@@ -70,10 +80,8 @@ export const getProjectByProjectID: Endpoint = {
             const projectRes = await payload.find({
                 collection: "projects",
                 where: {
-                    and: [
-                        { user: { equals: userId } },
-                        { projectID: { equals: parseInt(projectID, 10) } }
-                    ]
+                    user: { equals: userId },
+                    projectID: { equals: parseInt(projectID, 10) },
                 },
                 limit: 1,
             });
@@ -87,11 +95,43 @@ export const getProjectByProjectID: Endpoint = {
 
             const project = projectRes.docs[0];
 
-            // Return only project name and domain name
+            // Get related SEO guides for this project
+            const seoGuides = await payload.find({
+                collection: "seo-guides",
+                where: {
+                    project: { equals: project.id },
+                },
+                depth: 2,
+            });
+
+            // Get user data for profile picture
+            const users = await payload.find({
+                collection: "users",
+                where: {
+                    id: { equals: (project.user as any).id },
+                },
+                limit: 1,
+            });
+
+            // Return project with related SEO guides
             return new Response(
                 JSON.stringify({
-                    projectName: project.projectName,
-                    domainName: project.domainName
+                    guides: seoGuides.docs.map(guide => ({
+                        query: guide.query,
+                        queryID: guide.queryID,
+                        queryEngine: guide.queryEngine,
+                        projectName: (guide.project as any)?.projectName,
+                        projectID: (guide.project as any)?.projectID,
+                        language: guide.language,
+                        gl: guide.gl,
+                        createdAt: guide.createdAt,
+                        createdBy: guide.createdBy,
+                        username: users.docs[0]?.username,
+                        creatorProfilePicture: users.docs[0]?.profilePicture,
+                        soseo: guide.soseo,
+                        dseo: guide.dseo,
+                        monitoringUrl: guide.monitoringUrl
+                    }))
                 }),
                 { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
             );

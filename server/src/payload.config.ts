@@ -71,7 +71,8 @@ export default buildConfig({
     'http://167.235.246.98:4001',
     'http://localhost:4001',
     'http://localhost:3000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'http://167.235.246.98:3001'
   ].filter((url): url is string => Boolean(url)),
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

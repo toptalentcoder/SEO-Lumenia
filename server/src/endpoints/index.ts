@@ -3,11 +3,10 @@ import { paypalSubscriptionEndpoint } from "./paypal/createSubscriptionEndpoint"
 import { getPlansFromDbEndpoint } from "./paypal/getPlansFromDbEndpoint";
 import { saveSubscriptionToUserCollection } from "./paypal/saveSubscriptionTpDbEndpoint";
 import { showSubscriptionEndpoint } from "./paypal/showSubscriptionEndpoint";
-import { getUserProjects } from "./projectManagement/getProject";
-import { getUserProjectInfo } from "./projectManagement/getProjectInfo";
+import { getProjectByProjectID } from "./projectManagement/getProjectByProjectID";
 import { getSeoGuideByQueryID } from "./projectManagement/getSeoGuideByQueryID";
-import { addProjectToUser } from "./projectManagement/postProject";
-import { editProject } from "./projectManagement/editProject";
+import { addProjectToUser } from "./projectManagement/createProject";
+import { editProject } from "./projectManagement/updateProject";
 import { deleteProject } from "./projectManagement/deleteProject";
 import { generateSeoAutoEndpoint } from "./seoGuide/seoEditor/generateSeoAutoEndpoint";
 import { generateSeoOutlineEndpoint } from "./seoGuide/seoEditor/generateSeoOutlineEndpoint";
@@ -24,7 +23,7 @@ import { getCronjobData } from "./getCronjobData";
 import { getMonitoringUrl } from "./seoGuide/monitoring/getMonitoring";
 import { setMonitoringUrl } from "./seoGuide/monitoring/setMonitoring";
 import { getUserProjectList } from "./projectManagement/getProjectList";
-import { getProjectGuides } from "./projectManagement/getProjectByProjectID";
+import { getProjectWithQueryListsByProjectID } from "./projectManagement/getProjectWithQueryListsByProjectID";
 import { saveSeoEditorDataEndpoint } from "./seoGuide/seoEditor/saveSeoEditorDataEndpoint";
 import { translateSeoEditorEndpoint } from "./seoGuide/translateSeoEditorEndpoint";
 import { generateSeoCategoryEndpoint } from "./seoGuide/generateSeoCategoryEndpoint";
@@ -35,7 +34,7 @@ import { saveSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/save_soseo_dseo";
 import { getSoseoDseoEndpoint } from "./seoGuide/soseo_dseo/get_soseo_dseo";
 import { generateKeywordsEndpoint } from "./serpWeather/generateKeywordsEndpoint";
 import { getMonitoringData } from "./seoGuide/monitoring/getMonitoringData";
-import { getAllUserProjects } from "./projectManagement/getAllUserProject";
+import { getAllUserProjects } from "./projectManagement/getAllProjects";
 import { internalPageRankEndpoint } from "./internal_page_rank/internalPageRankEndpoint";
 import { getInternalPageRankEndpoint } from "./internal_page_rank/getInternalPageRankEndpoint";
 import { pageDuplicationEndpoint } from "./page_duplication/pageDuplicationEndpoint";
@@ -56,10 +55,14 @@ import { getSeoGuideStatus } from './seoGuide/getSeoGuideStatus';
 import { getSeoBriefStatus } from './seoGuide/getSeoBriefStatus';
 import { intercomSign } from "./intercom-sign";
 import { generateBrainstormerIdeasEndpoint } from "./contentStrategy/generateIdes/generateBrainstormerIdeas";
-import { testEndpoint } from "./test";
 import { keywordExplorerEndpoint } from "./keywordExplorerEndpoint";
+import { loginEndpoint } from './auth/login';
+import { Endpoint } from 'payload';
+import { getSeoGuideResults } from "./seoGuide/getSeoGuideResults";
+import { getProjectWithSeoGuideList } from "./projectManagement/getProjectWithAllQueryLists";
 
-export const customEndpoints = [
+export const customEndpoints: Endpoint[] = [
+    loginEndpoint,
     googleAuthEndpoint,
     getPlansFromDbEndpoint,
     paypalSubscriptionEndpoint,
@@ -68,10 +71,11 @@ export const customEndpoints = [
     addProjectToUser,
     editProject,
     deleteProject,
-    getUserProjectInfo,
-    getUserProjects,
+    getProjectByProjectID,
+    getProjectWithQueryListsByProjectID,
     getUserProjectList,
-    getProjectGuides,
+    getProjectByProjectID,
+    getProjectWithSeoGuideList,
     getAllUserProjects,
     getSeoGuideByQueryID,
     generateSeoQuestionsEndpoint,
@@ -119,5 +123,6 @@ export const customEndpoints = [
     getSeoBriefStatus,
     intercomSign,
     generateBrainstormerIdeasEndpoint,
-    keywordExplorerEndpoint
+    keywordExplorerEndpoint,
+    getSeoGuideResults
 ]

@@ -250,7 +250,7 @@ export default function PricingTable() {
             <div className="flex items-center text-center w-3/4">
                 {activeTab === 'subscription' ? (
                     <div>
-                        <div className="mt-6 text-s">
+                        <div className="mt-6 text-sm text-gray-800">
                             Every month, our subscriptions unlock a world of optimization with a set of tokens to create guides valid for 50 days, helping you fine-tune your semantic work. These tokens come with a one-month lifespan, alongside AI tokens you can use to generate content or unlock data, also valid for a month. And because we love rewarding loyalty, 70% of your unused guide creation tokens automatically roll over for an extra month. So, you never have to worry about missing out on optimization opportunities!
                         </div>
                     </div>

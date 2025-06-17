@@ -9,19 +9,20 @@ export const Users: CollectionConfig = {
   },
   access: {
     create: () => true, // Keep this for registration
-    read: () => true,
-    update: ({ req, id }) => {
-      if (!req.user) return false;
-      return req.user.role === 'admin' || req.user.id === id;
-    },
-    delete: ({ req }) => req.user?.role === 'admin',
+    // read: ({ req }) => {
+    //   if (!req.user) return false;
+    //   return req.user.role === 'user';
+    // },
+    read : () => true,
+    // update: ({ req, id }) => {
+    //   if (!req.user) return false;
+    //   return req.user.role === 'admin' || req.user.id === id;
+    // },
+    // delete: ({ req }) => req.user?.role === 'admin',
+    update : () => true,
+    delete : () => true,
   },
-  auth: {
-    tokenExpiration: 7200, // 2 hours
-    verify: false,
-    maxLoginAttempts: 5,
-    lockTime: 600 * 1000, // 10 minutes
-  },
+  auth: true,
   fields: [
     {
       name: 'role',
@@ -34,7 +35,8 @@ export const Users: CollectionConfig = {
       defaultValue: 'user',
       access: {
         create: ({ req }) => req.user?.role === 'admin',
-        update: ({ req }) => req.user?.role === 'admin',
+        // update: ({ req }) => req.user?.role === 'admin',
+        update : () => true
       },
     },
     {
@@ -102,8 +104,54 @@ export const Users: CollectionConfig = {
         { name: "monitoring", type: "number", label: "Monitoring", min: 0 },
       ]
     },
+    {
+      name: 'apiKey',
+      type: 'text',
+      required: false,
+      unique: true,
+      admin: {
+        position: 'sidebar',
+        description: 'API key for programmatic access',
+      },
+      access: {
+        read: ({ req }) => req.user?.role === 'admin' || req.user?.id === req.user?.id,
+        update: ({ req }) => req.user?.role === 'admin' || req.user?.id === req.user?.id,
+      },
+    },
   ],
   hooks: {
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        // Only create Default project on user creation
+        if (operation === 'create') {
+          try {
+            // Get the latest project ID
+            const latestProject = await req.payload.find({
+              collection: 'projects',
+              sort: '-projectID',
+              limit: 1,
+            });
+
+            const nextProjectID = latestProject.docs.length > 0 ? latestProject.docs[0].projectID + 1 : 1;
+
+            // Create Default project
+            await req.payload.create({
+              collection: 'projects',
+              data: {
+                user: doc.id,
+                projectID: nextProjectID,
+                projectName: 'Default',
+                createdAt: new Date().toISOString(),
+              },
+            });
+
+            console.log(`Created Default project for user ${doc.email}`);
+          } catch (error) {
+            console.error('Error creating Default project:', error);
+          }
+        }
+      }
+    ],
     afterLogin: [
       async ({ user }) => {
         return {

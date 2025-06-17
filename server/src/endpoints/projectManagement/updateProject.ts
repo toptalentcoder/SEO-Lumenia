@@ -3,12 +3,13 @@ import { Endpoint, PayloadRequest } from "payload";
 import { FRONTEND_URL } from "@/config/apiConfig";
 
 export const editProject: Endpoint = {
-    path: "/edit-project",
-    method: "post",
+    path: "/project/:projectID",
+    method: "put",
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
+        const { payload } = req;
         const corsHeaders = {
             "Access-Control-Allow-Origin": FRONTEND_URL || "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Methods": "PUT, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type, Authorization",
             "Access-Control-Allow-Credentials": "true",
         };
@@ -20,21 +21,45 @@ export const editProject: Endpoint = {
             });
         }
 
-        if (!req.user) {
-            return new Response(JSON.stringify({ error: "Unauthorized" }), {
-                status: 401,
-                headers: {
-                    "Content-Type": "application/json",
-                    ...corsHeaders,
-                },
+        let userId: string;
+
+        // Check if user is logged in
+        if (req.user) {
+            userId = req.user.id;
+        } else {
+            // For non-logged-in users, check API key
+            const authHeader = req.headers.get('Authorization');
+            const apiKey = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+
+            if (!apiKey) {
+                return new Response(JSON.stringify({ error: "API key is required for non-logged-in users" }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            // Find user by API key
+            const users = await payload.find({
+                collection: "users",
+                where: { apiKey: { equals: apiKey } },
+                limit: 1,
             });
+
+            if (!users.docs.length) {
+                return new Response(JSON.stringify({ error: "Invalid API key" }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            userId = users.docs[0].id;
         }
 
-        const body = typeof req.json === "function" ? await req.json() : {};
-        const { projectID, projectName, domainName } = body;
+        // Get projectID from the URL path
+        const projectID = req.url ? new URL(req.url).pathname.split('/').pop() : null;
 
-        if (!projectID || !projectName || !domainName) {
-            return new Response(JSON.stringify({ error: "Missing required fields" }), {
+        if (!projectID) {
+            return new Response(JSON.stringify({ error: "ProjectID is required" }), {
                 status: 400,
                 headers: {
                     "Content-Type": "application/json",
@@ -54,7 +79,18 @@ export const editProject: Endpoint = {
             });
         }
 
-        const { payload } = req;
+        const body = typeof req.json === "function" ? await req.json() : {};
+        const { projectName, domainName } = body;
+
+        if (!projectName || !domainName) {
+            return new Response(JSON.stringify({ error: "Missing required fields: projectName and domainName" }), {
+                status: 400,
+                headers: {
+                    "Content-Type": "application/json",
+                    ...corsHeaders,
+                },
+            });
+        }
 
         try {
             // Look up project by projectID and ensure it belongs to current user
@@ -62,13 +98,13 @@ export const editProject: Endpoint = {
                 collection: "projects",
                 where: {
                     projectID: { equals: Number(projectID) },
-                    user: { equals: req.user.id },
+                    user: { equals: userId },
                 },
                 limit: 1,
             });
 
             if (!projects.docs.length) {
-                return new Response(JSON.stringify({ error: "Project not found or unauthorized" }), {
+                return new Response(JSON.stringify({ error: "Project not found or not owned by user" }), {
                     status: 404,
                     headers: {
                         "Content-Type": "application/json",

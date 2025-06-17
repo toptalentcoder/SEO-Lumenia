@@ -25,7 +25,6 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
                 },
                 credentials: "include",
                 body: JSON.stringify({
-                    email: userEmail,
                     projectName,
                     domainName
                 }),
@@ -37,7 +36,7 @@ export default function CreateProjectModal({ isOpen, onClose, onProjectCreated, 
                 setSuccessMessage("Project successfully created!"); // Show success message
                 // Use the project ID from the server response
                 onProjectCreated({ 
-                    id: data.project.projectID, 
+                    id: data.projectID, 
                     name: projectName, 
                     domain: domainName, 
                     favourites: 0 

@@ -18,33 +18,11 @@ export default function SigninPage() {
     const { setUser } = useUser();
     const [success, setSuccess] = useState(null);
 
-    useEffect(() => {
-        const checkGoogleLogin = () => {
-        const userDataString = localStorage.getItem("googleAuthUser");
-        if (userDataString) {
-            try {
-                const userData = JSON.parse(userDataString);
-                localStorage.setItem("authToken", userData.token);
-                localStorage.setItem("user", JSON.stringify(userData.user));
-                setUser(userData.user);
-                localStorage.removeItem("googleAuthUser");
-                router.push("/dashboard");
-            } catch (error) {
-                console.error("Error parsing user data:", error);
-            }
-        }
-        };
-        checkGoogleLogin();
-        const storageListener = () => checkGoogleLogin();
-        window.addEventListener("storage", storageListener);
-        return () => window.removeEventListener("storage", storageListener);
-    }, [router, setUser]);
-
     const handleChange = (e) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({
-        ...prevData,
-        [id]: value,
+            ...prevData,
+            [id]: value,
         }));
     };
 
@@ -53,56 +31,48 @@ export default function SigninPage() {
         setError(null);
         setSuccess(null);
         setIsLoading(true);
+
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify(formData),
             });
+
             if (!response.ok) {
                 const data = await response.json();
-                throw new Error(data.error || "Sign-in failed. Please try again.");
+                throw new Error(data.error || data.message || "Sign-in failed. Please try again.");
             }
-            let data = await response.json();
-            if (!data.user) {
-                data = {
-                    user: {
-                        name: data.name,
-                        email: data.email,
-                        role: data.role,
-                    },
-                    token: data.token,
-                };
-            }
+
+            const data = await response.json();
+            
+            // Store auth data
             if (typeof window !== "undefined") {
                 localStorage.setItem("authToken", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user));
             }
+
             try {
                 setUser(data.user);
                 setSuccess("Sign-in successful! Redirecting to dashboard...");
+                router.push("/dashboard");
             } catch (err) {
                 console.error("Error setting user in context:", err);
                 setError("Error setting user in context.");
             }
-            router.push("/dashboard");
         } catch (err) {
-            console.error(err);
+            console.error("Login error:", err);
             setError(err instanceof Error ? err.message : "An unexpected error occurred.");
         } finally {
             setIsLoading(false);
         }
     };
 
-    const goToSignUp = () => {
-        router.push("/auth/signup");
-    };
-
     return (
         <div className="min-h-screen bg-white">
-
             <NavbarLandingEn/>
 
             <section id="blog" className="py-24 bg-blue-50 relative overflow-hidden" style={{
@@ -115,32 +85,29 @@ export default function SigninPage() {
             }}>
                 <div className="container mx-auto px-4">
                     <div className="flex flex-wrap mt-28">
-                        {/* section intro row starts */}
                         <div className="mb-24 w-3/4 mx-auto">
                             <div className="text-left">
                                 <h2 className="text-[37.328px] font-bold text-gray-900">Log in!</h2>
                                 <div className="w-24 h-1 bg-green-400 mt-4 ml-4"></div>
                             </div>
                         </div>
-                        {/* section intro row ends */}
                     </div>
-                    {/* row starts */}
                     <div className="flex flex-wrap">
-                        {/* column 1 starts */}
                         <div className="w-3/4 justify-center mx-auto">
-                            {/* blog item 1 starts */}
                             <div className="bg-white p-8">
-                                {/* image */}
                                 <div className="space-y-6 text-left">
                                     <div className="flex justify-start">
-                                    <h4 className="text-[21.328px] font-bold text-gray-900">Log in!</h4>
+                                        <h4 className="text-[21.328px] font-bold text-gray-900">Log in!</h4>
                                     </div>
                                     
-                                    <p className="text-gray-600 text-[16px] bg-gray-200 px-4 py-3 rounded-md">If you do not have a Lumenia account yet, {""}
-                                        <Link href="/auth/signup" className="hover:text-blue-600 font-medium underline">go to the registration page to create one.</Link></p>
-                                    <form className="space-y-4" onSubmit={handleSubmit}>
-                                        <input type="hidden" name="_token" value="KsG7xlS8al4PDbJDNKymwFr6W3QCqs0ylNGR1XyU" />
+                                    <p className="text-gray-600 text-[16px] bg-gray-200 px-4 py-3 rounded-md">
+                                        If you do not have a Lumenia account yet, {""}
+                                        <Link href="/auth/signup" className="hover:text-blue-600 font-medium underline">
+                                            go to the registration page to create one.
+                                        </Link>
+                                    </p>
 
+                                    <form className="space-y-4" onSubmit={handleSubmit}>
                                         {error && (
                                             <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
                                                 <div className="flex">
@@ -173,16 +140,40 @@ export default function SigninPage() {
 
                                         <div>
                                             <label htmlFor="email" className="block text-[16px] font-semibold text-gray-900">Email</label>
-                                            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                            <input 
+                                                type="email" 
+                                                id="email" 
+                                                name="email" 
+                                                value={formData.email} 
+                                                onChange={handleChange} 
+                                                required 
+                                                className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" 
+                                            />
                                         </div>
 
                                         <div className="mt-6">
                                             <label htmlFor="password" className="block text-[16px] font-semibold text-gray-900">Password</label>
-                                            <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" />
+                                            <input 
+                                                type="password" 
+                                                id="password" 
+                                                name="password" 
+                                                value={formData.password} 
+                                                onChange={handleChange} 
+                                                required 
+                                                className="mt-1 block w-full border-2 border-gray-300 px-4 py-3 text-gray-900" 
+                                            />
                                         </div>
 
                                         <div className="flex items-center mt-8 justify-start text-left">
-                                            <input type="checkbox" name="cgu" id="cgu" checked={formData.cgu} onChange={handleChange} value="1" className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="cgu" 
+                                                id="cgu" 
+                                                checked={formData.cgu} 
+                                                onChange={handleChange} 
+                                                value="1" 
+                                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" 
+                                            />
                                             <label htmlFor="cgu" className="ml-2 block text-[16px] font-semibold text-[#001F3F] text-left">
                                                 Remember me
                                             </label>
@@ -199,21 +190,19 @@ export default function SigninPage() {
                                         </div>
 
                                         <div className="mt-6">
-                                            <Link href="/auth/forgot-password" className="text-blue-600 font-medium hover:underline">Forgot your password?</Link>
+                                            <Link href="/auth/forgot-password" className="text-blue-600 font-medium hover:underline">
+                                                Forgot your password?
+                                            </Link>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            {/* blog item 1 ends */}
                         </div>
-                        {/* column 1 ends */}
                     </div>
-                    {/* row starts */}
                 </div>
             </section>
 
             <FooterLandingEn/>
-
         </div>
     );
 }

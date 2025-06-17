@@ -1,135 +1,169 @@
+import { FRONTEND_URL } from "@/config/apiConfig";
 import { withErrorHandling } from "@/middleware/errorMiddleware";
 import { Endpoint, PayloadRequest } from "payload";
-import { seoGuideQueue } from "@/lib/seoGuideQueue";
-import { checkRedisConnection } from "@/lib/redis";
-import { FRONTEND_URL } from "@/config/apiConfig";
+import { Queue, QueueEvents } from "bullmq";
+import { connection } from "@/lib/redis";
+
+const seoGuideQueue = new Queue('seoGuideQueue', { connection });
+const queueEvents = new QueueEvents('seoGuideQueue', { connection });
+
+
 
 export const createSeoGuide: Endpoint = {
-    path: "/createSeoGuide",
+    path: "/seo-guide",
     method: "post",
 
     handler: withErrorHandling(async (req: PayloadRequest): Promise<Response> => {
-        // CORS headers
-        const corsHeaders = {
-            "Access-Control-Allow-Origin": FRONTEND_URL || "",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept",
-            "Access-Control-Allow-Credentials": "true",
-            "Access-Control-Max-Age": "86400"
-        };
-
-        // Handle preflight OPTIONS request
-        if (req.method === "OPTIONS") {
-            return new Response(null, {
-                status: 204,
-                headers: corsHeaders
-            });
-        }
-
-        if (!req.json) {
-            return new Response(
-                JSON.stringify({ error: "Invalid request: Missing JSON parsing function" }),
-                { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
-            );
-        }
-
-        // Check Redis connection
-        const isRedisConnected = await checkRedisConnection();
-        if (!isRedisConnected) {
-            return new Response(
-                JSON.stringify({ 
-                    error: "Service temporarily unavailable. Please try again in a few moments.",
-                    code: "REDIS_CONNECTION_ERROR"
-                }),
-                { 
-                    status: 503, 
-                    headers: { 
-                        "Content-Type": "application/json", 
-                        ...corsHeaders 
-                    } 
-                }
-            );
-        }
-
         const { payload } = req;
-        const body = await req.json();
-        const { query, projectID, email, queryID, language, queryEngine, hl, gl, lr } = body;
+        const body = typeof req.json === "function" ? await req.json() : {};
+        const { query, projectID, language, queryEngine, hl, gl, lr } = body;
+    
+        const corsHeaders = {
+            "Access-Control-Allow-Origin": FRONTEND_URL || "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Credentials": "true",
+        };
+    
+        if (req.method === "OPTIONS") {
+            return new Response(null, { status: 204, headers: corsHeaders });
+        }
 
-        console.log("Received request body:", body);
+        let userId: string;
+        let email: string;
 
-        if (!query || typeof query !== "string") {
-            return new Response(
-                JSON.stringify({ error: "Missing query in request body" }),
-                {
-                    status: 400,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
+        // Check if user is logged in
+        if (req.user) {
+            userId = req.user.id;
+            email = req.user.email;
+        } else {
+            // For non-logged-in users, check API key
+            const authHeader = req.headers.get('Authorization');
+            const apiKey = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+
+            if (!apiKey) {
+                return new Response(JSON.stringify({ error: "API key is required for non-logged-in users" }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            // Find user by API key
+            const users = await payload.find({
+                collection: "users",
+                where: { apiKey: { equals: apiKey } },
+                limit: 1,
+            });
+
+            if (!users.docs.length) {
+                return new Response(JSON.stringify({ error: "Invalid API key" }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            userId = users.docs[0].id;
+            email = users.docs[0].email;
+        }
+
+        if (!query || !projectID || !language) {
+            return new Response(JSON.stringify({ error: "Missing required fields" }), {
+                status: 400,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
         }
 
         try {
-            console.log("Adding job to the queue...");
-            // Add job to queue with retention settings
+            // Convert projectID to number and validate
+            const numericProjectID = Number(projectID);
+            if (isNaN(numericProjectID)) {
+                return new Response(JSON.stringify({ error: "Invalid projectID format" }), {
+                    status: 400,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            // Verify project exists and belongs to user
+            const project = await payload.find({
+                collection: "projects",
+                where: {
+                    and: [
+                        {
+                            user: { equals: userId }
+                        },
+                        {
+                            projectID: { equals: numericProjectID }
+                        }
+                    ]
+                },
+                limit: 1,
+            });
+
+            if (!project.docs.length) {
+                return new Response(JSON.stringify({ error: "Project not found or access denied" }), {
+                    status: 404,
+                    headers: { "Content-Type": "application/json", ...corsHeaders },
+                });
+            }
+
+            // Generate a unique queryID
+            const now = Date.now().toString(); // e.g., "1718540163624"
+            const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // 4 digits
+            const queryID = (now.slice(-4) + random); // final result: 8-digit string            
+
+            // Add job to queue
             const job = await seoGuideQueue.add('createSeoGuide', {
                 query,
-                projectID,
+                projectID: numericProjectID.toString(),
                 email,
                 queryID,
-                language,
                 queryEngine,
+                language,
                 hl,
                 gl,
                 lr
-            }, {
-                attempts: 3,
-                backoff: {
-                    type: 'exponential',
-                    delay: 1000
-                },
-                removeOnComplete: {
-                    age: 3600, // Keep completed jobs for 1 hour
-                    count: 100 // Keep last 100 completed jobs
-                },
-                removeOnFail: {
-                    age: 24 * 3600 // Keep failed jobs for 24 hours
-                }
             });
 
-            console.log("Job added to queue with ID:", job.id);
+            // Wait for job completion
+            const result = await new Promise((resolve, reject) => {
+                const timeout = setTimeout(() => {
+                    reject(new Error('Job timeout'));
+                }, 300000); // 5 minute timeout
 
-            return new Response(
-                JSON.stringify({ 
-                    success: true, 
-                    message: "SEO guide creation started",
-                    jobId: job.id
-                }),
-                {
-                    status: 202,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
-        } catch (error: unknown) {
-            console.error("❌ createSeoGuide error:", error);
-            const errorMessage = error instanceof Error ? error.message : "Failed to create SEO guide";
-            return new Response(
-                JSON.stringify({ 
-                    error: errorMessage,
-                    code: "QUEUE_ERROR"
-                }),
-                {
-                    status: 500,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...corsHeaders
-                    },
-                }
-            );
+                queueEvents.on('completed', async (jobData) => {
+                    if (jobData.jobId === job.id) {
+                        clearTimeout(timeout);
+                        const completedJob = await seoGuideQueue.getJob(job.id);
+                        resolve(completedJob.returnvalue);
+                    }
+                });
+
+                queueEvents.on('failed', (jobData) => {
+                    if (jobData.jobId === job.id) {
+                        clearTimeout(timeout);
+                        reject(new Error(jobData.failedReason));
+                    }
+                });
+            });
+
+            // Return the final result
+            return new Response(JSON.stringify({
+                status: "completed",
+                data: result
+            }), {
+                status: 200,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
+
+        } catch (error: any) {
+            console.error("POST /seo-guide error:", error);
+            return new Response(JSON.stringify({ 
+                error: "Internal Server Error",
+                details: error.message 
+            }), {
+                status: 500,
+                headers: { "Content-Type": "application/json", ...corsHeaders },
+            });
         }
     }),
 };

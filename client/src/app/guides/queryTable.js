@@ -15,6 +15,7 @@ import { Menu, Transition } from '@headlessui/react';
 import Image from "next/image";
 import { Fragment } from 'react';
 import { useRef } from "react";
+import { NEXT_PUBLIC_API_URL } from "../../config/apiConfig";
 
 const getBaseGrade = (score) => {
     if (score >= 95) return 'a';
@@ -155,46 +156,62 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
     ];
 
     useEffect(() => {
-        if(!user.email) return;
+        if(!user?.email) return;
 
         const fetchProjects = async () => {
-
             setLoading(true);
 
             try {
                 let response;
+                let data;
 
                 if (projectID) {
-                    response = await fetch(`/api/get-project-guides?email=${user.email}&projectID=${projectID}`);
+                    response = await fetch(`/api/all-project-with-query-list/${projectID}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `JWT ${localStorage.getItem('authToken')}`
+                        }
+                    });
+                    data = await response.json();
                 } else {
-                    response = await fetch(`/api/get-all-projects?email=${user.email}`);
+                    response = await fetch(`/api/all-project-with-query-list`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `JWT ${localStorage.getItem('authToken')}`
+                        }
+                    });
+                    data = await response.json();
                 }
-                const data = await response.json();
 
-                if(response.ok){
-                    const formattedProjects = data.map((project, index) => ({
-                        id : index + 1,
-                        query : project.query,
-                        queryID : project.queryID,
-                        queryEngine : project.queryEngine,
-                        projectName : project.projectName,
-                        projectID : project.projectID,
-                        language : project.language,
+                if (response.ok) {
+                    const formattedProjects = data.guides ? data.guides.map((project, index) => ({
+                        id: index + 1,
+                        query: project.query,
+                        queryID: project.queryID,
+                        queryEngine: project.queryEngine,
+                        projectName: project.projectName,
+                        projectID: project.projectID,
+                        language: project.language,
                         gl: project.gl || 'us',
-                        createdAt : project.createdAt,
+                        createdAt: project.createdAt,
                         createdBy: project.createdBy,
                         username: project.username,
-                        creatorProfilePicture: project.createdBy === user?.email ? user?.profilePicture?.url : null
-                    }))
+                        creatorProfilePicture: project.createdBy === user?.email ? user?.profilePicture?.url : null,
+                        soseo: project.soseo,
+                        dseo: project.dseo,
+                        monitoringUrl: project.monitoringUrl || ""
+                    })) : [];
 
                     setRows(formattedProjects);
                 }
-            }catch (error) {
+            } catch (error) {
                 console.error("Error fetching projects:", error);
-            }finally {
-                setLoading(false); // ✅ Hide loading after fetch
+            } finally {
+                setLoading(false);
             }
-        }
+        };
 
         fetchProjects();
     }, [user, projectID, refreshTrigger]);
@@ -204,10 +221,16 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
         const fetchProjectInfo = async () => {
             if (projectID && user?.email) {
                 try {
-                    const response = await fetch(`/api/getProjectItemInfo?email=${user.email}&projectID=${projectID}`);
+                    const response = await fetch(`/api/project/${projectID}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `JWT ${localStorage.getItem('authToken')}`
+                        },
+                    });
                     if (response.ok) {
                         const data = await response.json();
-                        setProjectInfo(data.matchingProject);
+                        setProjectInfo(data);
                     }
                 } catch (error) {
                     console.error("Error fetching project info:", error);
@@ -300,16 +323,12 @@ export default function QueryTable({ projectID, pendingQueryID, pendingQueryText
     // Delete project handler
     const handleDeleteProject = async () => {
         try {
-            const response = await fetch("/api/delete-project", {
-                method: "POST",
+            const response = await fetch(`/api/project/${projectID}`, {
+                method: "DELETE",
                 headers: { 
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Authorization": `JWT ${localStorage.getItem('authToken')}`
                 },
-                body: JSON.stringify({
-                    email: user.email,
-                    projectID,
-                }),
             });
 
             const data = await response.json();
